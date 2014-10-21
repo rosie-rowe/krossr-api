@@ -1,0 +1,10 @@
+<div>
+	<select ng-model='ctrl.options.size' ng-init="ctrl.options.size = 25" ng-change="ctrl.setGameSize()">
+		<option value="25" selected>5x5</option>
+		<option value="100">10x10</option>
+	</select>
+
+	<game>
+		<tile ng-repeat="i in ctrl.getSize(ctrl.options.size) track by $index"></tile>
+	</game>
+</div>

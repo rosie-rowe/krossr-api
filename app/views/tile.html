@@ -1,0 +1,7 @@
+<div class="square"
+	ng-class="{unselected: tileCtrl.selected === false && tileCtrl.marked === false,
+				selected: tileCtrl.selected === true,
+				marked: tileCtrl.marked === true }"
+	ng-click="tileCtrl.change()"
+	ng-style="{ 'width': tileCtrl.width, 'height': tileCtrl.height }">
+</div>
