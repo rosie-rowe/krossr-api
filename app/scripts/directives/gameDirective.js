@@ -10,7 +10,7 @@ angular
         transclude: true,
         templateUrl: 'views/game.html',
         link: function (scope, elem, attr) {
-        
+
         }
       };
     });
