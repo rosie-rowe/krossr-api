@@ -16,6 +16,7 @@ angular
     }
       
     this.keydown = function(event) {
+        console.log("key down! " + event)
         if (event.shiftKey) {
             $rootScope.shiftOn = true;
         }

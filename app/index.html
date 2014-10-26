@@ -17,8 +17,10 @@
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
-  <body ng-app="krossrApp">
+  <body ng-app="krossrApp" ng-keydown="ctrl.keydown($event)"
+    ng-keyup="ctrl.keyup($event)" tabindex="0" ng-controller="MainCtrl as ctrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->

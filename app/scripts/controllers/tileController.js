@@ -1,6 +1,6 @@
 'use strict';
 
-var tileController = function($rootScope) {
+var tileController = function($rootScope, $scope) {
     var _this = this;
 
     this.selected = false;
@@ -10,9 +10,13 @@ var tileController = function($rootScope) {
         _this.changeTile($rootScope, index);
     };
     this.setTileSize($rootScope, 25);
+    $scope.$on('clearAll', function() {
+      _this.selected = false;
+      _this.marked = false;
+    });
 };
 
-tileController.$inject = ['$rootScope'];
+tileController.$inject = ['$rootScope', '$scope'];
 
 tileController.prototype.changeTile = function($rootScope, index) {
     var coord = this.convertTo2D($rootScope, index);
@@ -37,12 +41,12 @@ tileController.prototype.setTileSize = function($rootScope, value) {
 
 tileController.prototype.convertTo2D = function($rootScope, index) {
   var valueRoot = Math.sqrt($rootScope.options.size),
-      y = index % valueRoot,
-      x = (index - y) / valueRoot,
+      x = index % valueRoot,
+      y = (index - x) / valueRoot,
       coord = [];
 
-  coord.push(x, y);
-
+  coord.push(y, x);
+  console.log(coord);
   return coord;
 }
 

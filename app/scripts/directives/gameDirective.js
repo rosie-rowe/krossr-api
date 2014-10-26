@@ -10,7 +10,9 @@ angular
         transclude: true,
         templateUrl: 'views/game.html',
         link: function (scope, elem, attr) {
-
+            elem.on('mouseenter', function() {
+                elem.focus();
+            });
         }
       };
     });
