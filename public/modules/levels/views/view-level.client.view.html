@@ -12,6 +12,8 @@
 	</div>
 	<div data-ng-bind="level.layout"></div>
 	<div data-ng-controller="MainCtrl as ctrl">
+		<div number-grid orientation="horizontal" class="left-grid"></div>
+<!-- 		<div number-grid orientation="vertical" class="top-grid"></div> -->
 	    <game>
 	        <tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
 	    </game>

@@ -1,0 +1,6 @@
+<div number-line
+	ng-style="{ 'height': options.size,
+				'line-height': options.size + 'px' }"
+	ng-repeat="i in ctrl.getLines(level.layout) track by $index"
+	>
+</div>

@@ -32,6 +32,16 @@ angular
         return _this.flatten($rootScope.gameMatrix);
     };
 
+    this.getLineContent = function(index) {
+        console.log($rootScope.goalMatrix[index]);
+    }
+
+    this.getLines = function(layout) {
+        if (layout) {
+            return layout;
+        }
+    };
+
     this.flatten = function(matrix) {
         return Array.prototype.concat.apply([], matrix);
     };

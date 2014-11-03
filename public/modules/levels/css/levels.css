@@ -22,3 +22,8 @@
 .unselected {
     background-color: #E2E2E2;
 }
+
+.left-grid {
+	float: left;
+	margin-right: 12px;
+}
