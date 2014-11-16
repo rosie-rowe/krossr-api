@@ -28,11 +28,13 @@ tileController.$inject = ['$rootScope', '$scope'];
 tileController.prototype.changeTile = function($rootScope, index) {
     var coord = this.convertTo2D($rootScope, index);
 
+    console.log(coord);
+
     if ($rootScope.shiftOn === true) {
       this.fill('marked');
     } else {
       this.fill('selected');
-      $rootScope.gameMatrix[coord[0]][coord[1]] = this.selected;
+      $rootScope.gameMatrix[coord.y][coord.x] = this.selected;
     }
 };
 
@@ -65,7 +67,7 @@ tileController.prototype.fill = function(fillType) {
 
 tileController.prototype.fillFromLayout = function($rootScope, layout, index) {
   var coord = this.convertTo2D($rootScope, index),
-      value = layout[coord[0]][coord[1]];
+      value = layout[coord.y][coord.x];
 
   if (value === true) {
     this.fill('selected');
@@ -84,9 +86,11 @@ tileController.prototype.convertTo2D = function($rootScope, index) {
   var valueRoot = Math.sqrt($rootScope.options.size),
       x = index % valueRoot,
       y = (index - x) / valueRoot,
-      coord = [];
+      coord = {
+        y: y,
+        x: x
+      };
 
-  coord.push(y, x);
   //console.log(coord);
   return coord;
 }
