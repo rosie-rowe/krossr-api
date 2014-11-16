@@ -5,6 +5,11 @@
     overflow: hidden;
 }
 
+.gameContainer {
+    position: relative;
+    display: inline-block;
+}
+
 .square {
     box-sizing: border-box;
     border: 1px solid #999;
@@ -26,4 +31,24 @@
 .left-grid {
 	float: left;
 	margin-right: 12px;
+    position: absolute;
+    bottom: 0;
+}
+
+.top-grid {
+    display: inline-block;
+}
+
+.horizontal-line {
+    text-align: right;
+}
+
+.vertical-line {
+    display: inline-block;
+    text-align: center;
+}
+
+.vertical-line div {
+    width: 50%;
+    margin: 0 auto;
 }

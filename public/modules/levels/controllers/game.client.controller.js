@@ -43,6 +43,7 @@ gameController.prototype.setGameSize = function($rootScope, value) {
 
     this.width = finalWidth + 2 + 'px';
     this.height = finalHeight + 'px';
+    $rootScope.$broadcast('gameSizeUpdated', { width: this.width });
 };
 
 gameController.prototype.createEmptyMatrix = function($rootScope, value) {
@@ -58,11 +59,15 @@ gameController.prototype.createEmptyMatrix = function($rootScope, value) {
   console.log($rootScope.gameMatrix);
 };
 
+gameController.prototype.calculateMargin = function(width) {
+  return parseInt(width, 10) / 3;
+};
+
 gameController.prototype.loadGameFromLayout = function($rootScope, layout) {
   $rootScope.goalMatrix = layout;
   console.log("Game loaded!");
   console.log(layout);
-}
+};
 
 gameController.prototype.clearAllMatrix = function($rootScope, matrix, value) {
   for (var i = 0; i < value; i++) {

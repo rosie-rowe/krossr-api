@@ -12,7 +12,7 @@ angular
     };
 
     $rootScope.options = {
-        size: 25
+        size: 25,
     };
       
     this.keydown = function(event) {
@@ -59,5 +59,13 @@ angular
 
     this.clearAll = function() {
         $rootScope.$broadcast('clearAll', { numberOfTiles: parseInt($rootScope.options.size, 10) });
+    };
+
+    this.calculateMargin = function(gameSize) {
+        return parseInt(gameSize, 10) / 3;
     }
+
+    $scope.$on('gameSizeUpdated', function(event, args) {
+        _this.gameSize = args.width;
+    });
 }]);

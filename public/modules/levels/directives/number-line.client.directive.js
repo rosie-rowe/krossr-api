@@ -11,7 +11,8 @@ angular.module('levels').directive('numberLine', [
 				// Number line directive logic
 				// ...
 
-			}
+			},
+			scope: true
 		};
 	}
 ]);
