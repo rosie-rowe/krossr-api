@@ -2,14 +2,17 @@
 
 angular.module('levels').controller('NumberLineController', ['$rootScope', '$scope',
 	function($rootScope, $scope) {
+		var sideLength = $rootScope.goalMatrix.length;
 		// Number line controller logic
 		// ...
 		$scope.getLineContent = function(index, orientation) {
 			var lineContent = [],
-				len = $rootScope.goalMatrix[index].length,
+				len = sideLength,
 				i,
 				count = 0,
-				targetMatrix;
+				targetMatrix,
+				currentGroup = {},
+				groupCount = 0;
 
 			//console.log("oreo: " + $scope.orientation);
 
@@ -26,19 +29,29 @@ angular.module('levels').controller('NumberLineController', ['$rootScope', '$sco
 			// Loop through the row, building a separate count for each group of consecutive true tiles
 			for (i = 0; i < len; i++) {
 				if (targetMatrix[index][i] === true)  {
+					if (!currentGroup[groupCount]) {
+						currentGroup[groupCount] = [];
+					}
+					currentGroup[groupCount].push({x: i, currentValue: $rootScope.gameMatrix[index][i]});
 					count++;
-					if(i == len - 1) { addLineContent(lineContent, count.toString(), orientation); }
 				} else {
 					if (count > 0) {
-						addLineContent(lineContent, count.toString(), orientation);
+						groupCount++;
 					}
 					count = 0;
 				}
 			};
 
-			// If there are no true tiles in the row, MARK IT ZERO!!!
+			var lineContent = Object.keys(currentGroup).map(function(value, index) {
+				return currentGroup[value].length;
+			});
+
+			if (orientation === 'vertical') {
+				lineContent = lineContent.reverse();
+			}
+
 			if (lineContent.length === 0) {
-				addLineContent(lineContent, '0', orientation);
+				lineContent = [0];
 			}
 
 			return lineContent.join(' ');
@@ -46,8 +59,7 @@ angular.module('levels').controller('NumberLineController', ['$rootScope', '$sco
 
 		// Create a new matrix of equal size to the one passed in, and assign it to the original rotated 90 degrees
 		var rotate90 = function(matrix) {
-			var sideLength = matrix.length,
-				rotatedMatrix = new Array(sideLength);
+			var rotatedMatrix = new Array(sideLength);
 
 			for (var i = 0; i < sideLength; i++) {
 				rotatedMatrix[i] = new Array(sideLength);
@@ -62,19 +74,6 @@ angular.module('levels').controller('NumberLineController', ['$rootScope', '$sco
 			}
 
 			return rotatedMatrix;
-		};
-
-		// For vertical lines, the numbers need to be added backwards so they appear in the correct order on the screen
-		var addLineContent = function(array, content, orientation) {
-			switch (orientation) {
-				case 'vertical':
-					array.unshift(content);
-					break;
-				case 'horizontal':
-				default:
-					array.push(content);
-					break;
-			}
 		};
 	}
 ]);

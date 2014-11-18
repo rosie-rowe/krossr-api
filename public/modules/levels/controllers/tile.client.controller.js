@@ -77,7 +77,7 @@ tileController.prototype.getBorderColors = function(sideLength, direction, index
   var canColor,
       coord = this.convert2D(index);
 
-  // no borders through puzzle for small puzzles,
+  // no borders through puzzle for small puzzles
   if (sideLength <= 5) {
     return;
   }
