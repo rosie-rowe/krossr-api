@@ -4,6 +4,8 @@ var gameController = function($rootScope, $scope) {
     var _this = this;
     this.setGameSize($rootScope, 25);
 
+    this.dragBox = {};
+
     $scope.$on('gameSizeChanged', function(event, args) {
       _this.setGameSize($rootScope, args.numberOfTiles);
     });

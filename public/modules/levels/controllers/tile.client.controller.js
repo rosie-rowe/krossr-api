@@ -8,7 +8,7 @@ var tileController = function($rootScope, $scope) {
 
     this.change = function(index) {
         if (this.editable === 'true') {
-          _this.changeTile($rootScope, index);
+            _this.changeTile($rootScope, index);
         }
     };
     this.getLayoutForEdit = function(layout, index) {
@@ -33,9 +33,15 @@ var tileController = function($rootScope, $scope) {
 tileController.$inject = ['$rootScope', '$scope'];
 
 tileController.prototype.changeTile = function($rootScope, index) {
-    var coord = this.convertTo2D($rootScope, index);
+    var coord;
 
-    console.log(index);
+    if (typeof index === 'number') { 
+      coord = this.convertTo2D($rootScope, index);
+    } else {
+      coord = index;
+    }
+
+    console.log(coord);
 
     if ($rootScope.shiftOn === true) {
       this.fill('marked');
@@ -115,6 +121,37 @@ tileController.prototype.fillFromLayout = function($rootScope, layout, index) {
   if (value === true) {
     this.fill('selected');
   }
+};
+
+tileController.prototype.fillFromDragBox = function(dragBox) {
+  var startX = dragBox.startCoord.x,
+      startY = dragBox.startCoord.y,
+      endX = dragBox.endCoord.x,
+      endY = dragBox.endCoord.y;
+
+      //todo: make this a function. tricky javascript makes easy problem harder.
+      if (startX > endX) {
+        var temp = startX;
+        startX = endX;
+        endX = temp;
+      }
+
+      if (startY > endY) {
+        var temp = startY;
+        startY = endY;
+        endY = temp;
+      }
+
+      for (var i = startY; i <= endY; i++) {
+        for (var j = startX; j <= endX; j++) {
+          var coord = {
+            x: j,
+            y: i
+          };
+
+          this.change(coord);
+        }
+      }
 };
 
 tileController.prototype.setTileSize = function($rootScope, value) {
