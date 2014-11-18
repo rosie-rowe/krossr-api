@@ -14,6 +14,10 @@ angular.module('levels').directive('game', [
                 elem.on('mouseenter', function() {
                     elem.focus();
                 });
+
+                elem.on('dragstart', function(e) {
+                    e.preventDefault();
+                })
             }
         };
     }
