@@ -54,7 +54,10 @@ tileController.prototype.changeTile = function($rootScope, index) {
 tileController.prototype.checkForWin = function($rootScope) {
   if (typeof $rootScope.goalMatrix !== 'undefined') {
     var result = ($rootScope.goalMatrix.toString() === $rootScope.gameMatrix.toString());
-    console.log(result);
+    if (result) {
+      $rootScope.gameIsWon = true;
+      $rootScope.$digest();
+    }
   }
 };
 

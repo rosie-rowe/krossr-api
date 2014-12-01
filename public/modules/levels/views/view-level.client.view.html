@@ -11,6 +11,7 @@
 		</a>
 	</div>
 	<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer">
+		<div class="win-notification" ng-show="gameIsWon">YOU WIN!</div>
 		<div number-grid orientation="horizontal" class="left-grid"></div>
 		<div number-grid orientation="vertical" class="top-grid" ng-style="{
 				'margin-left': ctrl.calculateMargin(ctrl.gameSize),

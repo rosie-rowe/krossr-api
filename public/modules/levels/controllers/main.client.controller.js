@@ -6,6 +6,7 @@ angular
     var _this = this;
             
     $rootScope.shiftOn = false;
+    $rootScope.gameIsWon = false;
     $rootScope.tile = {
         width: 25,
         height: 25
