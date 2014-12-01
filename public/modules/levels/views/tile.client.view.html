@@ -1,9 +1,9 @@
 <div 
-	class="square"
+	class="square tile"
 	ng-class="{unselected: tileCtrl.selected === false && tileCtrl.marked === false,
 				selected: tileCtrl.selected === true,
 				marked: tileCtrl.marked === true }"
-	ng-click="tileCtrl.change($index)"
+	
 	data-index="{{$index}}"
 	draggable="true"
 	ng-style="{

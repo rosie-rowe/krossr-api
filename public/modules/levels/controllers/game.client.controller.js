@@ -3,8 +3,11 @@
 var gameController = function($rootScope, $scope) {
     var _this = this;
     this.setGameSize($rootScope, 25);
+    this.clearDragBox();
 
-    this.dragBox = {};
+    this.processDragBox = function(dragBox) {
+      return _this.handleDragBox($rootScope, dragBox);
+    }
 
     $scope.$on('gameSizeChanged', function(event, args) {
       _this.setGameSize($rootScope, args.numberOfTiles);
@@ -37,6 +40,48 @@ var gameController = function($rootScope, $scope) {
 };
 
 gameController.$inject = ['$rootScope', '$scope'];
+
+gameController.prototype.handleDragBox = function($rootScope, dragBox) {
+  var startX = dragBox.startCoord.x,
+      startY = dragBox.startCoord.y,
+      endX = dragBox.endCoord.x,
+      endY = dragBox.endCoord.y,
+      finalCoords = [];
+
+      //todo: make this a function. tricky javascript makes easy problem harder.
+      if (startX > endX) {
+        var temp = startX;
+        startX = endX;
+        endX = temp;
+      }
+
+      if (startY > endY) {
+        var temp = startY;
+        startY = endY;
+        endY = temp;
+      }
+
+      console.log("dragboxed");
+
+      for (var i = startY; i <= endY; i++) {
+        for (var j = startX; j <= endX; j++) {
+          var coord = {
+            x: j,
+            y: i
+          };
+
+          finalCoords.push(coord);
+        }
+      }
+
+    this.clearDragBox();
+    return finalCoords;
+};
+
+gameController.prototype.clearDragBox = function() {
+  this.dragBox = {};
+  console.log('dragbox cleared');
+};
 
 gameController.prototype.setGameSize = function($rootScope, value) {
     var valueRoot = Math.sqrt(value),

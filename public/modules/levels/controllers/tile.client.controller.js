@@ -10,6 +10,7 @@ var tileController = function($rootScope, $scope) {
         if (this.editable === 'true') {
             _this.changeTile($rootScope, index);
         }
+        $scope.$apply();
     };
     this.getLayoutForEdit = function(layout, index) {
         _this.fillFromLayout($rootScope, layout, index);
@@ -20,8 +21,11 @@ var tileController = function($rootScope, $scope) {
     this.fillBorders = function(direction, index) {
       return _this.getBorderColors(sideLength, direction, index);
     };
+    this.convert1D = function(index) {
+      return _this.convertTo1D(index, sideLength);
+    }
     this.convert2D = function(index) {
-      return _this.convertTo2D($rootScope, index);
+      return _this.convertTo2D(index, sideLength);
     }
     this.setTileSize($rootScope, 25);
     $scope.$on('clearAll', function() {
@@ -41,7 +45,8 @@ tileController.prototype.changeTile = function($rootScope, index) {
       coord = index;
     }
 
-    console.log(coord);
+    console.log("Changing tile " + coord.y + ',' + coord.x);
+    console.log("Index is " + this.convert1D(coord));
 
     if ($rootScope.shiftOn === true) {
       this.fill('marked');
@@ -126,37 +131,6 @@ tileController.prototype.fillFromLayout = function($rootScope, layout, index) {
   }
 };
 
-tileController.prototype.fillFromDragBox = function(dragBox) {
-  var startX = dragBox.startCoord.x,
-      startY = dragBox.startCoord.y,
-      endX = dragBox.endCoord.x,
-      endY = dragBox.endCoord.y;
-
-      //todo: make this a function. tricky javascript makes easy problem harder.
-      if (startX > endX) {
-        var temp = startX;
-        startX = endX;
-        endX = temp;
-      }
-
-      if (startY > endY) {
-        var temp = startY;
-        startY = endY;
-        endY = temp;
-      }
-
-      for (var i = startY; i <= endY; i++) {
-        for (var j = startX; j <= endX; j++) {
-          var coord = {
-            x: j,
-            y: i
-          };
-
-          this.change(coord);
-        }
-      }
-};
-
 tileController.prototype.setTileSize = function($rootScope, value) {
     $rootScope.tile.width  = value;
     $rootScope.tile.height = value;
@@ -165,10 +139,13 @@ tileController.prototype.setTileSize = function($rootScope, value) {
     this.height = $rootScope.tile.height  + 'px';
 };
 
-tileController.prototype.convertTo2D = function($rootScope, index) {
-  var valueRoot = Math.sqrt($rootScope.options.size),
-      x = index % valueRoot,
-      y = (index - x) / valueRoot,
+tileController.prototype.convertTo1D = function(coord, sideLength) {
+  return (coord.y * sideLength) + coord.x;
+};
+
+tileController.prototype.convertTo2D = function(index, sideLength) {
+  var x = index % sideLength,
+      y = (index - x) / sideLength,
       coord = {
         y: y,
         x: x

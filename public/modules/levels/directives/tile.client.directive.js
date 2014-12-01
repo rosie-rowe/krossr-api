@@ -14,9 +14,11 @@ angular.module('levels').directive('tile', [
                 scope.tileCtrl.editable = attr.editable;
                 scope.index = attr.index;
 
-                elem.on('click', function() {
-                    scope.tileCtrl.checkWin();
-                });
+                /* Hacky */
+                var findTileCtrlByCoord = function(coord) {
+                    var index = scope.tileCtrl.convert1D(coord);
+                    return angular.element('.tile[data-index=' + index + ']').scope().tileCtrl;
+                };
 
                 elem.on('dragstart', function(e) {
                     e.preventDefault();
@@ -32,8 +34,16 @@ angular.module('levels').directive('tile', [
                     gameCtrl.dragBox.endCoord = coord;
 
                     if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
-                        scope.tileCtrl.fillFromDragBox(gameCtrl.dragBox);
+                        var coords = gameCtrl.processDragBox(gameCtrl.dragBox);
+                        angular.forEach(coords, function(value, key) {
+                            var theTileController = findTileCtrlByCoord(value);
+                            theTileController.change(value);
+                        });
+                    } else {
+                        scope.tileCtrl.change(coord);
                     }
+
+                    scope.tileCtrl.checkWin();
                 });
             }
         }
