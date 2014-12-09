@@ -7,7 +7,7 @@ var gameController = function($rootScope, $scope) {
 
     this.processDragBox = function(dragBox) {
       return _this.handleDragBox($rootScope, dragBox);
-    }
+    };
 
     $scope.$on('gameSizeChanged', function(event, args) {
       _this.setGameSize($rootScope, args.numberOfTiles);
@@ -74,7 +74,6 @@ gameController.prototype.handleDragBox = function($rootScope, dragBox) {
         }
       }
 
-    this.clearDragBox();
     return finalCoords;
 };
 

@@ -6,9 +6,9 @@ var tileController = function($rootScope, $scope) {
 
     this.fill('empty');
 
-    this.change = function(index) {
+    this.change = function(index, initState, changeTo) {
         if (this.editable === 'true') {
-            _this.changeTile($rootScope, index);
+            _this.changeTile($rootScope, index, initState, changeTo);
         }
         $scope.$apply();
     };
@@ -36,7 +36,7 @@ var tileController = function($rootScope, $scope) {
 
 tileController.$inject = ['$rootScope', '$scope'];
 
-tileController.prototype.changeTile = function($rootScope, index) {
+tileController.prototype.changeTile = function($rootScope, index, initState, changeTo) {
     var coord;
 
     if (typeof index === 'number') { 
@@ -45,14 +45,15 @@ tileController.prototype.changeTile = function($rootScope, index) {
       coord = index;
     }
 
-    console.log("Changing tile " + coord.y + ',' + coord.x);
-    console.log("Index is " + this.convert1D(coord));
-
-    if ($rootScope.shiftOn === true) {
-      this.fill('marked');
+    if (typeof changeTo === "string") {
+      this.fill(changeTo);
     } else {
-      this.fill('selected');
-      $rootScope.gameMatrix[coord.y][coord.x] = this.selected;
+      if ($rootScope.shiftOn === true) {
+        this.fill('marked', initState);
+      } else {
+        this.fill('selected', initState);
+        $rootScope.gameMatrix[coord.y][coord.x] = this.selected;
+      }
     }
 };
 
@@ -66,23 +67,41 @@ tileController.prototype.checkForWin = function($rootScope) {
   }
 };
 
-tileController.prototype.fill = function(fillType) {
+tileController.prototype.fill = function(fillType, override) {
   switch (fillType) {
+    case 'pending':
+      this.pending = true;
+      break;
     case 'marked':
-      this.marked = !this.marked;
+      this.marked = checkForOverride(override, this.marked);
       this.selected = false;
+      this.pending = false;
       break;
     case 'selected':
-      this.selected = !this.selected;
+      this.selected = checkForOverride(override, this.selected);
       this.marked = false;
+      this.pending = false;
       break;
     case 'empty':
       this.selected = false;
       this.marked = false;
+      this.pending = false;
       break;
     default:
       console.log("you done goofed");
       break;
+  }
+};
+
+/* If the override value (which will be the value of the tile that a dragstart is activated on)
+   is present, use that for all tiles being considered.
+   This is so you don't unselect previously selected tiles if your drags overlap
+   */
+var checkForOverride = function(override, value) {
+  if (typeof override !== 'undefined') {
+    return !override;
+  } else {
+    return !value;
   }
 };
 

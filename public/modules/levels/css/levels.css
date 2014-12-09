@@ -16,6 +16,10 @@
     float: left;
 }
 
+.pending {
+    background-color: rgba(0, 0, 0, .5);
+}
+
 .selected {
     background-color: #2199D0;
 }
