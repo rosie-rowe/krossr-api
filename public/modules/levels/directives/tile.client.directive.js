@@ -14,41 +14,51 @@ angular.module('levels').directive('tile', [
                 scope.tileCtrl.editable = attr.editable;
                 scope.index = attr.index;
 
-                /* Hacky */
-                var findTileCtrlByCoord = function(coord) {
-                    var index = scope.tileCtrl.convert1D(coord);
-                    return findTileCtrlByIndex(index);
-                };
-
-                var findTileCtrlByIndex = function(index) {
-                    return angular.element('.tile[data-index=' + index + ']').scope().tileCtrl;
-                }
-
-                var clearPending = function() {
-                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
-                        var allCoords = gameCtrl.processDragBox(gameCtrl.dragBox);
-
-                        angular.forEach(allCoords, function(value, key) {
-                            var theTileController = findTileCtrlByCoord(value);
-                            if (theTileController.pending) {
-                                theTileController.change(value, true, 'empty');
-                            }
-                        });
-                    }
+                var clearPending = function(coords) {                 
+                    angular.forEach(coords, function(value, key) {
+                        var theTileController = gameCtrl.findTileCtrlByCoord(value);
+                        if (theTileController.pending) {
+                            theTileController.change(value, true, 'empty');
+                        }
+                    });
                 };
 
                 var fillPending = function(index) {
-                    var coord = scope.tileCtrl.convert2D(index);
+                    var coord = scope.tileCtrl.convert2D(index),
+                        coordsToClear;
 
+                    // save a snapshot of the previous dragbox for comparison purposes
+                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
+                        var oldCoords = gameCtrl.processDragBox(gameCtrl.dragBox);
+                    }
+
+                    // set the current coordinate to the new dragbox end and compute the new dragbox
                     gameCtrl.dragBox.endCoord = coord;
                     
                     if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
                         var allPendingCoords = gameCtrl.processDragBox(gameCtrl.dragBox);
                     }
 
+                    // we should only clear the old coordinates off if the current selected area is
+                    // smaller than the previous selected area, for speed reasons
+                    if (allPendingCoords &&
+                        oldCoords &&
+                        allPendingCoords.length < oldCoords.length) {
+
+                        // more speed -- only clear the values that are present in
+                        // oldCoords but not allPendingCoords
+                        coordsToClear = oldCoords.filter(function(e) {
+                            if (allPendingCoords.indexOfObject(e) === -1) return true;
+                        });
+                        clearPending(coordsToClear);
+                    }
+
                     angular.forEach(allPendingCoords, function(value, key) {
-                        var theTileController = findTileCtrlByCoord(value);
-                        theTileController.change(value, true, 'pending');
+                        var theTileController = gameCtrl.findTileCtrlByCoord(value);
+                        // should also only change it to pending if it's not already, also for speed reasons
+                        if (!theTileController.pending) {
+                            theTileController.change(value, true, 'pending');
+                        }
                     });
                 };
 
@@ -63,34 +73,20 @@ angular.module('levels').directive('tile', [
                 });
 
                 elem.on('mouseenter', function(e) {
-                    fillPending(scope.index);
-                });
-
-                elem.on('mouseleave', function() {
-                    clearPending();
+                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord) {
+                        fillPending(scope.index);
+                    }
                 });
 
                 elem.on('mouseup', function(e) {
                     e.preventDefault();
                     
-                    var coord = scope.tileCtrl.convert2D(scope.index);
+                    var coord = gameCtrl.convertTo2D(scope.index);
                     gameCtrl.dragBox.endCoord = coord;
 
-                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
-                        var initState = gameCtrl.dragBox.initState,
-                            coords = gameCtrl.processDragBox(gameCtrl.dragBox);
-
-                        angular.forEach(coords, function(value, key) {
-                            var theTileController = findTileCtrlByCoord(value);
-                            theTileController.change(value, initState);
-                        });
-
-                        gameCtrl.clearDragBox();
-                    } else {
+                    if (!(gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord)) {
                         scope.tileCtrl.change(coord);
                     }
-
-                    scope.tileCtrl.checkWin();
                 });
             }
         }

@@ -1,9 +1,24 @@
 'use strict';
 
-var gameController = function($rootScope, $scope) {
+var gameController = function($rootScope, $scope, Convert) {
     var _this = this;
+
     this.setGameSize($rootScope, 25);
     this.clearDragBox();
+
+    this.checkWin = function() {
+      _this.checkForWin($rootScope);
+    };
+
+    this.convertTo1D = function(index) {
+      return Convert.convertTo1D(index, $rootScope.gameMatrix.length);
+    }
+
+    this.convertTo2D = function(index) {
+      return Convert.convertTo2D(index, $rootScope.gameMatrix.length);
+    }
+
+    this.tileIndex = [];
 
     this.processDragBox = function(dragBox) {
       return _this.handleDragBox($rootScope, dragBox);
@@ -39,7 +54,26 @@ var gameController = function($rootScope, $scope) {
     });
 };
 
-gameController.$inject = ['$rootScope', '$scope'];
+gameController.$inject = ['$rootScope', '$scope', 'Convert'];
+
+gameController.prototype.checkForWin = function($rootScope) {
+  if (typeof $rootScope.goalMatrix !== 'undefined') {
+    var result = (angular.equals($rootScope.goalMatrix, $rootScope.gameMatrix));
+    if (result) {
+      $rootScope.gameIsWon = true;
+      $rootScope.$digest();
+    }
+  }
+};
+
+gameController.prototype.findTileCtrlByCoord = function(coord) {
+  var index = this.convertTo1D(coord);
+  return this.findTileCtrlByIndex(index);
+}
+
+gameController.prototype.findTileCtrlByIndex = function(index) {
+  return this.tileIndex[index].tileCtrl;
+}
 
 gameController.prototype.handleDragBox = function($rootScope, dragBox) {
   var startX = dragBox.startCoord.x,
@@ -60,8 +94,6 @@ gameController.prototype.handleDragBox = function($rootScope, dragBox) {
         startY = endY;
         endY = temp;
       }
-
-      console.log("dragboxed");
 
       for (var i = startY; i <= endY; i++) {
         for (var j = startX; j <= endX; j++) {

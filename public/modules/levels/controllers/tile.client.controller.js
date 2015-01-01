@@ -1,6 +1,6 @@
 'use strict';
 
-var tileController = function($rootScope, $scope) {
+var tileController = function($rootScope, $scope, Convert) {
     var _this = this,
         sideLength = $rootScope.gameMatrix.length;
 
@@ -15,18 +15,16 @@ var tileController = function($rootScope, $scope) {
     this.getLayoutForEdit = function(layout, index) {
         _this.fillFromLayout($rootScope, layout, index);
     };
-    this.checkWin = function() {
-      _this.checkForWin($rootScope);
-    };
     this.fillBorders = function(direction, index) {
       return _this.getBorderColors(sideLength, direction, index);
     };
     this.convert1D = function(index) {
-      return _this.convertTo1D(index, sideLength);
+      return Convert.convertTo1D(index, sideLength);
     }
     this.convert2D = function(index) {
-      return _this.convertTo2D(index, sideLength);
+      return Convert.convertTo2D(index, sideLength);
     }
+
     this.setTileSize($rootScope, 25);
     $scope.$on('clearAll', function() {
       console.log('clearing tile');
@@ -34,7 +32,7 @@ var tileController = function($rootScope, $scope) {
     });
 };
 
-tileController.$inject = ['$rootScope', '$scope'];
+tileController.$inject = ['$rootScope', '$scope', 'Convert'];
 
 tileController.prototype.changeTile = function($rootScope, index, initState, changeTo) {
     var coord;
@@ -55,16 +53,6 @@ tileController.prototype.changeTile = function($rootScope, index, initState, cha
         $rootScope.gameMatrix[coord.y][coord.x] = this.selected;
       }
     }
-};
-
-tileController.prototype.checkForWin = function($rootScope) {
-  if (typeof $rootScope.goalMatrix !== 'undefined') {
-    var result = ($rootScope.goalMatrix.toString() === $rootScope.gameMatrix.toString());
-    if (result) {
-      $rootScope.gameIsWon = true;
-      $rootScope.$digest();
-    }
-  }
 };
 
 tileController.prototype.fill = function(fillType, override) {
@@ -157,22 +145,6 @@ tileController.prototype.setTileSize = function($rootScope, value) {
     this.width = $rootScope.tile.width + 'px';
     this.height = $rootScope.tile.height  + 'px';
 };
-
-tileController.prototype.convertTo1D = function(coord, sideLength) {
-  return (coord.y * sideLength) + coord.x;
-};
-
-tileController.prototype.convertTo2D = function(index, sideLength) {
-  var x = index % sideLength,
-      y = (index - x) / sideLength,
-      coord = {
-        y: y,
-        x: x
-      };
-
-  //console.log(coord);
-  return coord;
-}
 
 angular
     .module('levels')
