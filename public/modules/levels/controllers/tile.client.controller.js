@@ -48,6 +48,7 @@ tileController.prototype.changeTile = function($rootScope, index, initState, cha
     } else {
       if ($rootScope.shiftOn === true) {
         this.fill('marked', initState);
+        $rootScope.gameMatrix[coord.y][coord.x] = this.selected;
       } else {
         this.fill('selected', initState);
         $rootScope.gameMatrix[coord.y][coord.x] = this.selected;
