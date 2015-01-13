@@ -22,7 +22,8 @@ angular.module('levels').directive('game', [
                 elem.on('mouseenter', function() {
                     // focus the game when the mouse enters it
                     // so that the first click will register
-                    elem.focus();
+                    elem.find('.inner').focus();
+                    console.log('focused');
 
                     // the first time the mouse enters the game, index all the tiles
                     // so that we can access them faster later

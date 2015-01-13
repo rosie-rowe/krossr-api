@@ -2,10 +2,10 @@
 
 angular
 .module('levels')
-.controller('MainCtrl', ['$rootScope', '$scope', '$timeout', function ($rootScope, $scope, $timeout) {
+.controller('MainCtrl', ['$rootScope', '$scope', '$timeout', 'shiftService',
+    function ($rootScope, $scope, $timeout, shiftService) {
     var _this = this;
             
-    $rootScope.shiftOn = false;
     $rootScope.gameIsWon = false;
     $rootScope.tile = {
         width: 25,
@@ -19,13 +19,13 @@ angular
     this.keydown = function(event) {
         console.log("key down! " + event)
         if (event.shiftKey) {
-            $rootScope.shiftOn = true;
+            shiftService.shiftOn = true;
         }
     };
       
     this.keyup = function(event) {
         if (!event.shiftKey) {
-            $rootScope.shiftOn = false;
+            shiftService.shiftOn = false;
         }
     };
 

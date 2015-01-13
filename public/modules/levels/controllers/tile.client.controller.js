@@ -1,6 +1,6 @@
 'use strict';
 
-var tileController = function($rootScope, $scope, Convert) {
+var tileController = function($rootScope, $scope, Convert, shiftService) {
     var _this = this,
         sideLength = $rootScope.gameMatrix.length;
 
@@ -8,7 +8,7 @@ var tileController = function($rootScope, $scope, Convert) {
 
     this.change = function(index, initState, changeTo) {
         if (this.editable === 'true') {
-            _this.changeTile($rootScope, index, initState, changeTo);
+            _this.changeTile($rootScope, index, initState, changeTo, shiftService);
         }
         $scope.$apply();
     };
@@ -32,9 +32,9 @@ var tileController = function($rootScope, $scope, Convert) {
     });
 };
 
-tileController.$inject = ['$rootScope', '$scope', 'Convert'];
+tileController.$inject = ['$rootScope', '$scope', 'Convert', 'shiftService'];
 
-tileController.prototype.changeTile = function($rootScope, index, initState, changeTo) {
+tileController.prototype.changeTile = function($rootScope, index, initState, changeTo, shiftService) {
     var coord;
 
     if (typeof index === 'number') { 
@@ -46,7 +46,7 @@ tileController.prototype.changeTile = function($rootScope, index, initState, cha
     if (typeof changeTo === "string") {
       this.fill(changeTo);
     } else {
-      if ($rootScope.shiftOn === true) {
+      if (shiftService.shiftOn === true) {
         this.fill('marked', initState);
         $rootScope.gameMatrix[coord.y][coord.x] = this.selected;
       } else {
