@@ -2,15 +2,12 @@
 
 angular
 .module('levels')
-.controller('MainCtrl', ['$rootScope', '$scope', '$timeout', 'shiftService',
-    function ($rootScope, $scope, $timeout, shiftService) {
+.controller('MainCtrl', ['$rootScope', '$scope', '$timeout', 'shiftService', 'tileSize',
+    function ($rootScope, $scope, $timeout, shiftService, tileSize) {
     var _this = this;
             
     $rootScope.gameIsWon = false;
-    $rootScope.tile = {
-        width: 25,
-        height: 25
-    };
+    this.tileSize = tileSize + 'px';
 
     $rootScope.options = {
         size: 25,

@@ -1,7 +1,7 @@
 <div number-line
 	ng-if="orientation == 'horizontal'"
-	ng-style="{ 'height': tile.height,
-				'line-height': tile.height + 'px' }"
+	ng-style="{ 'height': ctrl.tileSize,
+				'line-height': ctrl.tileSize }"
 	ng-repeat="i in ctrl.getLines(level.layout) track by $index"
 	class="{{orientation}}-line"
 	>
@@ -10,7 +10,7 @@
 <div number-line
 	ng-if="orientation == 'vertical'"
 	ng-style="{
-		'width': tile.width
+		'width': ctrl.tileSize
 	}"
 	ng-repeat="i in ctrl.getLines(level.layout) track by $index"
 	class="{{orientation}}-line"

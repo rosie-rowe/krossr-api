@@ -19,6 +19,20 @@ angular.module('levels').directive('game', [
                     });
                 };
 
+                var fillDragBox = function(override) {
+                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
+                        var initState = gameCtrl.dragBox.initState,
+                            coords = gameCtrl.processDragBox(gameCtrl.dragBox);
+
+                        angular.forEach(coords, function(value, key) {
+                            var theTileController = gameCtrl.findTileCtrlByCoord(value);
+                            theTileController.change(value, initState, override);
+                        });
+
+                        gameCtrl.clearDragBox();
+                    }  
+                };
+
                 elem.on('mouseenter', function() {
                     // focus the game when the mouse enters it
                     // so that the first click will register
@@ -36,18 +50,7 @@ angular.module('levels').directive('game', [
                 // and empty the tiles.
                 elem.on('mouseleave', function(e) {
                     e.preventDefault();
-
-                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
-                        var initState = gameCtrl.dragBox.initState,
-                            coords = gameCtrl.processDragBox(gameCtrl.dragBox);
-
-                        angular.forEach(coords, function(value, key) {
-                            var theTileController = gameCtrl.findTileCtrlByCoord(value);
-                            theTileController.change(value, initState, 'empty');
-                        });
-
-                        gameCtrl.clearDragBox();
-                    }     
+                    fillDragBox('empty');
                 });
 
                 // If a user starts dragging a tile and their mouse pointer leaves the game area,
@@ -58,19 +61,7 @@ angular.module('levels').directive('game', [
                 // should always run after that event due to bubbling.
                 elem.on('mouseup', function(e) {
                     e.preventDefault();
-
-                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
-                        var initState = gameCtrl.dragBox.initState,
-                            coords = gameCtrl.processDragBox(gameCtrl.dragBox);
-
-                        angular.forEach(coords, function(value, key) {
-                            var theTileController = gameCtrl.findTileCtrlByCoord(value);
-                            theTileController.change(value, initState);
-                        });
-
-                        gameCtrl.clearDragBox();
-                    }     
-
+                    fillDragBox();
                     gameCtrl.checkWin();
                 });
             }

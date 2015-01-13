@@ -1,6 +1,6 @@
 'use strict';
 
-var gameController = function($rootScope, $scope, Convert) {
+var gameController = function($rootScope, $scope, Convert, tileSize) {
     var _this = this;
 
     this.setGameSize($rootScope, 25);
@@ -25,7 +25,7 @@ var gameController = function($rootScope, $scope, Convert) {
     };
 
     $scope.$on('gameSizeChanged', function(event, args) {
-      _this.setGameSize($rootScope, args.numberOfTiles);
+      _this.setGameSize($rootScope, args.numberOfTiles, tileSize);
     });
 
     $scope.$on('createNewGame', function(event, args) {
@@ -54,7 +54,7 @@ var gameController = function($rootScope, $scope, Convert) {
     });
 };
 
-gameController.$inject = ['$rootScope', '$scope', 'Convert'];
+gameController.$inject = ['$rootScope', '$scope', 'Convert', 'tileSize'];
 
 gameController.prototype.checkForWin = function($rootScope) {
   if (typeof $rootScope.goalMatrix !== 'undefined') {
@@ -114,10 +114,10 @@ gameController.prototype.clearDragBox = function() {
   console.log('dragbox cleared');
 };
 
-gameController.prototype.setGameSize = function($rootScope, value) {
+gameController.prototype.setGameSize = function($rootScope, value, tileSize) {
     var valueRoot = Math.sqrt(value),
-        finalWidth = $rootScope.tile.width * valueRoot,
-        finalHeight = $rootScope.tile.height * valueRoot;
+        finalWidth = tileSize * valueRoot,
+        finalHeight = tileSize * valueRoot;
 
     this.width = finalWidth + 2 + 'px';
     this.height = finalHeight + 'px';

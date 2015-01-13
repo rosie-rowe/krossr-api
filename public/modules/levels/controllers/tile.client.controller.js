@@ -1,6 +1,6 @@
 'use strict';
 
-var tileController = function($rootScope, $scope, Convert, shiftService) {
+var tileController = function($rootScope, $scope, Convert, shiftService, tileSize) {
     var _this = this,
         sideLength = $rootScope.gameMatrix.length;
 
@@ -25,14 +25,14 @@ var tileController = function($rootScope, $scope, Convert, shiftService) {
       return Convert.convertTo2D(index, sideLength);
     }
 
-    this.setTileSize($rootScope, 25);
+    this.setTileSize(tileSize);
     $scope.$on('clearAll', function() {
       console.log('clearing tile');
       _this.fill('empty');
     });
 };
 
-tileController.$inject = ['$rootScope', '$scope', 'Convert', 'shiftService'];
+tileController.$inject = ['$rootScope', '$scope', 'Convert', 'shiftService', 'tileSize'];
 
 tileController.prototype.changeTile = function($rootScope, index, initState, changeTo, shiftService) {
     var coord;
@@ -130,6 +130,11 @@ tileController.prototype.testTileForBorder = function(sideLength, index) {
           && index % sideLength !== 0);
 };
 
+tileController.prototype.setTileSize = function(tileSize) {
+  this.width = tileSize + 'px';
+  this.height = tileSize + 'px';
+};
+
 tileController.prototype.fillFromLayout = function($rootScope, layout, index) {
   var coord = this.convertTo2D($rootScope, index),
       value = layout[coord.y][coord.x];
@@ -137,14 +142,6 @@ tileController.prototype.fillFromLayout = function($rootScope, layout, index) {
   if (value === true) {
     this.fill('selected');
   }
-};
-
-tileController.prototype.setTileSize = function($rootScope, value) {
-    $rootScope.tile.width  = value;
-    $rootScope.tile.height = value;
-
-    this.width = $rootScope.tile.width + 'px';
-    this.height = $rootScope.tile.height  + 'px';
 };
 
 angular
