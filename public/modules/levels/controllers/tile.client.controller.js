@@ -1,28 +1,28 @@
 'use strict';
 
-var tileController = function($rootScope, $scope, Convert, shiftService, tileSize) {
+var tileController = function($scope, Utils, shiftService, tileSize) {
     var _this = this,
-        sideLength = $rootScope.gameMatrix.length;
+        sideLength = Utils.getSideLength();
 
     this.fill('empty');
 
     this.change = function(index, initState, changeTo) {
         if (this.editable === 'true') {
-            _this.changeTile($rootScope, index, initState, changeTo, shiftService);
+            _this.changeTile(index, initState, changeTo, shiftService, Utils);
         }
         $scope.$apply();
     };
     this.getLayoutForEdit = function(layout, index) {
-        _this.fillFromLayout($rootScope, layout, index);
+        _this.fillFromLayout(layout, index);
     };
     this.fillBorders = function(direction, index) {
       return _this.getBorderColors(sideLength, direction, index);
     };
-    this.convert1D = function(index) {
-      return Convert.convertTo1D(index, sideLength);
+    this.convert1D = function(coord) {
+      return Utils.convertTo1D(coord);
     }
     this.convert2D = function(index) {
-      return Convert.convertTo2D(index, sideLength);
+      return Utils.convertTo2D(index);
     }
 
     this.setTileSize(tileSize);
@@ -32,13 +32,13 @@ var tileController = function($rootScope, $scope, Convert, shiftService, tileSiz
     });
 };
 
-tileController.$inject = ['$rootScope', '$scope', 'Convert', 'shiftService', 'tileSize'];
+tileController.$inject = ['$scope', 'Utils', 'shiftService', 'tileSize'];
 
-tileController.prototype.changeTile = function($rootScope, index, initState, changeTo, shiftService) {
+tileController.prototype.changeTile = function(index, initState, changeTo, shiftService, Utils) {
     var coord;
 
     if (typeof index === 'number') { 
-      coord = this.convertTo2D($rootScope, index);
+      coord = this.convert2D(index);
     } else {
       coord = index;
     }
@@ -48,10 +48,10 @@ tileController.prototype.changeTile = function($rootScope, index, initState, cha
     } else {
       if (shiftService.shiftOn === true) {
         this.fill('marked', initState);
-        $rootScope.gameMatrix[coord.y][coord.x] = this.selected;
+        Utils.setCoord(coord.y, coord.x, this.selected);
       } else {
         this.fill('selected', initState);
-        $rootScope.gameMatrix[coord.y][coord.x] = this.selected;
+        Utils.setCoord(coord.y, coord.x, this.selected);
       }
     }
 };
@@ -135,8 +135,8 @@ tileController.prototype.setTileSize = function(tileSize) {
   this.height = tileSize + 'px';
 };
 
-tileController.prototype.fillFromLayout = function($rootScope, layout, index) {
-  var coord = this.convertTo2D($rootScope, index),
+tileController.prototype.fillFromLayout = function(layout, index) {
+  var coord = this.convert2D(index),
       value = layout[coord.y][coord.x];
 
   if (value === true) {

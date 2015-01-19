@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('levels').controller('NumberGridController', ['$rootScope', '$scope',
-	function($rootScope, $scope) {
+angular.module('levels').controller('NumberGridController', ['$scope',
+	function($scope) {
 		// Number grid controller logic
 		// ...+
 		$scope.groupings = {};

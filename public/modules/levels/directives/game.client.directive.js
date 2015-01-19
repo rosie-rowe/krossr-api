@@ -11,6 +11,7 @@ angular.module('levels').directive('game', [
             transclude: true,
             templateUrl: 'modules/levels/views/game.client.view.html',
             link: function (scope, elem, attr, gameCtrl) {
+                console.log(gameCtrl);
                 var indexTiles = function() {
                     var allTiles = angular.element('.tile');
                     
@@ -64,6 +65,11 @@ angular.module('levels').directive('game', [
                     fillDragBox();
                     gameCtrl.checkWin();
                 });
+
+                elem.on('click', '.win-notification', function() {
+                    gameCtrl.gameIsWon = false;
+                    scope.$digest();
+                })
             }
         };
     }

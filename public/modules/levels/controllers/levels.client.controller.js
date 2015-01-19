@@ -1,13 +1,13 @@
 'use strict';
 
 // Levels controller
-angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels',
-	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels ) {
+angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'Utils',
+	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, Utils) {
 		$scope.authentication = Authentication;
 
 		// Create new Level
 		$scope.create = function() {
-			var layout = $rootScope.gameMatrix;
+			var layout = Utils.getGameMatrix();
 
 			// Create new Level object
 			var level = new Levels ({
@@ -44,7 +44,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Update existing Level
 		$scope.update = function() {
-			var level = $scope.level ;
+			var level = $scope.level;
 
 			level.$update(function() {
 				$location.path('levels/' + level._id);
@@ -65,10 +65,9 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			});
 			$scope.level.$promise.then(function(data) {
 				var flatLayout = [].concat.apply([], data.layout);
-				$rootScope.options.size = flatLayout.length;
-				$rootScope.$broadcast('gameSizeChanged', { numberOfTiles: $rootScope.options.size });
-				$rootScope.$broadcast('createNewGame', {
-					numberOfTiles: $rootScope.options.size,
+				$scope.$broadcast('gameSizeChanged', { numberOfTiles: flatLayout.length });
+				$scope.$broadcast('createNewGame', {
+					numberOfTiles: flatLayout.length,
 					layout: $scope.level.layout,
 					controller: controller
 				});

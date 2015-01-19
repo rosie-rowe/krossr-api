@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('levels').controller('NumberLineController', ['$rootScope', '$scope',
-	function($rootScope, $scope) {
-		var sideLength = $rootScope.goalMatrix.length;
+angular.module('levels').controller('NumberLineController', ['$scope', 'Utils',
+	function($scope, Utils) {
+		var sideLength = Utils.getGoalMatrix().length;
 		// Number line controller logic
 		// ...
 		$scope.getLineContent = function(index, orientation) {
@@ -10,6 +10,8 @@ angular.module('levels').controller('NumberLineController', ['$rootScope', '$sco
 				len = sideLength,
 				i,
 				count = 0,
+				gameMatrix = Utils.getGameMatrix(),
+				goalMatrix = Utils.getGoalMatrix(),
 				targetMatrix,
 				currentGroup = {},
 				groupCount = 0;
@@ -18,11 +20,11 @@ angular.module('levels').controller('NumberLineController', ['$rootScope', '$sco
 
 			switch (orientation) {
 				case 'vertical':
-					targetMatrix = rotate90($rootScope.goalMatrix);
+					targetMatrix = rotate90(goalMatrix);
 					break;
 				case 'horizontal':
 				default:
-					targetMatrix = $rootScope.goalMatrix;
+					targetMatrix = goalMatrix;
 					break;
 			};
 
@@ -32,7 +34,7 @@ angular.module('levels').controller('NumberLineController', ['$rootScope', '$sco
 					if (!currentGroup[groupCount]) {
 						currentGroup[groupCount] = [];
 					}
-					currentGroup[groupCount].push({x: i, currentValue: $rootScope.gameMatrix[index][i]});
+					currentGroup[groupCount].push({x: i, currentValue: gameMatrix[index][i]});
 					count++;
 				} else {
 					if (count > 0) {

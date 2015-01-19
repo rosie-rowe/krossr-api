@@ -13,7 +13,7 @@
                 </div>
                 <div data-ng-controller="MainCtrl as ctrl" class="form-group">
                     <label class="control-label" for="size">Size</label>
-                    <select ng-model='options.size' ng-change="ctrl.clearAll();ctrl.setGameSize();ctrl.createGameArray('new');">
+                    <select ng-model='ctrl.options.size' ng-change="ctrl.clearAll();ctrl.setGameSize();ctrl.createGameArray('new');">
                         <option value="25" selected>5x5</option>
                         <option value="100">10x10</option>
                         <option value="225">15x15</option>
