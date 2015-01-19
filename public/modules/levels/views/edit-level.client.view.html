@@ -15,11 +15,12 @@
                     <game>
                         <tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayoutForEdit(level.layout, $index);" editable='true'></tile>
                     </game>
-
+                    
                     <div class="form-group">
                         <button type="button" ng-click="ctrl.clearAll()">Clear</button>
                         <input type="submit" value="Update" class="btn btn-default">
                     </div>
+
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>

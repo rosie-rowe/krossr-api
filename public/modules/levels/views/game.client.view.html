@@ -4,8 +4,8 @@
 	<div
 		class="inner game"
 		ng-transclude
-		ng-style="{ 'width': gameCtrl.width,
-					'height': gameCtrl.height }"
+		ng-style="{ 'width': gameCtrl.getWidth(),
+					'height': gameCtrl.getHeight() }"
 		tabindex="1">
 	</div>
 	<div class="win-notification" ng-show="gameCtrl.gameIsWon">

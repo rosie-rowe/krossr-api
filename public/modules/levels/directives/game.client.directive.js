@@ -12,13 +12,6 @@ angular.module('levels').directive('game', [
             templateUrl: 'modules/levels/views/game.client.view.html',
             link: function (scope, elem, attr, gameCtrl) {
                 console.log(gameCtrl);
-                var indexTiles = function() {
-                    var allTiles = angular.element('.tile');
-                    
-                    angular.forEach(allTiles, function(value, key) {
-                        gameCtrl.tileIndex.push({ tileCtrl: angular.element(value).scope().tileCtrl });
-                    });
-                };
 
                 var fillDragBox = function(override) {
                     if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
@@ -40,11 +33,9 @@ angular.module('levels').directive('game', [
                     elem.find('.inner').focus();
                     console.log('focused');
 
-                    // the first time the mouse enters the game, index all the tiles
-                    // so that we can access them faster later
-                    if (gameCtrl.tileIndex = []) {
-                        indexTiles();
-                    }   
+                    if (gameCtrl.getTileIndex().length === 0) {
+                        gameCtrl.indexTiles();
+                    }
                 });
                 
                 // But if the user goes too far away from the game area, clear the dragbox
@@ -63,6 +54,7 @@ angular.module('levels').directive('game', [
                 elem.on('mouseup', function(e) {
                     e.preventDefault();
                     fillDragBox();
+                    console.log('drag ended');
                     gameCtrl.checkWin();
                 });
 

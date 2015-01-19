@@ -13,7 +13,6 @@ angular
     };
       
     this.keydown = function(event) {
-        console.log("key down! " + event)
         if (event.shiftKey) {
             shiftService.shiftOn = true;
         }
@@ -38,25 +37,23 @@ angular
     this.flatten = Utils.flatten;
 
     this.setGameSize = function() {
-        $scope.$broadcast('gameSizeChanged', { numberOfTiles: parseInt(_this.options.size, 10) });
+        Utils.setGameSize(_this.options.size);
     };
 
     this.createGameArray = function(controller) {
-        $scope.$broadcast('createNewGame', {
+        Utils.createNewGame({
             numberOfTiles: parseInt(_this.options.size, 10),
             controller: controller
         });
     };
 
     this.clearAll = function() {
-        $scope.$broadcast('clearAll', { numberOfTiles: parseInt(_this.options.size, 10) });
+        var valueRoot = Math.sqrt(_this.options.size);
+        Utils.clearAllTiles(_this.options.size);
+        Utils.clearAllMatrix(Utils.getGameMatrix(), valueRoot);
     };
 
     this.calculateMargin = function(gameSize) {
         return parseInt(gameSize, 10) / 3;
     }
-
-    $scope.$on('gameSizeUpdated', function(event, args) {
-        _this.gameSize = args.width;
-    });
 }]);

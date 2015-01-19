@@ -64,9 +64,8 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				levelId: $stateParams.levelId
 			});
 			$scope.level.$promise.then(function(data) {
-				var flatLayout = [].concat.apply([], data.layout);
-				$scope.$broadcast('gameSizeChanged', { numberOfTiles: flatLayout.length });
-				$scope.$broadcast('createNewGame', {
+				var flatLayout = Utils.flatten(data.layout);
+				Utils.createNewGame({
 					numberOfTiles: flatLayout.length,
 					layout: $scope.level.layout,
 					controller: controller

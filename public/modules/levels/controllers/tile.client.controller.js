@@ -26,10 +26,6 @@ var tileController = function($scope, Utils, shiftService, tileSize) {
     }
 
     this.setTileSize(tileSize);
-    $scope.$on('clearAll', function() {
-      console.log('clearing tile');
-      _this.fill('empty');
-    });
 };
 
 tileController.$inject = ['$scope', 'Utils', 'shiftService', 'tileSize'];
