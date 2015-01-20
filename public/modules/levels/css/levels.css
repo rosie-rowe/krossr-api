@@ -1,5 +1,9 @@
 /* Styles go here */
 
+.even {
+    background-color: #CCC;
+}
+
 .inner.game {
     border: 1px solid #000;
     overflow: hidden;

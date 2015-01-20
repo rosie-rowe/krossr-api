@@ -4,6 +4,8 @@
 				'line-height': ctrl.tileSize }"
 	ng-repeat="i in ctrl.getLines(level.layout) track by $index"
 	class="{{orientation}}-line"
+	ng-class-even="'even'"
+	ng-class-odd="'odd'"
 	>
 </div>
 
@@ -14,5 +16,7 @@
 	}"
 	ng-repeat="i in ctrl.getLines(level.layout) track by $index"
 	class="{{orientation}}-line"
+	ng-class-even="'even'"
+	ng-class-odd="'odd'"
 	>
 </div>

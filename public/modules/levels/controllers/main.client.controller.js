@@ -13,12 +13,15 @@ angular
     };
       
     this.keydown = function(event) {
+        //debugger;
+        console.log("key down!");
         if (event.shiftKey) {
             shiftService.shiftOn = true;
         }
     };
       
     this.keyup = function(event) {
+        console.log("key up!");
         if (!event.shiftKey) {
             shiftService.shiftOn = false;
         }
