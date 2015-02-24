@@ -31,7 +31,7 @@ angular.module('levels').directive('game', [
                     // focus the game when the mouse enters it
                     // so that the first click will register
                     elem.find('.inner').focus();
-                    console.log('focused');
+                    //console.log('focused');
 
                     if (gameCtrl.getTileIndex().length === 0) {
                         gameCtrl.indexTiles();
@@ -54,7 +54,7 @@ angular.module('levels').directive('game', [
                 elem.on('mouseup', function(e) {
                     e.preventDefault();
                     fillDragBox();
-                    console.log('drag ended');
+                    //console.log('drag ended');
                     gameCtrl.checkWin();
                 });
 

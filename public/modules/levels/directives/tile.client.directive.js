@@ -17,7 +17,7 @@ angular.module('levels').directive('tile', [
                 var clearPending = function(coords) {                 
                     angular.forEach(coords, function(value, key) {
                         var theTileController = gameCtrl.findTileCtrlByCoord(value);
-                        if (theTileController.pending) {
+                        if (theTileController.pending && !theTileController.selected) {
                             theTileController.change(value, true, 'empty');
                         }
                     });
@@ -64,7 +64,7 @@ angular.module('levels').directive('tile', [
 
                 elem.on('dragstart', function(e) {
                     e.preventDefault();
-                    console.log('drag started');
+                    //console.log('drag started');
 
                     var coord = scope.tileCtrl.convert2D(scope.index);
                     gameCtrl.dragBox.startCoord = coord;
