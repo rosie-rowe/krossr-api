@@ -84,3 +84,8 @@
     display: table-cell;
     vertical-align: middle;
 }
+
+.finishedGrouping {
+    color: #F00;
+    text-decoration: line-through;
+}

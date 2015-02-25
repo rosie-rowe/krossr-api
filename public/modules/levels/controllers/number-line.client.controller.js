@@ -1,9 +1,8 @@
 'use strict';
 
-angular.module('levels').controller('NumberLineController', ['$scope', 'Utils',
-	function($scope, Utils) {
-		var gameMatrix = Utils.getGameMatrix(),
-			goalMatrix = Utils.getGoalMatrix(),
+angular.module('levels').controller('NumberLineController', ['$scope', '$timeout', 'Utils',
+	function($scope, $timeout, Utils) {
+		var goalMatrix = Utils.getGoalMatrix(),
 			sideLength = goalMatrix.length,
 			lineContent = [], // keep lineContent in closure so we maintain it across calls back to an instance of the controller,
 			currentGroup = {}, // do the same for currentGroup
@@ -14,38 +13,45 @@ angular.module('levels').controller('NumberLineController', ['$scope', 'Utils',
 		   before joining them for display, so they will appear in the correct order */
 		var adjustContentForOrientation = function(lineContent, orientation) {
 		   	if (orientation === 'vertical') {
-				return lineContent.reverse();
-			} else {
-				return lineContent;
-			}
+				lineContent = lineContent.reverse();
+			};
+
+			return lineContent;
 		};
 
 		/* Given a matrix index for a row or column and an indication for which it is,
 		   calculate groups of consective tiles in that row or column */
 		var calculateGroup = function(index, orientation) {
-			console.log('entered calculateGroup');
-
 			var	groupCount = 0,
-				targetMatrix = getTargetMatrix(goalMatrix, orientation),
+				gameMatrix = getTargetMatrix(Utils.getGameMatrix(), orientation),
 				currentGroup = {},
-				reset_ind = true;
+				targetMatrix = getTargetMatrix(goalMatrix, orientation),
+				reset_ind = true,
+				coord = {};
 
 			// Loop through the row, building a separate count for each group of consecutive true tiles
 			for (var i = 0; i < sideLength; i++) {
 				// If the rotated goal matrix contains a true tile at the current index...
 				if (targetMatrix[index][i]) {
-					// If there is not already an array for the current grouping of tiles, create it.
-					if (!currentGroup[groupCount]) {
+					if (!currentGroup[groupCount]) {	
 						currentGroup[groupCount] = [];
 					}
 
 					// Add the tile to the grouping.
 					currentGroup[groupCount].push(
 						{
+							coord: {
+								y: index,
+								x: i
+							},
 							currentValue: gameMatrix[index][i],
-							goalValue: goalMatrix[index][i]
+							goalValue: targetMatrix[index][i]
 						}
 					);
+
+					/* if a grouping's tiles all contain the correct values, we want to mark that group off in the view so that the user
+						can keep better track of their progress */
+					currentGroup[groupCount].cssClass = determineCssForGrouping(currentGroup[groupCount]);
 
 					reset_ind = true;
 				} else {
@@ -60,20 +66,68 @@ angular.module('levels').controller('NumberLineController', ['$scope', 'Utils',
 			return currentGroup;
 		};
 
+		var determineCssForGrouping = function(grouping) {
+			var isMarked = grouping.every(function(value, index, array) {
+				return array[index].currentValue === array[index].goalValue;
+			});
+
+			if (isMarked) {
+				return 'finishedGrouping';
+			}
+			return isMarked ? 'finishedGrouping' : 'unfinishedGrouping';
+		};
+
 		/* To compute the number lines for the current row or column, we need to find the length of each grouping */
-		var getGroupingLengths = function(currentGroup) {
+		var getGroupings = function(currentGroup) {
 			return Object.keys(currentGroup).map(function(value, index) {
-				return currentGroup[value].length;
+				return {
+					cssClass: currentGroup[value].cssClass,
+					text: currentGroup[value].length
+				};
 			});
 		};
 
 		/* To compute the number lines for the top part, we need to rotate the matrix by 90 degrees first */
-		var getTargetMatrix = function(goalMatrix, orientation) {
+		var getTargetMatrix = function(matrix, orientation) {
 			if (orientation === 'vertical') {
-				return rotate90(goalMatrix);
+				return rotate90(matrix);
 			} else {
-				return goalMatrix
+				return matrix;
 			}
+		};
+
+		/* Knowing the group already exists, update the css classes on it */
+		var recalculateGroup = function(index, orientation) {
+			var gameMatrix = getTargetMatrix(Utils.getGameMatrix(), orientation);
+
+			/* We need to keep track if anything changed so we know whether or not to actually change lineContent,
+				because if we change it regardless we'll end up with the infdig error */
+			var changed = false,
+				newValue,
+				newCssClass,
+				coord;
+
+			angular.forEach(currentGroup, function(value, key) {
+				var entry = value;
+				angular.forEach(entry, function(value, key) {
+					if (value.coord) {
+						newValue = gameMatrix[value.coord.y][value.coord.x];
+
+						if (value.currentValue !== newValue) {
+							value.currentValue = newValue;
+							changed = true;
+						}
+
+						newCssClass = determineCssForGrouping(entry);
+						if (entry.cssClass !== newCssClass) {
+							entry.cssClass = newCssClass;
+							changed = true;
+						}
+					}
+				});
+			});
+
+			return changed;
 		};
 
 		// Create a new matrix of equal size to the one passed in, and assign it to the original rotated 90 degrees
@@ -97,18 +151,25 @@ angular.module('levels').controller('NumberLineController', ['$scope', 'Utils',
 
 		/* For a given row or column, compute its number line (guide numbers on the sides of the board */
 		$scope.getLineContent = function(index, orientation) {
-			//if (!hasGroup) {
+			if (!hasGroup) {
 				currentGroup = calculateGroup(index, orientation);
 				hasGroup = true;
 
-				lineContent = adjustContentForOrientation(getGroupingLengths(currentGroup), orientation);
+				lineContent = adjustContentForOrientation(getGroupings(currentGroup), orientation);
 
 				if (lineContent.length === 0) {
-					lineContent = [0];
+					lineContent = [{
+						cssClass: 'finishedGrouping',
+						text: 0
+					}];
 				}
-			//}
+			} else {
+				if (recalculateGroup(index, orientation)) {
+					lineContent = adjustContentForOrientation(getGroupings(currentGroup), orientation);
+				};
+			}
 
-			return lineContent.join(' ');
+			return lineContent;
 		};
 	}
 ]);

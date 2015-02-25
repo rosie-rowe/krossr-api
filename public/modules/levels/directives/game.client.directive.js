@@ -11,8 +11,6 @@ angular.module('levels').directive('game', [
             transclude: true,
             templateUrl: 'modules/levels/views/game.client.view.html',
             link: function (scope, elem, attr, gameCtrl) {
-                console.log(gameCtrl);
-
                 var fillDragBox = function(override) {
                     if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
                         var initState = gameCtrl.dragBox.initState,
@@ -54,7 +52,6 @@ angular.module('levels').directive('game', [
                 elem.on('mouseup', function(e) {
                     e.preventDefault();
                     fillDragBox();
-                    //console.log('drag ended');
                     gameCtrl.checkWin();
                 });
 
