@@ -8,6 +8,19 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			currentGroup = {}, // do the same for currentGroup
 			hasGroup = false; // when a group is created, this is set to true so we know not to create it again
 
+		$scope.cssClass = "unfinishedGrouping";
+
+		// display a crossed out 0 if the linecontent comes back with no content. otherwise, pass through
+		var accountForZeros = function(lineContent) {
+			if (lineContent.length === 0) {
+				return [{
+					cssClass: 'finishedGrouping',
+					text: 0
+				}];
+			} else {
+				return lineContent;
+			}
+		};
 
 		/* When computing number lines for the top part, we need to reverse the results
 		   before joining them for display, so they will appear in the correct order */
@@ -51,7 +64,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 					/* if a grouping's tiles all contain the correct values, we want to mark that group off in the view so that the user
 						can keep better track of their progress */
-					currentGroup[groupCount].cssClass = determineCssForGrouping(currentGroup[groupCount]);
+					$scope.cssClass = determineCssForGroup(currentGroup);
 
 					reset_ind = true;
 				} else {
@@ -66,22 +79,31 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			return currentGroup;
 		};
 
-		var determineCssForGrouping = function(grouping) {
-			var isMarked = grouping.every(function(value, index, array) {
-				return array[index].currentValue === array[index].goalValue;
+		var determineCssForGroup = function(group) {
+			var groupAsArray = Object.keys(group);
+
+			var isMarked = groupAsArray.every(function(value, index, array) {
+				return determineCssForGrouping(group[value]);
 			});
 
-			if (isMarked) {
-				return 'finishedGrouping';
-			}
 			return isMarked ? 'finishedGrouping' : 'unfinishedGrouping';
+		}
+
+		var determineCssForGrouping = function(grouping) {
+			if (Array.isArray(grouping)) {
+				return grouping.every(function(value, index, array) {
+					return array[index].currentValue === array[index].goalValue;
+				});
+			} else {
+				return true;
+			}
 		};
 
 		/* To compute the number lines for the current row or column, we need to find the length of each grouping */
 		var getGroupings = function(currentGroup) {
 			return Object.keys(currentGroup).map(function(value, index) {
 				return {
-					cssClass: currentGroup[value].cssClass,
+					cssClass: $scope.cssClass,
 					text: currentGroup[value].length
 				};
 			});
@@ -117,15 +139,15 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 							value.currentValue = newValue;
 							changed = true;
 						}
-
-						newCssClass = determineCssForGrouping(entry);
-						if (entry.cssClass !== newCssClass) {
-							entry.cssClass = newCssClass;
-							changed = true;
-						}
 					}
 				});
 			});
+
+			newCssClass = determineCssForGroup(currentGroup);
+			if ($scope.cssClass !== newCssClass) {
+				$scope.cssClass = newCssClass;
+				changed = true;
+			}
 
 			return changed;
 		};
@@ -155,17 +177,10 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 				currentGroup = calculateGroup(index, orientation);
 				hasGroup = true;
 
-				lineContent = adjustContentForOrientation(getGroupings(currentGroup), orientation);
-
-				if (lineContent.length === 0) {
-					lineContent = [{
-						cssClass: 'finishedGrouping',
-						text: 0
-					}];
-				}
+				lineContent = accountForZeros(adjustContentForOrientation(getGroupings(currentGroup), orientation));
 			} else {
 				if (recalculateGroup(index, orientation)) {
-					lineContent = adjustContentForOrientation(getGroupings(currentGroup), orientation);
+					lineContent = accountForZeros(adjustContentForOrientation(getGroupings(currentGroup), orientation));
 				};
 			}
 
