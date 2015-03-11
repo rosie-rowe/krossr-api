@@ -10,6 +10,10 @@
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
                     </div>
+                    <label class="control-label" for="minutes">Time Limit</label>
+                    <div class="controls">
+                        <input type='text' data-ng-model="minutes" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+                    </div>
                 </div>
                 <div data-ng-controller="MainCtrl as ctrl" class="form-group">
                     <label class="control-label" for="size">Size</label>
@@ -18,6 +22,8 @@
                         <option value="100">10x10</option>
                         <option value="225">15x15</option>
                     </select>
+                    
+
 
                     <game ng-init="ctrl.createGameArray('new')">
                         <tile ng-repeat="i in ctrl.getSize() track by $index" editable='true'></tile>

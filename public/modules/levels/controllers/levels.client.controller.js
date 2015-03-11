@@ -7,12 +7,16 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Create new Level
 		$scope.create = function() {
-			var layout = Utils.getGameMatrix();
+			var layout = Utils.getGameMatrix(),
+				timeLimit = Utils.computeTimeLimit($scope.minutes);
+
+			console.log(timeLimit);
 
 			// Create new Level object
 			var level = new Levels ({
 				name: this.name,
-				layout: layout
+				layout: layout,
+				timeLimit: timeLimit
 			});
 
 			// Redirect after save

@@ -1,34 +1,39 @@
 <section data-ng-controller="LevelsController" data-ng-init="findOne();">
 	<div class="page-header">
-		<h1 data-ng-bind="level.name"></h1>
-	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == level.user._id">
-		<a class="btn btn-primary" href="/#!/levels/{{level._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer" tabindex="0">
-
-		<div number-grid orientation="horizontal" class="left-grid"></div>
-		<div number-grid orientation="vertical" class="top-grid" ng-style="{
-				'margin-left': '50px',
-				'width': ctrl.gameSize
-			}"
-			>
+		<big data-ng-bind="level.name"></big>
+		<div class="pull-right" data-ng-show="authentication.user._id == level.user._id">
+			<a class="btn btn-primary" href="/#!/levels/{{level._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-primary" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
 		</div>
-	    <game>
-	        <tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
-	    </game>
 	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="level.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="level.user.displayName"></span>
-		</em>
-	</small>
+	
+	<div class="pull-right">
+		<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer" tabindex="0">
+			<div number-grid orientation="horizontal" class="left-grid"></div>
+			<div number-grid orientation="vertical" class="top-grid" ng-style="{
+					'margin-left': '50px',
+					'width': ctrl.gameSize
+				}"
+				>
+			</div>
+			<game>
+	    		<tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
+			</game>
+		</div>
+		<div>
+			<h2>
+				<timer interval="1000" countdown="level.timeLimit">{{ minutes }}:{{sseconds}}</timer>
+			</h2>
+			<em class="text-muted">
+				Posted on
+				<span data-ng-bind="level.created | date:'mediumDate'"></span>
+				by
+				<span data-ng-bind="level.user.displayName"></span>
+			</em>
+		</div>
+	</div>
 </section>

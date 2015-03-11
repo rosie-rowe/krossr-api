@@ -45,6 +45,11 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout',
                 tileIndex = [];
 			},
 
+			/* Convert minutes into seconds */
+			computeTimeLimit: function(minutes) {
+				return minutes * 60;
+			},
+
 			/* Convert a 2D coordinate into an index */
 			convertTo1D: function(coord) {
 				return (coord.y * sideLength) + coord.x;
