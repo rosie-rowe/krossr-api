@@ -59,5 +59,5 @@ angular
 
     this.calculateMargin = function(gameSize) {
         return parseInt(gameSize, 10) / 3;
-    }
+    };
 }]);

@@ -52,11 +52,15 @@ angular.module('levels').directive('game', [
                 elem.on('mouseup', function(e) {
                     e.preventDefault();
                     fillDragBox();
-                    gameCtrl.checkWin();
+                    if(gameCtrl.checkWin()) {
+                        gameCtrl.setWinTime(scope.level.timeLimit - scope.level.timeRemaining);
+                    };
                 });
 
                 elem.on('click', '.win-notification', function() {
                     gameCtrl.gameIsWon = false;
+                    gameCtrl.gameIsLost = false;
+                    gameCtrl.gameIsOver = false;
                     scope.$digest();
                 })
             }

@@ -10,8 +10,6 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			var layout = Utils.getGameMatrix(),
 				timeLimit = Utils.computeTimeLimit($scope.minutes);
 
-			console.log(timeLimit);
-
 			// Create new Level object
 			var level = new Levels ({
 				name: this.name,
@@ -29,6 +27,9 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+		// this needs to be here so Edit can see it
+		$scope.decomputeTimeLimit = Utils.decomputeTimeLimit;
 
 		// Remove existing Level
 		$scope.remove = function( level ) {
@@ -50,6 +51,8 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.update = function() {
 			var level = $scope.level;
 
+			level.timeLimit = Utils.computeTimeLimit($scope.level.decomputedTimeLimit);
+
 			level.$update(function() {
 				$location.path('levels/' + level._id);
 			}, function(errorResponse) {
@@ -67,7 +70,11 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			$scope.level = Levels.get({ 
 				levelId: $stateParams.levelId
 			});
+
+
 			$scope.level.$promise.then(function(data) {
+				$scope.level.decomputedTimeLimit = Utils.decomputeTimeLimit($scope.level.timeLimit);
+				$scope.level.timeRemaining = $scope.level.timeLimit;
 				var flatLayout = Utils.flatten(data.layout);
 				Utils.createNewGame({
 					numberOfTiles: flatLayout.length,
@@ -75,6 +82,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					controller: controller
 				});
 			});
+		};
+
+		$scope.gameOver = function() {
+			Utils.gameOver();
 		};
 	}
 ]);

@@ -10,6 +10,10 @@
                     <div class="controls">
                         <input type="text" data-ng-model="level.name" id="name" class="form-control" placeholder="Name" required>
                     </div>
+                    <label class="control-label" for="minutes">Time Limit</label>
+                    <div class="controls">
+                        <input type='text' data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+                    </div>
                 </div>
                 <div data-ng-controller="MainCtrl as ctrl">
                     <game>

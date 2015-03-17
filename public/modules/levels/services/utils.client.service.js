@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('levels').factory('Utils', ['tileSize', '$timeout',
-	function(tileSize, $timeout) {
+angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
+	function(tileSize, $timeout, $rootScope) {
 		// Convert service logic
 		// ...
 		var sideLength,
@@ -9,7 +9,9 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout',
 			goalMatrix,
 			gameWidth,
 			gameHeight,
-			tileIndex = [];
+			tileIndex = [],
+			timeScale = 60, // number to convert minutes to seconds and vice versa... probably not going to change
+			winTime = 0 // the time the level was beaten in
 		// Public API
 		return {
 			/* Append the current tile index */
@@ -47,7 +49,7 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout',
 
 			/* Convert minutes into seconds */
 			computeTimeLimit: function(minutes) {
-				return minutes * 60;
+				return minutes * timeScale;
 			},
 
 			/* Convert a 2D coordinate into an index */
@@ -105,9 +107,18 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout',
 		      }
 		    },
 
+		    decomputeTimeLimit: function(seconds) {
+		    	return seconds / timeScale;
+		    },
+
 			/* Convert a Matrix into an array (for ng-repeat to hit all of them) */
 			flatten: function(matrix) {
 		        return Array.prototype.concat.apply([], matrix);
+		    },
+
+		    /* End the game (time ran out) */
+		    gameOver: function() {
+		    	$rootScope.$broadcast('gameOver');
 		    },
 
 		    /* Return the current game size (width and height in pixels of the game field, changes depending on number of tiles) */
@@ -126,6 +137,10 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout',
 		    /* Return the current goal matrix (matrix for game matrix to be compared to to determine a win) */
 		    getGoalMatrix: function() {
 		    	return goalMatrix;
+		    },
+
+		    getWinTime: function() {
+		    	return winTime;
 		    },
 
 		    /* Return the current side length */
@@ -178,6 +193,11 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout',
 		   	setSideLength: function(length) {
 		   		sideLength = length;
 		   	},
+
+		   	setWinTime: function(winTime) {
+		   		winTime = winTime;
+		   		return winTime;
+		   	}
 		};
 	}
 ]);

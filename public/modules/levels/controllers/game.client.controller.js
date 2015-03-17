@@ -4,14 +4,21 @@ var gameController = function($scope, Utils, tileSize) {
     var _this = this;
 
     this.gameIsWon = false;
+    this.gameIsLost = false;
+    this.gameIsOver = false;
+    this.winTime = 0;
+
     this.clearDragBox();
 
     this.checkWin = function() {
       var winner = _this.checkForWin(Utils);
       if (winner) {
+        _this.gameIsOver = true;
         _this.gameIsWon = true;
         $scope.$digest();
+        return true;
       }
+      return false;
     };
 
     this.getWidth = function() {
@@ -30,11 +37,27 @@ var gameController = function($scope, Utils, tileSize) {
       return Utils.convertTo2D(index, Utils.getSideLength());
     }
 
+    /* Dammit! It's been years! */
+    this.lostTheGame = function() {
+      _this.gameIsOver = true;
+      _this.gameIsLost = true;
+      $scope.$digest();
+    }
+
     this.getGameMatrix = Utils.getGameMatrix;
 
     this.getTileIndex = Utils.getTileIndex;
 
     this.indexTiles = Utils.indexTiles.bind(Utils);
+
+    this.setWinTime = function(time) {
+      _this.winTime = Utils.setWinTime(time);
+      $scope.$digest();
+    }
+
+    // as far as I know, this has to be an event since it's triggered by a timer expiring.
+    // if I think of a way to use the service better instead, I'll change it
+    $scope.$on('gameOver', _this.lostTheGame);
 };
 
 gameController.$inject = ['$scope', 'Utils', 'tileSize'];
