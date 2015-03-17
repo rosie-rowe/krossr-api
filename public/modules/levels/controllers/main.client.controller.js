@@ -54,6 +54,7 @@ angular
         var valueRoot = Math.sqrt(_this.options.size);
         Utils.clearAllTiles(_this.options.size);
         Utils.clearAllMatrix(Utils.getGameMatrix(), valueRoot);
+        Utils.clearTileIndex();
     };
 
     this.calculateMargin = function(gameSize) {
