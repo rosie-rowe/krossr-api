@@ -2,13 +2,14 @@
 
 var tileController = function($scope, Utils, shiftService, tileSize) {
     var _this = this,
-        sideLength = Utils.getSideLength();
+        sideLength = Utils.getSideLength(),
+        goalMatrix = Utils.getGoalMatrix();
 
     this.fill('empty');
 
     this.change = function(index, initState, changeTo) {
         if (this.editable === 'true') {
-            _this.changeTile(index, initState, changeTo, shiftService, Utils);
+            _this.changeTile(index, initState, changeTo, goalMatrix, shiftService, Utils);
         }
         $scope.$apply();
     };
@@ -30,8 +31,9 @@ var tileController = function($scope, Utils, shiftService, tileSize) {
 
 tileController.$inject = ['$scope', 'Utils', 'shiftService', 'tileSize'];
 
-tileController.prototype.changeTile = function(index, initState, changeTo, shiftService, Utils) {
-    var coord;
+tileController.prototype.changeTile = function(index, initState, changeTo, goalMatrix, shiftService, Utils) {
+    var coord,
+        wrong_answer = false;
 
     if (typeof index === 'number') { 
       coord = this.convert2D(index);
@@ -46,8 +48,17 @@ tileController.prototype.changeTile = function(index, initState, changeTo, shift
         this.fill('marked', initState);
         Utils.setCoord(coord.y, coord.x, this.selected);
       } else {
-        this.fill('selected', initState);
-        Utils.setCoord(coord.y, coord.x, this.selected);
+        // we don't want this to happen for new or edit screens
+        if (goalMatrix) {
+          wrong_answer = (goalMatrix[coord.y][coord.x] !== true)
+        }
+
+        if (wrong_answer) {
+          Utils.knockOffTime();
+        } else {
+          this.fill('selected', initState);
+          Utils.setCoord(coord.y, coord.x, this.selected);
+        }
       }
     }
 };

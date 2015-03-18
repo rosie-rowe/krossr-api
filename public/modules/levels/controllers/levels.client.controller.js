@@ -4,6 +4,7 @@
 angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'Utils',
 	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, Utils) {
 		$scope.authentication = Authentication;
+		var penaltyTimer;
 
 		// Create new Level
 		$scope.create = function() {
@@ -87,5 +88,19 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.gameOver = function() {
 			Utils.gameOver();
 		};
+
+			    // gonna utilize the same event included with angular-timer to display the penalty on the screen
+	    $scope.$on('timer-add-cd-seconds', function(event, args) {
+	        $scope.penaltyAmount = args;
+	        $scope.showPenalty = true;
+
+	        // if multiple decrements happen in quick succession, we should reset the timer
+	        // to allow the next penalty indicator to show for the full timeout instead of expiring at the end of the first one.
+	        $timeout.cancel(penaltyTimer);
+
+	        penaltyTimer = $timeout(function() {
+	            $scope.showPenalty = false;
+	        }, 1000);
+	    });
 	}
 ]);

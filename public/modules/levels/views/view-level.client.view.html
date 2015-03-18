@@ -32,6 +32,9 @@
 				<timer ng-if="level.timeLimit" countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
 					{{ minutes }}:{{sseconds}}
 				</timer>
+				<div ng-if="showPenalty">
+					{{ penaltyAmount }} sec
+				</div>
 			</h2>
 			<em class="text-muted">
 				Posted on

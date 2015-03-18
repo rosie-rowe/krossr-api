@@ -11,7 +11,9 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
 			gameHeight,
 			tileIndex = [],
 			timeScale = 60, // number to convert minutes to seconds and vice versa... probably not going to change
-			winTime = 0 // the time the level was beaten in
+			winTime = 0, // the time the level was beaten in
+			currentPenalty = 4; // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
+
 		// Public API
 		return {
 			/* Append the current tile index */
@@ -121,6 +123,10 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
 		    	$rootScope.$broadcast('gameOver');
 		    },
 
+		    getCurrentPenalty: function() {
+		    	return currentPenalty;
+		    },
+
 		    /* Return the current game size (width and height in pixels of the game field, changes depending on number of tiles) */
 		    getGameSize: function() {
 		    	return {
@@ -163,6 +169,13 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
                 });
 		    },
 
+		    // subtract time from the angular-timer
+		    knockOffTime: function() {
+		    	$rootScope.$broadcast('timer-add-cd-seconds', -(this.getCurrentPenalty()));
+		    	// increment the penalty
+		    	this.setCurrentPenalty();
+		    },
+
 		    /* Modify the current game size */
 		    setGameSize: function(widthInTiles) {
 		    	var finalWidth = tileSize * widthInTiles,
@@ -180,6 +193,11 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
 		    /* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
 		    setCoord: function(y, x, value) {
 		    	gameMatrix[y][x] = value;
+		    },
+
+		    setCurrentPenalty: function() {
+		    	currentPenalty *= 2;
+		    	console.log(currentPenalty);
 		    },
 
 		    /* Modify the current game matrix, setting a new side length and game size as a side effect  (used for changing size) */

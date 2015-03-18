@@ -40,7 +40,10 @@ var gameController = function($scope, Utils, tileSize) {
     /* Dammit! It's been years! */
     this.lostTheGame = function() {
       _this.gameIsOver = true;
-      _this.gameIsLost = true;
+      // can't lose if you already won
+      if (!_this.gameIsWon) {
+        _this.gameIsLost = true;
+      }
       $scope.$digest();
     }
 
