@@ -47,6 +47,13 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true
 				}
+			},
+			clientLESS: {
+                files: ['public/**/css/*.less'],
+                tasks: ['less'],
+                options: {
+                    livereload: true,
+                }
 			}
 		},
 		jshint: {
@@ -136,6 +143,13 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
+		},
+		less: {
+			development: {
+				files: {
+              		'public/less/modules.css': 'public/modules/**/css/*.less'
+            	}
+			}
 		}
 	});
 
@@ -155,7 +169,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default']);
+	grunt.registerTask('default', ['concurrent:default', 'less']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -164,7 +178,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
+	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);

@@ -1,0 +1,80 @@
+body {
+  background: #222222;
+  color: #dddddd;
+}
+select {
+  color: #222222;
+}
+.content {
+  margin-top: 50px;
+}
+.undecorated-link:hover {
+  text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.ng-invalid.ng-dirty {
+  border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+  border-color: #78FA89;
+}
+:focus {
+  outline: none;
+}
+a.list-group-item,
+a.list-group-item .list-group-item-heading {
+  color: inherit;
+}
+a.list-group-item:hover,
+a.list-group-item:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #555555;
+}
+.btn-primary {
+  background: #555555;
+  border-color: #ffffff;
+  background-image: none;
+}
+.btn-primary:hover {
+  background: #222222;
+  border-color: #ffffff;
+}
+.dropdown-menu {
+  background-color: #222222;
+}
+.dropdown-menu > li > a {
+  background-color: #222222;
+  color: inherit;
+}
+.dropdown-menu > li > a:hover {
+  background-color: #555555;
+  color: #ffffff;
+  background-image: none;
+}
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover,
+.dropdown-menu .active > a:focus {
+  background-color: #555555;
+  background-image: none;
+}
+.list-group-item {
+  background: none;
+}
+.navbar-inverse {
+  background: #222222;
+  background-image: none;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #dddddd;
+}
+.page-header {
+  border-bottom: none;
+}
