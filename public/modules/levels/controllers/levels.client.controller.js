@@ -36,8 +36,8 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.remove = function( level ) {
 			if ( level ) { level.$remove();
 
-				for (var i in $scope.levels ) {
-					if ($scope.levels [i] === level ) {
+				for (var i in $scope.levels) {
+					if ($scope.levels[i] === level ) {
 						$scope.levels.splice(i, 1);
 					}
 				}
@@ -89,7 +89,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			Utils.gameOver();
 		};
 
-			    // gonna utilize the same event included with angular-timer to display the penalty on the screen
+		// gonna utilize the same event included with angular-timer to display the penalty on the screen
 	    $scope.$on('timer-add-cd-seconds', function(event, args) {
 	        $scope.penaltyAmount = args;
 	        $scope.showPenalty = true;
