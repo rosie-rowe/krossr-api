@@ -78,3 +78,82 @@ a.list-group-item:focus {
 .page-header {
   border-bottom: none;
 }
+
+/* Styles go here */
+.even {
+  background-color: #444;
+}
+.inner.game {
+  border: 1px solid #000;
+  background-color: #e2e2e2;
+  overflow: hidden;
+}
+.gameContainer {
+  position: relative;
+  display: inline-block;
+}
+.square {
+  box-sizing: border-box;
+  border: 1px solid #999;
+  float: left;
+}
+.pending {
+  background-color: rgba(175, 175, 175, 0.75);
+}
+.selected {
+  background-color: #2199d0;
+}
+.marked {
+  color: #232323;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+.unselected {
+  background-color: #e2e2e2;
+}
+.left-grid {
+  float: left;
+  margin-right: 12px;
+  position: absolute;
+  bottom: 25px;
+}
+.top-grid {
+  display: inline-block;
+}
+.horizontal-line {
+  text-align: right;
+}
+.vertical-line {
+  display: inline-block;
+  text-align: center;
+}
+.vertical-line div {
+  width: 50%;
+  margin: 0 auto;
+}
+.win-notification {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #FFF;
+  text-align: center;
+}
+.win-wrapper {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.win-text {
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+.finishedGrouping {
+  color: #F00;
+  text-decoration: line-through;
+}

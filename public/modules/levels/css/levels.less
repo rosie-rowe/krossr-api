@@ -1,0 +1,109 @@
+/* Styles go here */
+
+@black: #000;
+@tileColor: #E2E2E2;
+@pendingColor: fade(darken(@tileColor, 20%), 75%);
+@selectedColor: #2199D0;
+@markedColor: darken(@tileColor, 75%);
+
+.even {
+    background-color: #444;
+}
+
+.inner.game {
+    border: 1px solid #000;
+    background-color: @tileColor;
+    overflow: hidden;
+}
+
+.gameContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.square {
+    box-sizing: border-box;
+    border: 1px solid #999;
+    float: left;
+}
+
+.pending {
+    background-color: @pendingColor;
+}
+
+.selected {
+    background-color: @selectedColor;
+}
+
+.marked {
+    color: @markedColor;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+}
+
+.unselected {
+    background-color: @tileColor;
+}
+
+.left-grid {
+	float: left;
+	margin-right: 12px;
+    position: absolute;
+    bottom: 25px;
+}
+
+.top-grid {
+    display: inline-block;
+}
+
+.transform(@transform) {
+    -webkit-transform: @transform;
+    -moz-transform: @transform;
+    -ms-transform: @transform; /* note that you have @trasnform here */
+    -o-transform: @transform;
+    transform: @transform; 
+}
+
+.horizontal-line {
+    text-align: right;
+}
+
+.vertical-line {
+    display: inline-block;
+    text-align: center;
+}
+
+.vertical-line div {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.win-notification {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #FFF;
+    text-align: center;
+}
+
+.win-wrapper {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.win-text {
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.finishedGrouping {
+    color: #F00;
+    text-decoration: line-through;
+}

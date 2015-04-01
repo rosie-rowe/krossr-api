@@ -8,12 +8,15 @@
 	data-index="{{$index}}"
 	draggable="true"
 	ng-style="{
+		'font-size': tileCtrl.height,
 		'width': tileCtrl.width,
 		'height': tileCtrl.height,
+		'line-height': tileCtrl.height,
 		'border-right': tileCtrl.fillBorders('right', $index),
 		'border-left': tileCtrl.fillBorders('left', $index),
 		'border-top': tileCtrl.fillBorders('top', $index),
 		'border-bottom': tileCtrl.fillBorders('bottom', $index)
 	}"
 	>
+	<div ng-if="tileCtrl.marked">✖</div>
 </div>
