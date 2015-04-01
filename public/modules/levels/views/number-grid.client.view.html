@@ -1,7 +1,8 @@
 <div number-line
 	ng-if="orientation === 'horizontal'"
 	ng-style="{ 'height': ctrl.tileSize,
-				'line-height': ctrl.tileSize }"
+				'line-height': ctrl.tileSize,
+				'font-size': ctrl.getFontSize() }"
 	ng-repeat="i in ctrl.getLines(level.layout) track by $index"
 	class="{{orientation}}-line"
 	ng-class-even="'even'"
@@ -12,7 +13,8 @@
 <div number-line
 	ng-if="orientation === 'vertical'"
 	ng-style="{
-		'width': ctrl.tileSize
+		'width': ctrl.tileSize,
+		'font-size': ctrl.getFontSize()
 	}"
 	ng-repeat="i in ctrl.getLines(level.layout) track by $index"
 	class="{{orientation}}-line"

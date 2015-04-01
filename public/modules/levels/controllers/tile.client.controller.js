@@ -1,6 +1,6 @@
 'use strict';
 
-var tileController = function($scope, Utils, shiftService, tileSize) {
+var tileController = function($scope, Utils, shiftService) {
     var _this = this,
         sideLength = Utils.getSideLength(),
         goalMatrix = Utils.getGoalMatrix();
@@ -26,10 +26,10 @@ var tileController = function($scope, Utils, shiftService, tileSize) {
       return Utils.convertTo2D(index);
     }
 
-    this.setTileSize(tileSize);
+    this.setTileSize(Utils.getTileSize());
 };
 
-tileController.$inject = ['$scope', 'Utils', 'shiftService', 'tileSize'];
+tileController.$inject = ['$scope', 'Utils', 'shiftService'];
 
 tileController.prototype.changeTile = function(index, initState, changeTo, goalMatrix, shiftService, Utils) {
     var coord,

@@ -75,13 +75,19 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 			$scope.level.$promise.then(function(data) {
 				$scope.level.decomputedTimeLimit = Utils.decomputeTimeLimit($scope.level.timeLimit);
+
 				$scope.level.timeRemaining = $scope.level.timeLimit;
+
 				var flatLayout = Utils.flatten(data.layout);
+
+				console.log(Utils.calculatePlayableArea());
+
 				Utils.createNewGame({
 					numberOfTiles: flatLayout.length,
 					layout: $scope.level.layout,
 					controller: controller
 				});
+				
 			});
 		};
 

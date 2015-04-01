@@ -1,6 +1,6 @@
 'use strict';
 
-var gameController = function($scope, Utils, tileSize) {
+var gameController = function($scope, Utils) {
     var _this = this;
 
     this.gameIsWon = false;
@@ -63,7 +63,7 @@ var gameController = function($scope, Utils, tileSize) {
     $scope.$on('gameOver', _this.lostTheGame);
 };
 
-gameController.$inject = ['$scope', 'Utils', 'tileSize'];
+gameController.$inject = ['$scope', 'Utils'];
 
 gameController.prototype.checkForWin = function(Utils) {
   var goalMatrix = Utils.getGoalMatrix(),

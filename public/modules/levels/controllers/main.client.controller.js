@@ -2,11 +2,17 @@
 
 angular
 .module('levels')
-.controller('MainCtrl', ['$scope', '$timeout', 'shiftService', 'tileSize', 'Utils',
-    function ($scope, $timeout, shiftService, tileSize, Utils) {
+.controller('MainCtrl', ['$scope', '$timeout', 'shiftService', 'Utils',
+    function ($scope, $timeout, shiftService, Utils) {
     var _this = this;
             
-    this.tileSize = tileSize + 'px';
+    this.tileSize = Utils.getTileSizePx();
+
+    $scope.$on('tileSizeChanged', function(e, args) {
+        _this.tileSize = args + 'px';
+    });
+
+    console.log(this.tileSize);
 
     this.options = {
         size: 25
@@ -58,6 +64,10 @@ angular
     };
 
     this.calculateMargin = function(gameSize) {
-        return parseInt(gameSize, 10) / 3;
+        return Utils.getPlayableArea() - Utils.getGameSize();
     };
+
+    this.getFontSize = function() {
+        return parseInt(_this.tileSize, 10) / 2 + 'px';
+    }
 }]);

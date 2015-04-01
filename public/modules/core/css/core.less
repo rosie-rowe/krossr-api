@@ -1,21 +1,36 @@
+@navbarHeight: 50px;
 @primary: #222;
+@primaryText: #DDD;
 @secondary: lighten(@primary, 20%);
 @white: #FFF;
-@primary-text: #DDD;
+
+@bodyHeight: calc(~"100% - "@navbarHeight);
+
+html {
+	height: 100%;
+	overflow: hidden;
+}
 
 body {
 	background: @primary;
-	color: @primary-text;
+	font-family: 'PT Sans';
+	height: @bodyHeight;
+	color: @primaryText;
 }
 
 select {
 	color: @primary;
 }
 
-.content {
-	margin-top: 50px;
-
+#playable-area {
+	height: @bodyHeight;
 }
+
+.content {
+	margin-top: @navbarHeight;
+	height: @bodyHeight;
+}
+
 .undecorated-link:hover {
 	text-decoration: none;
 }
@@ -89,7 +104,7 @@ a.list-group-item:hover, a.list-group-item:focus {
 	background-image: none;
 
 	.navbar-nav > li > a {
-		color: @primary-text;
+		color: @primaryText;
 	}
 }
 

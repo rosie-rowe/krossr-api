@@ -11,37 +11,32 @@
 		</div>
 	</div>
 	
-	<div class="pull-right">
-		<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer" tabindex="0">
-			<div number-grid orientation="horizontal" class="left-grid"></div>
-			<div number-grid orientation="vertical" class="top-grid" ng-style="{
-					'margin-left': '50px',
-					'width': ctrl.gameSize
-				}"
-				>
+	<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer pull-right" tabindex="0">
+		<div number-grid orientation="horizontal" class="left-grid" ng-style="{
+			'left': '-' + ctrl.tileSize
+		}"></div>
+		<div number-grid orientation="vertical" class="top-grid"></div>
+		<game>
+    		<tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
+		</game>
+	</div>
+	<div>
+		<h2>
+			<timer ng-if="!level.timeLimit" interval="1000">
+				{{ minutes }}:{{sseconds}}
+			</timer>
+			<timer ng-if="level.timeLimit" countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
+				{{ minutes }}:{{sseconds}}
+			</timer>
+			<div ng-if="showPenalty">
+				{{ penaltyAmount }} sec
 			</div>
-			<game>
-	    		<tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
-			</game>
-		</div>
-		<div>
-			<h2>
-				<timer ng-if="!level.timeLimit" interval="1000">
-					{{ minutes }}:{{sseconds}}
-				</timer>
-				<timer ng-if="level.timeLimit" countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
-					{{ minutes }}:{{sseconds}}
-				</timer>
-				<div ng-if="showPenalty">
-					{{ penaltyAmount }} sec
-				</div>
-			</h2>
-			<em class="text-muted">
-				Posted on
-				<span data-ng-bind="level.created | date:'mediumDate'"></span>
-				by
-				<span data-ng-bind="level.user.displayName"></span>
-			</em>
-		</div>
+		</h2>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="level.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="level.user.displayName"></span>
+		</em>
 	</div>
 </section>

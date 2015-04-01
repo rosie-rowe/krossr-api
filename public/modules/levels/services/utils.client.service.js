@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
-	function(tileSize, $timeout, $rootScope) {
+angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
+	function($timeout, $rootScope) {
 		// Convert service logic
 		// ...
 		var sideLength,
@@ -9,7 +9,9 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
 			goalMatrix,
 			gameWidth,
 			gameHeight,
+			playableAreaSize,
 			tileIndex = [],
+			tileSize = 25,
 			timeScale = 60, // number to convert minutes to seconds and vice versa... probably not going to change
 			winTime = 0, // the time the level was beaten in
 			currentPenalty = 4; // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
@@ -19,6 +21,12 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
 			/* Append the current tile index */
 			addTileToIndex: function(obj) {
 				tileIndex.push(obj);
+			},
+
+			/* Return the width of the main section of the game so we can calculate game and tile sizes off of it */
+			calculatePlayableArea: function() {
+				playableAreaSize = angular.element('#playable-area').outerHeight();
+				return playableAreaSize;
 			},
 
 			/* Given a matrix of true/false values, set every value to false */
@@ -145,10 +153,10 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
 		    	return goalMatrix;
 		    },
 
-		    getWinTime: function() {
-		    	return winTime;
+		    getPlayableArea: function() {
+		    	return playableAreaSize;
 		    },
-
+		    
 		    /* Return the current side length */
 		    getSideLength: function() {
 		    	return sideLength;
@@ -157,6 +165,18 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
 		    /* Return the current tile index */
 		    getTileIndex: function() {
 		    	return tileIndex;
+		    },
+
+		    getTileSize: function() {
+		    	return tileSize;
+		    },
+
+		    getTileSizePx: function() {
+		    	return tileSize + 'px'
+		    },
+
+		    getWinTime: function() {
+		    	return winTime;
 		    },
 
 		    /* Evil DOM maniplation in service? Oh well. When setting up the game, also cache the tiles for faster access later */
@@ -178,11 +198,14 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
 
 		    /* Modify the current game size */
 		    setGameSize: function(widthInTiles) {
-		    	var finalWidth = tileSize * widthInTiles,
-			    	finalHeight = tileSize * widthInTiles;
+		    	/* Not quite the golden ratio, more round */
+		    	var finalWidth = playableAreaSize / 1.6,
+			    	finalHeight = finalWidth;
 
 			    gameWidth = finalWidth + 2 + 'px';
 			    gameHeight = finalHeight + 'px';
+
+			    this.setTileSize(finalWidth, widthInTiles);
 		    },
 
 		    /* Modify the current goal matrix (loading level from layout) */
@@ -210,6 +233,11 @@ angular.module('levels').factory('Utils', ['tileSize', '$timeout', '$rootScope',
 		    /* Modify the current side length */
 		   	setSideLength: function(length) {
 		   		sideLength = length;
+		   	},
+
+		   	setTileSize: function(gameWidth, widthInTiles) {
+		   		tileSize = gameWidth / widthInTiles;
+		   		$rootScope.$broadcast('tileSizeChanged', tileSize);
 		   	},
 
 		   	setWinTime: function(winTime) {
