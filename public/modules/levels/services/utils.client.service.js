@@ -23,6 +23,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				tileIndex.push(obj);
 			},
 
+			addTime: function(timeToAdd) {
+		    	if (timeToAdd) {
+		    		$rootScope.$broadcast('timer-add-cd-seconds', timeToAdd);
+		    	}
+		    },
+
 			/* Return the width of the main section of the game so we can calculate game and tile sizes off of it */
 			calculatePlayableArea: function() {
 				playableAreaSize = angular.element('#playable-area').outerHeight();
@@ -99,6 +105,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 		        this.setGoalMatrix(args.layout);
 		      } 
 
+		      this.calculatePlayableArea();
 		      this.createEmptyMatrix(args.numberOfTiles);
 		      this.clearTileIndex();
 
@@ -172,14 +179,14 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 		    },
 
 		    getTileSizePx: function() {
-		    	return tileSize + 'px'
+		    	return tileSize  + 'px'
 		    },
 
 		    getWinTime: function() {
 		    	return winTime;
 		    },
 
-		    /* Evil DOM maniplation in service? Oh well. When setting up the game, also cache the tiles for faster access later */
+		    /* When setting up the game, also cache the tiles for faster access later */
 		    indexTiles: function() {
                 var allTiles = angular.element('.tile'),
                 	_this = this;
@@ -236,13 +243,21 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 		   	},
 
 		   	setTileSize: function(gameWidth, widthInTiles) {
-		   		tileSize = gameWidth / widthInTiles;
+		   		tileSize = gameWidth / parseInt(widthInTiles, 10);
 		   		$rootScope.$broadcast('tileSizeChanged', tileSize);
 		   	},
 
 		   	setWinTime: function(winTime) {
 		   		winTime = winTime;
 		   		return winTime;
+		   	},
+
+		   	startTimer: function() {
+		   		$rootScope.$broadcast('timer-start');
+		   	},
+
+		   	stopTimer: function() {
+		   		$rootScope.$broadcast('timer-stop');
 		   	}
 		};
 	}

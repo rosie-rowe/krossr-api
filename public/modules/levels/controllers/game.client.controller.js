@@ -15,6 +15,7 @@ var gameController = function($scope, Utils) {
       if (winner) {
         _this.gameIsOver = true;
         _this.gameIsWon = true;
+        Utils.stopTimer();
         $scope.$digest();
         return true;
       }
@@ -52,6 +53,10 @@ var gameController = function($scope, Utils) {
     this.getTileIndex = Utils.getTileIndex;
 
     this.indexTiles = Utils.indexTiles.bind(Utils);
+
+    this.addTime = Utils.addTime;
+
+    this.startTimer = Utils.startTimer;
 
     this.setWinTime = function(time) {
       _this.winTime = Utils.setWinTime(time);
@@ -125,12 +130,6 @@ gameController.prototype.processDragBox = function(dragBox) {
 gameController.prototype.clearDragBox = function() {
   this.dragBox = {};
 };
-
-gameController.prototype.calculateMargin = function(width) {
-  return parseInt(width, 10) / 3;
-};
-
-
 
 angular
     .module('levels')

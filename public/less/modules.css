@@ -100,7 +100,6 @@ a.list-group-item:focus {
 }
 .gameContainer {
   position: relative;
-  display: inline-block;
 }
 .square {
   box-sizing: border-box;
@@ -122,15 +121,8 @@ a.list-group-item:focus {
 .unselected {
   background-color: #e2e2e2;
 }
-.left-grid {
-  float: left;
-  position: absolute;
-  bottom: 25px;
-}
 .top-grid {
-  display: inline-block;
-  margin-left: 50px;
-  /* magic */
+  float: right;
 }
 .horizontal-line {
   text-align: right;
@@ -161,10 +153,33 @@ a.list-group-item:focus {
 }
 .win-text {
   height: 100%;
+  font-size: 5em;
   display: table-cell;
   vertical-align: middle;
 }
+.win-text .btn {
+  width: 20%;
+  font-size: .75em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
 .finishedGrouping {
-  color: #F00;
-  text-decoration: line-through;
+  color: #2199d0;
+}
+.theCountdown {
+  position: fixed;
+  left: 4em;
+  bottom: 3em;
+}
+@media screen and (min-width: 1024px) {
+  .theCountdown timer,
+  .theCountdown .showPenalty {
+    font-size: 6em;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .theCountdown timer,
+  .theCountdown .showPenalty {
+    font-size: 4em;
+  }
 }

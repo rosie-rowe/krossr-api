@@ -80,7 +80,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 				var flatLayout = Utils.flatten(data.layout);
 
-				console.log(Utils.calculatePlayableArea());
+				Utils.calculatePlayableArea();
 
 				Utils.createNewGame({
 					numberOfTiles: flatLayout.length,
@@ -97,16 +97,19 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// gonna utilize the same event included with angular-timer to display the penalty on the screen
 	    $scope.$on('timer-add-cd-seconds', function(event, args) {
-	        $scope.penaltyAmount = args;
-	        $scope.showPenalty = true;
+	    	// don't want to see the time being added to the clock, for example, when adding it back when pressing 'play again'
+	    	if (args < 0) {
+		        $scope.penaltyAmount = args;
+		        $scope.showPenalty = true;
 
-	        // if multiple decrements happen in quick succession, we should reset the timer
-	        // to allow the next penalty indicator to show for the full timeout instead of expiring at the end of the first one.
-	        $timeout.cancel(penaltyTimer);
+		        // if multiple decrements happen in quick succession, we should reset the timer
+		        // to allow the next penalty indicator to show for the full timeout instead of expiring at the end of the first one.
+		        $timeout.cancel(penaltyTimer);
 
-	        penaltyTimer = $timeout(function() {
-	            $scope.showPenalty = false;
-	        }, 1000);
+		        penaltyTimer = $timeout(function() {
+		            $scope.showPenalty = false;
+		        }, 1000);
+	    	}
 	    });
 	}
 ]);

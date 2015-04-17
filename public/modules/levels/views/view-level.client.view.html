@@ -11,32 +11,41 @@
 		</div>
 	</div>
 	
-	<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer pull-right" tabindex="0">
-		<div number-grid orientation="horizontal" class="left-grid" ng-style="{
-			'left': '-' + ctrl.tileSize
-		}"></div>
-		<div number-grid orientation="vertical" class="top-grid"></div>
-		<game>
-    		<tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
-		</game>
+	<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer" tabindex="0">
+		<div class="row-fluid top">
+			<div number-grid orientation="vertical" class="top-grid" ng-style="{
+				'padding-left': ctrl.margin,
+				'padding-right': ctrl.margin
+			}"></div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="row-fluid bottom">
+			<game class="pull-right">
+				<tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
+			</game>
+			<div number-grid orientation="horizontal" class="left-grid pull-right" ng-style="{'padding-top': ctrl.margin}"></div>
+		</div>
 	</div>
-	<div>
-		<h2>
-			<timer ng-if="!level.timeLimit" interval="1000">
+
+	<div class="theCountdown">
+		<div>
+			<timer ng-if="!level.timeLimit" ng-hide="showPenalty" interval="1000">
 				{{ minutes }}:{{sseconds}}
 			</timer>
-			<timer ng-if="level.timeLimit" countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
+			<timer ng-if="level.timeLimit" ng-hide="showPenalty" countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
 				{{ minutes }}:{{sseconds}}
 			</timer>
-			<div ng-if="showPenalty">
+			<div ng-if="showPenalty" class="showPenalty">
 				{{ penaltyAmount }} sec
 			</div>
-		</h2>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="level.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="level.user.displayName"></span>
-		</em>
+		</div>
+
+		<div>
+			<em class="text-muted">
+				<span data-ng-bind="level.user.displayName"></span>
+				/
+				<span data-ng-bind="level.created | date:'mediumDate'"></span>
+			</em>
+		</div>
 	</div>
 </section>

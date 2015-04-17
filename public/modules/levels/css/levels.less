@@ -5,6 +5,9 @@
 @pendingColor: fade(darken(@tileColor, 20%), 75%);
 @selectedColor: #2199D0;
 @markedColor: darken(@tileColor, 75%);
+@leftColumn: 33%;
+@rightColumn: 66%;
+@largeScreen: 1024px;
 
 .even {
     background-color: #444;
@@ -18,7 +21,6 @@
 
 .gameContainer {
     position: relative;
-    display: inline-block;
 }
 
 .square {
@@ -46,21 +48,14 @@
     background-color: @tileColor;
 }
 
-.left-grid {
-	float: left;
-    position: absolute;
-    bottom: 25px;
-}
-
 .top-grid {
-    display: inline-block;
-    margin-left: 50px; /* magic */
+    float: right;
 }
 
 .transform(@transform) {
     -webkit-transform: @transform;
     -moz-transform: @transform;
-    -ms-transform: @transform; /* note that you have @trasnform here */
+    -ms-transform: @transform; 
     -o-transform: @transform;
     transform: @transform; 
 }
@@ -99,11 +94,29 @@
 
 .win-text {
     height: 100%;
+    font-size: 5em;
     display: table-cell;
     vertical-align: middle;
+
+    .btn {
+        width: 20%;
+        font-size: .75em;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
 }
 
 .finishedGrouping {
-    color: #F00;
-    text-decoration: line-through;
+    color: @selectedColor;    
+}
+
+.theCountdown {
+    position: fixed;
+    left: 4em;
+    bottom: 3em;
+
+    timer, .showPenalty {
+        @media screen and (min-width: @largeScreen) { font-size: 6em; }
+        @media screen and (max-width: @largeScreen) { font-size: 4em; }
+    }
 }

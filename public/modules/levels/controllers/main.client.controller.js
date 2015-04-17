@@ -7,16 +7,18 @@ angular
     var _this = this;
             
     this.tileSize = Utils.getTileSizePx();
+    this.margin = Utils.getTileSizePx() / 2;
 
     $scope.$on('tileSizeChanged', function(e, args) {
         _this.tileSize = args + 'px';
+        _this.margin = args / 2;
     });
-
-    console.log(this.tileSize);
 
     this.options = {
         size: 25
     };
+
+    this.flatten = Utils.flatten;
       
     this.keydown = function(event) {
         //debugger;
@@ -43,10 +45,16 @@ angular
         }
     };
 
-    this.flatten = Utils.flatten;
+    this.getMargin = function(side, tileSize) {
+        switch (side) {
+            default:
+                return tileSize / 2;
+                break;
+        }
+    };
 
     this.setGameSize = function() {
-        Utils.setGameSize(_this.options.size);
+        Utils.setGameSize(Math.sqrt(_this.options.size));
     };
 
     this.createGameArray = function(controller) {
@@ -69,5 +77,5 @@ angular
 
     this.getFontSize = function() {
         return parseInt(_this.tileSize, 10) / 2 + 'px';
-    }
+    };
 }]);

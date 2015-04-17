@@ -27,6 +27,10 @@ var tileController = function($scope, Utils, shiftService) {
     }
 
     this.setTileSize(Utils.getTileSize());
+
+    $scope.$on('tileSizeChanged', function() {
+      _this.setTileSize(Utils.getTileSize());
+    });
 };
 
 tileController.$inject = ['$scope', 'Utils', 'shiftService'];
