@@ -65,9 +65,10 @@ angular
     };
 
     this.clearAll = function() {
-        var valueRoot = Math.sqrt(_this.options.size);
-        Utils.clearAllTiles(_this.options.size);
-        Utils.clearAllMatrix(Utils.getGameMatrix(), valueRoot);
+        var currentGameMatrix = Utils.getGameMatrix();
+        
+        Utils.clearAllTiles();
+        Utils.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
         Utils.clearTileIndex();
     };
 
