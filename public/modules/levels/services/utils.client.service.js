@@ -31,7 +31,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Return the width of the main section of the game so we can calculate game and tile sizes off of it */
 			calculatePlayableArea: function() {
-				playableAreaSize = angular.element('#playable-area').outerHeight();
+				var playableArea = angular.element('#playable-area'),
+					pHeight = playableArea.outerHeight(),
+					pWidth = playableArea.outerWidth();
+
+				playableAreaSize = Math.min(pHeight, pWidth);
+				
 				return playableAreaSize;
 			},
 
