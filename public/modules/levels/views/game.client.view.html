@@ -17,15 +17,26 @@
 				{{gameCtrl.winTime}} SECONDS!
 				<br />
 				<button class="btn btn-primary play-again" ng-click="ctrl.clearAll()">
-					Play Again
+					Retry
 				</button>
 				<a href="/#!/levels">
 					<button class="btn btn-primary">
-						Level Select
+						New Level
 					</button>
 				</a>
 			</div>
-			<div class="win-text" ng-if="gameCtrl.gameIsLost">YOU LOSE!</div>
+			<div class="win-text" ng-if="gameCtrl.gameIsLost">
+				YOU LOSE!
+				<br />
+				<button class="btn btn-primary play-again" ng-click="ctrl.clearAll()">
+					Retry
+				</button>
+				<a href="/#!/levels">
+					<button class="btn btn-primary">
+						New Level
+					</button>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>

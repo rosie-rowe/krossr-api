@@ -14,7 +14,8 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			tileSize = 25,
 			timeScale = 60, // number to convert minutes to seconds and vice versa... probably not going to change
 			winTime = 0, // the time the level was beaten in
-			currentPenalty = 4; // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
+			currentPenalty = 4,  // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
+			basePenalty = currentPenalty; // the number to reset the penalty to when changing levels or retrying a level
 
 		// Public API
 		return {
@@ -23,9 +24,9 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				tileIndex.push(obj);
 			},
 
-			addTime: function(timeToAdd) {
-		    	if (timeToAdd) {
-		    		$rootScope.$broadcast('timer-add-cd-seconds', timeToAdd);
+			resetTimer: function(timeToResetTo) {
+		    	if (timeToResetTo) {
+		    		$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);
 		    	}
 		    },
 
@@ -38,6 +39,16 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				playableAreaSize = Math.min(pHeight, pWidth);
 				
 				return playableAreaSize;
+			},
+
+			/* Clear everything, to start a new game */
+			clearAll: function() {
+		        var currentGameMatrix = this.getGameMatrix();
+		        
+		        this.clearAllTiles();
+		        this.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
+		        this.clearTileIndex();
+		        this.setCurrentPenalty(true);
 			},
 
 			/* Given a matrix of true/false values, set every value to false */
@@ -215,7 +226,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			    	finalHeight = finalWidth;
 
 			    gameWidth = finalWidth + 2 + 'px';
-			    gameHeight = finalHeight + 'px';
+			    gameHeight = finalHeight - 2 + 'px';
 
 			    this.setTileSize(finalWidth, widthInTiles);
 		    },
@@ -230,8 +241,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 		    	gameMatrix[y][x] = value;
 		    },
 
-		    setCurrentPenalty: function() {
-		    	currentPenalty *= 2;
+		    setCurrentPenalty: function(resetPenalty) {
+		    	if (resetPenalty) {
+		    		currentPenalty = basePenalty;
+		    	} else {
+		    		currentPenalty *= 2;
+		    	}
 		    	console.log(currentPenalty);
 		    },
 

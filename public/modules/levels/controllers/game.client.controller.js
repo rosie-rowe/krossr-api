@@ -54,7 +54,7 @@ var gameController = function($scope, Utils) {
 
     this.indexTiles = Utils.indexTiles.bind(Utils);
 
-    this.addTime = Utils.addTime;
+    this.resetTimer = Utils.resetTimer;
 
     this.startTimer = Utils.startTimer;
 

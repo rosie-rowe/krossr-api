@@ -4,7 +4,30 @@
 @secondary: lighten(@primary, 20%);
 @white: #FFF;
 
-@bodyHeight: calc(~"100% - "@navbarHeight);
+@bodyHeight: 100%;
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+
+:focus {
+	outline: none;
+}
+
+a {
+	&.list-group-item {
+		&,
+		& .list-group-item-heading {
+			color: inherit;
+		}
+
+		&:hover, &:focus {
+			color: @white;
+			text-decoration: none;
+			background-color: @secondary;
+		}
+	}
+}
 
 html {
 	height: 100%;
@@ -26,48 +49,27 @@ select {
 	height: @bodyHeight;
 }
 
-.content {
-	margin-top: @navbarHeight;
-	height: @bodyHeight;
-}
-
-.undecorated-link:hover {
-	text-decoration: none;
-}
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-	display: none !important;
-}
-.ng-invalid.ng-dirty{
-    border-color:#FA787E;
-}
-.ng-valid.ng-dirty{
-    border-color:#78FA89;
-}
-:focus {
-	outline: none;
-}
-
-a.list-group-item {
-	&,
-	& .list-group-item-heading {
-		color: inherit;
-	}
-}
-
-a.list-group-item:hover, a.list-group-item:focus {
-	color: @white;
-	text-decoration: none;
-	background-color: @secondary;
-}
-
 .btn-primary {
 	background: @secondary;
 	border-color: @white;
-	background-image: none;
+	color: @white;
+
 	&:hover {
 		background: @primary;
 		border-color: @white;
 	};
+}
+
+.collapsing {
+	overflow: visible;
+}
+
+.content {
+	height: @bodyHeight;
+}
+
+.header-container {
+
 }
 
 .dropdown-menu {
@@ -99,15 +101,53 @@ a.list-group-item:hover, a.list-group-item:focus {
 	background: none;
 }
 
+.navbar {
+	display: inline-block;
+	//position: fixed;
+	left: 1em;
+	top: 1em;
+}
+
 .navbar-inverse {
 	background: @primary;
 	background-image: none;
 
-	.navbar-nav > li > a {
-		color: @primaryText;
+	.navbar-nav {
+		float: none;
+
+		& > li > a {
+			color: @primaryText;
+		}
 	}
+}
+
+.navbar-toggle {
+	float: none;
+	position: static;
+}
+
+.ng-invalid.ng-dirty{
+    border-color:#FA787E;
+}
+.ng-valid.ng-dirty{
+    border-color:#78FA89;
 }
 
 .page-header {
 	border-bottom: none;
+}
+
+.pull-right {
+	float: right;
+}
+
+.row {
+	display: inline-block;
+	width: 100%;
+}
+
+.undecorated-link {
+	&:hover {
+		text-decoration: none;
+	}
 }

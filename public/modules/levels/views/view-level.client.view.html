@@ -12,14 +12,14 @@
 	</div>
 	
 	<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer" tabindex="0">
-		<div class="row-fluid top">
+		<div class="top row">
 			<div number-grid orientation="vertical" class="top-grid" ng-style="{
 				'padding-left': ctrl.margin,
 				'padding-right': ctrl.margin
 			}"></div>
 			<div class="clearfix"></div>
 		</div>
-		<div class="row-fluid bottom">
+		<div class="bottom row">
 			<game class="pull-right">
 				<tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
 			</game>

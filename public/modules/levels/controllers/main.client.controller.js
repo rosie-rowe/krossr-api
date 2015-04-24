@@ -64,13 +64,7 @@ angular
         });
     };
 
-    this.clearAll = function() {
-        var currentGameMatrix = Utils.getGameMatrix();
-        
-        Utils.clearAllTiles();
-        Utils.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
-        Utils.clearTileIndex();
-    };
+    this.clearAll = Utils.clearAll.bind(Utils);
 
     this.calculateMargin = function(gameSize) {
         return Utils.getPlayableArea() - Utils.getGameSize();

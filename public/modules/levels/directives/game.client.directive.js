@@ -58,16 +58,16 @@ angular.module('levels').directive('game', [
                 });
 
                 // This also works with the click event in main.controller and should always hit this one first due to bubbling
-                elem.on('click', '.win-notification .play-again', function() {
+                elem.on('click', '.play-again', function() {
                     gameCtrl.gameIsWon = false;
                     gameCtrl.gameIsLost = false;
                     gameCtrl.gameIsOver = false;
 
-                    // reset the time back to its original value, this might be slightly hacky but I don't want to modify angular-timer at the moment
-                    gameCtrl.addTime(scope.level.timeLimit - scope.level.timeRemaining);
+                    // reset the time back to its original value, this might be slightly hacky but I don't want to modify angular-timer at the momen
+                    gameCtrl.resetTimer(scope.level.timeLimit);
                     gameCtrl.startTimer();
 
-                    scope.$digest();
+                    scope.$apply();
                 });
             }
         };
