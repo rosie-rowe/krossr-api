@@ -19,6 +19,10 @@ a.list-group-item:focus {
   text-decoration: none;
   background-color: #555555;
 }
+h1 {
+  font-size: 4em;
+  margin: 0.5em 0;
+}
 html {
   height: 100%;
   overflow: hidden;
@@ -32,6 +36,10 @@ body {
 select {
   color: #222222;
 }
+ul {
+  list-style-type: none;
+  padding-left: 12px;
+}
 #playable-area {
   height: 100%;
 }
@@ -44,11 +52,28 @@ select {
   background: #222222;
   border-color: #ffffff;
 }
+.caret {
+  display: inline-block;
+  font-size: 0.5em;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.caret.right:before {
+  content: '▶';
+}
+.caret.down:before {
+  content: '▼';
+}
 .collapsing {
   overflow: visible;
 }
+.container {
+  width: 100%;
+}
 .content {
+  display: inline-block;
   height: 100%;
+  width: 84%;
 }
 .dropdown-menu {
   background-color: #222222;
@@ -56,9 +81,9 @@ select {
 .dropdown-menu > li > a {
   background-color: #222222;
   color: inherit;
+  text-decoration: none;
 }
 .dropdown-menu > li > a:hover {
-  background-color: #555555;
   color: #ffffff;
   background-image: none;
 }
@@ -68,27 +93,35 @@ select {
   background-color: #555555;
   background-image: none;
 }
+.dropdown-toggle {
+  font-size: 2em;
+  cursor: pointer;
+}
+.hide {
+  display: none !important;
+}
+.header-container {
+  display: inline-block;
+  height: 100%;
+  font-family: inherit;
+  list-style-type: none;
+  vertical-align: top;
+  width: 15%;
+}
 .list-group-item {
   background: none;
 }
-.navbar {
-  display: inline-block;
-  left: 1em;
-  top: 1em;
-}
-.navbar-inverse {
-  background: #222222;
-  background-image: none;
-}
-.navbar-inverse .navbar-nav {
-  float: none;
-}
-.navbar-inverse .navbar-nav > li > a {
-  color: #dddddd;
-}
 .navbar-toggle {
-  float: none;
-  position: static;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ffffff;
+  display: inline-block;
+  font-size: 2em;
+  padding: 0.5em;
 }
 .ng-invalid.ng-dirty {
   border-color: #FA787E;
@@ -109,6 +142,9 @@ select {
 .undecorated-link:hover {
   text-decoration: none;
 }
+/*
+ *  Mixins
+ */
 
 /* Styles go here */
 .even {

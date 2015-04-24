@@ -1,20 +1,12 @@
-<div class="header-container" data-ng-controller="HeaderController">
-	<div class="navbar-header">
-		<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-	</div>
+<div class="container" data-ng-controller="HeaderController">
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
 			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
-				<a ng-switch-when="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+				<a ng-switch-when="dropdown" class="dropdown-toggle" ng-click="toggleShowing(item)">
 					<span data-ng-bind="item.title"></span>
-					<b class="caret"></b>
+					<b class="caret" ng-class="{ 'right': !item.isShowing, 'down': item.isShowing }"></b>
 				</a>
-				<ul ng-switch-when="dropdown" class="dropdown-menu">
+				<ul ng-switch-when="dropdown" class="dropdown-menu" ng-class="{ 'hide': !item.isShowing }">
 					<li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
 						<a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
 					</li>
@@ -33,10 +25,10 @@
 		</ul>
 		<ul class="nav navbar-nav" data-ng-show="authentication.user">
 			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+				<a class="dropdown-toggle" ng-click="toggleShowing(profileDropdown)">
+					<span>Profile</span> <b class="caret" ng-class="{ 'right': !profileDropdown.isShowing, 'down': profileDropdown.isShowing }"></b>
 				</a>
-				<ul class="dropdown-menu">
+				<ul class="dropdown-menu" ng-class="{ 'hide': !profileDropdown.isShowing }">
 					<li>
 						<a href="/#!/settings/profile">Edit Profile</a>
 					</li>
