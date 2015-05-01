@@ -1,14 +1,5 @@
 /* Styles go here */
 
-@black: #000;
-@tileColor: #E2E2E2;
-@pendingColor: fade(darken(@tileColor, 20%), 75%);
-@selectedColor: #2199D0;
-@markedColor: darken(@tileColor, 75%);
-@leftColumn: 33%;
-@rightColumn: 66%;
-@largeScreen: 1024px;
-
 .even {
     background-color: #444;
 }
@@ -21,8 +12,13 @@
     overflow: hidden;
 }
 
+.finishedGrouping {
+    color: @selectedColor;    
+}
+
 .gameContainer {
     position: relative;
+    height: 100%;
 }
 
 .square {
@@ -64,6 +60,17 @@
 
 .horizontal-line {
     text-align: right;
+}
+
+.theCountdown {
+    bottom: 0;
+    display: inline-block;
+    position: absolute;
+
+    timer, .showPenalty {
+        @media screen and (min-width: @largeScreen) { font-size: 6em; }
+        @media screen and (max-width: @largeScreen) { font-size: 4em; }
+    }
 }
 
 .vertical-line {
@@ -112,23 +119,8 @@
         text-transform: uppercase;
 
         &:hover {
-            background-color: #FF0;
+            background-color: @primary;
         }
-    }
-}
-
-.finishedGrouping {
-    color: @selectedColor;    
-}
-
-.theCountdown {
-    position: fixed;
-    left: 4em;
-    bottom: 3em;
-
-    timer, .showPenalty {
-        @media screen and (min-width: @largeScreen) { font-size: 6em; }
-        @media screen and (max-width: @largeScreen) { font-size: 4em; }
     }
 }
 

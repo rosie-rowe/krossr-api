@@ -37,7 +37,7 @@
 	{% endfor %}
 
 	<!-- Fonts -->
-	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	<link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
 
 	<!-- HTML5 Shim -->
 	<!--[if lt IE 9]>
@@ -49,7 +49,7 @@
 <body class="ng-cloak">
 	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="header-container"></header>
 	<section class="content">
-		<section id="playable-area" class="container">
+		<section id="playable-area" resize class="container">
 			{% block content %}{% endblock %}
 		</section>
 	</section>

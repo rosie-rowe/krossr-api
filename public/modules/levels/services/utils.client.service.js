@@ -9,6 +9,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			goalMatrix,
 			gameWidth,
 			gameHeight,
+			outerGameSize,
 			playableAreaSize,
 			tileIndex = [],
 			tileSize = 25,
@@ -25,10 +26,10 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			},
 
 			resetTimer: function(timeToResetTo) {
-		    	if (timeToResetTo) {
-		    		$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);
-		    	}
-		    },
+				if (timeToResetTo) {
+					$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);
+				}
+			},
 
 			/* Return the width of the main section of the game so we can calculate game and tile sizes off of it */
 			calculatePlayableArea: function() {
@@ -43,21 +44,21 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Clear everything, to start a new game */
 			clearAll: function() {
-		        var currentGameMatrix = this.getGameMatrix();
-		        
-		        this.clearAllTiles();
-		        this.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
-		        this.clearTileIndex();
-		        this.setCurrentPenalty(true);
+				var currentGameMatrix = this.getGameMatrix();
+				
+				this.clearAllTiles();
+				this.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
+				this.clearTileIndex();
+				this.setCurrentPenalty(true);
 			},
 
 			/* Given a matrix of true/false values, set every value to false */
 			clearAllMatrix: function(matrix, value) {
 			  for (var i = 0; i < value; i++) {
-			    var len = matrix[i].length
-			    for (var j = 0; j < len; j++) {
-			      matrix[i][j] = false;
-			    }
+				var len = matrix[i].length
+				for (var j = 0; j < len; j++) {
+				  matrix[i][j] = false;
+				}
 			  }
 
 			  return matrix;
@@ -74,9 +75,9 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				});
 			},
 
-            // make sure the index is clean before we add to it to avoid bugs with switching between screens
+			// make sure the index is clean before we add to it to avoid bugs with switching between screens
 			clearTileIndex: function() {
-                tileIndex = [];
+				tileIndex = [];
 			},
 
 			/* Convert minutes into seconds */
@@ -92,11 +93,11 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			/* Convert an index into a 2D coordinate */
 			convertTo2D: function(index) {
 			  var x = index % sideLength,
-			      y = (index - x) / sideLength,
-			      coord = {
-			        y: y,
-			        x: x
-			      };
+				  y = (index - x) / sideLength,
+				  coord = {
+					y: y,
+					x: x
+				  };
 
 			  //console.log(coord);
 			  return coord;
@@ -117,168 +118,191 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Combine a lot of the other functions here to set up a new game */
 			createNewGame: function(args) {
-		      if (args.layout) {
-		        this.setGoalMatrix(args.layout);
-		      } 
+				var sideLength;
 
-		      this.calculatePlayableArea();
-		      this.createEmptyMatrix(args.numberOfTiles);
-		      this.clearTileIndex();
+				if (args.layout) {
+					this.setGoalMatrix(args.layout);
+				}
 
-		      /* When editing the level, we'll prepopulate the game matrix (revealed tiles) with the goal matrix,
-		          then get rid of the goal matrix (since we don't want to be able to win while editing) */
-		      switch(args.controller) {
-		      	  case 'edit':
-		          	this.setGameMatrix(this.getGoalMatrix());
-		          	this.setGoalMatrix();
-		          	break;
-		          case 'new':
-		          	this.setGoalMatrix();
-		          	break;
-		          default:
-		          	break;
-		      }
-		    },
+				this.createEmptyMatrix(args.numberOfTiles);
+				this.clearTileIndex();
 
-		    decomputeTimeLimit: function(seconds) {
-		    	return seconds / timeScale;
-		    },
+				this.calculatePlayableArea();
+
+				/* When editing the level, we'll prepopulate the game matrix (revealed tiles) with the goal matrix,
+				  then get rid of the goal matrix (since we don't want to be able to win while editing) */
+				switch(args.controller) {
+					case 'edit':
+						this.setGameMatrix(this.getGoalMatrix());
+						this.setGoalMatrix();
+						break;
+					case 'new':
+						this.setGoalMatrix();
+						break;
+					default:
+						break;
+				}
+			},
+
+			decomputeTimeLimit: function(seconds) {
+				return seconds / timeScale;
+			},
+
+			draw: function() {
+				console.log('drawing');
+			},
 
 			/* Convert a Matrix into an array (for ng-repeat to hit all of them) */
 			flatten: function(matrix) {
-		        return Array.prototype.concat.apply([], matrix);
-		    },
+				return Array.prototype.concat.apply([], matrix);
+			},
 
-		    /* End the game (time ran out) */
-		    gameOver: function() {
-		    	$rootScope.$broadcast('gameOver');
-		    },
+			/* End the game (time ran out) */
+			gameOver: function() {
+				$rootScope.$broadcast('gameOver');
+			},
 
-		    getCurrentPenalty: function() {
-		    	return currentPenalty;
-		    },
+			getCurrentPenalty: function() {
+				return currentPenalty;
+			},
 
-		    /* Return the current game size (width and height in pixels of the game field, changes depending on number of tiles) */
-		    getGameSize: function() {
-		    	return {
-		    		gameHeight: gameHeight,
-		    		gameWidth: gameWidth
-		    	};
-		    },
+			/* Return the current game size (width and height in pixels of the game field, changes depending on number of tiles) */
+			getGameSize: function() {
+				return {
+					gameHeight: gameHeight,
+					gameWidth: gameWidth
+				};
+			},
 
-		    /* Return the current game matrix */
-		    getGameMatrix: function() {
-		    	return gameMatrix;
-		    },
+			/* Return the current game matrix */
+			getGameMatrix: function() {
+				return gameMatrix;
+			},
 
-		    /* Return the current goal matrix (matrix for game matrix to be compared to to determine a win) */
-		    getGoalMatrix: function() {
-		    	return goalMatrix;
-		    },
+			/* Return the current goal matrix (matrix for game matrix to be compared to to determine a win) */
+			getGoalMatrix: function() {
+				return goalMatrix;
+			},
 
-		    getPlayableArea: function() {
-		    	return playableAreaSize;
-		    },
-		    
-		    /* Return the current side length */
-		    getSideLength: function() {
-		    	return sideLength;
-		    },
+			getOuterGameWidth: function() {
+				return this.getWidth('.outer.game') + this.getWidth('.left-grid');
+			},
+			
+			/* Return the current side length */
+			getSideLength: function() {
+				return sideLength;
+			},
 
-		    /* Return the current tile index */
-		    getTileIndex: function() {
-		    	return tileIndex;
-		    },
+			/* Return the current tile index */
+			getTileIndex: function() {
+				return tileIndex;
+			},
 
-		    getTileSize: function() {
-		    	return tileSize;
-		    },
+			getTileSize: function() {
+				return tileSize;
+			},
 
-		    getTileSizePx: function() {
-		    	return tileSize  + 'px'
-		    },
+			getTileSizePx: function() {
+				return tileSize  + 'px'
+			},
 
-		    getWinTime: function() {
-		    	return winTime;
-		    },
+			getWinTime: function() {
+				return winTime;
+			},
 
-		    /* When setting up the game, also cache the tiles for faster access later */
-		    indexTiles: function() {
-                var allTiles = angular.element('.tile'),
-                	_this = this;
+			getWidth: function(selector) {
+				return angular.element(selector).outerWidth();
+			},
 
-                angular.forEach(allTiles, function(value, key) {
-                    _this.addTileToIndex({ tileCtrl: angular.element(value).scope().tileCtrl });
-                });
-		    },
+			/* When setting up the game, also cache the tiles for faster access later */
+			indexTiles: function() {
+				var allTiles = angular.element('.tile'),
+					_this = this;
 
-		    // subtract time from the angular-timer
-		    knockOffTime: function() {
-		    	$rootScope.$broadcast('timer-add-cd-seconds', -(this.getCurrentPenalty()));
-		    	// increment the penalty
-		    	this.setCurrentPenalty();
-		    },
+				angular.forEach(allTiles, function(value, key) {
+					_this.addTileToIndex({ tileCtrl: angular.element(value).scope().tileCtrl });
+				});
+			},
 
-		    /* Modify the current game size */
-		    setGameSize: function(widthInTiles) {
-		    	/* Not quite the golden ratio, more round */
-		    	var finalWidth = playableAreaSize / 1.6,
-			    	finalHeight = finalWidth;
+			// subtract time from the angular-timer
+			knockOffTime: function() {
+				$rootScope.$broadcast('timer-add-cd-seconds', -(this.getCurrentPenalty()));
+				// increment the penalty
+				this.setCurrentPenalty();
+			},
 
-			    gameWidth = finalWidth + 2 + 'px';
-			    gameHeight = finalHeight - 2 + 'px';
+			/* Modify the current game size */
+			setGameSize: function(widthInTiles) {
+				/* Not quite the golden ratio, more round */
+				var finalWidth = Math.round(playableAreaSize / 1.6),
+					finalHeight = finalWidth;
 
-			    this.setTileSize(finalWidth, widthInTiles);
-		    },
+				gameWidth = finalWidth + 2 + 'px';
+				gameHeight = finalHeight - 2 + 'px';
 
-		    /* Modify the current goal matrix (loading level from layout) */
-		    setGoalMatrix: function(layout) {
-		    	goalMatrix = layout;
-		    },
+				this.setTileSize(finalWidth, widthInTiles);
+			},
 
-		    /* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
-		    setCoord: function(y, x, value) {
-		    	gameMatrix[y][x] = value;
-		    },
+			/* Modify the current goal matrix (loading level from layout) */
+			setGoalMatrix: function(layout) {
+				goalMatrix = layout;
+			},
 
-		    setCurrentPenalty: function(resetPenalty) {
-		    	if (resetPenalty) {
-		    		currentPenalty = basePenalty;
-		    	} else {
-		    		currentPenalty *= 2;
-		    	}
-		    	console.log(currentPenalty);
-		    },
+			/* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
+			setCoord: function(y, x, value) {
+				gameMatrix[y][x] = value;
+			},
 
-		    /* Modify the current game matrix, setting a new side length and game size as a side effect  (used for changing size) */
-		    setGameMatrix: function(matrix) {
-		    	gameMatrix = matrix;
-		    	this.setSideLength(matrix.length);
-		    	this.setGameSize(matrix.length);
-		    },
+			setCurrentPenalty: function(resetPenalty) {
+				if (resetPenalty) {
+					currentPenalty = basePenalty;
+				} else {
+					currentPenalty *= 2;
+				}
+				console.log(currentPenalty);
+			},
 
-		    /* Modify the current side length */
-		   	setSideLength: function(length) {
-		   		sideLength = length;
-		   	},
+			/* Modify the current game matrix, setting a new side length and game size as a side effect  (used for changing size) */
+			setGameMatrix: function(matrix) {
+				gameMatrix = matrix;
+				this.setSideLength(matrix.length);
+				this.setGameSize(matrix.length);
+			},
 
-		   	setTileSize: function(gameWidth, widthInTiles) {
-		   		tileSize = gameWidth / parseInt(widthInTiles, 10);
-		   		$rootScope.$broadcast('tileSizeChanged', tileSize);
-		   	},
+			/* Modify the current side length */
+			setSideLength: function(length) {
+				sideLength = length;
+			},
 
-		   	setWinTime: function(winTime) {
-		   		winTime = winTime;
-		   		return winTime;
-		   	},
+			setTileSize: function(gameWidth, widthInTiles) {
+				tileSize = gameWidth / parseInt(widthInTiles, 10);
+				$rootScope.$broadcast('tileSizeChanged', tileSize);
+			},
 
-		   	startTimer: function() {
-		   		$rootScope.$broadcast('timer-start');
-		   	},
+			/* Make div.gameContainer-inner be only as large as it needs to be,
+			*  so the game will be centered in its available space. */
+			setOuterGameWidth: function(width) {
+				$timeout(function() {
+					_this.setWidth('.gameContainer-inner', gameWidth);
+				}, 0);
+			},
 
-		   	stopTimer: function() {
-		   		$rootScope.$broadcast('timer-stop');
-		   	}
+			setWinTime: function(winTime) {
+				winTime = winTime;
+				return winTime;
+			},
+
+			setWidth: function(selector, width) {
+				angular.element(selector).css("width", width);
+			},
+
+			startTimer: function() {
+				$rootScope.$broadcast('timer-start');
+			},
+
+			stopTimer: function() {
+				$rootScope.$broadcast('timer-stop');
+			}
 		};
 	}
 ]);

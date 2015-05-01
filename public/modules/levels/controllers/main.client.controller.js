@@ -66,10 +66,6 @@ angular
 
     this.clearAll = Utils.clearAll.bind(Utils);
 
-    this.calculateMargin = function(gameSize) {
-        return Utils.getPlayableArea() - Utils.getGameSize();
-    };
-
     this.getFontSize = function() {
         return parseInt(_this.tileSize, 10) / 2 + 'px';
     };
