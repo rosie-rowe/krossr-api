@@ -7,6 +7,9 @@
 }
 
 a {
+	color: @white;
+	text-decoration: none;
+
 	&.list-group-item {
 		&,
 		& .list-group-item-heading {
@@ -57,10 +60,27 @@ ul {
 	height: @bodyHeight;
 }
 
+.btn {
+    .border-radius(.25em);
+
+    background-color: fade(@black, 50%);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: .5em;
+    font-weight: 700;
+    padding: .4em;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: @primary;
+    }
+}
+
 .btn-primary {
 	background: @secondary;
 	border-color: @white;
 	color: @white;
+	font-size: 1.5em;
 
 	&:hover {
 		background: @primary;
@@ -128,6 +148,28 @@ ul {
 	cursor: pointer;
 }
 
+.form-group {
+	margin: 1em;
+
+	input {
+		.border-radius();
+
+		background-color: @primary;
+		border: 1px solid @secondary;
+		color: @white;
+		font-family: @mainFont !important;
+		line-height: 2;
+		padding: 1em;
+	}
+}
+
+.hero {
+	display: table;
+	height: 100%;
+	text-align: center;
+	width: 100%;
+}
+
 .hide {
 	display: none !important;
 }
@@ -167,10 +209,10 @@ ul {
 }
 
 .ng-invalid.ng-dirty{
-    border-color:#FA787E;
+    border-color: @invalidColor;
 }
 .ng-valid.ng-dirty{
-    border-color:#78FA89;
+    border-color: @selectedColor;
 }
 
 .page-header {
@@ -196,6 +238,17 @@ ul {
 	}
 }
 
+.sign-on {
+    .btn {
+        font-size: 1.5em;
+        margin: 1em;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
 .splash {
 	font-size: 10em;
 	font-family: @mainFont;
@@ -207,11 +260,20 @@ ul {
 	}
 }
 
+.valign-outer  {
+	display: table;
+}
+
+.valign-inner {
+	display: table-cell;
+	vertical-align: middle;
+}
+
 /*
  *  Mixins
  */
 
- .border-radius (@radius: 5px) {
+ .border-radius (@radius: @borderRadius) {
     -webkit-border-radius: @radius;
     -moz-border-radius:    @radius;
     border-radius:         @radius;

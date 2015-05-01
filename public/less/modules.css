@@ -9,6 +9,10 @@
 :focus {
   outline: none;
 }
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
 a.list-group-item,
 a.list-group-item .list-group-item-heading {
   color: inherit;
@@ -48,10 +52,29 @@ ul {
 #playable-area {
   height: 100%;
 }
+.btn {
+  -webkit-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
+  border-radius: 0.25em;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: .5em;
+  font-weight: 700;
+  padding: .4em;
+  text-transform: uppercase;
+}
+.btn:hover {
+  background-color: #222222;
+}
 .btn-primary {
   background: #555555;
   border-color: #ffffff;
   color: #ffffff;
+  font-size: 1.5em;
 }
 .btn-primary:hover {
   background: #222222;
@@ -102,6 +125,28 @@ ul {
   font-size: 2em;
   cursor: pointer;
 }
+.form-group {
+  margin: 1em;
+}
+.form-group input {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #222222;
+  border: 1px solid #555555;
+  color: #ffffff;
+  line-height: 2;
+  padding: 1em;
+}
+.hero {
+  display: table;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
 .hide {
   display: none !important;
 }
@@ -141,7 +186,7 @@ ul {
   border-color: #FA787E;
 }
 .ng-valid.ng-dirty {
-  border-color: #78FA89;
+  border-color: #2199d0;
 }
 .page-header {
   border-bottom: none;
@@ -161,12 +206,26 @@ ul {
 .row.bottom .theCountdown {
   margin: 0 0 1em 0;
 }
+.sign-on .btn {
+  font-size: 1.5em;
+  margin: 1em;
+}
+.sign-on a {
+  text-decoration: none;
+}
 .splash {
   font-size: 10em;
   font-family: 'Corben';
 }
 .undecorated-link:hover {
   text-decoration: none;
+}
+.valign-outer {
+  display: table;
+}
+.valign-inner {
+  display: table-cell;
+  vertical-align: middle;
 }
 /*
  *  Mixins
@@ -260,27 +319,8 @@ ul {
 }
 .win-text {
   height: 100%;
-  font-size: 5em;
   display: table-cell;
   vertical-align: middle;
-}
-.win-text .btn {
-  -webkit-border-radius: 0.25em;
-  -moz-border-radius: 0.25em;
-  border-radius: 0.25em;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  background-color: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  font-family: inherit;
-  font-size: .5em;
-  font-weight: 700;
-  padding: .4em;
-  text-transform: uppercase;
-}
-.win-text .btn:hover {
-  background-color: #222222;
 }
 /*
  *  Mixins

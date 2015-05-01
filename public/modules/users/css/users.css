@@ -9,6 +9,10 @@
 	position: relative;
 }
 
+.sign-on-form {
+	display: inline-block;
+}
+
 .btn-remove-account {
 	top: 10px;
 	right: 10px;

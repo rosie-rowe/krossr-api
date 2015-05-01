@@ -32,6 +32,7 @@ module.exports = {
 			]
 		},
 		css: [
+			'public/less/reset.css',
 			'public/modules/**/css/*.css',
 			'public/less/modules.css'
 		],
