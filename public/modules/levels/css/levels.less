@@ -21,6 +21,11 @@
     height: 100%;
 }
 
+.listLevels {
+    height: 100%;
+    position: relative;
+}
+
 .square {
     box-sizing: border-box;
     border: 1px solid #999;
@@ -40,6 +45,21 @@
     height: 100%;
     text-align: center;
     width: 100%;
+}
+
+.pagination {
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+
+    .prevPage,
+    .nextPage,
+    .currentPage {
+        display: inline-block;
+        margin: 1em;
+        font-size: 2em;
+    }
 }
 
 .unselected {

@@ -6,7 +6,7 @@ module.exports = function(app) {
 
 	// Levels Routes
 	app.route('/levels')
-		.get(levels.list)
+		.get(levels.paginate)
 		.post(users.requiresLogin, levels.create);
 
 	app.route('/levels/:levelId')

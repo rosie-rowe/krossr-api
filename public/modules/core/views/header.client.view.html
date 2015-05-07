@@ -1,5 +1,8 @@
 <div class="container" data-ng-controller="HeaderController">
 	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+		<ul class="nav navbar-nav">
+			<h2>Krossr</h2>
+		</ul>
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
 			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
 				<a ng-switch-when="dropdown" class="dropdown-toggle" ng-click="toggleShowing(item)">
@@ -14,29 +17,11 @@
 				<a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
 			</li>
 		</ul>
-		<ul class="nav navbar-nav" data-ng-hide="authentication.user">
-			<h2>Krossr</h2>
-		</ul>
 		<ul class="nav navbar-nav" data-ng-show="authentication.user">
-			<li class="dropdown">
-				<a class="dropdown-toggle" ng-click="toggleShowing(profileDropdown)">
-					<span>Profile</span> <b class="caret" ng-class="{ 'right': !profileDropdown.isShowing, 'down': profileDropdown.isShowing }"></b>
+			<li>
+				<a href="/#!/settings/profile">
+					<span>Profile</span>
 				</a>
-				<ul class="dropdown-menu" ng-class="{ 'hide': !profileDropdown.isShowing }">
-					<li>
-						<a href="/#!/settings/profile">Edit Profile</a>
-					</li>
-					<li>
-						<a href="/#!/settings/accounts">Manage Social Accounts</a>
-					</li>
-					<li data-ng-show="authentication.user.provider === 'local'">
-						<a href="/#!/settings/password">Change Password</a>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<a href="/auth/signout">Signout</a>
-					</li>
-				</ul>
 			</li>
 		</ul>
 	</nav>

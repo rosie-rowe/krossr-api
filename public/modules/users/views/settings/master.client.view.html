@@ -1,0 +1,27 @@
+<div class="hero">
+	<section class="valign-inner" data-ng-controller="MasterController">
+		<ul>
+			<li>
+				<button class="btn btn-primary">
+					<a href="/#!/settings/edit-profile">Edit Profile</a>
+				</button>
+			</li>
+			<li>
+				<button class="btn btn-primary">
+					<a href="/#!/settings/accounts">Manage Social Accounts</a>
+				</button>
+			</li>
+			<li data-ng-show="authentication.user.provider === 'local'">
+				<button class="btn btn-primary">
+					<a href="/#!/settings/password">Change Password</a>
+				</button>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<button class="btn btn-primary">
+					<a href="/auth/signout">Signout</a>
+				</button>
+			</li>
+		</ul>
+	</section>
+</div>

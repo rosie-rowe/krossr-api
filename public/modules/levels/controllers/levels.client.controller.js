@@ -4,6 +4,11 @@
 angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'Utils',
 	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, Utils) {
 		$scope.authentication = Authentication;
+		$scope.currentPage = 0;
+
+		// get total number of levels
+		//$scope.totalCount = Levels.count();
+
 		var penaltyTimer;
 
 		// Create new Level
@@ -63,7 +68,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Find a list of Levels
 		$scope.find = function() {
-			$scope.levels = Levels.query();
+			Levels.query({ pageNum: $scope.currentPage }, function(data) {
+				$scope.totalPages = Math.ceil(data.count / data.numPerPage);
+				$scope.levels = data.levels;
+			});
 		};
 
 		// Find existing Level
@@ -89,6 +97,21 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				});
 				
 			});
+		};
+
+		$scope.pageDown = function() {
+			if ($scope.currentPage > 0) {
+				$scope.currentPage--;
+				$scope.find();
+			}
+		}
+
+		$scope.pageUp = function() {
+			//currentPage will be off by 1 since it's 0-indexed
+			if ($scope.currentPage + 1 < $scope.totalPages) {
+				$scope.currentPage++;
+				$scope.find();
+			}
 		};
 
 		$scope.gameOver = function() {

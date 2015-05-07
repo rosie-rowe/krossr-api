@@ -13,16 +13,6 @@ a {
   color: #ffffff;
   text-decoration: none;
 }
-a.list-group-item,
-a.list-group-item .list-group-item-heading {
-  color: inherit;
-}
-a.list-group-item:hover,
-a.list-group-item:focus {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #555555;
-}
 h1 {
   font-size: 4em;
   margin: 0.5em 0;
@@ -75,6 +65,7 @@ ul {
   border-color: #ffffff;
   color: #ffffff;
   font-size: 1.5em;
+  margin: 1em;
 }
 .btn-primary:hover {
   background: #222222;
@@ -122,7 +113,6 @@ ul {
   background-image: none;
 }
 .dropdown-toggle {
-  font-size: 2em;
   cursor: pointer;
 }
 .form-group {
@@ -138,6 +128,7 @@ ul {
   background-color: #222222;
   border: 1px solid #555555;
   color: #ffffff;
+  font-family: 'Corben' !important;
   line-height: 2;
   padding: 1em;
 }
@@ -161,7 +152,7 @@ ul {
   width: 15%;
 }
 .list-group-item {
-  background: none;
+  background: rgba(0, 0, 0, 0.5);
 }
 .navbar-toggle {
   -webkit-border-radius: 5px;
@@ -182,8 +173,11 @@ ul {
   color: #ffffff;
   text-decoration: none;
 }
+.navbar-nav li {
+  font-size: 2em;
+}
 .ng-invalid.ng-dirty {
-  border-color: #FA787E;
+  border-color: #fa787e;
 }
 .ng-valid.ng-dirty {
   border-color: #2199d0;
@@ -250,6 +244,10 @@ ul {
   position: relative;
   height: 100%;
 }
+.listLevels {
+  height: 100%;
+  position: relative;
+}
 .square {
   box-sizing: border-box;
   border: 1px solid #999;
@@ -266,6 +264,19 @@ ul {
   height: 100%;
   text-align: center;
   width: 100%;
+}
+.pagination {
+  bottom: 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+.pagination .prevPage,
+.pagination .nextPage,
+.pagination .currentPage {
+  display: inline-block;
+  margin: 1em;
+  font-size: 2em;
 }
 .unselected {
   background-color: #e2e2e2;

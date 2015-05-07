@@ -7,6 +7,9 @@ angular.module('levels').factory('Levels', ['$resource',
 		}, {
 			update: {
 				method: 'PUT'
+			},
+			query: {
+				isArray: false
 			}
 		});
 	}
