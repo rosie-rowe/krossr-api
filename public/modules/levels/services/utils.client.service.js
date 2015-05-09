@@ -233,8 +233,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Modify the current game size */
 			setGameSize: function(widthInTiles) {
-				/* Not quite the golden ratio, more round */
-				var finalWidth = Math.round(playableAreaSize / 1.6),
+				var finalWidth = playableAreaSize / 2,
 					finalHeight = finalWidth;
 
 				gameWidth = finalWidth + 2 + 'px';

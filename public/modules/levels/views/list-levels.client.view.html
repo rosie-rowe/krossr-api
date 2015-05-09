@@ -1,30 +1,35 @@
 <section class="listLevels" data-ng-controller="LevelsController" data-ng-init="find()">
     <div class="page-header">
         <h1>Levels</h1>
+        <button class="btn btn-primary">
+            <a href="/#!/levels/create">New level</a>
+        </button>
     </div>
+
     <div class="list-group">
         <a data-ng-repeat="level in levels" data-ng-href="#!/levels/{{level._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				<span data-ng-bind="level.user.displayName"></span>
-                <span data-ng-bind="level.created | date:'short'"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="level.name"></h4>
+			<div class="list-group-item-heading" data-ng-bind="level.name"></div>
+            <small class="list-group-item-text">
+                <div data-ng-bind="level.user.displayName"></div>
+                <div data-ng-bind="level.created | date:'short'"></div>
+            </small>
         </a>
     </div>
+
     <div class="alert alert-warning text-center" data-ng-hide="!levels.$resolved || levels.length">
     	No Levels yet, why don't you <a href="/#!/levels/create">create one</a>?
     </div>
 
     <div class="pagination">
-        <div class="prevPage" ng-click="pageDown()">
+        <div class="prevPage" ng-click="pageDown()" ng-class="{'invisible': currentPage === 0}">
             ◀
         </div>
 
         <div class="currentPage">
-            Page {{ currentPage + 1}} of {{ totalPages }}
+            Page {{ currentPage + 1 }} of {{ totalPages }}
         </div>
 
-        <div class="nextPage" ng-click="pageUp()">
+        <div class="nextPage" ng-click="pageUp()" ng-class="{'invisible': currentPage + 1 === totalPages }">
             ▶
         </div>
     </div>

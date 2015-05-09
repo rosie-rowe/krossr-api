@@ -1,43 +1,45 @@
-<section data-ng-controller="LevelsController">
+<section class="newLevel" data-ng-controller="LevelsController">
     <div class="page-header">
         <h1>New Level</h1>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
-                    <label class="control-label" for="minutes">Time Limit</label>
-                    <div class="controls">
-                        <input type='text' data-ng-model="minutes" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
-                    </div>
-                </div>
-                <div data-ng-controller="MainCtrl as ctrl" class="form-group">
-                    <label class="control-label" for="size">Size</label>
-                    <select ng-model='ctrl.options.size' ng-change="ctrl.setGameSize();ctrl.createGameArray('new');ctrl.clearAll();">
-                        <option value="25" selected>5x5</option>
-                        <option value="100">10x10</option>
-                        <option value="225">15x15</option>
-                    </select>
+    <div data-ng-controller="MainCtrl as ctrl" class="form-horizontal" novalidate>
+        <div class="form-group">
+            <label class="control-label" for="name">Name</label>
+            <div class="controls">
+                <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+            </div>
+            
+            <label class="control-label" for="minutes">Time Limit</label>
+            <div class="controls">
+                <input type='text' data-ng-model="minutes" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+            </div>
 
-                    <game ng-init="ctrl.createGameArray('new')">
-                        <tile ng-repeat="i in ctrl.getSize() track by $index" editable='true'></tile>
-                    </game>
+            <label class="control-label" for="size">Size</label>
+            <div class="controls">
+                <select ng-model='ctrl.options.size' ng-change="ctrl.createGameArray('new');ctrl.setGameSize();ctrl.clearAll();">
+                    <option value="25" selected>5x5</option>
+                    <option value="100">10x10</option>
+                    <option value="225">15x15</option>
+                </select>
+            </div>
 
-                    <button class="btn btn-default" type="button" ng-click="ctrl.clearAll()">Clear</button>
-                </div>
-                
-                <div class="form-group">
-                    <input type="submit" class="btn btn-default">
-                </div>
+            <button class="btn btn-primary" type="button" ng-click="ctrl.clearAll()">Clear</button>
 
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
+            <button class="btn btn-primary" ng-click="create()">
+                Submit
+            </button>
+        </div>
+
+        <div class="gameContainer pull-right">
+            <div class="gameContainer-inner">
+                <game ng-init="ctrl.createGameArray('new');ctrl.setGameSize();">
+                    <tile ng-repeat="i in ctrl.getSize() track by $index" editable='true'></tile>
+                </game>
+            </div>
+        </div>
+    
+		<div data-ng-show="error" class="text-danger">
+			<strong data-ng-bind="error"></strong>
+		</div>
     </div>
 </section>

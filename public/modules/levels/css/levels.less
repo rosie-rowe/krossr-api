@@ -17,13 +17,41 @@
 }
 
 .gameContainer {
+    display: table;
     position: relative;
     height: 100%;
 }
 
-.listLevels {
+.gameContainer-inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.levelInfo {
+    position: absolute;
+    margin: 1em 0 0 1em;
+
+    .btn {
+        margin-left: 0;
+    }
+}
+
+.list-group-item {
+    width: 25%;
+    height: 100px;
+    display: inline-block;
+}
+
+.editLevel,
+.listLevels,
+.newLevel {
     height: 100%;
     position: relative;
+    margin: 0 1em;
+
+    .btn {
+        margin-left: 0;
+    }
 }
 
 .square {
@@ -45,6 +73,11 @@
     height: 100%;
     text-align: center;
     width: 100%;
+}
+
+.page-header {
+    border-bottom: none;
+    margin: 1em 0;
 }
 
 .pagination {
@@ -84,8 +117,9 @@
 
 .theCountdown {
     bottom: 0;
-    display: inline-block;
     position: absolute;
+    left: 0;
+    margin: 0 0 1em 1em;
 
     timer, .showPenalty {
         @media screen and (min-width: @largeScreen) { font-size: 6em; }

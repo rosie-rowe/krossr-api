@@ -15,7 +15,7 @@ a {
 }
 h1 {
   font-size: 4em;
-  margin: 0.5em 0;
+  margin: 0;
 }
 html {
   height: 100%;
@@ -31,6 +31,9 @@ body {
 section {
   max-height: 100%;
   height: 100%;
+}
+small {
+  font-size: .5em;
 }
 select {
   color: #222222;
@@ -90,9 +93,10 @@ ul {
   width: 100%;
 }
 .content {
-  display: inline-block;
+  box-sizing: border-box;
+  float: left;
   height: 100%;
-  width: calc(80.5%);
+  width: 85%;
 }
 .dropdown-menu {
   background-color: #222222;
@@ -116,7 +120,10 @@ ul {
   cursor: pointer;
 }
 .form-group {
-  margin: 1em;
+  display: inline-block;
+}
+.form-group .btn {
+  margin-left: 0;
 }
 .form-group input {
   -webkit-border-radius: 5px;
@@ -132,6 +139,19 @@ ul {
   line-height: 2;
   padding: 1em;
 }
+.form-group select {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #222222;
+  border: 1px solid #555555;
+  color: #ffffff;
+  line-height: 2;
+  padding: 1em;
+}
 .hero {
   display: table;
   height: 100%;
@@ -141,18 +161,18 @@ ul {
 .hide {
   display: none !important;
 }
+.invisible {
+  visibility: hidden !important;
+}
 .header-container {
+  box-sizing: border-box;
   background: rgba(0, 0, 0, 0.5);
-  display: inline-block;
+  float: left;
   height: 100%;
   font-family: inherit;
   list-style-type: none;
-  margin-right: 3em;
   vertical-align: top;
   width: 15%;
-}
-.list-group-item {
-  background: rgba(0, 0, 0, 0.5);
 }
 .navbar-toggle {
   -webkit-border-radius: 5px;
@@ -182,20 +202,12 @@ ul {
 .ng-valid.ng-dirty {
   border-color: #2199d0;
 }
-.page-header {
-  border-bottom: none;
-  display: inline-block;
-}
 .pull-right {
   float: right;
 }
 .row {
   display: inline-block;
   width: 100%;
-  /* this needs to be rethought */
-}
-.row.top {
-  margin: 1em 0 0 0;
 }
 .row.bottom .theCountdown {
   margin: 0 0 1em 0;
@@ -241,12 +253,37 @@ ul {
   color: #2199d0;
 }
 .gameContainer {
+  display: table;
   position: relative;
   height: 100%;
 }
-.listLevels {
+.gameContainer-inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+.levelInfo {
+  position: absolute;
+  margin: 1em 0 0 1em;
+}
+.levelInfo .btn {
+  margin-left: 0;
+}
+.list-group-item {
+  width: 25%;
+  height: 100px;
+  display: inline-block;
+}
+.editLevel,
+.listLevels,
+.newLevel {
   height: 100%;
   position: relative;
+  margin: 0 1em;
+}
+.editLevel .btn,
+.listLevels .btn,
+.newLevel .btn {
+  margin-left: 0;
 }
 .square {
   box-sizing: border-box;
@@ -264,6 +301,10 @@ ul {
   height: 100%;
   text-align: center;
   width: 100%;
+}
+.page-header {
+  border-bottom: none;
+  margin: 1em 0;
 }
 .pagination {
   bottom: 0;
@@ -289,8 +330,9 @@ ul {
 }
 .theCountdown {
   bottom: 0;
-  display: inline-block;
   position: absolute;
+  left: 0;
+  margin: 0 0 1em 1em;
 }
 @media screen and (min-width: 1024px) {
   .theCountdown timer,

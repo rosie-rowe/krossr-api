@@ -1,35 +1,34 @@
-<section data-ng-controller="LevelsController" data-ng-init="findOne('edit')">
+<section class="editLevel" data-ng-controller="LevelsController" data-ng-init="findOne('edit')">
     <div class="page-header">
         <h1>Edit Level</h1>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="level.name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
-                    <label class="control-label" for="minutes">Time Limit</label>
-                    <div class="controls">
-                        <input type='text' data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
-                    </div>
-                </div>
-                <div data-ng-controller="MainCtrl as ctrl">
-                    <game>
-                        <tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayoutForEdit(level.layout, $index);" editable='true'></tile>
-                    </game>
-                    
-                    <div class="form-group">
-                        <button class="btn btn-default" type="button" ng-click="ctrl.clearAll()">Clear</button>
-                        <input type="submit" value="Update" class="btn btn-default">
-                    </div>
+    <div data-ng-controller="MainCtrl as ctrl" class="form-horizontal" novalidate>
+        <div class="form-group">
+            <label class="control-label" for="name">Name</label>
+            <div class="controls">
+                <input type="text" data-ng-model="level.name" id="name" class="form-control" placeholder="Name" required>
+            </div>
+            <label class="control-label" for="minutes">Time Limit</label>
+            <div class="controls">
+                <input type='text' data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+            </div>
 
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
+            <button class="btn btn-primary" type="button" ng-click="ctrl.clearAll()">Clear</button>
+            <button class="btn btn-primary" type="button" ng-click="update()">Update</button>
+        </div>
+
+        <div class="gameContainer pull-right">
+            <div class="gameContainer-inner">
+                <game>
+                    <tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayoutForEdit(level.layout, $index);" editable='true'></tile>
+                </game>
+            </div>
+        </div>
+            
+
+
+		<div data-ng-show="error" class="text-danger">
+			<strong data-ng-bind="error"></strong>
+		</div>
     </div>
 </section>
