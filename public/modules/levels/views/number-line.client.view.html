@@ -1,5 +1,5 @@
 <div>
-	<span ng-repeat="entry in getLineContent($index, orientation) track by $index" class="{{ entry.cssClass }}">
+	<span ng-repeat="entry in getLineContent($index, orientation) track by $index" class="{{ entry.cssClass }} entry">
 		{{ entry.text }}
 	</span>
 </div>

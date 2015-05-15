@@ -8,8 +8,12 @@ angular.module('levels').directive('numberLine', [
 			templateUrl: 'modules/levels/views/number-line.client.view.html',
 			restrict: 'A',
 			link: function postLink(scope, element, attrs) {
-				// Number line directive logic
-				// ...
+				
+				element.on('click', '.entry', function() {
+					var $this = angular.element(this);
+
+					$this.toggleClass('finishedGrouping');
+				});
 
 			},
 			scope: true

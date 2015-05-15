@@ -68,7 +68,11 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Find a list of Levels
 		$scope.find = function() {
-			Levels.query({ pageNum: $scope.currentPage }, function(data) {
+			var queryObj = {
+				pageNum: $scope.currentPage
+			};
+
+			Levels.query(queryObj, function(data) {
 				$scope.totalPages = Math.ceil(data.count / data.numPerPage);
 				$scope.levels = data.levels;
 			});

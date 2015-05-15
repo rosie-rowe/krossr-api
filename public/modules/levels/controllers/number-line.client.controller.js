@@ -8,7 +8,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			currentGroup = {}, // do the same for currentGroup
 			hasGroup = false; // when a group is created, this is set to true so we know not to create it again
 
-		$scope.cssClass = "unfinishedGrouping";
+		$scope.cssClass = '';
 
 		// display a crossed out 0 if the linecontent comes back with no content. otherwise, pass through
 		var accountForZeros = function(lineContent) {
@@ -86,7 +86,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 				return determineCssForGrouping(group[value]);
 			});
 
-			return isMarked ? 'finishedGrouping' : 'unfinishedGrouping';
+			return isMarked ? 'finishedGrouping' : '';
 		}
 
 		var determineCssForGrouping = function(grouping) {
