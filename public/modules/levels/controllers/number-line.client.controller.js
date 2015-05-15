@@ -80,16 +80,18 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 		};
 
 		var determineCssForGroup = function(group) {
+			return isGroupCompleted(group) ? 'finishedGrouping' : '';
+		};
+
+		var isGroupCompleted = function(group) {
 			var groupAsArray = Object.keys(group);
 
-			var isMarked = groupAsArray.every(function(value, index, array) {
-				return determineCssForGrouping(group[value]);
+			return groupAsArray.every(function(value, index, array) {
+				return isGroupingCompleted(group[value]);
 			});
+		};
 
-			return isMarked ? 'finishedGrouping' : '';
-		}
-
-		var determineCssForGrouping = function(grouping) {
+		var isGroupingCompleted = function(grouping) {
 			if (Array.isArray(grouping)) {
 				return grouping.every(function(value, index, array) {
 					return array[index].currentValue === array[index].goalValue;

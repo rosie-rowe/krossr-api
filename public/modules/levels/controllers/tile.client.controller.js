@@ -58,6 +58,7 @@ tileController.prototype.changeTile = function(index, initState, changeTo, goalM
         }
 
         if (wrong_answer) {
+          this.fill('marked');
           Utils.knockOffTime();
         } else {
           this.fill('selected', initState);
