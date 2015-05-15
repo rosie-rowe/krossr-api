@@ -118,8 +118,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Combine a lot of the other functions here to set up a new game */
 			createNewGame: function(args) {
-				var sideLength;
-
 				if (args.layout) {
 					this.setGoalMatrix(args.layout);
 				}
