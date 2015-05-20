@@ -150,6 +150,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				console.log('drawing');
 			},
 
+			/* Given an index and orientation, pass a message to the tile controller
+			 * to mark out the tiles on that line that aren't selected */
+			finishLine: function(index, orientation) {
+				$rootScope.$broadcast('lineComplete', { index: index, orientation: orientation });
+			},
+
 			/* Convert a Matrix into an array (for ng-repeat to hit all of them) */
 			flatten: function(matrix) {
 				return Array.prototype.concat.apply([], matrix);
@@ -227,6 +233,11 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				$rootScope.$broadcast('timer-add-cd-seconds', -(this.getCurrentPenalty()));
 				// increment the penalty
 				this.setCurrentPenalty();
+			},
+
+			/* Display an integer size (e.g. 15) and convert it to a pleasing form (15x15) */
+			prettySize: function(size) {
+				return size + 'x' + size;
 			},
 
 			/* Modify the current game size */

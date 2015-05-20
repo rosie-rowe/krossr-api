@@ -75,6 +75,11 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			Levels.query(queryObj, function(data) {
 				$scope.totalPages = Math.ceil(data.count / data.numPerPage);
 				$scope.levels = data.levels;
+
+				// Calculate the size for each level so we can display it to the screen & sort by size
+				angular.forEach($scope.levels, function(level, key) {
+					level.size = Utils.prettySize(level.layout.length);
+				});
 			});
 		};
 
@@ -89,6 +94,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				$scope.level.decomputedTimeLimit = Utils.decomputeTimeLimit($scope.level.timeLimit);
 
 				$scope.level.timeRemaining = $scope.level.timeLimit;
+
 
 				var flatLayout = Utils.flatten(data.layout);
 

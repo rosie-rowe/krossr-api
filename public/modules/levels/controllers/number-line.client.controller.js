@@ -64,7 +64,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 					/* if a grouping's tiles all contain the correct values, we want to mark that group off in the view so that the user
 						can keep better track of their progress */
-					$scope.cssClass = determineCssForGroup(currentGroup);
+					$scope.cssClass = determineCssForGroup(currentGroup, index, orientation);
 
 					reset_ind = true;
 				} else {
@@ -79,8 +79,18 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			return currentGroup;
 		};
 
-		var determineCssForGroup = function(group) {
-			return isGroupCompleted(group) ? 'finishedGrouping' : '';
+		var determineCssForGroup = function(group, index, orientation) {
+			var groupCompleted = isGroupCompleted(group);
+
+			if (groupCompleted) {
+				/* If the group is finished, we should send a message to the tile controller
+				 * containing the row or column's index and orientation so that
+				 * we can mark out the remaining tiles automatically */
+				Utils.finishLine(index, orientation);
+				return 'finishedGrouping';
+			} else {
+				return '';
+			}
 		};
 
 		var isGroupCompleted = function(group) {
@@ -145,7 +155,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 				});
 			});
 
-			newCssClass = determineCssForGroup(currentGroup);
+			newCssClass = determineCssForGroup(currentGroup, index, orientation);
 			if ($scope.cssClass !== newCssClass) {
 				$scope.cssClass = newCssClass;
 				changed = true;
