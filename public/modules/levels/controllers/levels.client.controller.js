@@ -20,7 +20,8 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			var level = new Levels ({
 				name: this.name,
 				layout: layout,
-				timeLimit: timeLimit
+				timeLimit: timeLimit,
+				size: layout.length
 			});
 
 			// Redirect after save
@@ -58,6 +59,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			var level = $scope.level;
 
 			level.timeLimit = Utils.computeTimeLimit($scope.level.decomputedTimeLimit);
+			level.size = level.layout.length;
 
 			level.$update(function() {
 				$location.path('levels/' + level._id);
@@ -69,8 +71,11 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		// Find a list of Levels
 		$scope.find = function() {
 			var queryObj = {
-				pageNum: $scope.currentPage
+				pageNum: $scope.currentPage,
+				sizeRestriction: $scope.sizeRestriction
 			};
+
+			console.log(queryObj.sizeRestriction);
 
 			Levels.query(queryObj, function(data) {
 				$scope.totalPages = Math.ceil(data.count / data.numPerPage);

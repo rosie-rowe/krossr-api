@@ -119,9 +119,6 @@ ul {
 .dropdown-toggle {
   cursor: pointer;
 }
-.form-group {
-  display: inline-block;
-}
 .form-group .btn {
   margin-left: 0;
 }

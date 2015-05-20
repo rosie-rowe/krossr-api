@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css', 'public/less/*'],
+		clientLESS: ['public/**/css/*.less', 'public/less/*'],
 		mochaTests: ['app/tests/**/*.js']
 	};
 
@@ -49,7 +50,7 @@ module.exports = function(grunt) {
 				}
 			},
 			clientLESS: {
-                files: ['public/**/css/*.less'],
+                files: watchFiles.clientLESS,
                 tasks: ['less'],
                 options: {
                     livereload: true,

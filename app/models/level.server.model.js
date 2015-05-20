@@ -27,6 +27,9 @@ var LevelSchema = new Schema({
 	layout: {
 		type: Array
 	},
+	size: {
+		type: Number
+	},
 	timeLimit: {
 		type: Number
 	}

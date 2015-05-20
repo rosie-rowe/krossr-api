@@ -96,31 +96,43 @@ exports.levelByID = function(req, res, next, id) { Level.findById(id).populate('
 
 exports.paginate = function(req, res) {
 	var pageNum = req.query['pageNum'];
+	var sizeRestriction = req.query['sizeRestriction'];
 	var numPerPage = 8,
 		totalCount;
 
-	Level.find().sort('-created').populate('user', 'displayName')
-		.limit(numPerPage).skip(pageNum * numPerPage).exec(function(err, levels) {
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else {
-				Level.find().count({}, function(err, totalCount) {
-					if (err) {
-						return res.status(400).send({
-							message: errorHandler.getErrorMessage(err)
-						});
-					} else {
-						res.jsonp({
-							levels: levels,
-							count: totalCount,
-							numPerPage: numPerPage
-						});
-					}
-				});
-			}
-		});
+	var query = Level
+					.find()
+					.sort('-created')
+					.populate('user', 'displayName')
+					.limit(numPerPage)
+					.skip(pageNum * numPerPage);
+
+	if (sizeRestriction) {
+		sizeRestriction = parseInt(sizeRestriction, 10);
+		query.where('size').equals(sizeRestriction);
+	}
+
+	query.exec(function(err, levels) {
+		if (err) {
+			return res.status(400).send({
+				message: sizeRestriction
+			});
+		} else {
+			Level.find().count({}, function(err, totalCount) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					res.jsonp({
+						levels: levels,
+						count: totalCount,
+						numPerPage: numPerPage
+					});
+				}
+			});
+		}
+	});
 };
 
 /**
