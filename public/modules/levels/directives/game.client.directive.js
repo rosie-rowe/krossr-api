@@ -13,8 +13,7 @@ angular.module('levels').directive('game', [
             link: function (scope, elem, attr, gameCtrl) {
                 /* Change the tiles inside the dragbox to the specified state
                     (pending if being dragged over, selected if mouse released normally,
-                    marked if shift was held)
-                    Return the ending coordinate so it can be used in updateLineContent later */
+                    marked if shift was held) */
                 var fillDragBox = function(override) {
                     if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
                         var initState = gameCtrl.dragBox.initState,

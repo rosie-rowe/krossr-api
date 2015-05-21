@@ -58,8 +58,6 @@ var gameController = function($scope, Utils) {
 
     this.startTimer = Utils.startTimer;
 
-    this.updateLineContent = Utils.getLineContent;
-
     this.setWinTime = function(time) {
       _this.winTime = Utils.setWinTime(time);
       $scope.$digest();

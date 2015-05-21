@@ -192,10 +192,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				return goalMatrix;
 			},
 
-			getLineContent: function(coord, orientation) {
-				$rootScope.$broadcast('updateLineContent', { coord: coord, orientation: orientation });
-			},
-
 			getOuterGameWidth: function() {
 				return this.getWidth('.outer.game') + this.getWidth('.left-grid');
 			},

@@ -139,7 +139,10 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			var changed = false,
 				newValue,
 				newCssClass,
-				coord;
+				coord,
+				currentGroupAsArray = Object.keys(currentGroup);
+
+			console.log(currentGroupAsArray);
 
 			angular.forEach(currentGroup, function(value, key) {
 				var entry = value;

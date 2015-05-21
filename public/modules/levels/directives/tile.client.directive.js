@@ -96,7 +96,6 @@ angular.module('levels').directive('tile', [
                     e.preventDefault();
                     
                     var coord = gameCtrl.convertTo2D(scope.index);
-                    gameCtrl.updateLineContent(coord, 'horizontal');
                     gameCtrl.dragBox.endCoord = coord;
 
                     if (!(gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord)) {
