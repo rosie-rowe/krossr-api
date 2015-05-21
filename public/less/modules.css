@@ -282,6 +282,11 @@ ul {
 .newLevel .btn {
   margin-left: 0;
 }
+.editLevel .form-group,
+.listLevels .form-group,
+.newLevel .form-group {
+  display: inline-block;
+}
 .square {
   box-sizing: border-box;
   border: 1px solid #999;
