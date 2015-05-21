@@ -140,13 +140,21 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 				newValue,
 				newCssClass,
 				coord,
-				currentGroupAsArray = Object.keys(currentGroup);
+				currentGroupAsArray = Object.keys(currentGroup),
+				i = 0,
+				j,
+				groupLen = currentGroupAsArray.length,
+				entry,
+				entryLen,
+				value;
 
-			console.log(currentGroupAsArray);
+			for (; i < groupLen; i++) {
+				entry = currentGroup[currentGroupAsArray[i]];
+				entryLen = entry.length;
 
-			angular.forEach(currentGroup, function(value, key) {
-				var entry = value;
-				angular.forEach(entry, function(value, key) {
+				for (j = 0; j < entryLen; j++) {
+					value = entry[j];
+
 					if (value.coord) {
 						newValue = gameMatrix[value.coord.y][value.coord.x];
 
@@ -155,8 +163,12 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 							changed = true;
 						}
 					}
+				}
+
+				angular.forEach(entry, function(value, key) {					
+
 				});
-			});
+			}	
 
 			newCssClass = determineCssForGroup(currentGroup, index, orientation);
 			if ($scope.cssClass !== newCssClass) {
