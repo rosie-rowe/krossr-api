@@ -58,6 +58,8 @@ var gameController = function($scope, Utils) {
 
     this.startTimer = Utils.startTimer;
 
+    this.updateLineContent = Utils.getLineContent;
+
     this.setWinTime = function(time) {
       _this.winTime = Utils.setWinTime(time);
       $scope.$digest();
@@ -66,12 +68,6 @@ var gameController = function($scope, Utils) {
     // as far as I know, this has to be an event since it's triggered by a timer expiring.
     // if I think of a way to use the service better instead, I'll change it
     $scope.$on('gameOver', _this.lostTheGame);
-
-    $scope.$on('lineComplete', function(e, args) {
-      var gameMatrix = Utils.getGameMatrix();
-
-      console.log(gameMatrix[args.index])
-    });
 };
 
 gameController.$inject = ['$scope', 'Utils'];

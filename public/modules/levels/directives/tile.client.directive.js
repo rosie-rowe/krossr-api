@@ -14,18 +14,28 @@ angular.module('levels').directive('tile', [
                 scope.tileCtrl.editable = attr.editable;
                 scope.index = attr.index;
 
-                var clearPending = function(coords) {                 
-                    angular.forEach(coords, function(value, key) {
-                        var theTileController = gameCtrl.findTileCtrlByCoord(value);
-                        if (theTileController.pending && !theTileController.selected) {
-                            theTileController.change(value, true, 'empty');
+                var clearPending = function(coords) {
+                    var i = 0,
+                        len = coords.length,
+                        currentCoord,
+                        currentTileController;
+
+                    for (; i < len; i++) {
+                        currentCoord = coords[i];
+                        currentTileController = gameCtrl.findTileCtrlByCoord(currentCoord);
+                        if (currentTileController.pending && !currentTileController.selected) {
+                            currentTileController.change(currentCoord, true, 'empty');
                         }
-                    });
+                    }           
                 };
 
                 var fillPending = function(index) {
                     var coord = scope.tileCtrl.convert2D(index),
-                        coordsToClear;
+                        coordsToClear,
+                        i = 0,
+                        len,
+                        currentCoord,
+                        currentTileController;
 
                     // save a snapshot of the previous dragbox for comparison purposes
                     if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
@@ -53,13 +63,17 @@ angular.module('levels').directive('tile', [
                         clearPending(coordsToClear);
                     }
 
-                    angular.forEach(allPendingCoords, function(value, key) {
-                        var theTileController = gameCtrl.findTileCtrlByCoord(value);
-                        // should also only change it to pending if it's not already, also for speed reasons
-                        if (!theTileController.pending) {
-                            theTileController.change(value, true, 'pending');
+                    len = allPendingCoords.length;
+
+                    for (; i < len; i++) {
+                        currentCoord = allPendingCoords[i];
+                        currentTileController = gameCtrl.findTileCtrlByCoord(currentCoord);
+                        if (!currentTileController.pending) {
+                            currentTileController.change(currentCoord, true, 'pending');
                         }
-                    });
+                    }
+
+                    scope.$apply();
                 };
 
                 elem.on('dragstart', function(e) {
@@ -82,6 +96,7 @@ angular.module('levels').directive('tile', [
                     e.preventDefault();
                     
                     var coord = gameCtrl.convertTo2D(scope.index);
+                    gameCtrl.updateLineContent(coord, 'horizontal');
                     gameCtrl.dragBox.endCoord = coord;
 
                     if (!(gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord)) {

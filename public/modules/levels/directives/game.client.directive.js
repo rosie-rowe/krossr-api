@@ -11,18 +11,27 @@ angular.module('levels').directive('game', [
             transclude: true,
             templateUrl: 'modules/levels/views/game.client.view.html',
             link: function (scope, elem, attr, gameCtrl) {
+                /* Change the tiles inside the dragbox to the specified state
+                    (pending if being dragged over, selected if mouse released normally,
+                    marked if shift was held)
+                    Return the ending coordinate so it can be used in updateLineContent later */
                 var fillDragBox = function(override) {
                     if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
                         var initState = gameCtrl.dragBox.initState,
-                            coords = gameCtrl.processDragBox(gameCtrl.dragBox);
+                            coords = gameCtrl.processDragBox(gameCtrl.dragBox),
+                            currentCoord,
+                            currentTileController,
+                            i = 0,
+                            len = coords.length;
 
-                        angular.forEach(coords, function(value, key) {
-                            var theTileController = gameCtrl.findTileCtrlByCoord(value);
-                            theTileController.change(value, initState, override);
-                        });
+                        for (; i < len; i++) {
+                            currentCoord = coords[i];
+                            currentTileController = gameCtrl.findTileCtrlByCoord(currentCoord);
+                            currentTileController.change(currentCoord, initState, override);
+                        }
 
                         gameCtrl.clearDragBox();
-                    }  
+                    }
                 };
 
                 elem.on('mouseenter', function() {
@@ -41,6 +50,7 @@ angular.module('levels').directive('game', [
                 elem.on('mouseleave', function(e) {
                     e.preventDefault();
                     fillDragBox('empty');
+                    scope.$apply();
                 });
 
                 // If a user starts dragging a tile and their mouse pointer leaves the game area,
@@ -55,6 +65,7 @@ angular.module('levels').directive('game', [
                     if(gameCtrl.checkWin()) {
                         gameCtrl.setWinTime(scope.level.timeLimit - scope.level.timeRemaining);
                     };
+                    scope.$apply();
                 });
 
                 // This also works with the click event in main.controller and should always hit this one first due to bubbling

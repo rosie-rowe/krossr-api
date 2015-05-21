@@ -78,13 +78,19 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			console.log(queryObj.sizeRestriction);
 
 			Levels.query(queryObj, function(data) {
+				var i = 0,
+					allLevels = data.levels,
+					len = allLevels ? allLevels.length : 0,
+					currentLevel;
+
 				$scope.totalPages = Math.ceil(data.count / data.numPerPage);
 				$scope.levels = data.levels;
 
 				// Calculate the size for each level so we can display it to the screen & sort by size
-				angular.forEach($scope.levels, function(level, key) {
-					level.size = Utils.prettySize(level.layout.length);
-				});
+				for (; i < len; i++ ) {
+					currentLevel = allLevels[i];
+					currentLevel.size = Utils.prettySize(currentLevel.layout.length);
+				}
 			});
 		};
 

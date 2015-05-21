@@ -11,7 +11,6 @@ var tileController = function($scope, Utils, shiftService) {
         if (this.editable === 'true') {
             _this.changeTile(index, initState, changeTo, goalMatrix, shiftService, Utils);
         }
-        $scope.$apply();
     };
     this.getLayoutForEdit = function(layout, index) {
         _this.fillFromLayout(layout, index);

@@ -65,14 +65,18 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			},
 
 			clearAllTiles: function() {
+				var i = 0,
+					len = tileIndex.length;
+
 				// in the unlikely event that this function is called without the tiles being indexed, index them then.
-				if (tileIndex.length === 0) {
+				if (len === 0) {
 					this.indexTiles();	
+					len = tileIndex.length;
 				}
 
-				angular.forEach(tileIndex, function(value, key) {
-					tileIndex[key].tileCtrl.fill('empty');
-				});
+				for (; i < len; i++) {
+					tileIndex[i].tileCtrl.fill('empty');
+				}
 			},
 
 			// make sure the index is clean before we add to it to avoid bugs with switching between screens
@@ -188,6 +192,10 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				return goalMatrix;
 			},
 
+			getLineContent: function(coord, orientation) {
+				$rootScope.$broadcast('updateLineContent', { coord: coord, orientation: orientation });
+			},
+
 			getOuterGameWidth: function() {
 				return this.getWidth('.outer.game') + this.getWidth('.left-grid');
 			},
@@ -221,11 +229,13 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			/* When setting up the game, also cache the tiles for faster access later */
 			indexTiles: function() {
 				var allTiles = angular.element('.tile'),
-					_this = this;
+					_this = this,
+					i = 0,
+					len = allTiles.length;
 
-				angular.forEach(allTiles, function(value, key) {
-					_this.addTileToIndex({ tileCtrl: angular.element(value).scope().tileCtrl });
-				});
+				for (; i < len; i++) {
+					_this.addTileToIndex({ tileCtrl: angular.element(allTiles[i]).scope().tileCtrl });
+				}
 			},
 
 			// subtract time from the angular-timer
