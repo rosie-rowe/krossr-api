@@ -7,8 +7,6 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			lineContent = [], // keep lineContent in closure so we maintain it across calls back to an instance of the controller,
 			currentGroup = {}, // do the same for currentGroup
 			hasGroup = false; // when a group is created, this is set to true so we know not to create it again
-			//index, // the index of the current line
-			//orientation; // the orientation of the current line
 
 		$scope.cssClass = '';
 
@@ -141,31 +139,21 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			var changed = false,
 				newValue,
 				newCssClass,
-				coord,
-				i = 0,
-				j = 0,
-				currentGroupKeys = Object.keys(currentGroup),
-				len = currentGroupKeys.length,
-				currentEntry,
-				currentEntryLength,
-				currentValue;
+				coord;
 
+			angular.forEach(currentGroup, function(value, key) {
+				var entry = value;
+				angular.forEach(entry, function(value, key) {
+					if (value.coord) {
+						newValue = gameMatrix[value.coord.y][value.coord.x];
 
-			for (; i < len; i++) {
-				currentEntry = currentGroup[currentGroupKeys[i]];
-				currentEntryLength = currentEntry.length;
-				for (; j < currentEntryLength; j++) {
-					currentValue = currentEntry[j];
-					if (currentValue.coord) {
-						newValue = gameMatrix[currentValue.coord.y][currentValue.coord.x];
-
-						if (currentValue.currentValue !== newValue) {
-							currentValue.currentValue = newValue;
+						if (value.currentValue !== newValue) {
+							value.currentValue = newValue;
 							changed = true;
 						}
 					}
-				}
-			}
+				});
+			});
 
 			newCssClass = determineCssForGroup(currentGroup, index, orientation);
 			if ($scope.cssClass !== newCssClass) {
@@ -210,10 +198,5 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 			return lineContent;
 		};
-
-		$scope.$on('updateLineContent', function(e, args) {
-			var index = Utils.convertTo1D(args.coord);
-			$scope.getLineContent(index, args.orientation);
-		});
 	}
 ]);
