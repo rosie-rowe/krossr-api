@@ -20,7 +20,7 @@
         <a data-ng-repeat="level in levels" data-ng-href="#!/levels/{{level._id}}" class="list-group-item">
 			<div class="list-group-item-heading" data-ng-bind="level.name"></div>
             <small class="list-group-item-text">
-                <div data-ng-bind="level.user.displayName"></div>
+                <div data-ng-bind="level.user.username"></div>
                 <div data-ng-bind="level.created | date:'short'"></div>
                 <div data-ng-bind="level.size || 'Fuck'"></div>
             </small>

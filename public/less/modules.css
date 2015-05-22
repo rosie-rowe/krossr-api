@@ -80,6 +80,10 @@ ul {
   background-color: #2199d0;
   transition: all 1s;
 }
+.btn:disabled {
+  background-color: #051720;
+  transition: all .2s;
+}
 .caret {
   display: inline-block;
   font-size: 0.5em;

@@ -72,7 +72,7 @@ exports.delete = function(req, res) {
 /**
  * List of Levels
  */
-exports.list = function(req, res) { Level.find().sort('-created').populate('user', 'displayName').exec(function(err, levels) {
+exports.list = function(req, res) { Level.find().sort('-created').populate('user', 'username').exec(function(err, levels) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -86,7 +86,7 @@ exports.list = function(req, res) { Level.find().sort('-created').populate('user
 /**
  * Level middleware
  */
-exports.levelByID = function(req, res, next, id) { Level.findById(id).populate('user', 'displayName').exec(function(err, level) {
+exports.levelByID = function(req, res, next, id) { Level.findById(id).populate('user', 'username').exec(function(err, level) {
 		if (err) return next(err);
 		if (! level) return next(new Error('Failed to load Level ' + id));
 		req.level = level ;
@@ -103,7 +103,7 @@ exports.paginate = function(req, res) {
 	var query = Level
 					.find()
 					.sort('-created')
-					.populate('user', 'displayName')
+					.populate('user', 'username')
 					.limit(numPerPage)
 					.skip(pageNum * numPerPage);
 

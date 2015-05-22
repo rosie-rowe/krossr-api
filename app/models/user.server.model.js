@@ -18,7 +18,7 @@ var validateLocalStrategyProperty = function(property) {
  * A Validation function for local strategy password
  */
 var validateLocalStrategyPassword = function(password) {
-	return (this.provider !== 'local' || (password && password.length > 10));
+	return (this.provider !== 'local' || (password && password.length >= 10));
 };
 
 /**
@@ -41,7 +41,7 @@ var UserSchema = new Schema({
 	password: {
 		type: String,
 		default: '',
-		validate: [validateLocalStrategyPassword, 'Password should be at least 10 characters']
+		validate: [validateLocalStrategyPassword, '10 characters or more!']
 	},
 	salt: {
 		type: String
