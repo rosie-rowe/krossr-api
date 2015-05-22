@@ -18,14 +18,13 @@
     </div>
 
     <div class="list-group">
-        <a data-ng-repeat="level in levels" data-ng-href="#!/levels/{{level._id}}" class="list-group-item">
-			<div class="list-group-item-heading" data-ng-bind="level.name"></div>
+        <div data-ng-repeat="level in levels" class="list-group-item">
+			<a class="list-group-item-heading" data-ng-href="#!/levels/{{level._id}}" data-ng-bind="level.name"></a>
             <small class="list-group-item-text">
-                <div data-ng-bind="level.user.username"></div>
-                <div data-ng-bind="level.created | date:'short'"></div>
+                <div ng-click="setUsernameSearch(level.user.username);find()" data-ng-bind="level.user.username"></div>
                 <div data-ng-bind="level.size || 'Fuck'"></div>
             </small>
-        </a>
+        </div>
     </div>
 
     <div class="alert alert-warning text-center" data-ng-hide="!levels.$resolved || levels.length">

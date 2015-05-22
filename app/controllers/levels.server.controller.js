@@ -95,24 +95,36 @@ exports.levelByID = function(req, res, next, id) { Level.findById(id).populate('
 };
 
 exports.paginate = function(req, res) {
-	var pageNum = req.query['pageNum'];
-	var sizeRestriction = req.query['sizeRestriction'];
-	var numPerPage = 8,
-		totalCount;
+	var pageNum = req.query['pageNum'],
+		sizeRestriction = req.query['sizeRestriction'],
+		userName = req.query['userName'],
+		numPerPage = 8,
+		totalCount,
+		query = Level.find().sort('-created').limit(numPerPage).skip(pageNum * numPerPage);
+		
 
-	var query = Level
-					.find()
-					.sort('-created')
-					.populate('user', 'username')
-					.limit(numPerPage)
-					.skip(pageNum * numPerPage);
+	if (userName) {
+		query.populate({ path: 'user',select: 'username', match: { username: { $in: [userName] }} });
+	} else {
+		query.populate('user', 'username');
+	}
 
 	if (sizeRestriction) {
 		sizeRestriction = parseInt(sizeRestriction, 10);
 		query.where('size').equals(sizeRestriction);
 	}
 
+	// if (userName) {
+	// 	query.where('username').equals(userName);
+	// }
+
 	query.exec(function(err, levels) {
+		if (userName) {
+			levels = levels.filter(function(level) {
+				return level.user;
+			});
+		}
+
 		if (err) {
 			return res.status(400).send({
 				message: sizeRestriction

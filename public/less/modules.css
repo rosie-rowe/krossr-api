@@ -41,7 +41,7 @@ section {
   height: 100%;
 }
 small {
-  font-size: .5em;
+  font-size: 1em;
 }
 select {
   color: #222222;
@@ -290,6 +290,9 @@ ul {
   width: 25%;
   height: 100px;
   display: inline-block;
+}
+.list-group-item-heading {
+  font-size: 2em;
 }
 .editLevel,
 .listLevels,
