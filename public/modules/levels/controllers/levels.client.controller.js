@@ -136,10 +136,15 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			}
 		};
 
+		$scope.setSizeRestriction = function(sizeRestriction) {
+			$scope.sizeRestriction = sizeRestriction;
+			$scope.find();
+		};
+
 		$scope.setUsernameSearch = function(username) {
 			$scope.usernameSearch = username ? username : null;
 			$scope.find();
-		}
+		};
 
 		$scope.gameOver = function() {
 			Utils.gameOver();

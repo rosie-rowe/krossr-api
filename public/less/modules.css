@@ -356,6 +356,7 @@ ul {
   background: rgba(0, 0, 0, 0.5);
   font-size: .25em;
   padding: 1em;
+  vertical-align: middle;
 }
 .searchText .clearSearch {
   cursor: pointer;

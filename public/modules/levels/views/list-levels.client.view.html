@@ -1,10 +1,13 @@
 <section class="listLevels" data-ng-controller="LevelsController" data-ng-init="find()">
     <div class="page-header">
         <h1>
-            <span ng-if="sizeRestriction">{{ sizeRestriction }}x{{ sizeRestriction}}</span>
             Levels
             <div class="searchText" ng-if="usernameSearch">
                 Usernames like "{{ usernameSearch }}" <div ng-click="setUsernameSearch()" class="clearSearch">✖</div>
+            </div>
+            <div class="searchText" ng-if="sizeRestriction">
+                Size: {{ sizeRestriction }}x{{ sizeRestriction}}
+                <div ng-click="setSizeRestriction()" class="clearSearch">✖</div>
             </div>
         </h1>
         <div class="form-group">
