@@ -20,7 +20,7 @@
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
 			<li>
 				<a href="/#!/settings/edit-profile">
-					<span>Profile</span>
+					<span>{{ authentication.user.username }}</span>
 				</a>
 			</li>
 		</ul>

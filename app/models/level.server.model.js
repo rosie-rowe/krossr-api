@@ -6,6 +6,10 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
+var timeLimitValidator = function(value) {
+	return /^\d+$/.test(value);
+};
+
 /**
  * Level Schema
  */
@@ -31,7 +35,9 @@ var LevelSchema = new Schema({
 		type: Number
 	},
 	timeLimit: {
-		type: Number
+		type: Number,
+		validate: [timeLimitValidator, 'Time limit must be an integer'],
+		required: 'Please provide time limit'
 	}
 });
 

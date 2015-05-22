@@ -5,22 +5,20 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, Utils) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = 0;
+		$scope.validNumber = /^\d+$/;
 
-		// get total number of levels
-		//$scope.totalCount = Levels.count();
-
-		var penaltyTimer;
+		var penaltyTimer,
+			timeout = 1000;
 
 		// Create new Level
 		$scope.create = function() {
-			var layout = Utils.getGameMatrix(),
-				timeLimit = Utils.computeTimeLimit($scope.minutes);
+			var layout = Utils.getGameMatrix();
 
 			// Create new Level object
 			var level = new Levels ({
 				name: this.name,
 				layout: layout,
-				timeLimit: timeLimit,
+				timeLimit: Utils.computeTimeLimit(this.minutes),
 				size: layout.length
 			});
 
@@ -32,6 +30,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				$scope.name = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
+
+				$timeout(function() {
+					$scope.error = '';
+				}, timeout)
 			});
 		};
 
@@ -65,6 +67,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				$location.path('levels/' + level._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
+
+				$timeout(function() {
+					$scope.error = null;
+				}, timeout);
 			});
 		};
 
@@ -163,7 +169,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		        penaltyTimer = $timeout(function() {
 		            $scope.showPenalty = false;
-		        }, 1000);
+		        }, timeout);
 	    	}
 	    });
 	}

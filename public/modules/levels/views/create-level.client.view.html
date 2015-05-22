@@ -11,7 +11,7 @@
             
             <label class="control-label" for="minutes">Time Limit</label>
             <div class="controls">
-                <input type='text' data-ng-model="minutes" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+                <input type='text' ng-pattern="validNumber" data-ng-model="minutes" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
             </div>
 
             <label class="control-label" for="size">Size</label>
@@ -25,7 +25,12 @@
 
             <div><button class="btn btn-primary" type="button" ng-click="ctrl.clearAll()">Clear</button></div>
 
-            <div><button class="btn btn-primary" ng-click="create()">Submit</button></div>
+            <div>
+                <button ng-disabled="error" class="btn btn-primary" ng-click="create()">
+                    <span ng-if="!error">Submit</span>
+                    <span ng-if="error" data-ng-bind="error"></span>
+                </button>
+            </div>
         </div>
 
         <div class="gameContainer pull-right">
@@ -36,8 +41,6 @@
             </div>
         </div>
     
-		<div data-ng-show="error" class="text-danger">
-			<strong data-ng-bind="error"></strong>
-		</div>
+
     </div>
 </section>

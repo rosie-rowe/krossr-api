@@ -10,11 +10,16 @@
             </div>
             <label class="control-label" for="minutes">Time Limit</label>
             <div class="controls">
-                <input type='text' data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+                <input type='text' ng-pattern="validNumber" data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
             </div>
 
             <div><button class="btn" type="button" ng-click="ctrl.clearAll()">Clear</button></div>
-            <div><button class="btn" type="button" ng-click="update()">Update</button></div>
+            <div>
+                <button ng-disabled="error"class="btn" type="button" ng-click="update()">
+                    <span ng-if="!error">Update</span>
+                    <span ng-if="error" ng-bind-html="error"></span>
+                </button>
+            </div>
         </div>
 
         <div class="gameContainer pull-right">
@@ -24,11 +29,5 @@
                 </game>
             </div>
         </div>
-            
-
-
-		<div data-ng-show="error" class="text-danger">
-			<strong data-ng-bind="error"></strong>
-		</div>
     </div>
 </section>
