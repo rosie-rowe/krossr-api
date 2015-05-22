@@ -330,6 +330,11 @@ ul {
 .newLevel .btn {
   margin: 1em 0;
 }
+.editLevel .btn-mini,
+.listLevels .btn-mini,
+.newLevel .btn-mini {
+  margin: 0;
+}
 .editLevel .form-group,
 .listLevels .form-group,
 .newLevel .form-group {

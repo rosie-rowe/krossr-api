@@ -98,7 +98,7 @@ exports.paginate = function(req, res) {
 	var pageNum = req.query['pageNum'],
 		sizeRestriction = req.query['sizeRestriction'],
 		userName = req.query['userName'],
-		numPerPage = 8,
+		numPerPage = 9,
 		totalCount,
 		query = Level.find().sort('-created').limit(numPerPage).skip(pageNum * numPerPage);
 		
