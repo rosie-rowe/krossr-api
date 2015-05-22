@@ -11,6 +11,10 @@ a {
 	text-decoration: none;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 400;
+}
+
 h1 {
 	font-size: 4em;
 	margin: 0;
@@ -47,6 +51,10 @@ ul {
 	padding-left: 0;
 }
 
+::-webkit-input-placeholder {
+	font-family: @mainFont;
+}
+
 #playable-area {
 	height: @bodyHeight;
 }
@@ -54,30 +62,23 @@ ul {
 .btn {
     .border-radius(.25em);
 
-    background-color: fade(@black, 50%);
+    background-color: darken(@selectedColor, 30%);
+    border: 0;
+    color: @white;
     cursor: pointer;
     font-family: inherit;
-    font-size: .5em;
-    font-weight: 700;
+    font-size: 1.5em;
+    height: @inputHeight;
+   	margin: @inputMargin;
     padding: .4em;
-    text-transform: uppercase;
+    width: @inputWidth;
+    max-width: @inputWidth;
+    transition: all 1s;
 
     &:hover {
-        background-color: @primary;
+        background-color: @selectedColor;
+        transition: all 1s;
     }
-}
-
-.btn-primary {
-	background: @secondary;
-	border-color: @white;
-	color: @white;
-	font-size: 1.5em;
-	margin: 1em;
-
-	&:hover {
-		background: @primary;
-		border-color: @white;
-	};
 }
 
 .caret {
@@ -141,19 +142,21 @@ ul {
 }
 
 .form-group {
-	.btn {
-		margin-left: 0;
-	}
+	margin-bottom: @inputMargin * 3;
 
 	input {
 		.border-radius();
 
 		background-color: @primary;
+		box-sizing: border-box;
 		border: 1px solid @secondary;
 		color: @white;
 		font-family: @mainFont !important;
 		line-height: 2;
+		margin: @inputMargin;
+		height: @inputHeight;
 		padding: 1em;
+		width: @inputWidth;
 	}
 
 	select {
@@ -163,6 +166,10 @@ ul {
 		color: @white;
 		line-height: 2;
 		padding: 1em;
+	}
+
+	.details {
+		margin: @inputMargin;
 	}
 }
 
@@ -243,6 +250,10 @@ ul {
     a {
         text-decoration: none;
     }
+}
+
+.sign-on-form {
+	margin-top: @inputMargin;
 }
 
 .splash {

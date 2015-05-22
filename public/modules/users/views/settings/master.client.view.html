@@ -2,20 +2,19 @@
 	<section class="valign-inner" data-ng-controller="MasterController">
 		<ul>
 			<li>
-				<button class="btn btn-primary">
-					<a href="/#!/settings/edit-profile">Edit Profile</a>
-				</button>
-			</li>
-			<li data-ng-show="authentication.user.provider === 'local'">
-				<button class="btn btn-primary">
-					<a href="/#!/settings/password">Change Password</a>
-				</button>
+				<a href="/#!/settings/edit-profile">
+					<button class="btn btn-primary">
+						Edit Profile
+					</button>
+				</a>
 			</li>
 			<li class="divider"></li>
 			<li>
-				<button class="btn btn-primary">
-					<a href="/auth/signout">Signout</a>
-				</button>
+				<a href="/auth/signout">
+					<button class="btn btn-primary">
+						Signout
+					</button>
+				</a>
 			</li>
 		</ul>
 	</section>

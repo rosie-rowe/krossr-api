@@ -13,6 +13,14 @@ a {
   color: #ffffff;
   text-decoration: none;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
 h1 {
   font-size: 4em;
   margin: 0;
@@ -24,7 +32,7 @@ html {
 body {
   background: #222222;
   color: #dddddd;
-  font-family: 'Corben';
+  font-family: 'Raleway';
   height: 100%;
   margin: 0;
 }
@@ -42,6 +50,9 @@ ul {
   list-style-type: none;
   padding-left: 0;
 }
+::-webkit-input-placeholder {
+  font-family: 'Raleway';
+}
 #playable-area {
   height: 100%;
 }
@@ -52,27 +63,22 @@ ul {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #0c384c;
+  border: 0;
+  color: #ffffff;
   cursor: pointer;
   font-family: inherit;
-  font-size: .5em;
-  font-weight: 700;
+  font-size: 1.5em;
+  height: 60px;
+  margin: 1em;
   padding: .4em;
-  text-transform: uppercase;
+  width: 400px;
+  max-width: 400px;
+  transition: all 1s;
 }
 .btn:hover {
-  background-color: #222222;
-}
-.btn-primary {
-  background: #555555;
-  border-color: #ffffff;
-  color: #ffffff;
-  font-size: 1.5em;
-  margin: 1em;
-}
-.btn-primary:hover {
-  background: #222222;
-  border-color: #ffffff;
+  background-color: #2199d0;
+  transition: all 1s;
 }
 .caret {
   display: inline-block;
@@ -119,8 +125,8 @@ ul {
 .dropdown-toggle {
   cursor: pointer;
 }
-.form-group .btn {
-  margin-left: 0;
+.form-group {
+  margin-bottom: 3em;
 }
 .form-group input {
   -webkit-border-radius: 5px;
@@ -130,11 +136,15 @@ ul {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   background-color: #222222;
+  box-sizing: border-box;
   border: 1px solid #555555;
   color: #ffffff;
-  font-family: 'Corben' !important;
+  font-family: 'Raleway' !important;
   line-height: 2;
+  margin: 1em;
+  height: 60px;
   padding: 1em;
+  width: 400px;
 }
 .form-group select {
   -webkit-border-radius: 5px;
@@ -148,6 +158,9 @@ ul {
   color: #ffffff;
   line-height: 2;
   padding: 1em;
+}
+.form-group .details {
+  margin: 1em;
 }
 .hero {
   display: table;
@@ -216,9 +229,12 @@ ul {
 .sign-on a {
   text-decoration: none;
 }
+.sign-on-form {
+  margin-top: 1em;
+}
 .splash {
   font-size: 10em;
-  font-family: 'Corben';
+  font-family: 'Raleway';
 }
 .undecorated-link:hover {
   text-decoration: none;
