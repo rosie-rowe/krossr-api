@@ -17,10 +17,17 @@
 				<a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
 			</li>
 		</ul>
-		<ul class="nav navbar-nav" data-ng-show="authentication.user">
+		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
 			<li>
-				<a href="/#!/settings/profile">
+				<a href="/#!/settings/edit-profile">
 					<span>Profile</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
+			<li>
+				<a href="/auth/signout">
+					<span>Sign Out</span>
 				</a>
 			</li>
 		</ul>

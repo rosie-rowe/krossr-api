@@ -4,6 +4,6 @@
 angular.module('levels').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Levels', 'levels', 'levels', '/levels(/create)?');
+		Menus.addMenuItem('topbar', 'Levels', 'levels', 'levels', '/levels(/create)?', false);
 	}
 ]);
