@@ -125,9 +125,6 @@ ul {
 .dropdown-toggle {
   cursor: pointer;
 }
-.form-group {
-  margin-bottom: 3em;
-}
 .form-group input {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -160,7 +157,8 @@ ul {
   padding: 1em;
 }
 .form-group .details {
-  margin: 1em;
+  font-size: 0.7em;
+  margin-bottom: 3em;
 }
 .hero {
   display: table;
@@ -228,9 +226,6 @@ ul {
 }
 .sign-on a {
   text-decoration: none;
-}
-.sign-on-form {
-  margin-top: 1em;
 }
 .splash {
   font-size: 10em;
@@ -396,3 +391,21 @@ ul {
 /*
  *  Mixins
  */
+@media (min-width: 992px) {
+  .nav-users {
+    position: fixed;
+  }
+}
+.remove-account-container {
+  display: inline-block;
+  position: relative;
+}
+.sign-on-form {
+  display: inline-block;
+  margin-top: 3em;
+}
+.btn-remove-account {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+}

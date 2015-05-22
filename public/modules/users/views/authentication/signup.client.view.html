@@ -1,6 +1,6 @@
 <div class="hero">
 	<section class="row valign-inner" data-ng-controller="AuthenticationController">
-		<h3 class="col-md-12 text-center">Sign up</h3>
+		<h1>Sign up</h1>
 		<div class="sign-on-form">
 			<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
 				<label class="control-label" for="username">Username</label> 
@@ -17,8 +17,8 @@
 
 				<label class="control-label" for="password">Password</label> 
 				<div class="form-group">
-					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
-					<div class="details">Your password must be at least 10 characters</div>
+					<input type="password" id="password" minlength="{{ minPasswordLength }}" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+					<div class="details">Your password must be at least 10 characters. Spaces allowed, no symbols required.</div>
 				</div>
 				<div class="text-center form-group">
 					<button type="submit" class="btn btn-large btn-primary">Sign up</button>
