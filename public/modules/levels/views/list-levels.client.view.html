@@ -1,6 +1,12 @@
 <section class="listLevels" data-ng-controller="LevelsController" data-ng-init="find()">
     <div class="page-header">
-        <h1>Levels</h1>
+        <h1>
+            <span ng-if="sizeRestriction">{{ sizeRestriction }}x{{ sizeRestriction}}</span>
+            Levels
+            <div class="searchText" ng-if="usernameSearch">
+                Usernames like "{{ usernameSearch }}" <div ng-click="setUsernameSearch()" class="clearSearch">✖</div>
+            </div>
+        </h1>
         <div class="form-group">
             <a href="/#!/levels/create">
                 <button class="btn btn-primary">New level</button>
@@ -15,18 +21,23 @@
                 </select>
 
                 <label class="control-label">Search by username</label>
-                <input ng-model="usernameSearch" ng-change="setUsernameSearch(usernameSearch); find();">
+                <input ng-model="usernameSearch" ng-change="setUsernameSearch(usernameSearch)">
             </div>
         </div>
     </div>
 
     <div class="list-group">
         <div data-ng-repeat="level in levels" class="list-group-item">
-			<a class="list-group-item-heading" data-ng-href="#!/levels/{{level._id}}" data-ng-bind="level.name"></a>
-            <small class="list-group-item-text">
-                <div ng-click="setUsernameSearch(level.user.username);find()" data-ng-bind="level.user.username"></div>
-                <div data-ng-bind="level.size || 'Fuck'"></div>
-            </small>
+            <div>
+                <a class="list-group-item-heading" data-ng-bind="level.name"></a>
+                <div class="username" ng-click="setUsernameSearch(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
+            </div>
+            <div>
+                <div class="size" data-ng-bind="level.size || 'Fuck'"></div>
+                <a data-ng-href="#!/levels/{{level._id}}">
+                    <button class="btn btn-mini">Play</button>
+                </a>
+            </div>
         </div>
     </div>
 

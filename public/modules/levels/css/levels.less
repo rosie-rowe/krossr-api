@@ -37,14 +37,38 @@
 }
 
 .list-group-item {
+    background-color: @headerColor;
+    margin: @inputMargin;
     width: 25%;
-    height: 100px;
     display: inline-block;
+    padding: @inputMargin;
+    position: relative;
+
+    .btn {
+        float: right;
+    }
+
+    .list-group-item-heading {
+        display: inline-block;
+        font-size: 2em;
+    }
+
+    .username {
+        float: right;
+        cursor: pointer;
+    }
+
+    .size {
+        display: inline-block;
+        font-size: 2em;
+
+        &:hover {
+            background-color: @primary;
+            transition: all 1s;
+        };
+    }
 }
 
-.list-group-item-heading {
-    font-size: 2em;
-}
 
 .editLevel,
 .listLevels,
@@ -75,6 +99,18 @@
 
 .pending {
     background-color: @pendingColor;
+}
+
+.searchText {
+    display: inline-block;
+    background: @headerColor;
+    font-size: .25em;
+    padding: @inputMargin;
+
+    .clearSearch {
+        cursor: pointer;
+        display: inline-block;
+    }
 }
 
 .selected {

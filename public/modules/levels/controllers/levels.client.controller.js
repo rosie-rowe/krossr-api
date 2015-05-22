@@ -138,6 +138,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		$scope.setUsernameSearch = function(username) {
 			$scope.usernameSearch = username ? username : null;
+			$scope.find();
 		}
 
 		$scope.gameOver = function() {

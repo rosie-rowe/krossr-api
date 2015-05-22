@@ -87,6 +87,11 @@ ul {
 .btn-small {
   width: 133.33333333px;
 }
+.btn-mini {
+  width: 100px;
+  height: 40px;
+  font-size: 1.2em;
+}
 .caret {
   display: inline-block;
   font-size: 0.5em;
@@ -287,12 +292,31 @@ ul {
   margin-left: 0;
 }
 .list-group-item {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 1em;
   width: 25%;
-  height: 100px;
   display: inline-block;
+  padding: 1em;
+  position: relative;
 }
-.list-group-item-heading {
+.list-group-item .btn {
+  float: right;
+}
+.list-group-item .list-group-item-heading {
+  display: inline-block;
   font-size: 2em;
+}
+.list-group-item .username {
+  float: right;
+  cursor: pointer;
+}
+.list-group-item .size {
+  display: inline-block;
+  font-size: 2em;
+}
+.list-group-item .size:hover {
+  background-color: #222222;
+  transition: all 1s;
 }
 .editLevel,
 .listLevels,
@@ -326,6 +350,16 @@ ul {
 }
 .pending {
   background-color: rgba(175, 175, 175, 0.75);
+}
+.searchText {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: .25em;
+  padding: 1em;
+}
+.searchText .clearSearch {
+  cursor: pointer;
+  display: inline-block;
 }
 .selected {
   background-color: #2199d0;
