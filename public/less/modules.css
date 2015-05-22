@@ -311,6 +311,9 @@ ul {
 .newLevel .form-group {
   display: inline-block;
 }
+.editLevel .form-group input,
+.listLevels .form-group input,
+.newLevel .form-group input,
 .editLevel .form-group select,
 .listLevels .form-group select,
 .newLevel .form-group select {

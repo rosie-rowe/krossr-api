@@ -104,7 +104,7 @@ exports.paginate = function(req, res) {
 		
 
 	if (userName) {
-		query.populate({ path: 'user',select: 'username', match: { username: { $in: [userName] }} });
+		query.populate({ path: 'user',select: 'username', match: { username: { $regex: [userName] }} });
 	} else {
 		query.populate('user', 'username');
 	}
@@ -113,10 +113,6 @@ exports.paginate = function(req, res) {
 		sizeRestriction = parseInt(sizeRestriction, 10);
 		query.where('size').equals(sizeRestriction);
 	}
-
-	// if (userName) {
-	// 	query.where('username').equals(userName);
-	// }
 
 	query.exec(function(err, levels) {
 		if (userName) {

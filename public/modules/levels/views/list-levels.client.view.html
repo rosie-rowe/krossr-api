@@ -13,6 +13,9 @@
                     <option value="10">10x10</option>
                     <option value="15">15x15</option>
                 </select>
+
+                <label class="control-label">Search by username</label>
+                <input ng-model="usernameSearch" ng-change="setUsernameSearch(usernameSearch); find();">
             </div>
         </div>
     </div>
