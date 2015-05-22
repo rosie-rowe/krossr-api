@@ -86,6 +86,10 @@ ul {
     }
 }
 
+.btn-small {
+	width: @inputWidth / 3;
+}
+
 .caret {
 	&.right:before {
 		content: '▶';
@@ -156,7 +160,7 @@ ul {
 		color: @white;
 		font-family: @mainFont !important;
 		line-height: 2;
-		margin: @inputMargin;
+		margin: @inputMargin 0;
 		height: @inputHeight;
 		padding: 1em;
 		width: @inputWidth;
@@ -167,6 +171,8 @@ ul {
 		background-color: @primary;
 		border: 1px solid @secondary;
 		color: @white;
+		height: @inputHeight;
+		margin: @inputMargin 0;
 		line-height: 2;
 		padding: 1em;
 	}
@@ -213,6 +219,7 @@ ul {
 }
 
 .navbar-nav {
+	margin: @inputMargin * 2;
 	text-align: center;
 
 	a {

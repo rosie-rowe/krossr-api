@@ -3,9 +3,11 @@
 		<h1 class="col-md-12 text-center">Sign in</h1>
 		<div class="sign-on-form">
 			<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
+				<label class="control-label" for="username">Username</label>
 				<div class="form-group">
 					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
 				</div>
+				<label class="control-label" for="password">Password</label>
 				<div class="form-group">
 					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
 				</div>

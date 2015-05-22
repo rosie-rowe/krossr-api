@@ -2,18 +2,19 @@
     <div class="page-header">
         <h1>Levels</h1>
         <div class="form-group">
-            <label class="control-label">Select a size</label>
+            <a href="/#!/levels/create">
+                <button class="btn btn-primary">New level</button>
+            </a>
             <div class="controls">
+                <label class="control-label">Select a size</label>
                 <select ng-model='sizeRestriction' ng-change="find()">
-                    <option value="5" selected>5x5</option>
+                    <option value="" selected>All</option>
+                    <option value="5">5x5</option>
                     <option value="10">10x10</option>
                     <option value="15">15x15</option>
                 </select>
             </div>
         </div>
-        <button class="btn btn-primary">
-            <a href="/#!/levels/create">New level</a>
-        </button>
     </div>
 
     <div class="list-group">

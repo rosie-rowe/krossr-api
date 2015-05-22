@@ -84,6 +84,9 @@ ul {
   background-color: #051720;
   transition: all .2s;
 }
+.btn-small {
+  width: 133.33333333px;
+}
 .caret {
   display: inline-block;
   font-size: 0.5em;
@@ -142,7 +145,7 @@ ul {
   color: #ffffff;
   font-family: 'Raleway' !important;
   line-height: 2;
-  margin: 1em;
+  margin: 1em 0;
   height: 60px;
   padding: 1em;
   width: 400px;
@@ -157,6 +160,8 @@ ul {
   background-color: #222222;
   border: 1px solid #555555;
   color: #ffffff;
+  height: 60px;
+  margin: 1em 0;
   line-height: 2;
   padding: 1em;
 }
@@ -199,6 +204,7 @@ ul {
   padding: 0.5em;
 }
 .navbar-nav {
+  margin: 2em;
   text-align: center;
 }
 .navbar-nav a {
@@ -295,12 +301,17 @@ ul {
 .editLevel .btn,
 .listLevels .btn,
 .newLevel .btn {
-  margin-left: 0;
+  margin: 1em 0;
 }
 .editLevel .form-group,
 .listLevels .form-group,
 .newLevel .form-group {
   display: inline-block;
+}
+.editLevel .form-group select,
+.listLevels .form-group select,
+.newLevel .form-group select {
+  margin: 1em;
 }
 .square {
   box-sizing: border-box;
