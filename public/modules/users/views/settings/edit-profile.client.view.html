@@ -17,25 +17,30 @@
 		</div>
 		<div ng-if="user.provider === 'local'">
 		<h2 class="col-md-12 text-center">Change your password</h2>
-			<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
-				<form data-ng-submit="changeUserPassword()" class="signin form-horizontal" autocomplete="off">
-					<div class="form-group">
-						<input type="password" id="currentPassword" name="currentPassword" class="form-control" data-ng-model="passwordDetails.currentPassword" placeholder="Current Password">
-					</div>
-					<div class="form-group">
-						<input type="password" id="newPassword" name="newPassword" class="form-control" data-ng-model="passwordDetails.newPassword" placeholder="New Password">
-					</div>
-					<div class="form-group">
-						<input type="password" id="verifyPassword" name="verifyPassword" class="form-control" data-ng-model="passwordDetails.verifyPassword" placeholder="Verify Password">
-					</div>
-					<div class="text-center form-group">
-						<button ng-disabled="error.password || success.password" type="submit" class="btn btn-large btn-primary">
-							<span ng-if="!error.password && !success.password">Save Password</span>
-							<span ng-if="!error.password && success.password">Password Saved</span>
-							<span ng-if="error.password" data-ng-bind="error.password"></span>
-						</button>
-					</div>
-				</form>
-			</div>
+		<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+			<form data-ng-submit="changeUserPassword()" class="signin form-horizontal" autocomplete="off">
+				<div class="form-group">
+					<input type="password" id="currentPassword" name="currentPassword" class="form-control" data-ng-model="passwordDetails.currentPassword" placeholder="Current Password">
+				</div>
+				<div class="form-group">
+					<input type="password" id="newPassword" name="newPassword" class="form-control" data-ng-model="passwordDetails.newPassword" placeholder="New Password">
+				</div>
+				<div class="form-group">
+					<input type="password" id="verifyPassword" name="verifyPassword" class="form-control" data-ng-model="passwordDetails.verifyPassword" placeholder="Verify Password">
+				</div>
+				<div class="text-center form-group">
+					<button ng-disabled="error.password || success.password" type="submit" class="btn">
+						<span ng-if="!error.password && !success.password">Save Password</span>
+						<span ng-if="!error.password && success.password">Password Saved</span>
+						<span ng-if="error.password" data-ng-bind="error.password"></span>
+					</button>
+				</div>
+			</form>
+		</div>
+		<div>
+			<a href="/auth/signout">
+				<button class="btn">Sign Out</span>
+			</a>
+		</div>
 	</section>
 </div>

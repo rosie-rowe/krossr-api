@@ -1,64 +1,68 @@
-<section class="listLevels" data-ng-controller="LevelsController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>
-            Levels
-            <div class="searchText" ng-if="usernameSearch">
-                Usernames like "{{ usernameSearch }}" <div ng-click="setUsernameSearch()" class="clearSearch">✖</div>
+<div class="hero">
+    <section class="listLevels" data-ng-controller="LevelsController" data-ng-init="find()">
+        <div class="page-header">
+            <h1>
+                Levels
+            </h1>
+            <div class="searchLabels">
+                <div class="searchText" ng-if="usernameSearch">
+                    Usernames like "{{ usernameSearch }}" <div ng-click="setUsernameSearch()" class="clearSearch">✖</div>
+                </div>
+                <div class="searchText" ng-if="sizeRestriction">
+                    Size: {{ sizeRestriction }}x{{ sizeRestriction}}
+                    <div ng-click="setSizeRestriction()" class="clearSearch">✖</div>
+                </div>
             </div>
-            <div class="searchText" ng-if="sizeRestriction">
-                Size: {{ sizeRestriction }}x{{ sizeRestriction}}
-                <div ng-click="setSizeRestriction()" class="clearSearch">✖</div>
-            </div>
-        </h1>
-        <div class="form-group">
-            <a href="/#!/levels/create">
-                <button class="btn btn-primary">New level</button>
-            </a>
-            <div class="controls">
-                <label class="control-label">Select a size</label>
-                <select ng-model='sizeRestriction' ng-change="find()">
-                    <option value="" selected>All</option>
-                    <option value="5">5x5</option>
-                    <option value="10">10x10</option>
-                    <option value="15">15x15</option>
-                </select>
-
-                <label class="control-label">Search by username</label>
-                <input ng-model="usernameSearch" ng-change="setUsernameSearch(usernameSearch)">
-            </div>
-        </div>
-    </div>
-
-    <div class="list-group">
-        <div data-ng-repeat="level in levels" class="list-group-item">
-            <div>
-                <a class="list-group-item-heading" data-ng-bind="level.name"></a>
-                <div class="username" ng-click="setUsernameSearch(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
-            </div>
-            <div>
-                <div class="size" data-ng-bind="level.size || 'Fuck'"></div>
-                <a data-ng-href="#!/levels/{{level._id}}">
-                    <button class="btn btn-mini">Play</button>
+            <div class="form-group">
+                <a href="/#!/levels/create">
+                    <button class="btn btn-primary">New level</button>
                 </a>
+                <div class="controls">
+                    <label class="control-label">Select a size</label>
+                    <select ng-model='sizeRestriction' ng-change="find()">
+                        <option value="" selected>All</option>
+                        <option value="5">5x5</option>
+                        <option value="10">10x10</option>
+                        <option value="15">15x15</option>
+                    </select>
+
+                    <label class="control-label">Search by username</label>
+                    <input ng-model="usernameSearch" ng-change="setUsernameSearch(usernameSearch)">
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="alert alert-warning text-center" data-ng-hide="!levels.$resolved || levels.length">
-    	No Levels yet, why don't you <a href="/#!/levels/create">create one</a>?
-    </div>
-
-    <div class="pagination">
-        <div class="prevPage" ng-click="pageDown()" ng-class="{'invisible': currentPage === 0}">
-            ◀
+        <div class="list-group">
+            <div data-ng-repeat="level in levels" class="list-group-item">
+                <div>
+                    <a class="list-group-item-heading" data-ng-bind="level.name"></a>
+                    <div class="username" ng-click="setUsernameSearch(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
+                </div>
+                <div>
+                    <div class="size" data-ng-bind="level.size || 'Fuck'"></div>
+                    <a data-ng-href="#!/levels/{{level._id}}">
+                        <button class="btn btn-mini">Play</button>
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <div class="currentPage">
-            Page {{ currentPage + 1 }} of {{ totalPages }}
+        <div class="alert alert-warning text-center" data-ng-hide="!levels.$resolved || levels.length">
+        	No Levels yet, why don't you <a href="/#!/levels/create">create one</a>?
         </div>
 
-        <div class="nextPage" ng-click="pageUp()" ng-class="{'invisible': currentPage + 1 === totalPages }">
-            ▶
+        <div class="pagination">
+            <div class="prevPage" ng-click="pageDown()" ng-class="{'invisible': currentPage === 0}">
+                ◀
+            </div>
+
+            <div class="currentPage">
+                Page {{ currentPage + 1 }} of {{ totalPages }}
+            </div>
+
+            <div class="nextPage" ng-click="pageUp()" ng-class="{'invisible': currentPage + 1 === totalPages }">
+                ▶
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

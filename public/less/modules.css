@@ -27,7 +27,6 @@ h1 {
 }
 html {
   height: 100%;
-  overflow: hidden;
 }
 body {
   background: #222222;
@@ -114,7 +113,7 @@ ul {
   box-sizing: border-box;
   float: left;
   height: 100%;
-  width: 85%;
+  width: 100%;
 }
 .dropdown-menu {
   background-color: #222222;
@@ -189,12 +188,12 @@ ul {
 .header-container {
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.5);
-  float: left;
-  height: 100%;
   font-family: inherit;
   list-style-type: none;
-  vertical-align: top;
-  width: 15%;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  z-index: 10;
 }
 .navbar-toggle {
   -webkit-border-radius: 5px;
@@ -270,33 +269,33 @@ ul {
   box-sizing: border-box;
   border: 1px solid #000;
   background-color: #e2e2e2;
+  margin: 0 auto;
   overflow: hidden;
 }
 .finishedGrouping {
   color: #2199d0;
 }
 .gameContainer {
-  display: table;
-  position: relative;
   height: 100%;
 }
-.gameContainer-inner {
-  display: table-cell;
-  vertical-align: middle;
+.viewLevel .gameContainer-inner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 .levelInfo {
   position: absolute;
   margin: 1em 0 0 1em;
+  right: 0;
 }
 .levelInfo .btn {
   margin-left: 0;
 }
 .list-group-item {
   background-color: rgba(0, 0, 0, 0.5);
-  margin: 1em;
-  width: 25%;
-  display: inline-block;
+  margin: 1em auto;
   padding: 1em;
+  width: 25%;
   position: relative;
 }
 .list-group-item .btn {
@@ -340,12 +339,26 @@ ul {
 .newLevel .form-group {
   display: inline-block;
 }
+.editLevel .form-group button,
+.listLevels .form-group button,
+.newLevel .form-group button {
+  margin: 1em 0;
+}
 .editLevel .form-group input,
 .listLevels .form-group input,
 .newLevel .form-group input,
 .editLevel .form-group select,
 .listLevels .form-group select,
 .newLevel .form-group select {
+  margin: 1em;
+}
+.editLevel .form-group select,
+.listLevels .form-group select,
+.newLevel .form-group select {
+  background: #222222;
+  -webkit-appearance: none;
+}
+.newLevel .form-group button {
   margin: 1em;
 }
 .square {
@@ -381,8 +394,6 @@ ul {
   margin: 1em 0;
 }
 .pagination {
-  bottom: 0;
-  position: absolute;
   text-align: center;
   width: 100%;
 }

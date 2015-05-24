@@ -9,6 +9,7 @@
 
     border: 1px solid #000;
     background-color: @tileColor;
+    margin: 0 auto;
     overflow: hidden;
 }
 
@@ -17,19 +18,21 @@
 }
 
 .gameContainer {
-    display: table;
-    position: relative;
     height: 100%;
 }
 
 .gameContainer-inner {
-    display: table-cell;
-    vertical-align: middle;
+    .viewLevel & {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
 }
 
 .levelInfo {
     position: absolute;
     margin: 1em 0 0 1em;
+    right: 0;
 
     .btn {
         margin-left: 0;
@@ -38,10 +41,9 @@
 
 .list-group-item {
     background-color: @headerColor;
-    margin: @inputMargin;
-    width: 25%;
-    display: inline-block;
+    margin: @inputMargin auto;
     padding: @inputMargin;
+    width: 25%;
     position: relative;
 
     .btn {
@@ -69,7 +71,6 @@
     }
 }
 
-
 .editLevel,
 .listLevels,
 .newLevel {
@@ -88,8 +89,25 @@
     .form-group {
         display: inline-block;
 
+        button {
+            margin: @inputMargin 0;
+        }
         input,
         select {
+            margin: @inputMargin;
+        }
+        select {
+            background: @primary;
+            -webkit-appearance: none;
+        }
+    }
+}
+
+.newLevel {
+    .controlsContainer {
+    }
+    .form-group {
+        button {
             margin: @inputMargin;
         }
     }
@@ -135,8 +153,6 @@
 }
 
 .pagination {
-    bottom: 0;
-    position: absolute;
     text-align: center;
     width: 100%;
 

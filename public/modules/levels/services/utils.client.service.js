@@ -248,11 +248,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Modify the current game size */
 			setGameSize: function(widthInTiles) {
+				/* Double golden. */
 				var finalWidth = playableAreaSize / 2,
 					finalHeight = finalWidth;
 
 				gameWidth = finalWidth + 2 + 'px';
-				gameHeight = finalHeight - 2 + 'px';
+				gameHeight = finalHeight - (widthInTiles / 2) + 'px';
 
 				this.setTileSize(finalWidth, widthInTiles);
 			},

@@ -1,33 +1,36 @@
-<section class="editLevel" data-ng-controller="LevelsController" data-ng-init="findOne('edit')">
-    <div class="page-header">
-        <h1>Edit Level</h1>
-    </div>
-    <div data-ng-controller="MainCtrl as ctrl" class="form-horizontal" novalidate>
-        <div class="form-group">
-            <label class="control-label" for="name">Name</label>
-            <div class="controls">
-                <input type="text" data-ng-model="level.name" id="name" class="form-control" placeholder="Name" required>
-            </div>
-            <label class="control-label" for="minutes">Time Limit</label>
-            <div class="controls">
-                <input type='text' ng-pattern="validNumber" data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
-            </div>
+<div class="hero">
+    <section class="editLevel" data-ng-controller="LevelsController" data-ng-init="findOne('edit')">
+        <div class="page-header">
+            <h1>Edit Level</h1>
+        </div>
+        <div data-ng-controller="MainCtrl as ctrl" class="form-horizontal" novalidate>
+            <div class="form-group">
+                <div class="gameContainer">
+                    <div class="gameContainer-inner">
+                        <game>
+                            <tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayoutForEdit(level.layout, $index);" editable='true'></tile>
+                        </game>
+                    </div>
+                </div>
 
-            <div><button class="btn" type="button" ng-click="ctrl.clearAll()">Clear</button></div>
-            <div>
-                <button ng-disabled="error"class="btn" type="button" ng-click="update()">
-                    <span ng-if="!error">Update</span>
-                    <span ng-if="error" ng-bind-html="error"></span>
-                </button>
+                <label class="control-label" for="name">Name</label>
+                <div class="controls">
+                    <input type="text" data-ng-model="level.name" id="name" class="form-control" placeholder="Name" required>
+                </div>
+                <label class="control-label" for="minutes">Time Limit</label>
+                <div class="controls">
+                    <input type='text' ng-pattern="validNumber" data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+                </div>
+
+                <div><button class="btn" type="button" ng-click="ctrl.clearAll()">Clear</button></div>
+                <div>
+                    <button ng-disabled="error"class="btn" type="button" ng-click="update()">
+                        <span ng-if="!error">Update</span>
+                        <span ng-if="error" ng-bind-html="error"></span>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="gameContainer pull-right">
-            <div class="gameContainer-inner">
-                <game>
-                    <tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayoutForEdit(level.layout, $index);" editable='true'></tile>
-                </game>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+</div>
