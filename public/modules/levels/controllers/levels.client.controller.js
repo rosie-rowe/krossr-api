@@ -79,7 +79,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			var queryObj = {
 				pageNum: $scope.currentPage,
 				sizeRestriction: $scope.sizeRestriction,
-				userName: $scope.usernameSearch
+				searchText: $scope.searchText
 			};
 
 			console.log(queryObj.sizeRestriction);
@@ -147,8 +147,8 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			$scope.find();
 		};
 
-		$scope.setUsernameSearch = function(username) {
-			$scope.usernameSearch = username ? username : null;
+		$scope.setSearchText = function(username) {
+			$scope.searchText = username ? username : null;
 			$scope.find();
 		};
 

@@ -15,6 +15,7 @@
 
 .finishedGrouping {
     color: @selectedColor;    
+    transition: color .5s;
 }
 
 .gameContainer {
@@ -44,14 +45,12 @@
     margin: @inputMargin auto;
     padding: @inputMargin;
     width: 25%;
-    position: relative;
 
     .btn {
         float: right;
     }
 
     .list-group-item-heading {
-        display: inline-block;
         font-size: 2em;
     }
 
@@ -61,55 +60,16 @@
     }
 
     .size {
+        cursor: pointer;
         display: inline-block;
         font-size: 2em;
-
-        &:hover {
-            background-color: @primary;
-            transition: all 1s;
-        };
     }
 }
 
-.editLevel,
-.listLevels,
-.newLevel {
-    height: 100%;
-    position: relative;
-    margin: 0 1em;
-
-    .btn {
-        margin: @inputMargin 0;
-    }
-
-    .btn-mini {
-        margin: 0;
-    }
-
-    .form-group {
-        display: inline-block;
-
-        button {
-            margin: @inputMargin 0;
-        }
-        input,
-        select {
-            margin: @inputMargin;
-        }
-        select {
-            background: @primary;
-            -webkit-appearance: none;
-        }
-    }
-}
-
-.newLevel {
-    .controlsContainer {
-    }
-    .form-group {
-        button {
-            margin: @inputMargin;
-        }
+.listLevels {
+    input,
+    select {
+        margin: @inputMargin;
     }
 }
 
@@ -121,12 +81,12 @@
 
 .pending {
     background-color: @pendingColor;
+    transition: background-color .5s;
 }
 
 .searchText {
     display: inline-block;
     background: @headerColor;
-    font-size: .25em;
     padding: @inputMargin;
     vertical-align: middle;
 
@@ -138,13 +98,12 @@
 
 .selected {
     background-color: @selectedColor;
+    transition: background-color .5s;
 }
 
 .marked {
     color: @markedColor;
-    height: 100%;
-    text-align: center;
-    width: 100%;
+    transition: color .5s;
 }
 
 .page-header {

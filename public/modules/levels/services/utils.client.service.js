@@ -253,7 +253,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 					finalHeight = finalWidth;
 
 				gameWidth = finalWidth + 2 + 'px';
-				gameHeight = finalHeight - (widthInTiles / 2) + 'px';
+				gameHeight = finalHeight + 'px';
 
 				this.setTileSize(finalWidth, widthInTiles);
 			},

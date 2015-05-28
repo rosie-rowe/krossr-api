@@ -97,17 +97,11 @@ exports.levelByID = function(req, res, next, id) { Level.findById(id).populate('
 exports.paginate = function(req, res) {
 	var pageNum = req.query['pageNum'],
 		sizeRestriction = req.query['sizeRestriction'],
-		userName = req.query['userName'],
+		searchText = req.query['searchText'],
 		numPerPage = 9,
 		totalCount,
-		query = Level.find().sort('-created').limit(numPerPage).skip(pageNum * numPerPage);
-		
-
-	if (userName) {
-		query.populate({ path: 'user',select: 'username', match: { username: { $regex: [userName] }} });
-	} else {
-		query.populate('user', 'username');
-	}
+		query = Level.find().populate('user', 'username').sort('-created').limit(numPerPage).skip(pageNum * numPerPage),
+		searchRegex = new RegExp(searchText, 'i');;
 
 	if (sizeRestriction) {
 		sizeRestriction = parseInt(sizeRestriction, 10);
@@ -115,9 +109,12 @@ exports.paginate = function(req, res) {
 	}
 
 	query.exec(function(err, levels) {
-		if (userName) {
+		// As far as I can tell from googling, this is a limitation of mongo
+		// in that you can't .where on a populated field, so it has to be done after the initial fetch..
+		// will probably get slow with more levels,  but it'll work until I can switch the db.
+		if (searchText) {
 			levels = levels.filter(function(level) {
-				return level.user;
+				return searchRegex.test(level.user.username) || searchRegex.test(level.name);
 			});
 		}
 

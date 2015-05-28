@@ -90,6 +90,7 @@ ul {
   width: 100px;
   height: 40px;
   font-size: 1.2em;
+  margin: 0;
 }
 .caret {
   display: inline-block;
@@ -143,7 +144,7 @@ ul {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  background-color: #222222;
+  background-color: #555555;
   box-sizing: border-box;
   border: 1px solid #555555;
   color: #ffffff;
@@ -161,7 +162,7 @@ ul {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  background-color: #222222;
+  background-color: #555555;
   border: 1px solid #555555;
   color: #ffffff;
   height: 60px;
@@ -274,6 +275,7 @@ ul {
 }
 .finishedGrouping {
   color: #2199d0;
+  transition: color .5s;
 }
 .gameContainer {
   height: 100%;
@@ -296,13 +298,11 @@ ul {
   margin: 1em auto;
   padding: 1em;
   width: 25%;
-  position: relative;
 }
 .list-group-item .btn {
   float: right;
 }
 .list-group-item .list-group-item-heading {
-  display: inline-block;
   font-size: 2em;
 }
 .list-group-item .username {
@@ -310,55 +310,12 @@ ul {
   cursor: pointer;
 }
 .list-group-item .size {
+  cursor: pointer;
   display: inline-block;
   font-size: 2em;
 }
-.list-group-item .size:hover {
-  background-color: #222222;
-  transition: all 1s;
-}
-.editLevel,
-.listLevels,
-.newLevel {
-  height: 100%;
-  position: relative;
-  margin: 0 1em;
-}
-.editLevel .btn,
-.listLevels .btn,
-.newLevel .btn {
-  margin: 1em 0;
-}
-.editLevel .btn-mini,
-.listLevels .btn-mini,
-.newLevel .btn-mini {
-  margin: 0;
-}
-.editLevel .form-group,
-.listLevels .form-group,
-.newLevel .form-group {
-  display: inline-block;
-}
-.editLevel .form-group button,
-.listLevels .form-group button,
-.newLevel .form-group button {
-  margin: 1em 0;
-}
-.editLevel .form-group input,
-.listLevels .form-group input,
-.newLevel .form-group input,
-.editLevel .form-group select,
-.listLevels .form-group select,
-.newLevel .form-group select {
-  margin: 1em;
-}
-.editLevel .form-group select,
-.listLevels .form-group select,
-.newLevel .form-group select {
-  background: #222222;
-  -webkit-appearance: none;
-}
-.newLevel .form-group button {
+.listLevels input,
+.listLevels select {
   margin: 1em;
 }
 .square {
@@ -368,11 +325,11 @@ ul {
 }
 .pending {
   background-color: rgba(175, 175, 175, 0.75);
+  transition: background-color 0.5s;
 }
 .searchText {
   display: inline-block;
   background: rgba(0, 0, 0, 0.5);
-  font-size: .25em;
   padding: 1em;
   vertical-align: middle;
 }
@@ -382,12 +339,11 @@ ul {
 }
 .selected {
   background-color: #2199d0;
+  transition: background-color 0.5s;
 }
 .marked {
   color: #232323;
-  height: 100%;
-  text-align: center;
-  width: 100%;
+  transition: color .5s;
 }
 .page-header {
   border-bottom: none;
