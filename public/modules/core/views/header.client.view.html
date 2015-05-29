@@ -1,7 +1,10 @@
-<div class="container" data-ng-controller="HeaderController">
-	<nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
-		<ul class="nav navbar-nav">
-			<h2>Krossr</h2>
+<div class="header-container-inner container" data-ng-controller="HeaderController">
+	<nav ng-class="{collapsed: isCollapsed}" class="collapse navbar-collapse" role="navigation">
+		<ul class="nav navbar-header">
+			<h2 class="header">Krossr</h2>
+			<div class="hamburger" ng-click="toggleCollapsibleMenu();">
+				<span>☰</span>
+			</div>
 		</ul>
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
 			<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
@@ -19,7 +22,7 @@
 		</ul>
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
 			<li>
-				<a href="/#!/settings/edit-profile">
+				<a ui-sref="edit-profile">
 					<span>{{ authentication.user.username }}</span>
 				</a>
 			</li>

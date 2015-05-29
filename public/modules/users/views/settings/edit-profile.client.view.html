@@ -23,10 +23,10 @@
 					<input type="password" id="currentPassword" name="currentPassword" class="form-control" data-ng-model="passwordDetails.currentPassword" placeholder="Current Password">
 				</div>
 				<div class="form-group">
-					<input type="password" id="newPassword" name="newPassword" class="form-control" data-ng-model="passwordDetails.newPassword" placeholder="New Password">
+					<input type="password" id="newPassword" minlength="{{ minPasswordLength }}" name="newPassword" class="form-control" data-ng-model="passwordDetails.newPassword" placeholder="New Password">
 				</div>
 				<div class="form-group">
-					<input type="password" id="verifyPassword" name="verifyPassword" class="form-control" data-ng-model="passwordDetails.verifyPassword" placeholder="Verify Password">
+					<input type="password" id="verifyPassword" minlength="{{ minPasswordLength }}" name="verifyPassword" class="form-control" data-ng-model="passwordDetails.verifyPassword" placeholder="Verify Password">
 				</div>
 				<div class="text-center form-group">
 					<button ng-disabled="error.password || success.password" type="submit" class="btn">

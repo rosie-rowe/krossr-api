@@ -82,8 +82,6 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				searchText: $scope.searchText
 			};
 
-			console.log(queryObj.sizeRestriction);
-
 			Levels.query(queryObj, function(data) {
 				var i = 0,
 					allLevels = data.levels,

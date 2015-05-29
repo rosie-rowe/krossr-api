@@ -7,6 +7,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.success = {};
 		$scope.error = {};
 		$scope.passwordDetails = {};
+		$scope.minPasswordLength = 10;
 
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');

@@ -246,14 +246,23 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				return size + 'x' + size;
 			},
 
-			/* Modify the current game size */
+			/* Modify the current game size.
+			 * You encounter a MAGIC NUMBER STORM.
+			 * [FIGHT]	[RUN] */
 			setGameSize: function(widthInTiles) {
-				/* Double golden. */
-				var finalWidth = playableAreaSize / 2,
-					finalHeight = finalWidth;
+				var mq = window.matchMedia("(min-width: 1280px)"),
+					finalWidth,
+					finalHeight;
 
+				if (mq.matches) {
+					finalWidth = playableAreaSize / 1.5;
+				} else {
+					finalWidth =  playableAreaSize / 2;
+				}
+
+				finalHeight = finalWidth;
 				gameWidth = finalWidth + 2 + 'px';
-				gameHeight = finalHeight + 'px';
+				gameHeight = finalHeight - 4 + 'px';
 
 				this.setTileSize(finalWidth, widthInTiles);
 			},

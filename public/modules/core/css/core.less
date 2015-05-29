@@ -189,6 +189,18 @@ ul {
 	}
 }
 
+.hamburger {
+	display: inline-block;
+	font-size: @inputMargin * 2;
+	margin: 0 @inputMargin;
+	text-align: center;
+	vertical-align: middle;
+
+	@media screen and (min-width: 1024px) {
+		display: none;
+	}
+}
+
 .hero {
 	display: table;
 	height: 100%;
@@ -213,6 +225,33 @@ ul {
 	top: @inputMargin;
 	left: @inputMargin;
 	z-index: 10;
+
+	@media screen and (max-width: 1024px) {
+		position: static;
+
+		ul.navbar-header {
+			margin: 0;
+			padding: @inputMargin;
+
+			.hamburger {
+				float: right;
+			}
+		}
+
+		.collapsed & li {
+			display: none; 
+		}
+	}
+}
+
+.header-container-inner {
+	line-height: 1;
+
+	.header {
+		display: inline-block;
+		margin: 0 @inputMargin;
+		vertical-align: middle;
+	}
 }
 
 .navbar-toggle {
@@ -235,6 +274,13 @@ ul {
 
 	li {
 		font-size: 2em;
+	}
+
+	@media screen and (max-width: @largeScreen) { margin: @inputMargin; }
+	@media screen and (max-width: 1024px) {
+		.collapsed & li {
+			display: none; 
+		}
 	}
 }
 
