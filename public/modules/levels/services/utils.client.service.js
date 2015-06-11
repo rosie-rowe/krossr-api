@@ -197,7 +197,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				if (mq.matches) {
 					return "auto";
 				} else {
-					return this.getWidth('.outer.game') + this.getWidth('.left-grid');
+					return this.getWidth('.outer.game') + this.getWidth('.left-grid') + 1 + 'px';
 				}
 			},
 			
