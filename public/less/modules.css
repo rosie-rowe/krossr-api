@@ -397,6 +397,7 @@ ul {
   float: right;
 }
 .marked {
+  background-color: #e2e2e2;
   color: #232323;
   transition: color .5s;
 }
