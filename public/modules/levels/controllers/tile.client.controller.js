@@ -143,6 +143,7 @@ tileController.prototype.testTileForBorder = function(sideLength, index) {
 };
 
 tileController.prototype.setTileSize = function(tileSize) {
+  tileSize = Math.floor(tileSize);
   this.width = tileSize + 'px';
   this.height = tileSize + 'px';
 };

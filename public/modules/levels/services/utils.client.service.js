@@ -40,7 +40,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 				playableAreaSize = Math.min(pHeight, pWidth);
 				
-				return playableAreaSize;
+				return Math.floor(playableAreaSize);
 			},
 
 			/* Clear everything, to start a new game */
