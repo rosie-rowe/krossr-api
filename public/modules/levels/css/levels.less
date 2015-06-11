@@ -1,16 +1,18 @@
 /* Styles go here */
 
+.bottom-row-inner {
+    @media screen and (max-width: @largeScreen) {
+        display: inline-block;
+        margin: 0 auto;
+    }
+}
+
 .even {
     background-color: #444;
 }
 
 .inner.game {
-    .box-sizing(border-box);
-
-    border: 1px solid #000;
-    background-color: @tileColor;
     margin: 0 auto;
-    overflow: hidden;
 }
 
 .finishedGrouping {
@@ -27,16 +29,35 @@
         position: absolute;
         bottom: 0;
         right: 0;
+
+        @media screen and (max-width: @mediumScreen) {
+            display: inline-block;
+            position: static;
+            margin: 0 auto;
+        }
     }
+}
+
+.horizontal-line {
+    text-align: right;
 }
 
 .levelInfo {
     position: absolute;
     margin: 1em 0 0 1em;
-    right: 0;
+
+    width: auto;
 
     .btn {
         margin-left: 0;
+    }
+
+    @media screen and (min-width: @mediumScreen) { 
+        right: 0;
+    }
+
+    @media screen and (max-width: @mediumScreen) { 
+        position: static;
     }
 }
 
@@ -73,32 +94,13 @@
     }
 }
 
-.square {
-    box-sizing: border-box;
-    border: 1px solid #999;
-    float: left;
-}
-
-.pending {
-    background-color: @pendingColor;
-    transition: background-color .5s;
-}
-
-.searchText {
+.outer.game {
     display: inline-block;
-    background: @headerColor;
-    padding: @inputMargin;
-    vertical-align: middle;
-
-    .clearSearch {
-        cursor: pointer;
-        display: inline-block;
-    }
+    float: right;
 }
 
-.selected {
-    background-color: @selectedColor;
-    transition: background-color .5s;
+.left-grid {
+    float: right;
 }
 
 .marked {
@@ -124,8 +126,32 @@
     }
 }
 
-.unselected {
-    background-color: @tileColor;
+.pending {
+    background-color: @pendingColor;
+    transition: background-color .5s;
+}
+
+.searchText {
+    display: inline-block;
+    background: @headerColor;
+    padding: @inputMargin;
+    vertical-align: middle;
+
+    .clearSearch {
+        cursor: pointer;
+        display: inline-block;
+    }
+}
+
+.selected {
+    background-color: @selectedColor;
+    transition: background-color .5s;
+}
+
+.square {
+    box-sizing: border-box;
+    border: 1px solid #999;
+    float: left;
 }
 
 .top-grid {
@@ -140,20 +166,27 @@
     transform: @transform; 
 }
 
-.horizontal-line {
-    text-align: right;
-}
-
 .theCountdown {
     bottom: 0;
     position: absolute;
     left: 0;
     margin: 0 0 1em 1em;
 
+    @media screen and (max-width: @mediumScreen) {
+        position: static;
+    }
+
     timer, .showPenalty {
         @media screen and (min-width: @largeScreen) { font-size: 6em; }
-        @media screen and (max-width: @largeScreen) { font-size: 4em; }
+        @media screen and (max-width: @largeScreen) {
+            font-size: 4em;
+            position: static;
+        }
     }
+}
+
+.unselected {
+    background-color: @tileColor;
 }
 
 .vertical-line {
@@ -194,7 +227,7 @@
  *  Mixins
  */
 
- .border-radius (@radius: 5px) {
+.border-radius (@radius: 5px) {
     -webkit-border-radius: @radius;
     -moz-border-radius:    @radius;
     border-radius:         @radius;

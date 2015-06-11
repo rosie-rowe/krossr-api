@@ -196,7 +196,7 @@ ul {
 	text-align: center;
 	vertical-align: middle;
 
-	@media screen and (min-width: 1024px) {
+	@media screen and (min-width: @mediumScreen) {
 		display: none;
 	}
 }
@@ -226,7 +226,7 @@ ul {
 	left: @inputMargin;
 	z-index: 10;
 
-	@media screen and (max-width: 1024px) {
+	@media screen and (max-width: @mediumScreen) {
 		position: static;
 
 		ul.navbar-header {
@@ -277,7 +277,7 @@ ul {
 	}
 
 	@media screen and (max-width: @largeScreen) { margin: @inputMargin; }
-	@media screen and (max-width: 1024px) {
+	@media screen and (max-width: @mediumScreen) {
 		.collapsed & li {
 			display: none; 
 		}
@@ -298,6 +298,10 @@ ul {
 .row {
 	display: inline-block;
 	width: 100%;
+
+	@media screen and (max-width: @mediumScreen) {
+		width: 100%;
+    }
 
 	&.bottom {
 		& .theCountdown { margin: 0 0 1em 0; }

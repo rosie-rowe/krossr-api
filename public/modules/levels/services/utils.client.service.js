@@ -16,7 +16,8 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			timeScale = 60, // number to convert minutes to seconds and vice versa... probably not going to change
 			winTime = 0, // the time the level was beaten in
 			currentPenalty = 4,  // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
-			basePenalty = currentPenalty; // the number to reset the penalty to when changing levels or retrying a level
+			basePenalty = currentPenalty, // the number to reset the penalty to when changing levels or retrying a level
+			mq = window.matchMedia("(min-width: 1280px)"); 
 
 		// Public API
 		return {
@@ -193,7 +194,11 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			},
 
 			getOuterGameWidth: function() {
-				return this.getWidth('.outer.game') + this.getWidth('.left-grid');
+				if (mq.matches) {
+					return "100%";
+				} else {
+					return this.getWidth('.outer.game') + this.getWidth('.left-grid');
+				}
 			},
 			
 			/* Return the current side length */
@@ -250,8 +255,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			 * You encounter a MAGIC NUMBER STORM.
 			 * [FIGHT]	[RUN] */
 			setGameSize: function(widthInTiles) {
-				var mq = window.matchMedia("(min-width: 1280px)"),
-					finalWidth,
+				var finalWidth,
 					finalHeight;
 
 				if (mq.matches) {
@@ -261,8 +265,8 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				}
 
 				finalHeight = finalWidth;
-				gameWidth = finalWidth + 2 + 'px';
-				gameHeight = finalHeight - 4 + 'px';
+				gameWidth = finalWidth + 'px';
+				gameHeight = finalHeight + 'px';
 
 				this.setTileSize(finalWidth, widthInTiles);
 			},

@@ -16,20 +16,17 @@
 					</a>
 				</div>
 			</div>
-			<div class="gameContainer-inner">
+			<div class="gameContainer-inner" ng-style="{'width': ctrl.getOuterGameWidth(),'padding': ctrl.margin}">
 
 				<div class="top row">
-					<div number-grid orientation="vertical" class="top-grid" ng-style="{
-						'padding-left': ctrl.margin,
-						'padding-right': ctrl.margin
-					}"></div>
+					<div number-grid orientation="vertical" class="top-grid"></div>
 				</div>
 				
 				<div class="bottom row">
-					<game class="pull-right">
+					<game>
 						<tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
 					</game>
-					<div number-grid orientation="horizontal" class="left-grid pull-right" ng-style="{'padding-top': ctrl.margin}"></div>
+					<div number-grid orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
 				</div>
 			</div>
 

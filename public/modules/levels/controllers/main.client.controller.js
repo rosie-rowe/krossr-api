@@ -7,7 +7,6 @@ angular
     var _this = this;
             
     this.tileSize = Utils.getTileSizePx();
-    this.margin = Utils.getTileSizePx() / 2;
 
     $scope.$on('tileSizeChanged', function(e, args) {
         _this.tileSize = args + 'px';
@@ -69,4 +68,6 @@ angular
     this.getFontSize = function() {
         return parseInt(_this.tileSize, 10) / 2 + 'px';
     };
+
+    this.getOuterGameWidth = Utils.getOuterGameWidth.bind(Utils);
 }]);

@@ -277,6 +277,11 @@ ul {
   display: inline-block;
   width: 100%;
 }
+@media screen and (max-width: 1024px) {
+  .row {
+    width: 100%;
+  }
+}
 .row.bottom .theCountdown {
   margin: 0 0 1em 0;
 }
@@ -305,18 +310,17 @@ ul {
  *  Mixins
  */
 /* Styles go here */
+@media screen and (max-width: 1280px) {
+  .bottom-row-inner {
+    display: inline-block;
+    margin: 0 auto;
+  }
+}
 .even {
   background-color: #444;
 }
 .inner.game {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  box-sizing: border-box;
-  border: 1px solid #000;
-  background-color: #e2e2e2;
   margin: 0 auto;
-  overflow: hidden;
 }
 .finishedGrouping {
   color: #2199d0;
@@ -330,13 +334,33 @@ ul {
   bottom: 0;
   right: 0;
 }
+@media screen and (max-width: 1024px) {
+  .viewLevel .gameContainer-inner {
+    display: inline-block;
+    position: static;
+    margin: 0 auto;
+  }
+}
+.horizontal-line {
+  text-align: right;
+}
 .levelInfo {
   position: absolute;
   margin: 1em 0 0 1em;
-  right: 0;
+  width: auto;
 }
 .levelInfo .btn {
   margin-left: 0;
+}
+@media screen and (min-width: 1024px) {
+  .levelInfo {
+    right: 0;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .levelInfo {
+    position: static;
+  }
 }
 .list-group-item {
   background-color: rgba(0, 0, 0, 0.5);
@@ -363,28 +387,12 @@ ul {
 .listLevels select {
   margin: 1em;
 }
-.square {
-  box-sizing: border-box;
-  border: 1px solid #999;
-  float: left;
-}
-.pending {
-  background-color: rgba(175, 175, 175, 0.75);
-  transition: background-color 0.5s;
-}
-.searchText {
+.outer.game {
   display: inline-block;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 1em;
-  vertical-align: middle;
+  float: right;
 }
-.searchText .clearSearch {
-  cursor: pointer;
-  display: inline-block;
-}
-.selected {
-  background-color: #2199d0;
-  transition: background-color 0.5s;
+.left-grid {
+  float: right;
 }
 .marked {
   color: #232323;
@@ -405,20 +413,42 @@ ul {
   margin: 1em;
   font-size: 2em;
 }
-.unselected {
-  background-color: #e2e2e2;
+.pending {
+  background-color: rgba(175, 175, 175, 0.75);
+  transition: background-color 0.5s;
+}
+.searchText {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1em;
+  vertical-align: middle;
+}
+.searchText .clearSearch {
+  cursor: pointer;
+  display: inline-block;
+}
+.selected {
+  background-color: #2199d0;
+  transition: background-color 0.5s;
+}
+.square {
+  box-sizing: border-box;
+  border: 1px solid #999;
+  float: left;
 }
 .top-grid {
   float: right;
-}
-.horizontal-line {
-  text-align: right;
 }
 .theCountdown {
   bottom: 0;
   position: absolute;
   left: 0;
   margin: 0 0 1em 1em;
+}
+@media screen and (max-width: 1024px) {
+  .theCountdown {
+    position: static;
+  }
 }
 @media screen and (min-width: 1280px) {
   .theCountdown timer,
@@ -430,7 +460,11 @@ ul {
   .theCountdown timer,
   .theCountdown .showPenalty {
     font-size: 4em;
+    position: static;
   }
+}
+.unselected {
+  background-color: #e2e2e2;
 }
 .vertical-line {
   display: inline-block;
