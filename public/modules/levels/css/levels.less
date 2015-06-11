@@ -25,15 +25,19 @@
 }
 
 .gameContainer-inner {
+    display: inline-block;
+
     .viewLevel & {
         position: absolute;
         bottom: 0;
         right: 0;
+    }
 
-        @media screen and (max-width: @mediumScreen) {
-            display: inline-block;
+    @media screen and (max-width: @mediumScreen) {
+        margin: 0 auto;
+
+        .viewLevel & {
             position: static;
-            margin: 0 auto;
         }
     }
 }

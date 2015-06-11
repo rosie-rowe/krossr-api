@@ -195,7 +195,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			getOuterGameWidth: function() {
 				if (mq.matches) {
-					return "100%";
+					return "auto";
 				} else {
 					return this.getWidth('.outer.game') + this.getWidth('.left-grid');
 				}

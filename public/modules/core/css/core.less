@@ -237,10 +237,6 @@ ul {
 				float: right;
 			}
 		}
-
-		.collapsed & li {
-			display: none; 
-		}
 	}
 }
 
@@ -264,20 +260,28 @@ ul {
 }
 
 .navbar-nav {
-	margin: @inputMargin * 2;
+	padding: @inputMargin;
 	text-align: center;
 
 	a {
 		color: @white;
 		text-decoration: none;
+		transition: all 1s;
+
+
+		&:hover {
+			color: @selectedColor;
+			transition: all 1s;
+		}
 	}
 
 	li {
 		font-size: 2em;
 	}
 
-	@media screen and (max-width: @largeScreen) { margin: @inputMargin; }
+	@media screen and (max-width: @largeScreen) { padding: @inputMargin; }
 	@media screen and (max-width: @mediumScreen) {
+		.collapsed &,
 		.collapsed & li {
 			display: none; 
 		}
@@ -298,10 +302,6 @@ ul {
 .row {
 	display: inline-block;
 	width: 100%;
-
-	@media screen and (max-width: @mediumScreen) {
-		width: 100%;
-    }
 
 	&.bottom {
 		& .theCountdown { margin: 0 0 1em 0; }

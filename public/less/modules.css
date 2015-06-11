@@ -219,9 +219,6 @@ ul {
   .header-container ul.navbar-header .hamburger {
     float: right;
   }
-  .collapsed .header-container li {
-    display: none;
-  }
 }
 .header-container-inner {
   line-height: 1;
@@ -244,22 +241,28 @@ ul {
   padding: 0.5em;
 }
 .navbar-nav {
-  margin: 2em;
+  padding: 1em;
   text-align: center;
 }
 .navbar-nav a {
   color: #ffffff;
   text-decoration: none;
+  transition: all 1s;
+}
+.navbar-nav a:hover {
+  color: #2199d0;
+  transition: all 1s;
 }
 .navbar-nav li {
   font-size: 2em;
 }
 @media screen and (max-width: 1280px) {
   .navbar-nav {
-    margin: 1em;
+    padding: 1em;
   }
 }
 @media screen and (max-width: 1024px) {
+  .collapsed .navbar-nav,
   .collapsed .navbar-nav li {
     display: none;
   }
@@ -276,11 +279,6 @@ ul {
 .row {
   display: inline-block;
   width: 100%;
-}
-@media screen and (max-width: 1024px) {
-  .row {
-    width: 100%;
-  }
 }
 .row.bottom .theCountdown {
   margin: 0 0 1em 0;
@@ -329,16 +327,20 @@ ul {
 .gameContainer {
   height: 100%;
 }
+.gameContainer-inner {
+  display: inline-block;
+}
 .viewLevel .gameContainer-inner {
   position: absolute;
   bottom: 0;
   right: 0;
 }
 @media screen and (max-width: 1024px) {
-  .viewLevel .gameContainer-inner {
-    display: inline-block;
-    position: static;
+  .gameContainer-inner {
     margin: 0 auto;
+  }
+  .viewLevel .gameContainer-inner {
+    position: static;
   }
 }
 .horizontal-line {
