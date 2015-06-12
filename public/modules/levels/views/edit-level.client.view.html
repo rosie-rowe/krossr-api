@@ -22,13 +22,23 @@
                     <input type='text' ng-pattern="validNumber" data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
                 </div>
 
-                <div><button class="btn" type="button" ng-click="ctrl.clearAll()">Clear</button></div>
                 <div>
-                    <button ng-disabled="error"class="btn" type="button" ng-click="update()">
+                    <button class="btn" type="button" ng-click="ctrl.clearAll()">Clear</button>
+                </div>
+                <div>
+                    <button ng-disabled="error" class="btn" type="button" ng-click="update()">
                         <span ng-if="!error">Update</span>
                         <span ng-if="error" ng-bind-html="error"></span>
                     </button>
                 </div>
+                <div data-ng-if="authentication.user._id == level.user._id">
+                    <a data-ng-click="confirmRemove(level);">
+                        <button class="btn">  
+                            Delete Level
+                        </button>
+                    </a>
+                </div>
+            </div>
             </div>
         </div>
 

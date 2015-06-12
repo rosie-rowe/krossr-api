@@ -4,7 +4,8 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 	function($timeout, $rootScope) {
 		// Convert service logic
 		// ...
-		var sideLength,
+		var currentLevel,
+			sideLength,
 			gameMatrix,
 			goalMatrix,
 			gameWidth,
@@ -249,6 +250,11 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			/* Display an integer size (e.g. 15) and convert it to a pleasing form (15x15) */
 			prettySize: function(size) {
 				return size + 'x' + size;
+			},
+
+			/* Set the current level so it can be accessed for menu links */
+			setCurrentLevel: function(level) {
+				this.currentLevel = level;
 			},
 
 			/* Modify the current game size.

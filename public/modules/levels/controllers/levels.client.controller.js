@@ -1,8 +1,8 @@
 'use strict';
 
 // Levels controller
-angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'Utils',
-	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, Utils) {
+angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'ngDialog', 'Utils',
+	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, ngDialog, Utils) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
@@ -40,9 +40,22 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		// this needs to be here so Edit can see it
 		$scope.decomputeTimeLimit = Utils.decomputeTimeLimit;
 
+		$scope.confirmRemove = function() {
+			ngDialog.openConfirm({
+				controller: 'LevelsController',
+				closeByDocument: false,
+				template: 'modules/levels/views/delete-confirmation.client.view.html',
+				showClose: false,
+				scope: $scope
+			});
+		}
+
 		// Remove existing Level
 		$scope.remove = function( level ) {
-			if ( level ) { level.$remove();
+			if ( level ) { 
+				level.$remove(function() {
+					$location.path('levels');
+				});
 
 				for (var i in $scope.levels) {
 					if ($scope.levels[i] === level ) {
@@ -111,8 +124,9 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 				$scope.level.timeRemaining = $scope.level.timeLimit;
 
-
 				var flatLayout = Utils.flatten(data.layout);
+
+				Utils.setCurrentLevel($scope.level);
 
 				Utils.calculatePlayableArea();
 

@@ -1,21 +1,6 @@
 <div class="hero">
 	<section class="viewLevel" data-ng-controller="LevelsController" data-ng-init="findOne();">
 		<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer" tabindex="0">
-			<div class="levelInfo">
-				<big data-ng-bind="level.name"></big>
-				<div class="form-group" data-ng-show="authentication.user._id == level.user._id">
-					<a href="/#!/levels/{{level._id}}/edit">
-						<button class="btn btn-small">
-							Edit
-						</button>
-					</a>
-					<a data-ng-click="remove();">
-						<button class="btn btn-small">	
-							Delete
-						</button>
-					</a>
-				</div>
-			</div>
 			<div class="gameContainer-inner" ng-style="{'width': ctrl.getOuterGameWidth(),'padding': ctrl.margin}">
 
 				<div class="top row">

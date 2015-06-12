@@ -27,5 +27,12 @@
 				</a>
 			</li>
 		</ul>
+		<ul class="nav navbar-nav" data-ng-if="level && authentication.user._id === level.user._id">
+			<li>
+				<a ui-sref="editLevel({levelId: '{{level._id}}' })">
+					<span>{{ level.name }}</span>
+				</a>
+			</li>
+		</ul>
 	</nav>
 </div>
