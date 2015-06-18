@@ -6,7 +6,7 @@
         <div data-ng-controller="MainCtrl as ctrl" class="form-horizontal" novalidate>
             <div class="form-group">
                 <div class="gameContainer">
-                    <div class="gameContainer-inner" ng-style="{'width': ctrl.getOuterGameWidth(),'padding': ctrl.margin}">
+                    <div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
                         <game ng-init="ctrl.createGameArray('new');ctrl.setGameSize();">
                             <tile ng-repeat="i in ctrl.getSize() track by $index" editable='true'></tile>
                         </game>

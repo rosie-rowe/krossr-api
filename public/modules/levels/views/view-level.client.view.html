@@ -1,7 +1,7 @@
 <div class="hero">
 	<section class="viewLevel" data-ng-controller="LevelsController" data-ng-init="findOne();">
 		<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="gameContainer" tabindex="0">
-			<div class="gameContainer-inner" ng-style="{'width': ctrl.getOuterGameWidth(),'padding': ctrl.margin}">
+			<div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
 
 				<div class="top row">
 					<div number-grid orientation="vertical" class="top-grid"></div>

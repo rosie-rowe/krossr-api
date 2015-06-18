@@ -27,6 +27,13 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				tileIndex.push(obj);
 			},
 
+			/* Take a given game width and subtract border widths. I either have to do this
+				or remove border-box and add them instead... doesn't really matter. */
+			adjustForBorders: function(width) {
+				var borderWidth = 1;
+				return width - (borderWidth * (sideLength - 1));
+			},
+
 			resetTimer: function(timeToResetTo) {
 				if (timeToResetTo) {
 					$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);
@@ -40,7 +47,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 					pWidth = playableArea.outerWidth();
 
 				playableAreaSize = Math.min(pHeight, pWidth);
-				
+
 				return Math.floor(playableAreaSize);
 			},
 
@@ -193,14 +200,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			getGoalMatrix: function() {
 				return goalMatrix;
 			},
-
-			getOuterGameWidth: function() {
-				if (mq.matches) {
-					return "auto";
-				} else {
-					return this.getWidth('.outer.game') + this.getWidth('.left-grid') + 1 + 'px';
-				}
-			},
 			
 			/* Return the current side length */
 			getSideLength: function() {
@@ -252,24 +251,36 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				return size + 'x' + size;
 			},
 
+			/* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
+			setCoord: function(y, x, value) {
+				gameMatrix[y][x] = value;
+			},
+
 			/* Set the current level so it can be accessed for menu links */
 			setCurrentLevel: function(level) {
 				this.currentLevel = level;
 			},
 
-			/* Modify the current game size.
-			 * You encounter a MAGIC NUMBER STORM.
-			 * [FIGHT]	[RUN] */
+			setCurrentPenalty: function(resetPenalty) {
+				if (resetPenalty) {
+					currentPenalty = basePenalty;
+				} else {
+					currentPenalty *= 2;
+				}
+			},
+
+			/* Modify the current game size. */
 			setGameSize: function(widthInTiles) {
 				var finalWidth,
 					finalHeight;
 
 				if (mq.matches) {
-					finalWidth = playableAreaSize / 1.5;
+					finalWidth = Math.floor(playableAreaSize / 1.6);
 				} else {
-					finalWidth =  playableAreaSize / 2;
+					finalWidth =  Math.floor(playableAreaSize / 2);
 				}
 
+				finalWidth = this.adjustForBorders(finalWidth);
 				finalHeight = finalWidth;
 				gameWidth = finalWidth + 'px';
 				gameHeight = finalHeight + 'px';
@@ -280,20 +291,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			/* Modify the current goal matrix (loading level from layout) */
 			setGoalMatrix: function(layout) {
 				goalMatrix = layout;
-			},
-
-			/* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
-			setCoord: function(y, x, value) {
-				gameMatrix[y][x] = value;
-			},
-
-			setCurrentPenalty: function(resetPenalty) {
-				if (resetPenalty) {
-					currentPenalty = basePenalty;
-				} else {
-					currentPenalty *= 2;
-				}
-				console.log(currentPenalty);
 			},
 
 			/* Modify the current game matrix, setting a new side length and game size as a side effect  (used for changing size) */

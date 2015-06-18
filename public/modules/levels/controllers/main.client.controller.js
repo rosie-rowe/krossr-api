@@ -9,8 +9,9 @@ angular
     this.tileSize = Utils.getTileSizePx();
 
     $scope.$on('tileSizeChanged', function(e, args) {
-        _this.tileSize = args + 'px';
-        _this.margin = args / 2;
+        var newSize = Math.floor(args);
+        _this.tileSize = newSize  + 'px';
+        _this.margin = newSize / 2;
     });
 
     this.options = {
@@ -44,14 +45,6 @@ angular
         }
     };
 
-    this.getMargin = function(side, tileSize) {
-        switch (side) {
-            default:
-                return tileSize / 2;
-                break;
-        }
-    };
-
     this.setGameSize = function() {
         Utils.setGameSize(Math.sqrt(_this.options.size));
     };
@@ -68,6 +61,4 @@ angular
     this.getFontSize = function() {
         return parseInt(_this.tileSize, 10) / 2 + 'px';
     };
-
-    this.getOuterGameWidth = Utils.getOuterGameWidth.bind(Utils);
 }]);
