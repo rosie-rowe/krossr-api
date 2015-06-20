@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Level = mongoose.model('Level'),
+	Rating = mongoose.model('Rating'),
 	_ = require('lodash');
 
 /**
@@ -86,12 +87,17 @@ exports.list = function(req, res) { Level.find().sort('-created').populate('user
 /**
  * Level middleware
  */
-exports.levelByID = function(req, res, next, id) { Level.findById(id).populate('user', 'username').exec(function(err, level) {
-		if (err) return next(err);
-		if (! level) return next(new Error('Failed to load Level ' + id));
-		req.level = level ;
-		next();
-	});
+exports.levelByID = function(req, res, next, id) {
+	Level
+		.findById(id)
+		.populate('user', 'username')
+		.populate('ratings')
+		.exec(function(err, level) {
+			if (err) return next(err);
+			if (! level) return next(new Error('Failed to load Level ' + id));
+			req.level = level ;
+			next();
+		});
 };
 
 exports.paginate = function(req, res) {
@@ -100,8 +106,14 @@ exports.paginate = function(req, res) {
 		searchText = req.query['searchText'],
 		numPerPage = 9,
 		totalCount,
-		query = Level.find().populate('user', 'username').sort('-created').limit(numPerPage).skip(pageNum * numPerPage),
-		searchRegex = new RegExp(searchText, 'i');;
+		query = Level
+					.find()
+					.populate('user', 'username')
+					.populate('ratings', 'rating')
+					.sort('-created')
+					.limit(numPerPage)
+					.skip(pageNum * numPerPage),
+		searchRegex = new RegExp(searchText, 'i');
 
 	if (sizeRestriction) {
 		sizeRestriction = parseInt(sizeRestriction, 10);

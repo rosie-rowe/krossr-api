@@ -38,7 +38,11 @@ var LevelSchema = new Schema({
 		type: Number,
 		validate: [timeLimitValidator, 'Time limit must be an integer'],
 		required: 'Please provide time limit'
-	}
+	},
+	ratings: [{
+		type: Schema.ObjectId,
+		ref: 'Rating'
+	}]
 });
 
 mongoose.model('Level', LevelSchema);

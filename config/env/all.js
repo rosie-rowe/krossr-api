@@ -31,7 +31,7 @@ module.exports = {
 				'public/lib/ngDialog/js/ngDialog.js',
 				'public/lib/humanize-duration/humanize-duration.js',
 				'public/lib/momentjs/min/moment.min.js',
-				'public/lib/momentjs/min/locales.min.js'
+				'public/lib/momentjs/min/locales.min.js',
 			]
 		},
 		css: [
