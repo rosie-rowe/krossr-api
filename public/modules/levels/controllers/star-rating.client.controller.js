@@ -46,7 +46,7 @@ angular
 		};
 
 		$scope.update = function(rating) {
-			Ratings.update({ _id: rating._id, user: $scope.authentication.user._id, rating: $scope.rating }, function() {
+			Ratings.update({ _id: rating._id, user: rating.user, rating: $scope.rating }, function() {
 				console.log('hi');
 			});
 		};

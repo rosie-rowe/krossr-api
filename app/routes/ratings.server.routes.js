@@ -9,6 +9,9 @@ module.exports = function(app) {
 	app.route('/ratings')
 		.post(users.requiresLogin, ratings.create);
 
+	// app.route('/ratings/:levelId')
+	// 	.get(users.requiresLogin, ratings.hasAuthorization)
+
 	app.route('/ratings/:ratingId')
 		.put(users.requiresLogin, ratings.hasAuthorization, ratings.update)
 
@@ -19,4 +22,5 @@ module.exports = function(app) {
 
 	// Finish by binding the Rating middleware
 	app.param('ratingId', ratings.ratingByID);
+	//app.param('levelId', ratings.ratingByLevelId);
 };
