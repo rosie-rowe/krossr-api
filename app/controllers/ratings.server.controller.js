@@ -27,6 +27,26 @@ exports.create = function(req, res) {
 };
 
 /**
+ * Show the current Ratings
+ */
+exports.read = function(req, res) {
+	res.jsonp(req.ratings);
+	// var query = req.query;
+
+	// query.exec(function(err, ratings) {
+	// 	if (err) {
+	// 		return res.status(400).send({
+	// 			message: 'Failed to load Rating!'
+	// 		});
+	// 	} else {
+	// 		res.jsonp({
+	// 			ratings: ratings
+	// 		});
+	// 	}
+	// });
+};
+
+/**
  * Update a Rating
  */
 exports.update = function(req, res) {
@@ -67,4 +87,19 @@ exports.ratingByID = function(req, res, next, id) {
 			req.rating = rating;
 			next();
 		});
+};
+
+exports.ratingsByLevelID = function(req, res, next, id) {
+	Rating
+		.find({ _level: id })
+		.exec(function(err, ratings) {
+			if (err) return next(err);
+			if (! ratings) return next(new Error('Failed to load Rating ' + id));
+			req.ratings = ratings;
+			next();
+		});
+};
+
+exports.ratingsByUserID = function(req, res, next, id) {
+
 };

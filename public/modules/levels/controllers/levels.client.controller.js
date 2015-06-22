@@ -1,8 +1,8 @@
 'use strict';
 
 // Levels controller
-angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'ngDialog', 'Utils',
-	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, ngDialog, Utils) {
+angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'Ratings', 'ngDialog', 'Utils',
+	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, Ratings, ngDialog, Utils) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
@@ -48,7 +48,13 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				showClose: false,
 				scope: $scope
 			});
-		}
+		};
+
+		$scope.getYourRating = function() {
+			$scope.rating = Ratings.get({
+				levelId: $stateParams.levelId
+			});
+		};
 
 		// Remove existing Level
 		$scope.remove = function( level ) {
@@ -120,6 +126,8 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 
 			$scope.level.$promise.then(function(data) {
+				$scope.getYourRating();	
+
 				$scope.level.decomputedTimeLimit = Utils.decomputeTimeLimit($scope.level.timeLimit);
 
 				$scope.level.timeRemaining = $scope.level.timeLimit;
