@@ -22,5 +22,5 @@ module.exports = function(app) {
 
 	// Finish by binding the Rating middleware
 	app.param('ratingId', ratings.ratingByID);
-	app.param('levelId', ratings.ratingsByLevelID);
+	app.param('levelId', ratings.ratingsByLevelIDForYou);
 };

@@ -100,6 +100,15 @@ exports.ratingsByLevelID = function(req, res, next, id) {
 		});
 };
 
-exports.ratingsByUserID = function(req, res, next, id) {
+exports.ratingsByLevelIDForYou = function(req, res, next, id) {
+	var user_id = req.user.id;
 
+	Rating
+		.find({ _level: id, user: user_id })
+		.exec(function(err, ratings) {
+			if (err) return next(err);
+			if (! ratings) return next(new Error('Failed to load Rating ' + id));
+			req.ratings = ratings;
+			next();
+		});
 };
