@@ -31,19 +31,6 @@ exports.create = function(req, res) {
  */
 exports.read = function(req, res) {
 	res.jsonp(req.ratings);
-	// var query = req.query;
-
-	// query.exec(function(err, ratings) {
-	// 	if (err) {
-	// 		return res.status(400).send({
-	// 			message: 'Failed to load Rating!'
-	// 		});
-	// 	} else {
-	// 		res.jsonp({
-	// 			ratings: ratings
-	// 		});
-	// 	}
-	// });
 };
 
 /**

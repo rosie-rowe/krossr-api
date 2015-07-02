@@ -4,20 +4,24 @@ angular
 		var timeout = 1000;
 
 		$scope.authentication = Authentication;
-		$scope.rating = 5;
-		$scope.isReadonly = true;
+
+		$scope.rating = getCurrentRating();
+
+		function getCurrentRating() {
+			if ($scope.level.yourRating.length === 1) {
+				return $scope.level.yourRating[0].rating;
+			} else { 
+				return 5;
+			}
+		};
 
 		$scope.rateFunction = function(newRating) {
 			var level = $scope.level,
-				rating;
+				rating = level.yourRating;
 
 			$scope.rating = newRating;
 
-			rating = level.ratings.filter(function(rating) {
-				return rating.user === $scope.authentication.user._id;
-			});
-
-			if (rating) {
+			if (rating.length === 1) {
 				$scope.update(rating[0]);
 			} else {
 				$scope.create(level);
@@ -46,8 +50,8 @@ angular
 		};
 
 		$scope.update = function(rating) {
-			Ratings.update({ _id: rating._id, user: rating.user, rating: $scope.rating }, function() {
-				console.log('hi');
+			Ratings.update({ _id: rating._id, user: rating.user, rating: $scope.rating }, function(newRating) {
+				$scope.level.yourRating[0] = newRating;
 			});
 		};
 	}]);

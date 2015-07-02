@@ -51,7 +51,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		};
 
 		$scope.getYourRating = function() {
-			$scope.rating = Ratings.get({
+			$scope.level.yourRating = Ratings.get({
 				levelId: $stateParams.levelId
 			});
 		};

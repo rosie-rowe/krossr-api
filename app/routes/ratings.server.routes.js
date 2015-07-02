@@ -15,11 +15,6 @@ module.exports = function(app) {
 	app.route('/ratings/:ratingId')
 		.put(users.requiresLogin, ratings.hasAuthorization, ratings.update)
 
-	// app.route('/levels/:levelId')
-	// 	.get(levels.read)
-	// 	.put(users.requiresLogin, levels.hasAuthorization, levels.update)
-	// 	.delete(users.requiresLogin, levels.hasAuthorization, levels.delete);
-
 	// Finish by binding the Rating middleware
 	app.param('ratingId', ratings.ratingByID);
 	app.param('levelId', ratings.ratingsByLevelIDForYou);
