@@ -10,7 +10,7 @@
   "scripts": {
     "start": "grunt",
     "test": "grunt test",
-    "postinstall": "HOME=$HOME/app-root/runtime bower install --config.interactive=false"
+    "postinstall": "HOME=$HOME/app-root/runtime bower install --allow-root --config.interactive=false"
   },
   "dependencies": {
     "express": "~4.9.5",
