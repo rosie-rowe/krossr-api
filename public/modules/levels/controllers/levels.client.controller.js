@@ -113,7 +113,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				// Calculate the size for each level so we can display it to the screen & sort by size
 				for (; i < len; i++ ) {
 					currentLevel = allLevels[i];
-					currentLevel.size = Utils.prettySize(currentLevel.layout.length);
+					currentLevel.prettySize = Utils.prettySize(currentLevel.layout.length);
 				}
 			});
 		};

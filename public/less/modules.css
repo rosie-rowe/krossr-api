@@ -487,17 +487,20 @@ body.ngdialog-open {
   background-color: rgba(0, 0, 0, 0.5);
   margin: 1em auto;
   padding: 1em;
+  text-align: left;
   width: 25%;
 }
 .list-group-item .btn {
   float: right;
 }
 .list-group-item .list-group-item-heading {
+  display: inline-block;
   font-size: 2em;
 }
 .list-group-item .username {
-  float: right;
   cursor: pointer;
+  display: inline-block;
+  margin: 0 2em 0 1em;
 }
 .list-group-item .size {
   cursor: pointer;

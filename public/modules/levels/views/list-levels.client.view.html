@@ -34,16 +34,12 @@
 
         <div class="list-group">
             <div data-ng-repeat="level in levels" class="list-group-item">
-                <div>
-                    <a class="list-group-item-heading" data-ng-bind="level.name"></a>
-                    <div class="username" ng-click="setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
-                </div>
-                <div>
-                    <div class="size" data-ng-bind="level.size || 'Fuck'"></div>
-                    <a data-ng-href="#!/levels/{{level._id}}">
-                        <button class="btn btn-mini">Play</button>
-                    </a>
-                </div>
+                <div class="list-group-item-heading" data-ng-bind="level.name"></div>
+                <div class="username" ng-click="setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
+                <div class="size" data-ng-bind="level.prettySize" ng-click="setSizeRestriction(level.size)"></div>
+                <a data-ng-href="#!/levels/{{level._id}}">
+                    <button class="btn btn-mini">Play</button>
+                </a>
             </div>
         </div>
 

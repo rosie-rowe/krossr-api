@@ -69,6 +69,7 @@
     background-color: @headerColor;
     margin: @inputMargin auto;
     padding: @inputMargin;
+    text-align: left;
     width: 25%;
 
     .btn {
@@ -76,12 +77,14 @@
     }
 
     .list-group-item-heading {
+        display: inline-block;
         font-size: 2em;
     }
 
     .username {
-        float: right;
         cursor: pointer;
+        display: inline-block;
+        margin: 0 2em 0 1em;
     }
 
     .size {
