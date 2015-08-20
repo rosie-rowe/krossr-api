@@ -34,6 +34,23 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				return width - (borderWidth * (sideLength - 1));
 			},
 
+			/* You're MEAN! */
+			average: function(collection, propertyToAvg) {
+				var sum, average;
+
+				if (collection.length > 0) {
+					sum = Object.keys(collection).reduce(function(a, b) {
+						return a + collection[b][propertyToAvg];
+					}, 0);
+
+					average = sum / collection.length;
+
+					return average.toFixed(2);
+				} else {
+					return 0;
+				}
+			},
+
 			resetTimer: function(timeToResetTo) {
 				if (timeToResetTo) {
 					$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);

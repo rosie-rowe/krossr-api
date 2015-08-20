@@ -427,6 +427,9 @@ body.ngdialog-open {
   overflow: hidden;
 }
 /* Styles go here */
+.averageRating {
+  display: inline-block;
+}
 @media screen and (max-width: 1280px) {
   .bottom-row-inner {
     display: inline-block;
@@ -500,12 +503,13 @@ body.ngdialog-open {
 .list-group-item .username {
   cursor: pointer;
   display: inline-block;
-  margin: 0 2em 0 1em;
+  margin: 0 1em;
 }
 .list-group-item .size {
   cursor: pointer;
   display: inline-block;
   font-size: 2em;
+  margin: 0 1em 0 0;
 }
 .listLevels input,
 .listLevels select {

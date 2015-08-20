@@ -114,6 +114,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				for (; i < len; i++ ) {
 					currentLevel = allLevels[i];
 					currentLevel.prettySize = Utils.prettySize(currentLevel.layout.length);
+					currentLevel.averageRating = Utils.average(currentLevel.ratings, 'rating');
 				}
 			});
 		};

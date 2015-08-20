@@ -40,6 +40,9 @@
                 <a data-ng-href="#!/levels/{{level._id}}">
                     <button class="btn btn-mini">Play</button>
                 </a>
+                <div class="averageRating">
+                    Avg: {{ ::level.averageRating || "n/a"}} 
+                </div>
             </div>
         </div>
 
