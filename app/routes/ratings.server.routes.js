@@ -6,7 +6,7 @@ module.exports = function(app) {
 	var ratings = require('../../app/controllers/ratings')
 
 	// Levels Routes
-	app.route('/ratings')
+	app.route('/ratings/:levelId')
 		.post(users.requiresLogin, ratings.create);
 
 	app.route('/ratings/:levelId')
