@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 	app.route('/levels/:levelId')
 		.get(levels.read)
-		.put(users.requiresLogin, levels.hasAuthorization, levels.update)
+		.put(users.requiresLogin, levels.update)
 		.delete(users.requiresLogin, levels.hasAuthorization, levels.delete);
 
 	// Finish by binding the Level middleware

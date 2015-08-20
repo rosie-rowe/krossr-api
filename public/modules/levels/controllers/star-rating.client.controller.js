@@ -38,7 +38,7 @@ angular
 
 			// Redirect after save
 			rating.$save(function(response) {
-				level.ratings.push(rating._id);
+				level.ratings.push(rating);
 				level.$update();
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
