@@ -13,7 +13,14 @@ angular.module('levels').directive("starRating", function() {
       readonly: "=?"
     },
     link : function(scope, elem, attrs) {
+      var pvt = {};
+
       if (scope.max == undefined) { scope.max = 5; }
+      
+      pvt.init = function () {
+        updateStars();
+      }
+
       function updateStars() {
         scope.stars = [];
         for (var i = 0; i < scope.max; i++) {
@@ -31,8 +38,10 @@ angular.module('levels').directive("starRating", function() {
         }
       };
       scope.$watch("ratingValue", function(oldVal, newVal) {
-        if (newVal) { updateStars(); }
+        updateStars();
       });
+
+      pvt.init();
     }
   };
 });

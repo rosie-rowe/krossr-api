@@ -40,11 +40,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var level = req.level ;
 
-	if (level.user.id === req.user.id) {
-		level = _.extend(level , req.body);
-	} else {
-		level.ratings = req.body.ratings;
-	}
+	level = _.extend(level , req.body);
 
 	level.save(function(err) {
 		if (err) {

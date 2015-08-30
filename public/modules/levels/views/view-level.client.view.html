@@ -34,6 +34,12 @@
 						/
 						<span data-ng-bind="level.created | date:'mediumDate'"></span>
 					</em>
+
+					<div>
+						<span>Rate this level:</span>
+						{{ level.yourRating }}
+						<div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -11,6 +11,19 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		var penaltyTimer,
 			timeout = 1000;
 
+		// common logic to findOne and update
+		function setupLevel() {
+			$scope.findYourRating();
+
+			var yourRating = $scope.level.yourRatingIndex;
+
+			if (typeof yourRating !== 'undefined') {
+				$scope.level.yourRating = $scope.level.ratings[yourRating].rating;
+			}
+
+			$scope.level.decomputedTimeLimit = Utils.decomputeTimeLimit($scope.level.timeLimit);
+		}
+
 		// Create new Level
 		$scope.create = function() {
 			var layout = Utils.getGameMatrix();
@@ -51,12 +64,6 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			});
 		};
 
-		$scope.getYourRating = function() {
-			$scope.level.yourRating = Ratings.get({
-				levelId: $stateParams.levelId
-			});
-		};
-
 		// Remove existing Level
 		$scope.remove = function( level ) {
 			if ( level ) { 
@@ -78,13 +85,15 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Update existing Level
 		$scope.update = function() {
-			var level = $scope.level;
+			var level = $scope.level,
+				timeRemaining = $scope.level.timeRemaining;
 
 			level.timeLimit = Utils.computeTimeLimit($scope.level.decomputedTimeLimit);
 			level.size = level.layout.length;
 
 			level.$update(function() {
-				$location.path('levels/' + level._id);
+				setupLevel();
+				$scope.level.timeRemaining = timeRemaining;
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 
@@ -130,9 +139,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 
 			$scope.level.$promise.then(function(data) {
-				$scope.getYourRating();	
-
-				$scope.level.decomputedTimeLimit = Utils.decomputeTimeLimit($scope.level.timeLimit);
+				setupLevel();
 
 				$scope.level.timeRemaining = $scope.level.timeLimit;
 
@@ -147,7 +154,15 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					layout: $scope.level.layout,
 					controller: controller
 				});
-				
+			});
+		};
+
+		// return the index of your rating rather than the rating itself so it's easier to update later
+		$scope.findYourRating = function() {
+			$scope.level.ratings.filter(function(rating) {
+				if (rating.user === $scope.authentication.user._id) {
+					$scope.level.yourRatingIndex = $scope.level.ratings.indexOfObject(rating);
+				}
 			});
 		};
 
@@ -156,7 +171,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				$scope.currentPage--;
 				$scope.find();
 			}
-		}
+		};
 
 		$scope.pageUp = function() {
 			//currentPage will be off by 1 since it's 0-indexed
@@ -164,6 +179,27 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				$scope.currentPage++;
 				$scope.find();
 			}
+		};
+
+		$scope.rate = function() {
+			// timeout to give yourRating a digest cycle to catch up
+			$timeout(function() {
+				// we want to add a new rating if there's not already one there, otherwise update the existing one
+				var yourRating;
+
+				$scope.findYourRating();
+
+				yourRating = $scope.level.yourRatingIndex;
+
+				console.log($scope.level.ratings[yourRating]);
+
+				if ($scope.level.ratings[yourRating]) {
+					$scope.level.ratings[yourRating].rating = $scope.level.yourRating;
+				} else {
+					$scope.level.ratings.push({ user: $scope.authentication.user._id, rating: $scope.level.yourRating });
+				}
+				$scope.update();
+			}, 0);
 		};
 
 		$scope.setSizeRestriction = function(sizeRestriction) {

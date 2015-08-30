@@ -10,6 +10,18 @@ var timeLimitValidator = function(value) {
 	return /^\d+$/.test(value);
 };
 
+var RatingSchema = new Schema({
+	user: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+	rating: {
+		type: Number
+	}
+});
+
+mongoose.model('Rating', RatingSchema);
+
 /**
  * Level Schema
  */
@@ -39,10 +51,7 @@ var LevelSchema = new Schema({
 		validate: [timeLimitValidator, 'Time limit must be an integer'],
 		required: 'Please provide time limit'
 	},
-	ratings: [{
-		type: Schema.ObjectId,
-		ref: 'Rating'
-	}]
+	ratings: [RatingSchema]
 });
 
 mongoose.model('Level', LevelSchema);

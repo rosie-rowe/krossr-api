@@ -27,10 +27,6 @@
 						New Level
 					</button>
 				</a>
-				<div ng-controller="RatingCtrl">
-					<h1>Rate this level:</h1>
-					<div star-rating ng-model="rating" max="5" on-rating-selected="rateFunction(rating)"></div>
-				</div>
 			</div>
 			<div class="win-text" ng-if="gameCtrl.gameIsLost">
 				YOU LOSE!
