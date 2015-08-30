@@ -29,9 +29,19 @@
                     <label class="control-label">Search</label>
                     <input ng-model="searchText" ng-change="setSearchText(searchText)">
 
+                    <!-- Rating and Username are specifically excluded from here due to Mongo's limitations on joins
+                         This is one of the primary reasons I'd like to migrate the app to use SQL instead! Soon. -->
                     <label class="control-label">Sort by</label>
-                    <select ng-model="sortBy">
+                    <select ng-model="sortBy" ng-change="setSortBy(sortBy)">
                         <option value="">None</option>
+                        <option value="created">Created Date</option>
+                        <option value="name">Name</option>
+                    </select>
+
+                    <label class="control-label">Sort direction</label>
+                    <select ng-model="sortDirection" ng-change="setSortDirection(sortDirection)">
+                        <option value="+">Asc</option>
+                        <option value="-">Desc</option>
                     </select>
                 </div>
             </div>

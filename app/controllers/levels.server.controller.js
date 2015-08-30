@@ -108,16 +108,23 @@ exports.paginate = function(req, res) {
 	var pageNum = req.query['pageNum'],
 		sizeRestriction = req.query['sizeRestriction'],
 		searchText = req.query['searchText'],
+		sortBy = req.query['sortBy'],
+		sortDirection = req.query['sortDirection'],
 		numPerPage = 9,
 		totalCount,
-		query = Level
-					.find()
-					.populate('user', 'username')
-					.populate('ratings', 'rating')
-					.sort('-created')
-					.limit(numPerPage)
-					.skip(pageNum * numPerPage),
+		query,
 		searchRegex = new RegExp(searchText, 'i');
+
+	 query = Level
+				.find()
+				.populate('user', 'username')
+				.populate('ratings', 'rating')
+				.limit(numPerPage)
+				.skip(pageNum * numPerPage);
+
+	if (sortBy) {
+		query.sort(sortDirection + sortBy);
+	}
 
 	if (sizeRestriction) {
 		sizeRestriction = parseInt(sizeRestriction, 10);

@@ -6,6 +6,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.authentication = Authentication;
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
+		$scope.sortDirection = '+';
 
 		var penaltyTimer,
 			timeout = 1000;
@@ -98,7 +99,9 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			var queryObj = {
 				pageNum: $scope.currentPage,
 				sizeRestriction: $scope.sizeRestriction,
-				searchText: $scope.searchText
+				searchText: $scope.searchText,
+				sortBy: $scope.sortBy,
+				sortDirection: $scope.sortDirection
 			};
 
 			Levels.query(queryObj, function(data) {
@@ -172,6 +175,16 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			$scope.searchText = username ? username : null;
 			$scope.find();
 		};
+
+		$scope.setSortBy = function(sort_by) {
+			$scope.sortBy = sort_by ? sort_by : null;
+			$scope.find();
+		};
+
+		$scope.setSortDirection = function(sort_direction) {
+			$scope.sortDirection = sort_direction ? sort_direction : '+';
+			$scope.find();
+		}
 
 		$scope.gameOver = function() {
 			Utils.gameOver();
