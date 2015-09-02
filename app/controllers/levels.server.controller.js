@@ -91,7 +91,6 @@ exports.levelByID = function(req, res, next, id) {
 	Level
 		.findById(id)
 		.populate('user', 'username')
-		.populate('ratings')
 		.exec(function(err, level) {
 			if (err) return next(err);
 			if (! level) return next(new Error('Failed to load Level ' + id));
@@ -114,7 +113,6 @@ exports.paginate = function(req, res) {
 	 query = Level
 				.find()
 				.populate('user', 'username')
-				.populate('ratings', 'rating')
 				.limit(numPerPage)
 				.skip(pageNum * numPerPage);
 
