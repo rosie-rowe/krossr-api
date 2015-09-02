@@ -189,18 +189,6 @@ ul {
 	}
 }
 
-.hamburger {
-	display: inline-block;
-	font-size: @inputMargin * 2;
-	margin: 0 @inputMargin;
-	text-align: center;
-	vertical-align: middle;
-
-	@media screen and (min-width: @mediumScreen) {
-		display: none;
-	}
-}
-
 .hero {
 	display: table;
 	height: 100%;
@@ -221,9 +209,7 @@ ul {
 	background: @headerColor;
 	font-family: inherit;
 	list-style-type: none;
-	position: absolute;
-	top: @inputMargin;
-	left: @inputMargin;
+	width: 100%;
 	z-index: 10;
 
 	@media screen and (max-width: @mediumScreen) {
@@ -231,7 +217,6 @@ ul {
 
 		ul.navbar-header {
 			margin: 0;
-			padding: @inputMargin;
 
 			.hamburger {
 				float: right;
@@ -241,13 +226,24 @@ ul {
 }
 
 .header-container-inner {
-	line-height: 1;
-
 	.header {
-		margin: 0 @inputMargin;
+		margin: 0;
 		text-align: center;
 		vertical-align: middle;
+		font-size: 2em;
+		font-weight: 800;
 	}
+}
+
+.navbar-header {
+	background-color: @selectedColor;
+	display: inline-block;
+
+	/* I have no idea where this margin is coming from
+		to need to be overidden, dev tools shows nothing */
+	margin: 0;
+	text-align: center;
+	width: @navbarHeight;
 }
 
 .navbar-toggle {
@@ -260,7 +256,8 @@ ul {
 }
 
 .navbar-nav {
-	padding: @inputMargin;
+	display: inline-block;
+	margin: 0 @navbarHeight;
 	text-align: center;
 
 	a {
@@ -275,16 +272,12 @@ ul {
 		}
 	}
 
-	li {
-		font-size: 2em;
+	.fa {
+		margin: @borderRadius;
 	}
 
-	@media screen and (max-width: @largeScreen) { padding: @inputMargin; }
-	@media screen and (max-width: @mediumScreen) {
-		.collapsed &,
-		.collapsed & li {
-			display: none; 
-		}
+	@media screen and (max-width: @largeScreen) {
+		margin: 0 (@navbarHeight / 2);
 	}
 }
 

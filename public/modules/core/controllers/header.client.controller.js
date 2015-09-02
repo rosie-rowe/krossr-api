@@ -3,16 +3,11 @@
 angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Utils',
 	function($scope, $state, Authentication, Menus, Utils) {
 		$scope.authentication = Authentication;
-		$scope.isCollapsed = true;
 		$scope.menu = Menus.getMenu('topbar');
 		$scope.profileDropdown = {
 			isShowing: false
 		};
 		$scope.$state = $state;
-
-		$scope.toggleCollapsibleMenu = function() {
-			$scope.isCollapsed = !$scope.isCollapsed;
-		};
 
 		$scope.toggleShowing = function(item) {
 			item.isShowing = !item.isShowing;

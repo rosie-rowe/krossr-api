@@ -194,18 +194,6 @@ ul {
   font-size: 0.7em;
   margin-bottom: 3em;
 }
-.hamburger {
-  display: inline-block;
-  font-size: 2em;
-  margin: 0 1em;
-  text-align: center;
-  vertical-align: middle;
-}
-@media screen and (min-width: 1024px) {
-  .hamburger {
-    display: none;
-  }
-}
 .hero {
   display: table;
   height: 100%;
@@ -223,9 +211,7 @@ ul {
   background: rgba(0, 0, 0, 0.5);
   font-family: inherit;
   list-style-type: none;
-  position: absolute;
-  top: 1em;
-  left: 1em;
+  width: 100%;
   z-index: 10;
 }
 @media screen and (max-width: 1024px) {
@@ -234,19 +220,26 @@ ul {
   }
   .header-container ul.navbar-header {
     margin: 0;
-    padding: 1em;
   }
   .header-container ul.navbar-header .hamburger {
     float: right;
   }
 }
-.header-container-inner {
-  line-height: 1;
-}
 .header-container-inner .header {
-  margin: 0 1em;
+  margin: 0;
   text-align: center;
   vertical-align: middle;
+  font-size: 2em;
+  font-weight: 800;
+}
+.navbar-header {
+  background-color: #2199d0;
+  display: inline-block;
+  /* I have no idea where this margin is coming from
+		to need to be overidden, dev tools shows nothing */
+  margin: 0;
+  text-align: center;
+  width: 50px;
 }
 .navbar-toggle {
   -webkit-border-radius: 5px;
@@ -261,7 +254,8 @@ ul {
   padding: 0.5em;
 }
 .navbar-nav {
-  padding: 1em;
+  display: inline-block;
+  margin: 0 50px;
   text-align: center;
 }
 .navbar-nav a {
@@ -273,18 +267,12 @@ ul {
   color: #2199d0;
   transition: all 1s;
 }
-.navbar-nav li {
-  font-size: 2em;
+.navbar-nav .fa {
+  margin: 5px;
 }
 @media screen and (max-width: 1280px) {
   .navbar-nav {
-    padding: 1em;
-  }
-}
-@media screen and (max-width: 1024px) {
-  .collapsed .navbar-nav,
-  .collapsed .navbar-nav li {
-    display: none;
+    margin: 0 25px;
   }
 }
 .ng-invalid.ng-dirty {
