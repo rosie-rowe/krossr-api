@@ -51,12 +51,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				}
 			},
 
-			resetTimer: function(timeToResetTo) {
-				if (timeToResetTo) {
-					$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);
-				}
-			},
-
 			/* Return the width of the main section of the game so we can calculate game and tile sizes off of it */
 			calculatePlayableArea: function() {
 				var pHeight = window.innerHeight,
@@ -255,6 +249,15 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				}
 			},
 
+			// returns an index
+			filterToUserId: function(collection, userId) {
+				var returnVal = collection.filter(function(item) {
+					return item.user === userId
+				})[0];
+
+				return collection.indexOfObject(returnVal);
+			},
+
 			// subtract time from the angular-timer
 			knockOffTime: function() {
 				$rootScope.$broadcast('timer-add-cd-seconds', -(this.getCurrentPenalty()));
@@ -265,6 +268,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			/* Display an integer size (e.g. 15) and convert it to a pleasing form (15x15) */
 			prettySize: function(size) {
 				return size + 'x' + size;
+			},
+
+			resetTimer: function(timeToResetTo) {
+				if (timeToResetTo) {
+					$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);
+				}
 			},
 
 			/* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
@@ -334,6 +343,17 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				}, 0);
 			},
 
+			// common logic to findOne and update
+			setupLevel: function(scope) {
+				var yourRating = scope.level.yourRatingIndex = this.filterToUserId(scope.level.ratings, scope.authentication.user._id);
+
+				if (typeof yourRating !== 'undefined' && yourRating !== -1) {
+					scope.level.yourRating = scope.level.ratings[yourRating].rating;
+				}
+
+				scope.level.decomputedTimeLimit = this.decomputeTimeLimit(scope.level.timeLimit);
+			},
+
 			setWinTime: function(winTime) {
 				winTime = winTime;
 				return winTime;
@@ -349,6 +369,27 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			stopTimer: function() {
 				$rootScope.$broadcast('timer-stop');
+			},
+
+			// this is here so it can be shared between game.client.controller and levels.client.controller
+			updateLevel: function(scope) {
+				var level = scope.level,
+					timeRemaining = scope.level.timeRemaining,
+					_this = this;
+
+				level.timeLimit = this.computeTimeLimit(scope.level.decomputedTimeLimit);
+				level.size = level.layout.length;
+
+				level.$update(function() {
+					_this.setupLevel(scope);
+					scope.level.timeRemaining = timeRemaining;
+				}, function(errorResponse) {
+					scope.error = errorResponse.data.message;
+
+					$timeout(function() {
+						scope.error = null;
+					}, timeout);
+				});
 			}
 		};
 	}
