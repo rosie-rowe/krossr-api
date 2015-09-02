@@ -122,7 +122,8 @@ ul {
 .content {
 	box-sizing: border-box;
 	float: left;
-	height: @bodyHeight;
+	margin-top: @navbarHeight;
+	height: @bodyHeight - @navbarHeight;
 	width: 100%
 }
 
@@ -209,6 +210,7 @@ ul {
 	background: @headerColor;
 	font-family: inherit;
 	list-style-type: none;
+	position: absolute;
 	width: 100%;
 	z-index: 10;
 

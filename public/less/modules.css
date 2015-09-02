@@ -133,7 +133,8 @@ ul {
 .content {
   box-sizing: border-box;
   float: left;
-  height: 100%;
+  margin-top: 50px;
+  height: 50%;
   width: 100%;
 }
 .dropdown-menu {
@@ -211,6 +212,7 @@ ul {
   background: rgba(0, 0, 0, 0.5);
   font-family: inherit;
   list-style-type: none;
+  position: absolute;
   width: 100%;
   z-index: 10;
 }
