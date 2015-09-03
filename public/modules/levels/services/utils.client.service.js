@@ -30,7 +30,10 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				or remove border-box and add them instead... doesn't really matter. */
 			adjustForBorders: function(width) {
 				var borderWidth = 1;
-				return width - (borderWidth * (sideLength - 1));
+
+				/* 18 is a bit of a magic number, I worked backwards from determining how much extra space
+					the game had based on sideLength */ 
+				return width - ((borderWidth * sideLength) + (18 - sideLength));
 			},
 
 			/* You're MEAN! */
@@ -295,7 +298,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Modify the current game size. */
 			setGameSize: function(widthInTiles) {
-				var finalWidth = Math.floor(playableAreaSize / 1.4),
+				var finalWidth = Math.floor(playableAreaSize / 1.6),
 					finalHeight;
 
 				finalWidth = this.adjustForBorders(finalWidth);
