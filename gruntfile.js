@@ -44,7 +44,7 @@ module.exports = function(grunt) {
 			},
 			clientCSS: {
 				files: watchFiles.clientCSS,
-				tasks: ['csslint'],
+				tasks: [],
 				options: {
 					livereload: true
 				}

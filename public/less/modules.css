@@ -33,14 +33,6 @@ a {
   color: #ffffff;
   text-decoration: none;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 400;
-}
 h1 {
   font-size: 4em;
   margin: 0;
@@ -52,6 +44,7 @@ body {
   background: #222222;
   color: #dddddd;
   font-family: 'Raleway';
+  font-weight: 800;
   height: 100%;
   margin: 0;
 }
@@ -232,7 +225,6 @@ ul {
   text-align: center;
   vertical-align: middle;
   font-size: 2em;
-  font-weight: 800;
 }
 .navbar-header {
   background-color: #2199d0;
@@ -477,6 +469,12 @@ body.ngdialog-open {
   }
 }
 .list-group-item {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
   background-color: rgba(0, 0, 0, 0.5);
   margin: 1em auto;
   padding: 1em;

@@ -17,8 +17,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			timeScale = 60, // number to convert minutes to seconds and vice versa... probably not going to change
 			winTime = 0, // the time the level was beaten in
 			currentPenalty = 4,  // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
-			basePenalty = currentPenalty, // the number to reset the penalty to when changing levels or retrying a level
-			mq = window.matchMedia("(min-width: 1280px)"); 
+			basePenalty = currentPenalty; // the number to reset the penalty to when changing levels or retrying a level
 
 		// Public API
 		return {
@@ -296,16 +295,11 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Modify the current game size. */
 			setGameSize: function(widthInTiles) {
-				var finalWidth,
+				var finalWidth = Math.floor(playableAreaSize / 1.4),
 					finalHeight;
 
-				if (mq.matches) {
-					finalWidth = Math.floor(playableAreaSize / 1.6);
-				} else {
-					finalWidth =  Math.floor(playableAreaSize / 2);
-				}
-
 				finalWidth = this.adjustForBorders(finalWidth);
+
 				finalHeight = finalWidth;
 				gameWidth = finalWidth + 'px';
 				gameHeight = finalHeight + 'px';
