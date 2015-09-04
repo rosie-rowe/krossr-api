@@ -477,9 +477,11 @@ body.ngdialog-open {
   background-clip: padding-box;
   background-color: rgba(0, 0, 0, 0.5);
   margin: 1em auto;
+  min-height: 60px;
   padding: 1em;
+  position: relative;
   text-align: left;
-  width: 25%;
+  max-width: 970.8px;
 }
 .list-group-item .list-group-item-heading {
   display: inline-block;
@@ -526,6 +528,12 @@ body.ngdialog-open {
   display: inline-block;
   margin: 1em;
   font-size: 2em;
+}
+.playButton {
+  position: absolute;
+  right: 0.33333333em;
+  bottom: 0.33333333em;
+  font-size: 3em;
 }
 .pending {
   background-color: rgba(175, 175, 175, 0.75);

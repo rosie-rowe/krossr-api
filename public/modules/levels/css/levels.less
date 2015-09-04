@@ -73,9 +73,11 @@
     .border-radius();
     background-color: @headerColor;
     margin: @inputMargin auto;
+    min-height: @inputHeight;
     padding: @inputMargin;
+    position: relative;
     text-align: left;
-    width: 25%;
+    max-width: (@inputHeight * 16.18);
 
     .list-group-item-heading {
         display: inline-block;
@@ -134,6 +136,13 @@
         margin: 1em;
         font-size: 2em;
     }
+}
+
+.playButton {
+    position: absolute;
+    right: @inputMargin / 3;
+    bottom: @inputMargin / 3;
+    font-size: 3em;
 }
 
 .pending {
