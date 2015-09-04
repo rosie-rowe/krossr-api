@@ -505,6 +505,11 @@ body.ngdialog-open {
 .outer.game {
   display: inline-block;
   float: right;
+  /* Has to be important to override ng-style */
+}
+.newLevel .outer.game,
+.editLevel .outer.game {
+  padding: 0 !important;
 }
 .left-grid {
   float: right;

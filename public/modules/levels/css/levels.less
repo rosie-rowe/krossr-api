@@ -108,6 +108,12 @@
 .outer.game {
     display: inline-block;
     float: right;
+
+    /* Has to be important to override ng-style */
+    .newLevel &,
+    .editLevel & {
+        padding: 0 !important;
+    }
 }
 
 .left-grid {
