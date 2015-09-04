@@ -22,13 +22,34 @@
 			</li>
 		</ul>
 		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
-			<li>
+			<li ng-if="authentication.user">
 				<a ui-sref="edit-profile">
 					<div class="fa fa-user"></div>
 					<span>{{ authentication.user.username }}</span>
 				</a>
 			</li>
 		</ul>
+		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
+			<li ng-if="!authentication.user">
+				<a href="/#!/signup">
+					<div class="fa fa-user"></div>
+					<span ui-route="/signup" ng-class="{active: $uiRoute}">
+						Sign Up
+					</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
+			<li ng-if="!authentication.user">
+				<a href="/#!/signin">
+					<div class="fa fa-user"></div>
+					<span ui-route="/signin" ng-class="{active: $uiRoute}">
+						Sign In
+					</button>
+				</a>
+			</li>
+		</ul>
+
 		<ul class="nav navbar-nav" data-ng-if="level && authentication.user._id === level.user._id">
 			<li>
 				<a ui-sref="editLevel({levelId: '{{level._id}}' })">

@@ -255,8 +255,7 @@ ul {
 
 .navbar-nav {
 	display: inline-block;
-	margin: 0 @navbarHeight;
-	text-align: center;
+	margin: 0;
 
 	a {
 		color: @white;
@@ -268,6 +267,10 @@ ul {
 			color: @selectedColor;
 			transition: all 1s;
 		}
+	}
+
+	li {
+		margin: 0 (@navbarHeight / 2) 0 (@navbarHeight / 2);
 	}
 
 	.fa {

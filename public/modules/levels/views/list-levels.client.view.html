@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <a href="/#!/levels/create">
+                <a ng-if="authentication.user" href="/#!/levels/create">
                     <button class="btn btn-primary">New level</button>
                 </a>
                 <div class="controls">

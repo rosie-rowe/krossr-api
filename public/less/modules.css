@@ -249,8 +249,7 @@ ul {
 }
 .navbar-nav {
   display: inline-block;
-  margin: 0 50px;
-  text-align: center;
+  margin: 0;
 }
 .navbar-nav a {
   color: #ffffff;
@@ -260,6 +259,9 @@ ul {
 .navbar-nav a:hover {
   color: #008287;
   transition: all 1s;
+}
+.navbar-nav li {
+  margin: 0 25px 0 25px;
 }
 .navbar-nav .fa {
   margin: 5px;
