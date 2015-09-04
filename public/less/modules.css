@@ -481,9 +481,6 @@ body.ngdialog-open {
   text-align: left;
   width: 25%;
 }
-.list-group-item .btn {
-  float: right;
-}
 .list-group-item .list-group-item-heading {
   display: inline-block;
   font-size: 2em;
@@ -533,6 +530,9 @@ body.ngdialog-open {
 .pending {
   background-color: rgba(175, 175, 175, 0.75);
   transition: background-color 0.5s;
+}
+.queryInput {
+  display: inline-block;
 }
 .searchText {
   display: inline-block;

@@ -18,31 +18,41 @@
                     <button class="btn btn-primary">New level</button>
                 </a>
                 <div class="controls">
-                    <label class="control-label">Select a size</label>
-                    <select ng-model='sizeRestriction' ng-change="find()">
-                        <option value="" selected>All</option>
-                        <option value="5">5x5</option>
-                        <option value="10">10x10</option>
-                        <option value="15">15x15</option>
-                    </select>
+                    <!-- These guys all get their own divs so they don't have the label and input on
+                          different lines -->
+                    <div class="queryInput">
+                        <label class="control-label">Select a size</label>
+                        <select ng-model='sizeRestriction' ng-change="find()">
+                            <option value="" selected>All</option>
+                            <option value="5">5x5</option>
+                            <option value="10">10x10</option>
+                            <option value="15">15x15</option>
+                        </select>
+                    </div>
 
-                    <label class="control-label">Search</label>
-                    <input ng-model="searchText" ng-change="setSearchText(searchText)">
+                    <div class="queryInput">
+                        <label class="control-label">Search</label>
+                        <input ng-model="searchText" ng-change="setSearchText(searchText)">
+                    </div>
 
                     <!-- Rating and Username are specifically excluded from here due to Mongo's limitations on joins
                          This is one of the primary reasons I'd like to migrate the app to use SQL instead! Soon. -->
-                    <label class="control-label">Sort by</label>
-                    <select ng-model="sortBy" ng-change="setSortBy(sortBy)">
-                        <option value="">None</option>
-                        <option value="created">Created Date</option>
-                        <option value="name">Name</option>
-                    </select>
+                    <div class="queryInput">
+                        <label class="control-label">Sort by</label>
+                        <select ng-model="sortBy" ng-change="setSortBy(sortBy)">
+                            <option value="">None</option>
+                            <option value="created">Created Date</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </div>
 
-                    <label class="control-label">Sort direction</label>
-                    <select ng-model="sortDirection" ng-change="setSortDirection(sortDirection)">
-                        <option value="+">Asc</option>
-                        <option value="-">Desc</option>
-                    </select>
+                    <div class="queryInput">
+                        <label class="control-label">Sort direction</label>
+                        <select ng-model="sortDirection" ng-change="setSortDirection(sortDirection)">
+                            <option value="+">Asc</option>
+                            <option value="-">Desc</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
