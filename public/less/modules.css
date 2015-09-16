@@ -1,9 +1,9 @@
 [ui-view].ng-enter,
 [ui-view].ng-leave {
-  -webkit-transition: opacity 1s ease-in-out;
-  -moz-transition: opacity 1s ease-in-out;
-  -o-transition: opacity 1s ease-in-out;
-  transition: opacity 1s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 [ui-view].ng-enter {
   opacity: 0;
@@ -17,6 +17,33 @@
 }
 [ui-view].ng-leave-active {
   opacity: 0;
+}
+.animate-hide {
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+}
+.animate-hide.ng-hide {
+  opacity: 0;
+}
+.loadingAnimation {
+  display: table;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9001;
+  /* above the level */
+}
+.loadingAnimation.ng-hide {
+  display: table !important;
+  z-index: 0;
+  /* way below the level */
+}
+.loadingAnimation-inner {
+  font-size: 72px;
+  display: table-cell;
+  vertical-align: middle;
 }
 [ng\:cloak],
 [ng-cloak],
@@ -126,8 +153,7 @@ ul {
 .content {
   box-sizing: border-box;
   float: left;
-  margin-top: 50px;
-  height: 50%;
+  margin-top: 37px;
   width: 100%;
 }
 .dropdown-menu {
@@ -204,6 +230,7 @@ ul {
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.5);
   font-family: inherit;
+  height: 37px;
   list-style-type: none;
   position: absolute;
   width: 100%;
@@ -226,6 +253,10 @@ ul {
   vertical-align: middle;
   font-size: 2em;
 }
+.loading {
+  height: 100%;
+  width: 100%;
+}
 .navbar-header {
   background-color: #008287;
   display: inline-block;
@@ -233,7 +264,7 @@ ul {
 		to need to be overidden, dev tools shows nothing */
   margin: 0;
   text-align: center;
-  width: 50px;
+  width: 37px;
 }
 .navbar-toggle {
   -webkit-border-radius: 5px;
@@ -261,14 +292,14 @@ ul {
   transition: all 1s;
 }
 .navbar-nav li {
-  margin: 0 25px 0 25px;
+  margin: 0 18.5px 0 18.5px;
 }
 .navbar-nav .fa {
   margin: 5px;
 }
 @media screen and (max-width: 1280px) {
   .navbar-nav {
-    margin: 0 25px;
+    margin: 0 18.5px;
   }
 }
 .ng-invalid.ng-dirty {

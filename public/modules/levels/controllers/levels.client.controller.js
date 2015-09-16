@@ -126,6 +126,8 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					layout: $scope.level.layout,
 					controller: controller
 				});
+
+				$scope.level.ready = true;
 			});
 		};
 
