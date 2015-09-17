@@ -301,6 +301,9 @@ ul {
   .navbar-nav {
     margin: 0 18.5px;
   }
+  .navbar-nav li {
+    margin: 0;
+  }
 }
 .ng-invalid.ng-dirty {
   border-color: #fa787e;
