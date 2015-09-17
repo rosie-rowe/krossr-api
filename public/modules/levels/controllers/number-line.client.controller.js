@@ -164,10 +164,6 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 						}
 					}
 				}
-
-				angular.forEach(entry, function(value, key) {					
-
-				});
 			}	
 
 			newCssClass = determineCssForGroup(currentGroup, index, orientation);
@@ -213,5 +209,18 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 			return lineContent;
 		};
+
+		$scope.getHeight = function() {
+			var tileSize = Utils.getTileSize();
+
+			return $scope.orientation === 'vertical' ? (tileSize / 2) + 'px' : tileSize + 'px';
+		}
+
+		$scope.getWidth = function() {
+			var tileSize = Utils.getTileSize();
+
+			return $scope.orientation === 'horizontal' ? (tileSize / 2) + 'px' : tileSize + 'px';
+		};
+
 	}
 ]);
