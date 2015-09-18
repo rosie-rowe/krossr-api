@@ -143,6 +143,8 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Combine a lot of the other functions here to set up a new game */
 			createNewGame: function(args) {
+				var goalMatrix;
+
 				if (args.layout) {
 					this.setGoalMatrix(args.layout);
 				}
@@ -156,7 +158,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				  then get rid of the goal matrix (since we don't want to be able to win while editing) */
 				switch(args.controller) {
 					case 'edit':
-						this.setGameMatrix(this.getGoalMatrix());
+						goalMatrix = this.getGoalMatrix();
+
+						if (goalMatrix) {
+							this.setGameMatrix(goalMatrix);
+						}
+
 						this.setGoalMatrix();
 						break;
 					case 'new':

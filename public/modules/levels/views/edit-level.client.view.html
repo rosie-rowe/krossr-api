@@ -23,10 +23,10 @@
                 </div>
 
                 <div>
-                    <button class="btn" type="button" ng-click="ctrl.clearAll()">Clear</button>
+                    <button class="btn" type="button" ng-click="confirmClear()">Clear</button>
                 </div>
                 <div>
-                    <button ng-disabled="error" class="btn" type="button" ng-click="update()">
+                    <button ng-disabled="error" class="btn" type="button" ng-click="confirmUpdate()">
                         <span ng-if="!error">Update</span>
                         <span ng-if="error" ng-bind-html="error"></span>
                     </button>

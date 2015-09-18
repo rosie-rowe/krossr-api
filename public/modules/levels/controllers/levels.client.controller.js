@@ -11,6 +11,25 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		var penaltyTimer,
 			timeout = 1000;
 
+		$scope.clearAll = function(controller) {
+			Utils.clearAll();
+
+			switch (controller) {
+				case 'edit':
+				case 'new':
+					$scope.clearAllInputs();
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		$scope.clearAllInputs = function() {
+			$scope.level.name = undefined;
+			$scope.level.decomputedTimeLimit = undefined;
+		};
+
 		// Create new Level
 		$scope.create = function() {
 			var layout = Utils.getGameMatrix();
@@ -41,6 +60,16 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		// this needs to be here so Edit can see it
 		$scope.decomputeTimeLimit = Utils.decomputeTimeLimit;
 
+		$scope.confirmClear = function() {
+			ngDialog.openConfirm({
+				controller: 'LevelsController',
+				closeByDocument: false,
+				template: 'modules/levels/views/clear-confirmation.client.view.html',
+				showClose: false,
+				scope: $scope
+			});
+		};
+
 		$scope.confirmRemove = function() {
 			ngDialog.openConfirm({
 				controller: 'LevelsController',
@@ -51,28 +80,18 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			});
 		};
 
-		// Remove existing Level
-		$scope.remove = function( level ) {
-			if ( level ) { 
-				level.$remove(function() {
-					$location.path('levels');
-				});
-
-				for (var i in $scope.levels) {
-					if ($scope.levels[i] === level ) {
-						$scope.levels.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.level.$remove(function() {
-					$location.path('levels');
-				});
-			}
+		$scope.confirmUpdate = function() {
+			ngDialog.openConfirm({
+				controller: 'LevelsController',
+				closeByDocument: false,
+				template: 'modules/levels/views/update-confirmation.client.view.html',
+				showClose: false,
+				scope: $scope
+			});
 		};
 
-		// Update existing Level
-		$scope.update = function() {
-			Utils.updateLevel($scope);
+		$scope.gameOver = function() {
+			Utils.gameOver();
 		};
 
 		// Find a list of Levels
@@ -105,6 +124,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Find existing Level
 		$scope.findOne = function(controller) {
+			// store the name of the controller so we can have the same functions do different things
+			// depending on new, edit, etc.
+			$scope.controller = controller;
+
 			$scope.level = Levels.get({ 
 				levelId: $stateParams.levelId
 			});
@@ -129,6 +152,31 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 				$scope.level.ready = true;
 			});
+		};
+
+
+		// Remove existing Level
+		$scope.remove = function(level) {
+			if (level) { 
+				level.$remove(function() {
+					$location.path('levels');
+				});
+
+				for (var i in $scope.levels) {
+					if ($scope.levels[i] === level ) {
+						$scope.levels.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.level.$remove(function() {
+					$location.path('levels');
+				});
+			}
+		};
+
+		// Update existing Level
+		$scope.update = function() {
+			Utils.updateLevel($scope);
 		};
 
 		$scope.pageDown = function() {
@@ -182,10 +230,6 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			$scope.sortDirection = sort_direction ? sort_direction : '+';
 			$scope.find();
 		}
-
-		$scope.gameOver = function() {
-			Utils.gameOver();
-		};
 
 		// gonna utilize the same event included with angular-timer to display the penalty on the screen
 	    $scope.$on('timer-add-cd-seconds', function(event, args) {
