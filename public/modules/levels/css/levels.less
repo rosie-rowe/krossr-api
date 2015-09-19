@@ -87,12 +87,21 @@
     .list-group-item-heading {
         display: inline-block;
         font-size: 2em;
+
+        @media screen and (max-width: @mediumScreen) {
+            max-width: 60%;
+        }
     }
 
     .username {
         cursor: pointer;
         display: inline-block;
         margin: 0 1em;
+
+        @media screen and (max-width: @mediumScreen) {
+            display: block;
+            margin: 0;
+        }
     }
 
     .size {
@@ -100,6 +109,10 @@
         display: inline-block;
         font-size: 2em;
         margin: 0 1em 0 0;
+
+        @media screen and (max-width: @mediumScreen) {
+            display: block;
+        }
     }
 }
 
@@ -146,6 +159,10 @@
         display: inline-block;
         margin: 1em;
         font-size: 2em;
+
+        @media screen and (max-width: @mediumScreen) {
+            font-size: 1em;
+        }
     }
 }
 

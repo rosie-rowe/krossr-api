@@ -123,7 +123,6 @@ module.exports = function(grunt) {
 		concurrent: {
 			default: ['nodemon', 'watch'],
 			debug: ['nodemon', 'watch', 'node-inspector'],
-			production: ['nodemon'],
 			options: {
 				logConcurrentOutput: true,
 				limit: 10
@@ -189,5 +188,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
 
 	// production
-	grunt.registerTask('production', ['concurrent:production']);
+	grunt.registerTask('production', []);
 };
