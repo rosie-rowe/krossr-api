@@ -4,9 +4,9 @@ module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
 		serverViews: ['app/views/**/*.*'],
-		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
+		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/*[!tests]*/*.js'],
 		clientViews: ['public/modules/**/views/**/*.html'],
-		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
+		clientJS: ['public/js/*.js', 'public/modules/*[!tests]*/*.js'],
 		clientCSS: ['public/modules/**/*.css', 'public/less/*'],
 		clientLESS: ['public/**/css/*.less', 'public/less/*'],
 		mochaTests: ['app/tests/**/*.js']
@@ -123,6 +123,7 @@ module.exports = function(grunt) {
 		concurrent: {
 			default: ['nodemon', 'watch'],
 			debug: ['nodemon', 'watch', 'node-inspector'],
+			production: ['nodemon'],
 			options: {
 				logConcurrentOutput: true,
 				limit: 10
@@ -182,8 +183,11 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
+	grunt.registerTask('build', ['loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+
+	// production
+	grunt.registerTask('production', ['concurrent:production']);
 };

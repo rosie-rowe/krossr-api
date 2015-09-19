@@ -40,9 +40,6 @@
   z-index: 0;
   /* way below the level */
 }
-.loadingAnimation.ng-hide.really-hide {
-  display: none !important;
-}
 .loadingAnimation-inner {
   font-size: 72px;
   display: table-cell;
@@ -317,6 +314,9 @@ ul {
 }
 .pull-right {
   float: right;
+}
+.really-hide {
+  display: none !important;
 }
 .row {
   display: inline-block;
