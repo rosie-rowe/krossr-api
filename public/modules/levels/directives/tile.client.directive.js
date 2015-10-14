@@ -14,6 +14,12 @@ angular.module('levels').directive('tile', [
                 scope.tileCtrl.editable = attr.editable;
                 scope.index = attr.index;
 
+                var pvt = {};
+
+                pvt.init = function() {
+                    scope.tileCtrl.setTileSize(scope.tileCtrl.getTileSize(attr.tutorial));
+                }
+
                 var clearPending = function(coords) {
                     var i = 0,
                         len = coords.length,
@@ -102,6 +108,8 @@ angular.module('levels').directive('tile', [
                         scope.tileCtrl.change(coord);
                     }
                 });
+
+                pvt.init();
             }
         }
     }

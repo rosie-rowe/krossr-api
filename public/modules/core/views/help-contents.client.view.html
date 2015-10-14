@@ -1,0 +1,23 @@
+<div data-ng-controller="MainCtrl as ctrl">
+	<h1>How to Play</h1>
+
+	<p>
+		Krossr is an HTML, CSS, and Javascript-based clone of the puzzle game Picross, made famous by Nintendo with Mario's Picross.<br />
+		Also known as nonograms, the puzzles use numbers to tell the solver where to fill in tiles in order to form a picture.
+	</p>
+
+	<div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
+		<div class="top row">
+			<div number-grid ctrl="ctrl" layout="level.layout" orientation="vertical" class="top-grid"></div>
+		</div>
+		
+		<div class="bottom row">
+			<game tutorial="true" filled-in="true" editable="false">
+				<tile ng-repeat="i in flatten(level.layout) track by $index" editable='true' tutorial="true"></tile>
+			</game>
+			<div number-grid ctrl="ctrl" layout="level.layout" orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
+		</div>
+	</div>
+
+	<button class="btn" ng-click="closeThisDialog()">OK, Got it</button>
+</div>

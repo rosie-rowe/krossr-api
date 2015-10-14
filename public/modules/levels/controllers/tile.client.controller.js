@@ -12,24 +12,28 @@ var tileController = function($scope, Utils, shiftService) {
             _this.changeTile(index, initState, changeTo, goalMatrix, shiftService, Utils);
         }
     };
+
     this.getLayoutForEdit = function(layout, index) {
         _this.fillFromLayout(layout, index);
     };
+
     this.fillBorders = function(direction, index) {
       return _this.getBorderColors(sideLength, direction, index);
     };
+
     this.convert1D = function(coord) {
       return Utils.convertTo1D(coord);
-    }
+    };
+
     this.convert2D = function(index) {
       return Utils.convertTo2D(index);
-    }
+    };
 
-    this.setTileSize(Utils.getTileSize());
+    this.getTileSize = Utils.getTileSize; 
 
     $scope.$on('tileSizeChanged', function() {
       sideLength = Utils.getSideLength();
-      _this.setTileSize(Utils.getTileSize());
+      _this.setTileSize(Utils.getTileSize($scope.tutorialMode));
     });
 };
 

@@ -2,7 +2,7 @@
 
 angular.module('levels').controller('NumberLineController', ['$scope', '$timeout', 'Utils',
 	function($scope, $timeout, Utils) {
-		var goalMatrix = Utils.getGoalMatrix(),
+		var goalMatrix = $scope.layout || Utils.getGoalMatrix(),
 			sideLength = goalMatrix.length,
 			lineContent = [], // keep lineContent in closure so we maintain it across calls back to an instance of the controller,
 			currentGroup = {}, // do the same for currentGroup
@@ -167,6 +167,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			}	
 
 			newCssClass = determineCssForGroup(currentGroup, index, orientation);
+
 			if ($scope.cssClass !== newCssClass) {
 				$scope.cssClass = newCssClass;
 				changed = true;
@@ -187,6 +188,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 				for (var j = 0; j < sideLength; j++) {
 					var y = sideLength - i - 1,
 						x = j;
+
 					rotatedMatrix[j][i] = matrix[y][x];
 				}
 			}
@@ -199,7 +201,6 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			if (!hasGroup) {
 				currentGroup = calculateGroup(index, orientation);
 				hasGroup = true;
-
 				lineContent = accountForZeros(adjustContentForOrientation(getGroupings(currentGroup), orientation));
 			} else {
 				if (recalculateGroup(index, orientation)) {

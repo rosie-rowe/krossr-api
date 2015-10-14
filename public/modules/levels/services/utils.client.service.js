@@ -17,7 +17,8 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			timeScale = 60, // number to convert minutes to seconds and vice versa... probably not going to change
 			winTime = 0, // the time the level was beaten in
 			currentPenalty = 4,  // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
-			basePenalty = currentPenalty; // the number to reset the penalty to when changing levels or retrying a level
+			basePenalty = currentPenalty, // the number to reset the penalty to when changing levels or retrying a level
+			tutorialDivider = 4; // the amount to divide the size of a game for a tutorial
 
 		// Public API
 		return {
@@ -149,10 +150,10 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 					this.setGoalMatrix(args.layout);
 				}
 
+				this.calculatePlayableArea();
 				this.createEmptyMatrix(args.numberOfTiles);
 				this.clearTileIndex();
 
-				this.calculatePlayableArea();
 
 				/* When editing the level, we'll prepopulate the game matrix (revealed tiles) with the goal matrix,
 				  then get rid of the goal matrix (since we don't want to be able to win while editing) */
@@ -203,10 +204,14 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 			},
 
 			/* Return the current game size (width and height in pixels of the game field, changes depending on number of tiles) */
-			getGameSize: function() {
+			getGameSize: function(tutorialMode) {
+				// height/width will probably come in as px
+				var intHeight = parseInt(gameHeight, 10),
+					intWidth = parseInt(gameWidth, 10);
+
 				return {
-					gameHeight: gameHeight,
-					gameWidth: gameWidth
+					gameHeight: tutorialMode ? intHeight / tutorialDivider : gameHeight,
+					gameWidth: tutorialMode ? intWidth / tutorialDivider : gameWidth
 				};
 			},
 
@@ -230,12 +235,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				return tileIndex;
 			},
 
-			getTileSize: function() {
-				return tileSize;
+			getTileSize: function(tutorialMode) {
+				return tutorialMode ? tileSize / tutorialDivider : tileSize;
 			},
 
 			getTileSizePx: function() {
-				return tileSize  + 'px'
+				return this.getTileSize()  + 'px'
 			},
 
 			getWinTime: function() {
@@ -305,6 +310,8 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 
 			/* Modify the current game size. */
 			setGameSize: function(widthInTiles) {
+				console.log('hit');
+
 				var finalWidth = Math.floor(playableAreaSize / 1.6),
 					finalHeight;
 
@@ -314,6 +321,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
 				gameWidth = finalWidth + 'px';
 				gameHeight = finalHeight + 'px';
 
+				$rootScope.$broadcast('gameSizeChanged', { width: gameWidth, height: gameHeight });
 				this.setTileSize(finalWidth, widthInTiles);
 			},
 

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Utils',
-	function($scope, $state, Authentication, Menus, Utils) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Utils', 'ngDialog',
+	function($scope, $state, Authentication, Menus, Utils, ngDialog) {
 		$scope.authentication = Authentication;
 		$scope.menu = Menus.getMenu('topbar');
 		$scope.profileDropdown = {
@@ -11,7 +11,13 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 
 		$scope.toggleShowing = function(item) {
 			item.isShowing = !item.isShowing;
-		}
+		};
+
+		$scope.openHelp = function() {
+			ngDialog.open({
+				template: 'modules/core/views/help.client.view.html'
+			});
+		};
 
 		// Collapsing the menu after navigation
 		$scope.$on('$stateChangeSuccess', function() {

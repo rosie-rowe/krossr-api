@@ -11,6 +11,8 @@ angular.module('levels').directive('game', [
             transclude: true,
             templateUrl: 'modules/levels/views/game.client.view.html',
             link: function (scope, elem, attr, gameCtrl) {
+                var pvt = {};
+
                 /* Change the tiles inside the dragbox to the specified state
                     (pending if being dragged over, selected if mouse released normally,
                     marked if shift was held) */
@@ -79,6 +81,17 @@ angular.module('levels').directive('game', [
 
                     scope.$apply();
                 });
+
+                pvt.init = function() {
+                    scope.tutorialMode = attr.tutorial;
+
+                    if (scope.tutorialMode) {
+                        scope.ctrl.createGameArray('tutorial');
+                        scope.ctrl.setGameSize()
+                    }
+                };
+
+                pvt.init();
             }
         };
     }

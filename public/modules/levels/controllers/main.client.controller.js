@@ -56,6 +56,10 @@ angular
         });
     };
 
+    this.initTutorialGame = function() {
+        console.log('hi');
+    };
+
     this.clearAll = Utils.clearAll.bind(Utils);
 
     this.getFontSize = function() {

@@ -237,22 +237,14 @@ ul {
   width: 100%;
   z-index: 10;
 }
-@media screen and (max-width: 1024px) {
-  .header-container {
-    position: static;
-  }
-  .header-container ul.navbar-header {
-    margin: 0;
-  }
-  .header-container ul.navbar-header .hamburger {
-    float: right;
-  }
-}
 .header-container-inner .header {
   margin: 0;
   text-align: center;
   vertical-align: middle;
   font-size: 2em;
+}
+.help-page h1 {
+  margin: 0 0 1em;
 }
 .loading {
   height: 100%;
@@ -311,6 +303,11 @@ ul {
 }
 .pull-right {
   float: right;
+}
+.readable {
+  line-height: 1.5;
+  max-width: 75%;
+  margin: 0 auto;
 }
 .really-hide {
   display: none !important;
@@ -400,6 +397,12 @@ ul {
   bottom: 0;
   left: 0;
 }
+.ngdialog-close {
+  position: absolute;
+  top: 0;
+  right: 2%;
+  font-size: 2em;
+}
 .ngdialog-overlay {
   position: fixed;
   background: rgba(0, 0, 0, 0.4);
@@ -425,7 +428,7 @@ ul {
   margin: 0 auto;
   padding: 1em;
   position: absolute;
-  top: 25%;
+  top: 1em;
   left: 0;
   right: 0;
 }

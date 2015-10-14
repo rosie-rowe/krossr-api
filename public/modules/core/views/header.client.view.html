@@ -58,5 +58,23 @@
 				</a>
 			</li>
 		</ul>
+		
+		<ul class="nav navbar-nav" ng-click="openHelp()">
+			<li>
+				<a>
+					<div class="fa fa-question"></div>
+					<span>Help</span>
+				</a>
+			</li>
+		</ul>
+
+		<ul class="nav navbar-nav" data-ng-if="level && authentication.user._id === level.user._id">
+			<li>
+				<a ui-sref="editLevel({levelId: '{{level._id}}' })">
+					<div class="fa fa-file"></div>
+					<span>{{ level.name }}</span>
+				</a>
+			</li>
+		</ul>		
 	</nav>
 </div>

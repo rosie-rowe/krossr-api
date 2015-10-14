@@ -22,14 +22,6 @@ var gameController = function($scope, Utils) {
       return false;
     };
 
-    this.getWidth = function() {
-      return Utils.getGameSize().gameWidth;  
-    }
-
-    this.getHeight = function() {
-      return Utils.getGameSize().gameHeight;
-    }
-
     this.convertTo1D = function(index) {
       return Utils.convertTo1D(index, Utils.getSideLength());
     }
@@ -49,19 +41,30 @@ var gameController = function($scope, Utils) {
     }
 
     this.getGameMatrix = Utils.getGameMatrix;
-
+    this.getGameSize = Utils.getGameSize;
     this.getTileIndex = Utils.getTileIndex;
-
     this.indexTiles = Utils.indexTiles.bind(Utils);
-
     this.resetTimer = Utils.resetTimer;
-
     this.startTimer = Utils.startTimer;
 
     this.setWinTime = function(time) {
       _this.winTime = Utils.setWinTime(time);
       $scope.$digest();
     }
+
+    this.updateGameSize = function() {
+      // don't use args, call to getGameSize so we take tutorials into account
+      var newGameSettings = Utils.getGameSize($scope.tutorialMode);
+
+      if (newGameSettings) {
+        _this.gameSettings = {
+          width: newGameSettings.gameWidth,
+          height: newGameSettings.gameHeight 
+        }
+      }
+    }
+
+    $scope.$on('gameSizeChanged', _this.updateGameSize.bind(_this));
 
     // as far as I know, this has to be an event since it's triggered by a timer expiring.
     // if I think of a way to use the service better instead, I'll change it
