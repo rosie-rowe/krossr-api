@@ -1,7 +1,9 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
-	function($scope, $http, $location, Authentication) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', '$timeout', 'Authentication',
+	function($scope, $http, $location, $timeout, Authentication) {
+		var timeout = 1000;
+
 		$scope.authentication = Authentication;
 		$scope.minPasswordLength = 10;
 
@@ -27,8 +29,13 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
 				// And redirect to the index page
 				$location.path('/levels');
+				$scope.closeThisDialog();
 			}).error(function(response) {
 				$scope.error = response.message;
+
+				$timeout(function() {
+					$scope.error = null;
+				}, timeout);
 			});
 		};
 	}

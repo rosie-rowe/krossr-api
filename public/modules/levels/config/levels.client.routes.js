@@ -5,10 +5,6 @@ angular.module('levels').config(['$stateProvider',
 	function($stateProvider) {
 		// Levels state routing
 		$stateProvider.
-		state('listLevels', {
-			url: '/levels',
-			templateUrl: 'modules/levels/views/list-levels.client.view.html'
-		}).
 		state('createLevel', {
 			url: '/levels/create',
 			templateUrl: 'modules/levels/views/create-level.client.view.html'

@@ -31,7 +31,7 @@
   height: calc(100% -  37px);
   width: 100%;
   position: absolute;
-  background: rgba(0, 0, 0, 0.5);
+  background: #000000;
   z-index: 9001;
   /* above the level */
 }
@@ -44,6 +44,18 @@
   font-size: 72px;
   display: table-cell;
   vertical-align: middle;
+}
+.animate-if.ng-enter,
+.animate-if.ng-leave {
+  transition: all 0.1s;
+}
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  max-height: 0;
+}
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  max-height: 100%;
 }
 [ng\:cloak],
 [ng-cloak],
@@ -120,7 +132,7 @@ ul {
   transition: all 1s;
 }
 .btn:disabled {
-  background-color: #000000;
+  background-color: #005154;
   transition: all .2s;
 }
 .btn-small {
@@ -229,13 +241,15 @@ ul {
 }
 .header-container {
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.5);
   font-family: inherit;
-  height: 37px;
   list-style-type: none;
-  position: absolute;
+  overflow: hidden;
   width: 100%;
   z-index: 10;
+}
+.header-container-inner {
+  transition: max-height 1s;
+  max-height: 100%;
 }
 .header-container-inner .header {
   margin: 0;
@@ -332,9 +346,6 @@ ul {
 }
 .undecorated-link:hover {
   text-decoration: none;
-}
-.valign-outer {
-  display: table;
 }
 .valign-inner {
   display: table-cell;
@@ -519,13 +530,12 @@ body.ngdialog-open {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  background-color: rgba(0, 0, 0, 0.5);
-  margin: 1em auto;
+  background-color: #000000;
+  margin: 1em 0;
   min-height: 60px;
   padding: 1em;
   position: relative;
   text-align: left;
-  max-width: 970.8px;
 }
 .list-group-item .list-group-item-heading {
   display: inline-block;
@@ -558,9 +568,9 @@ body.ngdialog-open {
     display: block;
   }
 }
-.listLevels input,
-.listLevels select {
-  margin: 1em;
+.listLevels {
+  max-width: 40%;
+  padding: 1em;
 }
 .outer.game {
   display: inline-block;
@@ -616,7 +626,7 @@ body.ngdialog-open {
 }
 .searchText {
   display: inline-block;
-  background: rgba(0, 0, 0, 0.5);
+  background: #000000;
   padding: 1em;
   vertical-align: middle;
 }
@@ -727,7 +737,14 @@ body.ngdialog-open {
 }
 .sign-on-form {
   display: inline-block;
-  margin-top: 3em;
+  padding-top: 1em;
+}
+.sign-on-form .form-group {
+  display: inline-block;
+  margin-right: 1em;
+}
+.sign-on-form .form-group .control-label {
+  margin-right: 1em;
 }
 .btn-remove-account {
   top: 10px;

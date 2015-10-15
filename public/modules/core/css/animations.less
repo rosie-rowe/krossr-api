@@ -52,3 +52,17 @@
 	display: table-cell;
 	vertical-align: middle;
 }
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  transition:all 0.1s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+	max-height: 0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+	max-height: 100%;
+}

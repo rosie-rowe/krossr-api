@@ -11,7 +11,16 @@
 
 .sign-on-form {
 	display: inline-block;
-	margin-top: @inputMargin * 3;
+	padding-top: @inputMargin;
+
+	.form-group {
+		display: inline-block;
+		margin-right: @inputMargin;
+
+		.control-label {
+			margin-right: @inputMargin;
+		}
+	}
 }
 
 .btn-remove-account {

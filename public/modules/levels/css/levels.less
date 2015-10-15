@@ -77,12 +77,11 @@
 .list-group-item {
     .border-radius();
     background-color: @headerColor;
-    margin: @inputMargin auto;
+    margin: @inputMargin 0;
     min-height: @inputHeight;
     padding: @inputMargin;
     position: relative;
     text-align: left;
-    max-width: (@inputHeight * 16.18);
 
     .list-group-item-heading {
         display: inline-block;
@@ -117,10 +116,8 @@
 }
 
 .listLevels {
-    input,
-    select {
-        margin: @inputMargin;
-    }
+    max-width: 40%;
+    padding: 1em;
 }
 
 .outer.game {
