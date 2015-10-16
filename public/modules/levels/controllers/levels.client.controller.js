@@ -6,6 +6,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.authentication = Authentication;
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
+		$scope.sizeRestriction = '';
 		$scope.sortDirection = '+';
 		$scope.showFilter = false;
 
@@ -129,30 +130,31 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			// depending on new, edit, etc.
 			$scope.controller = controller;
 
-			$scope.level = Levels.get({ 
-				levelId: $stateParams.levelId
-			});
-
-
-			$scope.level.$promise.then(function(data) {
-				Utils.setupLevel($scope);
-
-				$scope.level.timeRemaining = $scope.level.timeLimit;
-
-				var flatLayout = Utils.flatten(data.layout);
-
-				Utils.setCurrentLevel($scope.level);
-
-				Utils.calculatePlayableArea();
-
-				Utils.createNewGame({
-					numberOfTiles: flatLayout.length,
-					layout: $scope.level.layout,
-					controller: controller
+			if ($scope.selectedLevelId) {
+				$scope.level = Levels.get({ 
+					levelId: $scope.selectedLevelId
 				});
 
-				$scope.level.ready = true;
-			});
+				$scope.level.$promise.then(function(data) {
+					Utils.setupLevel($scope);
+
+					$scope.level.timeRemaining = $scope.level.timeLimit;
+
+					var flatLayout = Utils.flatten(data.layout);
+
+					Utils.setCurrentLevel($scope.level);
+
+					Utils.calculatePlayableArea();
+
+					Utils.createNewGame({
+						numberOfTiles: flatLayout.length,
+						layout: $scope.level.layout,
+						controller: controller
+					});
+
+					$scope.level.ready = true;
+				});
+			}
 		};
 
 
@@ -173,6 +175,11 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					$location.path('levels');
 				});
 			}
+		};
+
+		$scope.loadLevel = function(levelId, action) {
+			$scope.selectedLevelId = levelId;
+			$scope.findOne(action);
 		};
 
 		// Update existing Level

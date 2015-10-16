@@ -76,7 +76,6 @@
 
 .list-group-item.level {
     .BoxShadowHelper(3);
-    .border-radius();
     background-color: lighten(@primary, 5%);
     margin: @inputMargin 0;
     min-height: @inputHeight;
@@ -86,7 +85,6 @@
 
     .list-group-item-heading {
         display: inline-block;
-        font-size: 2em;
 
         @media screen and (max-width: @mediumScreen) {
             max-width: 60%;
@@ -95,8 +93,6 @@
 
     .username {
         cursor: pointer;
-        display: inline-block;
-        margin: 0 1em;
 
         @media screen and (max-width: @mediumScreen) {
             display: block;
@@ -107,7 +103,6 @@
     .size {
         cursor: pointer;
         display: inline-block;
-        font-size: 2em;
         margin: 0 1em 0 0;
 
         @media screen and (max-width: @mediumScreen) {
@@ -121,9 +116,15 @@
     background-color: darken(@primary, 5%);
     float: left;
     max-height: 100%;
+    height: 100%;
     overflow: hidden;
-    max-width: 10%;
-    padding: 0 @inputMargin;
+
+    width: 10%;
+
+    h2,
+    .form-group {
+        padding: 0 (@inputMargin / 2);
+    }
 
     .filterIcon {
         float: right;
@@ -164,20 +165,12 @@
     .nextPage,
     .currentPage {
         display: inline-block;
-        margin: 1em;
-        font-size: 2em;
-
-        @media screen and (max-width: @mediumScreen) {
-            font-size: 1em;
-        }
     }
 }
 
 .playButton {
-    position: absolute;
-    right: @inputMargin / 3;
-    bottom: @inputMargin / 3;
-    font-size: 3em;
+    float: right;
+    font-size: 2em;
 }
 
 .pending {
@@ -221,10 +214,6 @@
 }
 
 .theCountdown {
-    bottom: 0;
-    position: absolute;
-    left: 0;
-    margin: 0 0 1em 1em;
     min-width: 300px; /* magic number shame to quickfix #11 */
 
     @media screen and (max-width: @mediumScreen) {

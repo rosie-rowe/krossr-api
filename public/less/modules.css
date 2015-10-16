@@ -26,11 +26,14 @@
 .animate-hide.ng-hide {
   opacity: 0;
 }
+[loading-animation] {
+  height: 100%;
+}
 .loadingAnimation {
-  display: table;
   height: 100%;
   width: 100%;
-  position: absolute;
+  display: table;
+  text-align: center;
   z-index: 9001;
   /* above the level */
 }
@@ -55,6 +58,9 @@
 .animate-if.ng-leave,
 .animate-if.ng-enter.ng-enter-active {
   max-height: 100%;
+}
+* {
+  box-sizing: border-box;
 }
 [ng\:cloak],
 [ng-cloak],
@@ -119,7 +125,7 @@ ul {
   cursor: pointer;
   font-family: inherit;
   height: 30px;
-  margin: 1em 0;
+  margin: 6px 0;
   padding: .4em;
   width: 100%;
   transition: all 1s;
@@ -160,7 +166,6 @@ ul {
   width: 100%;
 }
 .content {
-  box-sizing: border-box;
   float: left;
   width: 100%;
   height: calc(100% -  37px);
@@ -187,42 +192,29 @@ ul {
   cursor: pointer;
 }
 .form-group input {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   background-color: #555555;
   box-sizing: border-box;
   border: 1px solid #555555;
   color: #ffffff;
   font-family: 'Raleway' !important;
-  line-height: 2;
-  margin: 1em 0;
+  margin: 6px 0;
   width: 100%;
   height: 30px;
-  padding: 1em;
+  padding: 6px;
 }
 .form-group select {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   background-color: #555555;
   border: 1px solid #555555;
   color: #ffffff;
   height: 30px;
-  margin: 1em 0;
+  margin: 6px 0;
   line-height: 2;
-  padding: 1em;
+  padding: 0 6px;
   width: 100%;
 }
 .form-group .details {
   font-size: 0.7em;
-  margin-bottom: 3em;
+  margin-bottom: 18px;
 }
 .hero {
   display: table;
@@ -257,11 +249,14 @@ ul {
   font-size: 2em;
 }
 .help-page h1 {
-  margin: 0 0 1em;
+  margin: 0 0 6px;
 }
 .loading {
   height: 100%;
   width: 100%;
+}
+.mainContainer {
+  height: 100%;
 }
 .main-viewport {
   float: left;
@@ -274,8 +269,9 @@ ul {
   /* I have no idea where this margin is coming from
 		to need to be overidden, dev tools shows nothing */
   margin: 0;
+  padding: 0 6px;
   text-align: center;
-  width: 37px;
+  width: 10%;
 }
 .navbar-toggle {
   -webkit-border-radius: 5px;
@@ -394,18 +390,6 @@ ul {
   }
 }
 .ngdialog {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.ngdialog *,
-.ngdialog *:before,
-.ngdialog *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit;
-}
-.ngdialog {
   position: fixed;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -444,7 +428,7 @@ ul {
   animation: ngdialog-fadein 0.5s;
   width: 25%;
   margin: 0 auto;
-  padding: 1em;
+  padding: 6px;
   position: absolute;
   top: 1em;
   left: 0;
@@ -532,22 +516,15 @@ body.ngdialog-open {
 }
 .list-group-item.level {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   background-color: #2f2f2f;
-  margin: 1em 0;
+  margin: 6px 0;
   min-height: 30px;
-  padding: 1em;
+  padding: 6px;
   position: relative;
   text-align: left;
 }
 .list-group-item.level .list-group-item-heading {
   display: inline-block;
-  font-size: 2em;
 }
 @media screen and (max-width: 1024px) {
   .list-group-item.level .list-group-item-heading {
@@ -556,8 +533,6 @@ body.ngdialog-open {
 }
 .list-group-item.level .username {
   cursor: pointer;
-  display: inline-block;
-  margin: 0 1em;
 }
 @media screen and (max-width: 1024px) {
   .list-group-item.level .username {
@@ -568,7 +543,6 @@ body.ngdialog-open {
 .list-group-item.level .size {
   cursor: pointer;
   display: inline-block;
-  font-size: 2em;
   margin: 0 1em 0 0;
 }
 @media screen and (max-width: 1024px) {
@@ -581,9 +555,13 @@ body.ngdialog-open {
   background-color: #151515;
   float: left;
   max-height: 100%;
+  height: 100%;
   overflow: hidden;
-  max-width: 10%;
-  padding: 0 1em;
+  width: 10%;
+}
+.listLevels h2,
+.listLevels .form-group {
+  padding: 0 3px;
 }
 .listLevels .filterIcon {
   float: right;
@@ -617,21 +595,10 @@ body.ngdialog-open {
 .pagination .nextPage,
 .pagination .currentPage {
   display: inline-block;
-  margin: 1em;
-  font-size: 2em;
-}
-@media screen and (max-width: 1024px) {
-  .pagination .prevPage,
-  .pagination .nextPage,
-  .pagination .currentPage {
-    font-size: 1em;
-  }
 }
 .playButton {
-  position: absolute;
-  right: 0.33333333em;
-  bottom: 0.33333333em;
-  font-size: 3em;
+  float: right;
+  font-size: 2em;
 }
 .pending {
   background-color: rgba(175, 175, 175, 0.75);
@@ -640,7 +607,7 @@ body.ngdialog-open {
 .searchText {
   display: inline-block;
   background: #000000;
-  padding: 1em;
+  padding: 6px;
   vertical-align: middle;
 }
 .searchText .clearSearch {
@@ -660,10 +627,6 @@ body.ngdialog-open {
   float: right;
 }
 .theCountdown {
-  bottom: 0;
-  position: absolute;
-  left: 0;
-  margin: 0 0 1em 1em;
   min-width: 300px;
   /* magic number shame to quickfix #11 */
 }
@@ -752,14 +715,14 @@ body.ngdialog-open {
   margin: auto;
   max-width: 300px;
   display: inline-block;
-  padding-top: 1em;
+  padding-top: 6px;
 }
 .sign-on-form .form-group {
   display: inline-block;
-  margin-right: 1em;
+  margin-right: 6px;
 }
 .sign-on-form .form-group .control-label {
-  margin-right: 1em;
+  margin-right: 6px;
 }
 .btn-remove-account {
   top: 10px;

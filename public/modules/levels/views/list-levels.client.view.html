@@ -1,86 +1,75 @@
-<section data-ng-controller="LevelsController" data-ng-init="find()">
-    <h2>Levels <span class="filterIcon" ng-click="toggleShowFilter()"><i class="fa fa-filter"></i></span></h2>
-    <div class="searchLabels">
-        <div class="searchText" ng-if="searchText">
-            Search for: "{{ searchText }}" <div ng-click="setSearchText()" class="clearSearch">✖</div>
+<h2>Levels <span class="filterIcon" ng-click="toggleShowFilter()"><i class="fa fa-filter"></i></span></h2>
+<div class="form-group">
+    <a ng-if="authentication.user" href="/#!/levels/create">
+        <button class="btn btn-primary">New level</button>
+    </a>
+    <div class="controls" ng-show="showFilter">
+        <!-- These guys all get their own divs so they don't have the label and input on
+              different lines -->
+        <div class="queryInput">
+            <label class="control-label">Size</label>
+            <select ng-model="sizeRestriction" ng-change="setSizeRestriction(sizeRestriction)">
+                <option value="" selected>All</option>
+                <option value="5">5x5</option>
+                <option value="10">10x10</option>
+                <option value="15">15x15</option>
+            </select>
         </div>
-        <div class="searchText" ng-if="sizeRestriction">
-            Size: {{ sizeRestriction }}x{{ sizeRestriction}}
-            <div ng-click="setSizeRestriction()" class="clearSearch">✖</div>
+
+        <div class="queryInput">
+            <label class="control-label">Search</label>
+            <input ng-model="searchText" ng-change="setSearchText(searchText)">
+        </div>
+
+        <!-- Rating and Username are specifically excluded from here due to Mongo's limitations on joins
+             This is one of the primary reasons I'd like to migrate the app to use SQL instead! Soon. -->
+        <div class="queryInput">
+            <label class="control-label">Sort by</label>
+            <select ng-model="sortBy" ng-change="setSortBy(sortBy)">
+                <option value="">None</option>
+                <option value="created">Created Date</option>
+                <option value="name">Name</option>
+            </select>
+        </div>
+
+        <div class="queryInput">
+            <label class="control-label">Sort direction</label>
+            <select ng-model="sortDirection" ng-change="setSortDirection(sortDirection)">
+                <option value="+">Asc</option>
+                <option value="-">Desc</option>
+            </select>
         </div>
     </div>
-    <div class="form-group">
-        <a ng-if="authentication.user" href="/#!/levels/create">
-            <button class="btn btn-primary">New level</button>
+</div>
+
+<div class="list-group">
+    <div data-ng-repeat="level in levels" class="list-group-item level">
+        <div class="list-group-item-heading" data-ng-bind="level.name"></div>
+        <div class="username" ng-click="setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
+        <div class="size" data-ng-bind="level.prettySize" ng-click="setSizeRestriction(level.size)"></div>
+        <div class="averageRating">
+            Avg: {{ ::level.averageRating || "n/a"}} 
+        </div>
+        <a class="playButton" ng-click="loadLevel('{{level._id}}', 'view')">
+            <i class="fa fa-play"></i>
         </a>
-        <div class="controls" ng-show="showFilter">
-            <!-- These guys all get their own divs so they don't have the label and input on
-                  different lines -->
-            <div class="queryInput">
-                <label class="control-label">Size</label>
-                <select ng-model='sizeRestriction' ng-change="find()">
-                    <option value="" selected>All</option>
-                    <option value="5">5x5</option>
-                    <option value="10">10x10</option>
-                    <option value="15">15x15</option>
-                </select>
-            </div>
+    </div>
+</div>
 
-            <div class="queryInput">
-                <label class="control-label">Search</label>
-                <input ng-model="searchText" ng-change="setSearchText(searchText)">
-            </div>
+<div class="alert alert-warning text-center" data-ng-hide="!levels.$resolved || levels.length">
+	No Levels yet, why don't you <a href="/#!/levels/create">create one</a>?
+</div>
 
-            <!-- Rating and Username are specifically excluded from here due to Mongo's limitations on joins
-                 This is one of the primary reasons I'd like to migrate the app to use SQL instead! Soon. -->
-            <div class="queryInput">
-                <label class="control-label">Sort by</label>
-                <select ng-model="sortBy" ng-change="setSortBy(sortBy)">
-                    <option value="">None</option>
-                    <option value="created">Created Date</option>
-                    <option value="name">Name</option>
-                </select>
-            </div>
-
-            <div class="queryInput">
-                <label class="control-label">Sort direction</label>
-                <select ng-model="sortDirection" ng-change="setSortDirection(sortDirection)">
-                    <option value="+">Asc</option>
-                    <option value="-">Desc</option>
-                </select>
-            </div>
-        </div>
+<div class="pagination">
+    <div class="prevPage" ng-click="pageDown()" ng-class="{'invisible': currentPage === 0}">
+        ◀
     </div>
 
-    <div class="list-group">
-        <div data-ng-repeat="level in levels" class="list-group-item level">
-            <div class="list-group-item-heading" data-ng-bind="level.name"></div>
-            <div class="username" ng-click="setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
-            <div class="size" data-ng-bind="level.prettySize" ng-click="setSizeRestriction(level.size)"></div>
-            <div class="averageRating">
-                Avg: {{ ::level.averageRating || "n/a"}} 
-            </div>
-            <a class="playButton" data-ng-href="#!/levels/{{level._id}}">
-                <i class="fa fa-play"></i>
-            </a>
-        </div>
+    <div class="currentPage">
+        Page {{ currentPage + 1 }} of {{ totalPages }}
     </div>
 
-    <div class="alert alert-warning text-center" data-ng-hide="!levels.$resolved || levels.length">
-    	No Levels yet, why don't you <a href="/#!/levels/create">create one</a>?
+    <div class="nextPage" ng-click="pageUp()" ng-class="{'invisible': currentPage + 1 === totalPages }">
+        ▶
     </div>
-
-    <div class="pagination">
-        <div class="prevPage" ng-click="pageDown()" ng-class="{'invisible': currentPage === 0}">
-            ◀
-        </div>
-
-        <div class="currentPage">
-            Page {{ currentPage + 1 }} of {{ totalPages }}
-        </div>
-
-        <div class="nextPage" ng-click="pageUp()" ng-class="{'invisible': currentPage + 1 === totalPages }">
-            ▶
-        </div>
-    </div>
-</section>
+</div>

@@ -1,7 +1,7 @@
 <div class="hero">
-	<section class="viewLevel" data-ng-controller="LevelsController" data-ng-init="findOne();">
+	<section class="viewLevel">
 		<div loading-animation condition="!level.ready"></div>
-		<div data-ng-controller="MainCtrl as ctrl" ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="level.ready">
+		<div ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="level.ready">
 			<div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
 				<div class="top row">
 					<div number-grid ctrl="ctrl" layout="level.layout" orientation="vertical" class="top-grid"></div>

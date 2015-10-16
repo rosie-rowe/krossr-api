@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
 }
@@ -115,7 +119,6 @@ ul {
 }
 
 .content {
-	box-sizing: border-box;
 	float: left;
 	width: 100%;
 
@@ -154,14 +157,11 @@ ul {
 
 .form-group {
 	input {
-		.border-radius();
-
 		background-color: @secondary;
 		box-sizing: border-box;
 		border: 1px solid @secondary;
 		color: @white;
 		font-family: @mainFont !important;
-		line-height: 2;
 		margin: @inputMargin 0;
 		width: 100%;
 		height: @inputHeight;
@@ -169,14 +169,13 @@ ul {
 	}
 
 	select {
-		.border-radius();
 		background-color: @secondary;
 		border: 1px solid @secondary;
 		color: @white;
 		height: @inputHeight;
 		margin: @inputMargin 0;
 		line-height: 2;
-		padding: @inputMargin;
+		padding: 0 @inputMargin;
 		width: 100%;
 	}
 
@@ -236,6 +235,10 @@ ul {
 	width: 100%;
 }
 
+.mainContainer {
+	height: 100%;
+}
+
 .main-viewport {
 	float: left;
 	width: 88%;
@@ -249,8 +252,9 @@ ul {
 	/* I have no idea where this margin is coming from
 		to need to be overidden, dev tools shows nothing */
 	margin: 0;
+	padding: 0 @inputMargin;
 	text-align: center;
-	width: @navbarHeight;
+	width: @leftGutter;
 }
 
 .navbar-toggle {
