@@ -74,9 +74,10 @@
     }
 }
 
-.list-group-item {
+.list-group-item.level {
+    .BoxShadowHelper(3);
     .border-radius();
-    background-color: @headerColor;
+    background-color: lighten(@primary, 5%);
     margin: @inputMargin 0;
     min-height: @inputHeight;
     padding: @inputMargin;
@@ -116,8 +117,17 @@
 }
 
 .listLevels {
-    max-width: 40%;
-    padding: 1em;
+    .BoxShadowHelper(3);
+    background-color: darken(@primary, 5%);
+    float: left;
+    max-height: 100%;
+    overflow: hidden;
+    max-width: 10%;
+    padding: 0 @inputMargin;
+
+    .filterIcon {
+        float: right;
+    }
 }
 
 .outer.game {
@@ -173,10 +183,6 @@
 .pending {
     background-color: @pendingColor;
     transition: background-color .5s;
-}
-
-.queryInput {
-    display: inline-block;
 }
 
 .searchText {

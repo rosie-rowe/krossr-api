@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', '$state', 'Authentication', 'Menus', 'Utils', 'ngDialog',
-	function($scope, $state, Authentication, Menus, Utils, ngDialog) {
+angular.module('core').controller('HeaderController', ['$scope', '$state', '$timeout', 'Authentication', 'Menus', 'Utils', 'ngDialog',
+	function($scope, $state, $timeout, Authentication, Menus, Utils, ngDialog) {
 		$scope.authentication = Authentication;
 		$scope.menu = Menus.getMenu('topbar');
 		$scope.profileDropdown = {
@@ -25,26 +25,29 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', 'Auth
 			item.isShowing = !item.isShowing;
 		};
 
+		$scope.openEditProfile = function() {
+			ngDialog.open({
+				template: 'modules/users/views/settings/edit-profile.client.view.html'
+			});
+		}
+
 		$scope.openHelp = function() {
 			ngDialog.open({
 				template: 'modules/core/views/help.client.view.html'
 			});
 		};
 
-		$scope.toggleSignIn = function() {
-			$scope.signInIsShowing = !$scope.signInIsShowing;
-			$scope.signUpIsShowing = false;
-
-			$scope.toggleCollapsed($scope.signInIsShowing);
+		$scope.openSignIn = function() {
+			ngDialog.open({
+				template: 'modules/users/views/authentication/signin.client.view.html'
+			});
 		};
 
-		$scope.toggleSignUp = function() {
-			$scope.signUpIsShowing = !$scope.signUpIsShowing;
-			$scope.signInIsShowing = false;
-
-			$scope.toggleCollapsed($scope.signUpIsShowing);
+		$scope.openSignUp = function() {
+			ngDialog.open({
+				template: 'modules/users/views/authentication/signup.client.view.html'
+			});
 		}
-
 		// Collapsing the menu after navigation
 		$scope.$on('$stateChangeSuccess', function() {
 			Utils.setCurrentLevel();

@@ -10,6 +10,15 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 	}
 ]);
 
+// Setting ngDialog defaults
+angular.module(ApplicationConfiguration.applicationModuleName).config(['ngDialogProvider',
+	function(ngDialogProvider) {
+		ngDialogProvider.setDefaults({
+			closeByDocument: false
+		});
+	}
+]);
+
 //Then define the init function for starting up the application
 angular.element(document).ready(function() {
 	//Fixing facebook bug with redirect

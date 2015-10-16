@@ -1,2 +1,22 @@
+
+
+.BoxShadowHelper(@level: 1, @color: #000000){
+    & when (@level = 1) {
+        box-shadow: 0 1px 3px fade(@color, 12%), 0 1px 2px fade(@color, 24%);
+    }
+    & when (@level = 2) {
+        box-shadow: 0 3px 6px fade(@color, 16%), 0 3px 6px fade(@color, 23%);
+    }
+    & when (@level = 3) {
+        box-shadow: 0 10px 20px fade(@color, 19%), 0 6px 6px fade(@color, 23%);
+    }
+    & when (@level = 4) {
+        box-shadow: 0 14px 28px fade(@color, 25%), 0 10px 10px fade(@color, 22%);
+    }
+    & when (@level = 5) {
+        box-shadow: 0 19px 38px fade(@color, 30%), 0 15px 12px fade(@color, 22%);
+    }
+}
+
 @import "variables.less";
 @import "../modules/**/css/*.less";

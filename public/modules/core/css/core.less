@@ -63,12 +63,10 @@ ul {
     color: @white;
     cursor: pointer;
     font-family: inherit;
-    font-size: 1.5em;
     height: @inputHeight;
-   	margin: @inputMargin;
+   	margin: @inputMargin 0;
     padding: .4em;
-    width: @inputWidth;
-    max-width: @inputWidth;
+    width: 100%;
     transition: all 1s;
 
     &:hover {
@@ -119,10 +117,9 @@ ul {
 .content {
 	box-sizing: border-box;
 	float: left;
-	margin-top: @navbarHeight;
 	width: 100%;
 
-	height: calc(~"100% - "@navbarHeight);
+	height: calc(~"100% - " @navbarHeight);
 }
 
 .dropdown-menu {
@@ -166,9 +163,9 @@ ul {
 		font-family: @mainFont !important;
 		line-height: 2;
 		margin: @inputMargin 0;
+		width: 100%;
 		height: @inputHeight;
-		padding: 1em;
-		width: @inputWidth;
+		padding: @inputMargin;
 	}
 
 	select {
@@ -179,7 +176,8 @@ ul {
 		height: @inputHeight;
 		margin: @inputMargin 0;
 		line-height: 2;
-		padding: 1em;
+		padding: @inputMargin;
+		width: 100%;
 	}
 
 	.details {
@@ -204,7 +202,10 @@ ul {
 }
 
 .header-container {
+	.BoxShadowHelper(1);
+
 	box-sizing: border-box;
+	background: @black;
 	font-family: inherit;
 	list-style-type: none;
 	overflow: hidden;
@@ -233,6 +234,12 @@ ul {
 .loading {
 	height: 100%;
 	width: 100%;
+}
+
+.main-viewport {
+	float: left;
+	width: 88%;
+	height: 100%;
 }
 
 .navbar-header {
@@ -303,6 +310,11 @@ ul {
 	margin: 0 auto;
 }
 
+.restrict-width {
+	margin: auto;
+	max-width: 300px;
+}
+
 .really-hide {
 	display: none !important;
 }
@@ -318,7 +330,6 @@ ul {
 
 .sign-on {
     .btn {
-        font-size: 1.5em;
         margin: 1em;
     }
 

@@ -7,6 +7,7 @@ angular
     var _this = this;
             
     this.tileSize = Utils.getTileSizePx();
+    this.currentView = "'../../modules/levels/views/view-level.client.view.html'";
 
     $scope.$on('tileSizeChanged', function(e, args) {
         var newSize = Math.floor(args);

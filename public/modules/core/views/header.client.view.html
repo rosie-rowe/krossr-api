@@ -3,29 +3,29 @@
 		<ul class="nav navbar-header">
 			<span class="header">K</span>
 		</ul>
-		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
+		<ul class="nav navbar-nav" ng-click="openEditProfile()" data-ng-if="menu.shouldRender(authentication.user)">
 			<li ng-if="authentication.user">
-				<a ui-sref="edit-profile">
+				<a>
 					<div class="fa fa-user"></div>
 					<span>{{ authentication.user.username }}</span>
 				</a>
 			</li>
 		</ul>
-		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
+		<ul class="nav navbar-nav" ng-click="openSignUp()" data-ng-if="menu.shouldRender(authentication.user)">
 			<li ng-if="!authentication.user">
 				<a>
 					<div class="fa fa-user"></div>
-					<span ng-click="toggleSignUp()" ng-class="{active: $uiRoute}">
+					<span ng-class="{active: $uiRoute}">
 						Sign Up
 					</span>
 				</a>
 			</li>
 		</ul>
-		<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user)">
+		<ul class="nav navbar-nav" ng-click="openSignIn()" data-ng-if="menu.shouldRender(authentication.user)">
 			<li ng-if="!authentication.user">
 				<a>
 					<div class="fa fa-user"></div>
-					<span ng-click="toggleSignIn()" ng-class="{active: $uiRoute}">
+					<span ng-class="{active: $uiRoute}">
 						Sign In
 					</button>
 				</a>
@@ -48,21 +48,7 @@
 					<span>Help</span>
 				</a>
 			</li>
-		</ul>
-
-		<ul class="nav navbar-nav" data-ng-if="level && authentication.user._id === level.user._id">
-			<li>
-				<a ui-sref="editLevel({levelId: '{{level._id}}' })">
-					<div class="fa fa-file"></div>
-					<span>{{ level.name }}</span>
-				</a>
-			</li>
-		</ul>		
+		</ul>	
 	</nav>
-
-	<div class="popout-section" ng-class="{'collapsed': isCollapsed}">
-		<div class="animate-if" ng-if="signInIsShowing" ng-include="'modules/users/views/authentication/signin.client.view.html'"></div>
-		<div class="animate-if" ng-if="signUpIsShowing" ng-include="'modules/users/views/authentication/signup.client.view.html'"></div>
-	</div>
 </div>
 

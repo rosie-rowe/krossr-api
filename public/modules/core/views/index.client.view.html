@@ -1,3 +1,4 @@
-<div class="listLevels">
-	<div ng-include="'../../modules/levels/views/list-levels.client.view.html'"></div>
+<div data-ng-controller="MainCtrl as ctrl">
+	<div class="listLevels" ng-include="'../../modules/levels/views/list-levels.client.view.html'"></div>
+	<div class="main-viewport" ng-include="'../../modules/levels/views/view-level.client.view.html'">
 </div>

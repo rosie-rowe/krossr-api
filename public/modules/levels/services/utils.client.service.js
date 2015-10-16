@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('levels').factory('Utils', ['$timeout', '$rootScope',
-	function($timeout, $rootScope) {
+angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
+	function($timeout, $rootScope, ngDialog) {
 		// Convert service logic
 		// ...
 		var currentLevel,

@@ -7,6 +7,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
 		$scope.sortDirection = '+';
+		$scope.showFilter = false;
 
 		var penaltyTimer,
 			timeout = 1000;
@@ -229,6 +230,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.setSortDirection = function(sort_direction) {
 			$scope.sortDirection = sort_direction ? sort_direction : '+';
 			$scope.find();
+		};
+
+		$scope.toggleShowFilter = function() {
+			$scope.showFilter = !$scope.showFilter;
 		}
 
 		// gonna utilize the same event included with angular-timer to display the penalty on the screen
