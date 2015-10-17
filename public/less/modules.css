@@ -301,10 +301,10 @@ ul {
   color: #008287;
   transition: all 1s;
 }
-.navbar-nav li {
+.navbar-nav > li {
   margin: 0 18.5px 0 18.5px;
 }
-.navbar-nav .fa {
+.navbar-nav .fa:not(.fa-star) {
   margin: 5px;
 }
 @media screen and (max-width: 1280px) {
@@ -336,9 +336,6 @@ ul {
 .row {
   display: inline-block;
   width: 100%;
-}
-.row.bottom .theCountdown {
-  margin: 0 0 1em 0;
 }
 .sign-on .btn {
   margin: 1em;
@@ -611,6 +608,9 @@ body.ngdialog-open {
   background-color: rgba(175, 175, 175, 0.75);
   transition: background-color 0.5s;
 }
+.rateLevel {
+  display: inline-block;
+}
 .searchText {
   display: inline-block;
   background: #000000;
@@ -634,26 +634,8 @@ body.ngdialog-open {
   float: right;
 }
 .theCountdown {
-  min-width: 300px;
+  width: 100px;
   /* magic number shame to quickfix #11 */
-}
-@media screen and (max-width: 1024px) {
-  .theCountdown {
-    position: static;
-  }
-}
-@media screen and (min-width: 1280px) {
-  .theCountdown timer,
-  .theCountdown .showPenalty {
-    font-size: 6em;
-  }
-}
-@media screen and (max-width: 1280px) {
-  .theCountdown timer,
-  .theCountdown .showPenalty {
-    font-size: 4em;
-    position: static;
-  }
 }
 .unselected {
   background-color: #e2e2e2;
@@ -666,11 +648,6 @@ body.ngdialog-open {
   width: 50%;
 }
 .win-notification {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   z-index: 9000;
   background-color: rgba(0, 0, 0, 0.9);
   color: #FFF;
@@ -689,6 +666,9 @@ body.ngdialog-open {
 /*
  *  Mixins
  */
+[star-rating] {
+  display: inline-block;
+}
 .rating {
   margin: 0;
   padding: 0;

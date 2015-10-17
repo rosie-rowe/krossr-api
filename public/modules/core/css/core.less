@@ -279,18 +279,17 @@ ul {
 		text-decoration: none;
 		transition: all 1s;
 
-
 		&:hover {
 			color: @selectedColor;
 			transition: all 1s;
 		}
 	}
 
-	li {
+	& > li {
 		margin: 0 (@navbarHeight / 2) 0 (@navbarHeight / 2);
 	}
 
-	.fa {
+	.fa:not(.fa-star) {
 		margin: @borderRadius;
 	}
 
@@ -330,10 +329,6 @@ ul {
 .row {
 	display: inline-block;
 	width: 100%;
-
-	&.bottom {
-		& .theCountdown { margin: 0 0 1em 0; }
-	}
 }
 
 .sign-on {

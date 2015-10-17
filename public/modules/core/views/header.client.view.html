@@ -32,6 +32,15 @@
 			</li>
 		</ul>
 
+		<ul class="nav navbar-nav" ng-click="openHelp()">
+			<li>
+				<a>
+					<div class="fa fa-question"></div>
+					<span>Help</span>
+				</a>
+			</li>
+		</ul>
+
 		<ul class="nav navbar-nav" data-ng-if="level && authentication.user._id === level.user._id">
 			<li>
 				<a ui-sref="editLevel({levelId: '{{level._id}}' })">
@@ -40,15 +49,33 @@
 				</a>
 			</li>
 		</ul>
-		
-		<ul class="nav navbar-nav" ng-click="openHelp()">
+
+		<ul class="nav navbar-nav theCountdown" ng-if="level">
 			<li>
-				<a>
-					<div class="fa fa-question"></div>
-					<span>Help</span>
-				</a>
+				<div class="fa fa-clock-o"></div>
+				<timer ng-if="!level.timeLimit" ng-hide="showPenalty" interval="1000">
+					{{ minutes }}:{{sseconds}}
+				</timer>
+				<timer ng-if="level.timeLimit" ng-hide="showPenalty" countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
+					{{ minutes }}:{{sseconds}}
+				</timer>
+				<div ng-if="showPenalty" class="showPenalty">
+					{{ penaltyAmount }} sec
+				</div>
 			</li>
-		</ul>	
+		</ul>
+
+		<ul class="nav navbar-nav" ng-if="level">
+			<li class="text-muted">
+				<span data-ng-bind="level.created | date:'mediumDate'"></span>
+			</li>
+		</ul>
+
+		<ul class="nav navbar-nav" ng-if="authentication.user && level">
+			<li class="rateLevel">
+				<span>Rate:</span>
+				<div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
+			</li>
+		</div>
 	</nav>
 </div>
-

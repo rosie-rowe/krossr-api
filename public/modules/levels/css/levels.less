@@ -183,6 +183,10 @@
     transition: background-color .5s;
 }
 
+.rateLevel {
+    display: inline-block;
+}
+
 .searchText {
     display: inline-block;
     background: @headerColor;
@@ -219,19 +223,7 @@
 }
 
 .theCountdown {
-    min-width: 300px; /* magic number shame to quickfix #11 */
-
-    @media screen and (max-width: @mediumScreen) {
-        position: static;
-    }
-
-    timer, .showPenalty {
-        @media screen and (min-width: @largeScreen) { font-size: 6em; }
-        @media screen and (max-width: @largeScreen) {
-            font-size: 4em;
-            position: static;
-        }
-    }
+    width: 100px; /* magic number shame to quickfix #11 */
 }
 
 .unselected {
@@ -248,11 +240,6 @@
 }
 
 .win-notification {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     z-index: 9000;
     background-color: fade(@black, 90%);
     color: #FFF;
