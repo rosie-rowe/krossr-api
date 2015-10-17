@@ -77,11 +77,14 @@
 .list-group-item.level {
     .BoxShadowHelper(3);
     background-color: lighten(@primary, 5%);
-    margin: @inputMargin 0;
     min-height: @inputHeight;
     padding: @inputMargin;
     position: relative;
     text-align: left;
+
+    &.odd {
+        background-color: @primary;
+    }
 
     .list-group-item-heading {
         display: inline-block;
@@ -126,8 +129,10 @@
         padding: 0 (@inputMargin / 2);
     }
 
+    .createIcon,
     .filterIcon {
         float: right;
+        margin: 0 @inputMargin;
     }
 }
 

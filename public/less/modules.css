@@ -191,6 +191,9 @@ ul {
 .dropdown-toggle {
   cursor: pointer;
 }
+.fa.active {
+  color: #008287;
+}
 .form-group input {
   background-color: #555555;
   box-sizing: border-box;
@@ -517,11 +520,13 @@ body.ngdialog-open {
 .list-group-item.level {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   background-color: #2f2f2f;
-  margin: 6px 0;
   min-height: 30px;
   padding: 6px;
   position: relative;
   text-align: left;
+}
+.list-group-item.level.odd {
+  background-color: #222222;
 }
 .list-group-item.level .list-group-item-heading {
   display: inline-block;
@@ -563,8 +568,10 @@ body.ngdialog-open {
 .listLevels .form-group {
   padding: 0 3px;
 }
+.listLevels .createIcon,
 .listLevels .filterIcon {
   float: right;
+  margin: 0 6px;
 }
 .outer.game {
   display: inline-block;

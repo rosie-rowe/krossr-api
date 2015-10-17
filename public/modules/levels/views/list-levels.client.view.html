@@ -1,8 +1,14 @@
-<h2>Levels <span class="filterIcon" ng-click="toggleShowFilter()"><i class="fa fa-filter"></i></span></h2>
-<div class="form-group">
-    <a ng-if="authentication.user" href="/#!/levels/create">
-        <button class="btn btn-primary">New level</button>
-    </a>
+<h2>
+    Levels
+    <span class="filterIcon" ng-click="toggleShowFilter()">
+        <i class="fa fa-filter"
+            ng-class="{'active': showFilter}"></i>
+    </span>
+    <span class="createIcon" ng-if="authentication.user" href="/#!/levels/create">
+        <i class="fa fa-plus"></i>
+    </span>
+</h2>
+<div class="form-group filters">
     <div class="controls" ng-show="showFilter">
         <!-- These guys all get their own divs so they don't have the label and input on
               different lines -->
@@ -43,16 +49,16 @@
 </div>
 
 <div class="list-group">
-    <div data-ng-repeat="level in levels" class="list-group-item level">
+    <div data-ng-repeat="level in levels track by $index" ng-class="{'odd': $index % 2 !== 0}" class="list-group-item level">
+        <a class="playButton" ng-click="loadLevel('{{level._id}}', 'view')">
+            <i class="fa fa-play"></i>
+        </a>
         <div class="list-group-item-heading" data-ng-bind="level.name"></div>
         <div class="username" ng-click="setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
         <div class="size" data-ng-bind="level.prettySize" ng-click="setSizeRestriction(level.size)"></div>
         <div class="averageRating">
             Avg: {{ ::level.averageRating || "n/a"}} 
         </div>
-        <a class="playButton" ng-click="loadLevel('{{level._id}}', 'view')">
-            <i class="fa fa-play"></i>
-        </a>
     </div>
 </div>
 
@@ -61,7 +67,7 @@
 </div>
 
 <div class="pagination">
-    <div class="prevPage" ng-click="pageDown()" ng-class="{'invisible': currentPage === 0}">
+    <div class="prev`Page" ng-click="pageDown()" ng-class="{'invisible': currentPage === 0}">
         ◀
     </div>
 

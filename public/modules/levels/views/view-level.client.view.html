@@ -1,47 +1,45 @@
-<div class="hero">
-	<section class="viewLevel">
-		<div loading-animation condition="!level.ready"></div>
-		<div ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="level.ready">
-			<div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
-				<div class="top row">
-					<div number-grid ctrl="ctrl" layout="level.layout" orientation="vertical" class="top-grid"></div>
-				</div>
-				
-				<div class="bottom row">
-					<game>
-						<tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
-					</game>
-					<div number-grid layout="level.layout" ctrl="ctrl" orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
+<section class="viewLevel">
+	<div loading-animation condition="!level.ready"></div>
+	<div ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="level.ready">
+		<div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
+			<div class="top row">
+				<div number-grid ctrl="ctrl" layout="level.layout" orientation="vertical" class="top-grid"></div>
+			</div>
+			
+			<div class="bottom row">
+				<game>
+					<tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayout(level.layout, $index)" editable='true'></tile>
+				</game>
+				<div number-grid layout="level.layout" ctrl="ctrl" orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
+			</div>
+		</div>
+
+		<div class="theCountdown">
+			<div>
+				<timer ng-if="!level.timeLimit" ng-hide="showPenalty" interval="1000">
+					{{ minutes }}:{{sseconds}}
+				</timer>
+				<timer ng-if="level.timeLimit" ng-hide="showPenalty" countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
+					{{ minutes }}:{{sseconds}}
+				</timer>
+				<div ng-if="showPenalty" class="showPenalty">
+					{{ penaltyAmount }} sec
 				</div>
 			</div>
 
-			<div class="theCountdown">
-				<div>
-					<timer ng-if="!level.timeLimit" ng-hide="showPenalty" interval="1000">
-						{{ minutes }}:{{sseconds}}
-					</timer>
-					<timer ng-if="level.timeLimit" ng-hide="showPenalty" countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
-						{{ minutes }}:{{sseconds}}
-					</timer>
-					<div ng-if="showPenalty" class="showPenalty">
-						{{ penaltyAmount }} sec
-					</div>
-				</div>
+			<div>
+				<em class="text-muted">
+					<span data-ng-bind="level.user.username"></span>
+					/
+					<span data-ng-bind="level.created | date:'mediumDate'"></span>
+				</em>
 
-				<div>
-					<em class="text-muted">
-						<span data-ng-bind="level.user.username"></span>
-						/
-						<span data-ng-bind="level.created | date:'mediumDate'"></span>
-					</em>
-
-					<div ng-if="authentication.user">
-						<span>Rate this level:</span>
-						{{ level.yourRating }}
-						<div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
-					</div>
+				<div ng-if="authentication.user">
+					<span>Rate this level:</span>
+					{{ level.yourRating }}
+					<div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</section>
-</div>
