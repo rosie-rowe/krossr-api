@@ -1,81 +1,63 @@
 <div class="header-container-inner container" data-ng-controller="HeaderController">
 	<nav role="navigation">
-		<ul class="nav navbar-header">
-			<span class="header">Krossr</span>
-		</ul>
-		<ul class="nav navbar-nav" ng-click="openEditProfile()" data-ng-if="menu.shouldRender(authentication.user)">
-			<li ng-if="authentication.user">
-				<a>
-					<div class="fa fa-user"></div>
-					<span>{{ authentication.user.username }}</span>
-				</a>
-			</li>
-		</ul>
-		<ul class="nav navbar-nav" ng-click="openSignUp()" data-ng-if="menu.shouldRender(authentication.user)">
-			<li ng-if="!authentication.user">
-				<a>
-					<div class="fa fa-user"></div>
-					<span ng-class="{active: $uiRoute}">
-						Sign Up
-					</span>
-				</a>
-			</li>
-		</ul>
-		<ul class="nav navbar-nav" ng-click="openSignIn()" data-ng-if="menu.shouldRender(authentication.user)">
-			<li ng-if="!authentication.user">
-				<a>
-					<div class="fa fa-user"></div>
-					<span ng-class="{active: $uiRoute}">
-						Sign In
-					</button>
-				</a>
-			</li>
-		</ul>
+		<div class="navbar-nav-container">
+			<ul class="nav navbar-nav" ng-click="openLevelSelect()">
+				<li>
+					<i class="fa fa-bars"></i>
+					<div>Levels</div>
+				</li>
+			</ul>
 
-		<ul class="nav navbar-nav" ng-click="openHelp()">
-			<li>
-				<a>
-					<div class="fa fa-question"></div>
-					<span>Help</span>
-				</a>
-			</li>
-		</ul>
+			<ul class="nav navbar-nav" ng-click="openEditProfile()" data-ng-if="authentication.user">
+				<li>
+					<i class="fa fa-user"></i>
+					<div>{{ authentication.user.username }}</div>
+				</li>
+			</ul>
 
-		<ul class="nav navbar-nav" data-ng-if="level && authentication.user._id === level.user._id">
-			<li>
-				<a ui-sref="editLevel({levelId: '{{level._id}}' })">
-					<div class="fa fa-file"></div>
-					<span>{{ level.name }}</span>
-				</a>
-			</li>
-		</ul>
+			<ul class="nav navbar-nav" ng-click="openSignUp()" data-ng-if="!authentication.user">
+				<li>
+					<i class="fa fa-user"></i>
+					<div>Sign Up</div>
+				</li>
+			</ul>
 
-		<ul class="nav navbar-nav theCountdown" ng-if="level">
-			<li>
-				<div class="fa fa-clock-o"></div>
-				<timer ng-if="!level.timeLimit" ng-hide="showPenalty" interval="1000">
-					{{ minutes }}:{{sseconds}}
-				</timer>
-				<timer ng-if="level.timeLimit" ng-hide="showPenalty" countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
-					{{ minutes }}:{{sseconds}}
-				</timer>
-				<div ng-if="showPenalty" class="showPenalty">
-					{{ penaltyAmount }} sec
-				</div>
-			</li>
-		</ul>
+			<ul class="nav navbar-nav" ng-click="openSignIn()" data-ng-if="!authentication.user"> <li>
+					<i class="fa fa-user"></i>
+					<div>Sign In</div>
+				</li>
+			</ul>
 
-		<ul class="nav navbar-nav" ng-if="level">
-			<li class="text-muted">
-				<span data-ng-bind="level.created | date:'mediumDate'"></span>
-			</li>
-		</ul>
+			<ul class="nav navbar-nav" ng-click="openHelp()">
+				<li>
+					<i class="fa fa-question"></i>
+					<div>Help</div>
+				</li>
+			</ul>
 
-		<ul class="nav navbar-nav" ng-if="authentication.user && level">
-			<li class="rateLevel">
-				<span>Rate:</span>
-				<div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
-			</li>
+			<ul class="nav navbar-nav theCountdown" ng-if="level.ready && ctrl.currentView === 'view'">
+				<li>
+					<i class="fa fa-clock-o"></i>
+					<div ng-if="!level.timeLimit" ng-hide="showPenalty">
+						<timer interval="1000">{{ minutes }}:{{ sseconds }}</timer>
+					</div>
+					<div ng-if="level.timeLimit" ng-hide="showPenalty">
+						<timer countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
+							{{ minutes }}:{{sseconds}}
+						</timer>
+					</div>
+					<div ng-if="showPenalty" class="showPenalty">
+						{{ penaltyAmount }} sec
+					</div>
+				</li>
+			</ul>
+
+			<ul class="nav navbar-nav" ng-if="authentication.user && level">
+				<li class="rateLevel">
+					<span>Rate:</span>
+					<div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
+				</li>
+			</ul>
 		</div>
 	</nav>
 </div>

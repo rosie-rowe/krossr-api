@@ -59,6 +59,9 @@
 .animate-if.ng-enter.ng-enter-active {
   max-height: 100%;
 }
+.specialK {
+  text-shadow: 1px 3px 30px #008287;
+}
 * {
   box-sizing: border-box;
 }
@@ -105,6 +108,7 @@ select {
 ul {
   list-style-type: none;
   padding-left: 0;
+  margin: 0;
 }
 ::-webkit-input-placeholder {
   font-family: 'Raleway';
@@ -113,12 +117,6 @@ ul {
   height: 100%;
 }
 .btn {
-  -webkit-border-radius: 0.25em;
-  -moz-border-radius: 0.25em;
-  border-radius: 0.25em;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   background-color: #008287;
   border: 0;
   color: #ffffff;
@@ -168,7 +166,7 @@ ul {
 .content {
   float: left;
   width: 100%;
-  height: calc(100% -  37px);
+  height: calc(100% -  60px);
 }
 .dropdown-menu {
   background-color: #222222;
@@ -238,7 +236,7 @@ ul {
   font-family: inherit;
   list-style-type: none;
   overflow: hidden;
-  width: 100%;
+  height: 60px;
   z-index: 10;
 }
 .header-container-inner {
@@ -263,18 +261,16 @@ ul {
 }
 .main-viewport {
   float: left;
-  width: 88%;
+  width: 100%;
   height: 100%;
 }
 .navbar-header {
   background-color: #008287;
-  display: inline-block;
   /* I have no idea where this margin is coming from
 		to need to be overidden, dev tools shows nothing */
   margin: 0;
   padding: 0 6px;
   text-align: center;
-  width: 10%;
 }
 .navbar-toggle {
   -webkit-border-radius: 5px;
@@ -288,29 +284,28 @@ ul {
   font-size: 2em;
   padding: 0.5em;
 }
-.navbar-nav {
-  display: inline-block;
-  margin: 0;
+.navbar-nav-container .navbar-nav {
+  float: left;
+  padding: 6px;
 }
-.navbar-nav a {
+.navbar-nav-container .navbar-nav div {
+  font-size: 0.8rem;
+  text-align: center;
+}
+.navbar-nav-container .navbar-nav > li {
   color: #ffffff;
   text-decoration: none;
+  margin: 0 6px;
   transition: all 1s;
 }
-.navbar-nav a:hover {
+.navbar-nav-container .navbar-nav > li:hover {
   color: #008287;
   transition: all 1s;
 }
-.navbar-nav > li {
-  margin: 0 18.5px 0 18.5px;
-}
-.navbar-nav .fa:not(.fa-star) {
+.navbar-nav-container .navbar-nav .fa:not(.fa-star) {
+  display: block;
   margin: 5px;
-}
-@media screen and (max-width: 1280px) {
-  .navbar-nav li {
-    margin: 0 3px;
-  }
+  text-align: center;
 }
 .ng-invalid.ng-dirty {
   border-color: #fa787e;
@@ -327,8 +322,12 @@ ul {
   margin: 0 auto;
 }
 .restrict-width {
-  margin: auto;
   max-width: 300px;
+}
+@media screen and (max-width: 1024px) {
+  .restrict-width {
+    margin: 0 auto;
+  }
 }
 .really-hide {
   display: none !important;
@@ -390,14 +389,9 @@ ul {
   }
 }
 .ngdialog {
-  position: fixed;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   z-index: 10000;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 .ngdialog-close {
   position: absolute;
@@ -422,20 +416,25 @@ ul {
   animation: ngdialog-fadeout 0.5s;
 }
 .ngdialog-content {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  max-width: 300px;
   background: #222222;
   -webkit-backface-visibility: hidden;
   -webkit-animation: ngdialog-fadein 0.5s;
   animation: ngdialog-fadein 0.5s;
-  width: 25%;
+  max-height: 95%;
+  width: auto;
   margin: 0 auto;
-  padding: 6px;
+  padding: 12px;
   position: absolute;
   top: 1em;
   left: 0;
   right: 0;
 }
-.ngdialog-content h2 {
-  text-align: center;
+@media screen and (max-width: 1024px) {
+  .ngdialog-content {
+    margin: 0 auto;
+  }
 }
 .ngdialog.ngdialog-closing .ngdialog-content {
   -webkit-backface-visibility: hidden;
@@ -480,6 +479,8 @@ body.ngdialog-open {
 .gameContainer-inner {
   display: inline-block;
 }
+.editLevel .gameContainer-inner,
+.newLevel .gameContainer-inner,
 .viewLevel .gameContainer-inner {
   position: absolute;
   bottom: 0;
@@ -489,6 +490,8 @@ body.ngdialog-open {
   .gameContainer-inner {
     margin: 0 auto;
   }
+  .editLevel .gameContainer-inner,
+  .newLevel .gameContainer-inner,
   .viewLevel .gameContainer-inner {
     position: static;
   }
@@ -553,22 +556,20 @@ body.ngdialog-open {
   }
 }
 .listLevels {
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  background-color: #151515;
-  float: left;
   max-height: 100%;
   height: 100%;
   overflow: hidden;
-  width: 10%;
 }
-.listLevels h2,
 .listLevels .form-group {
   padding: 0 3px;
 }
 .listLevels .createIcon,
 .listLevels .filterIcon {
-  float: right;
-  margin: 0 6px;
+  margin: 0 12px;
+}
+.editLevel,
+.newLevel {
+  padding: 6px;
 }
 .outer.game {
   display: inline-block;
@@ -633,10 +634,6 @@ body.ngdialog-open {
 .top-grid {
   float: right;
 }
-.theCountdown {
-  width: 100px;
-  /* magic number shame to quickfix #11 */
-}
 .unselected {
   background-color: #e2e2e2;
 }
@@ -699,17 +696,14 @@ body.ngdialog-open {
   position: relative;
 }
 .sign-on-form {
-  margin: auto;
   max-width: 300px;
   display: inline-block;
   padding-top: 6px;
 }
-.sign-on-form .form-group {
-  display: inline-block;
-  margin-right: 6px;
-}
-.sign-on-form .form-group .control-label {
-  margin-right: 6px;
+@media screen and (max-width: 1024px) {
+  .sign-on-form {
+    margin: 0 auto;
+  }
 }
 .btn-remove-account {
   top: 10px;

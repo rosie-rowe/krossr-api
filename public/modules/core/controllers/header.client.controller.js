@@ -25,12 +25,19 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$tim
 			item.isShowing = !item.isShowing;
 		};
 
+		$scope.openLevelSelect = function () {
+			ngDialog.open({
+				template: 'modules/levels/views/list-levels.client.view.html',
+				scope: $scope
+			});
+		};
+
 		$scope.openEditProfile = function() {
 			ngDialog.open({
 				template: 'modules/users/views/settings/edit-profile.client.view.html'
 			});
-		}
-
+		};
+		
 		$scope.openHelp = function() {
 			ngDialog.open({
 				template: 'modules/core/views/help.client.view.html'
@@ -53,10 +60,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$tim
 			Utils.setCurrentLevel();
 			$scope.isCollapsed = true;
 			$scope.signInIsShowing = false;
-		});
-
-		$scope.$watch(function() { return Utils.currentLevel; }, function(level) {
-			$scope.level = level;
 		});
 	}
 ]);

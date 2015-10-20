@@ -39,14 +39,9 @@
 }
 
 .ngdialog {
-  position: fixed;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   z-index: 10000;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 
 .ngdialog-close {
@@ -75,21 +70,21 @@
 }
 
 .ngdialog-content {
+  .BoxShadowHelper(5);
+  .restrict-width;
+  
   background: @primary;
   -webkit-backface-visibility: hidden;
   -webkit-animation: ngdialog-fadein 0.5s;
   animation: ngdialog-fadein 0.5s;
-  width: 25%;
+  max-height: 95%;
+  width: auto;
   margin: 0 auto;
-  padding: @inputMargin;
+  padding: @inputMargin * 2;
   position: absolute;
   top: 1em;
   left: 0;
   right: 0;
-
-  h2 {
-    text-align: center;
-  }
 }
 
 .ngdialog.ngdialog-closing .ngdialog-content {

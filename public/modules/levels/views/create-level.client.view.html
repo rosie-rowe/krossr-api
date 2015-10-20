@@ -1,48 +1,42 @@
-<div class="hero">
-    <section class="newLevel" data-ng-controller="LevelsController">
-        <div class="page-header">
-            <h1>New Level</h1>
-        </div>
-        <div data-ng-controller="MainCtrl as ctrl" class="form-horizontal" novalidate>
-            <div class="form-group">
-                <div class="gameContainer">
-                    <div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
-                        <game ng-init="ctrl.createGameArray('new');ctrl.setGameSize();">
-                            <tile ng-repeat="i in ctrl.getSize() track by $index" editable='true'></tile>
-                        </game>
-                    </div>
-                </div>
+<section class="newLevel form-horizontal restrict-width" novalidate>
+    <div class="form-group">
+        <h2>New Level</h2>
+        <div class="controlsContainer">
+            <label class="control-label" for="name">Name</label>
+            <div class="controls">
+                <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+            </div>
+            
+            <label class="control-label" for="minutes">Time Limit</label>
+            <div class="controls">
+                <input type='text' ng-pattern="validNumber" data-ng-model="minutes" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+            </div>
 
-                <div class="controlsContainer">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
-                    
-                    <label class="control-label" for="minutes">Time Limit</label>
-                    <div class="controls">
-                        <input type='text' ng-pattern="validNumber" data-ng-model="minutes" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
-                    </div>
-
-                    <label class="control-label" for="size">Size</label>
-                    <div class="controls">
-                        <select ng-model='ctrl.options.size' ng-change="ctrl.createGameArray('new');ctrl.setGameSize();ctrl.clearAll();">
-                            <option value="25" selected>5x5</option>
-                            <option value="100">10x10</option>
-                            <option value="225">15x15</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div><button class="btn btn-primary" type="button" ng-click="ctrl.clearAll()">Clear</button></div>
-
-                <div>
-                    <button ng-disabled="error" class="btn btn-primary" ng-click="create()">
-                        <span ng-if="!error">Submit</span>
-                        <span ng-if="error" data-ng-bind="error"></span>
-                    </button>
-                </div>
+            <label class="control-label" for="size">Size</label>
+            <div class="controls">
+                <select ng-model='ctrl.options.size' ng-change="ctrl.createGameArray('new');ctrl.setGameSize();ctrl.clearAll();">
+                    <option value="25" selected>5x5</option>
+                    <option value="100">10x10</option>
+                    <option value="225">15x15</option>
+                </select>
             </div>
         </div>
-    </section>
-</div>
+
+        <div><button class="btn btn-primary" type="button" ng-click="ctrl.clearAll()">Clear</button></div>
+
+        <div>
+            <button ng-disabled="error" class="btn btn-primary" ng-click="create()">
+                <span ng-if="!error">Submit</span>
+                <span ng-if="error" data-ng-bind="error"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="gameContainer">
+        <div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
+            <game ng-init="ctrl.createGameArray('new');ctrl.setGameSize();">
+                <tile ng-repeat="i in ctrl.getSize() track by $index" editable='true'></tile>
+            </game>
+        </div>
+    </div>  
+</section>

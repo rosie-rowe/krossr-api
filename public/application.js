@@ -14,7 +14,9 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 angular.module(ApplicationConfiguration.applicationModuleName).config(['ngDialogProvider',
 	function(ngDialogProvider) {
 		ngDialogProvider.setDefaults({
-			closeByDocument: false
+			closeByDocument: false,
+			overlay: false,
+			appendTo: '#main-section'
 		});
 	}
 ]);

@@ -1,46 +1,38 @@
-<div class="hero">
-    <section class="editLevel" data-ng-controller="LevelsController" data-ng-init="findOne('edit')">
-        <div class="page-header">
-            <h1>Edit Level</h1>
-        </div>
-        <div data-ng-controller="MainCtrl as ctrl" class="form-horizontal" novalidate>
-            <div class="form-group">
-                <div class="gameContainer">
-                    <div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
-                        <game ng-init="ctrl.createGameArray('edit');ctrl.setGameSize();">
-                            <tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayoutForEdit(level.layout, $index);" editable='true'></tile>
-                        </game>
-                    </div>
-                </div>
-
-                <label class="control-label" for="name">Name</label>
-                <div class="controls">
-                    <input type="text" data-ng-model="level.name" id="name" class="form-control" placeholder="Name" required>
-                </div>
-                <label class="control-label" for="minutes">Time Limit</label>
-                <div class="controls">
-                    <input type='text' ng-pattern="validNumber" data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
-                </div>
-
-                <div>
-                    <button class="btn" type="button" ng-click="confirmClear()">Clear</button>
-                </div>
-                <div>
-                    <button ng-disabled="error" class="btn" type="button" ng-click="confirmUpdate()">
-                        <span ng-if="!error">Update</span>
-                        <span ng-if="error" ng-bind-html="error"></span>
-                    </button>
-                </div>
-                <div data-ng-if="authentication.user._id == level.user._id">
-                    <a data-ng-click="confirmRemove(level);">
-                        <button class="btn">  
-                            Delete Level
-                        </button>
-                    </a>
-                </div>
-            </div>
+<section class="editLevel form-horizontal restrict-width">
+    <div class="form-group" ng-show="level.ready">
+        <h2>Edit Level</h2>
+        <div class="gameContainer">
+            <div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
+                <game>
+                    <tile ng-repeat="i in ctrl.flatten(level.layout) track by $index" ng-init="tileCtrl.getLayoutForEdit(level.layout, $index);" editable='true'></tile>
+                </game>
             </div>
         </div>
 
-    </section>
-</div>
+        <label class="control-label" for="name">Name</label>
+        <div class="controls">
+            <input type="text" data-ng-model="level.name" id="name" class="form-control" placeholder="Name" required>
+        </div>
+        <label class="control-label" for="minutes">Time Limit</label>
+        <div class="controls">
+            <input type='text' ng-pattern="validNumber" data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+        </div>
+
+        <div>
+            <button class="btn" type="button" ng-click="confirmClear()">Clear</button>
+        </div>
+        <div>
+            <button ng-disabled="error" class="btn" type="button" ng-click="confirmUpdate()">
+                <span ng-if="!error">Update</span>
+                <span ng-if="error" ng-bind-html="error"></span>
+            </button>
+        </div>
+        <div data-ng-if="authentication.user._id == level.user._id">
+            <a data-ng-click="confirmRemove(level);">
+                <button class="btn">  
+                    Delete Level
+                </button>
+            </a>
+        </div>
+    </div>
+</section>

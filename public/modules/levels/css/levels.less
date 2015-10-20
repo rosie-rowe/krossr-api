@@ -36,6 +36,8 @@
 .gameContainer-inner {
     display: inline-block;
 
+    .editLevel &,
+    .newLevel &,
     .viewLevel & {
         position: absolute;
         bottom: 0;
@@ -45,6 +47,8 @@
     @media screen and (max-width: @mediumScreen) {
         margin: 0 auto;
 
+        .editLevel &,
+        .newLevel &,
         .viewLevel & {
             position: static;
         }
@@ -115,25 +119,23 @@
 }
 
 .listLevels {
-    .BoxShadowHelper(3);
-    background-color: darken(@primary, 5%);
-    float: left;
     max-height: 100%;
     height: 100%;
     overflow: hidden;
 
-    width: 10%;
-
-    h2,
     .form-group {
         padding: 0 (@inputMargin / 2);
     }
 
     .createIcon,
     .filterIcon {
-        float: right;
-        margin: 0 @inputMargin;
+        margin: 0 (@inputMargin * 2);
     }
+}
+
+.editLevel,
+.newLevel {
+    padding: @inputMargin;
 }
 
 .outer.game {
@@ -220,10 +222,6 @@
     -ms-transform: @transform; 
     -o-transform: @transform;
     transform: @transform; 
-}
-
-.theCountdown {
-    width: 100px; /* magic number shame to quickfix #11 */
 }
 
 .unselected {

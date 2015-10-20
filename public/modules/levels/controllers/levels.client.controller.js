@@ -32,7 +32,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			$scope.level.decomputedTimeLimit = undefined;
 		};
 
-		// Create new Level
+		// Create new Level (submit function)
 		$scope.create = function() {
 			var layout = Utils.getGameMatrix();
 
@@ -57,6 +57,12 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					$scope.error = '';
 				}, timeout)
 			});
+		};
+
+		// Create new level (load template)
+		$scope.createNewLevel = function() {
+			Utils.setCurrentLevel();
+			$scope.ctrl.currentView = 'new';
 		};
 
 		// this needs to be here so Edit can see it
@@ -126,6 +132,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Find existing Level
 		$scope.findOne = function(controller) {
+			if ($scope.level) {
+				$scope.level.ready = false;
+			}
+
 			// store the name of the controller so we can have the same functions do different things
 			// depending on new, edit, etc.
 			$scope.controller = controller;
@@ -152,7 +162,12 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 						controller: controller
 					});
 
-					$scope.level.ready = true;
+
+					// artificial loading time, lolol. until I solve issue with switching between
+					// levels when editing causing display issues.
+					$timeout(function() {
+						$scope.level.ready = true;
+					}, 1000);
 				});
 			}
 		};
@@ -180,6 +195,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.loadLevel = function(levelId, action) {
 			$scope.selectedLevelId = levelId;
 			$scope.findOne(action);
+			$scope.ctrl.currentView = action;
 		};
 
 		// Update existing Level

@@ -47,11 +47,13 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
-<body class="ng-cloak">
-	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="header-container"></header>
-	<section class="content">
-		<section id="playable-area" resize class="container valign-outer">
-			{% block content %}{% endblock %}
+<body class="ng-cloak" data-ng-controller="MainCtrl as ctrl">
+	<section data-ng-controller="LevelsController">
+		<header data-ng-include="'/modules/core/views/header.client.view.html'" class="header-container"></header>
+		<section id="main-section" class="content">
+			<section id="playable-area" resize class="container valign-outer">
+				{% block content %}{% endblock %}
+			</section>
 		</section>
 	</section>
 

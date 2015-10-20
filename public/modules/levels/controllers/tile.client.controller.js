@@ -154,10 +154,18 @@ tileController.prototype.setTileSize = function(tileSize) {
 
 tileController.prototype.fillFromLayout = function(layout, index) {
   var coord = this.convert2D(index),
-      value = layout[coord.y][coord.x];
+      value;
 
-  if (value === true) {
-    this.fill('selected');
+  try {
+    if (layout) {
+      value = layout[coord.y][coord.x]
+
+      if (value === true) {
+        this.fill('selected');
+      }
+    }
+  } catch (e) {
+    console.log("YOU FUCKED UP!");
   }
 };
 

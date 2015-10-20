@@ -6,8 +6,8 @@ angular
     function ($scope, $timeout, shiftService, Utils) {
     var _this = this;
             
+    this.currentView = 'view';
     this.tileSize = Utils.getTileSizePx();
-    this.currentView = "'../../modules/levels/views/view-level.client.view.html'";
 
     $scope.$on('tileSizeChanged', function(e, args) {
         var newSize = Math.floor(args);
@@ -59,6 +59,10 @@ angular
 
     this.initTutorialGame = function() {
         console.log('hi');
+    };
+
+    this.toggleShowLevels = function() {
+        $scope.showLevels = !$scope.showLevels;
     };
 
     this.clearAll = Utils.clearAll.bind(Utils);

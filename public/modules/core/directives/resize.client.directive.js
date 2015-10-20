@@ -7,10 +7,10 @@ angular.module('core').directive('resize', ['$window', 'debounce', 'Utils', func
       	gameMatrix = Utils.getGameMatrix();
 
       	if (gameMatrix) {
-	      	Utils.calculatePlayableArea();
+          Utils.calculatePlayableArea();
 	      	Utils.setGameSize(gameMatrix.length);
 	      	scope.$apply();
-	    }
+        }
       }, 250));
     }
   }

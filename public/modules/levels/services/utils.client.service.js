@@ -310,8 +310,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 
 			/* Modify the current game size. */
 			setGameSize: function(widthInTiles) {
-				console.log('hit');
-
 				var finalWidth = Math.floor(playableAreaSize / 1.6),
 					finalHeight;
 
@@ -321,7 +319,11 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				gameWidth = finalWidth + 'px';
 				gameHeight = finalHeight + 'px';
 
-				$rootScope.$broadcast('gameSizeChanged', { width: gameWidth, height: gameHeight });
+				$timeout(function() {
+					$rootScope.$broadcast('gameSizeChanged', { width: gameWidth, height: gameHeight });
+				});
+				
+				console.log('wtf');
 				this.setTileSize(finalWidth, widthInTiles);
 			},
 

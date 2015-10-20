@@ -53,6 +53,8 @@ var gameController = function($scope, Utils) {
     }
 
     this.updateGameSize = function() {
+      console.log('what in sam hell');
+      console.trace();
       // don't use args, call to getGameSize so we take tutorials into account
       var newGameSettings = Utils.getGameSize($scope.tutorialMode);
 
