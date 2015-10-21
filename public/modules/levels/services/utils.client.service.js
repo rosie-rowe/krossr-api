@@ -323,7 +323,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 					$rootScope.$broadcast('gameSizeChanged', { width: gameWidth, height: gameHeight });
 				});
 				
-				console.log('wtf');
 				this.setTileSize(finalWidth, widthInTiles);
 			},
 

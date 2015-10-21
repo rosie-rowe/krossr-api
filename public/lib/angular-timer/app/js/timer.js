@@ -77,6 +77,17 @@ var timerModule = angular.module('timer', [])
           $scope.countdown = countdown;
         });
 
+        // changes for krossr, easiest to do it here.
+        $scope.$on('ngDialog.opened', function() {
+          $scope.stop();
+        });
+
+        $scope.$on('ngDialog.closed', function() {
+          $scope.resume();
+        });
+        // feel free to remove between comments if this ends up anywhere else somehow...
+        // sorry, tried to use a decorator but couldn't figure out how... will revisit
+
         function resetTimeout() {
           if ($scope.timeoutId) {
             clearTimeout($scope.timeoutId);
