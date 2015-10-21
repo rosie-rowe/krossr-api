@@ -14,20 +14,6 @@
 	</div>
 	<div class="win-notification" ng-show="gameCtrl.gameIsOver">
 		<div class="win-wrapper">
-			<div class="win-text" ng-if="gameCtrl.gameIsWon">
-				WINNER!
-				<br />
-				{{gameCtrl.winTime}} SECONDS!
-				<br />
-				<button class="btn btn-primary play-again" ng-click="ctrl.clearAll()">
-					Retry
-				</button>
-				<a href="/#!/levels">
-					<button class="btn btn-primary">
-						New Level
-					</button>
-				</a>
-			</div>
 			<div class="win-text" ng-if="gameCtrl.gameIsLost">
 				YOU LOSE!
 				<br />

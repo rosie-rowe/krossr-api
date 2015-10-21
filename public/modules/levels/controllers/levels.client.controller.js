@@ -172,6 +172,12 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			}
 		};
 
+		$scope.openLevelSelect = function () {
+			ngDialog.open({
+				template: 'modules/levels/views/list-levels.client.view.html',
+				scope: $scope
+			});
+		};
 
 		// Remove existing Level
 		$scope.remove = function(level) {

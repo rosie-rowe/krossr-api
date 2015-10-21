@@ -65,6 +65,7 @@ angular.module('levels').directive('game', [
                     fillDragBox();
                     if(gameCtrl.checkWin()) {
                         gameCtrl.setWinTime(scope.level.timeLimit - scope.level.timeRemaining);
+                        gameCtrl.openWinNotification();
                     };
                     scope.$apply();
                 });

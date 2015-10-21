@@ -27,6 +27,11 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				tileIndex.push(obj);
 			},
 
+			/* Add time to angular-timer */
+			addTime: function(timeToAdd) {
+				$rootScope.$broadcast('timer-add-cd-seconds', timeToAdd);
+			},
+
 			/* Take a given game width and subtract border widths. I either have to do this
 				or remove border-box and add them instead... doesn't really matter. */
 			adjustForBorders: function(width) {
@@ -66,12 +71,17 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 
 			/* Clear everything, to start a new game */
 			clearAll: function() {
-				var currentGameMatrix = this.getGameMatrix();
+				var currentGameMatrix = this.getGameMatrix(),
+					winTime = this.getWinTime();
 				
 				this.clearAllTiles();
 				this.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
 				this.clearTileIndex();
 				this.setCurrentPenalty(true);
+
+				if (winTime) {
+					this.addTime(winTime);
+				}
 			},
 
 			/* Given a matrix of true/false values, set every value to false */
@@ -179,8 +189,13 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				return seconds / timeScale;
 			},
 
-			draw: function() {
-				console.log('drawing');
+			// returns an index
+			filterToUserId: function(collection, userId) {
+				var returnVal = collection.filter(function(item) {
+					return item.user === userId
+				})[0];
+
+				return collection.indexOfObject(returnVal);
 			},
 
 			/* Given an index and orientation, pass a message to the tile controller
@@ -261,15 +276,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				for (; i < len; i++) {
 					_this.addTileToIndex({ tileCtrl: angular.element(allTiles[i]).scope().tileCtrl });
 				}
-			},
-
-			// returns an index
-			filterToUserId: function(collection, userId) {
-				var returnVal = collection.filter(function(item) {
-					return item.user === userId
-				})[0];
-
-				return collection.indexOfObject(returnVal);
 			},
 
 			// subtract time from the angular-timer
@@ -367,8 +373,8 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				scope.level.decomputedTimeLimit = this.decomputeTimeLimit(scope.level.timeLimit);
 			},
 
-			setWinTime: function(winTime) {
-				winTime = winTime;
+			setWinTime: function(newWinTime) {
+				winTime = newWinTime;
 				return winTime;
 			},
 

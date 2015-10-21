@@ -86,7 +86,7 @@ var timerModule = angular.module('timer', [])
           $scope.resume();
         });
         // feel free to remove between comments if this ends up anywhere else somehow...
-        // sorry, tried to use a decorator but couldn't figure out how... will revisit
+        // sorry, tried to use a decorator but was met with many errors.
 
         function resetTimeout() {
           if ($scope.timeoutId) {
@@ -318,3 +318,24 @@ var timerModule = angular.module('timer', [])
 if (typeof module !== "undefined" && typeof exports !== "undefined" && module.exports === exports){
   module.exports = timerModule;
 }
+
+// angular.module('timer').config(['$provide',
+//   function($provide) {
+//     $provide.decorator('timerDirective', ['$delegate', '$controller', function($delegate, $controller) {
+//       var directive = $delegate[0],
+//           controllerArray = directive.controller, // should be array with function as last arg
+//           controllerFuncIndex = controllerArray.length - 1,
+//           controllerFunc = controllerArray[controllerFuncIndex];
+
+//       console.log(controllerArray);
+
+//       directive.controller[controllerFuncIndex] = function() {
+//         var controller = $controller(controllerFuncIndex);
+
+//         return controller;
+//       }
+
+//       return $delegate;
+//     }]);
+//   }
+// ]);

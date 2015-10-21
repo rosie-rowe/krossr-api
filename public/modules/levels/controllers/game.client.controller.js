@@ -1,6 +1,6 @@
 'use strict';
 
-var gameController = function($scope, Utils) {
+var gameController = function($scope, Utils, ngDialog) {
     var _this = this;
 
     this.gameIsWon = false;
@@ -47,6 +47,15 @@ var gameController = function($scope, Utils) {
     this.resetTimer = Utils.resetTimer;
     this.startTimer = Utils.startTimer;
 
+    this.openWinNotification = function() {
+      console.log('uh');
+
+      ngDialog.open({
+        template: 'modules/levels/views/win-notification.client.view.html',
+        scope: $scope
+      });
+    };
+
     this.setWinTime = function(time) {
       _this.winTime = Utils.setWinTime(time);
       $scope.$digest();
@@ -71,7 +80,7 @@ var gameController = function($scope, Utils) {
     $scope.$on('gameOver', _this.lostTheGame);
 };
 
-gameController.$inject = ['$scope', 'Utils'];
+gameController.$inject = ['$scope', 'Utils', 'ngDialog'];
 
 gameController.prototype.checkForWin = function(Utils) {
   var goalMatrix = Utils.getGoalMatrix(),

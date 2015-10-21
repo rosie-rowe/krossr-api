@@ -25,13 +25,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$tim
 			item.isShowing = !item.isShowing;
 		};
 
-		$scope.openLevelSelect = function () {
-			ngDialog.open({
-				template: 'modules/levels/views/list-levels.client.view.html',
-				scope: $scope
-			});
-		};
-
 		$scope.openEditProfile = function() {
 			ngDialog.open({
 				template: 'modules/users/views/settings/edit-profile.client.view.html'
