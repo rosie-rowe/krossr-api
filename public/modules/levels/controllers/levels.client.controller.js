@@ -46,16 +46,15 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 			// Create new Level object
 			var level = new Levels ({
-				name: this.name,
+				name: this.level.name,
 				layout: layout,
-				timeLimit: Utils.computeTimeLimit(this.minutes),
+				timeLimit: Utils.computeTimeLimit(this.level.decomputedTimeLimit),
 				size: layout.length
 			});
 
 			// Redirect after save
 			level.$save(function(response) {
-				$location.path('levels/' + response._id);
-
+				$scope.loadLevel(response._id, 'edit');
 				// Clear form fields
 				$scope.name = '';
 			}, function(errorResponse) {
@@ -160,10 +159,6 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				Levels.get({ 
 					levelId: $scope.selectedLevelId
 				}).$promise.then(function(data) {
-					console.log('what the fuckkkkk');
-
-					$timeout(function() {}, 1000);
-
 					$scope.level = data;
 					Utils.setupLevel($scope);
 
