@@ -62,8 +62,6 @@ angular
                 break;
         }
 
-        console.log('HOW MANY TIMES DOES THIS RUN???');
-
         // these should be an object so i don't have to track by $index, which causes rendering issues
         _this.finalLayout.tiles = layoutForRepeater.map(function(value) {
             return {

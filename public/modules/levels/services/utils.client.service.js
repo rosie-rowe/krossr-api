@@ -88,7 +88,11 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 					winTime = this.getWinTime();
 				
 				this.clearAllTiles();
-				this.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
+
+				if (currentGameMatrix) {
+					this.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
+				}
+				
 				this.clearTileIndex();
 				this.setCurrentPenalty(true);
 

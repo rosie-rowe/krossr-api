@@ -14,7 +14,7 @@
 
         <div class="controls" ng-if="mode === 'new'">
             <label class="control-label" for="size">Size</label>
-            <select ng-model='ctrl.options.size' ng-change="ctrl.createGameArray('new');ctrl.setGameSize(ctrl.options.size);ctrl.clearAll();">
+            <select ng-model='ctrl.options.size' ng-change="createNewLevel();">
                 <option value="25" selected>5x5</option>
                 <option value="100">10x10</option>
                 <option value="225">15x15</option>

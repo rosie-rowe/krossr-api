@@ -68,7 +68,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Create new level (load template)
 		$scope.createNewLevel = function() {
-			$scope.clearAllInputs();
+			$scope.clearAll()
 			$scope.ctrl.currentView = undefined;
 
 			setGameReady(false);
