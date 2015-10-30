@@ -1,6 +1,6 @@
 'use strict';
 
-var gameController = function($scope, Utils, ngDialog) {
+var gameController = function($scope, $timeout, Utils, ngDialog) {
     var _this = this;
 
     this.gameIsWon = false;
@@ -73,14 +73,17 @@ var gameController = function($scope, Utils, ngDialog) {
       }
     }
 
-    $scope.$on('gameSizeChanged', _this.updateGameSize.bind(_this));
+    $scope.$on('gameSizeChanged', function() {
+        console.log('hi');
+        _this.updateGameSize.call(_this);
+    });
 
     // as far as I know, this has to be an event since it's triggered by a timer expiring.
     // if I think of a way to use the service better instead, I'll change it
     $scope.$on('gameOver', _this.lostTheGame);
 };
 
-gameController.$inject = ['$scope', 'Utils', 'ngDialog'];
+gameController.$inject = ['$scope', '$timeout', 'Utils', 'ngDialog'];
 
 gameController.prototype.checkForWin = function(Utils) {
   var goalMatrix = Utils.getGoalMatrix(),

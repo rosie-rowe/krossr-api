@@ -11,7 +11,14 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.showFilter = false;
 
 		var penaltyTimer,
-			timeout = 1000;
+			timeout = 1000,
+			changeGameReadyState = function(isReady) {
+				isReady ? Utils.showAllTiles() : Utils.hideAllTiles();
+				$scope.gameReady = isReady;
+			},
+			setGameReady = function(isReady) {
+				Utils.gameReady.set.call(Utils, isReady, changeGameReadyState.bind(null, isReady));
+			}
 
 		$scope.clearAll = function(controller) {
 			Utils.clearAll();
@@ -28,8 +35,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		}
 
 		$scope.clearAllInputs = function() {
-			$scope.level.name = undefined;
-			$scope.level.decomputedTimeLimit = undefined;
+			if ($scope.level) {
+				$scope.level.name = undefined;
+				$scope.level.decomputedTimeLimit = undefined;
+			}
 		};
 
 		// Create new Level (submit function)
@@ -61,8 +70,16 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Create new level (load template)
 		$scope.createNewLevel = function() {
+			$scope.clearAllInputs();
+			$scope.ctrl.currentView = undefined;
+
+			setGameReady(false);
+
 			Utils.setCurrentLevel();
+
 			$scope.ctrl.currentView = 'new';
+			$scope.ctrl.setGameSize($scope.ctrl.options.size)
+			$scope.ctrl.createGameArray('new');
 		};
 
 		// this needs to be here so Edit can see it
@@ -132,20 +149,15 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Find existing Level
 		$scope.findOne = function(controller) {
-			if ($scope.level) {
-				$scope.level.ready = false;
-			}
-
 			// store the name of the controller so we can have the same functions do different things
 			// depending on new, edit, etc.
 			$scope.controller = controller;
 
 			if ($scope.selectedLevelId) {
-				$scope.level = Levels.get({ 
+				Levels.get({ 
 					levelId: $scope.selectedLevelId
-				});
-
-				$scope.level.$promise.then(function(data) {
+				}).$promise.then(function(data) {
+					$scope.level = data;
 					Utils.setupLevel($scope);
 
 					$scope.level.timeRemaining = $scope.level.timeLimit;
@@ -161,13 +173,6 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 						layout: $scope.level.layout,
 						controller: controller
 					});
-
-
-					// artificial loading time, lolol. until I solve issue with switching between
-					// levels when editing causing display issues.
-					$timeout(function() {
-						$scope.level.ready = true;
-					}, 1000);
 				});
 			}
 		};
@@ -199,6 +204,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		};
 
 		$scope.loadLevel = function(levelId, action) {
+			$scope.ctrl.currentView = undefined;
+
+			setGameReady(false);
+
 			$scope.selectedLevelId = levelId;
 			$scope.findOne(action);
 			$scope.ctrl.currentView = action;
@@ -280,6 +289,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		            $scope.showPenalty = false;
 		        }, timeout);
 	    	}
+	    });
+
+	    $scope.$on('gameReadyChanged', function(event, args) {
+	    	changeGameReadyState(args.gameReady);
 	    });
 	}
 ]);

@@ -15,6 +15,7 @@ angular
         _this.margin = newSize / 2;
     });
 
+
     this.options = {
         size: 25
     };
@@ -46,8 +47,8 @@ angular
         }
     };
 
-    this.setGameSize = function() {
-        Utils.setGameSize(Math.sqrt(_this.options.size));
+    this.setGameSize = function(size) {
+        Utils.setGameSize(Math.sqrt(size));
     };
 
     this.createGameArray = function(controller) {

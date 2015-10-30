@@ -2,6 +2,19 @@
 
 angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 	function($timeout, $rootScope, ngDialog) {
+		function UtilsProperty(defaultValue) {
+			this.value = defaultValue;
+		};
+
+		UtilsProperty.prototype.get = function() {
+			return this.value;
+		};
+
+		UtilsProperty.prototype.set = function(newValue, setter) {
+			this.value = newValue;
+
+			if (typeof setter === 'function') setter({ 'newValue': newValue });
+		};
 		// Convert service logic
 		// ...
 		var currentLevel,
@@ -160,9 +173,9 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 					this.setGoalMatrix(args.layout);
 				}
 
+				this.clearTileIndex();
 				this.calculatePlayableArea();
 				this.createEmptyMatrix(args.numberOfTiles);
-				this.clearTileIndex();
 
 
 				/* When editing the level, we'll prepopulate the game matrix (revealed tiles) with the goal matrix,
@@ -183,6 +196,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 					default:
 						break;
 				}
+
+				this.gameReady.set(true, function(args) {
+					$timeout(function() {
+						$rootScope.$broadcast('gameReadyChanged', { gameReady: args.newValue });
+					}, 0);
+				});
 			},
 
 			decomputeTimeLimit: function(seconds) {
@@ -213,6 +232,8 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 			gameOver: function() {
 				$rootScope.$broadcast('gameOver');
 			},
+
+			gameReady: new UtilsProperty(false),
 
 			getCurrentPenalty: function() {
 				return currentPenalty;
@@ -266,6 +287,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				return angular.element(selector).outerWidth();
 			},
 
+			/* this has to be done in order to make sure that we don't see leftover tiles from the last screen when switching betwen levels
+			 * I believe this is because of needing to track the tiles by $index when using ng-repeat, but I could be wrong */	
+			hideAllTiles: function() {
+				angular.element('.tile').hide();
+			},
+
 			/* When setting up the game, also cache the tiles for faster access later */
 			indexTiles: function() {
 				var allTiles = angular.element('.tile'),
@@ -294,6 +321,10 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				if (timeToResetTo) {
 					$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);
 				}
+			},
+
+			showAllTiles: function() {
+				 angular.element('.tile').show();
 			},
 
 			/* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
@@ -326,6 +357,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				gameHeight = finalHeight + 'px';
 
 				$timeout(function() {
+					console.log('hello');
 					$rootScope.$broadcast('gameSizeChanged', { width: gameWidth, height: gameHeight });
 				});
 				

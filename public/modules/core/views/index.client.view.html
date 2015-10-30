@@ -1,15 +1,5 @@
 <div class="main-viewport">
-    <div loading-animation condition="!level.ready"></div>
+    <div loading-animation condition="!gameReady"></div>
 
-    <div class="main-viewport" ng-switch="ctrl.currentView">
-    	<div class="main-viewport" ng-switch-when="view">
-    		<div class="main-viewport" ng-include="'../../modules/levels/views/view-level.client.view.html'"></div>
-    	</div>
-    	<div class="main-viewport" ng-switch-when="edit">
-    		<div class="main-viewport" ng-include="'../../modules/levels/views/edit-level.client.view.html'"></div>
-    	</div>
-    	<div class="main-viewport" ng-switch-when="new">
-    		<div class="main-viewport" ng-include="'../../modules/levels/views/create-level.client.view.html'"></div>
-    	</div>
-    </div>
+    <level ng-if="gameReady" class="main-viewport" mode="ctrl.currentView" ctrl="ctrl" level="level"></level>
 </div>

@@ -14,7 +14,7 @@
 
             <label class="control-label" for="size">Size</label>
             <div class="controls">
-                <select ng-model='ctrl.options.size' ng-change="ctrl.createGameArray('new');ctrl.setGameSize();ctrl.clearAll();">
+                <select ng-model='ctrl.options.size' ng-change="ctrl.createGameArray('new');ctrl.setGameSize(ctrl.options.size);ctrl.clearAll();">
                     <option value="25" selected>5x5</option>
                     <option value="100">10x10</option>
                     <option value="225">15x15</option>
@@ -34,7 +34,7 @@
 
     <div class="gameContainer">
         <div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
-            <game ng-init="ctrl.createGameArray('new');ctrl.setGameSize();">
+            <game ng-init="ctrl.setGameSize(ctrl.options.size);ctrl.createGameArray('new');">
                 <tile ng-repeat="i in ctrl.getSize() track by $index" editable='true'></tile>
             </game>
         </div>

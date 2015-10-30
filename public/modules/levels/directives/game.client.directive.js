@@ -88,7 +88,6 @@ angular.module('levels').directive('game', [
 
                     if (scope.tutorialMode) {
                         scope.ctrl.createGameArray('tutorial');
-                        scope.ctrl.setGameSize()
                     }
                 };
 

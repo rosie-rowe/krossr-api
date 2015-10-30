@@ -136,7 +136,7 @@ tileController.prototype.getBorderColors = function(sideLength, direction, index
       break;
   }
   if (canColor) {
-    return "1px solid #FFF"
+    return "1px solid #222"
   }
 };
 
