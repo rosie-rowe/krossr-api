@@ -15,7 +15,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['ngDialog
 	function(ngDialogProvider) {
 		ngDialogProvider.setDefaults({
 			closeByDocument: false,
-			overlay: false,
+			overlay: true,
 			appendTo: '#main-section'
 		});
 	}

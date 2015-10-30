@@ -15,6 +15,15 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 
 			if (typeof setter === 'function') setter({ 'newValue': newValue });
 		};
+
+        $rootScope.$on('ngDialog.opened', function() {
+          $rootScope.$broadcast('timer-stop');
+        });
+
+        $rootScope.$on('ngDialog.closed', function() {
+          $rootScope.$broadcast('timer-start');
+        });
+
 		// Convert service logic
 		// ...
 		var currentLevel,
@@ -92,7 +101,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				if (currentGameMatrix) {
 					this.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
 				}
-				
+
 				this.clearTileIndex();
 				this.setCurrentPenalty(true);
 

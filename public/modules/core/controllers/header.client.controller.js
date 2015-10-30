@@ -25,29 +25,6 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$tim
 			item.isShowing = !item.isShowing;
 		};
 
-		$scope.openEditProfile = function() {
-			ngDialog.open({
-				template: 'modules/users/views/settings/edit-profile.client.view.html'
-			});
-		};
-		
-		$scope.openHelp = function() {
-			ngDialog.open({
-				template: 'modules/core/views/help.client.view.html'
-			});
-		};
-
-		$scope.openSignIn = function() {
-			ngDialog.open({
-				template: 'modules/users/views/authentication/signin.client.view.html'
-			});
-		};
-
-		$scope.openSignUp = function() {
-			ngDialog.open({
-				template: 'modules/users/views/authentication/signup.client.view.html'
-			});
-		}
 		// Collapsing the menu after navigation
 		$scope.$on('$stateChangeSuccess', function() {
 			Utils.setCurrentLevel();

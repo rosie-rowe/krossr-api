@@ -8,27 +8,39 @@
 				</li>
 			</ul>
 
-			<ul class="nav navbar-nav" ng-click="openEditProfile()" data-ng-if="authentication.user">
+			<ul class="nav navbar-nav"
+				ng-dialog="modules/users/views/settings/edit-profile.client.view.html"
+				ng-dialog-close-previous
+				data-ng-if="authentication.user">
 				<li>
 					<i class="fa fa-user"></i>
 					<div>{{ authentication.user.username }}</div>
 				</li>
 			</ul>
 
-			<ul class="nav navbar-nav" ng-click="openSignUp()" data-ng-if="!authentication.user">
+			<ul class="nav navbar-nav"
+				ng-dialog="modules/users/views/authentication/signup.client.view.html"
+				ng-dialog-close-previous
+				data-ng-if="!authentication.user">
 				<li>
 					<i class="fa fa-user"></i>
 					<div>Sign Up</div>
 				</li>
 			</ul>
 
-			<ul class="nav navbar-nav" ng-click="openSignIn()" data-ng-if="!authentication.user"> <li>
+			<ul class="nav navbar-nav"
+				ng-dialog="modules/users/views/authentication/signin.client.view.html"
+				ng-dialog-close-previous
+				data-ng-if="!authentication.user">
+				<li>
 					<i class="fa fa-user"></i>
 					<div>Sign In</div>
 				</li>
 			</ul>
 
-			<ul class="nav navbar-nav" ng-click="openHelp()">
+			<ul class="nav navbar-nav"
+				ng-dialog="modules/core/views/help.client.view.html"
+				ng-dialog-close-previous>
 				<li>
 					<i class="fa fa-question"></i>
 					<div>Help</div>
