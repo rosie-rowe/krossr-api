@@ -16,7 +16,6 @@ angular.module('levels').directive('level', [
                 var pvt = {};
 
                 pvt.init = function() {
-                    console.log('HI! You are in ' + scope.mode + ' mode!');
                 };
 
                 pvt.init();

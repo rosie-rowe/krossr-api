@@ -110,6 +110,11 @@ angular.module('levels').directive('tile', [
                 });
 
                 pvt.init();
+
+                // this is necessary to prevent tiles from previous ng-repeat from displaying when switching levels
+                scope.$on('$destroy', function() {
+                    elem.remove(); 
+                });
             }
         }
     }

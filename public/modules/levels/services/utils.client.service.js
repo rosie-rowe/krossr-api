@@ -287,12 +287,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				return angular.element(selector).outerWidth();
 			},
 
-			/* this has to be done in order to make sure that we don't see leftover tiles from the last screen when switching betwen levels
-			 * I believe this is because of needing to track the tiles by $index when using ng-repeat, but I could be wrong */	
-			hideAllTiles: function() {
-				angular.element('.tile').hide();
-			},
-
 			/* When setting up the game, also cache the tiles for faster access later */
 			indexTiles: function() {
 				var allTiles = angular.element('.tile'),
@@ -321,10 +315,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				if (timeToResetTo) {
 					$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);
 				}
-			},
-
-			showAllTiles: function() {
-				 angular.element('.tile').show();
 			},
 
 			/* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */

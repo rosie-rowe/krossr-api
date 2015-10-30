@@ -8,6 +8,12 @@ angular
             
     this.currentView = 'view';
     this.tileSize = Utils.getTileSizePx();
+    this.finalLayout = {};
+    this.flatten = Utils.flatten;
+
+    this.getSize = function() {
+        return _this.flatten(Utils.getGameMatrix());
+    };
 
     $scope.$on('tileSizeChanged', function(e, args) {
         var newSize = Math.floor(args);
@@ -19,8 +25,6 @@ angular
     this.options = {
         size: 25
     };
-
-    this.flatten = Utils.flatten;
       
     this.keydown = function(event) {
         //debugger;
@@ -37,14 +41,35 @@ angular
         }
     };
 
-    this.getSize = function() {
-        return _this.flatten(Utils.getGameMatrix());
-    };
-
     this.getLines = function(layout) {
         if (layout) {
             return layout;
         }
+    };
+
+    this.getLayoutForRepeater = function(mode, layout) {
+        // use finalLayout from above to prevent calculating this more than once
+        var layoutForRepeater;
+
+        switch (mode) {
+            case 'view':
+            case 'edit':
+                layoutForRepeater = $scope.ctrl.flatten(layout);
+                break;
+
+            case 'new':
+                layoutForRepeater =  $scope.ctrl.getSize();
+                break;
+        }
+
+        console.log('HOW MANY TIMES DOES THIS RUN???');
+
+        // these should be an object so i don't have to track by $index, which causes rendering issues
+        _this.finalLayout.tiles = layoutForRepeater.map(function(value) {
+            return {
+                selected: value
+            };
+        });
     };
 
     this.setGameSize = function(size) {

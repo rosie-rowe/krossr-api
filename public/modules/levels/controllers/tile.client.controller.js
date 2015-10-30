@@ -7,14 +7,20 @@ var tileController = function($scope, Utils, shiftService) {
 
     this.fill('empty');
 
+    if ($scope.ctrl.currentView === 'edit'
+        && $scope.ctrl.finalLayout
+        && $scope.ctrl.finalLayout.tiles
+        && $scope.ctrl.finalLayout.tiles[$scope.$index]
+        && $scope.ctrl.finalLayout.tiles[$scope.$index].selected) {
+          this.fill('selected');
+        } else {
+          this.fill('empty');
+        }
+
     this.change = function(index, initState, changeTo) {
         if (this.editable === 'true') {
             _this.changeTile(index, initState, changeTo, goalMatrix, shiftService, Utils);
         }
-    };
-
-    this.getLayoutForEdit = function(layout, index) {
-        _this.fillFromLayout(layout, index);
     };
 
     this.fillBorders = function(direction, index) {
@@ -150,23 +156,6 @@ tileController.prototype.setTileSize = function(tileSize) {
   tileSize = Math.floor(tileSize);
   this.width = tileSize + 'px';
   this.height = tileSize + 'px';
-};
-
-tileController.prototype.fillFromLayout = function(layout, index) {
-  var coord = this.convert2D(index),
-      value;
-
-  try {
-    if (layout) {
-      value = layout[coord.y][coord.x]
-
-      if (value === true) {
-        this.fill('selected');
-      }
-    }
-  } catch (e) {
-    console.log("YOU FUCKED UP!");
-  }
 };
 
 angular

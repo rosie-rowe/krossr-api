@@ -13,17 +13,16 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		var penaltyTimer,
 			timeout = 1000,
 			changeGameReadyState = function(isReady) {
-				isReady ? Utils.showAllTiles() : Utils.hideAllTiles();
 				$scope.gameReady = isReady;
 			},
 			setGameReady = function(isReady) {
 				Utils.gameReady.set.call(Utils, isReady, changeGameReadyState.bind(null, isReady));
 			}
 
-		$scope.clearAll = function(controller) {
+		$scope.clearAll = function(action) {
 			Utils.clearAll();
 
-			switch (controller) {
+			switch (action) {
 				case 'edit':
 				case 'new':
 					$scope.clearAllInputs();
@@ -80,6 +79,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			$scope.ctrl.currentView = 'new';
 			$scope.ctrl.setGameSize($scope.ctrl.options.size)
 			$scope.ctrl.createGameArray('new');
+			$scope.ctrl.getLayoutForRepeater('new');
 		};
 
 		// this needs to be here so Edit can see it
@@ -149,6 +149,9 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Find existing Level
 		$scope.findOne = function(controller) {
+			$scope.ctrl.finalLayout = {};
+			$scope.level = {};
+
 			// store the name of the controller so we can have the same functions do different things
 			// depending on new, edit, etc.
 			$scope.controller = controller;
@@ -157,6 +160,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				Levels.get({ 
 					levelId: $scope.selectedLevelId
 				}).$promise.then(function(data) {
+					console.log('what the fuckkkkk');
+
+					$timeout(function() {}, 1000);
+
 					$scope.level = data;
 					Utils.setupLevel($scope);
 
@@ -173,6 +180,9 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 						layout: $scope.level.layout,
 						controller: controller
 					});
+
+					$scope.ctrl.getLayoutForRepeater(controller, $scope.level.layout);
+					$scope.ctrl.currentView = controller;
 				});
 			}
 		};
@@ -210,7 +220,6 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 			$scope.selectedLevelId = levelId;
 			$scope.findOne(action);
-			$scope.ctrl.currentView = action;
 		};
 
 		// Update existing Level
