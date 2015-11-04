@@ -85,6 +85,11 @@
   top: 1em;
   left: 0;
   right: 0;
+  overflow: hidden;
+
+  @media screen and (max-width: @mediumScreen) {
+    height: 95%;
+  }
 }
 
 .ngdialog.ngdialog-closing .ngdialog-content {

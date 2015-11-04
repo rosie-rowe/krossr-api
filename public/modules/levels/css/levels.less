@@ -127,6 +127,10 @@
     .filterIcon {
         margin: 0 (@inputMargin * 2);
     }
+
+    .list-group {
+        .Scrolly(80%);
+    }
 }
 
 .editLevel,
@@ -222,6 +226,21 @@
 
 .unselected {
     background-color: @tileColor;
+}
+
+.viewLevel {
+    h2 {
+        margin: 0;
+        text-align: center;
+    }
+
+    .form-group {
+        margin: 1em;
+
+        @media screen and (max-width: @mediumScreen) {
+            margin: 0 auto;
+        }
+    }
 }
 
 .vertical-line {

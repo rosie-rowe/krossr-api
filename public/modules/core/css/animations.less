@@ -33,8 +33,15 @@
 	}
 }
 
+/* taking the animation out of context makes it possible to use it without making scrollbars appear */
 [loading-animation] {
-	height: 100%;
+	position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    z-index: 0; /* not clickable */
 }
 
 .loadingAnimation {
@@ -42,11 +49,9 @@
 	width: 100%;
 	display: table;
 	text-align: center;
-	z-index: 9001; /* above the level */
 
 	&.ng-hide  {
 		display: table !important;
-		z-index: 0; /* way below the level */
 	}
 }
 

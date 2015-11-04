@@ -1,5 +1,5 @@
-<section class="viewLevel">
-    <div class="form-group form-horizontal restrict-width" ng-if="mode === 'edit' || mode === 'new'">
+<div class="viewLevel">
+    <div class="form-group form-horizontal restrict-width" ng-if="['edit', 'new'].indexOf(mode) > -1">
         <h2>{{ mode }} level</h2>
 
         <div class="controls">
