@@ -50,7 +50,7 @@
     </div>
 
     <div class="list-group">
-        <div data-ng-repeat="level in levels track by $index" ng-class="{'odd': $index % 2 !== 0}" class="list-group-item level">
+        <div data-ng-repeat="level in levels track by $id(level)" ng-class="{'odd': $index % 2 !== 0}" class="list-group-item level">
             <a class="playButton" ng-click="loadLevel('{{level._id}}', 'view'); closeThisDialog();">
                 <i class="fa fa-play"></i>
             </a>
