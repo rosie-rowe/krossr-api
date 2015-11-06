@@ -267,7 +267,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		};
 
 		$scope.setSortDirection = function(sort_direction) {
-			$scope.sortDirection = sort_direction ? sort_direction : '+';
+			$scope.sortDirection = sort_direction ? sort_direction : '';
 			$scope.find();
 		};
 
