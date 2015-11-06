@@ -13,7 +13,6 @@ angular.module('levels').directive('numberGrid', [
 				ctrl: '='
 			},
 			link: function postLink(scope, element, attrs, numGridCtrl) {
-				numGridCtrl.createGrouping(scope.orientation);
 			}
 		};
 	}
