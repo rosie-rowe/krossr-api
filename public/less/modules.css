@@ -2,8 +2,8 @@
 [ui-view].ng-leave {
   -webkit-transition: opacity 0.3s ease-in-out;
   -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
   -o-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
 }
 [ui-view].ng-enter {
   opacity: 0;
@@ -20,7 +20,9 @@
 }
 .animate-hide {
   -webkit-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
   opacity: 1;
 }
 .animate-hide.ng-hide {
@@ -115,9 +117,6 @@ ul {
 }
 ::-webkit-input-placeholder {
   font-family: 'Raleway';
-}
-#playable-area {
-  height: 100%;
 }
 .btn {
   background-color: #008287;
@@ -317,6 +316,9 @@ ul {
 .ng-valid.ng-dirty {
   border-color: #008287;
 }
+.playable-area {
+  height: 100%;
+}
 .pull-right {
   float: right;
 }
@@ -413,20 +415,23 @@ ul {
   left: 0;
   -webkit-backface-visibility: hidden;
   -webkit-animation: ngdialog-fadein 0.1s;
+  -moz-animation: ngdialog-fadein 0.1s;
   animation: ngdialog-fadein 0.1s;
 }
 .ngdialog.ngdialog-closing .ngdialog-overlay {
   -webkit-backface-visibility: hidden;
   -webkit-animation: ngdialog-fadeout 0.1s;
+  -moz-animation: ngdialog-fadeout 0.1s;
   animation: ngdialog-fadeout 0.1s;
 }
 .ngdialog-content {
+  -webkit-animation: ngdialog-fadein 0.1s;
+  -moz-animation: ngdialog-fadein 0.1s;
+  animation: ngdialog-fadein 0.1s;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   max-width: 300px;
   background: #222222;
   -webkit-backface-visibility: hidden;
-  -webkit-animation: ngdialog-fadein 0.1s;
-  animation: ngdialog-fadein 0.1s;
   max-height: 95%;
   width: auto;
   margin: 0 auto;
@@ -448,9 +453,10 @@ ul {
   }
 }
 .ngdialog.ngdialog-closing .ngdialog-content {
-  -webkit-backface-visibility: hidden;
   -webkit-animation: ngdialog-fadeout 0.1s;
+  -moz-animation: ngdialog-fadeout 0.1s;
   animation: ngdialog-fadeout 0.1s;
+  -webkit-backface-visibility: hidden;
 }
 .ngdialog-close:before {
   font-family: 'Helvetica', Arial, sans-serif;
@@ -588,7 +594,6 @@ body.ngdialog-open {
   padding: 6px;
 }
 .outer.game {
-  display: inline-block;
   float: right;
   /* Has to be important to override ng-style */
 }

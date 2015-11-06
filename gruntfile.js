@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/*[!tests]*/*.js'],
 		clientViews: ['public/modules/**/views/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/*[!tests]*/*.js'],
-		clientCSS: ['public/modules/**/*.css', 'public/less/*'],
+		clientCSS: ['public/modules/**/*.css', 'public/less/modules.css'],
 		clientLESS: ['public/**/css/*.less', 'public/less/*'],
 		mochaTests: ['app/tests/**/*.js']
 	};

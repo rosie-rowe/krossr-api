@@ -59,24 +59,21 @@
   bottom: 0;
   left: 0;
   -webkit-backface-visibility: hidden;
-  -webkit-animation: ngdialog-fadein 0.1s;
-  animation: ngdialog-fadein 0.1s;
+  .Animation(ngdialog-fadein 0.1s);
 }
 
 .ngdialog.ngdialog-closing .ngdialog-overlay {
   -webkit-backface-visibility: hidden;
-  -webkit-animation: ngdialog-fadeout 0.1s;
-  animation: ngdialog-fadeout 0.1s;
+  .Animation(ngdialog-fadeout 0.1s);
 }
 
 .ngdialog-content {
+  .Animation(ngdialog-fadein 0.1s);
   .BoxShadowHelper(5);
   .restrict-width;
   
   background: @primary;
   -webkit-backface-visibility: hidden;
-  -webkit-animation: ngdialog-fadein 0.1s;
-  animation: ngdialog-fadein 0.1s;
   max-height: 95%;
   width: auto;
   margin: 0 auto;
@@ -93,9 +90,8 @@
 }
 
 .ngdialog.ngdialog-closing .ngdialog-content {
+  .Animation(ngdialog-fadeout 0.1s);
   -webkit-backface-visibility: hidden;
-  -webkit-animation: ngdialog-fadeout 0.1s;
-  animation: ngdialog-fadeout 0.1s;
 }
 
 .ngdialog-close:before {
