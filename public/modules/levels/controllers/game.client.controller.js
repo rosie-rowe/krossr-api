@@ -4,6 +4,7 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     var _this = this;
 
     this.gameIsWon = false;
+    this.gameIsLost = false;
     this.winTime = 0;
 
     this.clearDragBox();
@@ -57,7 +58,12 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
     // as far as I know, this has to be an event since it's triggered by a timer expiring.
     // if I think of a way to use the service better instead, I'll change it
-    $scope.$on('gameOver', $scope.openWinLoseNotification);
+    $scope.$on('gameOver', function() {
+      if (!_this.gameIsLost) {
+        $scope.openWinLoseNotification();
+        _this.gameIsLost = true;
+      }
+    });
 };
 
 gameController.$inject = ['$scope', '$timeout', 'Utils', 'ngDialog'];

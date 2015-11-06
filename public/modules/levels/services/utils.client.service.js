@@ -360,7 +360,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				gameHeight = finalHeight + 'px';
 
 				$timeout(function() {
-					console.log('hello');
 					$rootScope.$broadcast('gameSizeChanged', { width: gameWidth, height: gameHeight });
 				});
 				

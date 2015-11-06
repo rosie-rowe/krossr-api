@@ -93,6 +93,7 @@ angular.module('levels').directive('game', [
                  * we'll click a hidden button with the directive instead of opening it the js way */
                 scope.openWinLoseNotification = function() {
                     console.log('hax!');
+                    console.trace();
                     angular.element('.js-dialog-hax').click();
                 };
 
