@@ -1,9 +1,4 @@
 /* Styles go here */
-
-.averageRating {
-    display: inline-block;
-}
-
 .bottom-row-inner {
     @media screen and (max-width: @largeScreen) {
         display: inline-block;
@@ -103,14 +98,20 @@
         }
     }
 
+    .averageRating,
+    .timeLimit,
     .size {
-        cursor: pointer;
         display: inline-block;
         margin: 0 1em 0 0;
 
         @media screen and (max-width: @mediumScreen) {
             display: block;
         }
+    }
+
+    .editButton,
+    .size {
+        cursor: pointer;
     }
 }
 

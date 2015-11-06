@@ -51,7 +51,7 @@
     <div ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="gameReady">
         <div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
             <div class="top row">
-                <div number-grid ng-if="mode === 'view'" ctrl="ctrl" layout="level.layout" orientation="vertical" class="top-grid"></div>
+                <div number-grid ng-if="level && level.layout && mode === 'view'" ctrl="ctrl" layout="level.layout" orientation="vertical" class="top-grid"></div>
             </div>
             
             <div class="bottom row">
@@ -59,7 +59,7 @@
                     <tile ng-repeat="i in ctrl.finalLayout.tiles" editable='true'></tile>
                 </game>
 
-                <div number-grid ng-if="mode === 'view'" layout="level.layout" ctrl="ctrl" orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
+                <div number-grid ng-if="level && level.layout && mode === 'view'" layout="level.layout" ctrl="ctrl" orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
             </div>
         </div>
     </div>

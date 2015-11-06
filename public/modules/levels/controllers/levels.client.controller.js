@@ -7,7 +7,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
 		$scope.sizeRestriction = '';
-		$scope.sortDirection = '+';
+		$scope.sortDirection = '';
 		$scope.showFilter = false;
 
 		var penaltyTimer,
@@ -138,6 +138,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				// Calculate the size for each level so we can display it to the screen & sort by size
 				for (; i < len; i++ ) {
 					currentLevel = allLevels[i];
+					Utils.setupLevel(currentLevel, $scope.authentication.user._id);
 					currentLevel.prettySize = Utils.prettySize(currentLevel.layout.length);
 					currentLevel.averageRating = Utils.average(currentLevel.ratings, 'rating');
 				}
@@ -158,7 +159,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					levelId: $scope.selectedLevelId
 				}).$promise.then(function(data) {
 					$scope.level = data;
-					Utils.setupLevel($scope);
+					Utils.setupLevel($scope.level, $scope.authentication.user._id);
 
 					$scope.level.timeRemaining = $scope.level.timeLimit;
 

@@ -41,12 +41,6 @@ angular
         }
     };
 
-    this.getLines = function(layout) {
-        if (layout) {
-            return layout;
-        }
-    };
-
     this.getLayoutForRepeater = function(mode, layout) {
         // use finalLayout from above to prevent calculating this more than once
         var layoutForRepeater;

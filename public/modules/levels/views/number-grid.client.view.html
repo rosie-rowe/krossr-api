@@ -3,7 +3,7 @@
 	ng-style="{ 'height': ctrl.tileSize,
 				'line-height': ctrl.tileSize,
 				'font-size': ctrl.getFontSize() }"
-	ng-repeat="i in ctrl.getLines(layout) track by $index"
+	ng-repeat="i in layout track by $index"
 	class="{{orientation}}-line"
 	ng-class-even="'even'"
 	ng-class-odd="'odd'"
@@ -17,7 +17,7 @@
 		'width': ctrl.tileSize,
 		'font-size': ctrl.getFontSize()
 	}"
-	ng-repeat="i in ctrl.getLines(layout) track by $index"
+	ng-repeat="i in layout track by $index"
 	class="{{orientation}}-line"
 	ng-class-even="'even'"
 	ng-class-odd="'odd'"

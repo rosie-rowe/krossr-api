@@ -391,14 +391,14 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 			},
 
 			// common logic to findOne and update
-			setupLevel: function(scope) {
-				var yourRating = scope.level.yourRatingIndex = this.filterToUserId(scope.level.ratings, scope.authentication.user._id);
+			setupLevel: function(level, yourUserId) {
+				var yourRating = level.yourRatingIndex = this.filterToUserId(level.ratings, yourUserId);
 
 				if (typeof yourRating !== 'undefined' && yourRating !== -1) {
-					scope.level.yourRating = scope.level.ratings[yourRating].rating;
+					level.yourRating = level.ratings[yourRating].rating;
 				}
 
-				scope.level.decomputedTimeLimit = this.decomputeTimeLimit(scope.level.timeLimit);
+				level.decomputedTimeLimit = this.decomputeTimeLimit(level.timeLimit);
 			},
 
 			setWinTime: function(newWinTime) {
@@ -428,7 +428,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				level.size = level.layout.length;
 
 				level.$update(function() {
-					_this.setupLevel(scope);
+					_this.setupLevel(level, scope.authentication.user._id);
 					scope.level.timeRemaining = timeRemaining;
 				}, function(errorResponse) {
 					scope.error = errorResponse.data.message;

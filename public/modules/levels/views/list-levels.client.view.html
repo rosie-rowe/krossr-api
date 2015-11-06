@@ -36,13 +36,14 @@
                     <option value="">None</option>
                     <option value="created">Created Date</option>
                     <option value="name">Name</option>
+                    <option value="timeLimit">Time Limit</option>
                 </select>
             </div>
 
             <div class="queryInput">
                 <label class="control-label">Sort direction</label>
                 <select ng-model="sortDirection" ng-change="setSortDirection(sortDirection)">
-                    <option value="+">Asc</option>
+                    <option value="">Asc</option>
                     <option value="-">Desc</option>
                 </select>
             </div>
@@ -62,6 +63,9 @@
             <div class="size" data-ng-bind="level.prettySize" ng-click="setSizeRestriction(level.size)"></div>
             <div class="averageRating">
                 Avg: {{ ::level.averageRating || "n/a"}} 
+            </div>
+            <div class="timeLimit">
+                {{ ::level.decomputedTimeLimit }}m
             </div>
         </div>
     </div>

@@ -143,7 +143,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 				coord,
 				currentGroupAsArray = Object.keys(currentGroup),
 				i = 0,
-				j,
+				j = 0,
 				groupLen = currentGroupAsArray.length,
 				entry,
 				entryLen,
@@ -153,7 +153,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 				entry = currentGroup[currentGroupAsArray[i]];
 				entryLen = entry.length;
 
-				for (j = 0; j < entryLen; j++) {
+				for (; j < entryLen; j++) {
 					value = entry[j];
 
 					if (value.coord) {
@@ -199,6 +199,8 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 		/* For a given row or column, compute its number line (guide numbers on the sides of the board */
 		$scope.getLineContent = function(index, orientation) {
+			console.log('how many times does this even run? ');
+
 			if (!hasGroup) {
 				currentGroup = calculateGroup(index, orientation);
 				hasGroup = true;
@@ -225,7 +227,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 		};
 
 		pvt.init = function() {
-			console.log('init number line!');
+			//console.log('init number line!');
 		};
 
 		pvt.init();
