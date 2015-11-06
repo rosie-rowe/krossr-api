@@ -3,8 +3,8 @@
 var gameController = function($scope, $timeout, Utils, ngDialog) {
     var _this = this;
 
-    this.gameIsWon = false;
-    this.gameIsLost = false;
+    $scope.gameIsWon = false;
+    $scope.gameIsLost = false;
     this.winTime = 0;
 
     this.clearDragBox();
@@ -12,7 +12,7 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     this.checkWin = function() {
       var winner = _this.checkForWin(Utils);
       if (winner) {
-        _this.gameIsWon = true;
+        $scope.gameIsWon = true;
         Utils.stopTimer();
         $scope.$digest();
         return true;
@@ -34,6 +34,13 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     this.indexTiles = Utils.indexTiles.bind(Utils);
     this.resetTimer = Utils.resetTimer;
     this.startTimer = Utils.startTimer;
+
+    this.openWinLoseNotification = function() {
+      ngDialog.open({
+        template: "modules/levels/views/win-notification.client.view.html",
+        scope: $scope
+      });
+    }
 
     this.setWinTime = function(time) {
       _this.winTime = Utils.setWinTime(time);
@@ -59,9 +66,10 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     // as far as I know, this has to be an event since it's triggered by a timer expiring.
     // if I think of a way to use the service better instead, I'll change it
     $scope.$on('gameOver', function() {
-      if (!_this.gameIsLost) {
-        $scope.openWinLoseNotification();
-        _this.gameIsLost = true;
+      if (!$scope.gameIsLost) {
+        $scope.gameIsWon = false;
+        $scope.gameIsLost = true;
+        _this.openWinLoseNotification();
       }
     });
 };

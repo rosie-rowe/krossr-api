@@ -73,8 +73,6 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 			setGameReady(false);
 
-			Utils.setCurrentLevel();
-
 			$scope.ctrl.currentView = 'new';
 			$scope.ctrl.setGameSize($scope.ctrl.options.size)
 			$scope.ctrl.createGameArray('new');
@@ -165,8 +163,6 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					$scope.level.timeRemaining = $scope.level.timeLimit;
 
 					var flatLayout = Utils.flatten(data.layout);
-
-					Utils.setCurrentLevel($scope.level);
 
 					Utils.calculatePlayableArea();
 

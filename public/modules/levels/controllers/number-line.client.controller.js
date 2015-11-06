@@ -6,7 +6,8 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			sideLength = goalMatrix.length,
 			lineContent = [], // keep lineContent in closure so we maintain it across calls back to an instance of the controller,
 			currentGroup = {}, // do the same for currentGroup
-			hasGroup = false; // when a group is created, this is set to true so we know not to create it again
+			hasGroup = false, // when a group is created, this is set to true so we know not to create it again
+			pvt = {}; 
 
 		$scope.cssClass = '';
 
@@ -223,5 +224,10 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 			return $scope.orientation === 'horizontal' ? (tileSize / 2) + 'px' : tileSize + 'px';
 		};
 
+		pvt.init = function() {
+			console.log('init number line!');
+		};
+
+		pvt.init();
 	}
 ]);

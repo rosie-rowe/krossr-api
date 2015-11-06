@@ -1,6 +1,6 @@
-<h2>You {{ gameCtrl.gameIsWon ? 'win' : 'lose' }}</h2>
+<h2>You {{ gameIsWon ? 'win' : 'lose' }}</h2>
 
-<span ng-if="winner">That took you {{ gameCtrl.winTime }} seconds!</span>
+<span ng-if="gameIsWon">That took you {{ gameCtrl.winTime }} seconds!</span>
 
 <button class="btn btn-primary play-again" ng-click="closeThisDialog();ctrl.clearAll();">Retry</button>
 <button class="btn btn-primary" ng-click="closeThisDialog();ctrl.clearAll();openLevelSelect();">New Level</button>

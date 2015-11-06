@@ -65,14 +65,14 @@ angular.module('levels').directive('game', [
                     fillDragBox();
                     if(gameCtrl.checkWin()) {
                         gameCtrl.setWinTime(scope.level.timeLimit - scope.level.timeRemaining);
-                        scope.openWinLoseNotification();
+                        gameCtrl.openWinLoseNotification();
                     };
                     scope.$apply();
                 });
 
                 // This also works with the click event in main.controller and should always hit this one first due to bubbling
                 elem.on('click', '.play-again', function() {
-                    gameCtrl.gameIsWon = false;
+                    scope.gameIsWon = false;
 
                     // reset the time back to its original value, this might be slightly hacky but I don't want to modify angular-timer at the momen
                     gameCtrl.resetTimer(scope.level.timeLimit);
@@ -87,14 +87,6 @@ angular.module('levels').directive('game', [
                     if (scope.tutorialMode) {
                         scope.ctrl.createGameArray('tutorial');
                     }
-                };
-                
-                /* since ngDialog currently only provides the ng-dialog-close-previous for the directive version,
-                 * we'll click a hidden button with the directive instead of opening it the js way */
-                scope.openWinLoseNotification = function() {
-                    console.log('hax!');
-                    console.trace();
-                    angular.element('.js-dialog-hax').click();
                 };
 
                 pvt.init();

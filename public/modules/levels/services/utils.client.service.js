@@ -24,10 +24,9 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
           $rootScope.$broadcast('timer-start');
         });
 
-		// Convert service logic
+		// Utils service logic
 		// ...
-		var currentLevel,
-			sideLength,
+		var sideLength,
 			gameMatrix,
 			goalMatrix,
 			gameWidth,
@@ -333,11 +332,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 			/* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
 			setCoord: function(y, x, value) {
 				gameMatrix[y][x] = value;
-			},
-
-			/* Set the current level so it can be accessed for menu links */
-			setCurrentLevel: function(level) {
-				this.currentLevel = level;
 			},
 
 			setCurrentPenalty: function(resetPenalty) {

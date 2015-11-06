@@ -24,12 +24,5 @@ angular.module('core').controller('HeaderController', ['$scope', '$state', '$tim
 		$scope.toggleShowing = function(item) {
 			item.isShowing = !item.isShowing;
 		};
-
-		// Collapsing the menu after navigation
-		$scope.$on('$stateChangeSuccess', function() {
-			Utils.setCurrentLevel();
-			$scope.isCollapsed = true;
-			$scope.signInIsShowing = false;
-		});
 	}
 ]);
