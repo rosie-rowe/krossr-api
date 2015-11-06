@@ -10,13 +10,7 @@ angular.module('core').directive('loadingAnimation', ['$window', 'debounce', 'Ut
                   '</div>' +
               '</div>',
     link: function(scope, element) {
-      scope.afterShow = function() {
-        element.removeClass('really-hide');
-        console.log('why arent i seeing this');
-      };
-      scope.afterHide = function() {
-        element.addClass('really-hide');
-      }
+      
     }
   }
 }]);

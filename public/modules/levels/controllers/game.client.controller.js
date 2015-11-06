@@ -4,8 +4,6 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     var _this = this;
 
     this.gameIsWon = false;
-    this.gameIsLost = false;
-    this.gameIsOver = false;
     this.winTime = 0;
 
     this.clearDragBox();
@@ -13,7 +11,6 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     this.checkWin = function() {
       var winner = _this.checkForWin(Utils);
       if (winner) {
-        _this.gameIsOver = true;
         _this.gameIsWon = true;
         Utils.stopTimer();
         $scope.$digest();
@@ -30,31 +27,12 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
       return Utils.convertTo2D(index, Utils.getSideLength());
     }
 
-    /* Dammit! It's been years! */
-    this.lostTheGame = function() {
-      _this.gameIsOver = true;
-      // can't lose if you already won
-      if (!_this.gameIsWon) {
-        _this.gameIsLost = true;
-      }
-      $scope.$digest();
-    }
-
     this.getGameMatrix = Utils.getGameMatrix;
     this.getGameSize = Utils.getGameSize;
     this.getTileIndex = Utils.getTileIndex;
     this.indexTiles = Utils.indexTiles.bind(Utils);
     this.resetTimer = Utils.resetTimer;
     this.startTimer = Utils.startTimer;
-
-    this.openWinNotification = function() {
-      console.log('uh');
-
-      ngDialog.open({
-        template: 'modules/levels/views/win-notification.client.view.html',
-        scope: $scope
-      });
-    };
 
     this.setWinTime = function(time) {
       _this.winTime = Utils.setWinTime(time);
@@ -74,13 +52,12 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     }
 
     $scope.$on('gameSizeChanged', function() {
-        console.log('hi');
         _this.updateGameSize.call(_this);
     });
 
     // as far as I know, this has to be an event since it's triggered by a timer expiring.
     // if I think of a way to use the service better instead, I'll change it
-    $scope.$on('gameOver', _this.lostTheGame);
+    $scope.$on('gameOver', $scope.openWinLoseNotification);
 };
 
 gameController.$inject = ['$scope', '$timeout', 'Utils', 'ngDialog'];
