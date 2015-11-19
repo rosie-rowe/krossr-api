@@ -33,7 +33,7 @@
         </div>
 
         <div ng-if="mode === 'new'">
-            <button ng-disabled="error" class="btn btn-primary" ng-click="create()">
+            <button ng-disabled="error" class="btn btn-primary" ng-click="submitCreate()">
                 <span ng-if="!error">Submit</span>
                 <span ng-if="error" data-ng-bind="error"></span>
             </button>

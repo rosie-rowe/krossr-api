@@ -428,7 +428,9 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				level.size = level.layout.length;
 
 				level.$update(function() {
-					_this.setupLevel(level, scope.authentication.user._id);
+					if (scope.authentication && scope.authentication.user) {
+						_this.setupLevel(level, scope.authentication.user._id);
+					}
 					scope.level.timeRemaining = timeRemaining;
 				}, function(errorResponse) {
 					scope.error = errorResponse.data.message;

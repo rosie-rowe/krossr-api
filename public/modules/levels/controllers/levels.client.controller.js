@@ -40,8 +40,8 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			}
 		};
 
-		// Create new Level (submit function)
-		$scope.create = function() {
+		// Split out for easier testing
+		$scope.submitCreate = function() {
 			var layout = Utils.getGameMatrix();
 
 			// Create new Level object
@@ -52,17 +52,32 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				size: layout.length
 			});
 
-			// Redirect after save
-			level.$save(function(response) {
+			var levelSaveSuccess = function(response) {
 				$scope.loadLevel(response._id, 'edit');
-				// Clear form fields
-				$scope.name = '';
-			}, function(errorResponse) {
+			};
+
+			var levelSaveFailure = function(err) {
 				$scope.error = errorResponse.data.message;
 
 				$timeout(function() {
 					$scope.error = '';
 				}, timeout)
+			}
+
+			$scope.create(level, levelSaveSuccess, levelSaveFailure);
+		}
+
+		// Create new Level (submit function)
+		$scope.create = function(level, successFunc, failFunc) {
+			// Redirect after save
+			level.$save(function(response) {
+				if (typeof successFunc === 'function') {
+					successFunc(response);
+				}
+			}, function(errorResponse) {
+				if (typeof failFunc === 'function') {
+					failFunc(errorResponse);
+				}
 			});
 		};
 
@@ -138,7 +153,11 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				// Calculate the size for each level so we can display it to the screen & sort by size
 				for (; i < len; i++ ) {
 					currentLevel = allLevels[i];
-					Utils.setupLevel(currentLevel, $scope.authentication.user._id);
+
+					if ($scope.authentication && $scope.authentication.user) {
+						Utils.setupLevel(currentLevel, $scope.authentication.user._id);
+					}
+
 					currentLevel.prettySize = Utils.prettySize(currentLevel.layout.length);
 					currentLevel.averageRating = Utils.average(currentLevel.ratings, 'rating');
 				}
@@ -147,7 +166,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 
 		// Find existing Level
 		$scope.findOne = function(controller) {
-			$scope.ctrl.finalLayout = {};
+			if ($scope.ctrl) {
+				$scope.ctrl.finalLayout = {};
+			}
+
 			$scope.level = {};
 
 			// store the name of the controller so we can have the same functions do different things
@@ -159,7 +181,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					levelId: $scope.selectedLevelId
 				}).$promise.then(function(data) {
 					$scope.level = data;
-					Utils.setupLevel($scope.level, $scope.authentication.user._id);
+
+					if ($scope.authentication && $scope.authentication.user) {
+						Utils.setupLevel($scope.level, $scope.authentication.user._id);
+					}
 
 					$scope.level.timeRemaining = $scope.level.timeLimit;
 
@@ -173,8 +198,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 						controller: controller
 					});
 
-					$scope.ctrl.getLayoutForRepeater(controller, $scope.level.layout);
-					$scope.ctrl.currentView = controller;
+					if ($scope.ctrl) {
+						$scope.ctrl.getLayoutForRepeater(controller, $scope.level.layout);
+						$scope.ctrl.currentView = controller;
+					}
 				});
 			}
 		};

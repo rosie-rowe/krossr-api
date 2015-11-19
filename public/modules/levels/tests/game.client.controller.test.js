@@ -45,14 +45,9 @@
 			$location = _$location_;
 
 			// Initialize the Game controller.
-			GameController = $controller('GameController', {
+			GameController = $controller('gameController', {
 				$scope: scope
 			});
-		}));
-
-		it('Should do some controller test', inject(function() {
-			// The test logic
-			// ...
 		}));
 	});
 }());

@@ -45,14 +45,9 @@
 			$location = _$location_;
 
 			// Initialize the Tile controller.
-			TileController = $controller('TileController', {
+			TileController = $controller('tileController', {
 				$scope: scope
 			});
-		}));
-
-		it('Should do some controller test', inject(function() {
-			// The test logic
-			// ...
 		}));
 	});
 }());

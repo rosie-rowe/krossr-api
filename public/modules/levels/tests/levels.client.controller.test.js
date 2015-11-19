@@ -53,14 +53,30 @@
 		it('$scope.find() should create an array with at least one Level object fetched from XHR', inject(function(Levels) {
 			// Create sample Level using the Levels service
 			var sampleLevel = new Levels({
-				name: 'New Level'
+				id: '525a8422f6d0f87f0e407a33',
+				name: 'New Level',
+				decomputedTimeLimit: 3000,
+				layout: [[true, true, true, true, true],
+						 [true, true, true, true, true],
+						 [true, true, true, true, true],
+						 [true, true, true, true, true],
+						 [true, true, true, true, true]],
+				ratings: [],
+				prettySize: '5x5',
+				averageRating: 0
 			});
+
+			var sampleLevelsResponse = {
+				numPerPage: 8,
+				count: 10,
+				levels: [sampleLevel]
+			}
 
 			// Create a sample Levels array that includes the new Level
 			var sampleLevels = [sampleLevel];
 
 			// Set GET response
-			$httpBackend.expectGET('levels').respond(sampleLevels);
+			$httpBackend.expectGET('levels?pageNum=0&sizeRestriction=&sortDirection=').respond(sampleLevelsResponse);
 
 			// Run controller functionality
 			scope.find();
@@ -73,6 +89,7 @@
 		it('$scope.findOne() should create an array with one Level object fetched from XHR using a levelId URL parameter', inject(function(Levels) {
 			// Define a sample Level object
 			var sampleLevel = new Levels({
+				id: '525a8422f6d0f87f0e407a33',
 				name: 'New Level'
 			});
 
@@ -83,6 +100,7 @@
 			$httpBackend.expectGET(/levels\/([0-9a-fA-F]{24})$/).respond(sampleLevel);
 
 			// Run controller functionality
+			scope.selectedLevelId = '525a8422f6d0f87f0e407a33';
 			scope.findOne();
 			$httpBackend.flush();
 
@@ -93,7 +111,13 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Levels) {
 			// Create a sample Level object
 			var sampleLevelPostData = new Levels({
-				name: 'New Level'
+				name: 'New Level',
+				decomputedTimeLimit: 3000,
+				layout: [[true, true, true, true, true],
+						 [true, true, true, true, true],
+						 [true, true, true, true, true],
+						 [true, true, true, true, true],
+						 [true, true, true, true, true]]
 			});
 
 			// Create a sample Level response
@@ -102,28 +126,24 @@
 				name: 'New Level'
 			});
 
-			// Fixture mock form input values
-			scope.name = 'New Level';
-
 			// Set POST response
 			$httpBackend.expectPOST('levels', sampleLevelPostData).respond(sampleLevelResponse);
 
 			// Run controller functionality
-			scope.create();
+			scope.create(sampleLevelPostData);
 			$httpBackend.flush();
-
-			// Test form inputs are reset
-			expect(scope.name).toEqual('');
-
-			// Test URL redirection after the Level was created
-			expect($location.path()).toBe('/levels/' + sampleLevelResponse._id);
 		}));
 
 		it('$scope.update() should update a valid Level', inject(function(Levels) {
 			// Define a sample Level put data
 			var sampleLevelPutData = new Levels({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Level'
+				name: 'New Level',
+				layout: [[true, true, true, true, true],
+						 [true, true, true, true, true],
+						 [true, true, true, true, true],
+						 [true, true, true, true, true],
+						 [true, true, true, true, true]]
 			});
 
 			// Mock Level in scope
@@ -135,9 +155,6 @@
 			// Run controller functionality
 			scope.update();
 			$httpBackend.flush();
-
-			// Test URL location to new object
-			expect($location.path()).toBe('/levels/' + sampleLevelPutData._id);
 		}));
 
 		it('$scope.remove() should send a DELETE request with a valid levelId and remove the Level from the scope', inject(function(Levels) {
