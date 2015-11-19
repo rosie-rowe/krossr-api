@@ -20,13 +20,13 @@ describe('User Model Unit Tests:', function() {
 		user = new User({
 			email: 'test@test.com',
 			username: 'username',
-			password: 'password',
+			password: 'passwordhastobelong',
 			provider: 'local'
 		});
 		user2 = new User({
 			email: 'test@test.com',
 			username: 'username',
-			password: 'password',
+			password: 'passwordhastobelong',
 			provider: 'local'
 		});
 
@@ -53,8 +53,8 @@ describe('User Model Unit Tests:', function() {
 			});
 		});
 
-		it('should be able to show an error when try to save without first name', function(done) {
-			user.firstName = '';
+		it('should be able to show an error when try to save without username', function(done) {
+			user.username = '';
 			return user.save(function(err) {
 				should.exist(err);
 				done();

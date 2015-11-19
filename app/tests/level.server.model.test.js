@@ -27,7 +27,14 @@ describe('Level Model Unit Tests:', function() {
 		user.save(function() { 
 			level = new Level({
 				name: 'Level Name',
-				user: user
+				user: user,
+				timeLimit: 3000,
+				size: 25,
+				layout: [[true, true, true, true, true],
+						 [false, true, true, true, false],
+						 [false, true, false, true, false],
+						 [false, true, false, true, false],
+						 [false, true, false, true, false]]
 			});
 
 			done();
