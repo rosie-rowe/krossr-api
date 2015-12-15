@@ -6,20 +6,18 @@
 //jshint unused:false
 var init = require('./config/init')(),
 	config = require('./config/config'),
-	mongoose = require('mongoose');
+    winston = require('./config/winston');
+
+winston.info('Starting '+config.app.name+'...');
+winston.info('Config loaded: '+config.NODE_ENV);
+winston.debug('Accepted Config:',config);
 
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
  */
 
-// Bootstrap db connection
-var db = mongoose.connect(config.db, function(err) {
-	if (err) {
-		console.error('\x1b[31m', 'Could not connect to MongoDB!');
-		console.log(err);
-	}
-});
+ var db = require('./config/sequelize');
 
 // Init the express application
 var app = require('./config/express')(db);

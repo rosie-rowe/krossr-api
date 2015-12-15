@@ -5,9 +5,9 @@
  */
 var _ = require('lodash'),
 	errorHandler = require('../errors'),
-	mongoose = require('mongoose'),
+	db = require('../../../config/sequelize'),
 	passport = require('passport'),
-	User = mongoose.model('User'),
+	User = db.User,
 	config = require('../../../config/config'),
 	nodemailer = require('nodemailer'),
 	async = require('async'),
@@ -28,9 +28,14 @@ exports.forgot = function(req, res, next) {
 		// Lookup user by username
 		function(token, done) {
 			if (req.body.username) {
-				User.findOne({
-					username: req.body.username
-				}, '-salt -password', function(err, user) {
+				User.find({
+					attributes: {
+						exclude: ['salt, password']
+					},
+					where: {
+						username: req.body.username
+					}
+				}).then(function(user) {
 					if (!user) {
 						return res.status(400).send({
 							message: 'No account with that username has been found'
@@ -43,8 +48,10 @@ exports.forgot = function(req, res, next) {
 						user.resetPasswordToken = token;
 						user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
-						user.save(function(err) {
-							done(err, token, user);
+						user.save().then(function() {
+							done(null, token, user);
+						}).catch(function(err) {
+							done(err);
 						});
 					}
 				});
@@ -91,17 +98,23 @@ exports.forgot = function(req, res, next) {
  * Reset password GET from email token
  */
 exports.validateResetToken = function(req, res) {
-	User.findOne({
-		resetPasswordToken: req.params.token,
-		resetPasswordExpires: {
-			$gt: Date.now()
+	User.find({
+		where: {
+			resetPasswordToken: req.params.token,
+			resetPasswordExpires: {
+				$gt: Date.now()
+			}
 		}
-	}, function(err, user) {
+	}).then(function(user) {
 		if (!user) {
 			return res.redirect('/#!/password/reset/invalid');
 		}
 
 		res.redirect('/#!/password/reset/' + req.params.token);
+	}).catch(function(err) {
+		res.status(500).send({
+			message: errorHandler.getErrorMessage(err)
+		});
 	});
 };
 
@@ -115,45 +128,45 @@ exports.reset = function(req, res, next) {
 	async.waterfall([
 
 		function(done) {
-			User.findOne({
-				resetPasswordToken: req.params.token,
-				resetPasswordExpires: {
-					$gt: Date.now()
+			User.find({
+				where: {
+					resetPasswordToken: req.params.token,
+					resetPasswordExpires: {
+						$gt: Date.now()
+					}
 				}
-			}, function(err, user) {
-				if (!err && user) {
+			}).then(function(user) {
+				if (!user) {
+					return res.status(400).send({
+						message: 'Password reset token is invalid or has expired.'
+					});
+				} else {
 					if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
 						user.password = passwordDetails.newPassword;
 						user.resetPasswordToken = undefined;
 						user.resetPasswordExpires = undefined;
 
-						user.save(function(err) {
-							if (err) {
-								return res.status(400).send({
-									message: errorHandler.getErrorMessage(err)
-								});
-							} else {
-								req.login(user, function(err) {
-									if (err) {
-										res.status(400).send(err);
-									} else {
-										// Return authenticated user 
-										res.jsonp(user);
+						user.save().then(function() {
+							req.login(user, function(err) {
+								if (err) {
+									res.status(400).send(err);
+								} else {
+									// Return authenticated user 
+									res.jsonp(user);
 
-										done(err, user);
-									}
-								});
-							}
+									done(err, user);
+								}
+							});
+						}).catch(function(err) {
+							return res.status(400).send({
+								message: errorHandler.getErrorMessage(err)
+							});
 						});
 					} else {
 						return res.status(400).send({
 							message: 'Passwords do not match'
 						});
 					}
-				} else {
-					return res.status(400).send({
-						message: 'Password reset token is invalid or has expired.'
-					});
 				}
 			});
 		},
@@ -193,28 +206,34 @@ exports.changePassword = function(req, res) {
 
 	if (req.user) {
 		if (passwordDetails.newPassword) {
-			User.findById(req.user.id, function(err, user) {
-				if (!err && user) {
+			User.find({
+				where: {
+					id: req.user.id
+				}
+			}).then(function(user) {
+				if (!user) {
+					res.status(400).send({
+						message: 'User is not found'
+					});
+				} else {
 					if (user.authenticate(passwordDetails.currentPassword)) {
 						if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
-							user.password = passwordDetails.newPassword;
+							user.hashedPassword = user.encryptPassword(passwordDetails.newPassword, user.salt);
 
-							user.save(function(err) {
-								if (err) {
-									return res.status(400).send({
-										message: errorHandler.getErrorMessage(err)
-									});
-								} else {
-									req.login(user, function(err) {
-										if (err) {
-											res.status(400).send(err);
-										} else {
-											res.send({
-												message: 'Password changed successfully'
-											});
-										}
-									});
-								}
+							user.save().then(function() {
+								req.login(user, function(err) {
+									if (err) {
+										res.status(400).send(err);
+									} else {
+										res.send({
+											message: 'Password changed successfully'
+										});
+									}
+								});
+							}).catch(function(err) {
+								return res.status(400).send({
+									message: errorHandler.getErrorMessage(err)
+								});
 							});
 						} else {
 							res.status(400).send({
@@ -226,11 +245,11 @@ exports.changePassword = function(req, res) {
 							message: 'Current password is incorrect'
 						});
 					}
-				} else {
-					res.status(400).send({
-						message: 'User is not found'
-					});
 				}
+			}).catch(function(err) {
+				res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
 			});
 		} else {
 			res.status(400).send({

@@ -5,43 +5,48 @@
  */
 var _ = require('lodash'),
 	errorHandler = require('../errors'),
-	mongoose = require('mongoose'),
+	db = require('../../../config/sequelize'),
 	passport = require('passport'),
-	User = mongoose.model('User');
+	User = db.User,
+	winston = require('../../../config/winston');
 
 /**
  * Signup
  */
 exports.signup = function(req, res) {
-	// For security measurement we remove the roles from the req.body object
-	delete req.body.roles;
+	var message = null;
 
 	// Init Variables
-	var user = new User(req.body);
-	var message = null;
+	var user = User.build(req.body);
 
 	// Add missing user fields
 	user.provider = 'local';
+	user.salt = user.makeSalt();
+	user.hashedPassword = user.encryptPassword(req.body.password, user.salt);
+
+	winston.info('About to save the user...');
 
 	// Then save the user 
-	user.save(function(err) {
-		if (err) {
-			return res.status(400).send({
+	user.save().then(function() {
+		winston.info('Saved the user!');
+
+		// Remove sensitive data before login
+		user.password = undefined;
+		user.salt = undefined;
+
+		req.login(user, function(err) { 
+			if (err) {
+				res.status(500).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.jsonp(user);
+			}
+		}).catch(function(err) {
+			res.status(500).send({
 				message: errorHandler.getErrorMessage(err)
 			});
-		} else {
-			// Remove sensitive data before login
-			user.password = undefined;
-			user.salt = undefined;
-
-			req.login(user, function(err) {
-				if (err) {
-					res.status(400).send(err);
-				} else {
-					res.jsonp(user);
-				}
-			});
-		}
+		});
 	});
 };
 
@@ -74,39 +79,4 @@ exports.signin = function(req, res, next) {
 exports.signout = function(req, res) {
 	req.logout();
 	res.redirect('/');
-};
-
-
-/**
- * Remove OAuth provider
- */
-exports.removeOAuthProvider = function(req, res, next) {
-	var user = req.user;
-	var provider = req.param('provider');
-
-	if (user && provider) {
-		// Delete the additional provider
-		if (user.additionalProvidersData[provider]) {
-			delete user.additionalProvidersData[provider];
-
-			// Then tell mongoose that we've updated the additionalProvidersData field
-			user.markModified('additionalProvidersData');
-		}
-
-		user.save(function(err) {
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else {
-				req.login(user, function(err) {
-					if (err) {
-						res.status(400).send(err);
-					} else {
-						res.jsonp(user);
-					}
-				});
-			}
-		});
-	}
 };

@@ -5,9 +5,9 @@
  */
 var _ = require('lodash'),
 	errorHandler = require('../errors'),
-	mongoose = require('mongoose'),
 	passport = require('passport'),
-	User = mongoose.model('User');
+	db = require('../../../config/sequelize'),
+	User = db.User;
 
 /**
  * Update user details
@@ -22,23 +22,23 @@ exports.update = function(req, res) {
 
 	if (user) {
 		// Merge existing user
-		user = _.extend(user, req.body);
-		user.updated = Date.now();
+		user.updateAttributes({
+			updated: Date.now(),
+			email: req.body.email
+		});
 
-		user.save(function(err) {
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-			} else {
-				req.login(user, function(err) {
-					if (err) {
-						res.status(400).send(err);
-					} else {
-						res.jsonp(user);
-					}
-				});
-			}
+		user.save().then(function() {
+			req.login(user, function(err) {
+				if (err) {
+					res.status(400).send(err);
+				} else {
+					res.jsonp(user);
+				}
+			});
+		}).catch(function(err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
 		});
 	} else {
 		res.status(400).send({

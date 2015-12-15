@@ -4,20 +4,21 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	mongoose = require('mongoose'),
-	User = mongoose.model('User');
+	db = require('../../../config/sequelize'),
+	User = db.User;
 
 /**
  * User middleware
  */
 exports.userByID = function(req, res, next, id) {
-	User.findOne({
-		_id: id
-	}).exec(function(err, user) {
-		if (err) return next(err);
-		if (!user) return next(new Error('Failed to load User ' + id));
+	User.find({ where: { id: id }}).then(function(user) {
+		if (!user) {
+			return next(new Error('Failed to load User ' + id));
+		}
 		req.profile = user;
 		next();
+	}).catch(function(err) {
+		next(err);
 	});
 };
 
@@ -30,7 +31,6 @@ exports.requiresLogin = function(req, res, next) {
 			message: 'User is not logged in'
 		});
 	}
-
 	next();
 };
 

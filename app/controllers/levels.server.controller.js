@@ -3,26 +3,29 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
+var db = require('../../config/sequelize'),
 	errorHandler = require('./errors'),
-	Level = mongoose.model('Level'),
-	_ = require('lodash');
+	Level = db.Level,
+	Sequelize = require('sequelize');
 
 /**
  * Create a Level
  */
 exports.create = function(req, res) {
-	var level = new Level(req.body);
-	level.user = req.user;
+	req.body.UserId = req.user.id;
 
-	level.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+	Level.create(req.body).then(function(level) {
+		if (!level) {
+			return res.status(500).send({
+				message: 'There was a problem creating the level'
 			});
 		} else {
-			res.jsonp(level);
+			return res.jsonp(level);
 		}
+	}).catch(function(err) {
+		return res.status(500).send({
+			message: errorHandler.getErrorMessage(err)
+		});
 	});
 };
 
@@ -30,56 +33,41 @@ exports.create = function(req, res) {
  * Show the current Level
  */
 exports.read = function(req, res) {
-	res.jsonp(req.level);
+	return res.jsonp(req.level);
 };
 
 /**
  * Update a Level
  */
 exports.update = function(req, res) {
-	var level = req.level ;
+	var level = req.level;
 
-	level = _.extend(level , req.body);
-
-	level.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(level);
-		}
+	level.updateAttributes({
+		name: req.body.name,
+		layout: req.body.layout,
+		size: req.body.size,
+		timeLimit: req.body.timeLimit
+	}).then(function(l) {
+		return res.jsonp(l);
+	}).catch(function(err) {
+		return res.status(500).send({
+			message: errorHandler.getErrorMessage(err)
+		});
 	});
 };
 
 /**
- * Delete an Level
+ * Delete a Level
  */
 exports.delete = function(req, res) {
-	var level = req.level ;
+	var level = req.level;
 
-	level.remove(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(level);
-		}
-	});
-};
-
-/**
- * List of Levels
- */
-exports.list = function(req, res) { Level.find().sort('-created').populate('user', 'username').exec(function(err, levels) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(levels);
-		}
+	level.destroy().then(function() {
+		return res.jsonp(level);
+	}).catch(function(err) {
+		return res.status(500).send({
+			message: errorHandler.getErrorMessage(err)
+		});
 	});
 };
 
@@ -88,19 +76,13 @@ exports.list = function(req, res) { Level.find().sort('-created').populate('user
  */
 exports.levelByID = function(req, res, next, id) {
 	Level
-		.findById(id)
-		.populate('user', 'username')
-		.exec(function(err, level) {
-			if (err) {
-				return next(err);
-			}
-
+		.find({ where: {id: id}, include: [db.User]}).then(function(level) {
 			if (!level) {
-				return next(new Error('Failed to load Level ' + id));
+				return next(new Error('Failed to load level ' + id));
+			} else {
+				req.level = level;
+				return next();
 			}
-
-			req.level = level ;
-			next();
 		});
 };
 
@@ -110,54 +92,28 @@ exports.paginate = function(req, res) {
 		searchText = req.query.searchText,
 		sortBy = req.query.sortBy,
 		sortDirection = req.query.sortDirection,
-		numPerPage = 9,
-		query,
-		searchRegex = new RegExp(searchText, 'i');
+		numPerPage = 9;
 
-	 query = Level
-				.find()
-				.populate('user', 'username')
-				.limit(numPerPage)
-				.skip(pageNum * numPerPage);
-
-	if (sortBy) {
-		query.sort(sortDirection + sortBy);
-	}
-
-	if (sizeRestriction) {
-		sizeRestriction = parseInt(sizeRestriction, 10);
-		query.where('size').equals(sizeRestriction);
-	}
-
-	query.exec(function(err, levels) {
-		// As far as I can tell from googling, this is a limitation of mongo
-		// in that you can't .where on a populated field, so it has to be done after the initial fetch..
-		// will probably get slow with more levels,  but it'll work until I can switch the db.
-		if (searchText) {
-			levels = levels.filter(function(level) {
-				return searchRegex.test(level.user.username) || searchRegex.test(level.name);
-			});
-		}
-
-		if (err) {
-			return res.status(400).send({
-				message: sizeRestriction
-			});
-		} else {
-			Level.find().count({}, function(err, totalCount) {
-				if (err) {
-					return res.status(400).send({
-						message: errorHandler.getErrorMessage(err)
-					});
-				} else {
-					res.jsonp({
-						levels: levels,
-						count: totalCount,
-						numPerPage: numPerPage
-					});
-				}
-			});
-		}
+	Level.findAndCountAll({
+		include: [db.User],
+		where: Sequelize.and(
+			sizeRestriction ? ['size = ?', parseInt(sizeRestriction, 10)] : null,
+			searchText ? ['name like %?%', searchText] : null
+			// todo: also search on username
+		),
+		limit: numPerPage,
+		offset: pageNum * numPerPage,
+		order: [sortBy, sortDirection]
+	}).then(function(levels) {
+		return res.jsonp({
+			levels: levels,
+			count: levels.count,
+			numPerPage: numPerPage
+		});
+	}).catch(function(err) {
+		return res.status(500).send({
+			message: errorHandler.getErrorMessage(err)
+		});
 	});
 };
 

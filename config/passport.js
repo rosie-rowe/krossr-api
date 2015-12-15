@@ -1,7 +1,8 @@
 'use strict';
 
 var passport = require('passport'),
-	User = require('mongoose').model('User'),
+	db = require('./sequelize'),
+	User = db.User,
 	path = require('path'),
 	config = require('./config');
 
@@ -13,10 +14,15 @@ module.exports = function() {
 
 	// Deserialize sessions
 	passport.deserializeUser(function(id, done) {
-		User.findOne({
-			_id: id
-		}, '-salt -password', function(err, user) {
-			done(err, user);
+		User.find({
+			exclude: ['salt', 'password'],
+			where: {
+				id: id
+			}
+		}).then(function(user) {
+			done(null, user);
+		}).catch(function(err) {
+			done(err);
 		});
 	});
 

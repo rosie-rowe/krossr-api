@@ -1,57 +1,53 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
-var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+module.exports = function(sequelize, Sequelize) {
+    var Level = sequelize.define('Level', {
+        name: {
+            allowNull: false,
+            type: Sequelize.STRING,
+            defaultValue: '',       
+            unique: true,
+            validate: {
+                isAlphanumeric: true,
+                notEmpty: true,
+                isLongEnough: function(val) {
+                    if (val.length < 6) {
+                        throw new Error('Please choose a longer name');
+                    }
+                }
+            }
+        },
+        layout: {
+            allowNull: false,
+            type: Sequelize.ARRAY(Sequelize.BOOLEAN),
+            unique: true,
+            validate: {
+                isArray: true
+            }
+        },
+        size: {
+            allowNull: false,
+            type: Sequelize.INTEGER,
+            defaultValue: 25,
+            validate: {
+                isInt: true
+            }
+        },
+        timeLimit: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            validate: {
+                isInt: true
+            }
+        },
+    },
+    {
+        timestamps: true,
+        associate: function(models) {
+            Level.belongsTo(models.User);
+            Level.hasMany(models.Rating);
+        }
+    });
 
-var timeLimitValidator = function(value) {
-	return /^\d+$/.test(value);
-};
-
-var RatingSchema = new Schema({
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	},
-	rating: {
-		type: Number
-	}
-});
-
-mongoose.model('Rating', RatingSchema);
-
-/**
- * Level Schema
- */
-var LevelSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Level name',
-		trim: true
-	},
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	},
-	layout: {
-		type: Array
-	},
-	size: {
-		type: Number
-	},
-	timeLimit: {
-		type: Number,
-		validate: [timeLimitValidator, 'Time limit must be an integer'],
-		required: 'Please provide time limit'
-	},
-	ratings: [RatingSchema]
-});
-
-mongoose.model('Level', LevelSchema);
+    return Level;
+}; 

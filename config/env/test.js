@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/krossr-test',
+	db: 'postgresql://localhost/krossr-test',
 	port: 3001,
 	app: {
 		title: 'krossr - Test Environment'
