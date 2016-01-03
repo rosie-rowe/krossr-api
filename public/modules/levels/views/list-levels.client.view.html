@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <div class="list-group">
+    <div class="list-group" ng-if="levels.count > 0">
         <div data-ng-repeat="level in levels track by $id(level)" ng-class="{'odd': $index % 2 !== 0}" class="list-group-item level">
             <a class="playButton" ng-click="loadLevel('{{level._id}}', 'view'); closeThisDialog();">
                 <i class="fa fa-play"></i>
@@ -70,11 +70,15 @@
         </div>
     </div>
 
-    <div class="alert alert-warning text-center" data-ng-hide="!levels.$resolved || levels.length">
-    	No Levels yet, why don't you <a href="/#!/levels/create">create one</a>?
+    <div class="alert alert-warning text-center" data-ng-show="levels.count === 0">
+    	No Levels yet!
+
+        <button class="btn" ng-if="authentication.user" ng-click="createNewLevel();closeThisDialog();">
+            Create One
+        </button>
     </div>
 
-    <div class="pagination">
+    <div class="pagination" ng-if="levels.count > 0">
         <div class="prev`Page" ng-click="pageDown()" ng-class="{'invisible': currentPage === 0}">
             ◀
         </div>

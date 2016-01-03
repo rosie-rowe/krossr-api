@@ -57,7 +57,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			};
 
 			var levelSaveFailure = function(err) {
-				$scope.error = errorResponse.data.message;
+				$scope.error = err.data.message;
 
 				$timeout(function() {
 					$scope.error = '';

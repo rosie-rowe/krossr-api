@@ -15,6 +15,11 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
+				// Typeof check makes tests happy
+				if (typeof $scope.closeThisDialog === 'function') {
+					$scope.closeThisDialog();
+				}
+
 				// And redirect to the index page
 				$location.path('/levels');
 			}).error(function(response) {
