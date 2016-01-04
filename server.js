@@ -17,10 +17,10 @@ winston.debug('Accepted Config:',config);
  * Please note that the order of loading is important.
  */
 
- var db = require('./config/sequelize');
+var db = require('./config/sequelize');
 
 // Init the express application
-var app = require('./config/express')(db);
+var app = require('./config/express')(db.sequelize);
 
 // Bootstrap passport config
 require('./config/passport')();

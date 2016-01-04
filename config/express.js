@@ -12,12 +12,16 @@ var express = require('express'),
 	cookieParser = require('cookie-parser'),
 	helmet = require('helmet'),
 	passport = require('passport'),
+	SequelizeStore = require('connect-sequelize')(session),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+	winston = require('winston');
 
-module.exports = function() {
+module.exports = function(db) {
+	winston.info('Intializing Express!');
+
 	// Initialize express app
 	var app = express();
 
@@ -80,6 +84,18 @@ module.exports = function() {
 
 	// CookieParser should be above session
 	app.use(cookieParser());
+
+	winston.info('Trying to set up sessions...');
+
+	// Postgres Sessions
+	app.use(session({
+		store: new SequelizeStore(db, {}, 'Session'),
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+	}));
+
+	winston.info('...done');
 
 	// use passport session
 	app.use(passport.initialize());

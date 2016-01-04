@@ -392,11 +392,11 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 
 			// common logic to findOne and update
 			setupLevel: function(level, yourUserId) {
-				var yourRating = level.yourRatingIndex = this.filterToUserId(level.ratings, yourUserId);
+				//var yourRating = level.yourRatingIndex = this.filterToUserId(level.ratings, yourUserId);
 
-				if (typeof yourRating !== 'undefined' && yourRating !== -1) {
-					level.yourRating = level.ratings[yourRating].rating;
-				}
+				//if (typeof yourRating !== 'undefined' && yourRating !== -1) {
+				//	level.yourRating = level.ratings[yourRating].rating;
+				//}
 
 				level.decomputedTimeLimit = this.decomputeTimeLimit(level.timeLimit);
 			},

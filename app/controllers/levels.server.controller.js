@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var db = require('../../config/sequelize'),
+	winston = require('../../config/winston'),
 	errorHandler = require('./errors'),
 	Level = db.Level,
 	Sequelize = require('sequelize');
@@ -90,23 +91,25 @@ exports.paginate = function(req, res) {
 	var pageNum = req.query.pageNum,
 		sizeRestriction = req.query.sizeRestriction,
 		searchText = req.query.searchText,
-		sortBy = req.query.sortBy,
-		sortDirection = req.query.sortDirection,
+		sortBy = req.query.sortBy || '"createdAt"',
+		sortDirection = req.query.sortDirection || 'ASC',
 		numPerPage = 9;
 
+	winston.info('Trying to query Levels...');
+
 	Level.findAndCountAll({
-		include: [db.User],
+		include: [db.Rating],
 		where: Sequelize.and(
 			sizeRestriction ? ['size = ?', parseInt(sizeRestriction, 10)] : null,
-			searchText ? ['name like %?%', searchText] : null
+			searchText ? ['name ILIKE ?', '%' + searchText + '%'] : null
 			// todo: also search on username
 		),
 		limit: numPerPage,
 		offset: pageNum * numPerPage,
-		order: [sortBy, sortDirection]
+		order: sortBy + ' ' + sortDirection
 	}).then(function(levels) {
 		return res.jsonp({
-			levels: levels,
+			levels: levels.rows,
 			count: levels.count,
 			numPerPage: numPerPage
 		});

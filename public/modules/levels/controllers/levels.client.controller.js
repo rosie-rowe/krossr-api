@@ -138,7 +138,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 				sizeRestriction: $scope.sizeRestriction,
 				searchText: $scope.searchText,
 				sortBy: $scope.sortBy,
-				sortDirection: $scope.sortDirection
+				sortDirection: $scope.sortDirection.ratings
 			};
 
 			Levels.query(queryObj, function(data) {
@@ -159,7 +159,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					}
 
 					currentLevel.prettySize = Utils.prettySize(currentLevel.layout.length);
-					currentLevel.averageRating = Utils.average(currentLevel.ratings, 'rating');
+					currentLevel.averageRating = Utils.average(currentLevel.Ratings, 'rating');
 				}
 			});
 		};

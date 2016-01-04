@@ -8,7 +8,7 @@ module.exports = {
 		host: 'localhost'
 	},
 	enableSequelizeLog: 'true',
-	FORCE_DB_SYNC: 'true',
+//	FORCE_DB_SYNC: 'true',
 	app: {
 		title: 'krossr - Development Environment'
 	},

@@ -34,9 +34,10 @@
                 <label class="control-label">Sort by</label>
                 <select ng-model="sortBy" ng-change="setSortBy(sortBy)">
                     <option value="">None</option>
-                    <option value="created">Created Date</option>
-                    <option value="name">Name</option>
-                    <option value="timeLimit">Time Limit</option>
+                    <!-- Not sure why, but Sequelize is making me quote these names? -->
+                    <option value='"createdAt"'>Created Date</option>
+                    <option value='"name"'>Name</option>
+                    <option value='"timeLimit"'>Time Limit</option>
                 </select>
             </div>
 
@@ -50,7 +51,7 @@
         </div>
     </div>
 
-    <div class="list-group" ng-if="levels.count > 0">
+    <div class="list-group" ng-if="levels">
         <div data-ng-repeat="level in levels track by $id(level)" ng-class="{'odd': $index % 2 !== 0}" class="list-group-item level">
             <a class="playButton" ng-click="loadLevel('{{level._id}}', 'view'); closeThisDialog();">
                 <i class="fa fa-play"></i>
@@ -78,7 +79,7 @@
         </button>
     </div>
 
-    <div class="pagination" ng-if="levels.count > 0">
+    <div class="pagination" ng-if="levels && levels.length > 0">
         <div class="prev`Page" ng-click="pageDown()" ng-class="{'invisible': currentPage === 0}">
             ◀
         </div>

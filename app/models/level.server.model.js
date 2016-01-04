@@ -20,10 +20,7 @@ module.exports = function(sequelize, Sequelize) {
         layout: {
             allowNull: false,
             type: Sequelize.ARRAY(Sequelize.BOOLEAN),
-            unique: true,
-            validate: {
-                isArray: true
-            }
+            unique: true
         },
         size: {
             allowNull: false,
