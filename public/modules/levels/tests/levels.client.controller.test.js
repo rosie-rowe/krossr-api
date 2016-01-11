@@ -61,7 +61,7 @@
 						 [true, true, true, true, true],
 						 [true, true, true, true, true],
 						 [true, true, true, true, true]],
-				ratings: [],
+				Ratings: [],
 				prettySize: '5x5',
 				averageRating: 0
 			});
