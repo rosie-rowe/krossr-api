@@ -8,7 +8,7 @@ module.exports = function(sequelize, Sequelize) {
             defaultValue: '',       
             unique: true,
             validate: {
-                isAlphanumeric: true,
+                is: /[a-z\d\-_\s]+/i,
                 notEmpty: true,
                 isLongEnough: function(val) {
                     if (val.length < 6) {

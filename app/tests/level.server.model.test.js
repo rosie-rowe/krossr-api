@@ -4,9 +4,10 @@
  * Module dependencies.
  */
 var should = require('should'),
-	mongoose = require('mongoose'),
-	User = mongoose.model('User'),
-	Level = mongoose.model('Level');
+	db = require('../../config/sequelize'),
+	User = db.User,
+	Level = db.Level,
+	winston = require('../../config/winston');
 
 /**
  * Globals
@@ -18,14 +19,21 @@ var user, level;
  */
 describe('Level Model Unit Tests:', function() {
 	beforeEach(function(done) {
-		user = new User({
+		user = User.build({
 			email: 'test@test.com',
 			username: 'username',
-			password: 'password'
+			provider: 'local'
 		});
 
-		user.save(function() { 
-			level = new Level({
+		user.salt = user.makeSalt();
+		user.hashedPassword = user.encryptPassword('password', user.salt);
+
+		winston.info('Unit test creating a user for Level tests!')
+
+		user.save().then(function() { 
+			winston.info('User created! Creating a level...');
+
+			level = Level.build({
 				name: 'Level Name',
 				user: user,
 				timeLimit: 3000,
@@ -38,30 +46,41 @@ describe('Level Model Unit Tests:', function() {
 			});
 
 			done();
-		});
+		}).catch(function(err) {
+			winston.info('User creation failed! Printing error...');
+			winston.info(err);
+		});;
 	});
 
 	describe('Method Save', function() {
 		it('should be able to save without problems', function(done) {
-			return level.save(function(err) {
-				should.not.exist(err);
+			winston.info('Unit test commiting the level to the database!');
+
+			return level.save().then(function(l) {
+				winston.info('Level created!');
+
+				should.exist(l);
 				done();
+			}).catch(function(err) {
+				winston.info('Level creation failed! Printing error...');
+				winston.info(err);
 			});
 		});
 
 		it('should be able to show an error when try to save without name', function(done) { 
 			level.name = '';
 
-			return level.save(function(err) {
-				should.exist(err);
+			return level.save().then(function(l) {
+				winston.info('This message should never print.');	
+			}).catch(function(err) {
 				done();
-			});
+			});;
 		});
 	});
 
 	afterEach(function(done) { 
-		Level.remove().exec();
-		User.remove().exec();
+		Level.destroy({ where: {}});
+		User.destroy({ where: {}});
 
 		done();
 	});

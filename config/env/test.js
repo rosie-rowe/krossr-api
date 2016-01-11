@@ -1,7 +1,13 @@
 'use strict';
 
 module.exports = {
-	db: 'postgresql://localhost/krossr-test',
+	db: {
+		name: 'krossr-test',
+		username: 'brian',
+		password: 'postgres123!',
+		host: 'localhost'
+	},
+	//FORCE_DB_SYNC: 'true',
 	port: 3001,
 	app: {
 		title: 'krossr - Test Environment'
