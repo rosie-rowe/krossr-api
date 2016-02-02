@@ -108,6 +108,9 @@ exports.paginate = function(req, res) {
 		offset: pageNum * numPerPage,
 		order: sortBy + ' ' + sortDirection
 	}).then(function(levels) {
+		var i = 0;
+		var len = levels.length;
+
 		return res.jsonp({
 			levels: levels.rows,
 			count: levels.count,

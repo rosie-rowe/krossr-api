@@ -1,8 +1,8 @@
 'use strict';
 
 // Levels controller
-angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'Ratings', 'ngDialog', 'Utils',
-	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, Ratings, ngDialog, Utils) {
+angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'ngDialog', 'Utils',
+	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, ngDialog, Utils) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
@@ -53,7 +53,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			});
 
 			var levelSaveSuccess = function(response) {
-				$scope.loadLevel(response._id, 'edit');
+				$scope.loadLevel(response.id, 'edit');
 			};
 
 			var levelSaveFailure = function(err) {
@@ -155,9 +155,10 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					currentLevel = allLevels[i];
 
 					if ($scope.authentication && $scope.authentication.user) {
-						Utils.setupLevel(currentLevel, $scope.authentication.user._id);
+						Utils.setupLevel(currentLevel, $scope.authentication.user.id);
 					}
 
+					currentLevel.decomputedTimeLimit = Utils.decomputeTimeLimit(currentLevel.timeLimit);
 					currentLevel.prettySize = Utils.prettySize(currentLevel.layout.length);
 					currentLevel.averageRating = Utils.average(currentLevel.Ratings, 'rating');
 				}
@@ -183,7 +184,7 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 					$scope.level = data;
 
 					if ($scope.authentication && $scope.authentication.user) {
-						Utils.setupLevel($scope.level, $scope.authentication.user._id);
+						Utils.setupLevel($scope.level, $scope.authentication.user.id);
 					}
 
 					$scope.level.timeRemaining = $scope.level.timeLimit;
@@ -265,14 +266,14 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			// timeout to give yourRating a digest cycle to catch up
 			$timeout(function() {
 				// we want to add a new rating if there's not already one there, otherwise update the existing one
-				var yourRating = $scope.level.yourRatingIndex = Utils.filterToUserId($scope.level.ratings, $scope.authentication.user._id);
+				var yourRating = $scope.level.yourRatingIndex = Utils.filterToUserId($scope.level.ratings, $scope.authentication.user.id);
 
 				console.log($scope.level.ratings[yourRating]);
 
 				if ($scope.level.ratings[yourRating]) {
 					$scope.level.ratings[yourRating].rating = $scope.level.yourRating;
 				} else {
-					$scope.level.ratings.push({ user: $scope.authentication.user._id, rating: $scope.level.yourRating });
+					$scope.level.ratings.push({ user: $scope.authentication.user.id, rating: $scope.level.yourRating });
 				}
 				$scope.update();
 			}, 0);

@@ -429,7 +429,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 
 				level.$update(function() {
 					if (scope.authentication && scope.authentication.user) {
-						_this.setupLevel(level, scope.authentication.user._id);
+						_this.setupLevel(level, scope.authentication.user.id);
 					}
 					scope.level.timeRemaining = timeRemaining;
 				}, function(errorResponse) {

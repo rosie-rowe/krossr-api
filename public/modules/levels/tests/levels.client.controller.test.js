@@ -122,7 +122,6 @@
 
 			// Create a sample Level response
 			var sampleLevelResponse = new Levels({
-				_id: '525cf20451979dea2c000001',
 				name: 'New Level'
 			});
 
@@ -137,7 +136,6 @@
 		it('$scope.update() should update a valid Level', inject(function(Levels) {
 			// Define a sample Level put data
 			var sampleLevelPutData = new Levels({
-				_id: '525cf20451979dea2c000001',
 				name: 'New Level',
 				layout: [[true, true, true, true, true],
 						 [true, true, true, true, true],
