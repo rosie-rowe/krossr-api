@@ -7,6 +7,7 @@ var db = require('../../config/sequelize'),
 	winston = require('../../config/winston'),
 	errorHandler = require('./errors'),
 	Level = db.Level,
+	Rating = db.Rating,
 	Sequelize = require('sequelize');
 
 /**
@@ -58,6 +59,31 @@ exports.update = function(req, res) {
 };
 
 /**
+ * Add or replace a Rating
+ */
+exports.upsertRating = function(req, res) {
+	var level = req.level;
+	var user = req.user;
+	var rating = Rating.build(req.body);
+
+	rating.UserId = user.id;
+
+	rating.save().then(function() {
+		level.addRating(rating).then(function() {
+			res.jsonp(level);
+		}).catch(function(err) {
+			return res.status(500).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		});
+	}).catch(function(err) {
+		return res.status(500).send({
+			message: errorHandler.getErrorMessage(err)
+		});
+	});
+};
+
+/**
  * Delete a Level
  */
 exports.delete = function(req, res) {
@@ -76,6 +102,7 @@ exports.delete = function(req, res) {
  * Level middleware
  */
 exports.levelByID = function(req, res, next, id) {
+
 	Level
 		.find({ where: {id: id}, include: [db.User]}).then(function(level) {
 			if (!level) {
@@ -108,9 +135,6 @@ exports.paginate = function(req, res) {
 		offset: pageNum * numPerPage,
 		order: sortBy + ' ' + sortDirection
 	}).then(function(levels) {
-		var i = 0;
-		var len = levels.length;
-
 		return res.jsonp({
 			levels: levels.rows,
 			count: levels.count,

@@ -93,7 +93,7 @@ module.exports = function(db) {
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-		saveUnitialized: true
+		saveUninitialized: true
 	}));
 
 	winston.info('...done');

@@ -1,8 +1,8 @@
 'use strict';
 
 // Levels controller
-angular.module('levels').controller('LevelsController', ['$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'ngDialog', 'Utils',
-	function($rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, ngDialog, Utils) {
+angular.module('levels').controller('LevelsController', ['$http', '$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'ngDialog', 'Utils',
+	function($http, $rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, ngDialog, Utils) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
@@ -262,21 +262,19 @@ angular.module('levels').controller('LevelsController', ['$rootScope', '$scope',
 			}
 		};
 
+		/* Doing this old school until I figure out a better way */
 		$scope.rate = function() {
-			// timeout to give yourRating a digest cycle to catch up
 			$timeout(function() {
-				// we want to add a new rating if there's not already one there, otherwise update the existing one
-				var yourRating = $scope.level.yourRatingIndex = Utils.filterToUserId($scope.level.ratings, $scope.authentication.user.id);
+				var url = '/levels/' + $scope.level.id + '/ratings';
 
-				console.log($scope.level.ratings[yourRating]);
+				var post_data = {
+					rating: $scope.level.yourRating
+				};
 
-				if ($scope.level.ratings[yourRating]) {
-					$scope.level.ratings[yourRating].rating = $scope.level.yourRating;
-				} else {
-					$scope.level.ratings.push({ user: $scope.authentication.user.id, rating: $scope.level.yourRating });
-				}
-				$scope.update();
-			}, 0);
+				$http.post(url, post_data).success(function() {
+					console.log('omg');
+				});
+			});
 		};
 
 		$scope.setSizeRestriction = function(sizeRestriction) {

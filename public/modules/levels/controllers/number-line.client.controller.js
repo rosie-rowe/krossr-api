@@ -199,8 +199,6 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 		/* For a given row or column, compute its number line (guide numbers on the sides of the board */
 		$scope.getLineContent = function(index, orientation) {
-			console.log('how many times does this even run? ');
-
 			if (!hasGroup) {
 				currentGroup = calculateGroup(index, orientation);
 				hasGroup = true;
