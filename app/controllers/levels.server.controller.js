@@ -66,43 +66,39 @@ exports.upsertRating = function(req, res) {
 	var user = req.user;
 	var rating = Rating.build(req.body);
 
-	Rating.upsert({
-		UserId: user.id,
-		LevelId: level.id,
-		rating: rating.rating
-	}).then(function() {
-		res.jsonp(level);
+	/* Simulated composite primary key since Sequelize doesn't support them yet */
+	Rating.findOrCreate({
+		where: {
+			UserId: user.id,
+			LevelId: level.id
+		},
+		defaults: {
+			rating: rating.rating
+		}
+	}).spread(function(result, created) {
+		if (!created) {
+			Rating.update({
+				rating: rating.rating
+			}, {
+				where: {
+					UserId: user.id,
+					LevelId: level.id
+				}
+			}).then(function() {
+				res.jsonp(level);
+			}).catch(function(err) {
+				return res.status(500).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			});
+		} else {
+			res.jsonp(level);
+		}
 	}).catch(function(err) {
 		return res.status(500).send({
 			message: errorHandler.getErrorMessage(err)
 		});
 	});
-
-	// level.getRatings({ where: [whereClause] }).then(function(existingRating) {
-	// 	if (existingRating) {
-	// 		return res.status(500).send({
-	// 			message: 'you did it, hooray'
-	// 		})
-	// 	} else {
-	// 		rating = Rating.build(req.body);
-
-	// 		rating.UserId = user.id;
-
-	// 		rating.save().then(function() {
-	// 			level.addRating(rating).then(function() {
-	// 				res.jsonp(level);
-	// 			}).catch(function(err) {
-	// 				return res.status(500).send({
-	// 					message: errorHandler.getErrorMessage(err)
-	// 				});
-	// 			});
-	// 		}).catch(function(err) {
-	// 			return res.status(500).send({
-	// 				message: errorHandler.getErrorMessage(err)
-	// 			});
-	// 		});
-	// 	}
-	// });
 };
 
 /**
