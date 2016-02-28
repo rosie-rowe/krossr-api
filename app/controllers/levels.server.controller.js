@@ -66,7 +66,11 @@ exports.upsertRating = function(req, res) {
 	var user = req.user;
 	var rating = Rating.build(req.body);
 
-	Rating.upsert(rating, {}).then(function() {
+	Rating.upsert({
+		UserId: user.id,
+		LevelId: level.id,
+		rating: rating.rating
+	}).then(function() {
 		res.jsonp(level);
 	}).catch(function(err) {
 		return res.status(500).send({
@@ -169,7 +173,7 @@ exports.paginate = function(req, res) {
  * Level authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.level.user.id !== req.user.id) {
+	if (req.level.UserId !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();
