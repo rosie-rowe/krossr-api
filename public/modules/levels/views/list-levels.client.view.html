@@ -58,7 +58,7 @@
             </a>
             <div class="list-group-item-heading" data-ng-bind="level.name"></div>
             <div class="username" ng-click="setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
-            <a class="editButton" ng-click="loadLevel('{{level.id}}', 'edit'); closeThisDialog();" data-ng-if="level && authentication.user.id === level.user.id">
+            <a class="editButton" ng-click="loadLevel('{{level.id}}', 'edit'); closeThisDialog();" data-ng-if="level && authentication.user.id === level.UserId">
                 <i class="fa fa-edit"></i>
             </a>
             <div class="size" data-ng-bind="level.prettySize" ng-click="setSizeRestriction(level.size)"></div>

@@ -26,20 +26,21 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 
 		// Utils service logic
 		// ...
-		var sideLength,
-			gameMatrix,
-			goalMatrix,
-			gameWidth,
-			gameHeight,
-			outerGameSize,
-			playableAreaSize,
-			tileIndex = [],
-			tileSize = 25,
-			timeScale = 60, // number to convert minutes to seconds and vice versa... probably not going to change
-			winTime = 0, // the time the level was beaten in
-			currentPenalty = 4,  // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
-			basePenalty = currentPenalty, // the number to reset the penalty to when changing levels or retrying a level
-			tutorialDivider = 4; // the amount to divide the size of a game for a tutorial
+		var sideLength;
+		var	gameMatrix;
+		var	goalMatrix;
+		var	gameWidth;
+		var	gameHeight;
+		var	outerGameSize;
+		var	playableAreaSize;
+		var	tileIndex = [];
+		var	tileSize = 25;
+		var	timeScale = 60; // number to convert minutes to seconds and vice versa... probably not going to change
+		var	winTime = 0; // the time the level was beaten in
+		var	currentPenalty = 4;  // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
+		var	basePenalty = currentPenalty; // the number to reset the penalty to when changing levels or retrying a level
+		var	tutorialDivider = 4; // the amount to divide the size of a game for a tutorial
+		var	timeout = 1000; 
 
 		// Public API
 		return {

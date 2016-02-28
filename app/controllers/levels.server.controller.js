@@ -59,28 +59,46 @@ exports.update = function(req, res) {
 };
 
 /**
- * Add or replace a Rating
+ * Add or replace a Rating. Each user should only be able to have one rating for each level.
  */
 exports.upsertRating = function(req, res) {
 	var level = req.level;
 	var user = req.user;
 	var rating = Rating.build(req.body);
 
-	rating.UserId = user.id;
-
-	rating.save().then(function() {
-		level.addRating(rating).then(function() {
-			res.jsonp(level);
-		}).catch(function(err) {
-			return res.status(500).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		});
+	Rating.upsert(rating, {}).then(function() {
+		res.jsonp(level);
 	}).catch(function(err) {
 		return res.status(500).send({
 			message: errorHandler.getErrorMessage(err)
 		});
 	});
+
+	// level.getRatings({ where: [whereClause] }).then(function(existingRating) {
+	// 	if (existingRating) {
+	// 		return res.status(500).send({
+	// 			message: 'you did it, hooray'
+	// 		})
+	// 	} else {
+	// 		rating = Rating.build(req.body);
+
+	// 		rating.UserId = user.id;
+
+	// 		rating.save().then(function() {
+	// 			level.addRating(rating).then(function() {
+	// 				res.jsonp(level);
+	// 			}).catch(function(err) {
+	// 				return res.status(500).send({
+	// 					message: errorHandler.getErrorMessage(err)
+	// 				});
+	// 			});
+	// 		}).catch(function(err) {
+	// 			return res.status(500).send({
+	// 				message: errorHandler.getErrorMessage(err)
+	// 			});
+	// 		});
+	// 	}
+	// });
 };
 
 /**
