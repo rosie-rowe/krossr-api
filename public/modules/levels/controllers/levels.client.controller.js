@@ -1,8 +1,8 @@
 'use strict';
 
 // Levels controller
-angular.module('levels').controller('LevelsController', ['$http', '$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Levels', 'ngDialog', 'Utils',
-	function($http, $rootScope, $scope, $stateParams, $timeout, $location, Authentication, Levels, ngDialog, Utils) {
+angular.module('levels').controller('LevelsController', ['$http', '$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'debounce', 'Levels', 'ngDialog', 'Utils',
+	function($http, $rootScope, $scope, $stateParams, $timeout, $location, Authentication, debounce, Levels, ngDialog, Utils) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
@@ -284,10 +284,10 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			$scope.find();
 		};
 
-		$scope.setSearchText = function(username) {
-			$scope.searchText = username ? username : null;
+		$scope.setSearchText = debounce(function(searchText) {
+			$scope.searchText = searchText ? searchText : null;
 			$scope.find();
-		};
+		}, 250);
 
 		$scope.setSortBy = function(sort_by) {
 			$scope.sortBy = sort_by ? sort_by : null;
