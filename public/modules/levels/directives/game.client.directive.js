@@ -72,7 +72,7 @@ angular.module('levels').directive('game', [
                         gameCtrl.setWinTime(scope.level.timeLimit - scope.level.timeRemaining);
                         gameCtrl.openWinLoseNotification();
                     };
-                    //scope.$apply();
+                    scope.$apply();
                 });
 
                 // This also works with the click event in main.controller and should always hit this one first due to bubbling
