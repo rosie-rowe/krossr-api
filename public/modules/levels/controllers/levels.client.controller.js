@@ -10,14 +10,16 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		$scope.sortDirection = '';
 		$scope.showFilter = false;
 
-		var penaltyTimer,
-			timeout = 1000,
-			changeGameReadyState = function(isReady) {
-				$scope.gameReady = isReady;
-			},
-			setGameReady = function(isReady) {
-				Utils.gameReady.set.call(Utils, isReady, changeGameReadyState.bind(null, isReady));
-			}
+		var penaltyTimer;
+		var timeout = 1000;
+
+		var changeGameReadyState = function(isReady) {
+			$scope.gameReady = isReady;
+		};
+
+		var setGameReady = function(isReady) {
+			Utils.gameReady.set.call(Utils, isReady, changeGameReadyState.bind(null, isReady));
+		};
 
 		$scope.clearAll = function(action) {
 			Utils.clearAll();

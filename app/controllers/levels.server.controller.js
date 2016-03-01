@@ -120,7 +120,6 @@ exports.delete = function(req, res) {
  * Level middleware
  */
 exports.levelByID = function(req, res, next, id) {
-
 	Level
 		.find({ where: {id: id}, include: [db.User]}).then(function(level) {
 			if (!level) {

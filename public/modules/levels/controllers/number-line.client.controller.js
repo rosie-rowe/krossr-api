@@ -2,12 +2,14 @@
 
 angular.module('levels').controller('NumberLineController', ['$scope', '$timeout', 'Utils',
 	function($scope, $timeout, Utils) {
-		var goalMatrix = $scope.layout || Utils.getGoalMatrix(),
-			sideLength = goalMatrix.length,
-			lineContent = [], // keep lineContent in closure so we maintain it across calls back to an instance of the controller,
-			currentGroup = {}, // do the same for currentGroup
-			hasGroup = false, // when a group is created, this is set to true so we know not to create it again
-			pvt = {}; 
+		var gameMatrix = {}; // We'll store matrices as an object containing 2 arrays, so we can cache the regular and rotated versions
+		var goalMatrix = $scope.layout || Utils.getGoalMatrix();
+		var	sideLength = goalMatrix.length;
+		var	lineContent = []; // keep lineContent in closure so we maintain it across calls back to an instance of the controller,
+		var	currentGroup = {}; // do the same for currentGroup
+		var	hasGroup = false; // when a group is created, this is set to true so we know not to create it again
+		var	pvt = {}; 
+		var targetMatrix = {};
 
 		$scope.cssClass = '';
 
@@ -36,17 +38,18 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 		/* Given a matrix index for a row or column and an indication for which it is,
 		   calculate groups of consective tiles in that row or column */
 		var calculateGroup = function(index, orientation) {
-			var	groupCount = 0,
-				gameMatrix = getTargetMatrix(Utils.getGameMatrix(), orientation),
-				currentGroup = {},
-				targetMatrix = getTargetMatrix(goalMatrix, orientation),
-				reset_ind = true,
-				coord = {};
+			var	groupCount = 0;
+			var	currentGroup = {};
+			var	reset_ind = true;
+			var	coord = {};
+
+			gameMatrix[orientation] = gameMatrix[orientation] instanceof Array ? gameMatrix[orientation] : getTargetMatrix(Utils.getGameMatrix(), orientation);
+			targetMatrix[orientation] = targetMatrix[orientation] instanceof Array ? targetMatrix[orientation] : getTargetMatrix(goalMatrix, orientation);
 
 			// Loop through the row, building a separate count for each group of consecutive true tiles
 			for (var i = 0; i < sideLength; i++) {
 				// If the rotated goal matrix contains a true tile at the current index...
-				if (targetMatrix[index][i]) {
+				if (targetMatrix[orientation][index][i]) {
 					if (!currentGroup[groupCount]) {	
 						currentGroup[groupCount] = [];
 					}
@@ -58,8 +61,8 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 								y: index,
 								x: i
 							},
-							currentValue: gameMatrix[index][i],
-							goalValue: targetMatrix[index][i]
+							currentValue: gameMatrix[orientation][index][i],
+							goalValue: targetMatrix[orientation][index][i]
 						}
 					);
 
@@ -124,6 +127,8 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 		/* To compute the number lines for the top part, we need to rotate the matrix by 90 degrees first */
 		var getTargetMatrix = function(matrix, orientation) {
+			console.log('now we are talking');
+
 			if (orientation === 'vertical') {
 				return rotate90(matrix);
 			} else {
@@ -133,7 +138,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 		/* Knowing the group already exists, update the css classes on it */
 		var recalculateGroup = function(index, orientation) {
-			var gameMatrix = getTargetMatrix(Utils.getGameMatrix(), orientation);
+			gameMatrix[orientation] = gameMatrix[orientation] instanceof Array ? gameMatrix[orientation] : getTargetMatrix(Utils.getGameMatrix(), orientation);
 
 			/* We need to keep track if anything changed so we know whether or not to actually change lineContent,
 				because if we change it regardless we'll end up with the infdig error */
@@ -157,7 +162,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 					value = entry[j];
 
 					if (value.coord) {
-						newValue = gameMatrix[value.coord.y][value.coord.x];
+						newValue = gameMatrix[orientation][value.coord.y][value.coord.x];
 
 						if (value.currentValue !== newValue) {
 							value.currentValue = newValue;

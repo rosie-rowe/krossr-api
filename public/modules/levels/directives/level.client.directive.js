@@ -19,6 +19,10 @@ angular.module('levels').directive('level', [
                 };
 
                 pvt.init();
+
+                scope.$on('$destroy', function() {
+                    console.log('hi');
+                });
             }
         };
     }

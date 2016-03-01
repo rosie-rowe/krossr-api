@@ -32,8 +32,14 @@ angular.module('levels').directive('game', [
                         }
 
                         gameCtrl.clearDragBox();
+
+                        scope.$apply();
                     }
                 };
+
+                elem.on('$destroy', function() {
+                    console.log('yeah, fix this');
+                });
 
                 elem.on('mouseenter', function() {
                     // focus the game when the mouse enters it
@@ -51,7 +57,6 @@ angular.module('levels').directive('game', [
                 elem.on('mouseleave', function(e) {
                     e.preventDefault();
                     fillDragBox('empty');
-                    scope.$apply();
                 });
 
                 // If a user starts dragging a tile and their mouse pointer leaves the game area,
@@ -67,7 +72,7 @@ angular.module('levels').directive('game', [
                         gameCtrl.setWinTime(scope.level.timeLimit - scope.level.timeRemaining);
                         gameCtrl.openWinLoseNotification();
                     };
-                    scope.$apply();
+                    //scope.$apply();
                 });
 
                 // This also works with the click event in main.controller and should always hit this one first due to bubbling
