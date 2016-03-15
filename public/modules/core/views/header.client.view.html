@@ -46,20 +46,6 @@
 					<div>Help</div>
 				</li>
 			</ul>
-
-			<ul class="nav navbar-nav theCountdown" ng-if="gameReady && currentView === 'view'">
-				<li>
-					<i class="fa fa-heart"></i>
-					<div ng-if="level.currentLives !== undefined" ng-bind="level.currentLives"></div>
-				</li>
-			</ul>
-
-			<ul class="nav navbar-nav" ng-if="authentication.user && level">
-				<li class="rateLevel">
-					<span>Rate:</span>
-					<div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
-				</li>
-			</ul>
 		</div>
 	</nav>
 </div>

@@ -44,8 +44,17 @@
                 <button class="btn">  
                     Delete Level
                 </button>
-            </a>z
+            </a>
         </div>
+    </div>
+
+    <div class="theCountdown" ng-if="gameReady && currentView === 'view'">
+        <i class="fa fa-heart red"></i>
+        <span ng-if="level.currentLives !== undefined" ng-bind="level.currentLives"></span>
+    </div>
+
+    <div class="rateLevel" ng-if="authentication.user && level">
+        Rate: <div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
     </div>
 
     <div ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="gameReady">

@@ -331,6 +331,9 @@ level.main-viewport {
   max-width: 75%;
   margin: 0 auto;
 }
+.red {
+  color: #cc0000;
+}
 .restrict-width {
   max-width: 300px;
 }
@@ -636,6 +639,7 @@ body.ngdialog-open {
 }
 .rateLevel {
   display: inline-block;
+  margin-left: 6px;
 }
 .searchText {
   display: inline-block;
@@ -655,6 +659,9 @@ body.ngdialog-open {
   box-sizing: border-box;
   border: 1px solid #999;
   float: left;
+}
+.theCountdown {
+  display: inline-block;
 }
 .top-grid {
   float: right;
