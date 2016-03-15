@@ -53,7 +53,7 @@
         <span ng-if="level.currentLives !== undefined" ng-bind="level.currentLives"></span>
     </div>
 
-    <div class="rateLevel" ng-if="authentication.user && level">
+    <div class="rateLevel" ng-if="authentication.user && level && currentView === 'view'">
         Rate: <div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
     </div>
 

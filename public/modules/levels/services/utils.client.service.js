@@ -287,8 +287,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 					if (level.currentLives === 0) {
 						this.gameOver();
 					}
-				} else {
-					debugger;
 				}
 			},
 

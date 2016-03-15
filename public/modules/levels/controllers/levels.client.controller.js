@@ -21,7 +21,9 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		};
 
 		$scope.clearAll = function(action) {
+			console.log('clearing all! action: ' + action);
 			Utils.clearAll();
+
 
 			switch (action) {
 				case 'edit':
@@ -84,15 +86,17 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 
 		// Create new level (load template)
 		$scope.createNewLevel = function() {
-			$scope.clearAll()
+			var action = 'new';
+
+			$scope.clearAll(action)
 			$scope.currentView = undefined;
 
 			setGameReady(false);
 
-			$scope.currentView = 'new';
+			$scope.currentView = action;
 			$scope.ctrl.setGameSize($scope.ctrl.options.size)
-			$scope.ctrl.createGameArray('new');
-			$scope.ctrl.getLayoutForRepeater('new');
+			$scope.ctrl.createGameArray(action);
+			$scope.ctrl.getLayoutForRepeater(action);
 		};
 
 		$scope.confirmClear = function() {
