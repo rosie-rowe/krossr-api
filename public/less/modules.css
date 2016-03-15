@@ -267,6 +267,9 @@ ul {
   width: 100%;
   height: 100%;
 }
+level.main-viewport {
+  padding: 30px;
+}
 .navbar-header {
   background-color: #008287;
   /* I have no idea where this margin is coming from
@@ -558,14 +561,14 @@ body.ngdialog-open {
   }
 }
 .list-group-item.level .averageRating,
-.list-group-item.level .timeLimit,
+.list-group-item.level .lives,
 .list-group-item.level .size {
   display: inline-block;
   margin: 0 1em 0 0;
 }
 @media screen and (max-width: 1024px) {
   .list-group-item.level .averageRating,
-  .list-group-item.level .timeLimit,
+  .list-group-item.level .lives,
   .list-group-item.level .size {
     display: block;
   }

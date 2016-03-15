@@ -1,4 +1,4 @@
-<div class="header-container-inner container" data-ng-controller="HeaderController">
+<div class="header-container-inner container">
 	<nav role="navigation">
 		<div class="navbar-nav-container">
 			<ul class="nav navbar-nav" ng-click="openLevelSelect()">
@@ -47,20 +47,10 @@
 				</li>
 			</ul>
 
-			<ul class="nav navbar-nav theCountdown" ng-if="gameReady && ctrl.currentView === 'view'">
+			<ul class="nav navbar-nav theCountdown" ng-if="gameReady && currentView === 'view'">
 				<li>
-					<i class="fa fa-clock-o"></i>
-					<div ng-if="!level.timeLimit" ng-hide="showPenalty">
-						<timer interval="1000">{{ minutes }}:{{ sseconds }}</timer>
-					</div>
-					<div ng-if="level.timeLimit" ng-hide="showPenalty">
-						<timer countdown="level.timeRemaining" interval="1000" finish-callback="gameOver()">
-							{{ minutes }}:{{sseconds}}
-						</timer>
-					</div>
-					<div ng-if="showPenalty" class="showPenalty">
-						{{ penaltyAmount }} sec
-					</div>
+					<i class="fa fa-heart"></i>
+					<div ng-if="level.currentLives !== undefined" ng-bind="level.currentLives"></div>
 				</li>
 			</ul>
 

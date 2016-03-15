@@ -37,7 +37,7 @@
                     <!-- Not sure why, but Sequelize is making me quote these names? -->
                     <option value='"createdAt"'>Created Date</option>
                     <option value='"name"'>Name</option>
-                    <option value='"timeLimit"'>Time Limit</option>
+                    <option value='"lives"'>Lives</option>
                 </select>
             </div>
 
@@ -65,8 +65,8 @@
             <div class="averageRating">
                 Avg: {{ ::level.averageRating || "n/a"}} 
             </div>
-            <div class="timeLimit">
-                {{ ::level.decomputedTimeLimit }}m
+            <div class="lives">
+                {{ ::level.lives }} lives
             </div>
         </div>
     </div>

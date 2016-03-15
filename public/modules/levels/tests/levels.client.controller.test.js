@@ -55,7 +55,7 @@
 			var sampleLevel = new Levels({
 				id: '525a8422f6d0f87f0e407a33',
 				name: 'New Level',
-				decomputedTimeLimit: 3000,
+				lives: 5,
 				layout: [[true, true, true, true, true],
 						 [true, true, true, true, true],
 						 [true, true, true, true, true],
@@ -112,7 +112,7 @@
 			// Create a sample Level object
 			var sampleLevelPostData = new Levels({
 				name: 'New Level',
-				decomputedTimeLimit: 3000,
+				lives: 5,
 				layout: [[true, true, true, true, true],
 						 [true, true, true, true, true],
 						 [true, true, true, true, true],

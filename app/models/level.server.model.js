@@ -30,7 +30,7 @@ module.exports = function(sequelize, Sequelize) {
                 isInt: true
             }
         },
-        timeLimit: {
+        lives: {
             type: Sequelize.INTEGER,
             allowNull: false,
             validate: {

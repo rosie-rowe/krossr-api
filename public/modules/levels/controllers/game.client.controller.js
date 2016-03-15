@@ -5,7 +5,6 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
     $scope.gameIsWon = false;
     $scope.gameIsLost = false;
-    this.winTime = 0;
 
     this.clearDragBox();
 
@@ -13,7 +12,6 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
       var winner = _this.checkForWin(Utils);
       if (winner) {
         $scope.gameIsWon = true;
-        Utils.stopTimer();
         $scope.$digest();
         return true;
       }
@@ -32,19 +30,12 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     this.getGameSize = Utils.getGameSize;
     this.getTileIndex = Utils.getTileIndex;
     this.indexTiles = Utils.indexTiles.bind(Utils);
-    this.resetTimer = Utils.resetTimer;
-    this.startTimer = Utils.startTimer;
 
     this.openWinLoseNotification = function() {
       ngDialog.open({
         template: "modules/levels/views/win-notification.client.view.html",
         scope: $scope
       });
-    }
-
-    this.setWinTime = function(time) {
-      _this.winTime = Utils.setWinTime(time);
-      $scope.$digest();
     }
 
     this.updateGameSize = function() {

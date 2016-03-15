@@ -16,14 +16,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 			if (typeof setter === 'function') setter({ 'newValue': newValue });
 		};
 
-        $rootScope.$on('ngDialog.opened', function() {
-          $rootScope.$broadcast('timer-stop');
-        });
-
-        $rootScope.$on('ngDialog.closed', function() {
-          $rootScope.$broadcast('timer-start');
-        });
-
 		// Utils service logic
 		// ...
 		var sideLength;
@@ -35,10 +27,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 		var	playableAreaSize;
 		var	tileIndex = [];
 		var	tileSize = 25;
-		var	timeScale = 60; // number to convert minutes to seconds and vice versa... probably not going to change
-		var	winTime = 0; // the time the level was beaten in
-		var	currentPenalty = 4;  // number of seconds to knock off the timer when a wrong answer is given... this is going to increase with each wrong answer
-		var	basePenalty = currentPenalty; // the number to reset the penalty to when changing levels or retrying a level
 		var	tutorialDivider = 4; // the amount to divide the size of a game for a tutorial
 		var	timeout = 1000; 
 
@@ -47,11 +35,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 			/* Append the current tile index */
 			addTileToIndex: function(obj) {
 				tileIndex.push(obj);
-			},
-
-			/* Add time to angular-timer */
-			addTime: function(timeToAdd) {
-				$rootScope.$broadcast('timer-add-cd-seconds', timeToAdd);
 			},
 
 			/* Take a given game width and subtract border widths. I either have to do this
@@ -93,8 +76,7 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 
 			/* Clear everything, to start a new game */
 			clearAll: function() {
-				var currentGameMatrix = this.getGameMatrix(),
-					winTime = this.getWinTime();
+				var currentGameMatrix = this.getGameMatrix();
 				
 				this.clearAllTiles();
 
@@ -103,23 +85,20 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				}
 
 				this.clearTileIndex();
-				this.setCurrentPenalty(true);
-
-				if (winTime) {
-					this.addTime(winTime);
-				}
 			},
 
 			/* Given a matrix of true/false values, set every value to false */
 			clearAllMatrix: function(matrix, value) {
-			  for (var i = 0; i < value; i++) {
-				var len = matrix[i].length
-				for (var j = 0; j < len; j++) {
-				  matrix[i][j] = false;
-				}
-			  }
+				var len;
 
-			  return matrix;
+				for (var i = 0; i < value; i++) {
+					len = matrix[i].length
+					for (var j = 0; j < len; j++) {
+						matrix[i][j] = false;
+					}
+				}
+
+				return matrix;
 			},
 
 			clearAllTiles: function() {
@@ -140,11 +119,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 			// make sure the index is clean before we add to it to avoid bugs with switching between screens
 			clearTileIndex: function() {
 				tileIndex = [];
-			},
-
-			/* Convert minutes into seconds */
-			computeTimeLimit: function(minutes) {
-				return minutes * timeScale;
 			},
 
 			/* Convert a 2D coordinate into an index */
@@ -217,10 +191,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				});
 			},
 
-			decomputeTimeLimit: function(seconds) {
-				return seconds / timeScale;
-			},
-
 			// returns an index
 			filterToUserId: function(collection, userId) {
 				var returnVal = collection.filter(function(item) {
@@ -241,16 +211,12 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				return Array.prototype.concat.apply([], matrix);
 			},
 
-			/* End the game (time ran out) */
+			/* End the game (out of lives) */
 			gameOver: function() {
 				$rootScope.$broadcast('gameOver');
 			},
 
 			gameReady: new UtilsProperty(false),
-
-			getCurrentPenalty: function() {
-				return currentPenalty;
-			},
 
 			/* Return the current game size (width and height in pixels of the game field, changes depending on number of tiles) */
 			getGameSize: function(tutorialMode) {
@@ -292,10 +258,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				return this.getTileSize()  + 'px'
 			},
 
-			getWinTime: function() {
-				return winTime;
-			},
-
 			getWidth: function(selector) {
 				return angular.element(selector).outerWidth();
 			},
@@ -312,35 +274,27 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				}
 			},
 
-			// subtract time from the angular-timer
-			knockOffTime: function() {
-				$rootScope.$broadcast('timer-add-cd-seconds', -(this.getCurrentPenalty()));
-				// increment the penalty
-				this.setCurrentPenalty();
-			},
-
 			/* Display an integer size (e.g. 15) and convert it to a pleasing form (15x15) */
 			prettySize: function(size) {
 				return size + 'x' + size;
 			},
 
-			resetTimer: function(timeToResetTo) {
-				if (timeToResetTo) {
-					$rootScope.$broadcast('timer-set-countdown-seconds', timeToResetTo);
+			/* Remove a life from the games current lives. Do it here for checking for game over easier */
+			removeLife: function(level) {
+				if (level && level.currentLives) {
+					level.currentLives--;
+
+					if (level.currentLives === 0) {
+						this.gameOver();
+					}
+				} else {
+					debugger;
 				}
 			},
 
 			/* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
 			setCoord: function(y, x, value) {
 				gameMatrix[y][x] = value;
-			},
-
-			setCurrentPenalty: function(resetPenalty) {
-				if (resetPenalty) {
-					currentPenalty = basePenalty;
-				} else {
-					currentPenalty *= 2;
-				}
 			},
 
 			/* Modify the current game size. */
@@ -391,48 +345,19 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				}, 0);
 			},
 
-			// common logic to findOne and update
-			setupLevel: function(level, yourUserId) {
-				//var yourRating = level.yourRatingIndex = this.filterToUserId(level.ratings, yourUserId);
-
-				//if (typeof yourRating !== 'undefined' && yourRating !== -1) {
-				//	level.yourRating = level.ratings[yourRating].rating;
-				//}
-
-				level.decomputedTimeLimit = this.decomputeTimeLimit(level.timeLimit);
-			},
-
-			setWinTime: function(newWinTime) {
-				winTime = newWinTime;
-				return winTime;
-			},
-
 			setWidth: function(selector, width) {
 				angular.element(selector).css("width", width);
-			},
-
-			startTimer: function() {
-				$rootScope.$broadcast('timer-start');
-			},
-
-			stopTimer: function() {
-				$rootScope.$broadcast('timer-stop');
 			},
 
 			// this is here so it can be shared between game.client.controller and levels.client.controller
 			updateLevel: function(scope) {
 				var level = scope.level,
-					timeRemaining = scope.level.timeRemaining,
 					_this = this;
 
-				level.timeLimit = this.computeTimeLimit(scope.level.decomputedTimeLimit);
 				level.size = level.layout.length;
 
 				level.$update(function() {
-					if (scope.authentication && scope.authentication.user) {
-						_this.setupLevel(level, scope.authentication.user.id);
-					}
-					scope.level.timeRemaining = timeRemaining;
+					
 				}, function(errorResponse) {
 					scope.error = errorResponse.data.message;
 

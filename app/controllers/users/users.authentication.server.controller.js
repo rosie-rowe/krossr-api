@@ -42,10 +42,6 @@ exports.signup = function(req, res) {
 			} else {
 				res.jsonp(user);
 			}
-		}).catch(function(err) {
-			res.status(500).send({
-				message: errorHandler.getErrorMessage(err)
-			});
 		});
 	});
 };

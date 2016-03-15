@@ -69,7 +69,6 @@ angular.module('levels').directive('game', [
                     e.preventDefault();
                     fillDragBox();
                     if(gameCtrl.checkWin()) {
-                        gameCtrl.setWinTime(scope.level.timeLimit - scope.level.timeRemaining);
                         gameCtrl.openWinLoseNotification();
                     };
                     scope.$apply();
@@ -78,11 +77,6 @@ angular.module('levels').directive('game', [
                 // This also works with the click event in main.controller and should always hit this one first due to bubbling
                 elem.on('click', '.play-again', function() {
                     scope.gameIsWon = false;
-
-                    // reset the time back to its original value, this might be slightly hacky but I don't want to modify angular-timer at the momen
-                    gameCtrl.resetTimer(scope.level.timeLimit);
-                    gameCtrl.startTimer();
-
                     scope.$apply();
                 });
 

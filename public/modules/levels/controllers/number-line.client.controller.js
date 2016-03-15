@@ -127,12 +127,14 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 		/* To compute the number lines for the top part, we need to rotate the matrix by 90 degrees first */
 		var getTargetMatrix = function(matrix, orientation) {
-			console.log('now we are talking');
-
-			if (orientation === 'vertical') {
-				return rotate90(matrix);
+			if (matrix) {
+				if (orientation === 'vertical') {
+					return rotate90(matrix);
+				} else {
+					return matrix;
+				}
 			} else {
-				return matrix;
+				debugger;
 			}
 		};
 

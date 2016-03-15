@@ -1,6 +1,6 @@
 <div class="viewLevel">
-    <div class="form-group form-horizontal restrict-width" ng-if="['edit', 'new'].indexOf(mode) > -1">
-        <h2>{{ mode }} level</h2>
+    <div class="form-group form-horizontal restrict-width" ng-if="['edit', 'new'].indexOf(currentView) > -1">
+        <h2>{{ currentView }} level</h2>
 
         <div class="controls">
             <label class="control-label" for="name">Name</label>
@@ -8,11 +8,11 @@
         </div>
 
         <div class="controls">
-            <label class="control-label" for="minutes">Time Limit</label>
-            <input type='text' ng-pattern="validNumber" data-ng-model="level.decomputedTimeLimit" id="minutes" class="form-control" placeholder="Time Limit (minutes)" required>
+            <label class="control-label" for="lives"># of lives (wrong answers allowed)</label>
+            <input type='text' ng-pattern="validNumber" data-ng-model="level.lives" id="lives" class="form-control" placeholder="# of lives" required>
         </div>
 
-        <div class="controls" ng-if="mode === 'new'">
+        <div class="controls" ng-if="currentView === 'new'">
             <label class="control-label" for="size">Size</label>
             <select ng-model='ctrl.options.size' ng-change="createNewLevel();">
                 <option value="25" selected>5x5</option>
@@ -25,33 +25,39 @@
             <button class="btn" type="button" ng-click="confirmClear()">Clear</button>
         </div>
 
-        <div ng-if="mode === 'edit'">
+        <div ng-if="currentView === 'edit'">
             <button ng-disabled="error" class="btn" type="button" ng-click="confirmUpdate()">
                 <span ng-if="!error">Update</span>
                 <span ng-if="error" ng-bind-html="error"></span>
             </button>
         </div>
 
-        <div ng-if="mode === 'new'">
+        <div ng-if="currentView === 'new'">
             <button ng-disabled="error" class="btn btn-primary" ng-click="submitCreate()">
                 <span ng-if="!error">Submit</span>
                 <span ng-if="error" data-ng-bind="error"></span>
             </button>
         </div>
 
-        <div data-ng-if="authentication.user.id == level.UserId && mode === 'edit'">
+        <div data-ng-if="authentication.user.id == level.UserId && currentView === 'edit'">
             <a data-ng-click="confirmRemove(level);">
                 <button class="btn">  
                     Delete Level
                 </button>
-            </a>
+            </a>z
         </div>
     </div>
 
     <div ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="gameReady">
-        <div class="gameContainer-inner" ng-style="{'padding': ctrl.margin}">
+        <div class="gameContainer-inner">
             <div class="top row">
-                <div number-grid ng-if="level && level.layout && mode === 'view'" ctrl="ctrl" layout="level.layout" orientation="vertical" class="top-grid"></div>
+                <div number-grid
+                    ng-if="level && level.layout && currentView === 'view'"
+                    ctrl="ctrl"
+                    layout="level.layout"
+                    orientation="vertical"
+                    class="top-grid"
+                    ng-style="{'padding-right': ctrl.margin}"></div>
             </div>
             
             <div class="bottom row">
@@ -59,7 +65,7 @@
                     <tile ng-repeat="i in ctrl.finalLayout.tiles" editable='true'></tile>
                 </game>
 
-                <div number-grid ng-if="level && level.layout && mode === 'view'" layout="level.layout" ctrl="ctrl" orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
+                <div number-grid ng-if="level && level.layout && currentView === 'view'" layout="level.layout" ctrl="ctrl" orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@ var tileController = function($scope, Utils, shiftService) {
 
     this.fill('empty');
 
-    if ($scope.ctrl.currentView === 'edit'
+    if ($scope.currentView === 'edit'
         && $scope.ctrl.finalLayout
         && $scope.ctrl.finalLayout.tiles
         && $scope.ctrl.finalLayout.tiles[$scope.$index]
@@ -19,7 +19,7 @@ var tileController = function($scope, Utils, shiftService) {
 
     this.change = function(index, initState, changeTo) {
         if (this.editable === 'true') {
-            _this.changeTile(index, initState, changeTo, goalMatrix, shiftService, Utils);
+            _this.changeTile($scope, index, initState, changeTo, goalMatrix, shiftService, Utils);
         }
     };
 
@@ -45,7 +45,7 @@ var tileController = function($scope, Utils, shiftService) {
 
 tileController.$inject = ['$scope', 'Utils', 'shiftService'];
 
-tileController.prototype.changeTile = function(index, initState, changeTo, goalMatrix, shiftService, Utils) {
+tileController.prototype.changeTile = function(scope, index, initState, changeTo, goalMatrix, shiftService, Utils) {
     var coord,
         wrong_answer = false;
 
@@ -69,7 +69,7 @@ tileController.prototype.changeTile = function(index, initState, changeTo, goalM
 
         if (wrong_answer) {
           this.fill('marked');
-          Utils.knockOffTime();
+          Utils.removeLife(scope.level);
         } else {
           this.fill('selected', initState);
           Utils.setCoord(coord.y, coord.x, this.selected);

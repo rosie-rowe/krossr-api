@@ -10,7 +10,6 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		$scope.sortDirection = '';
 		$scope.showFilter = false;
 
-		var penaltyTimer;
 		var timeout = 1000;
 
 		var changeGameReadyState = function(isReady) {
@@ -38,7 +37,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		$scope.clearAllInputs = function() {
 			if ($scope.level) {
 				$scope.level.name = undefined;
-				$scope.level.decomputedTimeLimit = undefined;
+				$scope.level.lives = undefined;
 			}
 		};
 
@@ -50,7 +49,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			var level = new Levels ({
 				name: this.level.name,
 				layout: layout,
-				timeLimit: Utils.computeTimeLimit(this.level.decomputedTimeLimit),
+				lives: this.level.lives,
 				size: layout.length
 			});
 
@@ -86,18 +85,15 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		// Create new level (load template)
 		$scope.createNewLevel = function() {
 			$scope.clearAll()
-			$scope.ctrl.currentView = undefined;
+			$scope.currentView = undefined;
 
 			setGameReady(false);
 
-			$scope.ctrl.currentView = 'new';
+			$scope.currentView = 'new';
 			$scope.ctrl.setGameSize($scope.ctrl.options.size)
 			$scope.ctrl.createGameArray('new');
 			$scope.ctrl.getLayoutForRepeater('new');
 		};
-
-		// this needs to be here so Edit can see it
-		$scope.decomputeTimeLimit = Utils.decomputeTimeLimit;
 
 		$scope.confirmClear = function() {
 			ngDialog.openConfirm({
@@ -155,12 +151,6 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 				// Calculate the size for each level so we can display it to the screen & sort by size
 				for (; i < len; i++ ) {
 					currentLevel = allLevels[i];
-
-					if ($scope.authentication && $scope.authentication.user) {
-						Utils.setupLevel(currentLevel, $scope.authentication.user.id);
-					}
-
-					currentLevel.decomputedTimeLimit = Utils.decomputeTimeLimit(currentLevel.timeLimit);
 					currentLevel.prettySize = Utils.prettySize(currentLevel.layout.length);
 					currentLevel.averageRating = Utils.average(currentLevel.Ratings, 'rating');
 				}
@@ -185,11 +175,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 				}).$promise.then(function(data) {
 					$scope.level = data;
 
-					if ($scope.authentication && $scope.authentication.user) {
-						Utils.setupLevel($scope.level, $scope.authentication.user.id);
-					}
-
-					$scope.level.timeRemaining = $scope.level.timeLimit;
+					$scope.level.currentLives = data.lives;
 
 					var flatLayout = Utils.flatten(data.layout);
 
@@ -203,7 +189,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 
 					if ($scope.ctrl) {
 						$scope.ctrl.getLayoutForRepeater(controller, $scope.level.layout);
-						$scope.ctrl.currentView = controller;
+						$scope.currentView = controller;
 					}
 				});
 			}
@@ -236,7 +222,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		};
 
 		$scope.loadLevel = function(levelId, action) {
-			$scope.ctrl.currentView = undefined;
+			$scope.currentView = undefined;
 
 			setGameReady(false);
 
@@ -302,23 +288,6 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		$scope.toggleShowFilter = function() {
 			$scope.showFilter = !$scope.showFilter;
 		}
-
-		// gonna utilize the same event included with angular-timer to display the penalty on the screen
-	    $scope.$on('timer-add-cd-seconds', function(event, args) {
-	    	// don't want to see the time being added to the clock, for example, when adding it back when pressing 'play again'
-	    	if (args < 0) {
-		        $scope.penaltyAmount = args;
-		        $scope.showPenalty = true;
-
-		        // if multiple decrements happen in quick succession, we should reset the timer
-		        // to allow the next penalty indicator to show for the full timeout instead of expiring at the end of the first one.
-		        $timeout.cancel(penaltyTimer);
-
-		        penaltyTimer = $timeout(function() {
-		            $scope.showPenalty = false;
-		        }, timeout);
-	    	}
-	    });
 
 	    $scope.$on('gameReadyChanged', function(event, args) {
 	    	changeGameReadyState(args.gameReady);
