@@ -1,6 +1,6 @@
 <div class="viewLevel">
-    <div class="form-group form-horizontal restrict-width" ng-if="['edit', 'new'].indexOf(currentView) > -1">
-        <h2>{{ currentView }} level</h2>
+    <div class="form-group form-horizontal restrict-width" ng-if="['edit', 'new'].indexOf(level.currentView) > -1">
+        <h2>{{ level.currentView }} level</h2>
 
         <div class="controls">
             <label class="control-label" for="name">Name</label>
@@ -12,7 +12,7 @@
             <input type='text' ng-pattern="validNumber" data-ng-model="level.lives" id="lives" class="form-control" placeholder="# of lives" required>
         </div>
 
-        <div class="controls" ng-if="currentView === 'new'">
+        <div class="controls" ng-if="level.currentView === 'new'">
             <label class="control-label" for="size">Size</label>
             <select ng-model='ctrl.options.size' ng-change="createNewLevel();">
                 <option value="25" selected>5x5</option>
@@ -25,21 +25,21 @@
             <button class="btn" type="button" ng-click="confirmClear()">Clear</button>
         </div>
 
-        <div ng-if="currentView === 'edit'">
+        <div ng-if="level.currentView === 'edit'">
             <button ng-disabled="error" class="btn" type="button" ng-click="confirmUpdate()">
                 <span ng-if="!error">Update</span>
                 <span ng-if="error" ng-bind-html="error"></span>
             </button>
         </div>
 
-        <div ng-if="currentView === 'new'">
+        <div ng-if="level.currentView === 'new'">
             <button ng-disabled="error" class="btn btn-primary" ng-click="submitCreate()">
                 <span ng-if="!error">Submit</span>
                 <span ng-if="error" data-ng-bind="error"></span>
             </button>
         </div>
 
-        <div data-ng-if="authentication.user.id == level.userId && currentView === 'edit'">
+        <div data-ng-if="authentication.user.id == level.userId && level.currentView === 'edit'">
             <a data-ng-click="confirmRemove(level);">
                 <button class="btn">  
                     Delete Level
@@ -48,12 +48,12 @@
         </div>
     </div>
 
-    <div class="theCountdown" ng-if="gameReady && currentView === 'view'">
+    <div class="theCountdown" ng-if="gameReady && level.currentView === 'view'">
         <i class="fa fa-heart red"></i>
         <span ng-if="level.currentLives !== undefined" ng-bind="level.currentLives"></span>
     </div>
 
-    <div class="rateLevel" ng-if="authentication.user && level && currentView === 'view'">
+    <div class="rateLevel" ng-if="authentication.user && level && level.currentView === 'view'">
         Rate: <div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
     </div>
 
@@ -61,7 +61,7 @@
         <div class="gameContainer-inner">
             <div class="top row">
                 <div number-grid
-                    ng-if="level && level.layout && currentView === 'view'"
+                    ng-if="level && level.layout && level.currentView === 'view'"
                     ctrl="ctrl"
                     layout="level.layout"
                     orientation="vertical"
@@ -70,11 +70,11 @@
             </div>
             
             <div class="bottom row">
-                <game>
+                <game ng-if="level">
                     <tile ng-repeat="i in ctrl.finalLayout.tiles" editable='true'></tile>
                 </game>
 
-                <div number-grid ng-if="level && level.layout && currentView === 'view'" layout="level.layout" ctrl="ctrl" orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
+                <div number-grid ng-if="level && level.layout && level.currentView === 'view'" layout="level.layout" ctrl="ctrl" orientation="horizontal" class="left-grid" ng-style="{'padding-top': ctrl.margin}"></div>
             </div>
         </div>
     </div>

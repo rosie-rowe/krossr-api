@@ -12,6 +12,12 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 
 		var timeout = 1000;
 
+		var clearLevel = function() {
+			if ($scope.level) {
+				$scope.level = undefined;
+			}
+		}
+
 		var changeGameReadyState = function(isReady) {
 			$scope.gameReady = isReady;
 		};
@@ -23,25 +29,8 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		$scope.clearAll = function(action) {
 			console.log('clearing all! action: ' + action);
 			Utils.clearAll();
-
-
-			switch (action) {
-				case 'edit':
-				case 'new':
-					$scope.clearAllInputs();
-					break;
-
-				default:
-					break;
-			}
+			clearLevel();
 		}
-
-		$scope.clearAllInputs = function() {
-			if ($scope.level) {
-				$scope.level.name = undefined;
-				$scope.level.lives = undefined;
-			}
-		};
 
 		// Split out for easier testing
 		$scope.submitCreate = function() {
@@ -89,14 +78,15 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			var action = 'new';
 
 			$scope.clearAll(action)
-			$scope.currentView = undefined;
 
 			setGameReady(false);
 
-			$scope.currentView = action;
 			$scope.ctrl.setGameSize($scope.ctrl.options.size)
 			$scope.ctrl.createGameArray(action);
 			$scope.ctrl.getLayoutForRepeater(action);
+			$scope.level = {
+				currentView: action
+			};
 		};
 
 		$scope.confirmClear = function() {
@@ -191,12 +181,13 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 						controller: controller
 					});
 
-					debugger;
-
 					if ($scope.ctrl) {
 						$scope.ctrl.getLayoutForRepeater(controller, $scope.level.layout);
-						$scope.currentView = controller;
+						$scope.level.currentView = controller;
 					}
+
+					console.log('At this point we should be on ' + controller);
+					console.log('We are actually on ' + $scope.level.currentView);
 				});
 			}
 		};
@@ -228,8 +219,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		};
 
 		$scope.loadLevel = function(levelId, action) {
-			$scope.currentView = undefined;
-
+			clearLevel();
 			setGameReady(false);
 
 			$scope.selectedLevelId = levelId;

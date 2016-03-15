@@ -6,7 +6,6 @@ angular
     function ($scope, $timeout, shiftService, Utils) {
     var _this = this;
             
-    this.currentView = 'view';
     this.tileSize = Utils.getTileSizePx();
     this.finalLayout = {};
     this.flatten = Utils.flatten;

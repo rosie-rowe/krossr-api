@@ -7,7 +7,7 @@ var tileController = function($scope, Utils, shiftService) {
 
     this.fill('empty');
 
-    if ($scope.currentView === 'edit'
+    if ($scope.level.currentView === 'edit'
         && $scope.ctrl.finalLayout
         && $scope.ctrl.finalLayout.tiles
         && $scope.ctrl.finalLayout.tiles[$scope.$index]

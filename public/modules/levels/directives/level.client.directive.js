@@ -6,7 +6,10 @@ angular.module('levels').directive('level', [
             controller: 'LevelsController',
             controllerAs: 'levelCtrl',
             restrict: 'E',
-            scope: false,
+            scope: {
+                ctrl: '=',
+                level: '='
+            },
             templateUrl: 'modules/levels/views/level.client.view.html',
             link: function (scope, elem, attr, levelCtrl) {
                 var pvt = {};
