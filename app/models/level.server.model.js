@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, Sequelize) {
-    var Level = sequelize.define('Level', {
+    var level = sequelize.define('level', {
         name: {
             allowNull: false,
             type: Sequelize.STRING,
@@ -41,10 +41,10 @@ module.exports = function(sequelize, Sequelize) {
     {
         timestamps: true,
         associate: function(models) {
-            Level.belongsTo(models.User);
-            Level.hasMany(models.Rating);
+            level.belongsTo(models.user);
+            level.hasMany(models.rating);
         }
     });
 
-    return Level;
+    return level;
 }; 

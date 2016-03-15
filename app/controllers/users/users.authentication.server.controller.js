@@ -7,7 +7,7 @@ var _ = require('lodash'),
 	errorHandler = require('../errors'),
 	db = require('../../../config/sequelize'),
 	passport = require('passport'),
-	User = db.User,
+	User = db.user,
 	winston = require('../../../config/winston');
 
 /**

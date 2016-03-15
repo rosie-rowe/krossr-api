@@ -2,7 +2,7 @@
 
 var passport = require('passport'),
 	db = require('./sequelize'),
-	User = db.User,
+	User = db.user,
 	path = require('path'),
 	config = require('./config');
 

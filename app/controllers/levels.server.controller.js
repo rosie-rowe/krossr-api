@@ -6,15 +6,15 @@
 var db = require('../../config/sequelize'),
 	winston = require('../../config/winston'),
 	errorHandler = require('./errors'),
-	Level = db.Level,
-	Rating = db.Rating,
+	Level = db.level,
+	Rating = db.rating,
 	Sequelize = require('sequelize');
 
 /**
  * Create a Level
  */
 exports.create = function(req, res) {
-	req.body.UserId = req.user.id;
+	req.body.userId = req.user.id;
 
 	Level.create(req.body).then(function(level) {
 		if (!level) {
@@ -69,8 +69,8 @@ exports.upsertRating = function(req, res) {
 	/* Simulated composite primary key since Sequelize doesn't support them yet */
 	Rating.findOrCreate({
 		where: {
-			UserId: user.id,
-			LevelId: level.id
+			userId: user.id,
+			levelId: level.id
 		},
 		defaults: {
 			rating: rating.rating
@@ -81,8 +81,8 @@ exports.upsertRating = function(req, res) {
 				rating: rating.rating
 			}, {
 				where: {
-					UserId: user.id,
-					LevelId: level.id
+					userId: user.id,
+					levelId: level.id
 				}
 			}).then(function() {
 				res.jsonp(level);
@@ -121,7 +121,7 @@ exports.delete = function(req, res) {
  */
 exports.levelByID = function(req, res, next, id) {
 	Level
-		.find({ where: {id: id}, include: [db.User]}).then(function(level) {
+		.find({ where: {id: id}, include: [db.user]}).then(function(level) {
 			if (!level) {
 				return next(new Error('Failed to load level ' + id));
 			} else {
@@ -141,13 +141,36 @@ exports.paginate = function(req, res) {
 
 	winston.info('Trying to query Levels...');
 
+	var whereBuilder = {};
+
+	if (sizeRestriction) {
+		whereBuilder.size = {
+			$eq: parseInt(sizeRestriction, 10)
+		};
+	}
+
+	if (searchText) {
+		searchText = '%' + searchText + '%';
+
+		whereBuilder.$or = [
+			{
+				'user.username': {
+					$iLike: searchText
+				}
+			}
+		];
+	}
+
 	Level.findAndCountAll({
-		include: [db.Rating],
-		where: Sequelize.and(
-			sizeRestriction ? ['size = ?', parseInt(sizeRestriction, 10)] : null,
-			searchText ? ['name ILIKE ?', '%' + searchText + '%'] : null
-			// todo: also search on username
-		),
+		include: [{ model: db.rating }, { model: db.user, attributes: ['username'] }],
+		where: {
+			$and: whereBuilder
+		},
+		// Sequelize.and(
+		// 	sizeRestriction ? ['size = ?', parseInt(sizeRestriction, 10)] : null,
+		// 	searchText ? ['name ILIKE ?', '%' + searchText + '%'] : null,
+		// 	// todo: also search on username
+		// ),
 		limit: numPerPage,
 		offset: pageNum * numPerPage,
 		order: sortBy + ' ' + sortDirection
@@ -168,7 +191,7 @@ exports.paginate = function(req, res) {
  * Level authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.level.UserId !== req.user.id) {
+	if (req.level.userId !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

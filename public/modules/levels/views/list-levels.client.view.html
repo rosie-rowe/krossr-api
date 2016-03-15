@@ -34,10 +34,9 @@
                 <label class="control-label">Sort by</label>
                 <select ng-model="sortBy" ng-change="setSortBy(sortBy)">
                     <option value="">None</option>
-                    <!-- Not sure why, but Sequelize is making me quote these names? -->
-                    <option value='"createdAt"'>Created Date</option>
-                    <option value='"name"'>Name</option>
-                    <option value='"lives"'>Lives</option>
+                    <option value='createdAt'>Created Date</option>
+                    <option value='name'>Name</option>
+                    <option value='lives'>Lives</option>
                 </select>
             </div>
 
@@ -58,7 +57,7 @@
             </a>
             <div class="list-group-item-heading" data-ng-bind="level.name"></div>
             <div class="username" ng-click="setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
-            <a class="editButton" ng-click="loadLevel('{{level.id}}', 'edit'); closeThisDialog();" data-ng-if="level && authentication.user.id === level.UserId">
+            <a class="editButton" ng-click="loadLevel('{{level.id}}', 'edit'); closeThisDialog();" data-ng-if="level && authentication.user.id === level.userId">
                 <i class="fa fa-edit"></i>
             </a>
             <div class="size" data-ng-bind="level.prettySize" ng-click="setSizeRestriction(level.size)"></div>

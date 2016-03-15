@@ -5,7 +5,7 @@
  */
 var _ = require('lodash'),
 	db = require('../../../config/sequelize'),
-	User = db.User;
+	User = db.user;
 
 /**
  * User middleware

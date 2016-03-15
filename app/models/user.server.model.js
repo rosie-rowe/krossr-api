@@ -3,7 +3,7 @@
 var crypto = require('crypto');
 
 module.exports = function(sequelize, Sequelize) {
-    var User = sequelize.define('User', {
+    var user = sequelize.define('user', {
         email: {
             allowNull: false,
             type: Sequelize.STRING,
@@ -50,12 +50,12 @@ module.exports = function(sequelize, Sequelize) {
             }
         },
         associate: function(models) {
-            User.hasMany(models.Level);
-            User.hasMany(models.Rating);
+            user.hasMany(models.level);
+            user.hasMany(models.rating);
         }
     });
 
-    return User;
+    return user;
 };
 
  

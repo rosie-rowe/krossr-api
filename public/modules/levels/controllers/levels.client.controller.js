@@ -156,7 +156,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 				for (; i < len; i++ ) {
 					currentLevel = allLevels[i];
 					currentLevel.prettySize = Utils.prettySize(currentLevel.layout.length);
-					currentLevel.averageRating = Utils.average(currentLevel.Ratings, 'rating');
+					currentLevel.averageRating = Utils.average(currentLevel.ratings, 'rating');
 				}
 			});
 		};
@@ -190,6 +190,8 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 						layout: $scope.level.layout,
 						controller: controller
 					});
+
+					debugger;
 
 					if ($scope.ctrl) {
 						$scope.ctrl.getLayoutForRepeater(controller, $scope.level.layout);

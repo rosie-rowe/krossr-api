@@ -5,8 +5,8 @@
  */
 var should = require('should'),
 	db = require('../../config/sequelize'),
-	User = db.User,
-	Level = db.Level,
+	User = db.user,
+	Level = db.level,
 	winston = require('../../config/winston');
 
 /**

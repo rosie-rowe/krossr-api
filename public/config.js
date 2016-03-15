@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'Krossr';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ngCookies', 'ngDialog', 'ngTouch',  'ngSanitize',  'ui.router', 'ui.utils', 'timer', 'debounce'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ngCookies', 'ngDialog', 'ngTouch',  'ngSanitize',  'ui.router', 'ui.utils', 'debounce'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

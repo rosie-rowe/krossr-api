@@ -5,7 +5,7 @@
  */
 var should = require('should'),
 	db = require('../../config/sequelize'),
-	User = db.User;
+	User = db.user;
 
 /**
  * Globals
