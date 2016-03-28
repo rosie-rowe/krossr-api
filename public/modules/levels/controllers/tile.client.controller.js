@@ -1,9 +1,11 @@
 'use strict';
 
 var tileController = function($scope, Utils, shiftService) {
-    var _this = this,
-        sideLength = Utils.getSideLength(),
-        goalMatrix = Utils.getGoalMatrix();
+    var _this = this;
+    var sideLength = Utils.getSideLength();
+    var goalMatrix = Utils.getGoalMatrix();
+
+    $scope.controllerName = 'tile';
 
     this.fill('empty');
 
@@ -69,7 +71,7 @@ tileController.prototype.changeTile = function(scope, index, initState, changeTo
 
         if (wrong_answer) {
           this.fill('marked');
-          Utils.removeLife(scope.level);
+          scope.removeLife();
         } else {
           this.fill('selected', initState);
           Utils.setCoord(coord.y, coord.x, this.selected);

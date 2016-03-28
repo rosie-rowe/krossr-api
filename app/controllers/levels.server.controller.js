@@ -154,15 +154,16 @@ exports.paginate = function(req, res) {
 
 		whereBuilder.$or = [
 			{
-				'user.username': {
+				name: {
 					$iLike: searchText
 				}
-			}
+			},
+			Sequelize.where(Sequelize.col('user.username'), 'ILIKE', searchText)
 		];
 	}
 
 	Level.findAndCountAll({
-		include: [{ model: db.rating }, { model: db.user, attributes: ['username'] }],
+		include: [{ model: db.rating }, { model: db.user, attributes: ['username'], required: true, where: {} }],
 		where: {
 			$and: whereBuilder
 		},

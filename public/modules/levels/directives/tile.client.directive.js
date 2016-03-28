@@ -115,6 +115,23 @@ angular.module('levels').directive('tile', [
                 scope.$on('$destroy', function() {
                     elem.remove(); 
                 });
+
+                /* Remove a life from the pool of remaining lives */
+                scope.removeLife = function() {
+                    var level = scope.level;
+
+                    console.log('before: ' + level.currentLives);
+
+                    if (level && level.currentLives) {
+                        level.currentLives--;
+
+                        console.log('after: ' + level.currentLives);
+
+                        if (level.currentLives === 0) {
+                            gameCtrl.gameOver();
+                        }
+                    }
+                };
             }
         }
     }

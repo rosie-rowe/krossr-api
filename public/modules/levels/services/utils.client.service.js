@@ -211,11 +211,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				return Array.prototype.concat.apply([], matrix);
 			},
 
-			/* End the game (out of lives) */
-			gameOver: function() {
-				$rootScope.$broadcast('gameOver');
-			},
-
 			gameReady: new UtilsProperty(false),
 
 			/* Return the current game size (width and height in pixels of the game field, changes depending on number of tiles) */
@@ -277,17 +272,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 			/* Display an integer size (e.g. 15) and convert it to a pleasing form (15x15) */
 			prettySize: function(size) {
 				return size + 'x' + size;
-			},
-
-			/* Remove a life from the games current lives. Do it here for checking for game over easier */
-			removeLife: function(level) {
-				if (level && level.currentLives) {
-					level.currentLives--;
-
-					if (level.currentLives === 0) {
-						this.gameOver();
-					}
-				}
 			},
 
 			/* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */

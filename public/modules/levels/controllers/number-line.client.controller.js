@@ -12,6 +12,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 		var targetMatrix = {};
 
 		$scope.cssClass = '';
+		$scope.controllerName = 'numberLine';
 
 		// display a crossed out 0 if the linecontent comes back with no content. otherwise, pass through
 		var accountForZeros = function(lineContent) {

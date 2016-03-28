@@ -5,6 +5,7 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
     $scope.gameIsWon = false;
     $scope.gameIsLost = false;
+    $scope.controllerName = 'game';
 
     this.clearDragBox();
 
@@ -20,11 +21,19 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
     this.convertTo1D = function(index) {
       return Utils.convertTo1D(index, Utils.getSideLength());
-    }
+    };
 
     this.convertTo2D = function(index) {
       return Utils.convertTo2D(index, Utils.getSideLength());
-    }
+    };
+
+    this.gameOver = function() {
+      if (!$scope.gameIsLost) {
+        $scope.gameIsWon = false;
+        $scope.gameIsLost = true;
+        _this.openWinLoseNotification();
+      }
+    };
 
     this.getGameMatrix = Utils.getGameMatrix;
     this.getGameSize = Utils.getGameSize;
@@ -52,16 +61,6 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
     $scope.$on('gameSizeChanged', function() {
         _this.updateGameSize.call(_this);
-    });
-
-    // as far as I know, this has to be an event since it's triggered by a timer expiring.
-    // if I think of a way to use the service better instead, I'll change it
-    $scope.$on('gameOver', function() {
-      if (!$scope.gameIsLost) {
-        $scope.gameIsWon = false;
-        $scope.gameIsLost = true;
-        _this.openWinLoseNotification();
-      }
     });
 };
 

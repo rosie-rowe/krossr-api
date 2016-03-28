@@ -5,6 +5,8 @@ angular
 .controller('MainCtrl', ['$scope', '$timeout', 'shiftService', 'Utils',
     function ($scope, $timeout, shiftService, Utils) {
     var _this = this;
+
+    $scope.controllerName = 'main';
             
     this.tileSize = Utils.getTileSizePx();
     this.finalLayout = {};

@@ -4,6 +4,7 @@
 angular.module('levels').controller('LevelsController', ['$http', '$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'debounce', 'Levels', 'ngDialog', 'Utils',
 	function($http, $rootScope, $scope, $stateParams, $timeout, $location, Authentication, debounce, Levels, ngDialog, Utils) {
 		$scope.authentication = Authentication;
+		$scope.controllerName = 'levels';
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
 		$scope.sizeRestriction = '';
@@ -117,10 +118,6 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 				showClose: false,
 				scope: $scope
 			});
-		};
-
-		$scope.gameOver = function() {
-			Utils.gameOver();
 		};
 
 		// Find a list of Levels
@@ -286,6 +283,9 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		}
 
 	    $scope.$on('gameReadyChanged', function(event, args) {
+	    	console.log('received game ready changed event. ready? ' + args.gameReady ? 'yes' :'no');
+	    	console.trace();
+
 	    	changeGameReadyState(args.gameReady);
 	    });
 	}
