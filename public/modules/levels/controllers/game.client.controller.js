@@ -30,8 +30,8 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
     this.gameOver = function() {
       if (!$scope.gameIsLost) {
-        this.setGameWon(false);
-        this.setGameLost(true);
+        $scope.gameIsWon = false;
+        $scope.gameIsLost = true;
         _this.openWinLoseNotification();
       }
     };
