@@ -7,7 +7,6 @@ angular.module('levels').directive('level', [
             controllerAs: 'levelCtrl',
             restrict: 'E',
             scope: {
-                gameReady: '=',
                 ctrl: '=',
                 level: '='
             },

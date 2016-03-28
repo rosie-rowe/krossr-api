@@ -3,9 +3,6 @@
 var gameController = function($scope, $timeout, Utils, ngDialog) {
     var _this = this;
 
-    $scope.gameIsWon = false;
-    $scope.gameIsLost = false;
-
     $scope.controllerName = 'game';
 
     this.clearDragBox();
@@ -13,7 +10,7 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     this.checkWin = function() {
       var winner = _this.checkForWin(Utils);
       if (winner) {
-        $scope.gameIsWon = true;
+        $scope.level.won = true;
         $scope.$digest();
         return true;
       }
@@ -30,8 +27,8 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
     this.gameOver = function() {
       if (!$scope.gameIsLost) {
-        $scope.gameIsWon = false;
-        $scope.gameIsLost = true;
+        $scope.level.won = false;
+        $scope.level.lost = true;
         _this.openWinLoseNotification();
       }
     };

@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="theCountdown" ng-if="gameReady && level.currentView === 'view'">
+    <div class="theCountdown" ng-if="level.ready && level.currentView === 'view'">
         <i class="fa fa-heart red"></i>
         <span ng-if="level.currentLives !== undefined" ng-bind="level.currentLives"></span>
     </div>
@@ -57,7 +57,7 @@
         Rate: <div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
     </div>
 
-    <div ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="gameReady">
+    <div ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="level.ready">
         <div class="gameContainer-inner">
             <div class="top row">
                 <div number-grid

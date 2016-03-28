@@ -1,5 +1,5 @@
 <div class="main-viewport">
-    <div loading-animation condition="!gameReady"></div>
+    <div loading-animation condition="!level || !level.ready"></div>
 
-    <level class="main-viewport" ng-show="gameReady" game-ready="gameReady" ctrl="ctrl" level="level"></level>
+    <level class="main-viewport" ng-show="level && level.ready" ctrl="ctrl" level="level"></level>
 </div>

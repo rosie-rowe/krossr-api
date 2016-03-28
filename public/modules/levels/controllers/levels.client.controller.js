@@ -72,13 +72,14 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 
 			$scope.clearAll(action)
 
-			$scope.gameReady = false;
+			$scope.level = undefined;
 
 			$scope.ctrl.setGameSize($scope.ctrl.options.size)
 			$scope.ctrl.createGameArray(action);
 			$scope.ctrl.getLayoutForRepeater(action);
 			$scope.level = {
-				currentView: action
+				currentView: action,
+				ready: true
 			};
 		};
 
@@ -146,7 +147,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 				$scope.ctrl.finalLayout = {};
 			}
 
-			$scope.level = {};
+			$scope.level = undefined;
 
 			// store the name of the controller so we can have the same functions do different things
 			// depending on new, edit, etc.
@@ -158,6 +159,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 				}).$promise.then(function(data) {
 					$scope.level = data;
 
+					console.log('setting currentLives to: ' + data.lives);
 					$scope.level.currentLives = data.lives;
 
 					var flatLayout = Utils.flatten(data.layout);
@@ -178,7 +180,9 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 					console.log('At this point we should be on ' + controller);
 					console.log('We are actually on ' + $scope.level.currentView);
 
-					$scope.gameReady = true;
+					$scope.level.won = false;
+					$scope.level.lost = false;
+					$scope.level.ready = true;
 				});
 			}
 		};
@@ -188,6 +192,10 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 				template: 'modules/levels/views/list-levels.client.view.html',
 				scope: $scope
 			});
+		};
+
+		$scope.reloadLevel = function(action) {
+			$scope.loadLevel($scope.level.id, action);
 		};
 
 		// Remove existing Level
@@ -211,7 +219,6 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 
 		$scope.loadLevel = function(levelId, action) {
 			clearLevel();
-			$scope.gameReady = false;
 
 			$scope.selectedLevelId = levelId;
 			$scope.findOne(action);
