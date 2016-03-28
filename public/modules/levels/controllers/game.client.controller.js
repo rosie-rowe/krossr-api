@@ -5,6 +5,7 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
     $scope.gameIsWon = false;
     $scope.gameIsLost = false;
+
     $scope.controllerName = 'game';
 
     this.clearDragBox();
@@ -29,8 +30,8 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
     this.gameOver = function() {
       if (!$scope.gameIsLost) {
-        $scope.gameIsWon = false;
-        $scope.gameIsLost = true;
+        this.setGameWon(false);
+        this.setGameLost(true);
         _this.openWinLoseNotification();
       }
     };
@@ -45,7 +46,7 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
         template: "modules/levels/views/win-notification.client.view.html",
         scope: $scope
       });
-    }
+    };
 
     this.updateGameSize = function() {
       // don't use args, call to getGameSize so we take tutorials into account
@@ -57,7 +58,7 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
           height: newGameSettings.gameHeight 
         }
       }
-    }
+    };
 
     $scope.$on('gameSizeChanged', function() {
         _this.updateGameSize.call(_this);

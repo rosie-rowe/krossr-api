@@ -77,6 +77,7 @@ angular.module('levels').directive('game', [
                 // This also works with the click event in main.controller and should always hit this one first due to bubbling
                 elem.on('click', '.play-again', function() {
                     scope.gameIsWon = false;
+                    scope.gameIsLost = false;
                     scope.$apply();
                 });
 

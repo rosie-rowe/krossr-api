@@ -2,20 +2,6 @@
 
 angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 	function($timeout, $rootScope, ngDialog) {
-		function UtilsProperty(defaultValue) {
-			this.value = defaultValue;
-		};
-
-		UtilsProperty.prototype.get = function() {
-			return this.value;
-		};
-
-		UtilsProperty.prototype.set = function(newValue, setter) {
-			this.value = newValue;
-
-			if (typeof setter === 'function') setter({ 'newValue': newValue });
-		};
-
 		// Utils service logic
 		// ...
 		var sideLength;
@@ -183,21 +169,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 					default:
 						break;
 				}
-
-				this.gameReady.set(true, function(args) {
-					$timeout(function() {
-						$rootScope.$broadcast('gameReadyChanged', { gameReady: args.newValue });
-					}, 0);
-				});
-			},
-
-			// returns an index
-			filterToUserId: function(collection, userId) {
-				var returnVal = collection.filter(function(item) {
-					return item.user === userId
-				})[0];
-
-				return collection.indexOfObject(returnVal);
 			},
 
 			/* Given an index and orientation, pass a message to the tile controller
@@ -210,8 +181,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 			flatten: function(matrix) {
 				return Array.prototype.concat.apply([], matrix);
 			},
-
-			gameReady: new UtilsProperty(false),
 
 			/* Return the current game size (width and height in pixels of the game field, changes depending on number of tiles) */
 			getGameSize: function(tutorialMode) {

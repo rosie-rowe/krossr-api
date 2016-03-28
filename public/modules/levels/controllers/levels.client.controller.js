@@ -19,14 +19,6 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			}
 		}
 
-		var changeGameReadyState = function(isReady) {
-			$scope.gameReady = isReady;
-		};
-
-		var setGameReady = function(isReady) {
-			Utils.gameReady.set.call(Utils, isReady, changeGameReadyState.bind(null, isReady));
-		};
-
 		$scope.clearAll = function(action) {
 			console.log('clearing all! action: ' + action);
 			Utils.clearAll();
@@ -80,7 +72,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 
 			$scope.clearAll(action)
 
-			setGameReady(false);
+			$scope.gameReady = false;
 
 			$scope.ctrl.setGameSize($scope.ctrl.options.size)
 			$scope.ctrl.createGameArray(action);
@@ -185,6 +177,8 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 
 					console.log('At this point we should be on ' + controller);
 					console.log('We are actually on ' + $scope.level.currentView);
+
+					$scope.gameReady = true;
 				});
 			}
 		};
@@ -217,7 +211,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 
 		$scope.loadLevel = function(levelId, action) {
 			clearLevel();
-			setGameReady(false);
+			$scope.gameReady = false;
 
 			$scope.selectedLevelId = levelId;
 			$scope.findOne(action);
@@ -281,12 +275,5 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		$scope.toggleShowFilter = function() {
 			$scope.showFilter = !$scope.showFilter;
 		}
-
-	    $scope.$on('gameReadyChanged', function(event, args) {
-	    	console.log('received game ready changed event. ready? ' + args.gameReady ? 'yes' :'no');
-	    	console.trace();
-
-	    	changeGameReadyState(args.gameReady);
-	    });
 	}
 ]);
