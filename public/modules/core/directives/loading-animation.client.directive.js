@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('core').directive('loadingAnimation', ['$window', 'debounce', 'Utils', function($window, debounce, Utils) {
   return {
     restrict: 'A',

@@ -14,8 +14,8 @@
 
         <div class="controls" ng-if="level.currentView === 'new'">
             <label class="control-label" for="size">Size</label>
-            <select ng-model='ctrl.options.size' ng-change="createNewLevel();">
-                <option value="25" selected>5x5</option>
+            <select convert-to-number ng-model="ctrl.options.size" ng-change="createNewLevel();">
+                <option value="25">5x5</option>
                 <option value="100">10x10</option>
                 <option value="225">15x15</option>
             </select>
