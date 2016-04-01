@@ -18,12 +18,12 @@ angular.module('levels').directive('game', [
                     marked if shift was held) */
                 var fillDragBox = function(override) {
                     if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
-                        var initState = gameCtrl.dragBox.initState,
-                            coords = gameCtrl.processDragBox(gameCtrl.dragBox),
-                            currentCoord,
-                            currentTileController,
-                            i = 0,
-                            len = coords.length;
+                        var initState = gameCtrl.dragBox.initState;
+                        var coords = gameCtrl.processDragBox(gameCtrl.dragBox);
+                        var currentCoord;
+                        var currentTileController;
+                        var i = 0;
+                        var len = coords.length;
 
                         for (; i < len; i++) {
                             currentCoord = coords[i];
@@ -38,14 +38,13 @@ angular.module('levels').directive('game', [
                 };
 
                 elem.on('$destroy', function() {
-                    console.log('yeah, fix this');
+                    // do something amazing
                 });
 
                 elem.on('mouseenter', function() {
                     // focus the game when the mouse enters it
                     // so that the first click will register
                     elem.find('.inner').focus();
-                    //console.log('focused');
 
                     if (gameCtrl.getTileIndex().length === 0) {
                         gameCtrl.indexTiles();
@@ -59,22 +58,24 @@ angular.module('levels').directive('game', [
                     fillDragBox('empty');
                 });
 
-                // If a user starts dragging a tile and their mouse pointer leaves the game area,
-                // the area that was highlighted before should stay highlighted,
-                // and should activate when the user lets go of the mouse button.
-                // When the mouse is released in the game, attempt to process a dragbox and check if the game is won.
-                // This event works with the mouseup event in TileController and 
-                // should always run after that event due to bubbling.
+                /* If a user starts dragging a tile and their mouse pointer leaves the game area,
+                * the area that was highlighted before should stay highlighted,
+                * and should activate when the user lets go of the mouse button.
+                * When the mouse is released in the game, attempt to process a dragbox and check if the game is won.
+                * This event works with the mouseup event in TileController and 
+                * should always run after that event due to bubbling. */
                 elem.on('mouseup', function(e) {
                     e.preventDefault();
                     fillDragBox();
+
                     if(gameCtrl.checkWin()) {
                         gameCtrl.openWinLoseNotification();
                     };
+                    
                     scope.$apply();
                 });
 
-                // This also works with the click event in main.controller and should always hit this one first due to bubbling
+                /* This also works with the click event in main.controller and should always hit this one first due to bubbling */
                 elem.on('click', '.play-again', function() {
                     scope.level.won = false;
                     scope.level.lost = false;
