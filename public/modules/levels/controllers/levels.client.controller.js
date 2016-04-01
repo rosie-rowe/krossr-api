@@ -69,6 +69,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		// Create new level (load template)
 		$scope.createNewLevel = function() {
 			var action = 'new';
+            var oldLevel = angular.copy($scope.level);
 
 			$scope.clearAll(action)
 
@@ -79,7 +80,9 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			$scope.ctrl.getLayoutForRepeater(action);
 			$scope.level = {
 				currentView: action,
-				ready: true
+				ready: true,
+                name: oldLevel ? oldLevel.name : '',
+                lives: oldLevel ? oldLevel.lives : undefined
 			};
 		};
 
