@@ -1,4 +1,4 @@
 <h2>You {{ level.won ? 'win' : 'lose' }}</h2>
 
-<button class="btn btn-primary play-again" ng-click="closeThisDialog();ctrl.clearAll();reloadLevel('view')">Retry</button>
-<button class="btn btn-primary" ng-click="closeThisDialog();ctrl.clearAll();openLevelSelect();">New Level</button>
+<button class="btn btn-primary play-again" ng-click="closeThisDialog(); ctrl.clearAll(); levelCtrl.reloadLevel('view')">Retry</button>
+<button class="btn btn-primary" ng-click="closeThisDialog() ;ctrl.clearAll(); levelCtrl.openLevelSelect();">New Level</button>

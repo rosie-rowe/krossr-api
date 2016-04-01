@@ -14,7 +14,7 @@
 
         <div class="controls" ng-if="level.currentView === 'new'">
             <label class="control-label" for="size">Size</label>
-            <select convert-to-number ng-model="ctrl.options.size" ng-change="createNewLevel();">
+            <select convert-to-number ng-model="ctrl.options.size" ng-change="levelCtrl.createNewLevel();">
                 <option value="25">5x5</option>
                 <option value="100">10x10</option>
                 <option value="225">15x15</option>
@@ -22,25 +22,25 @@
         </div>
 
         <div>
-            <button class="btn" type="button" ng-click="confirmClear()">Clear</button>
+            <button class="btn" type="button" ng-click="levelCtrl.confirmClear()">Clear</button>
         </div>
 
         <div ng-if="level.currentView === 'edit'">
-            <button ng-disabled="error" class="btn" type="button" ng-click="confirmUpdate()">
+            <button ng-disabled="error" class="btn" type="button" ng-click="levelCtrl.confirmUpdate()">
                 <span ng-if="!error">Update</span>
                 <span ng-if="error" ng-bind-html="error"></span>
             </button>
         </div>
 
         <div ng-if="level.currentView === 'new'">
-            <button ng-disabled="error" class="btn btn-primary" ng-click="submitCreate()">
+            <button ng-disabled="error" class="btn btn-primary" ng-click="levelCtrl.submitCreate()">
                 <span ng-if="!error">Submit</span>
                 <span ng-if="error" data-ng-bind="error"></span>
             </button>
         </div>
 
-        <div data-ng-if="authentication.user.id == level.userId && level.currentView === 'edit'">
-            <a data-ng-click="confirmRemove(level);">
+        <div data-ng-if="levelCtrl.authentication.user.id == level.userId && level.currentView === 'edit'">
+            <a data-ng-click="levelCtrl.confirmRemove(level);">
                 <button class="btn">  
                     Delete Level
                 </button>
@@ -53,8 +53,8 @@
         <span ng-if="level.currentLives !== undefined" ng-bind="level.currentLives"></span>
     </div>
 
-    <div class="rateLevel" ng-if="authentication.user && level && level.currentView === 'view'">
-        Rate: <div star-rating ng-model="level.yourRating" max="5" on-rating-selected="rate()"></div>
+    <div class="rateLevel" ng-if="levelCtrl.authentication.user && level && level.currentView === 'view'">
+        Rate: <div star-rating ng-model="level.yourRating" max="5" on-rating-selected="levelCtrl.rate()"></div>
     </div>
 
     <div ng-keydown="ctrl.keydown($event)" ng-keyup="ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="level.ready">

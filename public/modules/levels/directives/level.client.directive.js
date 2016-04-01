@@ -3,15 +3,14 @@
 angular.module('levels').directive('level', [
     function() {
         return {
-            controller: 'LevelsController',
-            controllerAs: 'levelCtrl',
             restrict: 'E',
             scope: {
+                levelCtrl: '=',
                 ctrl: '=',
                 level: '='
             },
             templateUrl: 'modules/levels/views/level.client.view.html',
-            link: function (scope, elem, attr, levelCtrl) {
+            link: function (scope, elem, attr) {
                 var pvt = {};
 
                 pvt.init = function() {

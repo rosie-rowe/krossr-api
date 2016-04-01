@@ -3,7 +3,9 @@
 // Levels controller
 angular.module('levels').controller('LevelsController', ['$http', '$rootScope', '$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'debounce', 'Levels', 'ngDialog', 'Utils',
 	function($http, $rootScope, $scope, $stateParams, $timeout, $location, Authentication, debounce, Levels, ngDialog, Utils) {
-		$scope.authentication = Authentication;
+        var _this = this;
+
+		this.authentication = Authentication;
 		$scope.controllerName = 'levels';
 		$scope.currentPage = 0;
 		$scope.validNumber = /^\d+$/;
@@ -19,41 +21,14 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			}
 		}
 
-		$scope.clearAll = function(action) {
+		this.clearAll = function(action) {
 			console.log('clearing all! action: ' + action);
 			Utils.clearAll();
 			clearLevel();
 		}
 
-		// Split out for easier testing
-		$scope.submitCreate = function() {
-			var layout = Utils.getGameMatrix();
-
-			// Create new Level object
-			var level = new Levels ({
-				name: this.level.name,
-				layout: layout,
-				lives: this.level.lives,
-				size: layout.length
-			});
-
-			var levelSaveSuccess = function(response) {
-				$scope.loadLevel(response.id, 'edit');
-			};
-
-			var levelSaveFailure = function(err) {
-				$scope.error = err.data.message;
-
-				$timeout(function() {
-					$scope.error = '';
-				}, timeout)
-			}
-
-			$scope.create(level, levelSaveSuccess, levelSaveFailure);
-		}
-
 		// Create new Level (submit function)
-		$scope.create = function(level, successFunc, failFunc) {
+		this.create = function(level, successFunc, failFunc) {
 			// Redirect after save
 			level.$save(function(response) {
 				if (typeof successFunc === 'function') {
@@ -67,11 +42,11 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		};
 
 		// Create new level (load template)
-		$scope.createNewLevel = function() {
+		this.createNewLevel = function() {
 			var action = 'new';
             var oldLevel = angular.copy($scope.level);
 
-			$scope.clearAll(action)
+			_this.clearAll(action)
 
 			$scope.level = undefined;
 
@@ -86,9 +61,8 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			};
 		};
 
-		$scope.confirmClear = function() {
+		this.confirmClear = function() {
 			ngDialog.openConfirm({
-				controller: 'LevelsController',
 				closeByDocument: false,
 				template: 'modules/levels/views/clear-confirmation.client.view.html',
 				showClose: false,
@@ -96,9 +70,8 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			});
 		};
 
-		$scope.confirmRemove = function() {
+		this.confirmRemove = function() {
 			ngDialog.openConfirm({
-				controller: 'LevelsController',
 				closeByDocument: false,
 				template: 'modules/levels/views/delete-confirmation.client.view.html',
 				showClose: false,
@@ -106,9 +79,8 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			});
 		};
 
-		$scope.confirmUpdate = function() {
+		this.confirmUpdate = function() {
 			ngDialog.openConfirm({
-				controller: 'LevelsController',
 				closeByDocument: false,
 				template: 'modules/levels/views/update-confirmation.client.view.html',
 				showClose: false,
@@ -117,13 +89,13 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		};
 
 		// Find a list of Levels
-		$scope.find = function() {
+		this.find = function() {
 			var queryObj = {
 				pageNum: $scope.currentPage,
 				sizeRestriction: $scope.sizeRestriction,
 				searchText: $scope.searchText,
 				sortBy: $scope.sortBy,
-				sortDirection: $scope.sortDirection.ratings
+				sortDirection: $scope.sortDirection
 			};
 
 			Levels.query(queryObj, function(data) {
@@ -145,7 +117,7 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 		};
 
 		// Find existing Level
-		$scope.findOne = function(controller) {
+		this.findOne = function(controller) {
 			if ($scope.ctrl) {
 				$scope.ctrl.finalLayout = {};
 			}
@@ -190,19 +162,26 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			}
 		};
 
-		$scope.openLevelSelect = function () {
+        this.loadLevel = function(levelId, action) {
+            clearLevel();
+
+            $scope.selectedLevelId = levelId;
+            _this.findOne(action);
+        };
+
+		this.openLevelSelect = function () {
 			ngDialog.open({
 				template: 'modules/levels/views/list-levels.client.view.html',
 				scope: $scope
 			});
 		};
 
-		$scope.reloadLevel = function(action) {
-			$scope.loadLevel($scope.level.id, action);
+		this.reloadLevel = function(action) {
+			_this.loadLevel($scope.level.id, action);
 		};
 
 		// Remove existing Level
-		$scope.remove = function(level) {
+		this.remove = function(level) {
 			if (level) { 
 				level.$remove(function() {
 					$location.path('levels');
@@ -220,35 +199,23 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			}
 		};
 
-		$scope.loadLevel = function(levelId, action) {
-			clearLevel();
-
-			$scope.selectedLevelId = levelId;
-			$scope.findOne(action);
-		};
-
-		// Update existing Level
-		$scope.update = function() {
-			Utils.updateLevel($scope);
-		};
-
-		$scope.pageDown = function() {
+		this.pageDown = function() {
 			if ($scope.currentPage > 0) {
 				$scope.currentPage--;
-				$scope.find();
+				_this.find();
 			}
 		};
 
-		$scope.pageUp = function() {
+		this.pageUp = function() {
 			//currentPage will be off by 1 since it's 0-indexed
 			if ($scope.currentPage + 1 < $scope.totalPages) {
 				$scope.currentPage++;
-				$scope.find();
+				_this.find();
 			}
 		};
 
 		/* Doing this old school until I figure out a better way */
-		$scope.rate = function() {
+		this.rate = function() {
 			$timeout(function() {
 				var url = '/levels/' + $scope.level.id + '/ratings';
 
@@ -262,28 +229,60 @@ angular.module('levels').controller('LevelsController', ['$http', '$rootScope', 
 			});
 		};
 
-		$scope.setSizeRestriction = function(sizeRestriction) {
+		this.setSizeRestriction = function(sizeRestriction) {
 			$scope.sizeRestriction = sizeRestriction;
-			$scope.find();
+			_this.find();
 		};
 
-		$scope.setSearchText = debounce(function(searchText) {
+		this.setSearchText = debounce(function(searchText) {
 			$scope.searchText = searchText ? searchText : null;
-			$scope.find();
+			_this.find();
 		}, 250);
 
-		$scope.setSortBy = function(sort_by) {
+		this.setSortBy = function(sort_by) {
 			$scope.sortBy = sort_by ? sort_by : null;
-			$scope.find();
+			_this.find();
 		};
 
-		$scope.setSortDirection = function(sort_direction) {
+		this.setSortDirection = function(sort_direction) {
 			$scope.sortDirection = sort_direction ? sort_direction : '';
-			$scope.find();
+			_this.find();
 		};
 
-		$scope.toggleShowFilter = function() {
+        // Split out for easier testing
+        this.submitCreate = function() {
+            var layout = Utils.getGameMatrix();
+
+            // Create new Level object
+            var level = new Levels ({
+                name: $scope.level.name,
+                layout: layout,
+                lives: $scope.level.lives,
+                size: layout.length
+            });
+
+            var levelSaveSuccess = function(response) {
+                _this.loadLevel(response.id, 'edit');
+            };
+
+            var levelSaveFailure = function(err) {
+                $scope.error = err.data.message;
+
+                $timeout(function() {
+                    $scope.error = '';
+                }, timeout)
+            }
+
+            _this.create(level, levelSaveSuccess, levelSaveFailure);
+        }
+
+		this.toggleShowFilter = function() {
 			$scope.showFilter = !$scope.showFilter;
 		}
+
+        // Update existing Level
+        this.update = function() {
+            Utils.updateLevel($scope);
+        };
 	}
 ]);

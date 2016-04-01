@@ -167,11 +167,6 @@ exports.paginate = function(req, res) {
 		where: {
 			$and: whereBuilder
 		},
-		// Sequelize.and(
-		// 	sizeRestriction ? ['size = ?', parseInt(sizeRestriction, 10)] : null,
-		// 	searchText ? ['name ILIKE ?', '%' + searchText + '%'] : null,
-		// 	// todo: also search on username
-		// ),
 		limit: numPerPage,
 		offset: pageNum * numPerPage,
 		order: sortBy + ' ' + sortDirection
