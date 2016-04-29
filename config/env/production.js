@@ -2,7 +2,9 @@
 
 module.exports = {
 	db: {
-        name: 'krossr'
+        name: 'krossr',
+        username: 'postgres',
+        password: process.env.PG_PWD
     },
 	port: process.env.PORT || 3000,
 	idappr: process.env.SERVER_ADDR || '127.0.0.1',
