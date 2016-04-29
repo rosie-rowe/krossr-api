@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('levels').directive('tile', ['Utils',
-    function(Utils) {
+angular.module('levels').directive('tile', ['Utils', 'touchService',
+    function(Utils, touchService) {
         return {
             controller: 'tileController',
             controllerAs: 'tileCtrl',
@@ -83,7 +83,7 @@ angular.module('levels').directive('tile', ['Utils',
                     scope.$apply();
                 };
 
-                elem.on('mousedown', function(e) {
+                elem.on(touchService.getEvent('mousedown'), function(e) {
                     var coord = scope.tileCtrl.convert2D(scope.index);
                     gameCtrl.dragBox.startCoord = coord;
 
@@ -91,20 +91,29 @@ angular.module('levels').directive('tile', ['Utils',
                     gameCtrl.dragBox.initState = scope.tileCtrl.selected;
                 });
 
-                elem.on('mouseenter', function(e) {
-                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord) {
-                        fillPending(scope.index);
+                elem.on(touchService.getEvent('mousemove'), function(e) {
+                    var actualScope = touchService.getTargetScope(e);
+
+                    if (actualScope && actualScope.index) {
+                        if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord)  {
+                            fillPending(actualScope.index);
+                        }
                     }
                 });
 
-                elem.on('mouseup', function(e) {
+                elem.on(touchService.getEvent('mouseup'), function(e) {
                     e.preventDefault();
-                    
-                    var coord = gameCtrl.convertTo2D(scope.index);
-                    gameCtrl.dragBox.endCoord = coord;
 
-                    if (!(gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord)) {
-                        scope.tileCtrl.change(coord);
+                    var actualScope = touchService.getTargetScope(e);
+                    var coord;
+                    
+                    if (actualScope && actualScope.index) {
+                        coord = gameCtrl.convertTo2D(actualScope.index);
+                        gameCtrl.dragBox.endCoord = coord;
+
+                        if (!(gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord)) {
+                            scope.tileCtrl.change(coord);
+                        }
                     }
                 });
 

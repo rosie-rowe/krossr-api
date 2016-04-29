@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('levels').directive('game', [
-    function() {
+angular.module('levels').directive('game', ['touchService',
+    function(touchService) {
         return {
             controller: 'gameController',
             controllerAs: 'gameCtrl',
@@ -41,6 +41,10 @@ angular.module('levels').directive('game', [
                     // do something amazing
                 });
 
+                elem.on('dragstart', function(e) {
+                    e.preventDefault();
+                });
+
                 elem.on('mouseenter', function() {
                     // focus the game when the mouse enters it
                     // so that the first click will register
@@ -60,7 +64,7 @@ angular.module('levels').directive('game', [
                 * When the mouse is released in the game, attempt to process a dragbox and check if the game is won.
                 * This event works with the mouseup event in TileController and 
                 * should always run after that event due to bubbling. */
-                elem.on('mouseup', function(e) {
+                elem.on(touchService.getEvent('mouseup'), function(e) {
                     e.preventDefault();
                     fillDragBox();
 
