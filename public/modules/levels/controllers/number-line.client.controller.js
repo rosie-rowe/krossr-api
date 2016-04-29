@@ -145,23 +145,23 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 			/* We need to keep track if anything changed so we know whether or not to actually change lineContent,
 				because if we change it regardless we'll end up with the infdig error */
-			var changed = false,
-				newValue,
-				newCssClass,
-				coord,
-				currentGroupAsArray = Object.keys(currentGroup),
-				i = 0,
-				j = 0,
-				groupLen = currentGroupAsArray.length,
-				entry,
-				entryLen,
-				value;
+			var changed = false;
+			var newValue;
+			var newCssClass;
+			var coord;
+			var currentGroupAsArray = Object.keys(currentGroup);
+			var i = 0;
+			var j;
+			var groupLen = currentGroupAsArray.length;
+			var entry;
+			var entryLen;
+			var value;
 
 			for (; i < groupLen; i++) {
 				entry = currentGroup[currentGroupAsArray[i]];
 				entryLen = entry.length;
 
-				for (; j < entryLen; j++) {
+				for (j = 0; j < entryLen; j++) {
 					value = entry[j];
 
 					if (value.coord) {
