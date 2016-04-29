@@ -141,7 +141,7 @@ angular.module('levels').controller('NumberLineController', ['$scope', '$timeout
 
 		/* Knowing the group already exists, update the css classes on it */
 		var recalculateGroup = function(index, orientation) {
-			gameMatrix[orientation] = gameMatrix[orientation] instanceof Array ? gameMatrix[orientation] : getTargetMatrix(Utils.getGameMatrix(), orientation);
+            gameMatrix[orientation] = getTargetMatrix(Utils.getGameMatrix(), orientation);
 
 			/* We need to keep track if anything changed so we know whether or not to actually change lineContent,
 				because if we change it regardless we'll end up with the infdig error */
