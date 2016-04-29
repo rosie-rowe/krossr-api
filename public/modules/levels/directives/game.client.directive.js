@@ -45,10 +45,6 @@ angular.module('levels').directive('game', [
                     // focus the game when the mouse enters it
                     // so that the first click will register
                     elem.find('.inner').focus();
-
-                    if (gameCtrl.getTileIndex().length === 0) {
-                        gameCtrl.indexTiles();
-                    }
                 });
                 
                 // But if the user goes too far away from the game area, clear the dragbox

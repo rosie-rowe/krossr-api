@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('levels').directive('tile', [
-    function() {
+angular.module('levels').directive('tile', ['Utils',
+    function(Utils) {
         return {
             controller: 'tileController',
             controllerAs: 'tileCtrl',
@@ -18,6 +18,7 @@ angular.module('levels').directive('tile', [
 
                 pvt.init = function() {
                     scope.tileCtrl.setTileSize(scope.tileCtrl.getTileSize(attr.tutorial));
+                    Utils.addTileToIndex({ tileCtrl: scope.tileCtrl });
                 }
 
                 var clearPending = function(coords) {

@@ -91,12 +91,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				var i = 0,
 					len = tileIndex.length;
 
-				// in the unlikely event that this function is called without the tiles being indexed, index them then.
-				if (len === 0) {
-					this.indexTiles();	
-					len = tileIndex.length;
-				}
-
 				for (; i < len; i++) {
 					tileIndex[i].tileCtrl.fill('empty');
 				}
@@ -224,18 +218,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 
 			getWidth: function(selector) {
 				return angular.element(selector).outerWidth();
-			},
-
-			/* When setting up the game, also cache the tiles for faster access later */
-			indexTiles: function() {
-				var allTiles = angular.element('.tile'),
-					_this = this,
-					i = 0,
-					len = allTiles.length;
-
-				for (; i < len; i++) {
-					_this.addTileToIndex({ tileCtrl: angular.element(allTiles[i]).scope().tileCtrl });
-				}
 			},
 
 			/* Display an integer size (e.g. 15) and convert it to a pleasing form (15x15) */

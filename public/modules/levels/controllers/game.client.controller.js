@@ -37,7 +37,6 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     this.getGameMatrix = Utils.getGameMatrix;
     this.getGameSize = Utils.getGameSize;
     this.getTileIndex = Utils.getTileIndex;
-    this.indexTiles = Utils.indexTiles.bind(Utils);
 
     this.openWinLoseNotification = function() {
         ngDialog.open({
