@@ -83,9 +83,7 @@ angular.module('levels').directive('tile', ['Utils',
                     scope.$apply();
                 };
 
-                elem.on('dragstart', function(e) {
-                    e.preventDefault();
-
+                elem.on('mousedown', function(e) {
                     var coord = scope.tileCtrl.convert2D(scope.index);
                     gameCtrl.dragBox.startCoord = coord;
 
