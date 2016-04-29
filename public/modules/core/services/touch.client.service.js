@@ -32,7 +32,7 @@ angular.module('levels').factory('touchService', [
             },
 
             /* Stolen from http://www.jqwidgets.com/community/topic/dragend-event-properties-clientx-and-clienty-are-undefined-on-ios/ 
-             * Handles both mouse and touch events */
+             * Handles both mouse and touch events. Modified for brevity */
             getTouches: function(e) {
                 if (e.originalEvent) {
                     if (e.originalEvent.touches && e.originalEvent.touches.length) {
@@ -41,10 +41,11 @@ angular.module('levels').factory('touchService', [
                         return e.originalEvent.changedTouches;
                     }
                 }
+
                 if (!e.touches) {
-                    e.touches = new Array();
-                    e.touches[0] = e.originalEvent;
+                    e.touches = [e.originalEvent];
                 }
+
                 return e.touches;
             }
         };
