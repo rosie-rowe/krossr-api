@@ -61,9 +61,8 @@
 						 [true, true, true, true, true],
 						 [true, true, true, true, true],
 						 [true, true, true, true, true]],
-				Ratings: [],
+				ratings: [],
 				prettySize: '5x5',
-				averageRating: 0
 			});
 
 			var sampleLevelsResponse = {

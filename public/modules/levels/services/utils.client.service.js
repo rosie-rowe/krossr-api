@@ -33,23 +33,6 @@ angular.module('levels').factory('Utils', ['$timeout', '$rootScope', 'ngDialog',
 				return width - ((borderWidth * sideLength) + (18 - sideLength));
 			},
 
-			/* You're MEAN! */
-			average: function(collection, propertyToAvg) {
-				var sum, average;
-
-				if (collection.length > 0) {
-					sum = Object.keys(collection).reduce(function(a, b) {
-						return a + collection[b][propertyToAvg];
-					}, 0);
-
-					average = sum / collection.length;
-
-					return average.toFixed(2);
-				} else {
-					return 0;
-				}
-			},
-
 			/* Return the width of the main section of the game so we can calculate game and tile sizes off of it */
 			calculatePlayableArea: function() {
 				var pHeight = window.innerHeight,
