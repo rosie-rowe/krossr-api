@@ -40,7 +40,7 @@
     "passport-twitter": "~1.0.2",
     "pg": "^4.4.3",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^3.19.3",
+    "sequelize": "^3.22.0",
     "swig": "~1.4.1",
     "winston": "^2.1.1"
   },
