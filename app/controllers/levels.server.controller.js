@@ -163,7 +163,17 @@ exports.paginate = function(req, res) {
 	}
 
 	Level.findAndCountAll({
-		include: [{ model: db.rating }, { model: db.user, attributes: ['username'], required: true, where: {} }],
+		include: [
+            {
+                model: db.rating
+            },
+            {
+                model: db.user,
+                attributes: ['username'],
+                required: true,
+                where: {}
+            }
+        ],
 		where: {
 			$and: whereBuilder
 		},
@@ -177,6 +187,8 @@ exports.paginate = function(req, res) {
 			numPerPage: numPerPage
 		});
 	}).catch(function(err) {
+        winston.info(err);
+
 		return res.status(500).send({
 			message: errorHandler.getErrorMessage(err)
 		});
