@@ -142,7 +142,14 @@ exports.paginate = function(req, res) {
 	winston.info('Trying to query Levels...');
 
 	var whereBuilder = {};
-    var ratingQuery;
+
+    /* This may be able to be done better, but hey. Include the average rating of a level with the levels query,
+     * rather than every ratings object for that level. Also, exclude levels without average ratings if ratings are being filtered upon */
+    var baseRatingQuery = '(SELECT AVG("ratings"."rating") FROM "ratings" WHERE "ratings"."levelId" = "level"."id")';
+    var ratingQuery = Sequelize.literal(baseRatingQuery);
+    var ratingTest = Sequelize.literal(baseRatingQuery + ' IS NOT NULL');
+
+    var isRating = (sortBy === '"avgRating"');
 
 	if (sizeRestriction) {
 		whereBuilder.size = {
@@ -163,10 +170,6 @@ exports.paginate = function(req, res) {
 		];
 	}
 
-    /* This may be able to be done better, but hey. Include the average rating of a level with the levels query,
-     * rather than every ratings object for that level. */
-    ratingQuery = Sequelize.literal('(SELECT AVG("ratings"."rating") FROM "ratings" WHERE "ratings"."levelId" = "level"."id")');
-
 	Level.findAndCountAll({
         attributes: {
             include: [[ratingQuery, 'avgRating']]
@@ -184,7 +187,7 @@ exports.paginate = function(req, res) {
             }
         ],
 		where: {
-			$and: whereBuilder
+			$and: isRating ? [whereBuilder, ratingTest] : whereBuilder
 		},
 		limit: numPerPage,
 		offset: pageNum * numPerPage,
