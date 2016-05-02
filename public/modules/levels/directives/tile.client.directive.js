@@ -84,6 +84,8 @@ angular.module('levels').directive('tile', ['Utils', 'touchService',
                 };
 
                 elem.on(touchService.getEvent('mousedown'), function(e) {
+                    e.preventDefault();
+
                     var coord = scope.tileCtrl.convert2D(scope.index);
                     gameCtrl.dragBox.startCoord = coord;
 
@@ -92,6 +94,8 @@ angular.module('levels').directive('tile', ['Utils', 'touchService',
                 });
 
                 elem.on(touchService.getEvent('mousemove'), function(e) {
+                    e.preventDefault();
+
                     var actualScope = touchService.getTargetScope(e);
 
                     if (actualScope && actualScope.index) {
@@ -128,12 +132,8 @@ angular.module('levels').directive('tile', ['Utils', 'touchService',
                 scope.removeLife = function() {
                     var level = scope.level;
 
-                    console.log('before: ' + level.currentLives);
-
                     if (level && level.currentLives) {
                         level.currentLives--;
-
-                        console.log('after: ' + level.currentLives);
 
                         if (level.currentLives === 0) {
                             gameCtrl.gameOver();

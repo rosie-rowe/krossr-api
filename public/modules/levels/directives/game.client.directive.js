@@ -41,6 +41,7 @@ angular.module('levels').directive('game', ['touchService',
                     // do something amazing
                 });
 
+                /* not sure if this is still necessary, seems to prevent grab hand from appearing even though draggable is no longer applied */
                 elem.on('dragstart', function(e) {
                     e.preventDefault();
                 });
