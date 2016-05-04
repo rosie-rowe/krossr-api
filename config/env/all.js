@@ -26,10 +26,7 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/ng-debounce/angular-debounce.js',
-				'public/lib/ngDialog/js/ngDialog.js',
-				'public/lib/humanize-duration/humanize-duration.js',
-				'public/lib/momentjs/min/moment.min.js',
-				'public/lib/momentjs/min/locales.min.js',
+				'public/lib/ngDialog/js/ngDialog.js'
 			]
 		},
 		css: [
