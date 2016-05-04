@@ -6,6 +6,11 @@ var ApplicationConfiguration = (function() {
 	var applicationModuleName = 'Krossr';
 	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ngCookies', 'ngDialog', 'ngTouch',  'ngSanitize',  'ui.router', 'ui.utils', 'debounce'];
 
+    // Only include template bundle as dependency in production
+    if (process.env.NODE_ENV === 'production') {
+        applicationModuleVendorDependencies.push('templates-main');
+    }
+
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
 		// Create angular module
