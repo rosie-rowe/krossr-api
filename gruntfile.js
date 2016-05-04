@@ -74,6 +74,9 @@ module.exports = function(grunt) {
 			}
 		},
         html2js: {
+            options: {
+                base: 'public/'
+            }
             main: {
                 src: '<%= applicationHTMLFiles %>',
                 dest: 'public/dist/templates.js'
