@@ -86,7 +86,8 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'public/dist/application.min.js': '<%= applicationJavaScriptFiles %>',
-                    'public/dist/lib.min.js': '<%= applicationJavaScriptLibFiles %>'
+                    'public/dist/lib.min.js': '<%= applicationJavaScriptLibFiles %>',
+                    'public/dist/templates.min.js', 'public/dist/templates.js'
 				}
 			}
 		},
