@@ -11,18 +11,7 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [],
-			js: [
-				'public/lib/angular/angular.js',
-				'public/lib/angular-animate/angular-animate.js',
-				'public/lib/angular-resource/angular-resource.js', 
-				'public/lib/angular-cookies/angular-cookies.js',
-				'public/lib/angular-touch/angular-touch.js', 
-				'public/lib/angular-sanitize/angular-sanitize.js', 
-				'public/lib/angular-ui-router/release/angular-ui-router.js',
-				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/ng-debounce/angular-debounce.js',
-				'public/lib/ngDialog/js/ngDialog.js'
-			]
+			js: []
 		},
 		css: 'public/dist/application.min.css',
 		js: ['public/dist/application.min.js', 'public/dist/lib.min.js']
