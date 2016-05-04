@@ -140,6 +140,9 @@ module.exports = function(grunt) {
 			}
 		},
 		env: {
+            development: {
+                NODE_ENV: 'development'
+            },
 			test: {
 				NODE_ENV: 'test'
 			}
@@ -196,12 +199,13 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['loadConfig', 'ngAnnotate', 'html2js', 'uglify', 'cssmin', 'less']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'ngAnnotate', 'html2js', 'uglify', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
 
     grunt.registerTask('mocha', ['env:test', 'mochaTest']);
+    grunt.registerTask('karma', ['env:test', 'karma:unit']);
 
 	// production
 	grunt.registerTask('production', []);
