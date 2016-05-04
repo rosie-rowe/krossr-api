@@ -54,6 +54,13 @@ module.exports.getGlobbedFiles = function(globPatterns, removeRoot) {
 };
 
 /**
+* Get the modules HTML files
+*/
+module.exports.getHTMLAssets = function() {
+    return this.getGlobbedFiles(this.assets.html, 'public/');
+};
+
+/**
  * Get the modules JavaScript files
  */
 module.exports.getJavaScriptAssets = function(includeTests) {

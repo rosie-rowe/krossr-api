@@ -73,6 +73,12 @@ module.exports = function(grunt) {
 				src: watchFiles.clientCSS
 			}
 		},
+        html2js: {
+            main: {
+                src: '<$= applicationHTMLFiles %>',
+                dest: 'public/dist/templates.js'
+            }
+        },
 		uglify: {
 			production: {
 				options: {
@@ -170,6 +176,7 @@ module.exports = function(grunt) {
 		var init = require('./config/init')();
 		var config = require('./config/config');
 
+        grunt.config.set('applicationHTMLFiles', config.assets.html);
         grunt.config.set('applicationJavaScriptLibFiles', config.assets.lib.js);
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
 		grunt.config.set('applicationCSSFiles', config.assets.css);
@@ -185,7 +192,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'less']);
+	grunt.registerTask('build', ['loadConfig', 'ngAnnotate', 'html2js', 'uglify', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
