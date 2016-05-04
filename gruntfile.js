@@ -90,7 +90,6 @@ module.exports = function(grunt) {
 				files: {
 					'public/dist/application.min.js': '<%= applicationJavaScriptFiles %>',
                     'public/dist/lib.min.js': '<%= applicationJavaScriptLibFiles %>',
-                    'public/dist/templates.min.js': 'public/dist/templates.js'
 				}
 			}
 		},
@@ -205,7 +204,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
 
     grunt.registerTask('mocha', ['env:test', 'mochaTest']);
-    grunt.registerTask('karma', ['env:test', 'karma:unit']);
 
 	// production
 	grunt.registerTask('production', []);
