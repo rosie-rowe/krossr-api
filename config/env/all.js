@@ -13,9 +13,7 @@ module.exports = {
 	sessionCollection: 'sessions',
 	assets: {
 		lib: {
-			css: [
-				//'public/lib/bootstrap/dist/css/bootstrap.css'
-			],
+			css: [],
 			js: [
 				'public/lib/angular/angular.js',
 				'public/lib/angular-animate/angular-animate.js',
@@ -26,7 +24,7 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/ng-debounce/angular-debounce.js',
-				'public/lib/ngDialog/js/ngDialog.js'
+				'public/lib/ngDialog/js/ngDialog.js',
 			]
 		},
 		css: [

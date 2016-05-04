@@ -10,8 +10,7 @@ module.exports = {
 	idappr: process.env.SERVER_ADDR || '127.0.0.1',
 	assets: {
 		lib: {
-			css: [
-			],
+			css: [],
 			js: [
 				'public/lib/angular/angular.js',
 				'public/lib/angular-animate/angular-animate.js',
@@ -26,7 +25,7 @@ module.exports = {
 			]
 		},
 		css: 'public/dist/application.min.css',
-		js: 'public/dist/application.min.js'
+		js: ['public/dist/application.min.js', 'public/dist/lib.min.js']
 	},
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',

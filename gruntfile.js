@@ -79,7 +79,8 @@ module.exports = function(grunt) {
 					mangle: false
 				},
 				files: {
-					'public/dist/application.min.js': '<%= applicationJavaScriptFiles %>'
+					'public/dist/application.min.js': '<%= applicationJavaScriptFiles %>',
+                    'public/dist/lib.min.js': '<%= applicationJavaScriptLibFiles %>'
 				}
 			}
 		},
@@ -116,7 +117,7 @@ module.exports = function(grunt) {
 		ngAnnotate: {
 			production: {
 				files: {
-					'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
+					'public/dist/application.js': '<%= applicationJavaScriptFiles %>',
 				}
 			}
 		},
@@ -169,6 +170,7 @@ module.exports = function(grunt) {
 		var init = require('./config/init')();
 		var config = require('./config/config');
 
+        grunt.config.set('applicationJavaScriptLibFiles', config.assets.lib.js);
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
 		grunt.config.set('applicationCSSFiles', config.assets.css);
 	});
