@@ -14,7 +14,7 @@ module.exports = {
 			js: []
 		},
 		css: 'public/dist/application.min.css',
-		js: ['public/dist/application.min.js', 'public/dist/lib.min.js']
+		js: ['public/dist/lib.min.js', 'public/dist/application.min.js']
 	},
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',
