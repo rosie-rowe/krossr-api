@@ -99,6 +99,8 @@ body {
   font-weight: 800;
   height: 100%;
   margin: 0;
+  /* For preventing mobile Chrome refreshing by dragging down */
+  overflow-y: hidden;
 }
 section {
   max-height: 100%;

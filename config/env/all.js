@@ -40,6 +40,9 @@ module.exports = {
         html: [
             'public/modules/**/*.html'
         ],
+        html2js: [
+            'public/dist/templates.js'
+        ],
 		tests: [
 			'public/lib/angular-mocks/angular-mocks.js',
 			'public/modules/*/tests/*.js'

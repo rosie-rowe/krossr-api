@@ -67,12 +67,6 @@
         <script type="text/javascript" src="{{jsFile}}"></script>
 	{% endfor %} 
 
-    {% if process.env.NODE_ENV === 'production' %}
-        {% for htmlFile in htmlFiles %}
-            <script type="text/javascript" src="{{htmlFile}}"></script>
-        {% endfor %}
-    {% endif %}
-
 	{% if process.env.NODE_ENV === 'development' %}
 	<!--Livereload script rendered -->
 	<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
