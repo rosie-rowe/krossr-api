@@ -2,21 +2,8 @@
 
 angular.module('levels').factory('touchService', [
     function() {
-        var isTouch = 'ontouchstart' in window;
-
-        var eventMap = {
-            'mousedown': 'touchstart',
-            'mousemove': 'touchmove',
-            'mouseup': 'touchend'
-        }
-
         // Public API
         return {
-            /* Return the mapped event for mobile, or the passed-in event for desktop */
-            getEvent: function(eventName) {
-                return isTouch ? eventMap[eventName] : eventName;
-            },
-
             /* Touchmove/touchend will not move along with crossing over elements like mousemove/mouseup will, so we need hax */
             getRealTarget: function(e) {
                 var myLocation = this.getTouches(e)[0];

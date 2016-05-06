@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('levels').directive('game', ['touchService',
-    function(touchService) {
+angular.module('levels').directive('game', [
+    function() {
         return {
             controller: 'gameController',
             controllerAs: 'gameCtrl',
@@ -37,6 +37,18 @@ angular.module('levels').directive('game', ['touchService',
                     }
                 };
 
+                var events = {
+                    mouseup: function(e) {
+                        fillDragBox();
+
+                        if (gameCtrl.checkWin()) {
+                            gameCtrl.openWinLoseNotification();
+                        };
+                    
+                        scope.$apply();
+                    }
+                };
+
                 elem.on('$destroy', function() {
                     // do something amazing
                 });
@@ -65,15 +77,10 @@ angular.module('levels').directive('game', ['touchService',
                 * When the mouse is released in the game, attempt to process a dragbox and check if the game is won.
                 * This event works with the mouseup event in TileController and 
                 * should always run after that event due to bubbling. */
-                elem.on(touchService.getEvent('mouseup'), function(e) {
+                elem.on('mouseup', events.mouseup);
+                elem.on('touchend', function(e) {
                     e.preventDefault();
-                    fillDragBox();
-
-                    if(gameCtrl.checkWin()) {
-                        gameCtrl.openWinLoseNotification();
-                    };
-                    
-                    scope.$apply();
+                    events.mouseup();
                 });
 
                 /* This also works with the click event in main.controller and should always hit this one first due to bubbling */

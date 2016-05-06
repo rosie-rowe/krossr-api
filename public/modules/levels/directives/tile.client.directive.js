@@ -83,42 +83,63 @@ angular.module('levels').directive('tile', ['Utils', 'touchService',
                     scope.$apply();
                 };
 
-                elem.on(touchService.getEvent('mousedown'), function(e) {
-                    e.preventDefault();
-
-                    var coord = scope.tileCtrl.convert2D(scope.index);
-                    gameCtrl.dragBox.startCoord = coord;
-
-                    // Based on the state of the tile where we begin dragging, we will make all tiles in the dragbox the opposite of that state.
-                    gameCtrl.dragBox.initState = scope.tileCtrl.selected;
-                });
-
-                elem.on(touchService.getEvent('mousemove'), function(e) {
-                    e.preventDefault();
-
-                    var actualScope = touchService.getTargetScope(e);
-
-                    if (actualScope && actualScope.index) {
-                        if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord)  {
-                            fillPending(actualScope.index);
-                        }
-                    }
-                });
-
-                elem.on(touchService.getEvent('mouseup'), function(e) {
-                    e.preventDefault();
-
-                    var actualScope = touchService.getTargetScope(e);
-                    var coord;
+                var events = {
+                    mouseup: function(e) {
+                        var actualScope = touchService.getTargetScope(e);
+                        var coord;
                     
-                    if (actualScope && actualScope.index) {
-                        coord = gameCtrl.convertTo2D(actualScope.index);
-                        gameCtrl.dragBox.endCoord = coord;
+                        if (actualScope && actualScope.index) {
+                            coord = gameCtrl.convertTo2D(actualScope.index);
+                            gameCtrl.dragBox.endCoord = coord;
 
-                        if (!(gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord)) {
-                            scope.tileCtrl.change(coord);
+                            if (!(gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord)) {
+                                scope.tileCtrl.change(coord);
+                            }
+                        }
+                    },
+                    mousedown: function(e) {
+                        var coord = scope.tileCtrl.convert2D(scope.index);
+                        gameCtrl.dragBox.startCoord = coord;
+
+                        // Based on the state of the tile where we begin dragging, we will make all tiles in the dragbox the opposite of that state.
+                        gameCtrl.dragBox.initState = scope.tileCtrl.selected;
+                    },
+                    mousemove: function(e) {
+                        var actualScope = touchService.getTargetScope(e);
+
+                        if (actualScope && actualScope.index) {
+                            if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord)  {
+                                fillPending(actualScope.index);
+                            }
                         }
                     }
+                }
+
+                elem.on('mousedown', function(e) {
+                    events.mousedown(e);
+                });
+
+                elem.on('touchstart', function(e) {
+                    e.preventDefault();
+                    events.mousedown(e);
+                });
+
+                elem.on('mousemove', function(e) {
+                    events.mousemove(e);
+                });
+
+                elem.on('touchmove', function(e) {
+                    e.preventDefault();
+                    events.mousemove(e);
+                });
+
+                elem.on('mouseup', function(e) {
+                    events.mouseup(e);
+                });
+
+                elem.on('touchend', function(e) {
+                    e.preventDefault();
+                    events.mouseup(e);
                 });
 
                 pvt.init();
