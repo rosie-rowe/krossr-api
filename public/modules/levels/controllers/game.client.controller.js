@@ -64,6 +64,9 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
 
 gameController.$inject = ['$scope', '$timeout', 'Utils', 'ngDialog'];
 
+/*
+* Compare the current state of the game to the correct state
+*/
 gameController.prototype.checkForWin = function(Utils) {
     var goalMatrix = Utils.getGoalMatrix();
     var gameMatrix = Utils.getGameMatrix();
@@ -78,16 +81,21 @@ gameController.prototype.checkForWin = function(Utils) {
     return false;
 };
 
+/* Grab a tile controller out of the tile index from a given 2D coordinate */
 gameController.prototype.findTileCtrlByCoord = function(coord) {
-  var index = this.convertTo1D(coord);
-  return this.findTileCtrlByIndex(index);
+    var index = this.convertTo1D(coord);
+    return this.findTileCtrlByIndex(index);
 };
 
+/* Grab a tile controller out of the tile index from a given 1D index */
 gameController.prototype.findTileCtrlByIndex = function(index) {
   var tileIndex = this.getTileIndex();
   return tileIndex[index].tileCtrl;
 };
 
+/*
+* Fill all of the tiles in the current (passed-in) dragBox
+*/
 gameController.prototype.fillDragBox = function(dragBox, override) {
     if (dragBox && dragBox.startCoord && dragBox.endCoord) {
         var initState = dragBox.initState;
@@ -107,6 +115,9 @@ gameController.prototype.fillDragBox = function(dragBox, override) {
     }
 };
 
+/*
+* Given a dragbox, return an array of all of the coordinates of included tiles
+*/
 gameController.prototype.processDragBox = function(dragBox) {
     if (!(dragBox && dragBox.startCoord && dragBox.endCoord)) {
         return [];
@@ -146,6 +157,9 @@ gameController.prototype.processDragBox = function(dragBox) {
     return finalCoords;
 };
 
+/*
+* Reset the dragbox
+*/
 gameController.prototype.clearDragBox = function() {
     this.dragBox = {};
 };
