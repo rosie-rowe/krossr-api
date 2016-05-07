@@ -1,11 +1,13 @@
 'use strict';
 
-var gameController = function($scope, $timeout, Utils, ngDialog) {
+var gameController = function($scope, $timeout, Utils, ngDialog, dragBoxService) {
     var _this = this;
 
     $scope.controllerName = 'game';
 
-    this.clearDragBox();
+    this.clearDragBox = function() {
+        _this.dragBox = dragBoxService.newDragBox();
+    }
 
     this.checkWin = function() {
         var winner = _this.checkForWin(Utils);
@@ -45,6 +47,10 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
         });
     };
 
+    this.processDragBox = function() {
+        return _this.dragBox.process();
+    };
+
     this.updateGameSize = function() {
         // don't use args, call to getGameSize so we take tutorials into account
         var newGameSettings = Utils.getGameSize($scope.tutorialMode);
@@ -60,9 +66,11 @@ var gameController = function($scope, $timeout, Utils, ngDialog) {
     $scope.$on('gameSizeChanged', function() {
         _this.updateGameSize.call(_this);
     });
+
+    this.clearDragBox();
 };
 
-gameController.$inject = ['$scope', '$timeout', 'Utils', 'ngDialog'];
+gameController.$inject = ['$scope', '$timeout', 'Utils', 'ngDialog', 'dragBoxService'];
 
 /*
 * Compare the current state of the game to the correct state
@@ -99,7 +107,7 @@ gameController.prototype.findTileCtrlByIndex = function(index) {
 gameController.prototype.fillDragBox = function(dragBox, override) {
     if (dragBox && dragBox.startCoord && dragBox.endCoord) {
         var initState = dragBox.initState;
-        var coords = this.processDragBox(dragBox);
+        var coords = dragBox.process();
 
         this.fillTiles(coords, initState, override);
         this.clearDragBox();
@@ -126,55 +134,6 @@ gameController.prototype.fillTiles = function(coords, initState, override, valid
         }
     }
 }
-
-/*
-* Given a dragbox, return an array of all of the coordinates of included tiles
-*/
-gameController.prototype.processDragBox = function(dragBox) {
-    if (!(dragBox && dragBox.startCoord && dragBox.endCoord)) {
-        return [];
-    }
-
-
-    var startX = dragBox.startCoord.x;
-    var startY = dragBox.startCoord.y;
-    var endX = dragBox.endCoord.x;
-    var endY = dragBox.endCoord.y;
-    var finalCoords = [];
-
-      //todo: make this a function. tricky javascript makes easy problem harder.
-    if (startX > endX) {
-        var temp = startX;
-        startX = endX;
-        endX = temp;
-    }
-
-    if (startY > endY) {
-        var temp = startY;
-        startY = endY;
-        endY = temp;
-    }
-
-    for (var i = startY; i <= endY; i++) {
-        for (var j = startX; j <= endX; j++) {
-            var coord = {
-                x: j,
-                y: i
-            };
-
-            finalCoords.push(coord);
-        }
-    }
-
-    return finalCoords;
-};
-
-/*
-* Reset the dragbox
-*/
-gameController.prototype.clearDragBox = function() {
-    this.dragBox = {};
-};
 
 angular
     .module('levels')
