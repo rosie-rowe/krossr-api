@@ -88,7 +88,31 @@ gameController.prototype.findTileCtrlByIndex = function(index) {
   return tileIndex[index].tileCtrl;
 };
 
+gameController.prototype.fillDragBox = function(dragBox, override) {
+    if (dragBox && dragBox.startCoord && dragBox.endCoord) {
+        var initState = dragBox.initState;
+        var coords = this.processDragBox(dragBox);
+        var currentCoord;
+        var currentTileController;
+        var i = 0;
+        var len = coords.length;
+
+        for (; i < len; i++) {
+            currentCoord = coords[i];
+            currentTileController = this.findTileCtrlByCoord(currentCoord);
+            currentTileController.change(currentCoord, initState, override);
+        }
+
+        this.clearDragBox();
+    }
+};
+
 gameController.prototype.processDragBox = function(dragBox) {
+    if (!(dragBox && dragBox.startCoord && dragBox.endCoord)) {
+        return [];
+    }
+
+
     var startX = dragBox.startCoord.x;
     var startY = dragBox.startCoord.y;
     var endX = dragBox.endCoord.x;

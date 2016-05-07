@@ -45,16 +45,12 @@ angular.module('levels').directive('tile', ['Utils', 'touchService',
                         currentTileController;
 
                     // save a snapshot of the previous dragbox for comparison purposes
-                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
-                        var oldCoords = gameCtrl.processDragBox(gameCtrl.dragBox);
-                    }
+                    var oldCoords = gameCtrl.processDragBox(gameCtrl.dragBox);
 
                     // set the current coordinate to the new dragbox end and compute the new dragbox
                     gameCtrl.dragBox.endCoord = coord;
                     
-                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
-                        var allPendingCoords = gameCtrl.processDragBox(gameCtrl.dragBox);
-                    }
+                    var allPendingCoords = gameCtrl.processDragBox(gameCtrl.dragBox);
 
                     // we should only clear the old coordinates off if the current selected area is
                     // smaller than the previous selected area, for speed reasons

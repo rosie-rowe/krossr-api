@@ -17,24 +17,8 @@ angular.module('levels').directive('game', [
                     (pending if being dragged over, selected if mouse released normally,
                     marked if shift was held) */
                 var fillDragBox = function(override) {
-                    if (gameCtrl.dragBox && gameCtrl.dragBox.startCoord && gameCtrl.dragBox.endCoord) {
-                        var initState = gameCtrl.dragBox.initState;
-                        var coords = gameCtrl.processDragBox(gameCtrl.dragBox);
-                        var currentCoord;
-                        var currentTileController;
-                        var i = 0;
-                        var len = coords.length;
-
-                        for (; i < len; i++) {
-                            currentCoord = coords[i];
-                            currentTileController = gameCtrl.findTileCtrlByCoord(currentCoord);
-                            currentTileController.change(currentCoord, initState, override);
-                        }
-
-                        gameCtrl.clearDragBox();
-
-                        scope.$apply();
-                    }
+                    gameCtrl.fillDragBox(gameCtrl.dragBox, override);
+                    scope.$apply();
                 };
 
                 var events = {
