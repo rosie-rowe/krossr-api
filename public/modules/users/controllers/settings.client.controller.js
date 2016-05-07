@@ -3,7 +3,7 @@
 angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', '$timeout', 'Users', 'Authentication',
 	function($scope, $http, $location, $timeout, Users, Authentication) {
 		var timeout = 1000;
-		$scope.user = Authentication.user;
+		$scope.authentication = Authentication;
 		$scope.success = {};
 		$scope.error = {};
 		$scope.passwordDetails = {};
@@ -60,10 +60,10 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 
         this.signout = function() {
             $http.post('/auth/signout').success(function(response) {
-
+                delete $scope.authentication.user;
             }).error(function(response) {
 
-            });;
+            });
         }
 	}
 ]);

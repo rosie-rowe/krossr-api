@@ -4,7 +4,7 @@
 			<form name="userForm" data-ng-submit="settingsCtrl.updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
 				<h2><label class="control-label" for="lastName">Change your Email Address</h2>
 				<div class="form-group">
-					<input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
+					<input type="email" id="email" name="email" class="form-control" data-ng-model="authentication.user.email" placeholder="Email">
 				</div>
 				<div class="text-center form-group">
 					<button ng-disabled="error.username || success.username" type="submit" class="btn btn-large btn-primary">
@@ -15,7 +15,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="restrict-width" ng-if="user.provider === 'local'">
+		<div class="restrict-width" ng-if="authentication.user.provider === 'local'">
 			<h2 class="col-md-12 text-center">Change your password</h2>
 			<form data-ng-submit="settingsCtrl.changeUserPassword()" class="signin form-horizontal" autocomplete="off">
 				<div class="form-group">
