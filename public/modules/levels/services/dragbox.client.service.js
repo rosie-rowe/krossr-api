@@ -48,6 +48,10 @@ angular.module('levels').factory('dragBoxService', ['coordinateService',
                 return finalCoords;
             };
 
+            this.isStarted = function() {
+                return this.startCoord;
+            };
+
             this.isValid = function() {
                 return this.startCoord && this.endCoord;
             };
@@ -57,10 +61,13 @@ angular.module('levels').factory('dragBoxService', ['coordinateService',
 
         // Public API
         return {
-            clearDragBox: function() { dragBox = this.newDragBox(); },
-            newDragBox: function() { return new DragBox(); },
-            getDragBox: function() { return dragBox; },
-            setDragBox: function(box) { dragBox = box; },
+            clearDragBox: function() { dragBox = new DragBox() },
+            getInitState: function () {
+                return dragBox.initState;
+            },
+            process: function() {
+                return dragBox.process();
+            },
             setStartCoord: function(coord) {
                 dragBox.startCoord = coord;
                 return dragBox;
@@ -72,6 +79,12 @@ angular.module('levels').factory('dragBoxService', ['coordinateService',
             setInitState: function(initState) {
                 dragBox.initState = initState;
                 return dragBox;
+            },
+            validate: function() {
+                return dragBox.isValid();
+            },
+            validateStart: function() {
+                return dragBox.isStarted();
             }
         };
     }

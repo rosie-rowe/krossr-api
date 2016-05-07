@@ -33,15 +33,13 @@ angular.module('levels').directive('tile', ['Utils', 'touchService', 'dragBoxSer
                         currentCoord,
                         currentTileController;
 
-                    var dragBox = dragBoxService.getDragBox();
-
                     // save a snapshot of the previous dragbox for comparison purposes
-                    var oldCoords = dragBox.process();
+                    var oldCoords = dragBoxService.process();
 
                     // set the current coordinate to the new dragbox end and compute the new dragbox
-                    dragBox = dragBoxService.setEndCoord(coord);
+                    dragBoxService.setEndCoord(coord);
                     
-                    var allPendingCoords = dragBox.process();
+                    var allPendingCoords = dragBoxService.process();
 
                     // we should only clear the old coordinates off if the current selected area is
                     // smaller than the previous selected area, for speed reasons
@@ -66,20 +64,18 @@ angular.module('levels').directive('tile', ['Utils', 'touchService', 'dragBoxSer
                     mouseup: function(e) {
                         var actualScope = touchService.getTargetScope(e);
                         var coord;
-                        var dragBox = dragBoxService.getDragBox();
                     
                         if (actualScope && actualScope.index) {
                             coord = gameCtrl.convertTo2D(actualScope.index);
-                            dragBox = dragBoxService.setEndCoord(coord);
+                            dragBoxService.setEndCoord(coord);
 
-                            if (!dragBox.isValid()) {
+                            if (!dragBoxService.validate()) {
                                 scope.tileCtrl.change(coord);
                             }
                         }
                     },
                     mousedown: function(e) {
                         var coord = scope.tileCtrl.convert2D(scope.index);
-                        var dragBox = dragBoxService.getDragBox();
 
                         dragBoxService.setStartCoord(coord)
                         // Based on the state of the tile where we begin dragging, we will make all tiles in the dragbox the opposite of that state.
@@ -87,10 +83,9 @@ angular.module('levels').directive('tile', ['Utils', 'touchService', 'dragBoxSer
                     },
                     mousemove: function(e) {
                         var actualScope = touchService.getTargetScope(e);
-                        var dragBox = dragBoxService.getDragBox();
 
                         if (actualScope && actualScope.index) {
-                            if (dragBox && dragBox.startCoord)  {
+                            if (dragBoxService.validateStart())  {
                                 fillPending(actualScope.index);
                             }
                         }
