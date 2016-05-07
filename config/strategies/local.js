@@ -6,7 +6,7 @@
 var passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
 	db = require('../sequelize'),
-	User = db.User;
+	User = db.user;
 
 module.exports = function() {
 	// Use local strategy
