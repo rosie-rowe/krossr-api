@@ -5,10 +5,6 @@ var gameController = function($scope, $timeout, Utils, ngDialog, dragBoxService)
 
     $scope.controllerName = 'game';
 
-    this.clearDragBox = function() {
-        _this.dragBox = dragBoxService.newDragBox();
-    }
-
     this.checkWin = function() {
         var winner = _this.checkForWin(Utils);
 
@@ -26,6 +22,15 @@ var gameController = function($scope, $timeout, Utils, ngDialog, dragBoxService)
 
     this.convertTo2D = function(index) {
         return Utils.convertTo2D(index, Utils.getSideLength());
+    };
+
+    this.fillDragBox = function(override) {
+        var dragBox = dragBoxService.getDragBox();
+
+        if (dragBox.isValid()) {
+            this.fillTiles(dragBox.process(), dragBox.initState, override);
+            dragBoxService.clearDragBox();
+        }
     };
 
     this.gameOver = function() {
@@ -47,10 +52,6 @@ var gameController = function($scope, $timeout, Utils, ngDialog, dragBoxService)
         });
     };
 
-    this.processDragBox = function() {
-        return _this.dragBox.process();
-    };
-
     this.updateGameSize = function() {
         // don't use args, call to getGameSize so we take tutorials into account
         var newGameSettings = Utils.getGameSize($scope.tutorialMode);
@@ -67,7 +68,7 @@ var gameController = function($scope, $timeout, Utils, ngDialog, dragBoxService)
         _this.updateGameSize.call(_this);
     });
 
-    this.clearDragBox();
+    dragBoxService.clearDragBox();
 };
 
 gameController.$inject = ['$scope', '$timeout', 'Utils', 'ngDialog', 'dragBoxService'];
@@ -99,19 +100,6 @@ gameController.prototype.findTileCtrlByCoord = function(coord) {
 gameController.prototype.findTileCtrlByIndex = function(index) {
   var tileIndex = this.getTileIndex();
   return tileIndex[index].tileCtrl;
-};
-
-/*
-* Fill all of the tiles in the current (passed-in) dragBox
-*/
-gameController.prototype.fillDragBox = function(dragBox, override) {
-    if (dragBox && dragBox.startCoord && dragBox.endCoord) {
-        var initState = dragBox.initState;
-        var coords = dragBox.process();
-
-        this.fillTiles(coords, initState, override);
-        this.clearDragBox();
-    }
 };
 
 /*

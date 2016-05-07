@@ -11,7 +11,7 @@ angular.module('levels').factory('dragBoxService', ['coordinateService',
             * Given a dragbox, return an array of all of the coordinates of included tiles
             */
             this.process = function() {
-                if (!(this.startCoord && this.endCoord)) {
+                if (!this.isValid()) {
                     return [];
                 }
 
@@ -47,14 +47,32 @@ angular.module('levels').factory('dragBoxService', ['coordinateService',
 
                 return finalCoords;
             };
+
+            this.isValid = function() {
+                return this.startCoord && this.endCoord;
+            };
         }
+
+        var dragBox;
 
         // Public API
         return {
-            //clearDragBox: function() { dragBox = this.newDragBox(); },
+            clearDragBox: function() { dragBox = this.newDragBox(); },
             newDragBox: function() { return new DragBox(); },
-            //getDragBox: function() { return dragBox; },
-            //setDragBox: function(box) { dragBox = box; }
+            getDragBox: function() { return dragBox; },
+            setDragBox: function(box) { dragBox = box; },
+            setStartCoord: function(coord) {
+                dragBox.startCoord = coord;
+                return dragBox;
+            },
+            setEndCoord: function(coord) {
+                dragBox.endCoord = coord;
+                return dragBox;
+            },
+            setInitState: function(initState) {
+                dragBox.initState = initState;
+                return dragBox;
+            }
         };
     }
 ]);

@@ -17,7 +17,7 @@ angular.module('levels').directive('game', [
                     (pending if being dragged over, selected if mouse released normally,
                     marked if shift was held) */
                 var fillDragBox = function(override) {
-                    gameCtrl.fillDragBox(gameCtrl.dragBox, override);
+                    gameCtrl.fillDragBox(override);
                     scope.$apply();
                 };
 
