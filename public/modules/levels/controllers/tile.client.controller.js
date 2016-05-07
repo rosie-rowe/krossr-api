@@ -106,6 +106,20 @@ tileController.prototype.fill = function(fillType, override) {
   }
 };
 
+/*
+* used with the validationFn in gameController.prototype.fillTiles
+*/
+tileController.prototype.isPendingAndNotSelected = function() {
+    return this.pending && !this.selected;
+};
+
+/*
+* used with the validationFn in gameController.prototype.fillTiles
+*/
+tileController.prototype.isNotPending = function() {
+    return !this.pending;
+};
+
 /* If the override value (which will be the value of the tile that a dragstart is activated on)
    is present, use that for all tiles being considered.
    This is so you don't unselect previously selected tiles if your drags overlap

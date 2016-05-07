@@ -22,18 +22,7 @@ angular.module('levels').directive('tile', ['Utils', 'touchService',
                 }
 
                 var clearPending = function(coords) {
-                    var i = 0,
-                        len = coords.length,
-                        currentCoord,
-                        currentTileController;
-
-                    for (; i < len; i++) {
-                        currentCoord = coords[i];
-                        currentTileController = gameCtrl.findTileCtrlByCoord(currentCoord);
-                        if (currentTileController.pending && !currentTileController.selected) {
-                            currentTileController.change(currentCoord, true, 'empty');
-                        }
-                    }           
+                    gameCtrl.fillTiles(coords, true, 'empty', 'isPendingAndNotSelected');
                 };
 
                 var fillPending = function(index) {
@@ -66,15 +55,7 @@ angular.module('levels').directive('tile', ['Utils', 'touchService',
                         clearPending(coordsToClear);
                     }
 
-                    len = allPendingCoords.length;
-
-                    for (; i < len; i++) {
-                        currentCoord = allPendingCoords[i];
-                        currentTileController = gameCtrl.findTileCtrlByCoord(currentCoord);
-                        if (!currentTileController.pending) {
-                            currentTileController.change(currentCoord, true, 'pending');
-                        }
-                    }
+                    gameCtrl.fillTiles(allPendingCoords, true, 'pending', 'isNotPending');
 
                     scope.$apply();
                 };

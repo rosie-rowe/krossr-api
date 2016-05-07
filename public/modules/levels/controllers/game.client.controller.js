@@ -100,20 +100,32 @@ gameController.prototype.fillDragBox = function(dragBox, override) {
     if (dragBox && dragBox.startCoord && dragBox.endCoord) {
         var initState = dragBox.initState;
         var coords = this.processDragBox(dragBox);
-        var currentCoord;
-        var currentTileController;
-        var i = 0;
-        var len = coords.length;
 
-        for (; i < len; i++) {
-            currentCoord = coords[i];
-            currentTileController = this.findTileCtrlByCoord(currentCoord);
-            currentTileController.change(currentCoord, initState, override);
-        }
-
+        this.fillTiles(coords, initState, override);
         this.clearDragBox();
     }
 };
+
+/*
+* Fill all of the tiles in the specified coordinate array
+* @params {Array} array of coordinate objects
+* @params {function} a function to run on each tile controller before changing it to determine whether or not to change. must be defined in tile.client.controller.js
+*/
+gameController.prototype.fillTiles = function(coords, initState, override, validationFn) {
+    var len = coords.length;
+    var i = 0;
+    var currentCoord;
+    var currentTileController;
+
+    for (; i < len; i++) {
+        currentCoord = coords[i];
+        currentTileController = this.findTileCtrlByCoord(currentCoord);
+
+        if (!validationFn || (typeof currentTileController[validationFn] === 'function' && currentTileController[validationFn]())) {
+            currentTileController.change(currentCoord, initState, override);
+        }
+    }
+}
 
 /*
 * Given a dragbox, return an array of all of the coordinates of included tiles
