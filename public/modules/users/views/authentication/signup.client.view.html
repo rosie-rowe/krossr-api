@@ -1,7 +1,7 @@
 <section class="row valign-inner" sign-up>
 	<h1>Sign Up</h1>
 	<div class="sign-on-form">
-		<form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
+		<form name="userForm" data-ng-submit="authCtrl.signup()" class="signin form-horizontal" novalidate autocomplete="off">
 			<div class="form-group">
 				<label class="control-label" for="username">Username</label> 
 				<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">

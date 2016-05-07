@@ -10,7 +10,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		// If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/levels');
 
-		$scope.signup = function() {
+		this.signup = function() {
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
@@ -27,7 +27,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			});
 		};
 
-		$scope.signin = function() {
+		this.signin = function() {
 			$http.post('/auth/signin', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;

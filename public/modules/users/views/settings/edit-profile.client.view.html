@@ -1,7 +1,7 @@
 <div class="hero">
-	<section class="row valign-inner" data-ng-controller="SettingsController">
+	<section class="row valign-inner" edit-profile>
 		<div class="restrict-width">
-			<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
+			<form name="userForm" data-ng-submit="settingsCtrl.updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
 				<h2><label class="control-label" for="lastName">Change your Email Address</h2>
 				<div class="form-group">
 					<input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
@@ -17,7 +17,7 @@
 		</div>
 		<div class="restrict-width" ng-if="user.provider === 'local'">
 			<h2 class="col-md-12 text-center">Change your password</h2>
-			<form data-ng-submit="changeUserPassword()" class="signin form-horizontal" autocomplete="off">
+			<form data-ng-submit="settingsCtrl.changeUserPassword()" class="signin form-horizontal" autocomplete="off">
 				<div class="form-group">
 					<input type="password" id="currentPassword" name="currentPassword" class="form-control" data-ng-model="passwordDetails.currentPassword" placeholder="Current Password">
 				</div>
@@ -37,9 +37,7 @@
 			</form>
 		</div>
 		<div class="restrict-width">
-			<a href="/auth/signout">
-				<button class="btn">Sign Out</span>
-			</a>
+			<button ng-click="settingsCtrl.signout(); closeThisDialog();" class="btn">Sign Out</span>
 		</div>
 	</section>
 </div>

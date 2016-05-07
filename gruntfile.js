@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 	var watchFiles = {
 		serverViews: ['app/views/**/*.*'],
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/*[!tests]*/*.js'],
-		clientViews: ['public/modules/**/views/**/*.html'],
+		clientViews: ['public/modules/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/*[!tests]*/*.js'],
 		clientCSS: ['public/modules/**/*.css', 'public/less/modules.css'],
 		clientLESS: ['public/**/css/*.less', 'public/less/*'],
@@ -31,6 +31,7 @@ module.exports = function(grunt) {
 			},
 			clientViews: {
 				files: watchFiles.clientViews,
+                tasks: ['html2js'],
 				options: {
 					livereload: true,
 				}

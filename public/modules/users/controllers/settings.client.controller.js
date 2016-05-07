@@ -13,7 +13,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		if (!$scope.user) $location.path('/');
 
 		// Update a user profile
-		$scope.updateUserProfile = function(isValid) {
+		this.updateUserProfile = function(isValid) {
 			if (isValid){
 				$scope.success.username = $scope.error.username = null;
 				var user = new Users($scope.user);
@@ -38,7 +38,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		};
 
 		// Change user password
-		$scope.changeUserPassword = function() {
+		this.changeUserPassword = function() {
 			$scope.success.password = $scope.error.password = null;
 
 			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
@@ -57,5 +57,13 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 				}, timeout);
 			});
 		};
+
+        this.signout = function() {
+            $http.post('/auth/signout').success(function(response) {
+
+            }).error(function(response) {
+
+            });;
+        }
 	}
 ]);
