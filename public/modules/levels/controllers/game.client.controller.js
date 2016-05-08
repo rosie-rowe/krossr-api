@@ -16,14 +16,6 @@ var gameController = function($scope, $timeout, Utils, ngDialog, dragBoxService)
         return false;
     };
 
-    this.convertTo1D = function(index) {
-        return Utils.convertTo1D(index, Utils.getSideLength());
-    };
-
-    this.convertTo2D = function(index) {
-        return Utils.convertTo2D(index, Utils.getSideLength());
-    };
-
     this.fillDragBox = function(override) {
         if (dragBoxService.validate()) {
             this.fillTiles(dragBoxService.process(), dragBoxService.getInitState(), override);
@@ -31,11 +23,17 @@ var gameController = function($scope, $timeout, Utils, ngDialog, dragBoxService)
         }
     };
 
+    /* Grab a tile controller out of the tile index from a given 2D coordinate */
+    this.findTileCtrlByCoord = function(coord) {
+        var index = Utils.convertTo1D(coord);
+        return this.findTileCtrlByIndex(index);
+    }
+
     this.gameOver = function() {
         if (!$scope.level.lost) {
             $scope.level.won = false;
             $scope.level.lost = true;
-            _this.openWinLoseNotification();
+            this.openWinLoseNotification();
         }
     };
 
@@ -86,12 +84,6 @@ gameController.prototype.checkForWin = function(Utils) {
         }
     }
     return false;
-};
-
-/* Grab a tile controller out of the tile index from a given 2D coordinate */
-gameController.prototype.findTileCtrlByCoord = function(coord) {
-    var index = this.convertTo1D(coord);
-    return this.findTileCtrlByIndex(index);
 };
 
 /* Grab a tile controller out of the tile index from a given 1D index */

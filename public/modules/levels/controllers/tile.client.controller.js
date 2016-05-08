@@ -25,16 +25,39 @@ var tileController = function($scope, Utils, shiftService) {
         }
     };
 
+    /* Determine which tiles to add colored borders to */
+    this.getBorderColors = function(sideLength, direction, index) {
+        var canColor,
+            coord = Utils.convertTo2D(index);
+
+        // no borders through puzzle for small puzzles
+        if (sideLength <= 5) {
+            return;
+        }
+
+        switch (direction) {
+            case 'left':
+                canColor = this.testTileForBorder(sideLength, coord.x);
+                break;
+            case 'right':
+                canColor = this.testTileForBorder(sideLength, coord.x + 1);
+                break;
+            case 'bottom':
+                canColor = this.testTileForBorder(sideLength, coord.y + 1);
+                break;
+            case 'top':
+                canColor = this.testTileForBorder(sideLength, coord.y);
+            default:
+                break;
+        }
+
+        if (canColor) {
+            return "1px solid #222"
+        }
+    };
+
     this.fillBorders = function(direction, index) {
       return _this.getBorderColors(sideLength, direction, index);
-    };
-
-    this.convert1D = function(coord) {
-      return Utils.convertTo1D(coord);
-    };
-
-    this.convert2D = function(index) {
-      return Utils.convertTo2D(index);
     };
 
     this.getTileSize = Utils.getTileSize; 
@@ -52,7 +75,7 @@ tileController.prototype.changeTile = function(scope, index, initState, changeTo
         wrong_answer = false;
 
     if (typeof index === 'number') { 
-      coord = this.convert2D(index);
+      coord = Utils.convertTo2D(index);
     } else {
       coord = index;
     }
@@ -129,36 +152,6 @@ var checkForOverride = function(override, value) {
     return !override;
   } else {
     return !value;
-  }
-};
-
-/* Determine which tiles to add colored borders to */
-tileController.prototype.getBorderColors = function(sideLength, direction, index) {
-  var canColor,
-      coord = this.convert2D(index);
-
-  // no borders through puzzle for small puzzles
-  if (sideLength <= 5) {
-    return;
-  }
-
-  switch (direction) {
-    case 'left':
-      canColor = this.testTileForBorder(sideLength, coord.x);
-      break;
-    case 'right':
-      canColor = this.testTileForBorder(sideLength, coord.x + 1);
-      break;
-    case 'bottom':
-      canColor = this.testTileForBorder(sideLength, coord.y + 1);
-      break;
-    case 'top':
-      canColor = this.testTileForBorder(sideLength, coord.y);
-    default:
-      break;
-  }
-  if (canColor) {
-    return "1px solid #222"
   }
 };
 

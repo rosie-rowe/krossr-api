@@ -26,7 +26,7 @@ angular.module('levels').directive('tile', ['Utils', 'touchService', 'dragBoxSer
                 };
 
                 var fillPending = function(index) {
-                    var coord = scope.tileCtrl.convert2D(index),
+                    var coord = Utils.convertTo2D(index),
                         coordsToClear,
                         i = 0,
                         len,
@@ -66,7 +66,7 @@ angular.module('levels').directive('tile', ['Utils', 'touchService', 'dragBoxSer
                         var coord;
                     
                         if (actualScope && actualScope.index) {
-                            coord = gameCtrl.convertTo2D(actualScope.index);
+                            coord = Utils.convertTo2D(actualScope.index);
                             dragBoxService.setEndCoord(coord);
 
                             if (!dragBoxService.validate()) {
@@ -75,7 +75,7 @@ angular.module('levels').directive('tile', ['Utils', 'touchService', 'dragBoxSer
                         }
                     },
                     mousedown: function(e) {
-                        var coord = scope.tileCtrl.convert2D(scope.index);
+                        var coord = Utils.convertTo2D(scope.index);
 
                         dragBoxService.setStartCoord(coord)
                         // Based on the state of the tile where we begin dragging, we will make all tiles in the dragbox the opposite of that state.

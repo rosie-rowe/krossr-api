@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('levels').factory('dragBoxService', ['coordinateService',
-    function(coordinateService) {
+angular.module('levels').factory('dragBoxService', [
+    function() {
         function DragBox() {
             this.initState = true;
-            this.startCoord; //coordinateService.newCoord();
-            this.endCoord; // = coordinateService.newCoord();
+            this.startCoord;
+            this.endCoord;
 
             /*
             * Given a dragbox, return an array of all of the coordinates of included tiles
