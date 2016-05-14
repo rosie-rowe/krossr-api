@@ -61,7 +61,8 @@
             ariaLabelledBySelector: null,
             ariaDescribedById: null,
             ariaDescribedBySelector: null,
-            bodyClassName: 'ngdialog-open'
+            bodyClassName: 'ngdialog-open',
+            width: null
         };
 
         this.setForceHtmlReload = function (_useIt) {
@@ -480,6 +481,14 @@
                         dialogID = dialogID || 'ngdialog' + localID;
                         openIdStack.push(dialogID);
 
+                        // Merge opts.data with predefined via setDefaults
+                        if (typeof options.data !== 'undefined') {
+                            if (typeof opts.data === 'undefined') {
+                                opts.data = {};
+                            }
+                            opts.data = angular.merge(angular.copy(options.data), opts.data);
+                        }
+
                         angular.extend(options, opts);
 
                         var defer;
@@ -532,6 +541,15 @@
 
                             if (options.appendClassName) {
                                 $dialog.addClass(options.appendClassName);
+                            }
+
+                            if (options.width) {
+                                var $dialogContent = $dialog[0].querySelector('.ngdialog-content');
+                                if (angular.isString(options.width)) {
+                                    $dialogContent.style.width = options.width;
+                                } else {
+                                    $dialogContent.style.width = options.width + 'px';
+                                }
                             }
 
                             if (options.disableAnimation) {
@@ -717,6 +735,15 @@
                         var options = angular.copy(defaults);
 
                         opts = opts || {};
+
+                        // Merge opts.data with predefined via setDefaults
+                        if (typeof options.data !== 'undefined') {
+                            if (typeof opts.data === 'undefined') {
+                                opts.data = {};
+                            }
+                            opts.data = angular.merge(angular.copy(options.data), opts.data);
+                        }
+
                         angular.extend(options, opts);
 
                         options.scope = angular.isObject(options.scope) ? options.scope.$new() : $rootScope.$new();
