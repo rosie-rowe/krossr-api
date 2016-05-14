@@ -43,7 +43,11 @@ exports.signup = function(req, res) {
 				res.jsonp(user);
 			}
 		});
-	});
+	}).catch(function(err) {
+        return res.status(500).send({
+            message: errorHandler.getErrorMessage(err)
+        });
+    });
 };
 
 /**
