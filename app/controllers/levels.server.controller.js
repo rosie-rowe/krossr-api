@@ -121,7 +121,11 @@ exports.delete = function(req, res) {
  */
 exports.levelByID = function(req, res, next, id) {
 	Level
-		.find({ where: {id: id}, include: [db.user]}).then(function(level) {
+		.find({ 
+            where: {
+                id: id
+            }
+        }).then(function(level) {
 			if (!level) {
 				return next(new Error('Failed to load level ' + id));
 			} else {
