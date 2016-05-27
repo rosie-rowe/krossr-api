@@ -1,4 +1,7 @@
-/* Styles go here */
+level {
+    .user-select();
+}
+
 .bottom-row-inner {
     @media screen and (max-width: @largeScreen) {
         display: inline-block;
@@ -274,25 +277,4 @@
     height: 100%;
     display: table-cell;
     vertical-align: middle;
-}
-
-/*
- *  Mixins
- */
-
-.border-radius (@radius: 5px) {
-    -webkit-border-radius: @radius;
-    -moz-border-radius:    @radius;
-    border-radius:         @radius;
-
-    -moz-background-clip:    padding;
-    -webkit-background-clip: padding-box;
-    background-clip:         padding-box;
-}
-
-.box-sizing (@box-sizing: content-box) {
-    -webkit-box-sizing: @box-sizing;
-    -moz-box-sizing: @box-sizing;
-    -o-box-sizing: @box-sizing;
-    box-sizing: @box-sizing;
 }

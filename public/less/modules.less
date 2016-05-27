@@ -34,5 +34,36 @@
     -o-transition:      @transition;
 }
 
+/*
+ *  Mixins
+ */
+
+.border-radius (@radius: @borderRadius) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius:    @radius;
+    border-radius:         @radius;
+
+    -moz-background-clip:    padding;
+    -webkit-background-clip: padding-box;
+    background-clip:         padding-box;
+}
+
+.box-sizing (@box-sizing: content-box) {
+    -webkit-box-sizing: @box-sizing;
+    -moz-box-sizing: @box-sizing;
+    -o-box-sizing: @box-sizing;
+    box-sizing: @box-sizing;
+}
+
+.user-select(@userSelect: none) {
+    -khtml-user-select: @userSelect;
+    -moz-user-select: @userSelect;
+    -ms-user-select: @userSelect;
+    user-select: @userSelect;
+    -webkit-touch-callout: @userSelect;
+    -webkit-user-select: @userSelect;
+    -o-user-select: @userSelect;
+}
+
 @import "variables.less";
 @import "../modules/**/css/*.less";

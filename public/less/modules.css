@@ -1,3 +1,6 @@
+/*
+ *  Mixins
+ */
 [ui-view].ng-enter,
 [ui-view].ng-leave {
   -webkit-transition: opacity 0.3s ease-in-out;
@@ -365,9 +368,6 @@ level.main-viewport {
   display: table-cell;
   vertical-align: middle;
 }
-/*
- *  Mixins
- */
 .how-to-play {
   overflow-y: auto;
   height: 80%;
@@ -475,7 +475,15 @@ level.main-viewport {
 body.ngdialog-open {
   overflow: hidden;
 }
-/* Styles go here */
+level {
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
 @media screen and (max-width: 1280px) {
   .bottom-row-inner {
     display: inline-block;
@@ -706,9 +714,6 @@ body.ngdialog-open {
   display: table-cell;
   vertical-align: middle;
 }
-/*
- *  Mixins
- */
 [star-rating] {
   display: inline-block;
 }
