@@ -44,7 +44,8 @@ var gameController = function($scope, $timeout, Utils, ngDialog, dragBoxService)
     this.openWinLoseNotification = function() {
         ngDialog.open({
             template: "modules/levels/views/win-notification.client.view.html",
-            scope: $scope
+            scope: $scope,
+            showClose: false
         });
     };
 

@@ -49,10 +49,10 @@ module.exports = {
     mailer: {
         from: 'support@krossr.com',
         options: {
-            service: 'gmail',
+            service: 'mailgun',
             auth: {
-                user: 'browe404@gmail.com',
-                pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+                api_key: process.env.MAILER_API_KEY,
+                domain: 'mg.krossr.com'
             }
         }
     }
