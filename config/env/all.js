@@ -45,5 +45,15 @@ module.exports = {
 			'public/lib/angular-mocks/angular-mocks.js',
 			'public/modules/*/tests/*.js'
 		]
-	}
+	},
+    mailer: {
+        from: 'support@krossr.com',
+        options: {
+            service: 'gmail',
+            auth: {
+                user: 'browe404@gmail.com',
+                pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+            }
+        }
+    }
 };
