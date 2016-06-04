@@ -7,6 +7,8 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 		//If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/');
 
+        this.invalid = $stateParams.invalid;
+
 		// Submit forgotten password account id
 		$scope.askForPasswordReset = function() {
 			$scope.success = $scope.error = null;
@@ -34,8 +36,8 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 				// Attach user profile
 				Authentication.user = response;
 
-				// And redirect to the index page
-				$location.path('/password/reset/success');
+				// And redirect to the home page
+				$location.path('/');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});

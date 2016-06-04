@@ -89,8 +89,24 @@ a {
   text-decoration: none;
 }
 h1 {
-  font-size: 4em;
-  margin: 0;
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+h2 {
+  font-size: 1.5em;
+  margin: 0.75em 0;
+}
+h3 {
+  font-size: 1.17em;
+  margin: 0.83em 0;
+}
+h5 {
+  font-size: .83em;
+  margin: 1.5em 0;
+}
+h6 {
+  font-size: .75em;
+  margin: 1.67em 0;
 }
 html {
   height: 100%;
@@ -760,4 +776,14 @@ level {
   top: 10px;
   right: 10px;
   position: absolute;
+}
+[forgot-password],
+[reset-password] {
+  max-width: 300px;
+}
+@media screen and (max-width: 1024px) {
+  [forgot-password],
+  [reset-password] {
+    margin: 0 auto;
+  }
 }

@@ -51,8 +51,10 @@ module.exports = {
         options: {
             service: 'mailgun',
             auth: {
-                api_key: process.env.MAILER_API_KEY,
-                domain: 'mg.krossr.com'
+                api_key: process.env.MAILER_API_KEY, // jshint ignore:line
+                domain: 'mg.krossr.com',
+                user: process.env.MAILER_USER,
+                pass: process.env.MAILER_PASS
             }
         }
     }
