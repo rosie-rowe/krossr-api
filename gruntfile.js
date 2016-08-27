@@ -93,7 +93,8 @@ module.exports = function(grunt) {
                     keepDirectoryHierarchy: true,
                     references: ['<%= applicationTypescriptReferences %>'],
                     rootDir: 'public/modules',
-                    sourceMap: true
+                    sourceMap: true,
+                    target: 'es5'
                 },
             }
         },

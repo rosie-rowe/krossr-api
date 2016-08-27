@@ -4,25 +4,51 @@
 'use strict';
 
 class DragBox {
-    public initState: boolean = true;
-    public startCoord: Point;
-    public endCoord: Point;
+    private _initState: boolean = true;
+    get initState(): boolean {
+        return this._initState;
+    }
+    set initState(state: boolean) {
+        this._initState = state;
+    }
 
-    contructor() {}
+    private _startCoord: Point;
+    get startCoord() {
+        return this._startCoord;
+    }
+    set startCoord(coord: Point) {
+        this._startCoord = coord;
+    }
+
+    private _endCoord: Point;
+    get endCoord() {
+        return this._endCoord;
+    }
+    set endCoord(coord: Point) {
+        this._endCoord = coord;
+    }
+
+    constructor() {}
+
+    public clearDragBox() {
+        this.startCoord = undefined;
+        this.endCoord = undefined;
+        this.initState = true;
+    }
     
     /*
     * Given a dragbox, return an array of all of the coordinates of included tiles
     */
     public process(): Point[] {
-        if (!this.isValid()) {
+        if (!this.validate()) {
             return [];
         }
 
-        var startX = this.startCoord.x;
-        var startY = this.startCoord.y;
-        var endX = this.endCoord.x;
-        var endY = this.endCoord.y;
-        var finalCoords: Point[] = [];
+        let startX = this.startCoord.x;
+        let startY = this.startCoord.y;
+        let endX = this.endCoord.x;
+        let endY = this.endCoord.y;
+        let finalCoords: Point[] = [];
 
         if (startX > endX) {
             [endX, startX] = [startX, endX];
@@ -32,9 +58,9 @@ class DragBox {
             [endY, startY] = [startY, endY];
         }
 
-        for (var i = startY; i <= endY; i++) {
-            for (var j = startX; j <= endX; j++) {
-                var coord: Point = {
+        for (let i = startY; i <= endY; i++) {
+            for (let j = startX; j <= endX; j++) {
+                let coord: Point = {
                     x: j,
                     y: i
                 };
@@ -46,42 +72,15 @@ class DragBox {
         return finalCoords;
     }
 
-    public isStarted() {
+    public validateStart() {
         return this.startCoord;
     }
 
-    public isValid() {
+    public validate() {
         return this.startCoord && this.endCoord;
     }
 }
 
 angular.module('levels').factory('dragBoxService', [
-    function() {
-        var dragBox: DragBox = new DragBox();
-
-        // Public API
-        return {
-            clearDragBox: function() { dragBox = new DragBox() },
-            getInitState() { return dragBox.initState; },
-            process() { return dragBox.process(); },
-            setStartCoord(coord: Point) {
-                dragBox.startCoord = coord;
-                return dragBox;
-            },
-            setEndCoord(coord: Point) {
-                dragBox.endCoord = coord;
-                return dragBox;
-            },
-            setInitState: function(initState: boolean) {
-                dragBox.initState = initState;
-                return dragBox;
-            },
-            validate() {
-                return dragBox.isValid();
-            },
-            validateStart() {
-                return dragBox.isStarted();
-            }
-        };
-    }
+    function() { return new DragBox(); }
 ]);

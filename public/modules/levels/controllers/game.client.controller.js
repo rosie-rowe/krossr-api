@@ -18,7 +18,7 @@ var gameController = function($scope, $timeout, Utils, ngDialog, dragBoxService)
 
     this.fillDragBox = function(override) {
         if (dragBoxService.validate()) {
-            this.fillTiles(dragBoxService.process(), dragBoxService.getInitState(), override);
+            this.fillTiles(dragBoxService.process(), dragBoxService.initState, override);
             dragBoxService.clearDragBox();
         }
     };
