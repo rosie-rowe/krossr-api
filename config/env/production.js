@@ -15,5 +15,6 @@ module.exports = {
         },
 		css: 'public/dist/application.min.css',
 		js: 'public/dist/application.min.js',
+        typescript: 'public/dist/typescript.min.js'
 	}
 };

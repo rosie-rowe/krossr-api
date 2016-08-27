@@ -12,6 +12,8 @@ module.exports = function(grunt) {
 		mochaTests: ['app/tests/**/*.js']
 	};
 
+    grunt.loadNpmTasks('grunt-typescript');
+
 	// Project Configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -83,6 +85,18 @@ module.exports = function(grunt) {
                 dest: 'public/dist/templates.js'
             }
         },
+        typescript: {
+            base: {
+                src: ['<%= applicationTypescriptFiles %>'],
+                dest: 'public/typescript',
+                options: {
+                    keepDirectoryHierarchy: true,
+                    references: ['<%= applicationTypescriptReferences %>'],
+                    rootDir: 'public/modules',
+                    sourceMap: true
+                },
+            }
+        },
 		uglify: {
 			production: {
 				options: {
@@ -121,13 +135,6 @@ module.exports = function(grunt) {
 					'no-preload': true,
 					'stack-trace-limit': 50,
 					'hidden': []
-				}
-			}
-		},
-		ngAnnotate: {
-			production: {
-				files: {
-					'public/dist/application.js': '<%= applicationJavaScriptFiles %>',
 				}
 			}
 		},
@@ -187,10 +194,12 @@ module.exports = function(grunt) {
         grunt.config.set('applicationJavaScriptLibFiles', config.assets.lib.js);
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
 		grunt.config.set('applicationCSSFiles', config.assets.css);
+        grunt.config.set('applicationTypescriptFiles', config.assets.typescript);
+        grunt.config.set('applicationTypescriptReferences', config.assets.typescriptRefs);
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['concurrent:default', 'less']);
+	grunt.registerTask('default', ['concurrent:default', 'typescript:base', 'less']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -208,4 +217,6 @@ module.exports = function(grunt) {
 
 	// production
 	grunt.registerTask('production', []);
+
+    grunt.registerTask('ts', ['env:development', 'loadConfig', 'typescript:base']);
 };

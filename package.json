@@ -58,9 +58,9 @@
     "grunt-html2js": "^0.3.6",
     "grunt-karma": "~0.9.0",
     "grunt-mocha-test": "~0.12.1",
-    "grunt-ng-annotate": "~0.4.0",
     "grunt-node-inspector": "^0.4.1",
     "grunt-nodemon": "~0.3.0",
+    "grunt-typescript": "^0.8.0",
     "karma": "~0.12.0",
     "karma-chrome-launcher": "~0.1.2",
     "karma-coverage": "~0.2.0",
@@ -70,7 +70,8 @@
     "less-plugin-glob": "^1.1.0",
     "load-grunt-tasks": "~0.6.0",
     "should": "~4.0.4",
-    "supertest": "~0.14.0"
+    "supertest": "~0.14.0",
+    "typescript": "^1.8.10"
   },
   "repository": {
     "type": "git",

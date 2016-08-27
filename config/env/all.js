@@ -35,6 +35,7 @@ module.exports = {
 			'public/config.js',
 			'public/application.js',
 			'public/modules/*/*.js',
+            'public/typescript/**/*.js',
 			'public/modules/*/*[!tests]*/**/*.js',
             'public/dist/templates.js'
 		],
@@ -44,7 +45,14 @@ module.exports = {
 		tests: [
 			'public/lib/angular-mocks/angular-mocks.js',
 			'public/modules/*/tests/*.js'
-		]
+		],
+        typescript: [
+            'public/modules/**/*.ts'
+        ],
+        typescriptRefs: [
+            'public/modules/*/typings/*.d.ts',
+            'public/typings/**/*.d.ts'
+        ]
 	},
     mailer: {
         from: 'support@krossr.com',
