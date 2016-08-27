@@ -75,10 +75,10 @@
 			var sampleLevels = [sampleLevel];
 
 			// Set GET response
-			$httpBackend.expectGET('levels?pageNum=0&sizeRestriction=').respond(sampleLevelsResponse);
+			$httpBackend.expectGET('levels?pageNum=0&sizeRestriction=&sortDirection=').respond(sampleLevelsResponse);
 
 			// Run controller functionality
-			scope.find();
+			LevelsController.find();
 			$httpBackend.flush();
 
 			// Test scope value
@@ -100,11 +100,11 @@
 
 			// Run controller functionality
 			scope.selectedLevelId = '525a8422f6d0f87f0e407a33';
-			scope.findOne();
+           
+			LevelsController.findOne();
 			$httpBackend.flush();
 
-			// Test scope value
-			expect(scope.level).toEqualData(sampleLevel);
+			expect(scope.level.id).toEqualData(sampleLevel.id);
 		}));
 
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Levels) {
@@ -128,13 +128,14 @@
 			$httpBackend.expectPOST('levels', sampleLevelPostData).respond(sampleLevelResponse);
 
 			// Run controller functionality
-			scope.create(sampleLevelPostData);
+			LevelsController.create(sampleLevelPostData);
 			$httpBackend.flush();
 		}));
 
 		it('$scope.update() should update a valid Level', inject(function(Levels) {
 			// Define a sample Level put data
 			var sampleLevelPutData = new Levels({
+                id: '525a8422f6d0f87f0e407a33',
 				name: 'New Level',
 				layout: [[true, true, true, true, true],
 						 [true, true, true, true, true],
@@ -150,24 +151,24 @@
 			$httpBackend.expectPUT(/levels\/([0-9a-fA-F]{24})$/).respond();
 
 			// Run controller functionality
-			scope.update();
+			LevelsController.update();
 			$httpBackend.flush();
 		}));
 
 		it('$scope.remove() should send a DELETE request with a valid levelId and remove the Level from the scope', inject(function(Levels) {
 			// Create new Level object
 			var sampleLevel = new Levels({
-				_id: '525a8422f6d0f87f0e407a33'
+				id: '525a8422f6d0f87f0e407a33'
 			});
 
 			// Create new Levels array and include the Level
-			scope.levels = [sampleLevel];
+    		scope.levels = [sampleLevel];
 
 			// Set expected DELETE response
 			$httpBackend.expectDELETE(/levels\/([0-9a-fA-F]{24})$/).respond(204);
 
 			// Run controller functionality
-			scope.remove(sampleLevel);
+			LevelsController.remove(sampleLevel);
 			$httpBackend.flush();
 
 			// Test array after successful delete

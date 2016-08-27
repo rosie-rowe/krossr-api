@@ -50,7 +50,7 @@
 			// Test expected GET request
 			$httpBackend.when('POST', '/auth/signin').respond(200, 'Fred');
 
-			scope.signin();
+			AuthenticationController.signin();
 			$httpBackend.flush();
 
 			// Test scope value
@@ -63,7 +63,7 @@
 				'message': 'Missing credentials'
 			});
 
-			scope.signin();
+			AuthenticationController.signin();
 			$httpBackend.flush();
 
 			// Test scope value
@@ -80,7 +80,7 @@
 				'message': 'Unknown user'
 			});
 
-			scope.signin();
+			AuthenticationController.signin();
 			$httpBackend.flush();
 
 			// Test scope value
@@ -92,13 +92,12 @@
 			scope.authentication.user = 'Fred';
 			$httpBackend.when('POST', '/auth/signup').respond(200, 'Fred');
 
-			scope.signup();
+			AuthenticationController.signup();
 			$httpBackend.flush();
 
 			// test scope value
 			expect(scope.authentication.user).toBe('Fred');
 			expect(scope.error).toEqual(undefined);
-			expect($location.url()).toBe('/levels');
 		});
 
 		it('$scope.signup() should fail to register with duplicate Username', function() {
@@ -107,7 +106,7 @@
 				'message': 'Username already exists'
 			});
 
-			scope.signup();
+			AuthenticationController.signup();
 			$httpBackend.flush();
 
 			// Test scope value

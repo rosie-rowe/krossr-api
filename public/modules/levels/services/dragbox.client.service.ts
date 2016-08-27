@@ -9,10 +9,11 @@ class DragBox {
     public endCoord: Point;
 
     contructor() {}
+    
     /*
     * Given a dragbox, return an array of all of the coordinates of included tiles
     */
-    public process() {
+    public process(): Point[] {
         if (!this.isValid()) {
             return [];
         }
@@ -23,7 +24,6 @@ class DragBox {
         var endY = this.endCoord.y;
         var finalCoords: Point[] = [];
 
-        //todo: make this a function. tricky javascript makes easy problem harder.
         if (startX > endX) {
             [endX, startX] = [startX, endX];
         }

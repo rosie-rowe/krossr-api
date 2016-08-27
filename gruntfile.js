@@ -208,7 +208,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'ngAnnotate', 'html2js', 'uglify', 'cssmin', 'less']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'html2js', 'uglify', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
