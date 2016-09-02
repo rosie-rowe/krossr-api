@@ -12,14 +12,14 @@ class NumberLineController {
         this.$scope.getWidth = this.getWidth.bind(this);
     }
 
-    private gameMatrix: GameMatrix = { normal: [], rotated: [] };
+    private gameMatrix: GameMatrix = new GameMatrix();
     private goalMatrix: boolean[][] = this.$scope.layout || this.Utils.getGoalMatrix();
 
     private sideLength: number = this.goalMatrix.length;
     private lineContent: LineContent[] = [];
-    private currentGroup: any = {};
+    private currentGroup: TileGroup = new TileGroup();
     private hasGroup: boolean = false;
-    private targetMatrix: any = {};
+    private targetMatrix: GameMatrix = new GameMatrix();
 
     // display a crossed out 0 if the linecontent comes back with no content. otherwise, pass through
     private accountForZeros(lineContent: LineContent[]): LineContent[] {
@@ -35,7 +35,7 @@ class NumberLineController {
 
     /* When computing number lines for the top part, we need to reverse the results
         before joining them for display, so they will appear in the correct order */
-    private adjustContentForOrientation(lineContent: LineContent[], orientation: string) {
+    private adjustContentForOrientation(lineContent: LineContent[], orientation: string): LineContent[] {
         if (orientation === 'vertical') {
             lineContent = lineContent.reverse();
         };
@@ -134,20 +134,18 @@ class NumberLineController {
     }
 
     /* To compute the number lines for the top part, we need to rotate the matrix by 90 degrees first */
-    private getTargetMatrix(matrix: boolean[][], orientation: string) {
+    private getTargetMatrix(matrix: boolean[][], orientation: string): boolean[][] {
         if (matrix) {
             if (orientation === 'vertical') {
                 return this.rotate90(matrix);
             } else {
                 return matrix;
             }
-        } else {
-            debugger;
         }
     }
 
     /* Knowing the group already exists, update the css classes on it */
-    private recalculateGroup(index: number, orientation: string) {
+    private recalculateGroup(index: number, orientation: string): boolean {
         this.gameMatrix[orientation] = this.getTargetMatrix(this.Utils.getGameMatrix(), orientation);
 
         /* We need to keep track if anything changed so we know whether or not to actually change lineContent,
@@ -193,7 +191,7 @@ class NumberLineController {
     }
 
     // Create a new matrix of equal size to the one passed in, and assign it to the original rotated 90 degrees
-    private rotate90 = function(matrix: boolean[][]) {
+    private rotate90(matrix: boolean[][]): boolean[][] {
         var rotatedMatrix = new Array(this.sideLength);
 
         for (var i = 0; i < this.sideLength; i++) {
@@ -213,7 +211,7 @@ class NumberLineController {
     }
 
     /* For a given row or column, compute its number line (guide numbers on the sides of the board) */
-    private getLineContent(index: number, orientation: string) {
+    private getLineContent(index: number, orientation: string): LineContent[] {
         if (!this.hasGroup) {
             this.currentGroup = this.calculateGroup(index, orientation);
             this.hasGroup = true;
@@ -227,13 +225,13 @@ class NumberLineController {
         return this.lineContent;
     }
 
-    private getHeight() {
+    private getHeight(): string {
         var tileSize: number = this.Utils.getTileSize();        
 
         return this.$scope.orientation === 'vertical' ? (tileSize / 2) + 'px' : tileSize + 'px';
     }
 
-    private getWidth() {
+    private getWidth(): string {
         var tileSize: number = this.Utils.getTileSize();
 
         return this.$scope.orientation === 'horizontal' ? (tileSize / 2) + 'px' : tileSize + 'px';
@@ -241,8 +239,8 @@ class NumberLineController {
 }
 
 class GameMatrix {
-    public normal: boolean[][];
-    public rotated: boolean[][];
+    public horizontal: boolean[][];
+    public vertical: boolean[][];
 }
 
 class LineContent {
