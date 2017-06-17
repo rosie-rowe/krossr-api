@@ -85,7 +85,7 @@
   outline: none;
 }
 a {
-  color: #ffffff;
+  color: #FFF;
   text-decoration: none;
 }
 h1 {
@@ -112,8 +112,8 @@ html {
   height: 100%;
 }
 body {
-  background: #222222;
-  color: #dddddd;
+  background: #222;
+  color: #DDD;
   font-family: 'Raleway';
   font-weight: 800;
   height: 100%;
@@ -129,7 +129,7 @@ small {
   font-size: 1em;
 }
 select {
-  color: #222222;
+  color: #222;
 }
 ul {
   list-style-type: none;
@@ -142,7 +142,7 @@ ul {
 .btn {
   background-color: #008287;
   border: 0;
-  color: #ffffff;
+  color: #FFF;
   cursor: pointer;
   font-family: inherit;
   height: 30px;
@@ -192,15 +192,15 @@ ul {
   height: calc(100% -  60px);
 }
 .dropdown-menu {
-  background-color: #222222;
+  background-color: #222;
 }
 .dropdown-menu > li > a {
-  background-color: #222222;
+  background-color: #222;
   color: inherit;
   text-decoration: none;
 }
 .dropdown-menu > li > a:hover {
-  color: #ffffff;
+  color: #FFF;
   background-image: none;
 }
 .dropdown-menu .active > a,
@@ -219,7 +219,7 @@ ul {
   background-color: #555555;
   box-sizing: border-box;
   border: 1px solid #555555;
-  color: #ffffff;
+  color: #FFF;
   font-family: 'Raleway' !important;
   margin: 6px 0;
   width: 100%;
@@ -229,7 +229,7 @@ ul {
 .form-group select {
   background-color: #555555;
   border: 1px solid #555555;
-  color: #ffffff;
+  color: #FFF;
   height: 30px;
   margin: 6px 0;
   line-height: 2;
@@ -255,7 +255,7 @@ ul {
 .header-container {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   box-sizing: border-box;
-  background: #000000;
+  background: #000;
   font-family: inherit;
   list-style-type: none;
   overflow: hidden;
@@ -306,7 +306,7 @@ level.main-viewport {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  border: 1px solid #ffffff;
+  border: 1px solid #FFF;
   display: inline-block;
   font-size: 2em;
   padding: 0.5em;
@@ -321,7 +321,7 @@ level.main-viewport {
   text-align: center;
 }
 .navbar-nav-container .navbar-nav > li {
-  color: #ffffff;
+  color: #FFF;
   text-decoration: none;
   margin: 0 6px;
   transition: all 1s;
@@ -336,7 +336,7 @@ level.main-viewport {
   text-align: center;
 }
 .ng-invalid.ng-dirty {
-  border-color: #fa787e;
+  border-color: #FA787E;
 }
 .ng-valid.ng-dirty {
   border-color: #008287;
@@ -353,7 +353,7 @@ level.main-viewport {
   margin: 0 auto;
 }
 .red {
-  color: #cc0000;
+  color: #C00;
 }
 .restrict-width {
   max-width: 300px;
@@ -455,7 +455,7 @@ level.main-viewport {
   animation: ngdialog-fadein 0.1s;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   max-width: 300px;
-  background: #222222;
+  background: #222;
   -webkit-backface-visibility: hidden;
   max-height: 95%;
   width: auto;
@@ -570,7 +570,7 @@ level {
   text-align: left;
 }
 .list-group-item.level.odd {
-  background-color: #222222;
+  background-color: #222;
 }
 .list-group-item.level .list-group-item-heading {
   display: inline-block;
@@ -638,7 +638,7 @@ level {
   float: right;
 }
 .marked {
-  background-color: #e2e2e2;
+  background-color: #E2E2E2;
   color: #232323;
   transition: color .5s;
 }
@@ -693,7 +693,7 @@ level {
   float: right;
 }
 .unselected {
-  background-color: #e2e2e2;
+  background-color: #E2E2E2;
 }
 .viewLevel h2 {
   margin: 0;

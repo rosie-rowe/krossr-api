@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 		mochaTests: ['app/tests/**/*.js']
 	};
 
-    grunt.loadNpmTasks('grunt-typescript');
+    grunt.loadNpmTasks('grunt-ts');
 
 	// Project Configuration
 	grunt.initConfig({
@@ -85,19 +85,25 @@ module.exports = function(grunt) {
                 dest: 'public/dist/templates.js'
             }
         },
-        typescript: {
-            base: {
-                src: ['<%= applicationTypescriptFiles %>'],
-                dest: 'public/typescript',
-                options: {
-                    keepDirectoryHierarchy: true,
-                    references: ['<%= applicationTypescriptReferences %>'],
-                    rootDir: 'public/modules',
-                    sourceMap: true,
-                    target: 'es5'
-                },
-            }
-        },
+        // typescript: {
+        //     base: {
+        //         src: ['<%= applicationTypescriptFiles %>'],
+        //         dest: 'public/typescript',
+        //         options: {
+        //             keepDirectoryHierarchy: true,
+        //             references: ['<%= applicationTypescriptReferences %>'],
+        //             rootDir: 'public/modules',
+        //             sourceMap: true,
+        //             target: 'es5'
+        //         },
+        //     }
+        // },
+		ts: {
+			default: {
+				 src: ['{%= applicationTypescriptFiles %}'],
+				 outDir: 'public/typescript',
+			}
+		},
 		uglify: {
 			production: {
 				options: {
@@ -200,7 +206,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['concurrent:default', 'typescript:base', 'less']);
+	grunt.registerTask('default', ['concurrent:default', 'ts', 'less']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -209,7 +215,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'html2js', 'uglify', 'cssmin', 'less']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'ts', 'html2js', 'uglify', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
@@ -218,6 +224,4 @@ module.exports = function(grunt) {
 
 	// production
 	grunt.registerTask('production', []);
-
-    grunt.registerTask('ts', ['env:development', 'loadConfig', 'typescript:base']);
 };
