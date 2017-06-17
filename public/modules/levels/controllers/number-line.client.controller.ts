@@ -113,7 +113,7 @@ class NumberLineController {
         });
     }
 
-    private isGroupingCompleted(grouping: LineContent[]): boolean {
+    private isGroupingCompleted(grouping: TileGroup[]): boolean {
         if (Array.isArray(grouping)) {
             return grouping.every(function(value, index, array) {
                 return array[index].currentValue === array[index].goalValue;
@@ -250,6 +250,6 @@ class LineContent {
 
 class TileGroup {
     private coord: Point;
-    private currentValue: boolean;
-    private goalValue: boolean;
+    currentValue: boolean;
+    goalValue: boolean;
 }
