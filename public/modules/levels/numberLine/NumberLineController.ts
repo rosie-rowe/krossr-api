@@ -13,7 +13,6 @@ class NumberLineController {
 
     constructor(private $scope, private $timeout, private Utils) {
         this.$scope.cssClass = '';
-        this.$scope.controllerName = 'numberLine';
     }
 
     private gameMatrix: GameMatrix = new GameMatrix();
