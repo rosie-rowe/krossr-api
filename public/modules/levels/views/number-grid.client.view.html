@@ -1,4 +1,4 @@
-<div number-line
+<number-line
 	ng-if="orientation === 'horizontal'"
 	ng-style="{ 'height': ctrl.tileSize,
 				'line-height': ctrl.tileSize,
@@ -7,11 +7,12 @@
 	class="{{orientation}}-line"
 	ng-class-even="'even'"
 	ng-class-odd="'odd'"
-	tutorial-matrix="tutorialMatrix"
+	index="$index"
+	orientation="{{orientation}}"
 	>
-</div>
+</number-line>
 
-<div number-line
+<number-line
 	ng-if="orientation === 'vertical'"
 	ng-style="{
 		'width': ctrl.tileSize,
@@ -21,6 +22,7 @@
 	class="{{orientation}}-line"
 	ng-class-even="'even'"
 	ng-class-odd="'odd'"
-	tutorial-matrix="tutorialMatrix"
+	index="$index"
+	orientation="{{orientation}}"
 	>
-</div>
+</number-line>

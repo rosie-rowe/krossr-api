@@ -1,6 +1,7 @@
 node_modules
 dist
 .tmp
+.tscache
 .sass-cache
 app/bower_components
 public/dist

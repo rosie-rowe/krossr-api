@@ -3,13 +3,17 @@
 'use strict';
 
 class NumberLineController {
+    static $inject = [
+        '$scope',
+        '$timeout',
+        'Utils'
+    ]
+
+    static $name = 'NumberLineController';
+
     constructor(private $scope, private $timeout, private Utils) {
         this.$scope.cssClass = '';
         this.$scope.controllerName = 'numberLine';
-
-        this.$scope.getLineContent = this.getLineContent.bind(this);
-        this.$scope.getHeight = this.getHeight.bind(this);
-        this.$scope.getWidth = this.getWidth.bind(this);
     }
 
     private gameMatrix: GameMatrix = new GameMatrix();
@@ -20,6 +24,10 @@ class NumberLineController {
     private currentGroup: TileGroup = new TileGroup();
     private hasGroup: boolean = false;
     private targetMatrix: GameMatrix = new GameMatrix();
+
+    private index: number;
+    private orientation: string;
+
 
     // display a crossed out 0 if the linecontent comes back with no content. otherwise, pass through
     private accountForZeros(lineContent: LineContent[]): LineContent[] {
@@ -211,14 +219,14 @@ class NumberLineController {
     }
 
     /* For a given row or column, compute its number line (guide numbers on the sides of the board) */
-    private getLineContent(index: number, orientation: string): LineContent[] {
+    private getLineContent(): LineContent[] {
         if (!this.hasGroup) {
-            this.currentGroup = this.calculateGroup(index, orientation);
+            this.currentGroup = this.calculateGroup(this.index, this.orientation);
             this.hasGroup = true;
-            this.lineContent = this.accountForZeros(this.adjustContentForOrientation(this.getGroupings(this.currentGroup), orientation));
+            this.lineContent = this.accountForZeros(this.adjustContentForOrientation(this.getGroupings(this.currentGroup), this.orientation));
         } else {
-            if (this.recalculateGroup(index, orientation)) {
-                this.lineContent = this.accountForZeros(this.adjustContentForOrientation(this.getGroupings(this.currentGroup), orientation));
+            if (this.recalculateGroup(this.index, this.orientation)) {
+                this.lineContent = this.accountForZeros(this.adjustContentForOrientation(this.getGroupings(this.currentGroup), this.orientation));
             };
         }
 
@@ -253,3 +261,5 @@ class TileGroup {
     currentValue: boolean;
     goalValue: boolean;
 }
+
+angular.module('levels').controller(NumberLineController.$name, NumberLineController);

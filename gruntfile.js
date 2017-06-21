@@ -12,11 +12,16 @@ module.exports = function(grunt) {
 		mochaTests: ['app/tests/**/*.js']
 	};
 
+	var directories = {
+		typescript: 'public/typescript'
+	}
+
     grunt.loadNpmTasks('grunt-ts');
 
 	// Project Configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		clean: [directories.typescript],
 		watch: {
 			serverViews: {
 				files: watchFiles.serverViews,
@@ -101,7 +106,7 @@ module.exports = function(grunt) {
 		ts: {
 			default: {
 				 src: ['<%= applicationTypescriptFiles %>'],
-				 outDir: 'public/typescript',
+				 outDir: directories.typescript,
 				 target: 'es6'
 			}
 		},
@@ -216,7 +221,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'ts', 'html2js', 'uglify', 'cssmin', 'less']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'ts', 'html2js', 'uglify', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
