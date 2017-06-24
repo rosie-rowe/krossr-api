@@ -1,3 +1,5 @@
+/// <reference path="./EventService.d.ts" />
+
 'use strict';
 
 /** Handles broadcast/on events */
@@ -22,7 +24,9 @@ class EventService implements IEventService {
 
     /** Using this method ensures that an event will always be destroyed when the accompanying scope is destroyed, saving boilerplate code */
     subscribe(scope: angular.IScope, event: string, action: Function) {
-        let eventCanceler = scope.$on(event, (...args: any[]) => action(args));
+        let eventCanceler = scope.$on(event, (event: angular.IAngularEvent, ...args: any[]) => {
+            action(event, args)
+        });
         
         scope.$on('destroy', eventCanceler);
     }
