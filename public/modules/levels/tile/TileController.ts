@@ -212,7 +212,7 @@ class TileController implements angular.IComponentController {
         
                 if (wrong_answer) {
                     this.fill('marked');
-                    scope.removeLife();
+                    this.removeLife();
                 } else {
                     this.fill('selected', initState);
                     this.Utils.setCoord(coord.y, coord.x, this.selected);
