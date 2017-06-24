@@ -7,24 +7,12 @@ class ShellController implements angular.IComponentController {
     static $name = 'ShellController'; 
 
     static $inject = [
-        '$scope',
-        'eventService'
     ];
 
-    private margin: number;
 
     constructor(
-        private $scope: angular.IScope,
-        private eventService: IEventService
     ) {
 
-    }
-
-    $postLink() {
-        this.eventService.subscribe(this.$scope, 'tileSizeChanged', (e, args) => {
-            let newSize = Math.floor(args);
-            this.margin = newSize / 2;
-        })
     }
 }
 

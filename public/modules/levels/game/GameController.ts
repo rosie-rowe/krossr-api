@@ -1,4 +1,5 @@
 /// <reference path="../utils/Utils.d.ts" />
+/// <reference path="../../core/eventService/EventService.d.ts" />
 
 'use strict';
 
@@ -11,6 +12,7 @@ class GameController implements angular.IComponentController {
         '$element',
         '$scope',
         '$timeout',
+        'eventService',
         'Utils',
         'ngDialog',
         'dragBoxService'
@@ -21,6 +23,7 @@ class GameController implements angular.IComponentController {
         private $element: angular.IAugmentedJQuery,
         private $scope: angular.IScope,
         private $timeout: angular.ITimeoutService,
+        private eventService: IEventService,
         private Utils: IUtils,
         private ngDialog,
         private dragBoxService
@@ -30,6 +33,7 @@ class GameController implements angular.IComponentController {
 
     private gameSettings;
     private level;
+    private margin: number;
     private tiles;
 
     $onInit() {
@@ -65,8 +69,13 @@ class GameController implements angular.IComponentController {
             this.mouseUpEvent(e);
         });
         
-        this.$scope.$on('gameSizeChanged', () => {
+        this.eventService.subscribe(this.$scope, 'gameSizeChanged', () => {
             this.updateGameSize();
+        });
+
+        this.eventService.subscribe(this.$scope, 'tileSizeChanged', (e, args) => {
+            let newSize = Math.floor(args);
+            this.margin = newSize / 2;
         });
     }
 

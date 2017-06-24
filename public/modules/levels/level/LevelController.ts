@@ -42,6 +42,7 @@ class LevelController implements angular.IComponentController {
 
     private mode: string; // string for edit, new, etc.
     private level; // the level
+    private margin: number;
     private selectedLevelId;
 
     $onInit() {
@@ -53,6 +54,11 @@ class LevelController implements angular.IComponentController {
     $postLink() {
         this.eventService.subscribe(this.$scope, 'level.clearAll', () => {
             this.clearAll();
+        });
+
+        this.eventService.subscribe(this.$scope, 'tileSizeChanged', (e, args) => {
+            let newSize = Math.floor(args);
+            this.margin = newSize / 2;
         });
     }
 
