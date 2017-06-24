@@ -35,17 +35,6 @@ class LevelsController implements angular.IComponentController {
     private timeout = 1000;
     private level;
 
-    private clearLevel() {
-        if (this.level) {
-            this.level = null;
-        }
-    }
-
-    clearAll(action) {
-        this.Utils.clearAll();
-        this.clearLevel();
-    }
-
     /** Create new Level (submit function) */
     create(level, successFunc, failFunc) {
         // Redirect after save

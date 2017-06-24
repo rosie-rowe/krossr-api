@@ -1,3 +1,6 @@
+/// <reference path="../utils/Utils.d.ts" />
+/// <reference path="../../core/eventService/EventService.d.ts" />
+
 'use strict';
 
 class LevelController implements angular.IComponentController {
@@ -5,13 +8,17 @@ class LevelController implements angular.IComponentController {
     static $name = 'LevelController';
 
     static $inject = [
+        '$scope',
         '$stateParams',
+        'eventService',
         'Levels',
         'Utils'
     ];
 
     constructor(
+        private $scope: angular.IScope,
         private $stateParams: any,
+        private eventService: IEventService,
         private Levels,
         private Utils: IUtils
     ) {
@@ -27,6 +34,23 @@ class LevelController implements angular.IComponentController {
         this.selectedLevelId = this.$stateParams['levelId'];
         this.mode = this.$stateParams.mode;
         this.findOne(this.mode);
+    }
+
+    $postLink() {
+        this.eventService.subscribe(this.$scope, 'level.clearAll', () => {
+            this.clearAll();
+        });
+    }
+
+    private clearLevel() {
+        if (this.level) {
+            this.level = null;
+        }
+    }
+
+    clearAll() {
+        this.Utils.clearAll();
+        this.clearLevel();
     }
 
     // Find existing Level

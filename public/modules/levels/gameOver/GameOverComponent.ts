@@ -8,7 +8,8 @@ class GameOverComponent implements angular.IComponentOptions {
     templateUrl = 'modules/levels/gameOver/GameOverView.html';
 
     bindings = {
-        closeAction: '&'
+        closeAction: '&',
+        levelId: '@'
     }
 }
 
