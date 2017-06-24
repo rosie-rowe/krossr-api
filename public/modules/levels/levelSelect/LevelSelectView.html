@@ -53,7 +53,7 @@
 
     <div class="list-group" ng-if="levelSelectCtrl.levels">
         <div data-ng-repeat="level in levelSelectCtrl.levels track by $id(level)" ng-class="{'odd': $index % 2 !== 0}" class="list-group-item level">
-            <a class="playButton" ui-sref="level({ levelId: level.id })" ng-click="levelSelectCtrl.closeAction()">
+            <a class="playButton" ui-sref="level({ levelId: level.id })" ui-sref-opts="{ reload: true }" ng-click="levelSelectCtrl.closeAction()">
                 <i class="fa fa-play"></i>
             </a>
             <div class="list-group-item-heading" data-ng-bind="level.name"></div>
