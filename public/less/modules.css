@@ -491,6 +491,9 @@ level.main-viewport {
 body.ngdialog-open {
   overflow: hidden;
 }
+krossr-header {
+  display: block;
+}
 level {
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -752,6 +755,9 @@ level {
 }
 .rating.readonly li.filled {
   color: #666;
+}
+level {
+  display: block;
 }
 @media (min-width: 992px) {
   .nav-users {

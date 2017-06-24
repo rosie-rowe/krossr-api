@@ -1,0 +1,7 @@
+<div class="outer game" ng-style="{'padding': ctrl.margin}">
+	<div class="inner game"
+         ng-style="{ 'width': gameCtrl.gameSettings.width, 'height': gameCtrl.gameSettings.height }"
+         tabindex="1">
+         <tile ng-repeat="i in gameCtrl.tiles" editable='true' index="$index" level="gameCtrl.level"></tile> 
+	</div>
+</div>

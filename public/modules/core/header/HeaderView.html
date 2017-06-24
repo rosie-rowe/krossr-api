@@ -1,7 +1,7 @@
 <div class="header-container-inner container">
 	<nav role="navigation">
 		<div class="navbar-nav-container">
-			<ul class="nav navbar-nav" ng-click="levelCtrl.openLevelSelect()">
+			<ul class="nav navbar-nav" ng-click="headerCtrl.openLevelSelect()">
 				<li>
 					<i class="fa fa-bars"></i>
 					<div>Levels</div>
@@ -11,17 +11,17 @@
 			<ul class="nav navbar-nav"
 				ng-dialog="modules/users/views/settings/edit-profile.client.view.html"
 				ng-dialog-close-previous
-				data-ng-if="authentication.user">
+				data-ng-if="headerCtrl.Authentication.user">
 				<li>
 					<i class="fa fa-user"></i>
-					<div>{{ authentication.user.username }}</div>
+					<div>{{ headerCtrl.Authentication.user.username }}</div>
 				</li>
 			</ul>
 
 			<ul class="nav navbar-nav"
-				ng-dialog="modules/users/views/authentication/signup.client.view.html"
+				ng-dialog="modules/users/views/headerCtrl.Authentication/signup.client.view.html"
 				ng-dialog-close-previous
-				data-ng-if="!authentication.user">
+				data-ng-if="!headerCtrl.Authentication.user">
 				<li>
 					<i class="fa fa-user"></i>
 					<div>Sign Up</div>
@@ -29,9 +29,9 @@
 			</ul>
 
 			<ul class="nav navbar-nav"
-				ng-dialog="modules/users/views/authentication/signin.client.view.html"
+				ng-dialog="modules/users/views/headerCtrl.Authentication/signin.client.view.html"
 				ng-dialog-close-previous
-				data-ng-if="!authentication.user">
+				data-ng-if="!headerCtrl.Authentication.user">
 				<li>
 					<i class="fa fa-user"></i>
 					<div>Sign In</div>

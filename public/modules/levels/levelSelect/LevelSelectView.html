@@ -1,0 +1,95 @@
+<div class="listLevels" data-ng-init="levelSelectCtrl.find()">
+    <h2>
+        Levels
+        <span class="filterIcon" ng-click="levelSelectCtrl.toggleShowFilter()">
+            <i class="fa fa-filter"
+                ng-class="{'active': levelSelectCtrl.showFilter}"></i>
+        </span>
+        <span class="createIcon" ng-if="levelSelectCtrl.Authentication.user" ng-click="levelSelectCtrl.createNewLevel();levelSelectCtrl.closeAction();">
+            <i class="fa fa-plus"></i>
+        </span>
+    </h2>
+    <div class="form-group filters">
+        <div class="controls" ng-show="levelSelectCtrl.showFilter">
+            <!-- These guys all get their own divs so they don't have the label and input on
+                  different lines -->
+            <div class="queryInput">
+                <label class="control-label">Size</label>
+                <select ng-model="levelSelectCtrl.sizeRestriction" ng-change="levelSelectCtrl.setSizeRestriction(levelSelectCtrl.sizeRestriction)">
+                    <option value="" selected>All</option>
+                    <option value="5">5x5</option>
+                    <option value="10">10x10</option>
+                    <option value="15">15x15</option>
+                </select>
+            </div>
+
+            <div class="queryInput">
+                <label class="control-label">Search</label>
+                <input ng-model="levelSelectCtrl.searchText" ng-change="levelSelectCtrl.setSearchText(levelSelectCtrl.searchText)">
+            </div>
+
+            <!-- Rating and Username are specifically excluded from here due to Mongo's limitations on joins
+                 This is one of the primary reasons I'd like to migrate the app to use SQL instead! Soon. -->
+            <div class="queryInput">
+                <label class="control-label">Sort by</label>
+                <select ng-model="levelSelectCtrl.sortBy" ng-change="levelSelectCtrl.setSortBy(levelSelectCtrl.sortBy)">
+                    <option value="">None</option>
+                    <option value='"createdAt"'>Created Date</option>
+                    <option value='name'>Name</option>
+                    <option value='lives'>Lives</option>
+                    <option value='"avgRating"'>Ratings</option>
+                </select>
+            </div>
+
+            <div class="queryInput">
+                <label class="control-label">Sort direction</label>
+                <select ng-model="levelSelectCtrl.sortDirection" ng-change="levelSelectCtrl.setSortDirection(levelSelectCtrl.sortDirection)">
+                    <option value="">Asc</option>
+                    <option value="DESC">Desc</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-group" ng-if="levelSelectCtrl.levels">
+        <div data-ng-repeat="level in levelSelectCtrl.levels track by $id(level)" ng-class="{'odd': $index % 2 !== 0}" class="list-group-item level">
+            <a class="playButton" ui-sref="level({ levelId: level.id })" ng-click="levelSelectCtrl.closeAction()">
+                <i class="fa fa-play"></i>
+            </a>
+            <div class="list-group-item-heading" data-ng-bind="level.name"></div>
+            <div class="username" ng-click="levelSelectCtrl.setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
+            <a class="editButton" ng-click="levelSelectCtrl.loadLevel('{{level.id}}', 'edit'); closeThisDialog();" data-ng-if="level && levelSelectCtrl.authentication.user.id === level.userId">
+                <i class="fa fa-edit"></i>
+            </a>
+            <div class="size" data-ng-bind="level.prettySize" ng-click="levelSelectCtrl.setSizeRestriction(level.size)"></div>
+            <div class="averageRating">
+                Avg: {{ ::level.avgRating || "n/a"}} 
+            </div>
+            <div class="lives">
+                {{ ::level.lives }} lives
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-warning text-center" data-ng-show="levelSelectCtrl.levels.count === 0">
+    	No Levels yet!
+
+        <button class="btn" ng-if="levelSelectCtrl.Authentication.user" ng-click="levelSelectCtrl.createNewLevel();closeThisDialog();">
+            Create One
+        </button>
+    </div>
+
+    <div class="pagination" ng-if="levelSelectCtrl.levels && levelSelectCtrl.levels.length > 0">
+        <div class="prevPage" ng-click="levelSelectCtrl.pageDown()" ng-class="{'invisible': levelSelectCtrl.currentPage === 0}">
+            ◀
+        </div>
+
+        <div class="currentPage">
+            Page {{ levelSelectCtrl.currentPage + 1 }} of {{ levelSelectCtrl.totalPages }}
+        </div>
+
+        <div class="nextPage" ng-click="levelSelectCtrl.pageUp()" ng-class="{'invisible': levelSelectCtrl.currentPage + 1 === totalPages }">
+            ▶
+        </div>
+    </div>
+</div>

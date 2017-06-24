@@ -48,14 +48,8 @@
 </head>
 
 <body app-main class="ng-cloak">
-	<section level-wrapper>
-		<header krossr-header data-level="level" class="header-container"></header>
-		<section id="main-section" class="content">
-			<section resize class="playble-area container valign-outer">
-				{% block content %}{% endblock %}
-			</section>
-		</section>
-	</section>
+	<level-wrapper>{% block content %}{% endblock %}</level-wrapper>
+	<div>{% block content %}{% endblock %}</div>
 
 	<!--Embedding The User Object-->
 	<script type="text/javascript">

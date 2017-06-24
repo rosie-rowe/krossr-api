@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@types/angular": "^1.6.19",
+    "@types/angular-ui-router": "^1.1.37",
     "@types/jquery": "^2.0.47",
     "grunt": "^1.0.1",
     "grunt-concurrent": "~1.0.0",
