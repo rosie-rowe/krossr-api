@@ -1,6 +1,7 @@
 'use strict';
 
-class Shift {
+class ShiftService {
+    static $name = 'shiftService';
     private _shiftOn: boolean = false;
 
     get shiftOn(): boolean {
@@ -14,6 +15,4 @@ class Shift {
     constructor() {}
 }
 
-angular.module('levels').factory('shiftService', [
-	function() { return new Shift(); }
-]);
+angular.module('levels').service(ShiftService.$name, ShiftService);

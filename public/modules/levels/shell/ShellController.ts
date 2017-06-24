@@ -1,5 +1,6 @@
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
+/// <reference path="../../levels/shiftService/ShiftService.d.ts" />
 
 'use strict';
 
@@ -26,7 +27,7 @@ class ShellController implements angular.IComponentController {
         private $scope: angular.IScope,
         private $timeout: angular.ITimeoutService,
         private eventService: IEventService,
-        private shiftService,
+        private shiftService: IShiftService,
         private Utils: IUtils
     ) {
 
