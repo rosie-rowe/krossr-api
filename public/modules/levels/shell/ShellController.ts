@@ -1,4 +1,3 @@
-/// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
 
 'use strict';
@@ -9,20 +8,14 @@ class ShellController implements angular.IComponentController {
 
     static $inject = [
         '$scope',
-        'eventService',
-        'Utils'
+        'eventService'
     ];
 
     private margin: number;
 
-    private options = {
-        size: 25
-    };
-
     constructor(
         private $scope: angular.IScope,
-        private eventService: IEventService,
-        private Utils: IUtils
+        private eventService: IEventService
     ) {
 
     }
@@ -32,17 +25,6 @@ class ShellController implements angular.IComponentController {
             let newSize = Math.floor(args);
             this.margin = newSize / 2;
         })
-    }
-
-    createGameArray(controller) {
-        this.Utils.createNewGame({
-            numberOfTiles: this.options.size,
-            controller: controller
-        });
-    }
-
-    setGameSize(size) {
-        this.Utils.setGameSize(Math.sqrt(size));
     }
 }
 

@@ -46,27 +46,6 @@ class LevelSelectController implements angular.IComponentController {
         this.clearLevel();
     }
 
-     // Create new level (load template)
-    createNewLevel() {
-        var action = 'new';
-        var oldLevel = angular.copy(this.level);
-
-        this.clearAll(action)
-
-        this.level = undefined;
-
-        this.ctrl.setGameSize(this.ctrl.options.size)
-        this.ctrl.createGameArray(action);
-        //this.ctrl.getLayoutForRepeater(action);
-
-        this.level = {
-            currentView: action,
-            ready: true,
-            name: oldLevel ? oldLevel.name : '',
-            lives: oldLevel ? oldLevel.lives : undefined
-        };
-    };
-
     /* Find a list of levels */
     find() {
        var queryObj = {

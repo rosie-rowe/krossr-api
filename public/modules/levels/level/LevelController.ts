@@ -22,6 +22,10 @@ class LevelController implements angular.IComponentController {
 
     private finalLayout: any = {};
 
+    private options = {
+        size: 25
+    };
+
     constructor(
         private $http: angular.IHttpService,
         private $scope: angular.IScope,
@@ -61,6 +65,34 @@ class LevelController implements angular.IComponentController {
     clearAll() {
         this.Utils.clearAll();
         this.clearLevel();
+    }
+
+    createGameArray(controller) {
+        this.Utils.createNewGame({
+            numberOfTiles: this.options.size,
+            controller: controller
+        });
+    }
+
+    // Create new level (load template)
+    createNewLevel() {
+        var action = 'new';
+        var oldLevel = angular.copy(this.level);
+
+        this.clearAll()
+
+        this.level = undefined;
+
+        this.setGameSize(this.options.size)
+        this.createGameArray(action);
+        this.getLayoutForRepeater(action);
+
+        this.level = {
+            currentView: action,
+            ready: true,
+            name: oldLevel ? oldLevel.name : '',
+            lives: oldLevel ? oldLevel.lives : undefined
+        };
     }
 
     // Find existing Level
@@ -104,7 +136,7 @@ class LevelController implements angular.IComponentController {
         }
     }
 
-    getLayoutForRepeater(mode, layout) {
+    getLayoutForRepeater(mode, layout?) {
         // use finalLayout from above to prevent calculating this more than once 
         let layoutForRepeater;
 
@@ -157,6 +189,10 @@ class LevelController implements angular.IComponentController {
             });
         });
     };
+
+    setGameSize(size) {
+        this.Utils.setGameSize(Math.sqrt(size));
+    }
 }
 
 angular.module('levels').controller(LevelController.$name, LevelController);
