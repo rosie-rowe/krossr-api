@@ -80,6 +80,4 @@ class DragBox {
     }
 }
 
-angular.module('levels').factory('dragBoxService', [
-    function() { return new DragBox(); }
-]);
+angular.module('levels').service('dragBoxService', DragBox);

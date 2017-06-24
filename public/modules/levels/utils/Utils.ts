@@ -258,10 +258,6 @@ class Utils implements IUtils {
     }
 
     setTileSize(gameWidth, widthInTiles) {
-        console.log('Setting tile size!');
-        console.log('gameWidth: ' + gameWidth);
-        console.log('widthInTiles: ' + widthInTiles);
-
         this.tileSize = gameWidth / parseInt(widthInTiles, 10);
         this.$rootScope.$broadcast('tileSizeChanged', this.tileSize);
     }
