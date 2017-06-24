@@ -494,15 +494,6 @@ body.ngdialog-open {
 krossr-header {
   display: block;
 }
-level {
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
-}
 @media screen and (max-width: 1280px) {
   .bottom-row-inner {
     display: inline-block;
@@ -734,6 +725,13 @@ level {
   vertical-align: middle;
 }
 level {
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
   display: block;
 }
 star-rating {
