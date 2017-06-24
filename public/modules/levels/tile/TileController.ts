@@ -1,4 +1,5 @@
 /// <reference path="../utils/Utils.d.ts" />
+/// <reference path="../../core/eventService/EventService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
 
 'use strict';
@@ -13,6 +14,7 @@ class TileController implements angular.IComponentController {
         '$scope',
         'Utils',
         'dragBoxService',
+        'eventService',
         'shiftService',
         'touchService'
     ];
@@ -47,6 +49,7 @@ class TileController implements angular.IComponentController {
         private $scope: angular.IScope,
         private Utils: IUtils, 
         private dragBoxService,
+        private eventService: IEventService,
         private shiftService: IShiftService,
         private touchService
     ) {
@@ -96,10 +99,10 @@ class TileController implements angular.IComponentController {
             this.mouseUpEvent(e);
         })
 
-        this.$scope.$on('tileSizeChanged', () => {
+        this.eventService.subscribe(this.$scope, 'tileSizeChanged', () => {
             this.sideLength = this.Utils.getSideLength();
             this.setTileSize(this.Utils.getTileSize(this.tutorial));
-        });
+        })
     }
 
     private clearPending(coords) {
