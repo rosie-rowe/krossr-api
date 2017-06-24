@@ -1,4 +1,5 @@
 /// <reference path="../../core/eventService/EventService.d.ts" />
+/// <reference path="../../levels/levelSelect/LevelSelectService.d.ts" />
 
 'use strict';
 
@@ -8,12 +9,14 @@ class GameOverController implements angular.IComponentController {
 
     static $inject = [
         '$scope',
-        'eventService'
+        'eventService',
+        'levelSelectService'
     ];
 
     constructor(
         private $scope: angular.IScope,
-        private eventService: IEventService
+        private eventService: IEventService,
+        private levelSelectService: ILevelSelectService
     ) {
 
     }
@@ -31,7 +34,7 @@ class GameOverController implements angular.IComponentController {
 
     newLevel() {
         this.close();
-        //levelCtrl.openLevelSelect();
+        this.levelSelectService.openLevelSelect();
     }
 }
 

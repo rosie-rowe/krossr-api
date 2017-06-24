@@ -1,4 +1,5 @@
 /// <reference path="../../levels/utils/Utils.d.ts" />
+/// <reference path="../../levels/levelSelect/LevelSelectService.d.ts" />
 
 'use strict';
 
@@ -11,9 +12,9 @@ class HeaderController implements angular.IComponentController {
 		'$state',
 		'$timeout',
 		'Authentication',
+		'levelSelectService',
 		'Menus',
-		'Utils',
-		'ngDialog'
+		'Utils'
 	]
 
 	constructor(
@@ -21,18 +22,15 @@ class HeaderController implements angular.IComponentController {
 		private $state: angular.ui.IStateService,
 		private $timeout: angular.ITimeoutService,
 		private Authentication,
+		private levelSelectService: ILevelSelectService,
 		private Menus,
-		private Utils: IUtils,
-		private ngDialog: any
+		private Utils: IUtils
 	) {
 
 	}
 
 	openLevelSelect() {
-		this.ngDialog.open({
-			template: '<level-select close-action="closeThisDialog()"></level-select>',
-			plain: true
-		})
+		this.levelSelectService.openLevelSelect();	
 	}
 }
 
