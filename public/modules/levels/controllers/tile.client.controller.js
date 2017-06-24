@@ -60,7 +60,7 @@ var tileController = function($scope, Utils, shiftService) {
       return _this.getBorderColors(sideLength, direction, index);
     };
 
-    this.getTileSize = Utils.getTileSize; 
+    this.getTileSize = Utils.getTileSize.bind(Utils);
 
     $scope.$on('tileSizeChanged', function() {
       sideLength = Utils.getSideLength();
