@@ -15,7 +15,6 @@ class ShellController implements angular.IComponentController {
     ];
 
     private margin: number;
-    private tileSize: string;
 
     private options = {
         size: 25
@@ -30,14 +29,9 @@ class ShellController implements angular.IComponentController {
 
     }
 
-    $onInit() {
-        this.tileSize = this.Utils.getTileSizePx();
-    }
-
     $postLink() {
         this.eventService.subscribe(this.$scope, 'tileSizeChanged', (e, args) => {
             let newSize = Math.floor(args);
-            this.tileSize = newSize + 'px';
             this.margin = newSize / 2;
         })
     }
