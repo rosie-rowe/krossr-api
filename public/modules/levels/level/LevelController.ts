@@ -31,7 +31,6 @@ class LevelController implements angular.IComponentController {
         
     }
 
-    private ctrl; // MainController, todo
     private mode: string; // string for edit, new, etc.
     private level; // the level
     private selectedLevelId;

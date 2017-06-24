@@ -8,7 +8,6 @@ class LevelComponent {
     templateUrl = 'modules/levels/level/LevelView.html';
 
     bindings = {
-        ctrl: '=',
         controller: '@'
     }
 }
