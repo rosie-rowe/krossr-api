@@ -708,22 +708,6 @@ krossr-header {
 .vertical-line div {
   width: 50%;
 }
-.win-notification {
-  z-index: 9000;
-  background-color: rgba(0, 0, 0, 0.9);
-  color: #FFF;
-  text-align: center;
-}
-.win-wrapper {
-  display: table;
-  height: 100%;
-  width: 100%;
-}
-.win-text {
-  height: 100%;
-  display: table-cell;
-  vertical-align: middle;
-}
 level {
   -khtml-user-select: none;
   -moz-user-select: none;
