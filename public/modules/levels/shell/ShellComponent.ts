@@ -2,11 +2,11 @@
 
 /** Enable us to share an instance of levelCtrl between the header & the level */
 
-class LevelWrapperComponent implements angular.IComponentOptions {
-    static $name = 'levelWrapper';
+class ShellComponent implements angular.IComponentOptions {
+    static $name = 'krossrShell';
     bindToController = true;
-    controller = 'LevelWrapperController';
-    controllerAs = 'levelWrapperCtrl';
+    controller = 'ShellController';
+    controllerAs = 'shellCtrl';
     transclude = true;
 
     template = `
@@ -21,4 +21,4 @@ class LevelWrapperComponent implements angular.IComponentOptions {
     constructor() {}
 }
 
-angular.module('levels').component(LevelWrapperComponent.$name, new LevelWrapperComponent());
+angular.module('levels').component(ShellComponent.$name, new ShellComponent());
