@@ -10,6 +10,7 @@ class LevelController implements angular.IComponentController {
     static $inject = [
         '$scope',
         '$stateParams',
+        'Authentication',
         'eventService',
         'Levels',
         'Utils'
@@ -18,6 +19,7 @@ class LevelController implements angular.IComponentController {
     constructor(
         private $scope: angular.IScope,
         private $stateParams: any,
+        private Authentication: any,
         private eventService: IEventService,
         private Levels,
         private Utils: IUtils
