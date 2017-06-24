@@ -733,7 +733,10 @@ level {
   display: table-cell;
   vertical-align: middle;
 }
-[star-rating] {
+level {
+  display: block;
+}
+star-rating {
   display: inline-block;
 }
 .rating {
@@ -755,9 +758,6 @@ level {
 }
 .rating.readonly li.filled {
   color: #666;
-}
-level {
-  display: block;
 }
 @media (min-width: 992px) {
   .nav-users {
