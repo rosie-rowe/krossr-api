@@ -9,7 +9,6 @@ class ShellController implements angular.IComponentController {
 
     static $inject = [
         '$scope',
-        '$timeout',
         'eventService',
         'Utils'
     ];
@@ -22,7 +21,6 @@ class ShellController implements angular.IComponentController {
 
     constructor(
         private $scope: angular.IScope,
-        private $timeout: angular.ITimeoutService,
         private eventService: IEventService,
         private Utils: IUtils
     ) {
