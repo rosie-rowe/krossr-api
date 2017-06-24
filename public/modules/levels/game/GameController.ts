@@ -41,6 +41,8 @@ class GameController implements angular.IComponentController {
     }
 
     $postLink() {
+        this.setMargin(this.Utils.getTileSize(false));
+        
         /* not sure if this is still necessary, seems to prevent grab hand from appearing even though draggable is no longer applied */
         this.$element.on('dragstart', (e) => e.preventDefault())
 
@@ -74,8 +76,7 @@ class GameController implements angular.IComponentController {
         });
 
         this.eventService.subscribe(this.$scope, 'tileSizeChanged', (e, args) => {
-            let newSize = Math.floor(args);
-            this.margin = newSize / 2;
+            this.setMargin(args);
         });
     }
 
@@ -182,6 +183,10 @@ class GameController implements angular.IComponentController {
             showClose: false
         });
     };
+
+    setMargin(tileSize: number) {
+        this.margin = Math.floor(tileSize) / 2;
+    }
 
     updateGameSize() {
         // don't use args, call to getGameSize so we take tutorials into account
