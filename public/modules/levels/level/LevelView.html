@@ -57,7 +57,7 @@
         Rate: <star-rating ng-model="levelCtrl.level.yourRating" max="5" on-rating-selected="levelCtrl.rate()"></star-rating>
     </div>
 
-    <div ng-keydown="levelCtrl.ctrl.keydown($event)" ng-keyup="levelCtrl.ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="levelCtrl.level.ready">
+    <div ng-keydown="levelCtrl.keydown($event)" ng-keyup="levelCtrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="levelCtrl.level.ready">
         <div class="gameContainer-inner">
             <div class="top row">
                 <number-grid

@@ -1,6 +1,5 @@
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
-/// <reference path="../../levels/shiftService/ShiftService.d.ts" />
 
 'use strict';
 
@@ -12,7 +11,6 @@ class ShellController implements angular.IComponentController {
         '$scope',
         '$timeout',
         'eventService',
-        'shiftService',
         'Utils'
     ];
 
@@ -27,7 +25,6 @@ class ShellController implements angular.IComponentController {
         private $scope: angular.IScope,
         private $timeout: angular.ITimeoutService,
         private eventService: IEventService,
-        private shiftService: IShiftService,
         private Utils: IUtils
     ) {
 
@@ -50,18 +47,6 @@ class ShellController implements angular.IComponentController {
             numberOfTiles: this.options.size,
             controller: controller
         });
-    }
-
-    keydown(event: JQueryEventObject) {
-        if (event.shiftKey) {
-            this.shiftService.shiftOn = true;
-        }
-    }
-
-    keyup(event: JQueryEventObject) {
-        if (!event.shiftKey) {
-            this.shiftService.shiftOn = false;
-        }
     }
 
     setGameSize(size) {

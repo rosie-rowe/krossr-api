@@ -1,5 +1,6 @@
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
+/// <reference path="../shiftService/ShiftService.d.ts" />
 
 'use strict';
 
@@ -15,6 +16,7 @@ class LevelController implements angular.IComponentController {
         'Authentication',
         'eventService',
         'Levels',
+        'shiftService',
         'Utils'
     ];
 
@@ -28,6 +30,7 @@ class LevelController implements angular.IComponentController {
         private Authentication: any,
         private eventService: IEventService,
         private Levels,
+        private shiftService: IShiftService,
         private Utils: IUtils
     ) {
         
@@ -101,7 +104,7 @@ class LevelController implements angular.IComponentController {
         }
     }
 
-     getLayoutForRepeater(mode, layout) {
+    getLayoutForRepeater(mode, layout) {
         // use finalLayout from above to prevent calculating this more than once 
         let layoutForRepeater;
 
@@ -126,6 +129,18 @@ class LevelController implements angular.IComponentController {
 
     getSize() {
         return this.Utils.flatten(this.Utils.getGameMatrix());
+    }
+
+    keydown($event: JQueryEventObject) {
+        if ($event.shiftKey) {
+            this.shiftService.shiftOn = true;
+        }
+    }
+
+    keyup($event: JQueryEventObject) {
+        if (!$event.shiftKey) {
+            this.shiftService.shiftOn = false;
+        }
     }
     
     /* Doing this old school until I figure out a better way */
