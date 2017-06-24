@@ -1,0 +1,5 @@
+<ul class='rating' ng-class='{readonly: starRatingCtrl.readonly}'>
+    <li ng-repeat='star in starRatingCtrl.stars' ng-class='star' ng-click='starRatingCtrl.toggle($index)'>
+        <i class='fa fa-star'></i>
+    </li>
+</ul>

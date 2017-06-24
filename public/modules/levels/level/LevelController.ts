@@ -8,8 +8,10 @@ class LevelController implements angular.IComponentController {
     static $name = 'LevelController';
 
     static $inject = [
+        '$http',
         '$scope',
         '$stateParams',
+        '$timeout',
         'Authentication',
         'eventService',
         'Levels',
@@ -17,8 +19,10 @@ class LevelController implements angular.IComponentController {
     ];
 
     constructor(
+        private $http: angular.IHttpService,
         private $scope: angular.IScope,
         private $stateParams: any,
+        private $timeout: angular.ITimeoutService,
         private Authentication: any,
         private eventService: IEventService,
         private Levels,
@@ -99,6 +103,22 @@ class LevelController implements angular.IComponentController {
                 this.level.ready = true;
             });
         }
+    }
+
+    
+    /* Doing this old school until I figure out a better way */
+    rate() {
+        this.$timeout(() => {
+            var url = '/levels/' + this.level.id + '/ratings';
+
+            var post_data = {
+                rating: this.level.yourRating
+            };
+
+            this.$http.post(url, post_data).then(function() {
+                console.log('omg');
+            });
+        });
     };
 }
 

@@ -54,7 +54,7 @@
     </div>
 
     <div class="rateLevel" ng-if="levelCtrl.Authentication.user && levelCtrl.level && levelCtrl.level.currentView === 'view'">
-        Rate: <div star-rating ng-model="levelCtrl.level.yourRating" max="5" on-rating-selected="levelCtrl.rate()"></div>
+        Rate: <star-rating ng-model="levelCtrl.level.yourRating" max="5" on-rating-selected="levelCtrl.rate()"></star-rating>
     </div>
 
     <div ng-keydown="levelCtrl.ctrl.keydown($event)" ng-keyup="levelCtrl.ctrl.keyup($event)" class="animate-hide gameContainer" tabindex="0" ng-show="levelCtrl.level.ready">

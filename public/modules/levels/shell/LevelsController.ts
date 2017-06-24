@@ -99,21 +99,6 @@ class LevelsController implements angular.IComponentController {
     //     }
     // };
 
-    /* Doing this old school until I figure out a better way */
-    rate() {
-        this.$timeout(() => {
-            var url = '/levels/' + this.level.id + '/ratings';
-
-            var post_data = {
-                rating: this.level.yourRating
-            };
-
-            this.$http.post(url, post_data).then(function() {
-                console.log('omg');
-            });
-        });
-    };
-
     // Split out for easier testing
     // submitCreate() {
     //     var layout = this.Utils.getGameMatrix();
