@@ -175,7 +175,8 @@ class GameController implements angular.IComponentController {
 
     openWinLoseNotification() {
         this.ngDialog.open({
-            template: "modules/levels/views/win-notification.client.view.html",
+            plain: true,
+            template: '<game-over close-action="closeThisDialog()"></game-over>',
             scope: this.$scope,
             showClose: false
         });
