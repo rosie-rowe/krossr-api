@@ -7,8 +7,7 @@ class NumberGridComponent implements angular.IComponentOptions {
 
     bindings = {
         orientation: '@',
-        layout: '=',
-        ctrl: '='
+        layout: '='
     }
 
     bindToController = true;

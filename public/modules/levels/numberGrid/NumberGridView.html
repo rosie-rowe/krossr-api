@@ -1,8 +1,8 @@
 <number-line
 	ng-if="numGridCtrl.orientation === 'horizontal'"
-	ng-style="{ 'height': numGridCtrl.ctrl.tileSize,
-				'line-height': numGridCtrl.ctrl.tileSize,
-				'font-size': numGridCtrl.ctrl.getFontSize() }"
+	ng-style="{ 'height': numGridCtrl.tileSize,
+				'line-height': numGridCtrl.tileSize,
+				'font-size': numGridCtrl.getFontSize() }"
 	ng-repeat="i in numGridCtrl.layout track by $index"
 	class="{{numGridCtrl.orientation}}-line"
 	ng-class-even="'even'"
@@ -15,8 +15,8 @@
 <number-line
 	ng-if="numGridCtrl.orientation === 'vertical'"
 	ng-style="{
-		'width': numGridCtrl.ctrl.tileSize,
-		'font-size': numGridCtrl.ctrl.getFontSize()
+		'width': numGridCtrl.tileSize,
+		'font-size': numGridCtrl.getFontSize()
 	}"
 	ng-repeat="i in numGridCtrl.layout track by $index"
 	class="{{numGridCtrl.orientation}}-line"

@@ -18,6 +18,8 @@ class LevelController implements angular.IComponentController {
         'Utils'
     ];
 
+    private finalLayout: any = {};
+
     constructor(
         private $http: angular.IHttpService,
         private $scope: angular.IScope,
@@ -60,10 +62,7 @@ class LevelController implements angular.IComponentController {
 
     // Find existing Level
     findOne(mode) {
-        if (this.ctrl) {
-            this.ctrl.finalLayout = {};
-        }
-
+        this.finalLayout = {};
         this.level = null;
 
         // store the name of the controller so we can have the same functions do different things
@@ -89,10 +88,8 @@ class LevelController implements angular.IComponentController {
                     controller: mode
                 });
 
-                if (this.ctrl) {
-                    this.ctrl.getLayoutForRepeater(mode, this.level.layout);
-                    this.level.currentView = mode;
-                }
+                this.getLayoutForRepeater(mode, this.level.layout);
+                this.level.currentView = mode;
 
                 console.log('At this point we should be on ' + mode);
                 console.log('We are actually on ' + this.level.currentView);
@@ -104,6 +101,32 @@ class LevelController implements angular.IComponentController {
         }
     }
 
+     getLayoutForRepeater(mode, layout) {
+        // use finalLayout from above to prevent calculating this more than once 
+        let layoutForRepeater;
+
+        switch(mode) {
+            case 'view':
+            case 'edit':
+                layoutForRepeater = this.Utils.flatten(layout);
+                break;
+
+            case 'new':
+                layoutForRepeater = this.getSize();
+                break;
+        }
+
+        // these should be an object so i don't have to track by $index, which causes rendering issues
+        this.finalLayout.tiles = layoutForRepeater.map((value) => {
+            return {
+                selected: value
+            };
+        });
+    }
+
+    getSize() {
+        return this.Utils.flatten(this.Utils.getGameMatrix());
+    }
     
     /* Doing this old school until I figure out a better way */
     rate() {

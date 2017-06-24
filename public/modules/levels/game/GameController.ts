@@ -28,20 +28,12 @@ class GameController implements angular.IComponentController {
 
     }
 
-    private ctrl; // MainController, todo
     private gameSettings;
     private level;
     private tiles;
-    private tutorial;
 
     $onInit() {
         this.dragBoxService.clearDragBox();
-
-        this.tutorial = this.$attrs['tutorial'];
-
-        if (this.tutorial) {
-            this.ctrl.createGameArray('tutorial');
-        }
     }
 
     $postLink() {

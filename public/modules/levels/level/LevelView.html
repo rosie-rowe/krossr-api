@@ -62,7 +62,6 @@
             <div class="top row">
                 <number-grid
                     ng-if="levelCtrl.level && levelCtrl.level.layout && levelCtrl.level.currentView === 'view'"
-                    ctrl="levelCtrl.ctrl"
                     layout="levelCtrl.level.layout"
                     orientation="vertical"
                     class="top-grid"
@@ -70,11 +69,10 @@
             </div>
             
             <div class="bottom row">
-                <game ctrl="levelCtrl.ctrl" level="levelCtrl.level" tiles="levelCtrl.ctrl.finalLayout.tiles" ng-if="levelCtrl.level"></game>
+                <game level="levelCtrl.level" tiles="levelCtrl.finalLayout.tiles" ng-if="levelCtrl.level"></game>
 
                 <number-grid ng-if="levelCtrl.level && levelCtrl.level.layout && levelCtrl.level.currentView === 'view'"
                              layout="levelCtrl.level.layout"
-                             ctrl="levelCtrl.ctrl"
                              orientation="horizontal"
                              class="left-grid"
                              ng-style="{'padding-top': ctrl.margin}">

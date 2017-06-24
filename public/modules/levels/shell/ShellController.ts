@@ -15,7 +15,6 @@ class ShellController implements angular.IComponentController {
         'Utils'
     ];
 
-    private finalLayout: any = {};
     private margin: number;
     private tileSize: string;
 
@@ -50,41 +49,6 @@ class ShellController implements angular.IComponentController {
             numberOfTiles: this.options.size,
             controller: controller
         });
-    }
-
-    getFontSize() {
-        return parseInt(this.tileSize, 10) / 2 + 'px';
-    }
-
-    getLayoutForRepeater(mode, layout) {
-        // use finalLayout from above to prevent calculating this more than once 
-        let layoutForRepeater;
-
-        switch(mode) {
-            case 'view':
-            case 'edit':
-                layoutForRepeater = this.Utils.flatten(layout);
-                break;
-
-            case 'new':
-                layoutForRepeater = this.getSize();
-                break;
-        }
-
-        // these should be an object so i don't have to track by $index, which causes rendering issues
-        this.finalLayout.tiles = layoutForRepeater.map((value) => {
-            return {
-                selected: value
-            };
-        });
-    }
-
-    getSize() {
-        return this.Utils.flatten(this.Utils.getGameMatrix());
-    }
-
-    initTutorialGame() {
-
     }
 
     keydown(event: JQueryEventObject) {

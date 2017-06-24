@@ -57,7 +57,7 @@ class LevelSelectController implements angular.IComponentController {
 
         this.ctrl.setGameSize(this.ctrl.options.size)
         this.ctrl.createGameArray(action);
-        this.ctrl.getLayoutForRepeater(action);
+        //this.ctrl.getLayoutForRepeater(action);
 
         this.level = {
             currentView: action,

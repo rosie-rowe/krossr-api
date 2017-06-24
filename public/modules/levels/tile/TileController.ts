@@ -36,6 +36,8 @@ class TileController implements angular.IComponentController {
     private height: string;
     private width: string;
 
+    private tiles;
+
     private tutorial;
 
     constructor(
@@ -60,10 +62,9 @@ class TileController implements angular.IComponentController {
         this.fill('empty');
 
         if (this.level.currentView === 'edit'
-            && this.ctrl.finalLayout
-            && this.ctrl.finalLayout.tiles
-            && this.ctrl.finalLayout.tiles[this.$scope.$index]
-            && this.ctrl.finalLayout.tiles[this.$scope.$index].selected
+            && this.tiles
+            && this.tiles[this.$scope.$index]
+            && this.tiles[this.$scope.$index].selected
         ) {
           this.fill('selected');
         } else {
