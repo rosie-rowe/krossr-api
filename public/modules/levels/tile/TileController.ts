@@ -177,7 +177,7 @@ class TileController implements angular.IComponentController {
         let actualScope = this.touchService.getTargetScope(event);
         let coord;
 
-        if (actualScope && actualScope.tileCtrl.index) {
+        if (actualScope && actualScope.tileCtrl.hasOwnProperty('index')) {
             coord = this.Utils.convertTo2D(actualScope.tileCtrl.index);
             this.dragBoxService.endCoord = coord;;
 
