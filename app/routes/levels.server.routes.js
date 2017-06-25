@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(levels.paginate)
 		.post(users.requiresLogin, levels.create);
 
+	app.route('/levels/new')
+		.get(levels.newLevel);
+
 	app.route('/levels/:levelId/ratings')
 		.post(users.requiresLogin, levels.upsertRating);
 

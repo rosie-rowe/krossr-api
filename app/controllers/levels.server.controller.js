@@ -32,6 +32,13 @@ exports.create = function(req, res) {
 };
 
 /**
+ * Load the template to create a new level
+ */
+exports.newLevel = function(req, res) {
+	return res.jsonp();
+}
+
+/**
  * Show the current Level
  */
 exports.read = function(req, res) {

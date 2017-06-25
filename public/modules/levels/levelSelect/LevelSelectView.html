@@ -5,7 +5,7 @@
             <i class="fa fa-filter"
                 ng-class="{'active': levelSelectCtrl.showFilter}"></i>
         </span>
-        <span class="createIcon" ng-if="levelSelectCtrl.Authentication.user" ng-click="levelSelectCtrl.createNewLevel();levelSelectCtrl.closeAction();">
+        <span class="createIcon" ng-if="levelSelectCtrl.Authentication.user" ui-sref="create-level()" ng-click="levelSelectCtrl.closeAction();">
             <i class="fa fa-plus"></i>
         </span>
     </h2>
@@ -58,7 +58,7 @@
             </a>
             <div class="list-group-item-heading" data-ng-bind="level.name"></div>
             <div class="username" ng-click="levelSelectCtrl.setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
-            <a class="editButton" ng-click="levelSelectCtrl.loadLevel('{{level.id}}', 'edit'); closeThisDialog();" data-ng-if="level && levelSelectCtrl.authentication.user.id === level.userId">
+            <a class="editButton" ng-click="levelSelectCtrl.loadLevel('{{level.id}}', 'edit'); closeThisDialog();" data-ng-if="level && levelSelectCtrl.Authentication.user.id === level.userId">
                 <i class="fa fa-edit"></i>
             </a>
             <div class="size" data-ng-bind="level.prettySize" ng-click="levelSelectCtrl.setSizeRestriction(level.size)"></div>
