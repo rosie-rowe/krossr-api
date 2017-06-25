@@ -28,10 +28,7 @@
 				</li>
 			</ul>
 
-			<ul class="nav navbar-nav"
-				ng-dialog="modules/users/views/headerCtrl.Authentication/signin.client.view.html"
-				ng-dialog-close-previous
-				data-ng-if="!headerCtrl.Authentication.user">
+			<ul class="nav navbar-nav" ng-click="headerCtrl.openSignIn()" data-ng-if="!headerCtrl.Authentication.user">
 				<li>
 					<i class="fa fa-user"></i>
 					<div>Sign In</div>

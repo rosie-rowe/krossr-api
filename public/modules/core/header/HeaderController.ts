@@ -39,6 +39,13 @@ class HeaderController implements angular.IComponentController {
 			template: '<help></help>'
 		})
 	}
+
+	openSignIn() {
+		this.ngDialog.open({
+			plain: true,
+			template: '<sign-in close-action="closeThisDialog()"></sign-in>'
+		})	
+	}
 }
 
 angular.module('core').controller(HeaderController.$name, HeaderController);
