@@ -1,6 +1,8 @@
+/// <reference path="./TouchService.d.ts" />
+
 'use strict';
 
-class TouchService {
+class TouchService implements ITouchService {
     static $name = 'touchService';
 
     /** Touchmove/touchend will not move along with crossing over elements like mousemove/mouseup will, so we need hax */

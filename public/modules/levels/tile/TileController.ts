@@ -1,5 +1,6 @@
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
+/// <reference path="../../core/touchService/TouchService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
 
 'use strict';
@@ -51,7 +52,7 @@ class TileController implements angular.IComponentController {
         private dragBoxService,
         private eventService: IEventService,
         private shiftService: IShiftService,
-        private touchService
+        private touchService: ITouchService
     ) {
        
     }
