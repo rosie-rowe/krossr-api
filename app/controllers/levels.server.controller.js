@@ -147,9 +147,6 @@ exports.levelByID = function(req, res, next, id) {
 			if (!level) {
 				return next(new Error('Failed to load level ' + id));
 			} else {
-				if (level.ratings.length) {
-					level.yourRating = level.ratings[0].rating;
-				}
 				req.level = level;
 				return next();
 			}

@@ -173,6 +173,8 @@ class LevelController implements angular.IComponentController {
             }).$promise.then((data) => {
                 this.level = data;
 
+                this.setRating();
+
                 console.log('setting currentLives to: ' + data.lives);
                 this.level.currentLives = data.lives;
 
@@ -271,6 +273,13 @@ class LevelController implements angular.IComponentController {
 
     setGameSize(size) {
         this.Utils.setGameSize(Math.sqrt(size));
+    }
+
+    /** This should be done on the server side, todo */
+    setRating() {
+        if (this.level.ratings.length) {
+            this.level.yourRating = this.level.ratings[0].rating;
+        }
     }
 
     // Split out for easier testing

@@ -136,11 +136,18 @@ module.exports = function(grunt) {
 					ext: 'js,html',
 					//watch: watchFiles.serverViews.concat(watchFiles.serverJS)
 				}
+			},
+			debug: {
+				script: 'server.js',
+				options: {
+					nodeArgs: ['--inspect'],
+					ext: 'js,html'
+				}
 			}
 		},
 		concurrent: {
-			default: ['nodemon', 'watch'],
-			debug: ['nodemon'],
+			default: ['nodemon:dev', 'watch'],
+			debug: ['nodemon:debug'],
 			options: {
 				logConcurrentOutput: true,
 				limit: 10
