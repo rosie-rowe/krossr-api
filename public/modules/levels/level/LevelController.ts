@@ -231,7 +231,7 @@ class LevelController implements angular.IComponentController {
         });
 
         var levelSaveSuccess = (response) => {
-            this.$state.go('edit-level', { levelId: response.id });
+            this.$state.go('update-level', { levelId: response.id });
         };
 
         var levelSaveFailure = function(err) {
