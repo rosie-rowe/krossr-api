@@ -8,13 +8,13 @@ module.exports = function(grunt) {
 		clientViews: ['public/modules/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/*[!tests]*/*.js'],
 		clientCSS: ['public/modules/**/*.css', 'public/less/modules.css'],
-		clientLESS: ['public/**/css/*.less', 'public/less/*'],
+		clientLESS: ['public/**/*.less', 'public/less/*'],
 		mochaTests: ['app/tests/**/*.js']
 	};
 
 	var directories = {
 		typescript: 'public/typescript'
-	}
+	};
 
     grunt.loadNpmTasks('grunt-ts');
 
