@@ -1,4 +1,4 @@
-/// <reference path="../point/Point.ts" />
+/// <reference path="../point/Point.d.ts" />
 
 interface IUtils {
     addTileToIndex(obj: any): void;

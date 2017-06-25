@@ -1,4 +1,4 @@
-/// <reference path="../point/point.ts" />
+/// <reference path="../point/Point.d.ts" />
 /// <reference path="./NumberLineController.ts" />
 
 'use strict';

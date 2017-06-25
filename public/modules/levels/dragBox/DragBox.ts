@@ -1,4 +1,4 @@
-/// <reference path="../point/point.ts" />
+/// <reference path="../point/Point.d.ts" />
 
 'use strict';
 
