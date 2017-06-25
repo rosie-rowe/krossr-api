@@ -105,9 +105,12 @@ module.exports = function(grunt) {
         // },
 		ts: {
 			default: {
-				 src: ['<%= applicationTypescriptFiles %>'],
-				 outDir: directories.typescript,
-				 target: 'es6'
+				src: ['<%= applicationTypescriptFiles %>'],
+				outDir: directories.typescript,
+				options: {
+					rootDir: 'public',
+					target: 'es5'
+				}
 			}
 		},
 		uglify: {
