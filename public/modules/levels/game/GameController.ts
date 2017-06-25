@@ -190,7 +190,7 @@ class GameController implements angular.IComponentController {
 
     updateGameSize() {
         // don't use args, call to getGameSize so we take tutorials into account
-        var newGameSettings = this.Utils.getGameSize(this.$scope.tutorialMode);
+        var newGameSettings = this.Utils.getGameSize(false);
 
         if (newGameSettings) {
             this.gameSettings = {
