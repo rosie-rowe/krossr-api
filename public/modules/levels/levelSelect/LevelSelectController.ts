@@ -64,11 +64,6 @@ class LevelSelectController implements angular.IComponentController {
         this.find(this.currentPage);
     }
 
-    setSizeRestriction(sizeRestriction) {
-        this.sizeRestriction = sizeRestriction;
-        this.find(this.currentPage);
-    };
-
     setSortBy(sort_by) {
         this.sortBy = sort_by ? sort_by : null;
         this.find(this.currentPage);

@@ -15,7 +15,7 @@
                   different lines -->
             <div class="queryInput">
                 <label class="control-label">Size</label>
-                <select ng-model="levelSelectCtrl.sizeRestriction" ng-change="levelSelectCtrl.setSizeRestriction(levelSelectCtrl.sizeRestriction)">
+                <select ng-model="levelSelectCtrl.sizeRestriction" ng-change="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
                     <option value="" selected>All</option>
                     <option value="5">5x5</option>
                     <option value="10">10x10</option>
