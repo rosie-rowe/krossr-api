@@ -29,8 +29,11 @@ class HeaderController implements angular.IComponentController {
 
 	}
 
-	openLevelSelect() {
-		this.levelSelectService.openLevelSelect();	
+	openEditProfile() {
+		this.ngDialog.open({
+			plain: true,
+			template: '<edit-profile close-action="closeThisDialog()"></edit-profile>'
+		})
 	}
 
 	openHelp() {
@@ -39,6 +42,11 @@ class HeaderController implements angular.IComponentController {
 			template: '<help></help>'
 		})
 	}
+
+	openLevelSelect() {
+		this.levelSelectService.openLevelSelect();	
+	}
+
 
 	openSignIn() {
 		this.ngDialog.open({

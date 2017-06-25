@@ -8,7 +8,7 @@
 				</li>
 			</ul>
 
-			<ul class="nav navbar-nav" ng-dialog="modules/users/views/settings/edit-profile.client.view.html" ng-dialog-close-previous data-ng-if="headerCtrl.Authentication.user">
+			<ul class="nav navbar-nav" ng-click="headerCtrl.openEditProfile()" ng-if="headerCtrl.Authentication.user">
 				<li>
 					<i class="fa fa-user"></i>
 					<div>{{ headerCtrl.Authentication.user.username }}</div>
