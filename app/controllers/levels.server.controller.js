@@ -135,6 +135,7 @@ exports.levelByID = function(req, res, next, id) {
 				{
 					attributes: ['rating'],
 					model: db.rating,
+					required: false,
 					where: {
 						userId: user.id
 					}

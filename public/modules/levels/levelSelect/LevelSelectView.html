@@ -68,7 +68,9 @@
             <div class="size" data-ng-bind="level.prettySize" ng-click="levelSelectCtrl.setSizeRestriction(level.size)"></div>
 
             <div class="averageRating">
-                Avg: {{ ::level.avgRating || "n/a"}} 
+                Avg:
+                <span ng-if="::level.avgRating">{{ ::level.avgRating | number: 2 }}</span>
+                <span ng-if="::!level.avgRating">n/a</span>
             </div>
 
             <div class="lives">
