@@ -3,8 +3,6 @@
 angular.module('core').directive('help', [
     function() {
         return {
-            controller: 'HelpController',
-            controllerAs: 'helpCtrl',
             restrict: 'A',
             replace: true,
             scope: true,
