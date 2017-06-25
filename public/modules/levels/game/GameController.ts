@@ -140,7 +140,7 @@ class GameController implements angular.IComponentController {
     openWinLoseNotification() {
         this.ngDialog.open({
             plain: true,
-            template: '<game-over close-action="closeThisDialog()" level-id="' + this.level.id +'"></game-over>',
+            template: '<game-over close-action="closeThisDialog()" level-id="' + this.level.id +'" won="' + this.level.won + '"></game-over>',
             scope: this.$scope,
             showClose: false
         });
@@ -159,6 +159,10 @@ class GameController implements angular.IComponentController {
                 width: newGameSettings.gameWidth,
                 height: newGameSettings.gameHeight 
             }
+        } else {
+            console.log('YOU FUCKED UP');
+            console.trace();
+            debugger;
         }
     };
 }

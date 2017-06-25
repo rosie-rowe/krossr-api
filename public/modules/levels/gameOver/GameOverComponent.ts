@@ -9,7 +9,8 @@ class GameOverComponent implements angular.IComponentOptions {
 
     bindings = {
         closeAction: '&',
-        levelId: '@'
+        levelId: '@',
+        won: '<'
     }
 }
 
