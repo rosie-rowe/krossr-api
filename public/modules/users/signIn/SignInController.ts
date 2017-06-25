@@ -6,8 +6,10 @@ class SignInController implements angular.IComponentController {
 
     static $inject = [
         '$http',
+        '$scope',
         '$timeout',
-        'Authentication'
+        'Authentication',
+        'ngDialog'
     ];
 
     private credentials;
@@ -17,9 +19,20 @@ class SignInController implements angular.IComponentController {
 
     constructor(
         private $http: angular.IHttpService,
+        private $scope: angular.IScope,
         private $timeout: angular.ITimeoutService,
-        private Authentication
+        private Authentication,
+        private ngDialog
     ) {}
+
+    openForgotPassword() {
+        this.closeAction();
+        
+        this.ngDialog.open({
+            plain: true,
+            template: '<forgot-password close-action="closeThisDialog()"></forgot-password>'
+        });
+    }
 
     signin() {
         this.$http.post('/auth/signin', this.credentials).then((response) => {
