@@ -1,0 +1,13 @@
+<div class="pagination">
+    <div class="prevPage" ng-click="paginationCtrl.pageDown()" ng-class="{'invisible': paginationCtrl.currentPage === 0}">
+        ◀
+    </div>
+
+    <div class="currentPage">
+        Page {{ paginationCtrl.currentPage + 1 }} of {{ paginationCtrl.totalPages }}
+    </div>
+
+    <div class="nextPage" ng-click="paginationCtrl.pageUp()" ng-class="{'invisible': paginationCtrl.currentPage + 1 === paginationCtrl.totalPages }">
+        ▶
+    </div>
+</div>

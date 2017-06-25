@@ -1,4 +1,4 @@
-<div class="listLevels" data-ng-init="levelSelectCtrl.find()">
+<div class="listLevels" data-ng-init="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
     <h2>
         Levels
         <span class="filterIcon" ng-click="levelSelectCtrl.toggleShowFilter()">
@@ -79,17 +79,5 @@
         </button>
     </div>
 
-    <div class="pagination" ng-if="levelSelectCtrl.levels && levelSelectCtrl.levels.length > 0">
-        <div class="prevPage" ng-click="levelSelectCtrl.pageDown()" ng-class="{'invisible': levelSelectCtrl.currentPage === 0}">
-            ◀
-        </div>
-
-        <div class="currentPage">
-            Page {{ levelSelectCtrl.currentPage + 1 }} of {{ levelSelectCtrl.totalPages }}
-        </div>
-
-        <div class="nextPage" ng-click="levelSelectCtrl.pageUp()" ng-class="{'invisible': levelSelectCtrl.currentPage + 1 === totalPages }">
-            ▶
-        </div>
-    </div>
+    <pagination ng-if="levelSelectCtrl.levels && levelSelectCtrl.levels.length > 0" on-pagination="levelSelectCtrl.find(currentPage)" current-page="levelSelectCtrl.currentPage" total-pages="levelSelectCtrl.totalPages"></pagination>
 </div>

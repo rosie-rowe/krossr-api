@@ -5,9 +5,12 @@ class PaginationComponent implements angular.IComponentOptions {
     bindToController = true;
     controller = 'PaginationController';
     controllerAs = 'paginationCtrl';
-    templateUrl = 'modules/levels/pagination/PaginationView.html';
+    templateUrl = 'modules/core/pagination/PaginationView.html';
 
     bindings = {
+        onPagination: '&',
+        currentPage: '=', // todo
+        totalPages: '<'
     }
 }
 

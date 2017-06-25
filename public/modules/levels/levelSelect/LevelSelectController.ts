@@ -22,7 +22,6 @@ class LevelSelectController implements angular.IComponentController {
 
     }
 
-    private controller;
     private currentPage: number = 0;
     private showFilter: boolean;
     private selectedLevelId;
@@ -46,15 +45,17 @@ class LevelSelectController implements angular.IComponentController {
     }
 
     /* Find a list of levels */
-    find() {
-       var queryObj = {
-            pageNum: this.currentPage,
+    find(currentPage: number) {
+        this.currentPage = currentPage;
+
+        var queryObj = {
+            pageNum: currentPage,
             sizeRestriction: this.sizeRestriction,
             searchText: this.searchText,
             sortBy: this.sortBy,
             sortDirection: this.sortDirection
         };
-
+    
         this.Levels.query(queryObj, (data) => {
             var i = 0,
                 allLevels = data.levels,
@@ -72,41 +73,26 @@ class LevelSelectController implements angular.IComponentController {
         }); 
     }
 
-    pageDown() {
-        if (this.currentPage > 0) {
-            this.currentPage--;
-            this.find();
-        }
-    }
-
-    pageUp() {
-        //currentPage will be off by 1 since it's 0-indexed
-        if (this.currentPage + 1 < this.totalPages) {
-            this.currentPage++;
-            this.find();
-        }
-    }
-
     setSearchText(searchText) {
         return this.debounce((searchText: string) => {
             this.searchText = searchText ? searchText : null;
-            this.find();
+            this.find(this.currentPage);
         }, 250);
     }
 
     setSizeRestriction(sizeRestriction) {
         this.sizeRestriction = sizeRestriction;
-        this.find();
+        this.find(this.currentPage);
     };
 
     setSortBy(sort_by) {
         this.sortBy = sort_by ? sort_by : null;
-        this.find();
+        this.find(this.currentPage);
     };
 
     setSortDirection(sort_direction) {
         this.sortDirection = sort_direction ? sort_direction : '';
-        this.find();
+        this.find(this.currentPage);
     };
 
     toggleShowFilter() {
