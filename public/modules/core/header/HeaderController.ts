@@ -1,5 +1,6 @@
 /// <reference path="../../levels/utils/Utils.d.ts" />
 /// <reference path="../../levels/levelSelect/LevelSelectService.d.ts" />
+/// <reference path="../../users/authentication/AuthenticationService.d.ts" />
 
 'use strict';
 
@@ -21,7 +22,7 @@ class HeaderController implements angular.IComponentController {
 		private $scope: angular.IScope,
 		private $state: angular.ui.IStateService,
 		private $timeout: angular.ITimeoutService,
-		private Authentication,
+		private Authentication: IAuthenticationService,
 		private levelSelectService: ILevelSelectService,
 		private ngDialog,
 		private Utils: IUtils

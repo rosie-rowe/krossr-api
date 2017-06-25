@@ -2,6 +2,7 @@
 /// <reference path="../../core/eventService/EventService.d.ts" />
 /// <reference path="../levelSelect/LevelSelectService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
+/// <reference path="../../users/authentication/AuthenticationService.d.ts" />
 
 'use strict';
 
@@ -36,7 +37,7 @@ class LevelController implements angular.IComponentController {
         private $state: angular.ui.IStateService,
         private $stateParams: any,
         private $timeout: angular.ITimeoutService,
-        private Authentication: any,
+        private Authentication: IAuthenticationService,
         private eventService: IEventService,
         private Levels,
         private levelSelectService: ILevelSelectService,

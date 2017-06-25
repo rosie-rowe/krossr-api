@@ -1,3 +1,5 @@
+/// <reference path="../authentication/AuthenticationService.d.ts" />
+
 'use strict';
 
 class EditProfileController implements angular.IComponentController {
@@ -31,7 +33,7 @@ class EditProfileController implements angular.IComponentController {
         private $location: angular.ILocationService,
         private $timeout: angular.ITimeoutService,
         private Users,
-        private Authentication
+        private Authentication: IAuthenticationService
     ){
 
     }

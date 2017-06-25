@@ -1,3 +1,5 @@
+/// <reference path="../authentication/AuthenticationService.d.ts" />
+
 'use strict';
 
 class SignInController implements angular.IComponentController {
@@ -21,7 +23,7 @@ class SignInController implements angular.IComponentController {
         private $http: angular.IHttpService,
         private $scope: angular.IScope,
         private $timeout: angular.ITimeoutService,
-        private Authentication,
+        private Authentication: IAuthenticationService,
         private ngDialog
     ) {}
 

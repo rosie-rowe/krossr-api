@@ -1,3 +1,5 @@
+/// <reference path="../authentication/AuthenticationService.d.ts" />
+
 'use strict';
 
 class ResetPasswordController implements angular.IComponentController {
@@ -22,7 +24,7 @@ class ResetPasswordController implements angular.IComponentController {
         private $http: angular.IHttpService,
         private $location: angular.ILocationService,
         private $stateParams: any,
-        private Authentication
+        private Authentication: IAuthenticationService
     ) {
 
     }

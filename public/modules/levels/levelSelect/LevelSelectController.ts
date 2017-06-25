@@ -1,4 +1,5 @@
 /// <reference path="../utils/Utils.d.ts" />
+/// <reference path="../../users/authentication/AuthenticationService.d.ts" />
 
 'use strict';
 
@@ -14,7 +15,7 @@ class LevelSelectController implements angular.IComponentController {
     ];
 
     constructor(
-        private Authentication: any,
+        private Authentication: IAuthenticationService,
         private debounce: any,
         private Levels: any,
         private Utils: IUtils
