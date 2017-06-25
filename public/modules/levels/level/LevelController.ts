@@ -84,10 +84,24 @@ class LevelController implements angular.IComponentController {
                         cancel-action="closeThisDialog()"
                         confirm-action="confirm()"
                         submit-action="levelCtrl.clearAll()"
-                        submit-text="Clear">`,
+                        submit-text="Clear"></confirmation>`,
             plain: true,
-            showClose: false,
-            scope: this.$scope
+            scope: this.$scope,
+            showClose: false
+        });
+    };
+
+    confirmRemove() {
+        this.ngDialog.openConfirm({
+            closeByDocument: false,
+            template: `<confirmation
+                        cancel-action="closeThisDialog()"
+                        confirm-action="confirm()"
+                        submit-action="levelCtrl.removeCurrentLevel()"
+                        submit-text="Delete"></confirmation>`,
+            plain: true,
+            scope: this.$scope,
+            showClose: false
         });
     };
 
@@ -228,7 +242,20 @@ class LevelController implements angular.IComponentController {
                 console.log('omg');
             });
         });
-    };
+    }
+
+     /** Remove any Level passed in */
+    remove(level) {
+        if (level) { 
+            level.$remove(() => {
+            });
+        }
+    }
+
+    /** Remove the level you're looking at */
+    removeCurrentLevel() {
+        this.remove(this.level);
+    }
 
     setGameSize(size) {
         this.Utils.setGameSize(Math.sqrt(size));
