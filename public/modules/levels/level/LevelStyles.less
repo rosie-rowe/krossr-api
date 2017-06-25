@@ -4,3 +4,45 @@ level {
     display: block;
     padding: @inputMargin * 5;
 }
+
+.gameContainer-inner {
+    display: inline-block;
+
+    .viewLevel & {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    @media screen and (max-width: @mediumScreen) {
+        margin: 0 auto;
+
+        .viewLevel & {
+            position: static;
+        }
+    }
+}
+
+.rateLevel {
+    display: inline-block;
+    margin-left: @inputMargin;
+}
+
+.theCountdown {
+    display: inline-block;
+}
+
+.viewLevel {
+    h2 {
+        margin: 0;
+        text-align: center;
+    }
+
+    .form-group {
+        margin: 1em;
+
+        @media screen and (max-width: @mediumScreen) {
+            margin: 0 auto;
+        }
+    }
+}
