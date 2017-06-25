@@ -26,7 +26,7 @@ class LevelSelectController implements angular.IComponentController {
     private selectedLevelId;
     private sizeRestriction: string = '';
     private searchText: string = ''
-    private sortBy: string = '';
+    private sortBy: string = '"createdAt"';
     private sortDirection: string = '';
     private totalPages: number;
     private levels;
@@ -59,11 +59,6 @@ class LevelSelectController implements angular.IComponentController {
             }
         }); 
     }
-
-    setSortBy(sort_by) {
-        this.sortBy = sort_by ? sort_by : null;
-        this.find(this.currentPage);
-    };
 
     setSortDirection(sort_direction) {
         this.sortDirection = sort_direction ? sort_direction : '';

@@ -32,8 +32,7 @@
                  This is one of the primary reasons I'd like to migrate the app to use SQL instead! Soon. -->
             <div class="queryInput">
                 <label class="control-label">Sort by</label>
-                <select ng-model="levelSelectCtrl.sortBy" ng-change="levelSelectCtrl.setSortBy(levelSelectCtrl.sortBy)">
-                    <option value="">None</option>
+                <select ng-model="levelSelectCtrl.sortBy" ng-change="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
                     <option value='"createdAt"'>Created Date</option>
                     <option value='name'>Name</option>
                     <option value='lives'>Lives</option>
