@@ -5,6 +5,7 @@
 class ConvertToNumberDirective implements angular.IDirective {
     static $name = 'convertToNumber';
     require = 'ngModel';
+    restrict = 'A';
 
     link = (scope: angular.IScope, element: angular.IAugmentedJQuery, attrs: angular.IAttributes, ngModel: angular.INgModelController) => {
         ngModel.$parsers.push((val: string) => {
