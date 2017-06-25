@@ -1,9 +1,7 @@
-<div>
-	<div ng-repeat="entry in numLineCtrl.getLineContent($index) track by $index" class="{{ entry.cssClass }} entry" ng-style="{
-		'width': numLineCtrl.getWidth(),
-		'height': numLineCtrl.getHeight(),
-		'line-height': numLineCtrl.getHeight()
-	}">
-		{{ entry.text }}
-	</div>
+<div ng-repeat="entry in numLineCtrl.getLineContent($index) track by $index" class="{{ entry.cssClass }}" ng-style="{
+	'width': numLineCtrl.getWidth(),
+	'height': numLineCtrl.getHeight(),
+	'line-height': numLineCtrl.getHeight()
+}">
+	{{ entry.text }}
 </div>
