@@ -1,4 +1,5 @@
 /// <reference path="../utils/Utils.d.ts" />
+/// <reference path="../tile/TileService.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
 /// <reference path="../../core/touchService/TouchService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
@@ -17,6 +18,7 @@ class TileController implements angular.IComponentController {
         'dragBoxService',
         'eventService',
         'shiftService',
+        'tileService',
         'touchService'
     ];
 
@@ -52,6 +54,7 @@ class TileController implements angular.IComponentController {
         private dragBoxService,
         private eventService: IEventService,
         private shiftService: IShiftService,
+        private tileService: ITileService,
         private touchService: ITouchService
     ) {
        
@@ -70,7 +73,7 @@ class TileController implements angular.IComponentController {
 
     $postLink() {
         this.setTileSize(this.Utils.getTileSize(this.tutorial));
-        this.Utils.addTileToIndex({ tileCtrl: this });
+        this.tileService.addTile({ tileCtrl: this });
 
         this.$element.on('mousedown', (e) => this.mouseDownEvent(e));
         this.$element.on('mousemove', (e) => this.mouseMoveEvent(e));
@@ -130,7 +133,7 @@ class TileController implements angular.IComponentController {
     }
 
     private fillPending(index) {
-        var coord = this.Utils.convertTo2D(index),
+        var coord = this.tileService.convertTo2D(index, this.sideLength),
                     coordsToClear,
                     i = 0,
                     len,
@@ -170,7 +173,7 @@ class TileController implements angular.IComponentController {
     }
 
     private mouseDownEvent(event: JQueryEventObject) {
-        let coord = this.Utils.convertTo2D(this.index);
+        let coord = this.tileService.convertTo2D(this.index, this.sideLength);
 
         this.dragBoxService.startCoord = coord;
         this.dragBoxService.initState = this.selected;
@@ -191,7 +194,7 @@ class TileController implements angular.IComponentController {
         let coord;
 
         if (actualScope && actualScope.tileCtrl.hasOwnProperty('index')) {
-            coord = this.Utils.convertTo2D(actualScope.tileCtrl.index);
+            coord = this.tileService.convertTo2D(actualScope.tileCtrl.index, this.sideLength);
             this.dragBoxService.endCoord = coord;
 
             if (!this.dragBoxService.validate()) {
@@ -211,7 +214,7 @@ class TileController implements angular.IComponentController {
             wrong_answer = false;
     
         if (typeof index === 'number') { 
-            coord = this.Utils.convertTo2D(index);
+            coord = this.tileService.convertTo2D(index, this.sideLength);
         } else {
             coord = index;
         }
@@ -272,7 +275,7 @@ class TileController implements angular.IComponentController {
     /* Determine which tiles to add colored borders to */
     getBorderColors(sideLength, direction, index) {
         var canColor,
-            coord = this.Utils.convertTo2D(index);
+            coord = this.tileService.convertTo2D(index, this.sideLength);
 
         // no borders through puzzle for small puzzles
         if (sideLength <= 5) {

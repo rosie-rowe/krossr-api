@@ -1,16 +1,19 @@
 /// <reference path="./Utils.d.ts" />
+/// <reference path="../tile/TileService.d.ts" />
 
 class Utils implements IUtils {
     static $inject = [
         '$timeout',
         '$rootScope',
-        'ngDialog'
+        'ngDialog',
+        'tileService'
     ];
 
     constructor(
         private $timeout: angular.ITimeoutService,
         private $rootScope: angular.IRootScopeService,
-        private ngDialog: any
+        private ngDialog: any,
+        private tileService: ITileService
     ) {
 
     }
@@ -22,15 +25,9 @@ class Utils implements IUtils {
     private outerGameSize: number;
     private playableAreaSize: number;
     private sideLength: number;
-    private tileIndex: any[] = [];
     private tileSize: number = 25;
     private timeout: number = 1000;
     private tutorialDivider: number = 4;
-
-    /** Append the current tile index */
-    addTileToIndex(obj) {
-        this.tileIndex.push(obj);
-    }
  
     /* Take a given game width and subtract border widths. I either have to do this
         or remove border-box and add them instead... doesn't really matter */
@@ -56,13 +53,13 @@ class Utils implements IUtils {
     clearAll() {
         var currentGameMatrix = this.getGameMatrix();
 				
-        this.clearAllTiles();
+        this.tileService.eraseTiles();
 
         if (currentGameMatrix) {
             this.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
         }
 
-        this.clearTileIndex();
+        this.tileService.clearTileIndex();
     }
 
     /** Given a matrix of true/false values, set every value to false */
@@ -77,38 +74,6 @@ class Utils implements IUtils {
         }
 
         return matrix;
-    }
-
-   
-    clearAllTiles() {
-        var i = 0,
-            len = this.tileIndex.length;
-
-        for (; i < len; i++) {
-            this.tileIndex[i].tileCtrl.fill('empty');
-        }
-    }
-
-    // make sure the index is clean before we add to it to avoid bugs with switching between screens
-    clearTileIndex() {
-        this.tileIndex = [];
-    }
-
-    /* Convert a 2D coordinate into an index */
-    convertTo1D(coord) {
-        return (coord.y * this.sideLength) + coord.x;
-    }
-
-    /* Convert an index into a 2D coordinate */
-    convertTo2D(index) {
-        var x = index % this.sideLength,
-            y = (index - x) / this.sideLength,
-            coord = {
-                y: y,
-                x: x
-            };
-
-        return coord;
     }
 
     /* Given a number of tiles, create an empty square matrix with that number */
@@ -132,7 +97,7 @@ class Utils implements IUtils {
             this.setGoalMatrix(args.layout);
         }
 
-        this.clearTileIndex();
+        this.tileService.clearTileIndex();
         this.calculatePlayableArea();
         this.createEmptyMatrix(args.numberOfTiles);
 
@@ -192,11 +157,6 @@ class Utils implements IUtils {
     /* Return the current side length */
     getSideLength() {
         return this.sideLength;
-    }
-
-    /* Return the current tile index */
-    getTileIndex() {
-        return this.tileIndex;
     }
 
     getTileSize(tutorialMode) {

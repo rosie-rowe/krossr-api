@@ -1,15 +1,10 @@
 /// <reference path="../point/Point.d.ts" />
 
 interface IUtils {
-    addTileToIndex(obj: any): void;
     adjustForBorders(width: number): number;
     calculatePlayableArea(): number;
     clearAll(): void;
     clearAllMatrix(matrix: boolean[][], value: boolean): boolean[][]; // todo
-    clearAllTiles(): void;
-    clearTileIndex(): void;
-    convertTo1D(coord: Point): number;
-    convertTo2D(index: number): Point;
     createEmptyMatrix(value: number): void;
     createNewGame(args: any): void; // todo
     finishLine(index: any, orientation: string): void;
@@ -18,7 +13,6 @@ interface IUtils {
     getGameMatrix(): any[][] // todo
     getGoalMatrix(): any[][] // todo
     getSideLength(): number;
-    getTileIndex(): any // todo
     getTileSize(tutorialMode: boolean): number;
     getTileSizePx(): string;
     getWidth(selector: string): number;

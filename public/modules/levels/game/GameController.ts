@@ -1,4 +1,5 @@
 /// <reference path="../utils/Utils.d.ts" />
+/// <reference path="../tile/TileService.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
 
 'use strict';
@@ -15,7 +16,8 @@ class GameController implements angular.IComponentController {
         'eventService',
         'Utils',
         'ngDialog',
-        'dragBoxService'
+        'dragBoxService',
+        'tileService'
     ];
 
     constructor(
@@ -26,7 +28,8 @@ class GameController implements angular.IComponentController {
         private eventService: IEventService,
         private Utils: IUtils,
         private ngDialog,
-        private dragBoxService
+        private dragBoxService,
+        private tileService: ITileService
     ) {
 
     }
@@ -137,7 +140,7 @@ class GameController implements angular.IComponentController {
     /**
     * Fill all of the tiles in the specified coordinate array
     * @params {Array} array of coordinate objects
-    * @params {function} a function to run on each tile controller before changing it to determine whether or not to change. must be defined in tile.client.controller.js
+    * @params {function} a function to run on each tile controller before changing it to determine whether or not to change. must be defined in TileController
     */
     fillTiles(coords, initState, override, validationFn?) {
         var len = coords.length;
@@ -147,25 +150,13 @@ class GameController implements angular.IComponentController {
     
         for (; i < len; i++) {
             currentCoord = coords[i];
-            currentTileController = this.findTileCtrlByCoord(currentCoord);
+            currentTileController = this.tileService.findTileCtrlByCoord(currentCoord, this.Utils.getSideLength());
     
             if (!validationFn || (typeof currentTileController[validationFn] === 'function' && currentTileController[validationFn]())) {
                 currentTileController.change(currentCoord, initState, override);
             }
         }
     }
-
-      /* Grab a tile controller out of the tile index from a given 2D coordinate */
-    findTileCtrlByCoord(coord) {
-        var index = this.Utils.convertTo1D(coord);
-        return this.findTileCtrlByIndex(index);
-    }
-
-    /* Grab a tile controller out of the tile index from a given 1D index */
-    findTileCtrlByIndex(index) {
-        var tileIndex = this.Utils.getTileIndex();
-        return tileIndex[index].tileCtrl;
-    };
 
     gameOver() {
         if (!this.level.lost) {
