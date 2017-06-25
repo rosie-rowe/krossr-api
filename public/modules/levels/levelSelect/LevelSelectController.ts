@@ -32,17 +32,6 @@ class LevelSelectController implements angular.IComponentController {
     private level;
     private levels;
 
-    private clearLevel() {
-        if (this.level) {
-            this.level = null;
-        }
-    }
-
-    clearAll(action) {
-        this.Utils.clearAll();
-        this.clearLevel();
-    }
-
     /* Find a list of levels */
     find(currentPage: number) {
         this.currentPage = currentPage;
