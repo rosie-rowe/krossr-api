@@ -56,15 +56,21 @@
             <a class="playButton" ui-sref="level({ levelId: level.id })" ui-sref-opts="{ reload: true }" ng-click="levelSelectCtrl.closeAction()">
                 <i class="fa fa-play"></i>
             </a>
+
             <div class="list-group-item-heading" data-ng-bind="level.name"></div>
+
             <div class="username" ng-click="levelSelectCtrl.setSearchText(level.user.username)" data-ng-bind="'by ' + level.user.username"></div>
-            <a class="editButton" ng-click="levelSelectCtrl.loadLevel('{{level.id}}', 'edit'); closeThisDialog();" data-ng-if="level && levelSelectCtrl.Authentication.user.id === level.userId">
+
+            <a class="editButton" ui-sref="update-level({ levelId: level.id })" ui-sref-opts="{ reload: true }" ng-click="levelSelectCtrl.closeAction()" ng-if="level && levelSelectCtrl.Authentication.user.id === level.userId">
                 <i class="fa fa-edit"></i>
             </a>
+
             <div class="size" data-ng-bind="level.prettySize" ng-click="levelSelectCtrl.setSizeRestriction(level.size)"></div>
+
             <div class="averageRating">
                 Avg: {{ ::level.avgRating || "n/a"}} 
             </div>
+
             <div class="lives">
                 {{ ::level.lives }} lives
             </div>
