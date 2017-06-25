@@ -1,5 +1,6 @@
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
+/// <reference path="../levelSelect/LevelSelectService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
 
 'use strict';
@@ -17,6 +18,7 @@ class LevelController implements angular.IComponentController {
         'Authentication',
         'eventService',
         'Levels',
+        'levelSelectService',
         'ngDialog',
         'shiftService',
         'Utils'
@@ -37,6 +39,7 @@ class LevelController implements angular.IComponentController {
         private Authentication: any,
         private eventService: IEventService,
         private Levels,
+        private levelSelectService: ILevelSelectService,
         private ngDialog,
         private shiftService: IShiftService,
         private Utils: IUtils
@@ -255,6 +258,7 @@ class LevelController implements angular.IComponentController {
     remove(level) {
         if (level) { 
             level.$remove(() => {
+                this.levelSelectService.openLevelSelect();
             });
         }
     }
