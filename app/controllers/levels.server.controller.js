@@ -36,7 +36,7 @@ exports.create = function(req, res) {
  */
 exports.newLevel = function(req, res) {
 	return res.jsonp();
-}
+};
 
 /**
  * Show the current Level
@@ -127,8 +127,19 @@ exports.delete = function(req, res) {
  * Level middleware
  */
 exports.levelByID = function(req, res, next, id) {
+	let user = req.user;
+
 	Level
-		.find({ 
+		.findOne({
+			include: [
+				{
+					attributes: ['rating'],
+					model: db.rating,
+					where: {
+						userId: user.id
+					}
+				}
+			],
             where: {
                 id: id
             }
@@ -136,6 +147,9 @@ exports.levelByID = function(req, res, next, id) {
 			if (!level) {
 				return next(new Error('Failed to load level ' + id));
 			} else {
+				if (level.ratings.length) {
+					level.yourRating = level.ratings[0].rating;
+				}
 				req.level = level;
 				return next();
 			}
