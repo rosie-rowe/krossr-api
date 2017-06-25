@@ -10,7 +10,8 @@ angular.module('users').config(['$stateProvider',
             params: {
                 invalid: true
             },
-			templateUrl: 'modules/users/views/password/forgot-password.client.view.html'
+			plain: true,
+			template: '<forgot-password></forgot-password>'
 		}).
 		state('reset', {
 			url: '/password/reset/:token',
