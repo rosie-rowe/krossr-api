@@ -4,7 +4,6 @@
 				'line-height': numGridCtrl.tileSize,
 				'font-size': numGridCtrl.getFontSize() }"
 	ng-repeat="i in numGridCtrl.layout track by $index"
-	class="{{numGridCtrl.orientation}}-line"
 	ng-class-even="'even'"
 	ng-class-odd="'odd'"
 	index="$index"
@@ -19,7 +18,6 @@
 		'font-size': numGridCtrl.getFontSize()
 	}"
 	ng-repeat="i in numGridCtrl.layout track by $index"
-	class="{{numGridCtrl.orientation}}-line"
 	ng-class-even="'even'"
 	ng-class-odd="'odd'"
 	index="$index"
