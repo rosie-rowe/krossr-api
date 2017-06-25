@@ -106,7 +106,12 @@ class TileController implements angular.IComponentController {
     }
 
     private clearPending(coords) {
-        this.fillTiles(coords, true, 'empty', 'isPendingAndNotSelected');
+        this.fillTiles({
+            coords: coords,
+            initState: true,
+            override: 'empty',
+            vadliationFn: 'isPendingAndNotSelected'
+        });
     }
 
     /** If the override value (which will be the value of the tile that a dragstart is activated on)
@@ -151,7 +156,12 @@ class TileController implements angular.IComponentController {
             this.clearPending(coordsToClear);
         }
 
-        this.fillTiles(allPendingCoords, true, 'pending', 'isNotPending');
+        this.fillTiles({
+            coords: allPendingCoords,
+            initState: true,
+            override: 'pending',
+            validationFn: 'isNotPending'
+        });
 
         this.$scope.$apply(); 
     }
