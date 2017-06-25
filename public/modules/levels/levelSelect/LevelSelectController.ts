@@ -9,14 +9,12 @@ class LevelSelectController implements angular.IComponentController {
 
     static $inject = [
         'Authentication',
-        'debounce',
         'Levels',
         'Utils'
     ];
 
     constructor(
         private Authentication: IAuthenticationService,
-        private debounce: any,
         private Levels: any,
         private Utils: IUtils
     ) {
@@ -74,11 +72,8 @@ class LevelSelectController implements angular.IComponentController {
         }); 
     }
 
-    setSearchText(searchText) {
-        return this.debounce((searchText: string) => {
-            this.searchText = searchText ? searchText : null;
-            this.find(this.currentPage);
-        }, 250);
+    setSearchText() {
+        this.find(this.currentPage);
     }
 
     setSizeRestriction(sizeRestriction) {
