@@ -23,7 +23,6 @@ class LevelSelectController implements angular.IComponentController {
 
     private currentPage: number = 0;
     private showFilter: boolean;
-    private selectedLevelId;
     private sizeRestriction: string = '';
     private searchText: string = ''
     private sortBy: string = '"createdAt"';
