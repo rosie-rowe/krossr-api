@@ -30,15 +30,6 @@ class LevelsController implements angular.IComponentController {
     private authentication;
     private level;
 
-    confirmClear() {
-        this.ngDialog.openConfirm({
-            closeByDocument: false,
-            template: 'modules/levels/views/clear-confirmation.client.view.html',
-            showClose: false,
-            scope: this.$scope
-        });
-    };
-
     confirmRemove() {
         this.ngDialog.openConfirm({
             closeByDocument: false,

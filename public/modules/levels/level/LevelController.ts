@@ -17,6 +17,7 @@ class LevelController implements angular.IComponentController {
         'Authentication',
         'eventService',
         'Levels',
+        'ngDialog',
         'shiftService',
         'Utils'
     ];
@@ -36,6 +37,7 @@ class LevelController implements angular.IComponentController {
         private Authentication: any,
         private eventService: IEventService,
         private Levels,
+        private ngDialog,
         private shiftService: IShiftService,
         private Utils: IUtils
     ) {
@@ -74,6 +76,20 @@ class LevelController implements angular.IComponentController {
         this.Utils.clearAll();
         this.clearLevel();
     }
+
+    confirmClear() {
+        this.ngDialog.openConfirm({
+            closeByDocument: false,
+            template: `<confirmation
+                        cancel-action="closeThisDialog()"
+                        confirm-action="confirm()"
+                        submit-action="levelCtrl.clearAll()"
+                        submit-text="Clear">`,
+            plain: true,
+            showClose: false,
+            scope: this.$scope
+        });
+    };
 
      /** Create new Level (submit function) */
     create(level, successFunc, failFunc) {
