@@ -1,0 +1,31 @@
+<section class="row valign-inner">
+	<h1>Sign Up</h1>
+	<div class="sign-on-form">
+		<form name="userForm" ng-submit="signUpCtrl.signup()" class="signin form-horizontal" novalidate autocomplete="off">
+			<div class="form-group">
+				<label class="control-label" for="username">Username</label> 
+				<input type="text" id="username" name="username" class="form-control" data-ng-model="signUpCtrl.credentials.username" placeholder="Username">
+				<div class="details">Your username will be displayed on any puzzles you create. No restrictions.</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label" for="email">Email</label> 
+				<input type="email" id="email" name="email" class="form-control" data-ng-model="signUpCtrl.credentials.email" placeholder="Email">
+				<div class="details">Your email will only be used for password recovery</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label" for="password">Password</label> 
+				<input type="password" id="password" minlength="{{ signUpCtrl.minPasswordLength }}" name="password" class="form-control" data-ng-model="signUpCtrl.credentials.password" placeholder="Password">
+				<div class="details">Your password must be at least 10 characters. Spaces allowed, no symbols required.</div>
+			</div>
+
+			<div class="text-center">
+                <button ng-disabled="signUpCtrl.error" class="btn" type="button" ng-click="signUpCtrl.signup()">
+                    <span ng-if="!signUpCtrl.error">Sign Up</span>
+                    <span ng-if="signUpCtrl.error" ng-bind-html="signUpCtrl.error"></span>
+                </button>
+			</div>
+		</form>
+	</div>
+</section>
