@@ -22,7 +22,6 @@ class LevelSelectController implements angular.IComponentController {
 
     }
 
-    private ctrl;
     private controller;
     private currentPage: number = 0;
     private showFilter: boolean;

@@ -21,7 +21,6 @@ class TileController implements angular.IComponentController {
 
     private index;
 
-    private ctrl; //MainController, todo
     private level;
 
     private editable;
