@@ -66,15 +66,8 @@ class LevelController implements angular.IComponentController {
         });
     }
 
-    private clearLevel() {
-        if (this.level) {
-            this.level = null;
-        }
-    }
-
     clearAll() {
         this.Utils.clearAll();
-        this.clearLevel();
     }
 
     confirmClear() {

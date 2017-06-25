@@ -13,7 +13,7 @@ class ShellComponent implements angular.IComponentOptions {
       <krossr-header data-level="level" class="header-container"></krossr-header>
       <section id="main-section" class="content">
         <section resize class="playble-area container valign-outer">
-                  <ng-transclude></ng-transclude>
+          <ng-transclude></ng-transclude>
         </section>
       </section> 
     `;
