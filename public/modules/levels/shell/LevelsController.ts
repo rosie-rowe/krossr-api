@@ -8,7 +8,6 @@ class LevelsController implements angular.IComponentController {
     static $inject = [
         '$http',
         '$scope',
-        '$timeout',
         '$location',
         'Authentication',
         'Levels',
@@ -19,7 +18,6 @@ class LevelsController implements angular.IComponentController {
     constructor(
         private $http: angular.IHttpService,
         private $scope: angular.IScope,
-        private $timeout: angular.ITimeoutService,
         private $location: angular.ILocationService,
         private Authentication: any,
         private Levels: any,
@@ -30,9 +28,6 @@ class LevelsController implements angular.IComponentController {
     }
 
     private authentication;
-    private controller;
-    private controllerName = 'levels';
-    private timeout = 1000;
     private level;
 
     confirmClear() {

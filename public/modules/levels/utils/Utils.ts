@@ -136,7 +136,6 @@ class Utils implements IUtils {
         this.calculatePlayableArea();
         this.createEmptyMatrix(args.numberOfTiles);
 
-
         /* When editing the level, we'll prepopulate the game matrix (revealed tiles) with the goal matrix,
         then get rid of the goal matrix (since we don't want to be able to win while editing) */
         switch(args.controller) {
