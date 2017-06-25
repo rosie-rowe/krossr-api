@@ -235,13 +235,13 @@ class NumberLineController {
     private getHeight(): string {
         var tileSize: number = this.Utils.getTileSize();        
 
-        return this.$scope.orientation === 'vertical' ? (tileSize / 2) + 'px' : tileSize + 'px';
+        return this.orientation === 'vertical' ? (tileSize / 2) + 'px' : tileSize + 'px';
     }
 
     private getWidth(): string {
         var tileSize: number = this.Utils.getTileSize();
 
-        return this.$scope.orientation === 'horizontal' ? (tileSize / 2) + 'px' : tileSize + 'px';
+        return this.orientation === 'horizontal' ? (tileSize / 2) + 'px' : tileSize + 'px';
     }
 }
 
