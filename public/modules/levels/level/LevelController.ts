@@ -11,6 +11,7 @@ class LevelController implements angular.IComponentController {
     static $inject = [
         '$http',
         '$scope',
+        '$state',
         '$stateParams',
         '$timeout',
         'Authentication',
@@ -29,6 +30,7 @@ class LevelController implements angular.IComponentController {
     constructor(
         private $http: angular.IHttpService,
         private $scope: angular.IScope,
+        private $state: angular.ui.IStateService,
         private $stateParams: any,
         private $timeout: angular.ITimeoutService,
         private Authentication: any,
@@ -71,6 +73,20 @@ class LevelController implements angular.IComponentController {
     clearAll() {
         this.Utils.clearAll();
         this.clearLevel();
+    }
+
+     /** Create new Level (submit function) */
+    create(level, successFunc, failFunc) {
+        // Redirect after save
+        level.$save(function(response) {
+            if (typeof successFunc === 'function') {
+                successFunc(response);
+            }
+        }, function(errorResponse) {
+            if (typeof failFunc === 'function') {
+                failFunc(errorResponse);
+            }
+        });
     }
 
     createGameArray(controller) {
@@ -139,6 +155,8 @@ class LevelController implements angular.IComponentController {
                 this.level.lost = false;
                 this.level.ready = true;
             });
+        } else {
+            this.createNewLevel();
         }
     }
 
@@ -198,6 +216,33 @@ class LevelController implements angular.IComponentController {
 
     setGameSize(size) {
         this.Utils.setGameSize(Math.sqrt(size));
+    }
+
+    // Split out for easier testing
+    submitCreate() {
+        var layout = this.Utils.getGameMatrix();
+
+        // Create new Level object
+        var level = new this.Levels ({
+            name: this.level.name,
+            layout: layout,
+            lives: this.level.lives,
+            size: layout.length
+        });
+
+        var levelSaveSuccess = (response) => {
+            this.$state.go('edit-level', { levelId: response.id });
+        };
+
+        var levelSaveFailure = function(err) {
+            this.error = err.data.message;
+
+            this.$timeout(function() {
+                this.error = '';
+            }, this.timeout)
+        }
+
+        this.create(level, levelSaveSuccess, levelSaveFailure);
     }
 }
 

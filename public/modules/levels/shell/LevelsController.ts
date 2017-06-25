@@ -35,20 +35,6 @@ class LevelsController implements angular.IComponentController {
     private timeout = 1000;
     private level;
 
-    /** Create new Level (submit function) */
-    create(level, successFunc, failFunc) {
-        // Redirect after save
-        level.$save(function(response) {
-            if (typeof successFunc === 'function') {
-                successFunc(response);
-            }
-        }, function(errorResponse) {
-            if (typeof failFunc === 'function') {
-                failFunc(errorResponse);
-            }
-        });
-    }
-
     confirmClear() {
         this.ngDialog.openConfirm({
             closeByDocument: false,
@@ -98,33 +84,6 @@ class LevelsController implements angular.IComponentController {
     //         });
     //     }
     // };
-
-    // Split out for easier testing
-    // submitCreate() {
-    //     var layout = this.Utils.getGameMatrix();
-
-    //     // Create new Level object
-    //     var level = new this.Levels ({
-    //         name: this.level.name,
-    //         layout: layout,
-    //         lives: this.level.lives,
-    //         size: layout.length
-    //     });
-
-    //     var levelSaveSuccess = (response) => {
-    //         this.loadLevel(response.id, 'edit');
-    //     };
-
-    //     var levelSaveFailure = function(err) {
-    //         this.error = err.data.message;
-
-    //         this.$timeout(function() {
-    //             this.error = '';
-    //         }, this.timeout)
-    //     }
-
-    //     this.create(level, levelSaveSuccess, levelSaveFailure);
-    // }
 
     // Update existing Level
     update() {
