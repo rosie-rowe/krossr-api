@@ -25,7 +25,7 @@
 
             <div class="queryInput">
                 <label class="control-label">Search</label>
-                <input ng-model="levelSelectCtrl.searchText" ng-model-options="{ debounce: 250 }" ng-change="levelSelectCtrl.setSearchText()">
+                <input ng-model="levelSelectCtrl.searchText" ng-model-options="{ debounce: 250 }" ng-change="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
             </div>
 
             <!-- Rating and Username are specifically excluded from here due to Mongo's limitations on joins

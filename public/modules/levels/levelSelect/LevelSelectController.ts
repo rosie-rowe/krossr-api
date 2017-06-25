@@ -60,10 +60,6 @@ class LevelSelectController implements angular.IComponentController {
         }); 
     }
 
-    setSearchText() {
-        this.find(this.currentPage);
-    }
-
     setSortBy(sort_by) {
         this.sortBy = sort_by ? sort_by : null;
         this.find(this.currentPage);
