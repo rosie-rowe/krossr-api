@@ -189,11 +189,11 @@ class TileController implements angular.IComponentController {
 
     change(index, initState, changeTo) {
         if (this.editable === 'true') {
-            this.changeTile(this.$scope, index, initState, changeTo, this.goalMatrix);
+            this.changeTile(index, initState, changeTo, this.goalMatrix);
         }
     }
 
-    changeTile(scope, index, initState, changeTo, goalMatrix) {
+    changeTile(index, initState, changeTo, goalMatrix) {
         var coord,
             wrong_answer = false;
     
