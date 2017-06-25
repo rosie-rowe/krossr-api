@@ -20,6 +20,7 @@ class TileController implements angular.IComponentController {
     ];
 
     private index;
+    private isEditMode: boolean;
 
     private level;
 
@@ -57,22 +58,13 @@ class TileController implements angular.IComponentController {
 
     $onInit() {
         this.editable = this.$attrs['editable'];
+        this.isEditMode = this.level.currentView === 'edit';
         this.tutorial = this.$attrs['tutorial'];
 
         this.sideLength = this.Utils.getSideLength();
         this.goalMatrix = this.Utils.getGoalMatrix();
 
-        this.fill('empty');
-
-        if (this.level.currentView === 'edit'
-            && this.tiles
-            && this.tiles[this.$scope.$index]
-            && this.tiles[this.$scope.$index].selected
-        ) {
-          this.fill('selected');
-        } else {
-          this.fill('empty');
-        }
+        this.initializeFill();
     }
 
     $postLink() {
@@ -122,6 +114,17 @@ class TileController implements angular.IComponentController {
             return !override;
         } else {
             return !value;
+        }
+    }
+
+    /**
+     * Determine the initial state of the tile fills
+     */
+    private initializeFill() {
+        if (this.isEditMode && this.tiles && this.tiles[this.index] && this.tiles[this.index].selected) {
+            this.fill('selected');
+        } else {
+            this.fill('empty');
         }
     }
 

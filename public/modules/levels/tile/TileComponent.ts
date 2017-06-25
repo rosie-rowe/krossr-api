@@ -11,7 +11,8 @@ class TileComponent implements angular.IComponentOptions {
         index: '<',
         fillTiles: '&',
         gameOver: '&',
-        level: '<'
+        level: '<',
+        tiles: '<'
     }
 }
 

@@ -69,7 +69,7 @@
             </div>
             
             <div class="bottom row">
-                <game level="levelCtrl.level" tiles="levelCtrl.finalLayout.tiles" ng-if="levelCtrl.level"></game>
+                <game level="levelCtrl.level" tiles="levelCtrl.finalLayout.tiles" ng-if="levelCtrl.finalLayout.tiles"></game>
 
                 <number-grid ng-if="levelCtrl.level && levelCtrl.level.layout && levelCtrl.level.currentView === 'view'"
                              layout="levelCtrl.level.layout"
