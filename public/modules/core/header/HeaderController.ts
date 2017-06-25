@@ -13,7 +13,6 @@ class HeaderController implements angular.IComponentController {
 		'$timeout',
 		'Authentication',
 		'levelSelectService',
-		'Menus',
 		'ngDialog',
 		'Utils'
 	]
@@ -24,7 +23,6 @@ class HeaderController implements angular.IComponentController {
 		private $timeout: angular.ITimeoutService,
 		private Authentication,
 		private levelSelectService: ILevelSelectService,
-		private Menus,
 		private ngDialog,
 		private Utils: IUtils
 	) {
