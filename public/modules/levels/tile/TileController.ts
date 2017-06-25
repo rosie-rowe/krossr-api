@@ -315,7 +315,7 @@ class TileController implements angular.IComponentController {
         if (this.level & this.level.currentLives) {
             this.level.currentLives--;
 
-            if (this.level.currentLilves === 0) {
+            if (this.level.currentLives === 0) {
                 this.gameOver();
             }
         }
