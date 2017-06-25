@@ -1,3 +1,4 @@
+/// <reference path="../gameOver/GameOverService.d.ts" />
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../tile/TileService.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
@@ -14,6 +15,7 @@ class GameController implements angular.IComponentController {
         '$scope',
         '$timeout',
         'eventService',
+        'gameOverService',
         'Utils',
         'ngDialog',
         'dragBoxService',
@@ -26,6 +28,7 @@ class GameController implements angular.IComponentController {
         private $scope: angular.IScope,
         private $timeout: angular.ITimeoutService,
         private eventService: IEventService,
+        private gameOverService: IGameOverService,
         private Utils: IUtils,
         private ngDialog,
         private dragBoxService,
@@ -35,7 +38,7 @@ class GameController implements angular.IComponentController {
     }
 
     private gameSettings;
-    private level;
+    private level; // todo
     private margin: number;
     private tiles;
 
@@ -95,7 +98,7 @@ class GameController implements angular.IComponentController {
         this.applyFillDragBox();
 
         if (this.checkWin()) {
-            this.openWinLoseNotification();
+            this.gameOverService.openDialog(this.level);
         }
 
         this.$scope.$apply();
@@ -133,17 +136,8 @@ class GameController implements angular.IComponentController {
         if (!this.level.lost) {
             this.level.won = false;
             this.level.lost = true;
-            this.openWinLoseNotification();
+            this.gameOverService.openDialog(this.level);
         }
-    };
-
-    openWinLoseNotification() {
-        this.ngDialog.open({
-            plain: true,
-            template: '<game-over close-action="closeThisDialog()" level-id="' + this.level.id +'" won="' + this.level.won + '"></game-over>',
-            scope: this.$scope,
-            showClose: false
-        });
     };
 
     setMargin(tileSize: number) {

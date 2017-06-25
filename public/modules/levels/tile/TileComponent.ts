@@ -9,7 +9,6 @@ class TileComponent implements angular.IComponentOptions {
 
     bindings = {
         index: '<',
-        gameOver: '&',
         level: '<',
         tiles: '<'
     }

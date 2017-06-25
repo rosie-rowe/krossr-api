@@ -1,3 +1,4 @@
+/// <reference path="../gameOver/GameOverService.d.ts" />
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../tile/TileService.d.ts" />
 /// <reference path="../../core/eventService/EventService.d.ts" />
@@ -18,6 +19,7 @@ class TileController implements angular.IComponentController {
         'Utils',
         'dragBoxService',
         'eventService',
+        'gameOverService',
         'shiftService',
         'sideLengthService',
         'tileService',
@@ -27,11 +29,9 @@ class TileController implements angular.IComponentController {
     private index;
     private isEditMode: boolean;
 
-    private level;
+    private level; // todo
 
     private editable;
-
-    private gameOver: Function;
 
     private marked: boolean;
     private pending: boolean;
@@ -53,6 +53,7 @@ class TileController implements angular.IComponentController {
         private Utils: IUtils, 
         private dragBoxService,
         private eventService: IEventService,
+        private gameOverService: IGameOverService,
         private shiftService: IShiftService,
         private sideLengthService: ISideLengthService,
         private tileService: ITileService,
@@ -309,7 +310,7 @@ class TileController implements angular.IComponentController {
             this.level.currentLives--;
 
             if (this.level.currentLives === 0) {
-                this.gameOver();
+                this.gameOverService.openDialog(this.level);
             }
         }
     }
