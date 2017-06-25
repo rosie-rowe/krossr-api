@@ -274,10 +274,7 @@ class Utils implements IUtils {
     }
 
     // this is here so it can be shared between game.client.controller and levels.client.controller
-    updateLevel(scope) {
-        var level = scope.level,
-            _this = this;
-
+    updateLevel(level, scope) {
         level.size = level.layout.length;
 
         level.$update(function() {

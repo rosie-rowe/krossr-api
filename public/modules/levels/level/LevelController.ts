@@ -80,28 +80,42 @@ class LevelController implements angular.IComponentController {
     confirmClear() {
         this.ngDialog.openConfirm({
             closeByDocument: false,
+            plain: true,
+            scope: this.$scope,
+            showClose: false,
             template: `<confirmation
                         cancel-action="closeThisDialog()"
                         confirm-action="confirm()"
                         submit-action="levelCtrl.clearAll()"
-                        submit-text="Clear"></confirmation>`,
-            plain: true,
-            scope: this.$scope,
-            showClose: false
+                        submit-text="Clear"></confirmation>`
         });
     };
 
     confirmRemove() {
         this.ngDialog.openConfirm({
             closeByDocument: false,
+            plain: true,
+            scope: this.$scope,
+            showClose: false,
             template: `<confirmation
                         cancel-action="closeThisDialog()"
                         confirm-action="confirm()"
                         submit-action="levelCtrl.removeCurrentLevel()"
-                        submit-text="Delete"></confirmation>`,
+                        submit-text="Delete"></confirmation>`
+        });
+    };
+
+    confirmUpdate() {
+        this.ngDialog.openConfirm({
+            closeByDocument: false,
             plain: true,
             scope: this.$scope,
-            showClose: false
+            showClose: false,
+            template: `<confirmation
+                        cancel-action="closeThisDialog()"
+                        confirm-action="confirm()"
+                        submit-action="levelCtrl.update()"
+                        submit-text="Update"></confirmation>`
         });
     };
 
@@ -287,6 +301,11 @@ class LevelController implements angular.IComponentController {
 
         this.create(level, levelSaveSuccess, levelSaveFailure);
     }
+
+    // Update existing Level
+    update() {
+        this.Utils.updateLevel(this.level, this.$scope);
+    };
 }
 
 angular.module('levels').controller(LevelController.$name, LevelController);
