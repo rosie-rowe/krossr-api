@@ -30,5 +30,4 @@ interface IUtils {
     setTileSize(gameWidth: number, widthInTiles: number): void;
     setOuterGameWidth(width: number): void;
     setWidth(selector: string, width: number): void;
-    updateLevel(level: any, scope: angular.IScope): void;
 }

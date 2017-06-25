@@ -285,7 +285,7 @@ class LevelController implements angular.IComponentController {
         });
 
         var levelSaveSuccess = (response) => {
-            this.$state.go('update-level', { levelId: response.id });
+            this.$state.go('update-level', { levelId: response.id }, { reload: true });
         };
 
         var levelSaveFailure = function(err) {
@@ -301,8 +301,22 @@ class LevelController implements angular.IComponentController {
 
     // Update existing Level
     update() {
-        this.Utils.updateLevel(this.level, this.$scope);
+        this.updateLevel(this.level);
     };
+
+    updateLevel(level) {
+        level.size = level.layout.length;
+
+        level.$update(() => {
+           this.$state.go('update-level', { levelId: level.id }, { reload: true }); 
+        }, function(errorResponse) {
+            this.error = errorResponse.data.message;
+
+            this.$timeout(() => {
+                this.error = null;
+            }, this.timeout);
+        });
+    }
 }
 
 angular.module('levels').controller(LevelController.$name, LevelController);

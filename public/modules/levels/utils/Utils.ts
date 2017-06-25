@@ -272,21 +272,6 @@ class Utils implements IUtils {
     setWidth(selector, width) {
         angular.element(selector).css("width", width);
     }
-
-    // this is here so it can be shared between game.client.controller and levels.client.controller
-    updateLevel(level, scope) {
-        level.size = level.layout.length;
-
-        level.$update(function() {
-            
-        }, function(errorResponse) {
-            scope.error = errorResponse.data.message;
-
-            this.$timeout(() => {
-                scope.error = null;
-            }, this.timeout);
-        });
-    }
 }
 
 angular.module('levels').service('Utils', Utils);
