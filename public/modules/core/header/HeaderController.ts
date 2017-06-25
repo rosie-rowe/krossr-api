@@ -14,6 +14,7 @@ class HeaderController implements angular.IComponentController {
 		'Authentication',
 		'levelSelectService',
 		'Menus',
+		'ngDialog',
 		'Utils'
 	]
 
@@ -24,6 +25,7 @@ class HeaderController implements angular.IComponentController {
 		private Authentication,
 		private levelSelectService: ILevelSelectService,
 		private Menus,
+		private ngDialog,
 		private Utils: IUtils
 	) {
 
@@ -31,6 +33,13 @@ class HeaderController implements angular.IComponentController {
 
 	openLevelSelect() {
 		this.levelSelectService.openLevelSelect();	
+	}
+
+	openHelp() {
+		this.ngDialog.open({
+			plain: true,
+			template: '<help></help>'
+		})
 	}
 }
 
