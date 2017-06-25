@@ -29,7 +29,6 @@ class LevelSelectController implements angular.IComponentController {
     private sortBy: string = '';
     private sortDirection: string = '';
     private totalPages: number;
-    private level;
     private levels;
 
     /* Find a list of levels */
