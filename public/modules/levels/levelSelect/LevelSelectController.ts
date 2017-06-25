@@ -60,11 +60,6 @@ class LevelSelectController implements angular.IComponentController {
         }); 
     }
 
-    setSortDirection(sort_direction) {
-        this.sortDirection = sort_direction ? sort_direction : '';
-        this.find(this.currentPage);
-    };
-
     toggleShowFilter() {
         this.showFilter = !this.showFilter;
     }

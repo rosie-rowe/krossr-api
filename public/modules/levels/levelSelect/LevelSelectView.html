@@ -42,7 +42,7 @@
 
             <div class="queryInput">
                 <label class="control-label">Sort direction</label>
-                <select ng-model="levelSelectCtrl.sortDirection" ng-change="levelSelectCtrl.setSortDirection(levelSelectCtrl.sortDirection)">
+                <select ng-model="levelSelectCtrl.sortDirection" ng-change="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
                     <option value="">Asc</option>
                     <option value="DESC">Desc</option>
                 </select>
