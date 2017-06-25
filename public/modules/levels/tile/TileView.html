@@ -1,9 +1,9 @@
 <div 
 	class="square tile"
-	ng-class="{unselected: tileCtrl.selected === false && tileCtrl.marked === false && tileCtrl.pending === false,
-				selected: tileCtrl.selected === true,
-				marked: tileCtrl.marked === true,
-				pending: tileCtrl.pending === true }"
+	ng-class="{unselected: !tileCtrl.selected && !tileCtrl.marked && !tileCtrl.pending,
+				selected: tileCtrl.selected,
+				marked: tileCtrl.marked,
+				pending: tileCtrl.pending }"
 	
 	data-index="{{$index}}"
 	ng-style="{
