@@ -7,6 +7,10 @@ class EditProfileComponent implements angular.IComponentOptions {
     controller = 'EditProfileController';
     controllerAs = 'editProfileCtrl';
     templateUrl = 'modules/users/editProfile/EditProfileView.html';
+
+    bindings = {
+        closeAction: '&'
+    }
 }
 
 angular.module('users').component(EditProfileComponent.$name, new EditProfileComponent());
