@@ -31,7 +31,6 @@ class TileController implements angular.IComponentController {
 
     private editable;
 
-    private fillTiles: Function;
     private gameOver: Function;
 
     private marked: boolean;
@@ -101,12 +100,7 @@ class TileController implements angular.IComponentController {
     }
 
     private clearPending(coords) {
-        this.fillTiles({
-            coords: coords,
-            initState: true,
-            override: 'empty',
-            vadliationFn: 'isPendingAndNotSelected'
-        });
+        this.tileService.fillTiles(coords, true, 'empty', 'isPendingAndNotSelected');
     }
 
     /** If the override value (which will be the value of the tile that a dragstart is activated on)
@@ -162,12 +156,7 @@ class TileController implements angular.IComponentController {
             this.clearPending(coordsToClear);
         }
 
-        this.fillTiles({
-            coords: allPendingCoords,
-            initState: true,
-            override: 'pending',
-            validationFn: 'isNotPending'
-        });
+        this.tileService.fillTiles(allPendingCoords, true, 'pending','isNotPending');
 
         this.$scope.$apply(); 
     }
@@ -304,12 +293,12 @@ class TileController implements angular.IComponentController {
         }
     }
 
-    /** used with the validationFn in gameController.prototype.fillTiles */
+    /** used with the validationFn in tileService.fillTiles */
     isPendingAndNotSelected() {
         return this.pending && !this.selected;
     }
 
-    /** used with the validationFn in gameController.prototype.fillTiles */
+    /** used with the validationFn in tileService.fillTiles */
     isNotPending() {
         return !this.pending;
     }
