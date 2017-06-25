@@ -3,6 +3,7 @@
 /// <reference path="../../core/eventService/EventService.d.ts" />
 /// <reference path="../../core/touchService/TouchService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
+/// <reference path="../sideLengthService/SideLengthService.d.ts" />
 
 'use strict';
 
@@ -18,6 +19,7 @@ class TileController implements angular.IComponentController {
         'dragBoxService',
         'eventService',
         'shiftService',
+        'sideLengthService',
         'tileService',
         'touchService'
     ];
@@ -36,7 +38,6 @@ class TileController implements angular.IComponentController {
     private pending: boolean;
     private selected: boolean;
 
-    private sideLength;
     private goalMatrix;
 
     private height: string;
@@ -54,6 +55,7 @@ class TileController implements angular.IComponentController {
         private dragBoxService,
         private eventService: IEventService,
         private shiftService: IShiftService,
+        private sideLengthService: ISideLengthService,
         private tileService: ITileService,
         private touchService: ITouchService
     ) {
@@ -65,7 +67,6 @@ class TileController implements angular.IComponentController {
         this.isEditMode = this.level.currentView === 'edit';
         this.tutorial = this.$attrs['tutorial'];
 
-        this.sideLength = this.Utils.getSideLength();
         this.goalMatrix = this.Utils.getGoalMatrix();
 
         this.initializeFill();
@@ -95,7 +96,6 @@ class TileController implements angular.IComponentController {
         })
 
         this.eventService.subscribe(this.$scope, 'tileSizeChanged', () => {
-            this.sideLength = this.Utils.getSideLength();
             this.setTileSize(this.Utils.getTileSize(this.tutorial));
         })
     }
@@ -133,7 +133,7 @@ class TileController implements angular.IComponentController {
     }
 
     private fillPending(index) {
-        var coord = this.tileService.convertTo2D(index, this.sideLength),
+        var coord = this.tileService.convertTo2D(index),
                     coordsToClear,
                     i = 0,
                     len,
@@ -173,7 +173,7 @@ class TileController implements angular.IComponentController {
     }
 
     private mouseDownEvent(event: JQueryEventObject) {
-        let coord = this.tileService.convertTo2D(this.index, this.sideLength);
+        let coord = this.tileService.convertTo2D(this.index);
 
         this.dragBoxService.startCoord = coord;
         this.dragBoxService.initState = this.selected;
@@ -194,7 +194,7 @@ class TileController implements angular.IComponentController {
         let coord;
 
         if (actualScope && actualScope.tileCtrl.hasOwnProperty('index')) {
-            coord = this.tileService.convertTo2D(actualScope.tileCtrl.index, this.sideLength);
+            coord = this.tileService.convertTo2D(actualScope.tileCtrl.index);
             this.dragBoxService.endCoord = coord;
 
             if (!this.dragBoxService.validate()) {
@@ -214,7 +214,7 @@ class TileController implements angular.IComponentController {
             wrong_answer = false;
     
         if (typeof index === 'number') { 
-            coord = this.tileService.convertTo2D(index, this.sideLength);
+            coord = this.tileService.convertTo2D(index);
         } else {
             coord = index;
         }
@@ -269,13 +269,14 @@ class TileController implements angular.IComponentController {
     }
 
     fillBorders(direction, index) {
-      return this.getBorderColors(this.sideLength, direction, index);
+      return this.getBorderColors(direction, index);
     }
 
     /* Determine which tiles to add colored borders to */
-    getBorderColors(sideLength, direction, index) {
-        var canColor,
-            coord = this.tileService.convertTo2D(index, this.sideLength);
+    getBorderColors(direction, index) {
+        let canColor;
+        let coord = this.tileService.convertTo2D(index);
+        let sideLength = this.sideLengthService.sideLength;
 
         // no borders through puzzle for small puzzles
         if (sideLength <= 5) {

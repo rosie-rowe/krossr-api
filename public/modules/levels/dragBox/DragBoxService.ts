@@ -1,17 +1,28 @@
+/// <reference path="./DragBoxService.d.ts" />
 /// <reference path="../point/Point.d.ts" />
+/// <reference path="../tile/TileService.d.ts" />
 
 'use strict';
 
-class DragBox {
+class DragBoxService implements IDragBoxService {
+    static $name = 'dragBoxService';
+
+    static $inject = [
+        'tileService'
+    ];
+
     private _initState: boolean = true;
+
     get initState(): boolean {
         return this._initState;
     }
+
     set initState(state: boolean) {
         this._initState = state;
     }
 
     private _startCoord: Point;
+
     get startCoord() {
         return this._startCoord;
     }
@@ -19,7 +30,9 @@ class DragBox {
         this._startCoord = coord;
     }
 
+
     private _endCoord: Point;
+
     get endCoord() {
         return this._endCoord;
     }
@@ -27,13 +40,28 @@ class DragBox {
         this._endCoord = coord;
     }
 
-    constructor() {}
+    constructor(
+        private tileService: ITileService
+    ) {
+
+    }
 
     public clearDragBox() {
         this.startCoord = undefined;
         this.endCoord = undefined;
         this.initState = true;
     }
+
+    /**
+     * Change the tiles in the dragbox to the correct state
+     */
+    fill(override) {
+        if (this.validate()) {
+            this.tileService.fillTiles(this.process(), this.initState, override);
+            this.clearDragBox();
+        }
+    }
+
     
     /*
     * Given a dragbox, return an array of all of the coordinates of included tiles
@@ -80,4 +108,4 @@ class DragBox {
     }
 }
 
-angular.module('levels').service('dragBoxService', DragBox);
+angular.module('levels').service(DragBoxService.$name, DragBoxService);

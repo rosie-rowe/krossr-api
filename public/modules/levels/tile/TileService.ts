@@ -1,4 +1,6 @@
 /// <reference path="../point/Point.d.ts" />
+/// <reference path="../sideLengthService/SideLengthService.d.ts" />
+/// <reference path="./TileService.d.ts" />
 
 'use strict';
 
@@ -7,14 +9,24 @@
  * as well as methods for accessing it
  */
 
-class TileService {
+class TileService implements ITileService {
     static $name = 'tileService';
+
+    static $inject = [
+        'sideLengthService'
+    ];
 
     private tileIndex: any[] = [];
 
+    constructor(
+        private sideLengthService: ISideLengthService
+    ) {
+
+    }
+
     /** Convert a 2D coordinate into an index */
-    private convertTo1D(coord: Point, sideLength: number): number {
-        return (coord.y * sideLength) + coord.x;
+    private convertTo1D(coord: Point): number {
+        return (coord.y * this.sideLengthService.sideLength) + coord.x;
     }
 
     addTile(obj) {
@@ -26,9 +38,9 @@ class TileService {
     }
 
     /** Convert an index into a 2D coordinate */
-    convertTo2D(index: number, sideLength: number): Point {
-        let x = index % sideLength;
-        let y = (index - x) / sideLength;
+    convertTo2D(index: number): Point {
+        let x = index % this.sideLengthService.sideLength;
+        let y = (index - x) / this.sideLengthService.sideLength;
 
         let coord = {
             y: y,
@@ -46,8 +58,21 @@ class TileService {
         }
     }
 
-    findTileCtrlByCoord(coord, sideLength) {
-        var index = this.convertTo1D(coord, sideLength);
+    fillTiles(coords, initState, override, validationFn?) {
+        let len = coords.length;
+    
+        for (let i = 0; i < len; i++) {
+            let currentCoord = coords[i];
+            let currentTileController = this.findTileCtrlByCoord(currentCoord);
+    
+            if (!validationFn || (typeof currentTileController[validationFn] === 'function' && currentTileController[validationFn]())) {
+                currentTileController.change(currentCoord, initState, override);
+            }
+        }
+    }
+
+    findTileCtrlByCoord(coord) {
+        var index = this.convertTo1D(coord);
         return this.findTileCtrlByIndex(index); 
     }
 

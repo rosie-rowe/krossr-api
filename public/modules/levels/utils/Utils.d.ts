@@ -12,7 +12,6 @@ interface IUtils {
     getGameSize(tutorialMode: boolean): any; // todo
     getGameMatrix(): any[][] // todo
     getGoalMatrix(): any[][] // todo
-    getSideLength(): number;
     getTileSize(tutorialMode: boolean): number;
     getTileSizePx(): string;
     getWidth(selector: string): number;
@@ -20,7 +19,6 @@ interface IUtils {
     setCoord(y: number, x: number, value: boolean): void;
     setGameSize(widthInTiles: number): void;
     setGoalMatrix(matrix: boolean[][]): void;
-    setSideLength(length: number): void;
     setTileSize(gameWidth: number, widthInTiles: number): void;
     setOuterGameWidth(width: number): void;
     setWidth(selector: string, width: number): void;

@@ -1,4 +1,5 @@
 /// <reference path="./Utils.d.ts" />
+/// <reference path="../sideLengthService/SideLengthService.d.ts" />
 /// <reference path="../tile/TileService.d.ts" />
 
 class Utils implements IUtils {
@@ -6,6 +7,7 @@ class Utils implements IUtils {
         '$timeout',
         '$rootScope',
         'ngDialog',
+        'sideLengthService',
         'tileService'
     ];
 
@@ -13,6 +15,7 @@ class Utils implements IUtils {
         private $timeout: angular.ITimeoutService,
         private $rootScope: angular.IRootScopeService,
         private ngDialog: any,
+        private sideLengthService: ISideLengthService,
         private tileService: ITileService
     ) {
 
@@ -24,7 +27,6 @@ class Utils implements IUtils {
     private goalMatrix: boolean[][];
     private outerGameSize: number;
     private playableAreaSize: number;
-    private sideLength: number;
     private tileSize: number = 25;
     private timeout: number = 1000;
     private tutorialDivider: number = 4;
@@ -36,7 +38,7 @@ class Utils implements IUtils {
 
         /* 18 is a bit of a magic number, I worked backwards from determining how much extra space
             the game had based on sideLength */ 
-        return width - ((borderWidth * this.sideLength) + (18 - this.sideLength)); 
+        return width - ((borderWidth * this.sideLengthService.sideLength) + (18 - this.sideLengthService.sideLength)); 
     }
 
     /** Return the width of the main section of the game so we can calculate game and tile sizes off of it */
@@ -154,11 +156,6 @@ class Utils implements IUtils {
         return this.goalMatrix;
     }
 			
-    /* Return the current side length */
-    getSideLength() {
-        return this.sideLength;
-    }
-
     getTileSize(tutorialMode) {
         return tutorialMode ? this.tileSize / this.tutorialDivider : this.tileSize;
     }
@@ -207,13 +204,8 @@ class Utils implements IUtils {
     /* Modify the current game matrix, setting a new side length and game size as a side effect  (used for changing size) */
     setGameMatrix(matrix) {
         this.gameMatrix = matrix;
-        this.setSideLength(matrix.length);
+        this.sideLengthService.sideLength = matrix.length;
         this.setGameSize(matrix.length);
-    }
-
-    /* Modify the current side length */
-    setSideLength(length) {
-        this.sideLength = length;
     }
 
     setTileSize(gameWidth, widthInTiles) {

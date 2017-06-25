@@ -83,12 +83,11 @@ class GameController implements angular.IComponentController {
         });
     }
 
-
     /** Change the tiles inside the dragbox to the specified state
         (pending if being dragged over, selected if mouse released normally,
         marked if shift was held) */
     private applyFillDragBox(override?) {
-        this.fillDragBox(override);
+        this.dragBoxService.fill(override);
         this.$scope.$apply();
     };
 
@@ -129,34 +128,6 @@ class GameController implements angular.IComponentController {
         }
         return false;
     };
-
-    fillDragBox(override) {
-        if (this.dragBoxService.validate()) {
-            this.fillTiles(this.dragBoxService.process(), this.dragBoxService.initState, override);
-            this.dragBoxService.clearDragBox();
-        }
-    };
-    
-    /**
-    * Fill all of the tiles in the specified coordinate array
-    * @params {Array} array of coordinate objects
-    * @params {function} a function to run on each tile controller before changing it to determine whether or not to change. must be defined in TileController
-    */
-    fillTiles(coords, initState, override, validationFn?) {
-        var len = coords.length;
-        var i = 0;
-        var currentCoord;
-        var currentTileController;
-    
-        for (; i < len; i++) {
-            currentCoord = coords[i];
-            currentTileController = this.tileService.findTileCtrlByCoord(currentCoord, this.Utils.getSideLength());
-    
-            if (!validationFn || (typeof currentTileController[validationFn] === 'function' && currentTileController[validationFn]())) {
-                currentTileController.change(currentCoord, initState, override);
-            }
-        }
-    }
 
     gameOver() {
         if (!this.level.lost) {
