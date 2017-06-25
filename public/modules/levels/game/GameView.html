@@ -2,6 +2,6 @@
 	<div class="inner game"
          ng-style="{ 'width': gameCtrl.gameSettings.width, 'height': gameCtrl.gameSettings.height }"
          tabindex="1">
-         <tile ng-repeat="i in gameCtrl.tiles" editable='true' fill-tiles="gameCtrl.fillTiles(coords, initState, override, validationFn)" index="$index" level="gameCtrl.level" tiles="gameCtrl.tiles"></tile> 
+         <tile ng-repeat="i in gameCtrl.tiles" editable='true' fill-tiles="gameCtrl.fillTiles(coords, initState, override, validationFn)" game-over="gameCtrl.openWinLoseNotification()" index="$index" level="gameCtrl.level" tiles="gameCtrl.tiles"></tile> 
 	</div>
 </div>

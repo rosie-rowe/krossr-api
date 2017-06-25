@@ -312,7 +312,7 @@ class TileController implements angular.IComponentController {
 
     /** Remove a life from the pool of remaining lives */
     removeLife() {
-        if (this.level & this.level.currentLives) {
+        if (this.level && this.level.currentLives) {
             this.level.currentLives--;
 
             if (this.level.currentLives === 0) {
