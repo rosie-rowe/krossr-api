@@ -27,8 +27,8 @@ angular.element(document).ready(function() {
 	if (window.location.hash === '#_=_') window.location.hash = '#!';
 
 	// If it's not already defined, define a method to find the index of an object in an array.
-	if (!Array.prototype.indexOfObject) {
-		Array.prototype.indexOfObject = function(obj) {
+	if (!Array.prototype.hasOwnProperty('indexOfObject')) {
+		Array.prototype['indexOfObject'] = function(obj) {
             for(var i = 0; i < this.length; i++){
                 if(angular.equals(this[i], obj)){
                     return i;

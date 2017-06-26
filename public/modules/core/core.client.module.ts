@@ -1,3 +1,5 @@
+/// <reference path="../../config.ts" />
+
 /*global
     ApplicationConfiguration
 */
