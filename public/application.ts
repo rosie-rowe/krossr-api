@@ -1,3 +1,5 @@
+/// <reference path="./config.ts" />
+
 'use strict';
 
 //Start by defining the main module and adding the module dependencies
