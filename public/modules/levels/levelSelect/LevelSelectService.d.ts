@@ -1,3 +1,0 @@
-interface ILevelSelectService {
-    openLevelSelect();
-}

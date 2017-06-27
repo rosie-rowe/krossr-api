@@ -1,5 +1,4 @@
-/// <reference path="../../levels/utils/Utils.d.ts" />
-/// <reference path="../../levels/levelSelect/LevelSelectService.d.ts" />
+/// <reference path="../../core/componentDialog/IComponentDialogService.d.ts" />
 /// <reference path="../../users/authentication/AuthenticationService.d.ts" />
 
 'use strict';
@@ -9,34 +8,19 @@ class HeaderController implements angular.IComponentController {
 	static $name = 'HeaderController';	
 
 	static $inject = [
-		'$scope',
-		'$state',
-		'$timeout',
 		'Authentication',
 		'componentDialogService',
-		'levelSelectService',
-		'ngDialog',
-		'Utils'
 	]
 
 	constructor(
-		private $scope: angular.IScope,
-		private $state: angular.ui.IStateService,
-		private $timeout: angular.ITimeoutService,
 		private Authentication: IAuthenticationService,
 		private componentDialogService: IComponentDialogService,
-		private levelSelectService: ILevelSelectService,
-		private ngDialog,
-		private Utils: IUtils
 	) {
 
 	}
 
 	openEditProfile() {
-		this.ngDialog.open({
-			plain: true,
-			template: '<edit-profile close-action="closeThisDialog()"></edit-profile>'
-		})
+		this.componentDialogService.open('edit-profile');
 	}
 
 	openHelp() {
@@ -44,22 +28,15 @@ class HeaderController implements angular.IComponentController {
 	}
 
 	openLevelSelect() {
-		this.levelSelectService.openLevelSelect();	
+		this.componentDialogService.open('level-select');
 	}
 
-
 	openSignIn() {
-		this.ngDialog.open({
-			plain: true,
-			template: '<sign-in close-action="closeThisDialog()"></sign-in>'
-		})	
+		this.componentDialogService.open('sign-in');
 	}
 
 	openSignUp() {
-		this.ngDialog.open({
-			plain: true,
-			template: '<sign-up close-action="closeThisDialog()"></sign-up>'
-		})
+		this.componentDialogService.open('sign-up');
 	}
 }
 

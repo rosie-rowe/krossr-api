@@ -1,6 +1,6 @@
 /// <reference path="../utils/Utils.d.ts" />
+/// <reference path="../../core/componentDialog/IComponentDialogService.d.ts" />
 /// <reference path="../../core/event/EventService.d.ts" />
-/// <reference path="../levelSelect/LevelSelectService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
 /// <reference path="../../users/authentication/AuthenticationService.d.ts" />
 
@@ -17,9 +17,9 @@ class LevelController implements angular.IComponentController {
         '$stateParams',
         '$timeout',
         'Authentication',
+        'componentDialogService',
         'eventService',
         'Levels',
-        'levelSelectService',
         'ngDialog',
         'shiftService',
         'Utils'
@@ -38,9 +38,9 @@ class LevelController implements angular.IComponentController {
         private $stateParams: any,
         private $timeout: angular.ITimeoutService,
         private Authentication: IAuthenticationService,
+        private componentDialogService: IComponentDialogService,
         private eventService: IEventService,
         private Levels,
-        private levelSelectService: ILevelSelectService,
         private ngDialog,
         private shiftService: IShiftService,
         private Utils: IUtils
@@ -261,7 +261,7 @@ class LevelController implements angular.IComponentController {
     remove(level) {
         if (level) { 
             level.$remove(() => {
-                this.levelSelectService.openLevelSelect();
+                this.componentDialogService.open('level-select');
             });
         }
     }

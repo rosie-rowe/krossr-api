@@ -37,8 +37,8 @@ class ComponentDialogService implements IComponentDialogService {
         })
     }
 
-    private getTemplate(directiveName: string, ...args: any[]){
-        return '<' + directiveName + ' close-action="closeThisDialog()"' + JSON.stringify(args) + '>' + '</' + directiveName + '>';
+    private getTemplate(directiveName: string){
+        return '<' + directiveName + ' close-action="closeThisDialog()">' + '</' + directiveName + '>';
     }
 
     open(directiveName: string) {
