@@ -13,6 +13,7 @@ class HeaderController implements angular.IComponentController {
 		'$state',
 		'$timeout',
 		'Authentication',
+		'componentDialogService',
 		'levelSelectService',
 		'ngDialog',
 		'Utils'
@@ -23,6 +24,7 @@ class HeaderController implements angular.IComponentController {
 		private $state: angular.ui.IStateService,
 		private $timeout: angular.ITimeoutService,
 		private Authentication: IAuthenticationService,
+		private componentDialogService: IComponentDialogService,
 		private levelSelectService: ILevelSelectService,
 		private ngDialog,
 		private Utils: IUtils
@@ -38,10 +40,7 @@ class HeaderController implements angular.IComponentController {
 	}
 
 	openHelp() {
-		this.ngDialog.open({
-			plain: true,
-			template: '<help></help>'
-		})
+		this.componentDialogService.open('help');
 	}
 
 	openLevelSelect() {
