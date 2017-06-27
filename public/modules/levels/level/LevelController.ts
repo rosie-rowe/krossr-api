@@ -1,5 +1,5 @@
 /// <reference path="../utils/Utils.d.ts" />
-/// <reference path="../../core/eventService/EventService.d.ts" />
+/// <reference path="../../core/event/EventService.d.ts" />
 /// <reference path="../levelSelect/LevelSelectService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
 /// <reference path="../../users/authentication/AuthenticationService.d.ts" />

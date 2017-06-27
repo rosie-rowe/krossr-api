@@ -1,7 +1,7 @@
 /// <reference path="../gameOver/GameOverService.d.ts" />
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../tile/TileService.d.ts" />
-/// <reference path="../../core/eventService/EventService.d.ts" />
+/// <reference path="../../core/event/EventService.d.ts" />
 
 'use strict';
 

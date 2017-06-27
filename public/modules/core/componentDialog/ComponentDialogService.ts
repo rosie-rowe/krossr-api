@@ -25,6 +25,8 @@ class ComponentDialogService implements IComponentDialogService {
 
     private getDefaultOpenOptions(directiveName: string): angular.dialog.IDialogOpenOptions {
         return angular.extend(this.defaultOptions, {
+            controller: 'ComponentDialogController',
+            controllerAs: 'componentDialogCtrl',
             template: this.getTemplate(directiveName)
         });
     }

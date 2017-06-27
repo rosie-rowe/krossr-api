@@ -1,4 +1,4 @@
-/// <reference path="../../core/eventService/EventService.d.ts" />
+/// <reference path="../../core/event/EventService.d.ts" />
 /// <reference path="../../levels/levelSelect/LevelSelectService.d.ts" />
 
 'use strict';
