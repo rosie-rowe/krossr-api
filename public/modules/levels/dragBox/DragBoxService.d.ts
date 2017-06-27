@@ -1,3 +1,5 @@
+/// <reference path="../point/Point.d.ts" />
+
 interface IDragBoxService {
     initState: boolean;
     startCoord: Point;
