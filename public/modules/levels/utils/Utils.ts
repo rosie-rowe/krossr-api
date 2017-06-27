@@ -6,7 +6,6 @@ class Utils implements IUtils {
     static $inject = [
         '$timeout',
         '$rootScope',
-        'ngDialog',
         'sideLengthService',
         'tileService'
     ];
@@ -14,7 +13,6 @@ class Utils implements IUtils {
     constructor(
         private $timeout: angular.ITimeoutService,
         private $rootScope: angular.IRootScopeService,
-        private ngDialog: any,
         private sideLengthService: ISideLengthService,
         private tileService: ITileService
     ) {
