@@ -2,7 +2,7 @@
 
 class HelpComponent implements angular.IComponentOptions {
     static $name = 'help';
-    bindToController: true;
+    bindToController = true;
     controllerAs = 'helpCtrl';
     templateUrl = 'modules/core/help/HelpView.html';
 
