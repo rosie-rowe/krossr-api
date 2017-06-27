@@ -32,9 +32,9 @@ module.exports = {
 			'public/less/modules.css'
 		],
 		js: [
-			'public/config.js',
-			'public/application.js',
-			'public/modules/*/*.js',
+			'public/typescript/config.js',
+			'public/typescript/application.js',
+			'public/typescript/**/*.module.js',
             'public/typescript/**/*.js',
 			'public/modules/*/*[!tests]*/**/*.js',
             'public/dist/templates.js'

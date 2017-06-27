@@ -90,19 +90,6 @@ module.exports = function(grunt) {
                 dest: 'public/dist/templates.js'
             }
         },
-        // typescript: {
-        //     base: {
-        //         src: ['<%= applicationTypescriptFiles %>'],
-        //         dest: 'public/typescript',
-        //         options: {
-        //             keepDirectoryHierarchy: true,
-        //             references: ['<%= applicationTypescriptReferences %>'],
-        //             rootDir: 'public/modules',
-        //             sourceMap: true,
-        //             target: 'es5'
-        //         },
-        //     }
-        // },
 		ts: {
 			default: {
 				src: ['<%= applicationTypescriptFiles %>'],
