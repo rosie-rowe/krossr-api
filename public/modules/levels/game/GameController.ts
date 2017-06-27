@@ -10,29 +10,21 @@ class GameController implements angular.IComponentController {
     static $name = 'GameController';
 
     static $inject = [
-        '$attrs',
         '$element',
         '$scope',
-        '$timeout',
         'eventService',
         'gameOverService',
         'Utils',
-        'ngDialog',
-        'dragBoxService',
-        'tileService'
+        'dragBoxService'
     ];
 
     constructor(
-        private $attrs: angular.IAttributes,
         private $element: angular.IAugmentedJQuery,
         private $scope: angular.IScope,
-        private $timeout: angular.ITimeoutService,
         private eventService: IEventService,
         private gameOverService: IGameOverService,
         private Utils: IUtils,
-        private ngDialog,
-        private dragBoxService,
-        private tileService: ITileService
+        private dragBoxService
     ) {
 
     }
