@@ -1,4 +1,4 @@
-/// <reference path="../config.ts" />
+/// <reference path="./config.ts" />
 
 'use strict';
 

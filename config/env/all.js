@@ -47,6 +47,8 @@ module.exports = {
 			'public/modules/*/tests/*.js'
 		],
         typescript: [
+			'public/config.ts',
+			'public/application.ts',
             'public/modules/**/*.ts'
         ],
         typescriptRefs: [
