@@ -202,6 +202,8 @@ class TileController implements angular.IComponentController {
     changeTile(index, initState, changeTo, goalMatrix) {
         var coord,
             wrong_answer = false;
+
+        let gameMatrix = this.Utils.getGameMatrix();
     
         if (typeof index === 'number') { 
             coord = this.tileService.convertTo2D(index);
@@ -214,7 +216,8 @@ class TileController implements angular.IComponentController {
         } else {
             if (this.shiftService.shiftOn === true) {
                 this.fill('marked', initState);
-                this.Utils.setCoord(coord.y, coord.x, this.selected);
+                
+                gameMatrix.setValueAt(coord.y, coord.x, this.selected);
             } else {
                 // we don't want this to happen for new or edit screens
                 if (goalMatrix) {
@@ -226,7 +229,7 @@ class TileController implements angular.IComponentController {
                     this.removeLife();
                 } else {
                     this.fill('selected', initState);
-                    this.Utils.setCoord(coord.y, coord.x, this.selected);
+                    gameMatrix.setValueAt(coord.y, coord.x, this.selected);
                 }
             }
         }

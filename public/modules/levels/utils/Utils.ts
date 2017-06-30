@@ -19,7 +19,7 @@ class Utils implements IUtils {
 
     }
 
-    private gameMatrix: boolean[][];
+    private gameMatrix: BooleanMatrix;
     private gameHeight: string;
     private gameWidth: string;
     private goalMatrix: boolean[][];
@@ -56,36 +56,16 @@ class Utils implements IUtils {
         this.tileService.eraseTiles();
 
         if (currentGameMatrix) {
-            this.clearAllMatrix(currentGameMatrix, currentGameMatrix.length);
+            currentGameMatrix.clear();
         }
 
         this.tileService.clearTileIndex();
     }
 
-    /** Given a matrix of true/false values, set every value to false */
-    clearAllMatrix(matrix, value) {
-        var len;
-
-        for (var i = 0; i < value; i++) {
-            len = matrix[i].length
-            for (var j = 0; j < len; j++) {
-                matrix[i][j] = false;
-            }
-        }
-
-        return matrix;
-    }
-
     /* Given a number of tiles, create an empty square matrix with that number */
-    createEmptyMatrix(value) {
-        var valueRoot = Math.sqrt(value),
-            finalMatrix = [];
-
-        for (var i = 0; i < valueRoot; i++) {
-            finalMatrix.push(new Array(valueRoot));
-        }
-
-        finalMatrix = this.clearAllMatrix(finalMatrix, valueRoot);
+    createEmptyMatrix(numberOfTiles: number) {
+        let sideLength = Math.sqrt(numberOfTiles);
+        let finalMatrix = new BooleanMatrix(sideLength, sideLength);
         this.setGameMatrix(finalMatrix);
     }
 
@@ -145,7 +125,7 @@ class Utils implements IUtils {
     }
 
     /* Return the current game matrix */
-    getGameMatrix() {
+    getGameMatrix(): BooleanMatrix {
         return this.gameMatrix;
     }
 
@@ -169,11 +149,6 @@ class Utils implements IUtils {
     /* Display an integer size (e.g. 15) and convert it to a pleasing form (15x15) */
     prettySize(size) {
         return size + 'x' + size;
-    }
-
-    /* Modfiy a specific coordinate of the game matrix (used for selection of tiles) */
-    setCoord(y, x, value) {
-        this.gameMatrix[y][x] = value;
     }
 
     /* Modify the current game size. */
@@ -200,10 +175,10 @@ class Utils implements IUtils {
     }
 
     /* Modify the current game matrix, setting a new side length and game size as a side effect  (used for changing size) */
-    setGameMatrix(matrix) {
-        this.gameMatrix = matrix;
-        this.sideLengthService.sideLength = matrix.length;
-        this.setGameSize(matrix.length);
+    setGameMatrix(gameMatrix: BooleanMatrix) {
+        this.gameMatrix = gameMatrix;
+        this.sideLengthService.sideLength = gameMatrix.length;
+        this.setGameSize(gameMatrix.length);
     }
 
     setTileSize(gameWidth, widthInTiles) {

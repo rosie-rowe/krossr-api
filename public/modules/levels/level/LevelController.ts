@@ -227,7 +227,8 @@ class LevelController implements angular.IComponentController {
     }
 
     getSize() {
-        return this.Utils.flatten(this.Utils.getGameMatrix());
+        let gameMatrix = this.Utils.getGameMatrix();
+        return gameMatrix.flatten();
     }
 
     keydown($event: JQueryEventObject) {
