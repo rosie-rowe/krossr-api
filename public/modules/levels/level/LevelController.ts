@@ -152,7 +152,6 @@ class LevelController implements angular.IComponentController {
 
         this.level = undefined;
 
-        this.setGameSize(this.options.size)
         this.createGameArray(action);
         this.getLayoutForRepeater(action);
 
@@ -181,7 +180,6 @@ class LevelController implements angular.IComponentController {
                 
                 this.setRating();
 
-                console.log('setting currentLives to: ' + data.lives);
                 this.level.currentLives = data.lives;
 
                 var flatLayout = this.Utils.flatten(data.layout);
@@ -199,9 +197,6 @@ class LevelController implements angular.IComponentController {
 
                 this.getLayoutForRepeater(mode, this.level.layout);
                 this.level.currentView = mode;
-
-                console.log('At this point we should be on ' + mode);
-                console.log('We are actually on ' + this.level.currentView);
 
                 this.level.won = false;
                 this.level.lost = false;
@@ -279,11 +274,6 @@ class LevelController implements angular.IComponentController {
     /** Remove the level you're looking at */
     removeCurrentLevel() {
         this.remove(this.level);
-    }
-
-    setGameSize(size) {
-        console.log('ts this one');
-        this.Utils.setGameSize(Math.sqrt(size));
     }
 
     /** This should be done on the server side, todo */

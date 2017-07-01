@@ -154,7 +154,6 @@ class Utils implements IUtils {
         this.gameHeight = finalHeight + 'px';
 
         this.$timeout(() => {
-            console.log('gameSizeChanged sending');
             this.$rootScope.$broadcast('gameSizeChanged', { width: this.gameWidth, height: this.gameHeight });
         });
         
