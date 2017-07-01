@@ -64,7 +64,7 @@
     "grunt-env": "~0.4.1",
     "grunt-html2js": "^0.3.6",
     "grunt-karma": "^2.0.0",
-    "grunt-mocha-test": "~0.12.1",
+    "grunt-mocha-test": "~0.13.2",
     "grunt-nodemon": "~0.4.2",
     "grunt-ts": "^6.0.0-beta.16",
     "jasmine-core": "^2.4.1",
