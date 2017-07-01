@@ -1,3 +1,4 @@
+/// <reference path="../matrix/Matrix.ts" />
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../../core/event/EventService.d.ts" />
 
@@ -20,6 +21,9 @@ class NumberGridController implements angular.IComponentController {
 
     }
 
+    // At this level and below we're working with the individual rotated pieces, not the full thing
+    private gameMatrix: BooleanMatrix;
+    private goalMatrix: BooleanMatrix;
     private tileSize: string;
 
     $onInit() {

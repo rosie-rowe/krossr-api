@@ -1,4 +1,3 @@
-/// <reference path="../GameMatrix/GameMatrix.ts" />
 /// <reference path="../Matrix/Matrix.ts" />
 /// <reference path="../point/Point.d.ts" />
 /// <reference path="../utils/Utils.d.ts" />
@@ -13,6 +12,8 @@ class NumberLineController {
     static $name = 'NumberLineController';
 
     private cssClass = '';
+    private gameMatrix: BooleanMatrix;
+    private goalMatrix: BooleanMatrix;
 
     constructor(
         private Utils: IUtils
@@ -21,13 +22,8 @@ class NumberLineController {
 
     $onInit() {
         let layout = this.Utils.getGoalMatrix();
-        this.gameMatrix = new GameMatrix(layout, false);
-        this.goalMatrix = new GameMatrix(layout, true);
         this.sideLength = layout.length;
     }
-
-    private gameMatrix: GameMatrix;
-    private goalMatrix: GameMatrix;
 
     private sideLength: number;
     private lineContent: LineContent[] = [];
@@ -67,15 +63,23 @@ class NumberLineController {
         let resetInd: boolean = true;
         let coord: Point = { x: undefined, y: undefined };
 
-        let currentGame: BooleanMatrix = this.gameMatrix[orientation];
-        let currentGoal: BooleanMatrix = this.goalMatrix[orientation];
+        let logLater = false;
+
+        if (orientation == 'horizontal') {
+            logLater = true;
+        }
 
         // Loop through the row, building a separate count for each group of consecutive true tiles
         for (var i = 0; i < this.sideLength; i++) {
             // If the rotated goal matrix contains a true tile at the current index...
-            if (currentGoal.getValueAt(index, i)) {
+            if (this.goalMatrix.getValueAt(index, i)) {
                 if (!currentGroup[groupCount]) {    
                     currentGroup[groupCount] = [];
+                }
+
+                if (logLater) {
+                    console.log('Added a point to a group.');
+                    console.log(`y ${index} x ${i}`);
                 }
 
                 // Add the tile to the grouping.
@@ -85,14 +89,19 @@ class NumberLineController {
                             y: index,
                             x: i
                         },
-                        currentValue: currentGame.getValueAt(index, i),
-                        goalValue: currentGoal.getValueAt(index, i)
+                        currentValue: this.gameMatrix.getValueAt(index, i),
+                        goalValue: this.goalMatrix.getValueAt(index, i)
                     }
                 );
 
                 /* if a grouping's tiles all contain the correct values, we want to mark that group off in the view so that the user
                     can keep better track of their progress */
-                this.cssClass = this.determineCssForGroup(currentGroup, index, orientation);
+
+                if (currentGroup[groupCount][0].coord.x === 0 && currentGroup[groupCount][0].coord.y === 0) {
+                    console.log('deciding..');
+                }
+
+                this.cssClass = this.determineCssForGroup(currentGroup);
 
                 resetInd = true;
             } else {
@@ -107,8 +116,8 @@ class NumberLineController {
         return currentGroup;
     }
 
-    private determineCssForGroup(group: TileGroup, index: number, orientation: string): string {
-        let groupCompleted: boolean = this.isGroupCompleted(group); 
+    private determineCssForGroup(group: TileGroup): string {
+        let groupCompleted = this.isGroupCompleted(group); 
 
         if (groupCompleted) {
             return 'finishedGrouping';
@@ -169,7 +178,7 @@ class NumberLineController {
                 value = entry[j];
 
                 if (value.coord) {
-                    newValue = this.gameMatrix[orientation].getValueAt(value.coord.y, value.coord.x);
+                    newValue = this.gameMatrix.getValueAt(value.coord.y, value.coord.x);
 
                     if (value.currentValue !== newValue) {
                         value.currentValue = newValue;
@@ -179,7 +188,7 @@ class NumberLineController {
             }
         }   
 
-        newCssClass = this.determineCssForGroup(this.currentGroup, index, orientation);
+        newCssClass = this.determineCssForGroup(this.currentGroup);
 
         if (this.cssClass !== newCssClass) {
             this.cssClass = newCssClass;
@@ -223,7 +232,7 @@ class LineContent {
 }
 
 class TileGroup {
-    private coord: Point;
+    coord: Point;
     currentValue: boolean;
     goalValue: boolean;
 }

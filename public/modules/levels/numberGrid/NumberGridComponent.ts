@@ -6,8 +6,9 @@ class NumberGridComponent implements angular.IComponentOptions {
     templateUrl = 'modules/levels/numberGrid/NumberGridView.html';
 
     bindings = {
+        gameMatrix: '<',
+        goalMatrix: '<',
         orientation: '@',
-        layout: '='
     }
 
     bindToController = true;

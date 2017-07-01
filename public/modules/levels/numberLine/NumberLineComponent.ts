@@ -10,7 +10,9 @@ class NumberLineComponent implements angular.IComponentOptions {
 
 	bindings = {
 		index: '<',
-		orientation: '@'
+		orientation: '@',
+		gameMatrix: '<',
+		goalMatrix: '<'
 	};
 
 	bindToController = true;

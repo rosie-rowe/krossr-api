@@ -1,3 +1,4 @@
+/// <reference path="../gameMatrix/GameMatrix.ts" />
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../../core/componentDialog/IComponentDialogService.d.ts" />
 /// <reference path="../../core/event/EventService.d.ts" />
@@ -54,6 +55,9 @@ class LevelController implements angular.IComponentController {
     private selectedLevelId;
     private error;
     private timeout = 1000;
+
+    private gameMatrix: GameMatrix;
+    private goalMatrix: GameMatrix;
 
     $onInit() {
         this.selectedLevelId = this.$stateParams['levelId'];
@@ -174,7 +178,7 @@ class LevelController implements angular.IComponentController {
                 levelId: this.selectedLevelId
             }).$promise.then((data) => {
                 this.level = data;
-
+                
                 this.setRating();
 
                 console.log('setting currentLives to: ' + data.lives);
@@ -189,6 +193,9 @@ class LevelController implements angular.IComponentController {
                     layout: this.level.layout,
                     controller: mode
                 });
+
+                this.gameMatrix = new GameMatrix(this.Utils.getGameMatrix(), false);
+                this.goalMatrix = new GameMatrix(this.Utils.getGoalMatrix(), true);
 
                 this.getLayoutForRepeater(mode, this.level.layout);
                 this.level.currentView = mode;
@@ -287,14 +294,14 @@ class LevelController implements angular.IComponentController {
 
     // Split out for easier testing
     submitCreate() {
-        var layout = this.Utils.getGameMatrix();
+        var gameMatrix = this.Utils.getGameMatrix();
 
         // Create new Level object
         var level = new this.Levels ({
             name: this.level.name,
-            layout: layout,
+            layout: gameMatrix.getLayout(),
             lives: this.level.lives,
-            size: layout.length
+            size: gameMatrix.length
         });
 
         var levelSaveSuccess = (response) => {

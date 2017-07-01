@@ -1,23 +1,11 @@
 <number-line
-	ng-if="numGridCtrl.orientation === 'horizontal'"
-	ng-style="{ 'height': numGridCtrl.tileSize,
-				'line-height': numGridCtrl.tileSize,
-				'font-size': numGridCtrl.getFontSize() }"
-	ng-repeat="i in numGridCtrl.layout track by $index"
-	ng-class-even="'even'"
-	ng-class-odd="'odd'"
-	index="$index"
-	orientation="{{numGridCtrl.orientation}}"
-	>
-</number-line>
-
-<number-line
-	ng-if="numGridCtrl.orientation === 'vertical'"
+	game-matrix="numGridCtrl.gameMatrix"
+	goal-matrix="numGridCtrl.goalMatrix"
 	ng-style="{
 		'width': numGridCtrl.tileSize,
 		'font-size': numGridCtrl.getFontSize()
 	}"
-	ng-repeat="i in numGridCtrl.layout track by $index"
+	ng-repeat="i in [].constructor(numGridCtrl.goalMatrix.length) track by $index"
 	ng-class-even="'even'"
 	ng-class-odd="'odd'"
 	index="$index"

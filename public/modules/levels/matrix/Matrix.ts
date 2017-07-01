@@ -27,6 +27,11 @@ class Matrix<T> {
         this.matrix = source.matrix;
     }
 
+    /** Return a COPY of the current layout to preserve encapsulation -- you shouldn't be able to modify a matrix by normal means */
+    getLayout() {
+        return angular.copy(this.matrix);
+    }
+
     initializeWith(values: T[][]) {
         this.matrix = values;
     }
