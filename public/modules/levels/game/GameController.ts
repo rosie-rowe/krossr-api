@@ -145,10 +145,6 @@ class GameController implements angular.IComponentController {
                 width: newGameSettings.gameWidth,
                 height: newGameSettings.gameHeight 
             }
-        } else {
-            console.log('YOU FUCKED UP');
-            console.trace();
-            debugger;
         }
     };
 }
