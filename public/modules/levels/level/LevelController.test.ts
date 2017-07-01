@@ -53,41 +53,6 @@ class LevelControllerTests {
                 });
             }));
     
-            it('$scope.find() should create an array with at least one Level object fetched from XHR', inject(function(Levels) {
-                // Create sample Level using the Levels service
-                var sampleLevel = new Levels({
-                    id: '525a8422f6d0f87f0e407a33',
-                    name: 'New Level',
-                    lives: 5,
-                    layout: [[true, true, true, true, true],
-                            [true, true, true, true, true],
-                            [true, true, true, true, true],
-                            [true, true, true, true, true],
-                            [true, true, true, true, true]],
-                    ratings: [],
-                    prettySize: '5x5',
-                });
-    
-                var sampleLevelsResponse = {
-                    numPerPage: 8,
-                    count: 10,
-                    levels: [sampleLevel]
-                }
-    
-                // Create a sample Levels array that includes the new Level
-                var sampleLevels = [sampleLevel];
-    
-                // Set GET response
-                $httpBackend.expectGET('levels?pageNum=0&sizeRestriction=&sortDirection=').respond(sampleLevelsResponse);
-    
-                // Run controller functionality
-                LevelsController.find();
-                $httpBackend.flush();
-    
-                // Test scope value
-                expect(scope.levels).toEqual(sampleLevels);
-            }));
-    
             it('$scope.findOne() should create an array with one Level object fetched from XHR using a levelId URL parameter', inject(function(Levels) {
                 // Define a sample Level object
                 var sampleLevel = new Levels({
