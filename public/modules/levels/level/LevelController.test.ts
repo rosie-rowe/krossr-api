@@ -4,9 +4,9 @@
 
 class LevelControllerTests {
    static run() {
-        describe('LevelSelectController tests:', function() {
+        describe('LevelController tests:', function() {
             // Initialize global variables
-            var LevelSelectController,
+            var LevelController,
                 scope,
                 $httpBackend,
                 $stateParams,
@@ -47,7 +47,7 @@ class LevelControllerTests {
                 $location = _$location_;
             
                 // Initialize the LevelSelect controller.
-                LevelSelectController = $controller('LevelSelectController', {
+                LevelController = $controller('LevelSelectController', {
                     $scope: scope
                 });
             }));
@@ -80,7 +80,7 @@ class LevelControllerTests {
                 $httpBackend.expectGET('levels?pageNum=0&sizeRestriction=&sortDirection=').respond(sampleLevelsResponse);
             
                 // Run controller functionality
-                LevelSelectController.find();
+                LevelController.find();
                 $httpBackend.flush();
             
                 // Test scope value
