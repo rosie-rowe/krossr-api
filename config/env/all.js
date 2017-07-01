@@ -36,7 +36,7 @@ module.exports = {
 			'public/typescript/application.js',
 			'public/typescript/**/*.module.js',
             'public/typescript/**/*.js',
-			'public/modules/*/*[!tests]*/**/*.js',
+			'public/modules/**/!(*.test).ts',
             'public/dist/templates.js'
 		],
         html: [
@@ -44,8 +44,7 @@ module.exports = {
         ],
 		tests: [
 			'public/lib/angular-mocks/angular-mocks.js',
-			'public/modules/*/tests/*.js',
-			'public/modules/**/*.test.js'
+			'public/modules/**/*.test.ts'
 		],
         typescript: [
 			'public/config.ts',
