@@ -1,4 +1,5 @@
 /**
+ * Container for a 2D array
  * A lot of this still assumes all matrices are square. Will fix if ever necessary.
  */
 
@@ -80,20 +81,5 @@ class Matrix<T> implements IEquatable<Matrix<T>>{
 
     setValueAt(row: number, column: number, value: T) {
         this.matrix[row][column] = value;
-    }
-}
-
-class BooleanMatrix extends Matrix<boolean> {
-    constructor(rowCount: number, colCount: number) {
-        super(rowCount, colCount);
-
-        // Initialize to false
-        this.clear();
-    }
-
-    clear() {
-        this.iterate((row, column) => {
-            this.setValueAt(row, column, false);
-        });
     }
 }

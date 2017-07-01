@@ -9,15 +9,19 @@ var applicationConfiguration = require('./config/config');
 module.exports = function(config) {
 	config.set({
 		// Frameworks to use
-		frameworks: ['jasmine'],
+		frameworks: ['jasmine', 'karma-typescript'],
 
 		// List of files / patterns to load in the browser
 		files: applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
 
+		preprocessors: {
+			'**/*.ts': ['karma-typescript'],
+		},
+
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		//reporters: ['progress'],
-		reporters: ['progress'],
+		reporters: ['progress', 'karma-typescript'],
 
 		// Web server port
 		port: 9876,
