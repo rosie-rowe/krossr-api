@@ -74,7 +74,6 @@ class GameController implements angular.IComponentController {
         });
         
         this.eventService.subscribe(this.$scope, 'gameSizeChanged', () => {
-            console.log('gameSizeChanged caught');
             this.updateGameSize();
         });
 
