@@ -52,6 +52,8 @@ class LevelController implements angular.IComponentController {
     private level; // the level
     private margin: number;
     private selectedLevelId;
+    private error;
+    private timeout = 1000;
 
     $onInit() {
         this.selectedLevelId = this.$stateParams['levelId'];
@@ -299,10 +301,10 @@ class LevelController implements angular.IComponentController {
             this.$state.go('update-level', { levelId: response.id }, { reload: true });
         };
 
-        var levelSaveFailure = function(err) {
+        var levelSaveFailure = (err) => {
             this.error = err.data.message;
 
-            this.$timeout(function() {
+            this.$timeout(() => {
                 this.error = '';
             }, this.timeout)
         }

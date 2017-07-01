@@ -14,7 +14,6 @@ interface IUtils {
     getTileSizePx(): string;
     prettySize(size: number): string;
     setGameSize(widthInTiles: number): void;
-    setGoalMatrix(matrix: boolean[][]): void;
     setTileSize(gameWidth: number, widthInTiles: number): void;
     setOuterGameWidth(width: number): void;
     setWidth(selector: string, width: number): void;

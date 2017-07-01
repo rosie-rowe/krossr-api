@@ -162,8 +162,10 @@ class Utils implements IUtils {
 
     /* Modify the current goal matrix (loading level from layout) */
     setGoalMatrix(layout?) {
-        this.goalMatrix = new BooleanMatrix(layout.length, layout.length);
-        this.goalMatrix.initializeWith(layout);
+        if (layout) {
+            this.goalMatrix = new BooleanMatrix(layout.length, layout.length);
+            this.goalMatrix.initializeWith(layout);
+        }
     }
 
     /* Modify the current game matrix, setting a new side length and game size as a side effect  (used for changing size) */
