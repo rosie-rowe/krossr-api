@@ -5,13 +5,13 @@
 class LevelControllerTests {
     static run() {
       	// Levels Controller Spec
-        describe('Levels Controller Tests', function() {
+        describe('LevelController Tests', function() {
             // Initialize global variables
-            var LevelsController,
-            scope,
-            $httpBackend,
-            $stateParams,
-            $location;
+            var LevelController,
+                scope,
+                $httpBackend,
+                $stateParams,
+                $location;
     
             // The $resource service augments the response object with methods for updating and deleting the resource.
             // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -48,7 +48,7 @@ class LevelControllerTests {
                 $location = _$location_;
     
                 // Initialize the Levels controller.
-                LevelsController = $controller('LevelsController', {
+                LevelController = $controller('LevelController', {
                     $scope: scope
                 });
             }));
@@ -67,12 +67,12 @@ class LevelControllerTests {
                 $httpBackend.expectGET(/levels\/([0-9a-fA-F]{24})$/).respond(sampleLevel);
     
                 // Run controller functionality
-                scope.selectedLevelId = '525a8422f6d0f87f0e407a33';
+                LevelController.selectedLevelId = '525a8422f6d0f87f0e407a33';
             
-                LevelsController.findOne();
+                LevelController.findOne();
                 $httpBackend.flush();
     
-                expect(scope.level.id).toEqual(sampleLevel.id);
+                expect(LevelController.level.id).toEqual(sampleLevel.id);
             }));
     
             it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Levels) {
@@ -96,7 +96,7 @@ class LevelControllerTests {
                 $httpBackend.expectPOST('levels', sampleLevelPostData).respond(sampleLevelResponse);
     
                 // Run controller functionality
-                LevelsController.create(sampleLevelPostData);
+                LevelController.create(sampleLevelPostData);
                 $httpBackend.flush();
             }));
     
@@ -119,7 +119,7 @@ class LevelControllerTests {
                 $httpBackend.expectPUT(/levels\/([0-9a-fA-F]{24})$/).respond();
     
                 // Run controller functionality
-                LevelsController.update();
+                LevelController.update();
                 $httpBackend.flush();
             }));
     
@@ -136,7 +136,7 @@ class LevelControllerTests {
                 $httpBackend.expectDELETE(/levels\/([0-9a-fA-F]{24})$/).respond(204);
     
                 // Run controller functionality
-                LevelsController.remove(sampleLevel);
+                LevelController.remove(sampleLevel);
                 $httpBackend.flush();
     
                 // Test array after successful delete
