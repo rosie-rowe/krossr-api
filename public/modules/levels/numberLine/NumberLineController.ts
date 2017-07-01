@@ -7,19 +7,16 @@
 
 class NumberLineController {
     static $inject = [
-        '$scope',
-        '$timeout',
         'Utils'
     ]
 
     static $name = 'NumberLineController';
 
+    private cssClass = '';
+
     constructor(
-        private $scope,
-        private $timeout,
         private Utils: IUtils
     ) {
-        this.$scope.cssClass = '';
     }
 
     $onInit() {
@@ -95,7 +92,7 @@ class NumberLineController {
 
                 /* if a grouping's tiles all contain the correct values, we want to mark that group off in the view so that the user
                     can keep better track of their progress */
-                this.$scope.cssClass = this.determineCssForGroup(currentGroup, index, orientation);
+                this.cssClass = this.determineCssForGroup(currentGroup, index, orientation);
 
                 resetInd = true;
             } else {
@@ -142,7 +139,7 @@ class NumberLineController {
     private getGroupings(currentGroup: TileGroup): LineContent[] {
         return Object.keys(currentGroup).map((value, index) => {
             return {
-                cssClass: this.$scope.cssClass,
+                cssClass: this.cssClass,
                 text: currentGroup[value].length
             };
         });
@@ -184,8 +181,8 @@ class NumberLineController {
 
         newCssClass = this.determineCssForGroup(this.currentGroup, index, orientation);
 
-        if (this.$scope.cssClass !== newCssClass) {
-            this.$scope.cssClass = newCssClass;
+        if (this.cssClass !== newCssClass) {
+            this.cssClass = newCssClass;
             changed = true;
         }
 
