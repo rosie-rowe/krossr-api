@@ -6,7 +6,6 @@ interface IUtils {
     clearAll(): void;
     createEmptyMatrix(value: number): void;
     createNewGame(args: any): void; // todo
-    finishLine(index: any, orientation: string): void;
     flatten(matrix: any[][]): any[][];
     getGameSize(tutorialMode: boolean): any; // todo
     getGameMatrix(): BooleanMatrix; 

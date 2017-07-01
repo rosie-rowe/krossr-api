@@ -102,12 +102,6 @@ class Utils implements IUtils {
         }
     }
  
-    /* Given an index and orientation, pass a message to the tile controller
-     * to mark out the tiles on that line that aren't selected */
-    finishLine(index, orientation) {
-        this.$rootScope.$broadcast('lineComplete', { index: index, orientation: orientation });
-    }
-
     /* Convert a Matrix into an array (for ng-repeat to hit all of them) */
     flatten(matrix) {
         return Array.prototype.concat.apply([], matrix);

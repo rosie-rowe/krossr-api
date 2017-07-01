@@ -114,10 +114,6 @@ class NumberLineController {
         let groupCompleted: boolean = this.isGroupCompleted(group); 
 
         if (groupCompleted) {
-            /* If the group is finished, we should send a message to the tile controller
-                * containing the row or column's index and orientation so that
-                * we can mark out the remaining tiles automatically */
-            this.Utils.finishLine(index, orientation);
             return 'finishedGrouping';
         } else {
             return '';
