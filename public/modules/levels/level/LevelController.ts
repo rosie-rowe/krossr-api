@@ -282,6 +282,7 @@ class LevelController implements angular.IComponentController {
     }
 
     setGameSize(size) {
+        console.log('ts this one');
         this.Utils.setGameSize(Math.sqrt(size));
     }
 

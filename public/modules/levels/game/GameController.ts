@@ -30,7 +30,8 @@ class GameController implements angular.IComponentController {
 
     }
 
-    private gameMatrix: BooleanMatrix; // only the horizontal one -- the vertical is only used for number lines
+    private gameMatrix: GameMatrix;
+    private goalMatrix: GameMatrix;
     private gameSettings;
     private level; // todo
     private margin: number;
@@ -103,17 +104,7 @@ class GameController implements angular.IComponentController {
     * Compare the current state of the game to the correct state
     */
     checkForWin() {
-        var goalMatrix = this.Utils.getGoalMatrix();
-        var gameMatrix = this.Utils.getGameMatrix();
-    
-        if (typeof goalMatrix !== 'undefined') {
-            var result = (angular.equals(goalMatrix, gameMatrix));
-    
-            if (result) {
-                return true;
-            }
-        }
-        return false;
+        return this.gameMatrix.equals(this.goalMatrix);
     };
 
     checkWin() {

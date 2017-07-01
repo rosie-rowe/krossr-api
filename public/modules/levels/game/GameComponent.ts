@@ -9,6 +9,7 @@ class GameComponent implements angular.IComponentOptions {
 
     bindings = {
         gameMatrix: '<',
+        goalMatrix: '<',
         level: '<',
         tiles: '<'
     };
