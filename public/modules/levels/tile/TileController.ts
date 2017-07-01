@@ -182,6 +182,9 @@ class TileController implements angular.IComponentController {
         }
     }
 
+    /*
+    * This event bubbles up to GameController, which completes the job
+    */
     private mouseUpEvent(event: JQueryEventObject) {
         let actualScope = this.touchService.getTargetScope(event);
         let coord;

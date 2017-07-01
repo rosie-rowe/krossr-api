@@ -1,3 +1,4 @@
+/// <reference path="../dragBox/DragBoxService.d.ts" />
 /// <reference path="../gameOver/GameOverService.d.ts" />
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../tile/TileService.d.ts" />
@@ -24,7 +25,7 @@ class GameController implements angular.IComponentController {
         private eventService: IEventService,
         private gameOverService: IGameOverService,
         private Utils: IUtils,
-        private dragBoxService
+        private dragBoxService: IDragBoxService,
     ) {
 
     }
