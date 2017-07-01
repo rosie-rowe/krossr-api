@@ -50,7 +50,8 @@ describe('User Model Unit Tests:', function() {
 
 		it('should fail to save an existing user again', function(done) {
 			user.save();
-			return user2.save().then(function() {
+
+			user2.save().then(function() {
 				winston.info('This message should never display!');
 			}).catch(function(err) {
                 done();
@@ -59,7 +60,8 @@ describe('User Model Unit Tests:', function() {
 
 		it('should be able to show an error when try to save without username', function(done) {
 			user.username = '';
-			return user.save().then(function() {
+
+			user.save().then(function() {
                 winston.info('This message should never display!');
 			}).catch(function(err) {
                 done();

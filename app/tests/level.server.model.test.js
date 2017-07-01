@@ -57,7 +57,7 @@ describe('Level Model Unit Tests:', function() {
 		it('should be able to save without problems', function(done) {
 			winston.info('Unit test commiting the level to the database!');
 
-			return level.save().then(function(l) {
+			level.save().then(function(l) {
 				winston.info('Level created!');
 
 				should.exist(l);
@@ -71,7 +71,7 @@ describe('Level Model Unit Tests:', function() {
 		it('should be able to show an error when try to save without name', function(done) { 
 			level.name = '';
 
-			return level.save().then(function(l) {
+			level.save().then(function(l) {
 				winston.info('This message should never print.');	
 			}).catch(function(err) {
 				done();
