@@ -29,6 +29,7 @@ class GameController implements angular.IComponentController {
 
     }
 
+    private gameMatrix: BooleanMatrix; // only the horizontal one -- the vertical is only used for number lines
     private gameSettings;
     private level; // todo
     private margin: number;
@@ -70,6 +71,7 @@ class GameController implements angular.IComponentController {
         });
         
         this.eventService.subscribe(this.$scope, 'gameSizeChanged', () => {
+            console.log('gameSizeChanged caught');
             this.updateGameSize();
         });
 

@@ -8,6 +8,7 @@ class TileComponent implements angular.IComponentOptions {
     templateUrl = 'modules/levels/tile/TileView.html';
 
     bindings = {
+        gameMatrix: '<',
         index: '<',
         level: '<',
         tiles: '<'

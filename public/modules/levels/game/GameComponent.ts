@@ -8,6 +8,7 @@ class GameComponent implements angular.IComponentOptions {
     templateUrl = 'modules/levels/game/GameView.html';
 
     bindings = {
+        gameMatrix: '<',
         level: '<',
         tiles: '<'
     };

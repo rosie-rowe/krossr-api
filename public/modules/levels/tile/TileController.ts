@@ -26,6 +26,9 @@ class TileController implements angular.IComponentController {
         'touchService'
     ];
 
+    /* At this level, work with the horizontal version only */
+    private gameMatrix: BooleanMatrix;
+
     private index;
     private isEditMode: boolean;
 
@@ -203,8 +206,6 @@ class TileController implements angular.IComponentController {
         var coord,
             wrong_answer = false;
 
-        let gameMatrix = this.Utils.getGameMatrix();
-    
         if (typeof index === 'number') { 
             coord = this.tileService.convertTo2D(index);
         } else {
@@ -217,7 +218,7 @@ class TileController implements angular.IComponentController {
             if (this.shiftService.shiftOn === true) {
                 this.fill('marked', initState);
                 
-                gameMatrix.setValueAt(coord.y, coord.x, this.selected);
+                this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
             } else {
                 // we don't want this to happen for new or edit screens
                 if (goalMatrix) {
@@ -229,7 +230,7 @@ class TileController implements angular.IComponentController {
                     this.removeLife();
                 } else {
                     this.fill('selected', initState);
-                    gameMatrix.setValueAt(coord.y, coord.x, this.selected);
+                    this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
                 }
             }
         }

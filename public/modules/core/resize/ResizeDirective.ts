@@ -27,6 +27,7 @@ class ResizeDirective implements angular.IDirective {
 
             if (gameMatrix) {
                 this.Utils.calculatePlayableArea();
+                console.log('resize event with length: ' + gameMatrix.length);
                 this.Utils.setGameSize(gameMatrix.length);
                 scope.$apply();
             }

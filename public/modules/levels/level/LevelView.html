@@ -67,7 +67,7 @@
             </div>
             
             <div class="bottom row">
-                <game level="levelCtrl.level" tiles="levelCtrl.finalLayout.tiles" ng-if="levelCtrl.finalLayout.tiles"></game>
+                <game game-matrix="levelCtrl.gameMatrix.horizontal" level="levelCtrl.level" tiles="levelCtrl.finalLayout.tiles" ng-if="levelCtrl.finalLayout.tiles"></game>
 
                 <number-grid
                     game-matrix="levelCtrl.gameMatrix['horizontal']"
