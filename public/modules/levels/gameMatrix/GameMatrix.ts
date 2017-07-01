@@ -1,4 +1,6 @@
-class GameMatrix {
+/// <reference path="../../core/equatable/IEquatable.d.ts" />
+
+class GameMatrix implements IEquatable<GameMatrix> {
     public horizontal: BooleanMatrix;
     public vertical: BooleanMatrix;
 
@@ -12,11 +14,8 @@ class GameMatrix {
         this.vertical = this.horizontal.rotate();
     }
 
-    /**
-     * This should probably implement an interface, but YAGNI?
-     */
     public equals(other: GameMatrix) {
-        return this.horizontal == other.horizontal;
+        return this.horizontal.equals(other.horizontal);
     }
 
     public setValueAt(row: number, column: number, value: boolean) {

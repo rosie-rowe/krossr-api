@@ -2,7 +2,7 @@
  * A lot of this still assumes all matrices are square. Will fix if ever necessary.
  */
 
-class Matrix<T> {
+class Matrix<T> implements IEquatable<Matrix<T>>{
     protected matrix: T[][];
 
     constructor(rowCount: number, colCount: number) {
@@ -30,6 +30,10 @@ class Matrix<T> {
     /** Return a COPY of the current layout to preserve encapsulation -- you shouldn't be able to modify a matrix by normal means */
     getLayout() {
         return angular.copy(this.matrix);
+    }
+
+    equals(other: Matrix<T>) {
+        return angular.equals(this.matrix, other.matrix);
     }
 
     initializeWith(values: T[][]) {
