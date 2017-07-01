@@ -2,7 +2,7 @@
 	game-matrix="numGridCtrl.gameMatrix"
 	goal-matrix="numGridCtrl.goalMatrix"
 	ng-style="{
-		'width': numGridCtrl.tileSize,
+		'width': numGridCtrl.isVertical ? numGridCtrl.tileSize : '',
 		'font-size': numGridCtrl.getFontSize()
 	}"
 	ng-repeat="i in [].constructor(numGridCtrl.goalMatrix.length) track by $index"

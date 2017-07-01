@@ -21,12 +21,19 @@ class NumberGridController implements angular.IComponentController {
 
     }
 
+    /** The top row is considered vertical because the numbers go from top to bottom */
+    private isVertical: boolean;
+
     // At this level and below we're working with the individual rotated pieces, not the full thing
     private gameMatrix: BooleanMatrix;
     private goalMatrix: BooleanMatrix;
+
+    private orientation: string;
+
     private tileSize: string;
 
     $onInit() {
+        this.isVertical = this.orientation === 'vertical';
         this.setTileSize();
     }
 
