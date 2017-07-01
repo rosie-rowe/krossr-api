@@ -40,7 +40,6 @@ class NumberLineController {
     private index: number;
     private orientation: string;
 
-
     // display a crossed out 0 if the linecontent comes back with no content. otherwise, pass through
     private accountForZeros(lineContent: LineContent[]): LineContent[] {
         if (lineContent.length === 0) {
@@ -77,8 +76,6 @@ class NumberLineController {
         // Loop through the row, building a separate count for each group of consecutive true tiles
         for (var i = 0; i < this.sideLength; i++) {
             // If the rotated goal matrix contains a true tile at the current index...
-           
-
             if (currentGoal.getValueAt(index, i)) {
                 if (!currentGroup[groupCount]) {    
                     currentGroup[groupCount] = [];

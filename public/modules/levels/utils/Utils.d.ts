@@ -13,7 +13,6 @@ interface IUtils {
     getGoalMatrix(): BooleanMatrix;
     getTileSize(tutorialMode: boolean): number;
     getTileSizePx(): string;
-    getWidth(selector: string): number;
     prettySize(size: number): string;
     setGameSize(widthInTiles: number): void;
     setGoalMatrix(matrix: boolean[][]): void;

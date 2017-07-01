@@ -143,10 +143,6 @@ class Utils implements IUtils {
         return this.getTileSize(false)  + 'px'
     }
 
-    getWidth(selector) {
-        return angular.element(selector).outerWidth();
-    }
-
     /* Display an integer size (e.g. 15) and convert it to a pleasing form (15x15) */
     prettySize(size) {
         return size + 'x' + size;
