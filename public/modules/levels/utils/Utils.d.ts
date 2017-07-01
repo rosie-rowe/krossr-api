@@ -10,7 +10,7 @@ interface IUtils {
     flatten(matrix: any[][]): any[][];
     getGameSize(tutorialMode: boolean): any; // todo
     getGameMatrix(): BooleanMatrix; 
-    getGoalMatrix(): any[][] // todo
+    getGoalMatrix(): BooleanMatrix;
     getTileSize(tutorialMode: boolean): number;
     getTileSizePx(): string;
     getWidth(selector: string): number;

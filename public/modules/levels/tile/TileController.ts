@@ -221,7 +221,7 @@ class TileController implements angular.IComponentController {
             } else {
                 // we don't want this to happen for new or edit screens
                 if (goalMatrix) {
-                    wrong_answer = (goalMatrix[coord.y][coord.x] !== true)
+                    wrong_answer = (goalMatrix.getValueAt(coord.y, coord.x) !== true)
                 }
         
                 if (wrong_answer) {

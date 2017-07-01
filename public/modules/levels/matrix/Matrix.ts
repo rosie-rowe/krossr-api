@@ -23,6 +23,10 @@ class Matrix<T> {
         return finalMatrix;
     }
 
+    copyFrom(source: Matrix<T>) {
+        this.matrix = source.matrix;
+    }
+
     initializeWith(values: T[][]) {
         this.matrix = values;
     }

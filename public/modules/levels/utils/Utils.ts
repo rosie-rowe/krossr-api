@@ -1,3 +1,4 @@
+/// <reference path="../matrix/Matrix.ts" />
 /// <reference path="./Utils.d.ts" />
 /// <reference path="../sideLengthService/SideLengthService.d.ts" />
 /// <reference path="../tile/TileService.d.ts" />
@@ -22,7 +23,7 @@ class Utils implements IUtils {
     private gameMatrix: BooleanMatrix;
     private gameHeight: string;
     private gameWidth: string;
-    private goalMatrix: boolean[][];
+    private goalMatrix: BooleanMatrix;
     private outerGameSize: number;
     private playableAreaSize: number;
     private tileSize: number = 25;
@@ -171,7 +172,8 @@ class Utils implements IUtils {
 
     /* Modify the current goal matrix (loading level from layout) */
     setGoalMatrix(layout?) {
-        this.goalMatrix = layout;
+        this.goalMatrix = new BooleanMatrix(layout.length, layout.length);
+        this.goalMatrix.initializeWith(layout);
     }
 
     /* Modify the current game matrix, setting a new side length and game size as a side effect  (used for changing size) */
