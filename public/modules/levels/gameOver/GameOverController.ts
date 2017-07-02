@@ -27,6 +27,8 @@ class GameOverController implements angular.IComponentController {
         this.eventService.publish('level.clearAll');
     }
 
+    $onInit() {}
+
     close() {
         this.closeAction();
         this.clearAll();

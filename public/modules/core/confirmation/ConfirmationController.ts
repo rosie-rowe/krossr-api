@@ -18,6 +18,8 @@ class ConfirmationController implements angular.IComponentController {
     ) {
 
     }
+
+    public $onInit() {}
 }
 
 angular.module('core').controller(ConfirmationController.$name, ConfirmationController);

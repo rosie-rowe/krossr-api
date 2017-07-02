@@ -12,6 +12,8 @@ class PaginationController implements angular.IComponentController {
     private totalPages: number;
     private onPagination: Function;
 
+    $onInit() {}
+
     pageDown() {
         if (this.currentPage > 0) {
             this.currentPage--;

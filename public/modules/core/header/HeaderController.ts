@@ -19,6 +19,8 @@ class HeaderController implements angular.IComponentController {
 
 	}
 
+	$onInit() {}
+
 	openEditProfile() {
 		this.componentDialogService.open('edit-profile');
 	}

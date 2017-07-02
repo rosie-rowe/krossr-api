@@ -5,6 +5,8 @@ class LifeMeterController implements angular.IComponentOptions {
     static $name = 'LifeMeterController';
 
     private lives;
+
+    $onInit() {}
 }
 
 angular.module('levels').controller(LifeMeterController.$name, LifeMeterController);

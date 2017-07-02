@@ -24,6 +24,8 @@ class SignUpController implements angular.IComponentController {
         private Authentication: IAuthenticationService
     ) {}
 
+    $onInit() {}
+
     signup() {
         this.$http.post('/auth/signup', this.credentials).then((response) => {
             // If successful we assign the response to the global user model

@@ -38,6 +38,8 @@ class EditProfileController implements angular.IComponentController {
 
     }
 
+    $onInit() {}
+
     /** Change user password */
     changeUserPassword() {
         this.success.password = this.error.password = null;

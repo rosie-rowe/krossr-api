@@ -27,6 +27,8 @@ class SignInController implements angular.IComponentController {
         private ngDialog
     ) {}
 
+    $onInit() {}
+
     openForgotPassword() {
         this.closeAction();
         

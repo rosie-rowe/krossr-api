@@ -30,6 +30,8 @@ class LevelSelectController implements angular.IComponentController {
     private totalPages: number;
     private levels;
 
+    $onInit() {}
+
     /* Find a list of levels */
     find(currentPage: number) {
         this.currentPage = currentPage;

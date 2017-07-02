@@ -16,6 +16,10 @@ module.exports = function(grunt) {
 		typescript: 'public/typescript'
 	};
 
+	var files = {
+		references: 'public/references.ts'
+	};
+
     grunt.loadNpmTasks('grunt-ts');
 
 	// Project Configuration
@@ -92,7 +96,8 @@ module.exports = function(grunt) {
         },
 		ts: {
 			default: {
-				src: ['<%= applicationTypescriptFiles %>'],
+				reference: files.references,
+				src: [files.references, '<%= applicationTypescriptFiles %>'],
 				outDir: directories.typescript,
 				options: {
 					rootDir: 'public',

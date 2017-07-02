@@ -5,6 +5,8 @@ class LoadingAnimationController implements angular.IComponentController {
     static $name = 'LoadingAnimationController';
 
     private condition: boolean;
+
+    $onInit() {}
 }
 
 angular.module('core').controller(LoadingAnimationController.$name, LoadingAnimationController);
