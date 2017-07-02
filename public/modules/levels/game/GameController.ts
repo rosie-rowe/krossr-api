@@ -1,4 +1,4 @@
-/// <reference path="../gameOver/GameOverService.d.ts" />
+import { IGameOverService } from '../gameOver/IGameOverService';
 import { IUtils } from '../utils/IUtils';
 /// <reference path="../../core/event/EventService.d.ts" />
 

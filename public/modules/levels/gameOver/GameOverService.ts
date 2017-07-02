@@ -1,4 +1,5 @@
-/// <reference path="./GameOverService.d.ts" />
+import * as angular from 'angular';
+import { IGameOverService } from './IGameOverService';
 
 'use strict';
 

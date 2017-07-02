@@ -1,4 +1,4 @@
-/// <reference path="../gameOver/GameOverService.d.ts" />
+import { IGameOverService } from '../gameOver/IGameOverService';
 /// <reference path="../../core/event/EventService.d.ts" />
 /// <reference path="../../core/touch/TouchService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
