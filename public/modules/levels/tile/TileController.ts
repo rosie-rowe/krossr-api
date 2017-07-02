@@ -1,5 +1,5 @@
 import { IGameOverService } from '../gameOver/IGameOverService';
-/// <reference path="../../core/event/EventService.d.ts" />
+import { IEventService} from '../../core/event/IEventService';
 /// <reference path="../../core/touch/TouchService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
 /// <reference path="../sideLengthService/SideLengthService.d.ts" />

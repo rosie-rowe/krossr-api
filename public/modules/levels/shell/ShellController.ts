@@ -1,4 +1,4 @@
-/// <reference path="../../core/event/EventService.d.ts" />
+import { IEventService} from '../../core/event/IEventService';
 
 'use strict';
 

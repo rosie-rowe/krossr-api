@@ -1,5 +1,5 @@
 /// <reference path="../../core/componentDialog/IComponentDialogService.d.ts" />
-/// <reference path="../../core/event/EventService.d.ts" />
+import { IEventService} from '../../core/event/IEventService';
 
 'use strict';
 
