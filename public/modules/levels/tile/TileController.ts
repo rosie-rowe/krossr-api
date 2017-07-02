@@ -1,7 +1,7 @@
 import { IGameOverService } from '../gameOver/IGameOverService';
 import { IEventService } from '../../core/event/IEventService';
-import { ITouchService } from '../../core/touch/ITouchService'
-/// <reference path="../shiftService/ShiftService.d.ts" />
+import { ITouchService } from '../../core/touch/ITouchService';
+import { IShiftService } from '../shiftService/IShiftService';
 /// <reference path="../sideLengthService/SideLengthService.d.ts" />
 
 import * as angular from 'angular';

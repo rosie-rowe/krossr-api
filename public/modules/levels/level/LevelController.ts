@@ -1,7 +1,7 @@
 import { IUtils } from '../utils/IUtils';
 import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
 import { IEventService } from '../../core/event/IEventService';
-/// <reference path="../shiftService/ShiftService.d.ts" />
+import { IShiftService } from '../shiftService/IShiftService';
 import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
 
 import * as angular from 'angular';

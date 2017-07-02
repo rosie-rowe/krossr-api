@@ -1,3 +1,0 @@
-interface IShiftService {
-    shiftOn: boolean;
-}

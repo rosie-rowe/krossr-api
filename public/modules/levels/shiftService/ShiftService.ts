@@ -1,6 +1,9 @@
+import * as angular from 'angular';
+import { IShiftService } from './IShiftService';
+
 'use strict';
 
-class ShiftService {
+class ShiftService implements IShiftService {
     static $name = 'shiftService';
     private _shiftOn: boolean = false;
 

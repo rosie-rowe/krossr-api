@@ -1,5 +1,3 @@
-/// <reference path="./NumberLineController.ts" />
-
 import * as angular from 'angular'
 import { Point } from '../point/Point'
 
