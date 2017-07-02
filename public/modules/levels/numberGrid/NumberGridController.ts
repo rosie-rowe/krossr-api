@@ -1,5 +1,5 @@
 import { IUtils } from '../utils/IUtils';
-import { IEventService} from '../../core/event/IEventService';
+import { IEventService } from '../../core/event/IEventService';
 
 import * as angular from 'angular';
 import { BooleanMatrix } from '../matrix/BooleanMatrix'

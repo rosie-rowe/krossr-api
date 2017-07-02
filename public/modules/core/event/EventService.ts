@@ -1,4 +1,4 @@
-import { IEventService} from './IEventService';
+import { IEventService } from './IEventService';
 
 'use strict';
 
