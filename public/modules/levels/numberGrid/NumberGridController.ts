@@ -1,4 +1,4 @@
-/// <reference path="../utils/Utils.d.ts" />
+import { IUtils } from '../utils/IUtils';
 /// <reference path="../../core/event/EventService.d.ts" />
 
 import * as angular from 'angular';

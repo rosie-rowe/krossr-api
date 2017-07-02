@@ -2,7 +2,7 @@
 
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 
-class GameMatrix implements IEquatable<GameMatrix> {
+export class GameMatrix implements IEquatable<GameMatrix> {
     public horizontal: BooleanMatrix;
     public vertical: BooleanMatrix;
 

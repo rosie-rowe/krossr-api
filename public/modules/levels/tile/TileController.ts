@@ -1,10 +1,13 @@
 /// <reference path="../gameOver/GameOverService.d.ts" />
-/// <reference path="../utils/Utils.d.ts" />
-/// <reference path="../tile/TileService.d.ts" />
 /// <reference path="../../core/event/EventService.d.ts" />
 /// <reference path="../../core/touch/TouchService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
 /// <reference path="../sideLengthService/SideLengthService.d.ts" />
+
+import * as angular from 'angular';
+import { BooleanMatrix } from '../matrix/BooleanMatrix';
+import { ITileService } from '../tile/ITileService';
+import { IUtils } from '../utils/IUtils';
 
 'use strict';
 

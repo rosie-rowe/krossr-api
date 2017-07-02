@@ -1,9 +1,10 @@
-/// <reference path="../dragBox/DragBoxService.d.ts" />
-/// <reference path="../gameMatrix/GameMatrix.ts" />
 /// <reference path="../gameOver/GameOverService.d.ts" />
-/// <reference path="../utils/Utils.d.ts" />
-/// <reference path="../tile/TileService.d.ts" />
+import { IUtils } from '../utils/IUtils';
 /// <reference path="../../core/event/EventService.d.ts" />
+
+import * as angular from 'angular';
+import { IDragBoxService } from '../dragBox/IDragBoxService';
+import { GameMatrix } from '../gameMatrix/GameMatrix';
 
 'use strict';
 

@@ -1,6 +1,6 @@
 import { Point } from '../point/Point';
 
-interface IDragBoxService {
+export interface IDragBoxService {
     initState: boolean;
     startCoord: Point;
     endCoord: Point;

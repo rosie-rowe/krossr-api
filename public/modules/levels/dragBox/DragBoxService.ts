@@ -1,6 +1,6 @@
-/// <reference path="./DragBoxService.d.ts" />
-/// <reference path="../tile/TileService.d.ts" />
-
+import * as angular from 'angular';
+import { IDragBoxService } from './IDragBoxService';
+import { ITileService } from '../tile/ITileService';
 import { Point } from '../point/Point';
 
 'use strict';

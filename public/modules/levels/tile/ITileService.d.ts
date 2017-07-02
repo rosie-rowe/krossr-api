@@ -1,6 +1,6 @@
 import { Point } from '../point/Point'
 
-interface ITileService {
+export interface ITileService {
     /** Append the current tile index */
     addTile(obj: any): void;
 

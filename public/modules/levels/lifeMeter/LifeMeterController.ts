@@ -1,6 +1,6 @@
 'use strict';
 
-class LifeMeterController implements angular.IComponentOptions {
+class LifeMeterController implements angular.IComponentController {
     static $controllerAs = 'lifeMeterCtrl';
     static $name = 'LifeMeterController';
 

@@ -1,9 +1,11 @@
-/// <reference path="../gameMatrix/GameMatrix.ts" />
-/// <reference path="../utils/Utils.d.ts" />
+import { IUtils } from '../utils/IUtils';
 /// <reference path="../../core/componentDialog/IComponentDialogService.d.ts" />
 /// <reference path="../../core/event/EventService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
 /// <reference path="../../users/authentication/AuthenticationService.d.ts" />
+
+import * as angular from 'angular';
+import { GameMatrix } from '../gameMatrix/GameMatrix';
 
 'use strict';
 

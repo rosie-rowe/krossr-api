@@ -1,5 +1,6 @@
-/// <reference path="../utils/Utils.d.ts" />
+import { IUtils } from '../utils/IUtils';
 
+import * as angular from 'angular';
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { Point } from '../point/Point'
 

@@ -1,4 +1,6 @@
-interface IUtils {
+import { BooleanMatrix } from '../matrix/BooleanMatrix';
+
+export interface IUtils {
     adjustForBorders(width: number): number;
     calculatePlayableArea(): number;
     clearAll(): void;

@@ -1,4 +1,5 @@
-/// <reference path="../utils/Utils.d.ts" />
+import * as angular from 'angular';
+import { IUtils } from '../utils/IUtils';
 /// <reference path="../../users/authentication/AuthenticationService.d.ts" />
 
 'use strict';

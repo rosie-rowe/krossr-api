@@ -1,8 +1,9 @@
-/// <reference path="./Utils.d.ts" />
 /// <reference path="../sideLengthService/SideLengthService.d.ts" />
-/// <reference path="../tile/TileService.d.ts" />
 
-import { BooleanMatrix } from '../matrix/BooleanMatrix'
+import * as angular from 'angular';
+import { BooleanMatrix } from '../matrix/BooleanMatrix';
+import { ITileService } from '../tile/ITileService';
+import { IUtils } from './IUtils';
 
 class Utils implements IUtils {
     static $inject = [
