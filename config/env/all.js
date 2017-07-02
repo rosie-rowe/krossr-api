@@ -36,7 +36,7 @@ module.exports = {
 			'public/typescript/application.js',
 			'public/typescript/**/*.module.js',
             'public/typescript/**/*.js',
-			'public/modules/**/!(*.test).ts',
+			'public/modules/**/!(*.test).js',
             'public/dist/templates.js'
 		],
         html: [
