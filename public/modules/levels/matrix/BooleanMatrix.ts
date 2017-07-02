@@ -1,3 +1,5 @@
+/// <reference path="./Matrix.ts" />
+
 /**
 * The matrix implementation we'll use for the game functionality
 */

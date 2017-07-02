@@ -1,3 +1,5 @@
+/// <reference path="../../core/equatable/IEquatable.d.ts" />
+
 /**
  * Container for a 2D array
  * A lot of this still assumes all matrices are square. Will fix if ever necessary.

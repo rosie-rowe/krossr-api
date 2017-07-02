@@ -1,5 +1,5 @@
 /// <reference path="../../core/equatable/IEquatable.d.ts" />
-/// <reference path="../Matrix/Matrix.ts" />
+/// <reference path="../matrix/BooleanMatrix.ts" />
 
 class GameMatrix implements IEquatable<GameMatrix> {
     public horizontal: BooleanMatrix;

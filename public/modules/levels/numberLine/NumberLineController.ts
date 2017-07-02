@@ -1,4 +1,4 @@
-/// <reference path="../Matrix/Matrix.ts" />
+/// <reference path="../matrix/BooleanMatrix.ts" />
 /// <reference path="../point/Point.d.ts" />
 /// <reference path="../utils/Utils.d.ts" />
 
