@@ -1,5 +1,5 @@
 /// <reference path="../../core/componentDialog/IComponentDialogService.d.ts" />
-/// <reference path="../../users/authentication/AuthenticationService.d.ts" />
+import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
 
 'use strict';
 

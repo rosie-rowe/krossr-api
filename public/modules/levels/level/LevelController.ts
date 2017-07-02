@@ -2,7 +2,7 @@ import { IUtils } from '../utils/IUtils';
 /// <reference path="../../core/componentDialog/IComponentDialogService.d.ts" />
 /// <reference path="../../core/event/EventService.d.ts" />
 /// <reference path="../shiftService/ShiftService.d.ts" />
-/// <reference path="../../users/authentication/AuthenticationService.d.ts" />
+import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
 
 import * as angular from 'angular';
 import { GameMatrix } from '../gameMatrix/GameMatrix';

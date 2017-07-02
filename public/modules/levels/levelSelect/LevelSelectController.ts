@@ -1,6 +1,6 @@
 import * as angular from 'angular';
 import { IUtils } from '../utils/IUtils';
-/// <reference path="../../users/authentication/AuthenticationService.d.ts" />
+import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
 
 'use strict';
 

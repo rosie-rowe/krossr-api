@@ -1,4 +1,4 @@
-/// <reference path="../authentication/AuthenticationService.d.ts" />
+import { IAuthenticationService } from '../authentication/IAuthenticationService'
 
 'use strict';
 
