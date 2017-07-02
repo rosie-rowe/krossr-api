@@ -1,4 +1,4 @@
-/// <reference path="../../config.ts" />
+import { ApplicationConfiguration } from '../../config';
 
 /*global
     ApplicationConfiguration
