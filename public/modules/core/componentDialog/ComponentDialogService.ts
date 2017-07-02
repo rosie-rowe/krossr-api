@@ -1,4 +1,4 @@
-/// <reference path="./IComponentDialogService.d.ts" />
+import { IComponentDialogService } from './IComponentDialogService';
 
 'use strict';
 

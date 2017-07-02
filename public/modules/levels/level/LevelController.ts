@@ -1,5 +1,5 @@
 import { IUtils } from '../utils/IUtils';
-/// <reference path="../../core/componentDialog/IComponentDialogService.d.ts" />
+import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
 import { IEventService} from '../../core/event/IEventService';
 /// <reference path="../shiftService/ShiftService.d.ts" />
 import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
