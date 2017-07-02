@@ -1,3 +1,4 @@
+import * as angular from 'angular';
 import { IAuthenticationService } from '../authentication/IAuthenticationService'
 
 'use strict';

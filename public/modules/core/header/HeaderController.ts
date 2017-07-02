@@ -1,5 +1,6 @@
-import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
+import * as angular from 'angular';
 import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
+import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
 
 'use strict';
 

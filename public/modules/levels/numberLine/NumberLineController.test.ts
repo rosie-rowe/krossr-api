@@ -1,3 +1,4 @@
+import * as angular from 'angular';
 import { ApplicationConfiguration } from '../../../config';
 
 'use strict';
@@ -61,4 +62,4 @@ class NumberLineControllerTests {
     }
 }
 
-NumberGridControllerTests.run();
+NumberLineControllerTests.run();

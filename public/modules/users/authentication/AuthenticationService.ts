@@ -1,4 +1,5 @@
-import { IAuthenticationService } from './IAuthenticationService'
+import * as angular from 'angular';
+import { IAuthenticationService } from './IAuthenticationService';
 
 'use strict';
 
