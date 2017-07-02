@@ -1,4 +1,3 @@
-/// <reference path="../matrix/Matrix.ts" />
 /// <reference path="../point/Point.d.ts" />
 
 interface IUtils {
