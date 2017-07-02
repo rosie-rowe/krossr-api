@@ -5,7 +5,7 @@
  * A lot of this still assumes all matrices are square. Will fix if ever necessary.
  */
 
-class Matrix<T> implements IEquatable<Matrix<T>>{
+export class Matrix<T> implements IEquatable<Matrix<T>> {
     protected matrix: T[][];
 
     constructor(rowCount: number, colCount: number) {

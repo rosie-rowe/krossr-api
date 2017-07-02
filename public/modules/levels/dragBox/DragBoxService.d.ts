@@ -1,4 +1,4 @@
-/// <reference path="../point/Point.d.ts" />
+import { Point } from '../point/Point';
 
 interface IDragBoxService {
     initState: boolean;

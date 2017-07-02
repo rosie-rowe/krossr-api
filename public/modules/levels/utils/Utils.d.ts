@@ -1,5 +1,3 @@
-/// <reference path="../point/Point.d.ts" />
-
 interface IUtils {
     adjustForBorders(width: number): number;
     calculatePlayableArea(): number;

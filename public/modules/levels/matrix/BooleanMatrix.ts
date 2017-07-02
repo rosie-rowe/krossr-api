@@ -1,4 +1,4 @@
-/// <reference path="./_Matrix.ts" />
+import { Matrix } from './Matrix';
 
 /**
 * The matrix implementation we'll use for the game functionality

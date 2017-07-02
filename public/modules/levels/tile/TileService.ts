@@ -1,6 +1,7 @@
-/// <reference path="../point/Point.d.ts" />
 /// <reference path="../sideLengthService/SideLengthService.d.ts" />
 /// <reference path="./TileService.d.ts" />
+
+import { Point } from '../point/Point'
 
 'use strict';
 

@@ -1,5 +1,6 @@
-/// <reference path="../point/Point.d.ts" />
 /// <reference path="./NumberLineController.ts" />
+
+import { Point } from '../point/Point'
 
 'use strict';
 

@@ -1,6 +1,7 @@
 /// <reference path="./DragBoxService.d.ts" />
-/// <reference path="../point/Point.d.ts" />
 /// <reference path="../tile/TileService.d.ts" />
+
+import { Point } from '../point/Point';
 
 'use strict';
 
