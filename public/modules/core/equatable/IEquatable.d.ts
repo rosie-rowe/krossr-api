@@ -1,3 +1,3 @@
-interface IEquatable<T> {
+export interface IEquatable<T> {
     equals(other: T);
 }

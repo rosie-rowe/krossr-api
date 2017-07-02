@@ -100,6 +100,7 @@ module.exports = function(grunt) {
 				src: [files.references, '<%= applicationTypescriptFiles %>'],
 				outDir: directories.typescript,
 				options: {
+					module: 'es6',
 					rootDir: 'public',
 					target: 'es5'
 				}

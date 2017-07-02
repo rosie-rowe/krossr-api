@@ -1,6 +1,5 @@
-/// <reference path="../../core/equatable/IEquatable.d.ts" />
-
 import * as angular from 'angular';
+import { IEquatable } from '../../core/equatable/IEquatable';
 
 /**
  * Container for a 2D array

@@ -1,6 +1,5 @@
-/// <reference path="../../core/equatable/IEquatable.d.ts" />
-
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
+import { IEquatable } from '../../core/equatable/IEquatable';
 
 export class GameMatrix implements IEquatable<GameMatrix> {
     public horizontal: BooleanMatrix;
