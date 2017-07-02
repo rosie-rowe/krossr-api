@@ -1,7 +1,8 @@
-/// <reference path="../matrix/BooleanMatrix.ts" />
 /// <reference path="./Utils.d.ts" />
 /// <reference path="../sideLengthService/SideLengthService.d.ts" />
 /// <reference path="../tile/TileService.d.ts" />
+
+import { BooleanMatrix } from '../matrix/BooleanMatrix'
 
 class Utils implements IUtils {
     static $inject = [

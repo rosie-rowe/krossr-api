@@ -1,6 +1,8 @@
-/// <reference path="../matrix/BooleanMatrix.ts" />
 /// <reference path="../utils/Utils.d.ts" />
 /// <reference path="../../core/event/EventService.d.ts" />
+
+import * as angular from 'angular';
+import { BooleanMatrix } from '../matrix/BooleanMatrix'
 
 'use strict';
 

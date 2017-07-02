@@ -1,6 +1,6 @@
-/// <reference path="../matrix/BooleanMatrix.ts" />
 /// <reference path="../utils/Utils.d.ts" />
 
+import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { Point } from '../point/Point'
 
 'use strict';

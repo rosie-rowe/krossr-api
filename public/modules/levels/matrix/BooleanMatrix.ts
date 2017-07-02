@@ -4,7 +4,7 @@ import { Matrix } from './Matrix';
 * The matrix implementation we'll use for the game functionality
 */
 
-class BooleanMatrix extends Matrix<boolean> {
+export class BooleanMatrix extends Matrix<boolean> {
     constructor(rowCount: number, colCount: number) {
         super(rowCount, colCount);
 
