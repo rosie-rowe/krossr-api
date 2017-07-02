@@ -1,4 +1,5 @@
-/// <reference path="./SideLengthService.d.ts" />
+import * as angular from 'angular';
+import { ISideLengthService } from './ISideLengthService';
 
 'use strict';
 

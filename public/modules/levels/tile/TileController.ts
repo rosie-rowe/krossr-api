@@ -2,8 +2,7 @@ import { IGameOverService } from '../gameOver/IGameOverService';
 import { IEventService } from '../../core/event/IEventService';
 import { ITouchService } from '../../core/touch/ITouchService';
 import { IShiftService } from '../shiftService/IShiftService';
-/// <reference path="../sideLengthService/SideLengthService.d.ts" />
-
+import { ISideLengthService } from '../sideLengthService/ISideLengthService';
 import * as angular from 'angular';
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { ITileService } from '../tile/ITileService';

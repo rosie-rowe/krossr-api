@@ -1,3 +1,0 @@
-interface ISideLengthService {
-    sideLength: number;
-}

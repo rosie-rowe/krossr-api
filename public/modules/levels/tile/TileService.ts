@@ -1,6 +1,5 @@
-/// <reference path="../sideLengthService/SideLengthService.d.ts" />
-
 import * as angular from 'angular';
+import { ISideLengthService } from '../sideLengthService/ISideLengthService';
 import { ITileService } from './ITileService';
 import { Point } from '../point/Point';
 
