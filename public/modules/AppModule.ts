@@ -1,6 +1,6 @@
 import * as angular from 'angular';
 
-import { ApplicationConfiguration } from '../config';
+import { ApplicationConfiguration } from './config';
 
 import CoreModule from './core/CoreModule';
 import LevelsModule from './levels/LevelsModule';
