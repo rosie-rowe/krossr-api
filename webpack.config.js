@@ -6,13 +6,14 @@ var webpack = require('webpack');
 
 var config = {
     entry: {
-        'krossr': glob.sync('/public/modules/**/!(*.test).ts')
+        'krossr': 'AppModule.ts'
     },
     output: {
         path: '/public/dist',
         filename: 'krossr.js'
     },
     resolve: {
+        modules: ['node_modules', 'public/modules'],
         extensions: ['.ts', '.js']
     },
     module: {
