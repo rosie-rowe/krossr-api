@@ -2,7 +2,7 @@
 
 /** Sign-in popup */
 
-class SignUpComponent implements angular.IComponentOptions {
+export default class SignUpComponent implements angular.IComponentOptions {
     static $name = 'signUp';
     bindToController = true;
     controller = 'SignUpController';
@@ -13,5 +13,3 @@ class SignUpComponent implements angular.IComponentOptions {
         closeAction: '&'
     }
 }
-
-angular.module('users').component(SignUpComponent.$name, new SignUpComponent());

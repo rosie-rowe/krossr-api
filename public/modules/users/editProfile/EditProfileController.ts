@@ -1,9 +1,8 @@
-import * as angular from 'angular';
 import { IAuthenticationService } from '../authentication/IAuthenticationService';
 
 'use strict';
 
-class EditProfileController implements angular.IComponentController {
+export default class EditProfileController implements angular.IComponentController {
     static $controllerAs = 'editProfileCtrl';
     static $name = 'EditProfileController';
 
@@ -96,5 +95,3 @@ class EditProfileController implements angular.IComponentController {
         }
     };
 }
-
-angular.module('users').controller(EditProfileController.$name, EditProfileController);

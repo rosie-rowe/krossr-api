@@ -1,9 +1,8 @@
-import * as angular from 'angular';
 import { IAuthenticationService } from './IAuthenticationService';
 
 'use strict';
 
-class AuthenticationService implements IAuthenticationService {
+export default class AuthenticationService implements IAuthenticationService {
     static $name = 'Authentication';
 
     static $inject = [
@@ -26,5 +25,3 @@ class AuthenticationService implements IAuthenticationService {
         this._data.user = user;
     }
 }
-
-angular.module('users').service(AuthenticationService.$name, AuthenticationService);

@@ -2,7 +2,7 @@
 
 /** Popup to change email/password or log out */
 
-class EditProfileComponent implements angular.IComponentOptions {
+export default class EditProfileComponent implements angular.IComponentOptions {
     static $name = 'editProfile';
     controller = 'EditProfileController';
     controllerAs = 'editProfileCtrl';
@@ -12,5 +12,3 @@ class EditProfileComponent implements angular.IComponentOptions {
         closeAction: '&'
     }
 }
-
-angular.module('users').component(EditProfileComponent.$name, new EditProfileComponent());

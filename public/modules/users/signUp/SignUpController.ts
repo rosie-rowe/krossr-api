@@ -1,9 +1,8 @@
-import * as angular from 'angular';
 import { IAuthenticationService } from '../authentication/IAuthenticationService'
 
 'use strict';
 
-class SignUpController implements angular.IComponentController {
+export default class SignUpController implements angular.IComponentController {
     static $controllerAs = 'signUpCtrl';
     static $name = 'SignUpController';
 
@@ -41,5 +40,3 @@ class SignUpController implements angular.IComponentController {
         });
     };
 }
-
-angular.module('users').controller(SignUpController.$name, SignUpController)

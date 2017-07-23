@@ -1,6 +1,6 @@
 'use strict';
 
-class ForgotPasswordController implements angular.IComponentController {
+export default class ForgotPasswordController implements angular.IComponentController {
     static $controllerAs = 'forgotPasswordCtrl';
     static $name = 'ForgotPasswordController';
 
@@ -41,5 +41,3 @@ class ForgotPasswordController implements angular.IComponentController {
         });
     };
 }
-
-angular.module('users').controller(ForgotPasswordController.$name, ForgotPasswordController);
