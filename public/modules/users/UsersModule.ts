@@ -24,4 +24,5 @@ export default angular
         UsersServiceModule
     ])
     .config(errorHandler)
-    .config(routing);
+    .config(routing)
+    .name;

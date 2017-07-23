@@ -1,10 +1,18 @@
-import * as angular from 'angular';
-import { ApplicationConfiguration } from './config';
+import angular from 'angular';
 
-'use strict';
+import { ApplicationConfiguration } from '../config';
 
-//Start by defining the main module and adding the module dependencies
-angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies);
+import CoreModule from './core/CoreModule';
+import LevelsModule from './levels/LevelsModule';
+import UsersModule from './users/UsersModule';
+
+let dependencies = ApplicationConfiguration.applicationModuleVendorDependencies.concat([
+    CoreModule,
+    LevelsModule,
+    UsersModule
+]);
+
+angular.module(ApplicationConfiguration.applicationModuleName, dependencies);
 
 // Setting HTML5 Location Mode
 angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider',

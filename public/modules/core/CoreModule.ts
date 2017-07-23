@@ -28,4 +28,5 @@ export default angular
         ResizeModule,
         TouchModule
     ])
-    .config(routing);
+    .config(routing)
+    .name;

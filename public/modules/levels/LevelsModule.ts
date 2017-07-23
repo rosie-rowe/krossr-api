@@ -38,4 +38,5 @@ export default angular
         TileModule,
         UtilsModule
     ])
-    .config(routing);
+    .config(routing)
+    .name;
