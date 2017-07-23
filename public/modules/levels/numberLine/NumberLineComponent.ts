@@ -1,4 +1,5 @@
 import NumberLineController from './NumberLineController';
+import { Point } from '../point/Point'
 
 'use strict';
 

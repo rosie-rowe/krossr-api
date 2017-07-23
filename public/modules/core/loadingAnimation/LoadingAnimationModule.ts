@@ -4,6 +4,6 @@ import LoadingAnimationController from './LoadingAnimationController';
 
 export default angular
     .module('core.loadingAnimation', [])
-    .component('loadingAnimation', LoadingAnimationComponent)
+    .component(LoadingAnimationComponent.$name, new LoadingAnimationComponent())
     .controller(LoadingAnimationController.$name, LoadingAnimationController)
     .name;
