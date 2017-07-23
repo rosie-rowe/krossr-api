@@ -1,5 +1,7 @@
 'use strict';
 
+var webpackConfig = require('./webpack.config');
+
 module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
@@ -20,7 +22,8 @@ module.exports = function(grunt) {
 		references: 'public/references.ts'
 	};
 
-    grunt.loadNpmTasks('grunt-ts');
+	grunt.loadNpmTasks('grunt-ts');
+	grunt.loadNpmTasks('grunt-webpack');
 
 	// Project Configuration
 	grunt.initConfig({
@@ -166,6 +169,10 @@ module.exports = function(grunt) {
 			options: {
 				plugins: [require('less-plugin-glob')]
 			}
+		},
+		webpack: {
+			prod: webpackConfig,
+			dev: webpackConfig
 		}
 	});
 
@@ -197,7 +204,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'ts', 'html2js', 'cssmin', 'less']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'webpack', 'ts', 'html2js', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
