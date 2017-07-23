@@ -64,23 +64,12 @@ export default class NumberLineController {
         let resetInd: boolean = true;
         let coord: Point = { x: undefined, y: undefined };
 
-        let logLater = false;
-
-        if (orientation == 'horizontal') {
-            logLater = true;
-        }
-
         // Loop through the row, building a separate count for each group of consecutive true tiles
         for (var i = 0; i < this.sideLength; i++) {
             // If the rotated goal matrix contains a true tile at the current index...
             if (this.goalMatrix.getValueAt(index, i)) {
                 if (!currentGroup[groupCount]) {    
                     currentGroup[groupCount] = [];
-                }
-
-                if (logLater) {
-                    console.log('Added a point to a group.');
-                    console.log(`y ${index} x ${i}`);
                 }
 
                 // Add the tile to the grouping.
