@@ -16,7 +16,6 @@ module.exports = {
 			css: [],
 			js: [
 				'public/dist/vendor.bundle.js',
-				'public/lib/angular-cookies/angular-cookies.js',
 				'public/lib/angular-touch/angular-touch.js', 
 				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',

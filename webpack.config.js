@@ -9,7 +9,8 @@ var config = {
         'vendor': [
             'angular',
             'angular-animate',
-            'angular-resource'
+            'angular-resource',
+            'angular-cookies'
         ],
         'krossr': 'AppModule.ts'
     },
