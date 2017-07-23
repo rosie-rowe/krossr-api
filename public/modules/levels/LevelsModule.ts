@@ -1,6 +1,6 @@
 'use strict';
 
-import angular from 'angular';
+import * as angular from 'angular';
 
 import DragBoxModule from './dragBox/DragBoxModule';
 import GameModule from './game/GameModule';

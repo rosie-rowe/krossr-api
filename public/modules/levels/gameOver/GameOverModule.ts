@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import GameOverComponent from './GameOverComponent';
 import GameOverController from './GameOverController';
 import GameOverService from './GameOverService';

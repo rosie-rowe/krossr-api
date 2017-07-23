@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import ConvertToNumberDirective from './ConvertToNumberDirective';
 
 export default angular

@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import StarRatingComponent from './StarRatingComponent';
 import StarRatingController from './StarRatingController';
 

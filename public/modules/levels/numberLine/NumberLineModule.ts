@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import NumberLineComponent from './NumberLineComponent';
 import NumberLineController from './NumberLineController';
 

@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import ForgotPasswordComponent from './ForgotPasswordComponent';
 import ForgotPasswordController from './ForgotPasswordController';
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import angular from 'angular';
+import * as angular from 'angular';
 
 import AuthenticationModule from './authentication/AuthenticationModule';
 import EditProfileModule from './editProfile/EditProfileModule';

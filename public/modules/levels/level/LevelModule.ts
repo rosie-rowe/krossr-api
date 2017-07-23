@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import LevelComponent from './LevelComponent';
 import LevelController from './LevelController';
 

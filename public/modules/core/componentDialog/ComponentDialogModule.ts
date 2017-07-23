@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import ComponentDialogController from './ComponentDialogController';
 import ComponentDialogService from './ComponentDialogService';
 

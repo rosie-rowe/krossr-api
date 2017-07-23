@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import TileComponent from './TileComponent';
 import TileController from './TileController';
 import TileService from './TileService';

@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import ResetPasswordComponent from './ResetPasswordComponent';
 import ResetPasswordController from './ResetPasswordController';
 

@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import { levelsResource } from './LevelsService';
 
 export default angular

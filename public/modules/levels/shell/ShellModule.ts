@@ -1,4 +1,4 @@
-import angular from 'angular';
+import * as angular from 'angular';
 import ShellComponent from './ShellComponent';
 import ShellController from './ShellController';
 
