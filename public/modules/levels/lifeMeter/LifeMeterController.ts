@@ -1,6 +1,6 @@
 'use strict';
 
-class LifeMeterController implements angular.IComponentController {
+export default class LifeMeterController implements angular.IComponentController {
     static $controllerAs = 'lifeMeterCtrl';
     static $name = 'LifeMeterController';
 
@@ -8,5 +8,3 @@ class LifeMeterController implements angular.IComponentController {
 
     $onInit() {}
 }
-
-angular.module('levels').controller(LifeMeterController.$name, LifeMeterController);

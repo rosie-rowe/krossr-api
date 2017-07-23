@@ -1,6 +1,6 @@
 'use strict'
 
-class LevelComponent {
+export default class LevelComponent {
     static $name = 'level';
     bindToController = true;
     controller = 'LevelController';
@@ -11,5 +11,3 @@ class LevelComponent {
         controller: '@'
     }
 }
-
-angular.module('levels').component(LevelComponent.$name, new LevelComponent());

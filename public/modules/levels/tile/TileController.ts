@@ -3,14 +3,13 @@ import { IEventService } from '../../core/event/IEventService';
 import { ITouchService } from '../../core/touch/ITouchService';
 import { IShiftService } from '../shiftService/IShiftService';
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';
-import * as angular from 'angular';
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { ITileService } from '../tile/ITileService';
 import { IUtils } from '../utils/IUtils';
 
 'use strict';
 
-class TileController implements angular.IComponentController {
+export default class TileController implements angular.IComponentController {
     static $controllerAs = 'tileCtrl';
     static $name = 'TileController';
 
@@ -336,5 +335,3 @@ class TileController implements angular.IComponentController {
         this.height = tileSize + 'px';
     };
 }
-
-angular.module('levels').controller(TileController.$name, TileController);

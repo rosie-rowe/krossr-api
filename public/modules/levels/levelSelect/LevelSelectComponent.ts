@@ -1,6 +1,6 @@
 'use strict';
 
-class LevelSelectComponent implements angular.IComponentOptions {
+export default class LevelSelectComponent implements angular.IComponentOptions {
     static $name = 'levelSelect';
     bindToController = true;
     controller = 'LevelSelectController';
@@ -11,5 +11,3 @@ class LevelSelectComponent implements angular.IComponentOptions {
         closeAction: '&'
     }
 }
-
-angular.module('levels').component(LevelSelectComponent.$name, new LevelSelectComponent());

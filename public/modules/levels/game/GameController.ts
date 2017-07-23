@@ -1,14 +1,12 @@
 import { IGameOverService } from '../gameOver/IGameOverService';
 import { IUtils } from '../utils/IUtils';
 import { IEventService } from '../../core/event/IEventService';
-
-import * as angular from 'angular';
 import { IDragBoxService } from '../dragBox/IDragBoxService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 
 'use strict';
 
-class GameController implements angular.IComponentController {
+export default class GameController implements angular.IComponentController {
     static $controllerAs = 'gameCtrl';
     static $name = 'GameController';
 
@@ -143,5 +141,3 @@ class GameController implements angular.IComponentController {
         }
     };
 }
-
-angular.module('levels').controller(GameController.$name, GameController);

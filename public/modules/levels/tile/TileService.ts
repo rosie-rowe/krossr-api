@@ -1,4 +1,3 @@
-import * as angular from 'angular';
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';
 import { ITileService } from './ITileService';
 import { Point } from '../point/Point';
@@ -10,7 +9,7 @@ import { Point } from '../point/Point';
  * as well as methods for accessing it
  */
 
-class TileService implements ITileService {
+export default class TileService implements ITileService {
     static $name = 'tileService';
 
     static $inject = [
@@ -87,5 +86,3 @@ class TileService implements ITileService {
         return this.tileIndex;
     }
 }
-
-angular.module('levels').service(TileService.$name, TileService);

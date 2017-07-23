@@ -1,6 +1,6 @@
 'use strict';
 
-class GameComponent implements angular.IComponentOptions {
+export default class GameComponent implements angular.IComponentOptions {
     static $name = 'game';
     bindToController = true;
     controller = 'GameController';
@@ -14,5 +14,3 @@ class GameComponent implements angular.IComponentOptions {
         tiles: '<'
     };
 }
-
-angular.module('levels').component(GameComponent.$name, new GameComponent());

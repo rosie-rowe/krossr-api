@@ -1,6 +1,6 @@
 'use strict';
 
-class TileComponent implements angular.IComponentOptions {
+export default class TileComponent implements angular.IComponentOptions {
     static $name = 'tile';
     bindToController = true;
     controller = 'TileController';
@@ -14,5 +14,3 @@ class TileComponent implements angular.IComponentOptions {
         tiles: '<'
     }
 }
-
-angular.module('levels').component(TileComponent.$name, new TileComponent());

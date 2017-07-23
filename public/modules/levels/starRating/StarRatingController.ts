@@ -1,6 +1,6 @@
 'use strict';
 
-class StarRatingController implements angular.IComponentController {
+export default class StarRatingController implements angular.IComponentController {
     static $controllerAs = 'starRatingCtrl';
     static $name = 'StarRatingController';
 
@@ -46,5 +46,3 @@ class StarRatingController implements angular.IComponentController {
         }
     }
 }
-
-angular.module('levels').controller(StarRatingController.$name, StarRatingController);

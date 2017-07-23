@@ -1,11 +1,10 @@
-import * as angular from 'angular';
 import { IDragBoxService } from './IDragBoxService';
 import { ITileService } from '../tile/ITileService';
 import { Point } from '../point/Point';
 
 'use strict';
 
-class DragBoxService implements IDragBoxService {
+export default class DragBoxService implements IDragBoxService {
     static $name = 'dragBoxService';
 
     static $inject = [
@@ -108,5 +107,3 @@ class DragBoxService implements IDragBoxService {
         return this.startCoord && this.endCoord;
     }
 }
-
-angular.module('levels').service(DragBoxService.$name, DragBoxService);

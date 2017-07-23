@@ -1,9 +1,8 @@
-import * as angular from 'angular';
 import { IEventService } from '../../core/event/IEventService';
 
 'use strict';
 
-class ShellController implements angular.IComponentController {
+export default class ShellController implements angular.IComponentController {
     static $controllerAs = 'shellCtrl';
     static $name = 'ShellController'; 
 
@@ -16,5 +15,3 @@ class ShellController implements angular.IComponentController {
 
     }
 }
-
-angular.module('levels').controller(ShellController.$name, ShellController);

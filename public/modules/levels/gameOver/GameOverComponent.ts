@@ -1,6 +1,6 @@
 'use strict';
 
-class GameOverComponent implements angular.IComponentOptions {
+export default class GameOverComponent implements angular.IComponentOptions {
     static $name = 'gameOver';
     bindToController = true;
     controller = 'GameOverController';
@@ -13,5 +13,3 @@ class GameOverComponent implements angular.IComponentOptions {
         won: '<'
     }
 }
-
-angular.module('levels').component(GameOverComponent.$name, new GameOverComponent());

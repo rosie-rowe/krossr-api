@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('levels').config(['$stateProvider', function($stateProvider: angular.ui.IStateProvider) {
+export function routing($stateProvider: angular.ui.IStateProvider) {
     let levelTemplateUrl = 'modules/levels/level/index.html';
 
     $stateProvider
@@ -25,4 +25,4 @@ angular.module('levels').config(['$stateProvider', function($stateProvider: angu
                 mode: 'edit'
             }
         });
-}]);
+}

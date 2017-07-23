@@ -1,10 +1,9 @@
-import * as angular from 'angular';
 import { IUtils } from '../utils/IUtils';
 import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
 
 'use strict';
 
-class LevelSelectController implements angular.IComponentController {
+export default class LevelSelectController implements angular.IComponentController {
     static $controllerAs = 'levelSelectCtrl';
     static $name = 'LevelSelectController';
 
@@ -66,5 +65,3 @@ class LevelSelectController implements angular.IComponentController {
         this.showFilter = !this.showFilter;
     }
 }
-
-angular.module('levels').controller(LevelSelectController.$name, LevelSelectController);

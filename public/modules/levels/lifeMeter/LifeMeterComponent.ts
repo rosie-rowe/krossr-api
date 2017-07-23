@@ -1,6 +1,6 @@
 'use strict';
 
-class LifeMeterComponent implements angular.IComponentOptions {
+export default class LifeMeterComponent implements angular.IComponentOptions {
     static $name = 'lifeMeter';
     bindToController = true;
     controller = 'LifeMeterController';
@@ -10,6 +10,4 @@ class LifeMeterComponent implements angular.IComponentOptions {
     bindings = {
         lives: '<'
     }
-}    
-
-angular.module('levels').component(LifeMeterComponent.$name, new LifeMeterComponent());
+}

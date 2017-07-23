@@ -1,6 +1,7 @@
 'use strict';
 
-class NumberGridComponent implements angular.IComponentOptions {
+export default class NumberGridComponent implements angular.IComponentOptions {
+    static $name = 'numberGrid';
     controller = 'NumberGridController';
     controllerAs = 'numGridCtrl'
     templateUrl = 'modules/levels/numberGrid/NumberGridView.html';
@@ -19,5 +20,3 @@ class NumberGridComponent implements angular.IComponentOptions {
 
     }
 }
-
-angular.module('levels').component('numberGrid', new NumberGridComponent());

@@ -1,12 +1,11 @@
 import { IUtils } from '../utils/IUtils';
 
-import * as angular from 'angular';
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { Point } from '../point/Point'
 
 'use strict';
 
-class NumberLineController {
+export default class NumberLineController {
     static $inject = [
         'Utils'
     ]
@@ -238,5 +237,3 @@ class TileGroup {
     currentValue: boolean;
     goalValue: boolean;
 }
-
-angular.module('levels').controller(NumberLineController.$name, NumberLineController);

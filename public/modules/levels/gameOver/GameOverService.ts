@@ -1,11 +1,10 @@
-import * as angular from 'angular';
 import { IGameOverService } from './IGameOverService';
 
 'use strict';
 
 /** Open the Game Over popup */
 
-class GameOverService implements IGameOverService {
+export default class GameOverService implements IGameOverService {
     static $name = 'gameOverService';
 
     static $inject = [
@@ -27,5 +26,3 @@ class GameOverService implements IGameOverService {
         });
     }
 }
-
-angular.module('levels').service(GameOverService.$name, GameOverService);

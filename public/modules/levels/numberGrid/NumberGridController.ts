@@ -1,12 +1,11 @@
 import { IUtils } from '../utils/IUtils';
 import { IEventService } from '../../core/event/IEventService';
 
-import * as angular from 'angular';
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
 
 'use strict';
 
-class NumberGridController implements angular.IComponentController {
+export default class NumberGridController implements angular.IComponentController {
     static $name = 'NumberGridController';
 
     static $inject = [
@@ -53,5 +52,3 @@ class NumberGridController implements angular.IComponentController {
         return parseInt(this.tileSize, 10) / 2 + 'px';
     }
 }
-
-angular.module('levels').controller(NumberGridController.$name, NumberGridController);

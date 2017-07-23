@@ -1,15 +1,15 @@
+import angular from 'angular';
+
 import { IUtils } from '../utils/IUtils';
 import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
 import { IEventService } from '../../core/event/IEventService';
 import { IShiftService } from '../shiftService/IShiftService';
 import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
-
-import * as angular from 'angular';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 
 'use strict';
 
-class LevelController implements angular.IComponentController {
+export default class LevelController implements angular.IComponentController {
     static $controllerAs = 'levelCtrl';
     static $name = 'LevelController';
 
@@ -331,5 +331,3 @@ class LevelController implements angular.IComponentController {
         });
     }
 }
-
-angular.module('levels').controller(LevelController.$name, LevelController);

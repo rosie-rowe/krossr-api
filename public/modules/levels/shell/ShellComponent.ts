@@ -2,7 +2,7 @@
 
 /** Enable us to share an instance of levelCtrl between the header & the level */
 
-class ShellComponent implements angular.IComponentOptions {
+export default class ShellComponent implements angular.IComponentOptions {
     static $name = 'krossrShell';
     bindToController = true;
     controller = 'ShellController';
@@ -20,5 +20,3 @@ class ShellComponent implements angular.IComponentOptions {
 
     constructor() {}
 }
-
-angular.module('levels').component(ShellComponent.$name, new ShellComponent());

@@ -1,10 +1,11 @@
-import * as angular from 'angular';
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';
 import { ITileService } from '../tile/ITileService';
 import { IUtils } from './IUtils';
 
-class Utils implements IUtils {
+export default class Utils implements IUtils {
+    static $name = 'Utils';
+
     static $inject = [
         '$timeout',
         '$rootScope',
@@ -193,5 +194,3 @@ class Utils implements IUtils {
         angular.element(selector).css("width", width);
     }
 }
-
-angular.module('levels').service('Utils', Utils);

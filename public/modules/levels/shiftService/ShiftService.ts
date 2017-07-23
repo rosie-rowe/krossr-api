@@ -1,9 +1,8 @@
-import * as angular from 'angular';
 import { IShiftService } from './IShiftService';
 
 'use strict';
 
-class ShiftService implements IShiftService {
+export default class ShiftService implements IShiftService {
     static $name = 'shiftService';
     private _shiftOn: boolean = false;
 
@@ -17,5 +16,3 @@ class ShiftService implements IShiftService {
 
     constructor() {}
 }
-
-angular.module('levels').service(ShiftService.$name, ShiftService);

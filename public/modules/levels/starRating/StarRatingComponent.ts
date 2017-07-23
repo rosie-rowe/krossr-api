@@ -1,6 +1,6 @@
 'use strict';
 
-class StarRatingComponent implements angular.IComponentOptions {
+export default class StarRatingComponent implements angular.IComponentOptions {
     static $name = 'starRating';
     bindToController = true;
     controller = 'StarRatingController';
@@ -14,5 +14,3 @@ class StarRatingComponent implements angular.IComponentOptions {
         readOnly: '<?readonly'
     }
 }
-
-angular.module('levels').component(StarRatingComponent.$name, new StarRatingComponent());

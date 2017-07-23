@@ -1,9 +1,9 @@
-import * as angular from 'angular'
 import { Point } from '../point/Point'
 
 'use strict';
 
-class NumberLineComponent implements angular.IComponentOptions {
+export default class NumberLineComponent implements angular.IComponentOptions {
+	static $name = 'numberLine';
 	controller = 'NumberLineController';
 	controllerAs = 'numLineCtrl';
 	templateUrl = 'modules/levels/numberLine/NumberLineView.html';
@@ -22,5 +22,3 @@ class NumberLineComponent implements angular.IComponentOptions {
 	) {
 	}
 }
-
-angular.module('levels').component('numberLine', new NumberLineComponent());
