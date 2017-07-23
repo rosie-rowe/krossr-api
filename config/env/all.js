@@ -15,8 +15,7 @@ module.exports = {
 		lib: {
 			css: [],
 			js: [
-				'public/dist/vendor.bundle.js',
-				'public/lib/ngDialog/js/ngDialog.js',
+				'public/dist/vendor.bundle.js'
 			]
 		},
 		css: [

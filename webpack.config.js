@@ -15,7 +15,8 @@ var config = {
             'angular-sanitize',
             'angular-ui-router',
             'angular-ui-utils/ui-utils.js',
-            'ng-debounce/angular-debounce.js'
+            'ng-debounce/angular-debounce.js',
+            'ngDialog/js/ngDialog.js'
         ],
         'krossr': 'AppModule.ts'
     },
