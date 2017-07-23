@@ -1,8 +1,6 @@
-import { IAuthenticationService } from './IAuthenticationService';
-
 'use strict';
 
-export default class AuthenticationService implements IAuthenticationService {
+export default class AuthenticationService implements krossr.users.authentication.IAuthenticationService {
     static $name = 'Authentication';
 
     static $inject = [

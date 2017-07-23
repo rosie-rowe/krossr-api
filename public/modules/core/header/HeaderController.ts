@@ -1,4 +1,3 @@
-import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
 import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
 
 'use strict';
@@ -13,7 +12,7 @@ export default class HeaderController implements angular.IComponentController {
 	]
 
 	constructor(
-		private Authentication: IAuthenticationService,
+		private Authentication: krossr.users.authentication.IAuthenticationService,
 		private componentDialogService: IComponentDialogService,
 	) {
 

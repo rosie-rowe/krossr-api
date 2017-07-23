@@ -1,5 +1,4 @@
 import { IUtils } from '../utils/IUtils';
-import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
 
 'use strict';
 
@@ -14,7 +13,7 @@ export default class LevelSelectController implements angular.IComponentControll
     ];
 
     constructor(
-        private Authentication: IAuthenticationService,
+        private Authentication: krossr.users.authentication.IAuthenticationService,
         private Levels: any,
         private Utils: IUtils
     ) {
