@@ -106,17 +106,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		uglify: {
-			production: {
-				options: {
-					mangle: false
-				},
-				files: {
-					'public/dist/application.min.js': '<%= applicationJavaScriptFiles %>',
-                    'public/dist/lib.min.js': '<%= applicationJavaScriptLibFiles %>',
-				}
-			}
-		},
 		cssmin: {
 			combine: {
 				files: {
@@ -211,7 +200,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'ts', 'html2js', 'uglify', 'cssmin', 'less']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'ts', 'html2js', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
