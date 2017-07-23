@@ -3,5 +3,5 @@ import AuthenticationService from './AuthenticationService';
 
 export default angular
     .module('users.authentication')
-    .service('Authentication', AuthenticationService)
+    .service(AuthenticationService.$name, AuthenticationService)
     .name;

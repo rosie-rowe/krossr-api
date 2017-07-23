@@ -4,6 +4,6 @@ import StarRatingController from './StarRatingController';
 
 export default angular
     .module('levels.starRating', [])
-    .component('starRating', StarRatingComponent)
+    .component(StarRatingComponent.$name, new StarRatingComponent())
     .controller(StarRatingController.$name, StarRatingController)
     .name;

@@ -1,15 +1,13 @@
-import LevelSelectController from './LevelSelectController';
-
 'use strict';
 
-export default function() {
-    return {
-        bindings: {
-            closeAction: '&'
-        },
-        bindToController: true,
-        controller: LevelSelectController,
-        controllerAs: LevelSelectController.$controllerAs,
-        templateUrl: 'modules/levels/levelSelect/LevelSelectView.html'
+export default class LevelSelectComponent implements angular.IComponentOptions {
+    static $name = 'levelSelect';
+    bindToController = true;
+    controller = 'LevelSelectController';
+    controllerAs = 'levelSelectCtrl';
+    templateUrl = 'modules/levels/levelSelect/LevelSelectView.html';
+
+    bindings = {
+        closeAction: '&'
     }
 }

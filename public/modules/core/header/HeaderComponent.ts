@@ -1,11 +1,8 @@
-import HeaderController from './HeaderController';
-
 'use strict';
 
-export default function() {
-    return {
-        controller: HeaderController,
-        controllerAs: HeaderController.$controllerAs,
-        template: 'modules/core/header/HeaderView.html'
-    }
+export default class HeaderComponent implements angular.IComponentOptions {
+    static $name = 'krossrHeader';
+    controller = 'HeaderController';
+    controllerAs = 'headerCtrl';
+    templateUrl = 'modules/core/header/HeaderView.html';
 }

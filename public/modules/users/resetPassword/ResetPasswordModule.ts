@@ -4,6 +4,6 @@ import ResetPasswordController from './ResetPasswordController';
 
 export default angular
     .module('users.resetPassword', [])
-    .component('resetPassword', ResetPasswordComponent)
+    .component(ResetPasswordComponent.$name, new ResetPasswordComponent())
     .controller(ResetPasswordController.$name, ResetPasswordController)
     .name;

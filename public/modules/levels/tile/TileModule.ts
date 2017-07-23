@@ -5,7 +5,7 @@ import TileService from './TileService';
 
 export default angular
     .module('levels.tile', [])
-    .component('tile', TileComponent)
+    .component(TileComponent.$name, new TileComponent())
     .controller(TileController.$name, TileController)
     .service(TileService.$name, TileService)
     .name;

@@ -2,7 +2,8 @@ import { IShiftService } from './IShiftService';
 
 'use strict';
 
-class ShiftService implements IShiftService {
+export default class ShiftService implements IShiftService {
+    static $name = 'shiftService';
     private _shiftOn: boolean = false;
 
     get shiftOn(): boolean {
@@ -14,8 +15,4 @@ class ShiftService implements IShiftService {
     }
 
     constructor() {}
-}
-
-export default function() {
-    return ShiftService;
 }

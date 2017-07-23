@@ -1,17 +1,22 @@
-import NumberGridController from './NumberGridController';
-
 'use strict';
 
-export default function() {
-    return {
-        bindings: {
-            gameMatrix: '<',
-            goalMatrix: '<',
-            orientation: '@',
-        },
-        bindToController: true,
-        controller: NumberGridController,
-        controllerAs: NumberGridController.$controllerAs,
-        templateUrl: 'modules/levels/numberGrid/NumberGridView.html'
+export default class NumberGridComponent implements angular.IComponentOptions {
+    static $name = 'numberGrid';
+    controller = 'NumberGridController';
+    controllerAs = 'numGridCtrl'
+    templateUrl = 'modules/levels/numberGrid/NumberGridView.html';
+
+    bindings = {
+        gameMatrix: '<',
+        goalMatrix: '<',
+        orientation: '@',
+    }
+
+    bindToController = true;
+
+    constructor(
+
+    ) {
+
     }
 }

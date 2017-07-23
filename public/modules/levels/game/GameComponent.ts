@@ -1,18 +1,16 @@
-import GameController from './GameController';
-
 'use strict';
 
-export default function() {
-    return {
-        bindings: {
-            gameMatrix: '<',
-            goalMatrix: '<',
-            level: '<',
-            tiles: '<'
-        },
-        bindToController: true,
-        controller: GameController,
-        controllerAs: GameController.$controllerAs,
-        templateUrl: 'modules/levels/game/GameView.html'
-    }
+export default class GameComponent implements angular.IComponentOptions {
+    static $name = 'game';
+    bindToController = true;
+    controller = 'GameController';
+    controllerAs = 'gameCtrl';
+    templateUrl = 'modules/levels/game/GameView.html';
+
+    bindings = {
+        gameMatrix: '<',
+        goalMatrix: '<',
+        level: '<',
+        tiles: '<'
+    };
 }

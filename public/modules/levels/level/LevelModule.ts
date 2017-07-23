@@ -4,6 +4,6 @@ import LevelController from './LevelController';
 
 export default angular
     .module('levels.level', [])
-    .component('level', LevelComponent)
+    .component(LevelComponent.$name, new LevelComponent())
     .controller(LevelController.$name, LevelController)
     .name;

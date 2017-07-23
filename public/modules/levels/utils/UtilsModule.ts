@@ -3,5 +3,5 @@ import Utils from './Utils';
 
 export default angular
     .module('levels.utils', [])
-    .service('Utils', Utils)
+    .service(Utils.$name, Utils)
     .name;

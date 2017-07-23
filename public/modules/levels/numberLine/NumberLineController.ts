@@ -6,8 +6,6 @@ import { Point } from '../point/Point'
 'use strict';
 
 export default class NumberLineController {
-    static $controllerAs = 'numLineCtrl';
-
     static $inject = [
         'Utils'
     ]

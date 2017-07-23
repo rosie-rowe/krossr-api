@@ -5,7 +5,9 @@ import { ISideLengthService } from '../sideLengthService/ISideLengthService';
 import { ITileService } from '../tile/ITileService';
 import { IUtils } from './IUtils';
 
-class Utils implements IUtils {
+export default class Utils implements IUtils {
+    static $name = 'Utils';
+
     static $inject = [
         '$timeout',
         '$rootScope',
@@ -193,8 +195,4 @@ class Utils implements IUtils {
     setWidth(selector, width) {
         angular.element(selector).css("width", width);
     }
-}
-
-export default function() {
-    return Utils;
 }

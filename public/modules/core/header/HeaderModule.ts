@@ -4,6 +4,6 @@ import HeaderController from './HeaderController';
 
 export default angular
     .module('core.header', [])
-    .component('krossrHeader', HeaderComponent)
+    .component(HeaderComponent.$name, new HeaderComponent())
     .controller(HeaderController.$name, HeaderController)
     .name;

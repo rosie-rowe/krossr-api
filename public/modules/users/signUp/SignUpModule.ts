@@ -4,6 +4,6 @@ import SignUpController from './SignUpController';
 
 export default angular
     .module('users.signUp', [])
-    .component('signUp', SignUpComponent)
+    .component(SignUpComponent.$name, new SignUpComponent())
     .controller(SignUpController.$name, SignUpController)
     .name;

@@ -3,5 +3,5 @@ import HelpComponent from './HelpComponent';
 
 export default angular
     .module('core.help', [])
-    .component('help', HelpComponent)
+    .component(HelpComponent.$name, new HelpComponent())
     .name;
