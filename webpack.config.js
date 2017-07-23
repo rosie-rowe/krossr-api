@@ -14,7 +14,8 @@ var config = {
             'angular-touch',
             'angular-sanitize',
             'angular-ui-router',
-            'angular-ui-utils/ui-utils.js'
+            'angular-ui-utils/ui-utils.js',
+            'ng-debounce/angular-debounce.js'
         ],
         'krossr': 'AppModule.ts'
     },
