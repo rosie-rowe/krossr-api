@@ -14,21 +14,11 @@ module.exports = function(grunt) {
 		mochaTests: ['app/tests/**/*.js']
 	};
 
-	var directories = {
-		typescript: 'public/typescript'
-	};
-
-	var files = {
-		references: 'public/references.ts'
-	};
-
-	grunt.loadNpmTasks('grunt-ts');
 	grunt.loadNpmTasks('grunt-webpack');
 
 	// Project Configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		clean: [directories.typescript],
 		watch: {
 			serverViews: {
 				files: watchFiles.serverViews,
@@ -97,17 +87,6 @@ module.exports = function(grunt) {
                 dest: 'public/dist/templates.js'
             }
         },
-		ts: {
-			default: {
-				reference: files.references,
-				src: [files.references],
-				options: {
-					module: 'es6',
-					rootDir: 'public',
-					target: 'es5'
-				}
-			}
-		},
 		cssmin: {
 			combine: {
 				files: {
@@ -195,7 +174,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['concurrent:default', 'ts', 'less']);
+	grunt.registerTask('default', ['concurrent:default', 'less']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -204,7 +183,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'webpack', 'ts', 'html2js', 'cssmin', 'less']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'webpack', 'html2js', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
