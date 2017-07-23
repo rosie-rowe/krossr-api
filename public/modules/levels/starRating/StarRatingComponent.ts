@@ -1,16 +1,18 @@
+import StarRatingController from './StarRatingController';
+
 'use strict';
 
-export default class StarRatingComponent implements angular.IComponentOptions {
-    static $name = 'starRating';
-    bindToController = true;
-    controller = 'StarRatingController';
-    controllerAs = 'starRatingCtrl';
-    templateUrl = 'modules/levels/starRating/StarRatingView.html';
-
-    bindings = {
-        ratingValue: '=ngModel',
-        max: '<?',
-        onRatingSelected: '&?',
-        readOnly: '<?readonly'
+export default function() {
+    return {
+        bindings: {
+            ratingValue: '=ngModel',
+            max: '<?',
+            onRatingSelected: '&?',
+            readOnly: '<?readonly'
+        },
+        bindToController: true,
+        controller: StarRatingController,
+        controllerAs: StarRatingController.$controllerAs,
+        templateUrl: 'modules/levels/starRating/StarRatingView.html'
     }
 }

@@ -4,6 +4,6 @@ import ConfirmationController from './ConfirmationController';
 
 export default angular
     .module('core.confirmation', [])
-    .component(ConfirmationComponent.$name, new ConfirmationComponent())
+    .component('confirmation', ConfirmationComponent)
     .controller(ConfirmationController.$name, ConfirmationController)
     .name;

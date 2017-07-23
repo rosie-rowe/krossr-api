@@ -3,5 +3,5 @@ import ConvertToNumberDirective from './ConvertToNumberDirective';
 
 export default angular
     .module('core.convertToNumber', [])
-    .directive(ConvertToNumberDirective.$name, () => new ConvertToNumberDirective())
+    .directive('convertToNumber', ConvertToNumberDirective)
     .name;

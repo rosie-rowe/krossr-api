@@ -4,6 +4,6 @@ import SignInController from './SignInController';
 
 export default angular
     .module('users.signIn', [])
-    .component(SignInComponent.$name, new SignInComponent())
+    .component('signIn', SignInComponent)
     .controller(SignInController.$name, SignInController)
     .name;

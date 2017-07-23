@@ -4,6 +4,6 @@ import NumberLineController from './NumberLineController';
 
 export default angular
     .module('levels.numberLine', [])
-    .component(NumberLineComponent.$name, new NumberLineComponent())
+    .component('numberLine', NumberLineComponent)
     .controller(NumberLineController.$name, NumberLineController)
     .name;

@@ -4,6 +4,6 @@ import PaginationController from './PaginationController';
 
 export default angular
     .module('core.pagination', [])
-    .component(PaginationComponent.$name, new PaginationComponent())
+    .component('pagination', PaginationComponent)
     .controller(PaginationController.$name, PaginationController)
     .name;

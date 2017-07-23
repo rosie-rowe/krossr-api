@@ -4,6 +4,6 @@ import EditProfileController from './EditProfileController';
 
 export default angular
     .module('users.editProfile', [])
-    .component(EditProfileComponent.$name, new EditProfileComponent())
+    .component('editProfile', EditProfileComponent)
     .controller(EditProfileController.$name, EditProfileController)
     .name;

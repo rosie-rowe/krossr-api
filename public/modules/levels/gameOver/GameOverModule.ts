@@ -5,7 +5,7 @@ import GameOverService from './GameOverService';
 
 export default angular
     .module('levels.gameOver', [])
-    .component(GameOverComponent.$name, new GameOverComponent())
+    .component('gameOver', GameOverComponent)
     .controller(GameOverController.$name, GameOverController)
     .service(GameOverService.$name, GameOverService)
     .name;

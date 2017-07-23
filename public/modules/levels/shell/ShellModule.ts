@@ -4,6 +4,6 @@ import ShellController from './ShellController';
 
 export default angular
     .module('levels.shell', [])
-    .component(ShellComponent.$name, new ShellComponent())
+    .component('krossrShell', ShellComponent)
     .controller(ShellController.$name, ShellController)
     .name;

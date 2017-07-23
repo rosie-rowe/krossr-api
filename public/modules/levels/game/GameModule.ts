@@ -4,6 +4,6 @@ import GameController from './GameController'
 
 export default angular
     .module('levels.game', [])
-    .component(GameComponent.$name, new GameComponent())
+    .component('game', GameComponent)
     .controller(GameController.$name, GameController)
     .name;

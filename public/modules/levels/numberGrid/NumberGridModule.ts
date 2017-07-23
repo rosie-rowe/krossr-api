@@ -4,6 +4,6 @@ import NumberGridController from './NumberGridController';
 
 export default angular
     .module('levels.numberGrid', [])
-    .component(NumberGridComponent.$name, new NumberGridComponent())
+    .component('numberGrid', NumberGridComponent)
     .controller(NumberGridController.$name, NumberGridController)
     .name;

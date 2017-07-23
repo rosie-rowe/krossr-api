@@ -1,15 +1,17 @@
+import PaginationController from './PaginationController';
+
 'use strict';
 
-export default class PaginationComponent implements angular.IComponentOptions {
-    static $name = 'pagination';
-    bindToController = true;
-    controller = 'PaginationController';
-    controllerAs = 'paginationCtrl';
-    templateUrl = 'modules/core/pagination/PaginationView.html';
-
-    bindings = {
-        onPagination: '&',
-        currentPage: '=', // todo
-        totalPages: '<'
+export default function() {
+    return {
+        bindings: {
+            onPagination: '&',
+            currentPage: '=', // todo
+            totalPages: '<'
+        },
+        bindToController: true,
+        controller: PaginationController,
+        controllerAs: PaginationController.$controllerAs,
+        templateUrl: 'modules/core/pagination/PaginationView.html',
     }
 }

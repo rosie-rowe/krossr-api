@@ -4,6 +4,6 @@ import LifeMeterController from './LifeMeterController';
 
 export default angular
     .module('levels.lifeMeter', [])
-    .component(LifeMeterComponent.$name, new LifeMeterComponent())
+    .component('lifeMeter', LifeMeterComponent)
     .controller(LifeMeterController.$name, LifeMeterController)
     .name;

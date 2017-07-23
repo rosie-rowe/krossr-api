@@ -1,13 +1,15 @@
+import LifeMeterController from './LifeMeterController';
+
 'use strict';
 
-export default class LifeMeterComponent implements angular.IComponentOptions {
-    static $name = 'lifeMeter';
-    bindToController = true;
-    controller = 'LifeMeterController';
-    controllerAs = 'lifeMeterCtrl';
-    templateUrl = 'modules/levels/lifeMeter/LifeMeterView.html';
-
-    bindings = {
-        lives: '<'
+export default function() {
+    return {
+        bindings: {
+            lives: '<'
+        },
+        bindToController: true,
+        controller: LifeMeterController,
+        controllerAs: LifeMeterController.$controllerAs,
+        templateUrl: 'modules/levels/lifeMeter/LifeMeterView.html'
     }
 }

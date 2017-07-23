@@ -6,6 +6,7 @@ import { BooleanMatrix } from '../matrix/BooleanMatrix'
 'use strict';
 
 export default class NumberGridController implements angular.IComponentController {
+    static $controllerAs = 'numGridCtrl';
     static $name = 'NumberGridController';
 
     static $inject = [

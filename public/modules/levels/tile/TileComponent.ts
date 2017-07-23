@@ -1,16 +1,18 @@
+import TileController from './TileController';
+
 'use strict';
 
-export default class TileComponent implements angular.IComponentOptions {
-    static $name = 'tile';
-    bindToController = true;
-    controller = 'TileController';
-    controllerAs = 'tileCtrl';
-    templateUrl = 'modules/levels/tile/TileView.html';
-
-    bindings = {
-        gameMatrix: '<',
-        index: '<',
-        level: '<',
-        tiles: '<'
+export default function() {
+    return {
+        bindings: {
+            gameMatrix: '<',
+            index: '<',
+            level: '<',
+            tiles: '<'
+        },
+        bindToController: true,
+        controller: TileController,
+        controllerAs: TileController.$controllerAs,
+        templateUrl: 'modules/levels/tile/TileView.html'
     }
 }

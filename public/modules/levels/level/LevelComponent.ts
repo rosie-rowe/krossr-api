@@ -1,13 +1,15 @@
+import LevelController from './LevelController';
+
 'use strict'
 
-export default class LevelComponent {
-    static $name = 'level';
-    bindToController = true;
-    controller = 'LevelController';
-    controllerAs = 'levelCtrl';
-    templateUrl = 'modules/levels/level/LevelView.html';
-
-    bindings = {
-        controller: '@'
+export default function() {
+    return {
+        bindings: {
+            controller: '@'
+        },
+        bindToController: true,
+        controller: LevelController,
+        controllerAs: LevelController.$controllerAs,
+        templateUrl: 'modules/levels/level/LevelView.html'
     }
 }

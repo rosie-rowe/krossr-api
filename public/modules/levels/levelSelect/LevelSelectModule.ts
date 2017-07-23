@@ -4,6 +4,6 @@ import LevelSelectController from './LevelSelectController'
 
 export default angular
     .module('levels.levelSelect', [])
-    .component(LevelSelectComponent.$name, new LevelSelectComponent())
+    .component('levelSelect', LevelSelectComponent)
     .controller(LevelSelectController.$name, LevelSelectController)
     .name;

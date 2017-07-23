@@ -4,6 +4,6 @@ import ForgotPasswordController from './ForgotPasswordController';
 
 export default angular
     .module('users.forgotPassword', [])
-    .component(ForgotPasswordComponent.$name, new ForgotPasswordComponent())
+    .component('forgotPassword', ForgotPasswordComponent)
     .controller(ForgotPasswordController.$name, ForgotPasswordController)
     .name;

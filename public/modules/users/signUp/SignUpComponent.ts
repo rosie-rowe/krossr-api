@@ -1,15 +1,18 @@
+import SignUpController from './SignUpController';
+
 'use strict';
 
+var $name = 'signUp';
+
 /** Sign-in popup */
-
-export default class SignUpComponent implements angular.IComponentOptions {
-    static $name = 'signUp';
-    bindToController = true;
-    controller = 'SignUpController';
-    controllerAs = 'signUpCtrl';
-    templateUrl = 'modules/users/signUp/SignUpView.html';
-
-    bindings = {
-        closeAction: '&'
+export default function() {
+    return {
+        bindings: {
+            closeAction: '&'
+        },
+        bindToController: true,
+        controller: SignUpController,
+        controllerAs: SignUpController.$controllerAs,
+        templateUrl: 'modules/users/signUp/SignUpView.html'
     }
 }
