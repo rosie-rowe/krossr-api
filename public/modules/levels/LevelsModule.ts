@@ -18,7 +18,7 @@ import SideLengthServiceModule from './sideLengthService/SideLengthServiceModule
 import TileModule from './tile/TileModule';
 import UtilsModule from './utils/UtilsModule';
 
-import { routing } from './config/RouteModule';
+import LevelsRoutes from './config/RouteModule';
 
 export default angular
     .module('levels', [
@@ -38,5 +38,5 @@ export default angular
         TileModule,
         UtilsModule
     ])
-    .config(routing)
+    .config(LevelsRoutes.route)
     .name;

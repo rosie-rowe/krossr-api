@@ -18,11 +18,18 @@ var config = {
             'public/lib',
             'public/modules'
         ],
-        extensions: ['.ts', '.js']
+        extensions: [
+            '.ts',
+            '.js'
+        ]
     },
     module: {
         loaders: [
-            { test: /.*[^test].ts$/, loader: 'ts-loader' }
+            {
+                include: __dirname,
+                test: /.*[^test].ts$/,
+                loader: 'ts-loader'
+            }
         ]
     }
 }
