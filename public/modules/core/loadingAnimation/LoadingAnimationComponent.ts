@@ -1,13 +1,15 @@
+import LoadingAnimationController from './LoadingAnimationController'; 
+
 'use strict';
 
-export default class LoadingAnimationComponent implements angular.IComponentOptions {
-    static $name = 'loadingAnimation';
-    bindToController = true;
-    controller = 'LoadingAnimationController';
-    controllerAs = 'loadingAnimationCtrl';
-    templateUrl = 'modules/core/loadingAnimation/LoadingAnimationView.html';
-
-    bindings = {
-        condition: '<'
+export default function () {
+    return {
+        bindings: {
+            condition: '<'
+        },
+        bindToController: true,
+        controller: LoadingAnimationController,
+        controllerAs: LoadingAnimationController.$controllerAs,
+        templateUrl: 'modules/core/loadingAnimation/LoadingAnimationView.html'
     }
 }
