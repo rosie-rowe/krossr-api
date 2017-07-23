@@ -26,7 +26,7 @@ var config = {
     module: {
         loaders: [
             {
-                include: __dirname,
+                include: path.join(__dirname, 'public/modules'),
                 test: /.*[^test].ts$/,
                 loader: 'ts-loader'
             }
