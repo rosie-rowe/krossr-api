@@ -11,7 +11,8 @@ var config = {
             'angular-animate',
             'angular-resource',
             'angular-cookies',
-            'angular-touch'
+            'angular-touch',
+            'angular-sanitize'
         ],
         'krossr': 'AppModule.ts'
     },

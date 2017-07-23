@@ -16,7 +16,6 @@ module.exports = {
 			css: [],
 			js: [
 				'public/dist/vendor.bundle.js',
-				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/ng-debounce/angular-debounce.js',
