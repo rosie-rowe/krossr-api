@@ -8,7 +8,8 @@ var config = {
     entry: {
         'vendor': [
             'angular',
-            'angular-animate'
+            'angular-animate',
+            'angular-resource'
         ],
         'krossr': 'AppModule.ts'
     },
