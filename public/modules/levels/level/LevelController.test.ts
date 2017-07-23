@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { ApplicationConfiguration } from '../../../config';
+import { ApplicationConfiguration } from '../../config';
 
 'use strict'
 
