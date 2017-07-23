@@ -6,7 +6,10 @@ var webpack = require('webpack');
 
 var config = {
     entry: {
-        'vendor': ['angular'],
+        'vendor': [
+            'angular',
+            'angular-animate'
+        ],
         'krossr': 'AppModule.ts'
     },
     output: {

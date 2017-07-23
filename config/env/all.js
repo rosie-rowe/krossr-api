@@ -16,7 +16,6 @@ module.exports = {
 			css: [],
 			js: [
 				'public/dist/vendor.bundle.js',
-				'public/lib/angular-animate/angular-animate.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js',
 				'public/lib/angular-touch/angular-touch.js', 
