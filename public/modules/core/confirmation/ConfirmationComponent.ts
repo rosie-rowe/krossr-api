@@ -1,6 +1,6 @@
 'use strict';
 
-class ConfirmationComponent implements angular.IComponentOptions {
+export default class ConfirmationComponent implements angular.IComponentOptions {
     static $name = 'confirmation';
     bindToController = true;
     controller = 'ConfirmationController';
@@ -14,5 +14,3 @@ class ConfirmationComponent implements angular.IComponentOptions {
         submitText: '@'
     }
 }
-
-angular.module('core').component(ConfirmationComponent.$name, new ConfirmationComponent());

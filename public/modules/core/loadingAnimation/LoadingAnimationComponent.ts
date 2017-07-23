@@ -1,6 +1,6 @@
 'use strict';
 
-class LoadingAnimationComponent implements angular.IComponentOptions {
+export default class LoadingAnimationComponent implements angular.IComponentOptions {
     static $name = 'loadingAnimation';
     bindToController = true;
     controller = 'LoadingAnimationController';
@@ -11,5 +11,3 @@ class LoadingAnimationComponent implements angular.IComponentOptions {
         condition: '<'
     }
 }
-
-angular.module('core').component(LoadingAnimationComponent.$name, new LoadingAnimationComponent());

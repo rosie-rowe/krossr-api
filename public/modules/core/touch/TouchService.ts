@@ -3,7 +3,7 @@ import { ITouchService } from './ITouchService';
 
 'use strict';
 
-class TouchService implements ITouchService {
+export default class TouchService implements ITouchService {
     static $name = 'touchService';
 
     /** Touchmove/touchend will not move along with crossing over elements like mousemove/mouseup will, so we need hax */
@@ -39,5 +39,3 @@ class TouchService implements ITouchService {
         return event.touches;
     }
 }
-
-angular.module('levels').service(TouchService.$name, TouchService);

@@ -1,10 +1,9 @@
-import * as angular from 'angular';
 import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
 import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
 
 'use strict';
 
-class HeaderController implements angular.IComponentController {
+export default class HeaderController implements angular.IComponentController {
 	static $controllerAs = 'headerCtrl';
 	static $name = 'HeaderController';	
 
@@ -42,5 +41,3 @@ class HeaderController implements angular.IComponentController {
 		this.componentDialogService.open('sign-up');
 	}
 }
-
-angular.module('core').controller(HeaderController.$name, HeaderController);

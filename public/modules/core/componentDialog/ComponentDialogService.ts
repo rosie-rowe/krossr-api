@@ -7,7 +7,7 @@ import { IComponentDialogService } from './IComponentDialogService';
  * Wrapper for ngDialog to easily allow dialogs to be defined as components
  */
 
-class ComponentDialogService implements IComponentDialogService {
+export default class ComponentDialogService implements IComponentDialogService {
     static $name = 'componentDialogService';
 
     static $inject = [
@@ -54,5 +54,3 @@ class ComponentDialogService implements IComponentDialogService {
         return this.ngDialog.openConfirm(options);
     }
 }
-
-angular.module('core').service(ComponentDialogService.$name, ComponentDialogService);

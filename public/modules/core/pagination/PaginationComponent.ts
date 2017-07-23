@@ -1,6 +1,6 @@
 'use strict';
 
-class PaginationComponent implements angular.IComponentOptions {
+export default class PaginationComponent implements angular.IComponentOptions {
     static $name = 'pagination';
     bindToController = true;
     controller = 'PaginationController';
@@ -13,5 +13,3 @@ class PaginationComponent implements angular.IComponentOptions {
         totalPages: '<'
     }
 }
-
-angular.module('core').component(PaginationComponent.$name, new PaginationComponent());

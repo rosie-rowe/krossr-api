@@ -81,7 +81,9 @@
     "load-grunt-tasks": "~0.6.0",
     "should": "~4.0.4",
     "supertest": "~0.14.0",
-    "typescript": "^2.4.1"
+    "ts-loader": "^2.2.2",
+    "typescript": "^2.4.1",
+    "webpack": "^3.0.0"
   },
   "repository": {
     "type": "git",

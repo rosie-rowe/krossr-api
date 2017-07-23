@@ -1,11 +1,10 @@
-import * as angular from 'angular';
 import { IEventService } from './IEventService';
 
 'use strict';
 
 /** Handles broadcast/on events */
 
-class EventService implements IEventService {
+export default class EventService implements IEventService {
     static $name = 'eventService';
 
     static $inject = [
@@ -32,5 +31,3 @@ class EventService implements IEventService {
         scope.$on('destroy', eventCanceler);
     }
 }
-
-angular.module('core').service(EventService.$name, EventService);

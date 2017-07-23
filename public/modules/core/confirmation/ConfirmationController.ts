@@ -1,6 +1,6 @@
 'use strict';
 
-class ConfirmationController implements angular.IComponentController {
+export default class ConfirmationController implements angular.IComponentController {
     static $controllerAs = 'confirmationCtrl';
     static $name = 'ConfirmationController';
 
@@ -19,7 +19,7 @@ class ConfirmationController implements angular.IComponentController {
 
     }
 
-    public $onInit() {}
-}
+    public $onInit() {
 
-angular.module('core').controller(ConfirmationController.$name, ConfirmationController);
+    }
+}

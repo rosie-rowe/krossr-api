@@ -1,6 +1,6 @@
 'use strict';
 
-class HelpComponent implements angular.IComponentOptions {
+export default class HelpComponent implements angular.IComponentOptions {
     static $name = 'help';
     bindToController = true;
     controllerAs = 'helpCtrl';
@@ -10,5 +10,3 @@ class HelpComponent implements angular.IComponentOptions {
         closeAction: '&'
     };
 }
-
-angular.module('core').component(HelpComponent.$name, new HelpComponent());

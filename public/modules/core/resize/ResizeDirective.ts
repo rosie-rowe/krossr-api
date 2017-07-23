@@ -3,7 +3,7 @@ import { IUtils } from '../../levels/utils/IUtils'
 
 'use strict';
 
-class ResizeDirective implements angular.IDirective {
+export default class ResizeDirective implements angular.IDirective {
     static $name = 'resize';
 
     static $inject = [
@@ -34,5 +34,3 @@ class ResizeDirective implements angular.IDirective {
         }, 250));
     }
 }
-
-angular.module('core').directive(ResizeDirective.$name, ($window, debounce, Utils) => { return new ResizeDirective($window, debounce, Utils); });
