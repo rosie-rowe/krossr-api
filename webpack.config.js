@@ -13,7 +13,11 @@ var config = {
         filename: 'krossr.js'
     },
     resolve: {
-        modules: ['node_modules', 'public/modules'],
+        modules: [
+            'node_modules',
+            'public/lib',
+            'public/modules'
+        ],
         extensions: ['.ts', '.js']
     },
     module: {
