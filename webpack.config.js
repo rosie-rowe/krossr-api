@@ -12,7 +12,8 @@ var config = {
             'angular-resource',
             'angular-cookies',
             'angular-touch',
-            'angular-sanitize'
+            'angular-sanitize',
+            'angular-ui-router'
         ],
         'krossr': 'AppModule.ts'
     },
@@ -30,6 +31,7 @@ var config = {
         modules: [
             'node_modules',
             'public/lib',
+            'public/lib/angular-ui-router/release',
             'public/modules'
         ],
         extensions: [
