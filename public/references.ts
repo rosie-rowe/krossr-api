@@ -1,7 +1,7 @@
 
 //grunt-start
-/// <reference path="config.ts" />
 /// <reference path="modules/AppModule.ts" />
+/// <reference path="modules/config.ts" />
 /// <reference path="modules/core/componentDialog/ComponentDialogController.ts" />
 /// <reference path="modules/core/componentDialog/ComponentDialogModule.ts" />
 /// <reference path="modules/core/componentDialog/ComponentDialogService.ts" />
