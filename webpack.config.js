@@ -13,7 +13,8 @@ var config = {
             'angular-cookies',
             'angular-touch',
             'angular-sanitize',
-            'angular-ui-router'
+            'angular-ui-router',
+            'angular-ui-utils/ui-utils.js'
         ],
         'krossr': 'AppModule.ts'
     },

@@ -16,7 +16,6 @@ module.exports = {
 			css: [],
 			js: [
 				'public/dist/vendor.bundle.js',
-				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/ng-debounce/angular-debounce.js',
 				'public/lib/ngDialog/js/ngDialog.js',
 			]
