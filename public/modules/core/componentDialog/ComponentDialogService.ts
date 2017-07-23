@@ -1,5 +1,4 @@
 import * as angular from 'angular';
-import { IComponentDialogService } from './IComponentDialogService';
 
 'use strict';
 
@@ -7,7 +6,7 @@ import { IComponentDialogService } from './IComponentDialogService';
  * Wrapper for ngDialog to easily allow dialogs to be defined as components
  */
 
-export default class ComponentDialogService implements IComponentDialogService {
+export default class ComponentDialogService implements krossr.core.componentDialog.IComponentDialogService {
     static $name = 'componentDialogService';
 
     static $inject = [
