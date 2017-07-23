@@ -5,7 +5,7 @@ import angular from 'angular';
 import ComponentDialogModule from './componentDialog/ComponentDialogModule';
 import ConfirmationModule from './confirmation/ConfirmationModule';
 import ConvertToNumberModule from './convertToNumber/ConvertToNumberModule';
-import EventModule from './event/EventModule';
+import EventServiceModule from './eventService/EventServiceModule';
 import HeaderModule from './header/HeaderModule';
 import HelpModule from './help/HelpModule';
 import LoadingAnimationModule from './loadingAnimation/LoadingAnimationModule';
@@ -20,7 +20,7 @@ export default angular
         ComponentDialogModule,
         ConfirmationModule,
         ConvertToNumberModule,
-        EventModule,
+        EventServiceModule,
         HeaderModule,
         HelpModule,
         LoadingAnimationModule,
