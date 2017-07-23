@@ -6,7 +6,7 @@ import CoreModule from './core/CoreModule';
 import LevelsModule from './levels/LevelsModule';
 import UsersModule from './users/UsersModule';
 
-export function application() {
+function application() {
 	let dependencies = ApplicationConfiguration.applicationModuleVendorDependencies.concat([
 		CoreModule,
 		LevelsModule,
@@ -54,3 +54,5 @@ export function application() {
 		angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 	});
 }
+
+application();
