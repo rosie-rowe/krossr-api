@@ -32,7 +32,7 @@ module.exports = {
 			'public/less/modules.css'
 		],
 		js: [
-			'public/dist/krossr.js',
+			'public/dist/krossr.bundle.js',
             'public/dist/templates.js'
 		],
         html: [
