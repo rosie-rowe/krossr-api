@@ -10,7 +10,8 @@ var config = {
             'angular',
             'angular-animate',
             'angular-resource',
-            'angular-cookies'
+            'angular-cookies',
+            'angular-touch'
         ],
         'krossr': 'AppModule.ts'
     },
