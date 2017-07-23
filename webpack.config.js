@@ -9,7 +9,7 @@ var config = {
         'krossr': 'AppModule.ts'
     },
     output: {
-        path: __dirname + '/public/dist',
+        path: path.join(__dirname + '/public/dist'),
         filename: 'krossr.js'
     },
     resolve: {
