@@ -97,8 +97,7 @@ module.exports = function(grunt) {
 		ts: {
 			default: {
 				reference: files.references,
-				src: [files.references, '<%= applicationTypescriptFiles %>'],
-				outDir: directories.typescript,
+				src: [files.references],
 				options: {
 					module: 'es6',
 					rootDir: 'public',
@@ -186,8 +185,6 @@ module.exports = function(grunt) {
         grunt.config.set('applicationJavaScriptLibFiles', config.assets.lib.js);
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
 		grunt.config.set('applicationCSSFiles', config.assets.css);
-        grunt.config.set('applicationTypescriptFiles', config.assets.typescript);
-        grunt.config.set('applicationTypescriptReferences', config.assets.typescriptRefs);
 	});
 
 	// Default task(s).

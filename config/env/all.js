@@ -32,16 +32,7 @@ module.exports = {
 		tests: [
 			'public/lib/angular-mocks/angular-mocks.js',
 			'public/modules/**/*.test.ts'
-		],
-        typescript: [
-			'public/config.ts',
-			'public/application.ts',
-            'public/modules/**/*.ts'
-        ],
-        typescriptRefs: [
-            'public/modules/*/typings/*.d.ts',
-            'public/typings/**/*.d.ts'
-        ]
+		]
 	},
     mailer: {
         from: 'support@krossr.com',
