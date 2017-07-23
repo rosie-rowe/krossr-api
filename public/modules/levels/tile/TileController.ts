@@ -1,5 +1,5 @@
 import { IGameOverService } from '../gameOver/IGameOverService';
-import { IEventService } from '../../core/event/IEventService';
+import { IEventService } from '../../core/eventService/IEventService';
 import { ITouchService } from '../../core/touch/ITouchService';
 import { IShiftService } from '../shiftService/IShiftService';
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';

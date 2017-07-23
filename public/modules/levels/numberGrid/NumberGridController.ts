@@ -1,5 +1,5 @@
 import { IUtils } from '../utils/IUtils';
-import { IEventService } from '../../core/event/IEventService';
+import { IEventService } from '../../core/eventService/IEventService';
 
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
 
