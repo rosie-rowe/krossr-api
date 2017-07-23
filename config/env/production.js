@@ -14,7 +14,7 @@ module.exports = {
             js: ['public/dist/lib.min.js']
         },
 		css: 'public/dist/application.min.css',
-		js: 'public/dist/application.min.js',
+		js: 'public/dist/krossr.js',
         typescript: 'public/dist/typescript.min.js'
 	}
 };
