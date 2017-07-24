@@ -1,3 +1,5 @@
+import { IAuthenticationService } from '../authentication/IAuthenticationService'
+
 'use strict';
 
 export default class SignInController implements angular.IComponentController {
@@ -21,7 +23,7 @@ export default class SignInController implements angular.IComponentController {
         private $http: angular.IHttpService,
         private $scope: angular.IScope,
         private $timeout: angular.ITimeoutService,
-        private Authentication: krossr.users.authentication.IAuthenticationService,
+        private Authentication: IAuthenticationService,
         private ngDialog
     ) {}
 

@@ -4,6 +4,7 @@ import { IUtils } from '../utils/IUtils';
 import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
 import { IEventService } from '../../core/eventService/IEventService';
 import { IShiftService } from '../shiftService/IShiftService';
+import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 
 'use strict';
@@ -39,7 +40,7 @@ export default class LevelController implements angular.IComponentController {
         private $state: angular.ui.IStateService,
         private $stateParams: any,
         private $timeout: angular.ITimeoutService,
-        private Authentication: krossr.users.authentication.IAuthenticationService,
+        private Authentication: IAuthenticationService,
         private componentDialogService: IComponentDialogService,
         private eventService: IEventService,
         private Levels,

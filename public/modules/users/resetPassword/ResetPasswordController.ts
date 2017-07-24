@@ -1,3 +1,5 @@
+import { IAuthenticationService } from '../authentication/IAuthenticationService'
+
 'use strict';
 
 export default class ResetPasswordController implements angular.IComponentController {
@@ -22,7 +24,7 @@ export default class ResetPasswordController implements angular.IComponentContro
         private $http: angular.IHttpService,
         private $location: angular.ILocationService,
         private $stateParams: any,
-        private Authentication: krossr.users.authentication.IAuthenticationService
+        private Authentication: IAuthenticationService
     ) {
 
     }

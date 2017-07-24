@@ -1,3 +1,5 @@
+import { IAuthenticationService } from '../authentication/IAuthenticationService';
+
 'use strict';
 
 export default class EditProfileController implements angular.IComponentController {
@@ -31,7 +33,7 @@ export default class EditProfileController implements angular.IComponentControll
         private $location: angular.ILocationService,
         private $timeout: angular.ITimeoutService,
         private Users,
-        private Authentication: krossr.users.authentication.IAuthenticationService
+        private Authentication: IAuthenticationService
     ){
 
     }
