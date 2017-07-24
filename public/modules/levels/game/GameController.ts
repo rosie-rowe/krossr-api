@@ -2,8 +2,8 @@ import { DragBoxService } from '../dragBox/DragBoxService';
 import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameOverService } from '../gameOver/GameOverService';
+import { Utils } from '../utils/Utils';
 
-import { IUtils } from '../utils/IUtils';
 
 'use strict';
 
@@ -25,7 +25,7 @@ export default class GameController implements angular.IComponentController {
         private $scope: angular.IScope,
         private eventService: EventService,
         private gameOverService: GameOverService,
-        private Utils: IUtils,
+        private Utils: Utils,
         private dragBoxService: DragBoxService,
     ) {
 

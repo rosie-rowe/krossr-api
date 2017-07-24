@@ -1,11 +1,12 @@
-import { GameOverService } from '../gameOver/GameOverService';
-import { EventService } from '../../core/eventService/EventService';
-import { TouchService } from '../../core/touch/TouchService';
-import { ShiftService } from '../shiftService/ShiftService';
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';
-import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { ITileService } from '../tile/ITileService';
-import { IUtils } from '../utils/IUtils';
+
+import { BooleanMatrix } from '../matrix/BooleanMatrix';
+import { EventService } from '../../core/eventService/EventService';
+import { GameOverService } from '../gameOver/GameOverService';
+import { ShiftService } from '../shiftService/ShiftService';
+import { TouchService } from '../../core/touch/TouchService';
+import { Utils } from '../utils/Utils';
 
 'use strict';
 
@@ -54,7 +55,7 @@ export default class TileController implements angular.IComponentController {
         private $attrs: angular.IAttributes,
         private $element: angular.IAugmentedJQuery,
         private $scope: angular.IScope,
-        private Utils: IUtils, 
+        private Utils: Utils, 
         private dragBoxService,
         private eventService: EventService,
         private gameOverService: GameOverService,

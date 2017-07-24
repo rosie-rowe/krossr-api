@@ -1,5 +1,5 @@
 import { AuthenticationService } from '../../users/authentication/AuthenticationService'
-import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
+import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 
 'use strict';
 
@@ -14,7 +14,7 @@ export default class HeaderController implements angular.IComponentController {
 
 	constructor(
 		private Authentication: AuthenticationService,
-		private componentDialogService: IComponentDialogService,
+		private componentDialogService: ComponentDialogService,
 	) {
 
 	}

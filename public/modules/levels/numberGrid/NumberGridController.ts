@@ -1,7 +1,6 @@
-import { IUtils } from '../utils/IUtils';
-
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { EventService } from '../../core/eventService/EventService';
+import { Utils } from '../utils/Utils';
 
 'use strict';
 
@@ -17,7 +16,7 @@ export default class NumberGridController implements angular.IComponentControlle
     constructor(
         private $scope: angular.IScope,
         private eventService: EventService,
-        private Utils: IUtils
+        private Utils: Utils
     ) {
 
     }

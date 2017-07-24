@@ -1,7 +1,7 @@
-import { IUtils } from '../utils/IUtils';
 
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { Point } from '../point/Point'
+import { Utils } from '../utils/Utils';
 
 'use strict';
 
@@ -17,7 +17,7 @@ export default class NumberLineController {
     private goalMatrix: BooleanMatrix;
 
     constructor(
-        private Utils: IUtils
+        private Utils: Utils
     ) {
     }
 

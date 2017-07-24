@@ -3,9 +3,8 @@ import * as angular from 'angular';
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';
 import { ITileService } from '../tile/ITileService';
-import { IUtils } from './IUtils';
 
-export default class Utils implements IUtils {
+export class Utils {
     static $name = 'Utils';
 
     static $inject = [

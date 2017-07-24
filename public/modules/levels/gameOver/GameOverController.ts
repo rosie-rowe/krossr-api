@@ -1,5 +1,5 @@
 import { EventService } from '../../core/eventService/EventService';
-import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
+import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 
 'use strict';
 
@@ -15,7 +15,7 @@ export default class GameOverController implements angular.IComponentController 
 
     constructor(
         private $scope: angular.IScope,
-        private componentDialogService: IComponentDialogService,
+        private componentDialogService: ComponentDialogService,
         private eventService: EventService
     ) {
 

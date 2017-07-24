@@ -1,5 +1,5 @@
-import { IUtils } from '../utils/IUtils';
 import { AuthenticationService } from '../../users/authentication/AuthenticationService'
+import { Utils } from '../utils/Utils';
 
 'use strict';
 
@@ -16,7 +16,7 @@ export default class LevelSelectController implements angular.IComponentControll
     constructor(
         private Authentication: AuthenticationService,
         private Levels: any,
-        private Utils: IUtils
+        private Utils: Utils
     ) {
 
     }

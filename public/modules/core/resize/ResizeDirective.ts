@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { IUtils } from '../../levels/utils/IUtils'
+import { Utils } from '../../levels/utils/Utils'
 
 'use strict';
 
@@ -15,7 +15,7 @@ export default class ResizeDirective implements angular.IDirective {
     constructor(
         private $window: angular.IWindowService,
         private debounce,
-        private Utils: IUtils
+        private Utils: Utils
     ) {
         
     }
