@@ -1,6 +1,6 @@
 import * as angular from 'angular';
 import ComponentDialogController from './ComponentDialogController';
-import ComponentDialogService from './ComponentDialogService';
+import { ComponentDialogService } from './ComponentDialogService';
 
 export default angular
     .module('core.componentDialog', [])

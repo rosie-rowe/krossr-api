@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import Utils from './Utils';
+import { Utils } from './Utils';
 
 export default angular
     .module('levels.utils', [])

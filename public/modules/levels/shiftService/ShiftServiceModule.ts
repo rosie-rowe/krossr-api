@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import ShiftService from './ShiftService';
+import { ShiftService } from './ShiftService';
 
 export default angular
     .module('levels.shiftService', [])
