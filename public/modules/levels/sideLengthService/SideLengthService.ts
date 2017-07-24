@@ -1,16 +1,15 @@
 import * as angular from 'angular';
-import { ISideLengthService } from './ISideLengthService';
 
 'use strict';
 
 /** Keeps track of the length of a side for a game -- it is used in many calculations & in many places */
 
-export default class SideLengthService implements ISideLengthService {
+export class SideLengthService {
     static $name = 'sideLengthService';
 
     private _sideLength: number;
 
-    get sideLength() {
+    get sideLength(): number {
         return this._sideLength;
     }
 

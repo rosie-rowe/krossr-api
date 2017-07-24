@@ -1,5 +1,5 @@
-import { ISideLengthService } from '../sideLengthService/ISideLengthService';
 import { Point } from '../point/Point';
+import { SideLengthService } from '../sideLengthService/SideLengthService';
 
 'use strict';
 
@@ -18,7 +18,7 @@ export class TileService {
     private tileIndex: any[] = [];
 
     constructor(
-        private sideLengthService: ISideLengthService
+        private sideLengthService: SideLengthService
     ) {
 
     }
