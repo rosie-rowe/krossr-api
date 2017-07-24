@@ -1,10 +1,9 @@
-import { IDragBoxService } from './IDragBoxService';
 import { ITileService } from '../tile/ITileService';
 import { Point } from '../point/Point';
 
 'use strict';
 
-export default class DragBoxService implements IDragBoxService {
+export class DragBoxService {
     static $name = 'dragBoxService';
 
     static $inject = [
