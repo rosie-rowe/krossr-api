@@ -1,5 +1,3 @@
-import { IEventService } from '../../core/eventService/IEventService';
-
 'use strict';
 
 export default class ShellController implements angular.IComponentController {

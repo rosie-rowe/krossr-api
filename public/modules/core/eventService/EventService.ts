@@ -1,10 +1,8 @@
-import { IEventService } from './IEventService';
-
 'use strict';
 
 /** Handles broadcast/on events */
 
-export default class EventService implements IEventService {
+export class EventService {
     static $name = 'eventService';
 
     static $inject = [

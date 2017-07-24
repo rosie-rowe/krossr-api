@@ -1,5 +1,5 @@
 import { GameOverService } from '../gameOver/GameOverService';
-import { IEventService } from '../../core/eventService/IEventService';
+import { EventService } from '../../core/eventService/EventService';
 import { ITouchService } from '../../core/touch/ITouchService';
 import { IShiftService } from '../shiftService/IShiftService';
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';
@@ -56,7 +56,7 @@ export default class TileController implements angular.IComponentController {
         private $scope: angular.IScope,
         private Utils: IUtils, 
         private dragBoxService,
-        private eventService: IEventService,
+        private eventService: EventService,
         private gameOverService: GameOverService,
         private shiftService: IShiftService,
         private sideLengthService: ISideLengthService,
