@@ -1,6 +1,6 @@
 'use strict';
 
-export default class StarRatingController implements angular.IComponentController {
+export class StarRatingController implements angular.IComponentController {
     static $controllerAs = 'starRatingCtrl';
     static $name = 'StarRatingController';
 

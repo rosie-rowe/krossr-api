@@ -2,7 +2,7 @@ import { AuthenticationService } from '../authentication/AuthenticationService'
 
 'use strict';
 
-export default class ResetPasswordController implements angular.IComponentController {
+export class ResetPasswordController implements angular.IComponentController {
     static $controllerAs = 'resetPasswordCtrl';
     static $name = 'ResetPasswordController';
 

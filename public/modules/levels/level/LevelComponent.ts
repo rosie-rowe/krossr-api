@@ -1,6 +1,6 @@
 'use strict'
 
-export default class LevelComponent {
+export class LevelComponent {
     static $name = 'level';
     bindToController = true;
     controller = 'LevelController';

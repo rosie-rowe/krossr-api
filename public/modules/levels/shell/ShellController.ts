@@ -1,6 +1,6 @@
 'use strict';
 
-export default class ShellController implements angular.IComponentController {
+export class ShellController implements angular.IComponentController {
     static $controllerAs = 'shellCtrl';
     static $name = 'ShellController'; 
 

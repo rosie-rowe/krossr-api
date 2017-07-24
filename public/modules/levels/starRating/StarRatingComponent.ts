@@ -1,6 +1,6 @@
 'use strict';
 
-export default class StarRatingComponent implements angular.IComponentOptions {
+export class StarRatingComponent implements angular.IComponentOptions {
     static $name = 'starRating';
     bindToController = true;
     controller = 'StarRatingController';

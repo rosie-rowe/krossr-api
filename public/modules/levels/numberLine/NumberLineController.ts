@@ -5,7 +5,7 @@ import { Utils } from '../utils/Utils';
 
 'use strict';
 
-export default class NumberLineController {
+export class NumberLineController {
     static $inject = [
         'Utils'
     ]

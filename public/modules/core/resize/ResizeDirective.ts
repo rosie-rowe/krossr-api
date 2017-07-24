@@ -3,7 +3,7 @@ import { Utils } from '../../levels/utils/Utils'
 
 'use strict';
 
-export default class ResizeDirective implements angular.IDirective {
+export class ResizeDirective implements angular.IDirective {
     static $name = 'resize';
 
     static $inject = [

@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import HelpComponent from './HelpComponent';
+import { HelpComponent } from './HelpComponent';
 
 export default angular
     .module('core.help', [])

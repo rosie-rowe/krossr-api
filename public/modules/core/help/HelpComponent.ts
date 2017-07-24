@@ -1,6 +1,6 @@
 'use strict';
 
-export default class HelpComponent implements angular.IComponentOptions {
+export class HelpComponent implements angular.IComponentOptions {
     static $name = 'help';
     bindToController = true;
     controllerAs = 'helpCtrl';

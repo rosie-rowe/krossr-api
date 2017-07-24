@@ -1,6 +1,6 @@
 'use strict';
 
-export default class HeaderComponent implements angular.IComponentOptions {
+export class HeaderComponent implements angular.IComponentOptions {
     static $name = 'krossrHeader';
     controller = 'HeaderController';
     controllerAs = 'headerCtrl';

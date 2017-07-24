@@ -2,7 +2,7 @@
 
 /** Popup to change email/password or log out */
 
-export default class ForgotPasswordComponent implements angular.IComponentOptions {
+export class ForgotPasswordComponent implements angular.IComponentOptions {
     static $name = 'forgotPassword';
     controller = 'ForgotPasswordController';
     controllerAs = 'forgotPasswordCtrl';

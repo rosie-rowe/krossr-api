@@ -1,6 +1,6 @@
 'use strict';
 
-export default class TileComponent implements angular.IComponentOptions {
+export class TileComponent implements angular.IComponentOptions {
     static $name = 'tile';
     bindToController = true;
     controller = 'TileController';

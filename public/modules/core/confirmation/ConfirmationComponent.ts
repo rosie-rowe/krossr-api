@@ -1,6 +1,6 @@
 'use strict';
 
-export default class ConfirmationComponent implements angular.IComponentOptions {
+export class ConfirmationComponent implements angular.IComponentOptions {
     static $name = 'confirmation';
     bindToController = true;
     controller = 'ConfirmationController';

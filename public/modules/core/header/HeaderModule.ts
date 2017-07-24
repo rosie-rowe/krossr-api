@@ -1,6 +1,6 @@
 import * as angular from 'angular';
-import HeaderComponent from './HeaderComponent';
-import HeaderController from './HeaderController';
+import { HeaderComponent } from './HeaderComponent';
+import { HeaderController } from './HeaderController';
 
 export default angular
     .module('core.header', [])

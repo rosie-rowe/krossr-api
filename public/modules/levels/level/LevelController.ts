@@ -9,7 +9,7 @@ import { Utils } from '../utils/Utils';
 
 'use strict';
 
-export default class LevelController implements angular.IComponentController {
+export class LevelController implements angular.IComponentController {
     static $controllerAs = 'levelCtrl';
     static $name = 'LevelController';
 

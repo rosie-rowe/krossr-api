@@ -2,7 +2,7 @@
 
 /** Sign-in popup */
 
-export default class SignUpComponent implements angular.IComponentOptions {
+export class SignUpComponent implements angular.IComponentOptions {
     static $name = 'signUp';
     bindToController = true;
     controller = 'SignUpController';

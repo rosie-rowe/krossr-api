@@ -1,6 +1,6 @@
 'use strict';
 
-export default class LoadingAnimationComponent implements angular.IComponentOptions {
+export class LoadingAnimationComponent implements angular.IComponentOptions {
     static $name = 'loadingAnimation';
     bindToController = true;
     controller = 'LoadingAnimationController';

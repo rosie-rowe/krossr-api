@@ -2,7 +2,7 @@
 
 /** Screen to reset password */
 
-export default class ResetPasswordComponent implements angular.IComponentOptions {
+export class ResetPasswordComponent implements angular.IComponentOptions {
     static $name = 'resetPassword';
     controller = 'ResetPasswordController';
     controllerAs = 'resetPasswordCtrl';

@@ -1,6 +1,6 @@
 import * as angular from 'angular';
-import ResetPasswordComponent from './ResetPasswordComponent';
-import ResetPasswordController from './ResetPasswordController';
+import { ResetPasswordComponent } from './ResetPasswordComponent';
+import { ResetPasswordController } from './ResetPasswordController';
 
 export default angular
     .module('users.resetPassword', [])

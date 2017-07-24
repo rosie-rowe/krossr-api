@@ -9,7 +9,7 @@ import { Utils } from '../utils/Utils';
 
 'use strict';
 
-export default class TileController implements angular.IComponentController {
+export class TileController implements angular.IComponentController {
     static $controllerAs = 'tileCtrl';
     static $name = 'TileController';
 

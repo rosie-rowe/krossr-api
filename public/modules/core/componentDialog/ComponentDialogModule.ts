@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import ComponentDialogController from './ComponentDialogController';
+import { ComponentDialogController } from './ComponentDialogController';
 import { ComponentDialogService } from './ComponentDialogService';
 
 export default angular

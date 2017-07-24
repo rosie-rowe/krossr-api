@@ -3,7 +3,7 @@ import { ComponentDialogService } from '../../core/componentDialog/ComponentDial
 
 'use strict';
 
-export default class HeaderController implements angular.IComponentController {
+export class HeaderController implements angular.IComponentController {
 	static $controllerAs = 'headerCtrl';
 	static $name = 'HeaderController';	
 

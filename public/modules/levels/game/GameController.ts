@@ -7,7 +7,7 @@ import { Utils } from '../utils/Utils';
 
 'use strict';
 
-export default class GameController implements angular.IComponentController {
+export class GameController implements angular.IComponentController {
     static $controllerAs = 'gameCtrl';
     static $name = 'GameController';
 

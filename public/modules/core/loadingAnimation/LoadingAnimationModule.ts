@@ -1,6 +1,6 @@
 import * as angular from 'angular';
-import LoadingAnimationComponent from './LoadingAnimationComponent';
-import LoadingAnimationController from './LoadingAnimationController';
+import { LoadingAnimationComponent } from './LoadingAnimationComponent';
+import { LoadingAnimationController } from './LoadingAnimationController';
 
 export default angular
     .module('core.loadingAnimation', [])

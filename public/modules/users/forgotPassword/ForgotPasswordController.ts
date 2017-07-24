@@ -1,6 +1,6 @@
 'use strict';
 
-export default class ForgotPasswordController implements angular.IComponentController {
+export class ForgotPasswordController implements angular.IComponentController {
     static $controllerAs = 'forgotPasswordCtrl';
     static $name = 'ForgotPasswordController';
 

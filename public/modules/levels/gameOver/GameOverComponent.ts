@@ -1,6 +1,6 @@
 'use strict';
 
-export default class GameOverComponent implements angular.IComponentOptions {
+export class GameOverComponent implements angular.IComponentOptions {
     static $name = 'gameOver';
     bindToController = true;
     controller = 'GameOverController';

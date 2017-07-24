@@ -1,6 +1,6 @@
 'use strict';
 
-export default class LevelsRoutes {
+export class LevelsRoutes {
     static route($stateProvider: angular.ui.IStateProvider) {
         let levelTemplateUrl = 'modules/levels/level/index.html';
     

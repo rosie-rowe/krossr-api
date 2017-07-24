@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import ResizeDirective from './ResizeDirective';
+import { ResizeDirective } from './ResizeDirective';
 
 export default angular
     .module('core.resize', [])

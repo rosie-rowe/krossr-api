@@ -1,6 +1,6 @@
 'use strict';
 
-export default class LevelSelectComponent implements angular.IComponentOptions {
+export class LevelSelectComponent implements angular.IComponentOptions {
     static $name = 'levelSelect';
     bindToController = true;
     controller = 'LevelSelectController';

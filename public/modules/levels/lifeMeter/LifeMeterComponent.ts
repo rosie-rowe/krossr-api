@@ -1,6 +1,6 @@
 'use strict';
 
-export default class LifeMeterComponent implements angular.IComponentOptions {
+export class LifeMeterComponent implements angular.IComponentOptions {
     static $name = 'lifeMeter';
     bindToController = true;
     controller = 'LifeMeterController';

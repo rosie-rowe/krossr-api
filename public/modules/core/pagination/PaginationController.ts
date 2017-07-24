@@ -1,6 +1,6 @@
 'use strict';
 
-export default class PaginationController implements angular.IComponentController {
+export class PaginationController implements angular.IComponentController {
     static $controllerAs = 'paginationCtrl';
     static $name = 'PaginationController';
 

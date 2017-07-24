@@ -4,7 +4,7 @@ import { Utils } from '../utils/Utils';
 
 'use strict';
 
-export default class NumberGridController implements angular.IComponentController {
+export class NumberGridController implements angular.IComponentController {
     static $name = 'NumberGridController';
 
     static $inject = [

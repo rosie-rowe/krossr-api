@@ -1,6 +1,6 @@
 import * as angular from 'angular';
-import LevelComponent from './LevelComponent';
-import LevelController from './LevelController';
+import { LevelComponent } from './LevelComponent';
+import { LevelController } from './LevelController';
 
 export default angular
     .module('levels.level', [])

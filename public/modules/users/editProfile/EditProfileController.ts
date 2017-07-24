@@ -2,7 +2,7 @@ import { AuthenticationService } from '../authentication/AuthenticationService';
 
 'use strict';
 
-export default class EditProfileController implements angular.IComponentController {
+export class EditProfileController implements angular.IComponentController {
     static $controllerAs = 'editProfileCtrl';
     static $name = 'EditProfileController';
 

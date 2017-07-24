@@ -2,7 +2,7 @@
 
 /** Required to have a number select a dropdown's value, stolen from https://docs.angularjs.org/api/ng/directive/select */
 
-export default class ConvertToNumberDirective implements angular.IDirective {
+export class ConvertToNumberDirective implements angular.IDirective {
     static $name = 'convertToNumber';
     require = 'ngModel';
     restrict = 'A';

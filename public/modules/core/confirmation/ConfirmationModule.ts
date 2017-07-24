@@ -1,6 +1,6 @@
 import * as angular from 'angular';
-import ConfirmationComponent from './ConfirmationComponent';
-import ConfirmationController from './ConfirmationController';
+import { ConfirmationComponent } from './ConfirmationComponent';
+import { ConfirmationController } from './ConfirmationController';
 
 export default angular
     .module('core.confirmation', [])

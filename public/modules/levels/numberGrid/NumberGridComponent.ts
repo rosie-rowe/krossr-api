@@ -1,6 +1,6 @@
 'use strict';
 
-export default class NumberGridComponent implements angular.IComponentOptions {
+export class NumberGridComponent implements angular.IComponentOptions {
     static $name = 'numberGrid';
     controller = 'NumberGridController';
     controllerAs = 'numGridCtrl'

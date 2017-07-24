@@ -2,7 +2,7 @@
 
 /** A controller for an individual ComponentDialog, meant to provide the closeThisDialog() function & others to all of them without needing to explicity pass it in */
 
-export default class ComponentDialogController implements angular.IController {
+export class ComponentDialogController implements angular.IController {
     static $controllerAs = 'componentDialogCtrl';
     static $name = 'ComponentDialogController';
 

@@ -1,6 +1,6 @@
 'use strict';
 
-export default class GameComponent implements angular.IComponentOptions {
+export class GameComponent implements angular.IComponentOptions {
     static $name = 'game';
     bindToController = true;
     controller = 'GameController';
