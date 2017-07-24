@@ -2,10 +2,10 @@ import * as angular from 'angular';
 
 import { IUtils } from '../utils/IUtils';
 import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
-import { EventService } from '../../core/eventService/EventService';
-import { IShiftService } from '../shiftService/IShiftService';
 import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
+import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
+import { ShiftService } from '../shiftService/ShiftService';
 
 'use strict';
 
@@ -45,7 +45,7 @@ export default class LevelController implements angular.IComponentController {
         private eventService: EventService,
         private Levels,
         private ngDialog,
-        private shiftService: IShiftService,
+        private shiftService: ShiftService,
         private Utils: IUtils
     ) {
         

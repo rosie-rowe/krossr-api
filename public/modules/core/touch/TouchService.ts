@@ -1,9 +1,8 @@
 import * as angular from 'angular';
-import { ITouchService } from './ITouchService';
 
 'use strict';
 
-export default class TouchService implements ITouchService {
+export class TouchService {
     static $name = 'touchService';
 
     /** Touchmove/touchend will not move along with crossing over elements like mousemove/mouseup will, so we need hax */

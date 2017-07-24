@@ -1,8 +1,6 @@
-import { IShiftService } from './IShiftService';
-
 'use strict';
 
-export default class ShiftService implements IShiftService {
+export class ShiftService {
     static $name = 'shiftService';
     private _shiftOn: boolean = false;
 
