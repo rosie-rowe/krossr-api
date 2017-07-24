@@ -41,13 +41,13 @@ export class ComponentDialogService {
         return '<' + directiveName + ' close-action="closeThisDialog()">' + '</' + directiveName + '>';
     }
 
-    open(directiveName: string) {
+    open(directiveName: string): angular.dialog.IDialogOpenResult {
         let options = this.getDefaultOpenOptions(directiveName);
 
         return this.ngDialog.open(options);
     }
 
-    openConfirm(directiveName: string) {
+    openConfirm(directiveName: string): angular.IPromise<any> {
         let options = this.getDefaultOpenConfirmOptions(directiveName);
 
         return this.ngDialog.openConfirm(options);

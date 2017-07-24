@@ -6,14 +6,14 @@ export class TouchService {
     static $name = 'touchService';
 
     /** Touchmove/touchend will not move along with crossing over elements like mousemove/mouseup will, so we need hax */
-    getRealTarget(event: JQueryEventObject) {
+    getRealTarget(event: JQueryEventObject): angular.IAugmentedJQuery {
         var myLocation = this.getTouches(event)[0];
 
         return angular.element(document.elementFromPoint(myLocation.clientX, myLocation.clientY));
     }
 
     /** Shortcut for getting actual target scope */
-    getTargetScope(event: JQueryEventObject) {
+    getTargetScope(event: JQueryEventObject): angular.IScope {
         var target = this.getRealTarget(event);
 
         return target.scope();
@@ -22,7 +22,7 @@ export class TouchService {
     /**
      * Stolen from http://www.jqwidgets.com/community/topic/dragend-event-properties-clientx-and-clienty-are-undefined-on-ios/ 
      * Handles both mouse and touch events. Modified for brevity */
-    getTouches(event: any) {
+    getTouches(event: any): any { // todo
         if (event.originalEvent) {
             if (event.originalEvent.touches && event.originalEvent.touches.length) {
                 return event.originalEvent.touches;

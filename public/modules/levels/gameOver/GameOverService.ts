@@ -15,7 +15,7 @@ export class GameOverService {
 
     }
 
-    openDialog(level) {
+    openDialog(level: any): void { // todo
         this.ngDialog.open({
             plain: true,
             template: '<game-over close-action="closeThisDialog()" level-id="' + level.id +'" won="' + level.won + '"></game-over>',

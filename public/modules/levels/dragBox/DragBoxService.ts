@@ -22,7 +22,7 @@ export class DragBoxService {
 
     private _startCoord: Point;
 
-    get startCoord() {
+    get startCoord(): Point {
         return this._startCoord;
     }
     set startCoord(coord: Point) {
@@ -45,7 +45,7 @@ export class DragBoxService {
 
     }
 
-    public clearDragBox() {
+    clearDragBox(): void {
         this.startCoord = undefined;
         this.endCoord = undefined;
         this.initState = true;
@@ -54,7 +54,7 @@ export class DragBoxService {
     /**
      * Change the tiles in the dragbox to the correct state
      */
-    fill(override) {
+    fill(override: string): void {
         if (this.validate()) {
             this.tileService.fillTiles(this.process(), this.initState, override);
             this.clearDragBox();
@@ -65,7 +65,7 @@ export class DragBoxService {
     /*
     * Given a dragbox, return an array of all of the coordinates of included tiles
     */
-    public process(): Point[] {
+    process(): Point[] {
         if (!this.validate()) {
             return [];
         }
@@ -98,11 +98,11 @@ export class DragBoxService {
         return finalCoords;
     }
 
-    public validateStart() {
+    validateStart(): Point {
         return this.startCoord;
     }
 
-    public validate() {
+    validate(): Point {
         return this.startCoord && this.endCoord;
     }
 }
