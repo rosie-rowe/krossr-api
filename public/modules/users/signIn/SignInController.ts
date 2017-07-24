@@ -1,4 +1,4 @@
-import { IAuthenticationService } from '../authentication/IAuthenticationService'
+import { AuthenticationService } from '../authentication/AuthenticationService'
 
 'use strict';
 
@@ -23,7 +23,7 @@ export default class SignInController implements angular.IComponentController {
         private $http: angular.IHttpService,
         private $scope: angular.IScope,
         private $timeout: angular.ITimeoutService,
-        private Authentication: IAuthenticationService,
+        private Authentication: AuthenticationService,
         private ngDialog
     ) {}
 

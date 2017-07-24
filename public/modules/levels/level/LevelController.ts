@@ -2,7 +2,7 @@ import * as angular from 'angular';
 
 import { IUtils } from '../utils/IUtils';
 import { IComponentDialogService } from '../../core/componentDialog/IComponentDialogService';
-import { IAuthenticationService } from '../../users/authentication/IAuthenticationService'
+import { AuthenticationService } from '../../users/authentication/AuthenticationService'
 import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { ShiftService } from '../shiftService/ShiftService';
@@ -40,7 +40,7 @@ export default class LevelController implements angular.IComponentController {
         private $state: angular.ui.IStateService,
         private $stateParams: any,
         private $timeout: angular.ITimeoutService,
-        private Authentication: IAuthenticationService,
+        private Authentication: AuthenticationService,
         private componentDialogService: IComponentDialogService,
         private eventService: EventService,
         private Levels,

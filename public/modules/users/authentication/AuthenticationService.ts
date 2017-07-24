@@ -1,8 +1,6 @@
-import { IAuthenticationService } from './IAuthenticationService';
-
 'use strict';
 
-export default class AuthenticationService implements IAuthenticationService {
+export class AuthenticationService {
     static $name = 'Authentication';
 
     static $inject = [

@@ -1,4 +1,4 @@
-import { IAuthenticationService } from '../authentication/IAuthenticationService';
+import { AuthenticationService } from '../authentication/AuthenticationService';
 
 'use strict';
 
@@ -33,7 +33,7 @@ export default class EditProfileController implements angular.IComponentControll
         private $location: angular.ILocationService,
         private $timeout: angular.ITimeoutService,
         private Users,
-        private Authentication: IAuthenticationService
+        private Authentication: AuthenticationService
     ){
 
     }

@@ -1,4 +1,4 @@
-import { IAuthenticationService } from '../authentication/IAuthenticationService'
+import { AuthenticationService } from '../authentication/AuthenticationService'
 
 'use strict';
 
@@ -24,7 +24,7 @@ export default class ResetPasswordController implements angular.IComponentContro
         private $http: angular.IHttpService,
         private $location: angular.ILocationService,
         private $stateParams: any,
-        private Authentication: IAuthenticationService
+        private Authentication: AuthenticationService
     ) {
 
     }
