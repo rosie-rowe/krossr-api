@@ -1,6 +1,6 @@
 import { DragBoxService } from '../dragBox/DragBoxService';
 
-import { IGameOverService } from '../gameOver/IGameOverService';
+import { GameOverService } from '../gameOver/GameOverService';
 import { IUtils } from '../utils/IUtils';
 import { IEventService } from '../../core/eventService/IEventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
@@ -24,7 +24,7 @@ export default class GameController implements angular.IComponentController {
         private $element: angular.IAugmentedJQuery,
         private $scope: angular.IScope,
         private eventService: IEventService,
-        private gameOverService: IGameOverService,
+        private gameOverService: GameOverService,
         private Utils: IUtils,
         private dragBoxService: DragBoxService,
     ) {

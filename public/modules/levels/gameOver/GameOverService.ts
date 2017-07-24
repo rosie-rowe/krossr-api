@@ -1,10 +1,8 @@
-import { IGameOverService } from './IGameOverService';
-
 'use strict';
 
 /** Open the Game Over popup */
 
-export default class GameOverService implements IGameOverService {
+export class GameOverService {
     static $name = 'gameOverService';
 
     static $inject = [
