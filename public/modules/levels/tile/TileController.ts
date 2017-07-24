@@ -1,5 +1,5 @@
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';
-import { ITileService } from '../tile/ITileService';
+import { TileService } from '../tile/TileService';
 
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { EventService } from '../../core/eventService/EventService';
@@ -61,7 +61,7 @@ export default class TileController implements angular.IComponentController {
         private gameOverService: GameOverService,
         private shiftService: ShiftService,
         private sideLengthService: ISideLengthService,
-        private tileService: ITileService,
+        private tileService: TileService,
         private touchService: TouchService
     ) {
        

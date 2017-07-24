@@ -1,5 +1,4 @@
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';
-import { ITileService } from './ITileService';
 import { Point } from '../point/Point';
 
 'use strict';
@@ -9,7 +8,7 @@ import { Point } from '../point/Point';
  * as well as methods for accessing it
  */
 
-export default class TileService implements ITileService {
+export class TileService {
     static $name = 'tileService';
 
     static $inject = [
@@ -29,11 +28,13 @@ export default class TileService implements ITileService {
         return (coord.y * this.sideLengthService.sideLength) + coord.x;
     }
 
-    addTile(obj) {
+    /** Append the current tile index */
+    addTile(obj): void {
         this.tileIndex.push(obj);
     }
 
-    clearTileIndex() {
+    /** Make sure the index is clean before we add to it, to avoid bugs with switching between screens */
+    clearTileIndex(): void {
         this.tileIndex = [];
     }
 
@@ -50,7 +51,8 @@ export default class TileService implements ITileService {
         return coord;
     }
    
-    eraseTiles() {
+    /** Empty out all of the tiles, but keep them on-screen */ 
+    eraseTiles(): void {
         let len = this.tileIndex.length;
 
         for (let i = 0; i < len; i++) {
@@ -58,7 +60,12 @@ export default class TileService implements ITileService {
         }
     }
 
-    fillTiles(coords, initState, override, validationFn?) {
+     /**
+     * Fill all of the tiles in the specified coordinate array
+     * @params {Array} array of coordinate objects
+     * @params {function} a function to run on each tile controller before changing it to determine whether or not to change. must be defined in TileController
+     */
+    fillTiles(coords: Point[], initState, override, validationFn?) {
         let len = coords.length;
     
         for (let i = 0; i < len; i++) {
@@ -71,18 +78,19 @@ export default class TileService implements ITileService {
         }
     }
 
-    findTileCtrlByCoord(coord) {
+    /** Grab a tile controller out of the tile index from a given 2D coordinate */
+    findTileCtrlByCoord(coord: Point): any { // todo
         var index = this.convertTo1D(coord);
         return this.findTileCtrlByIndex(index); 
     }
 
-     
-    findTileCtrlByIndex(index) {
+    /** Grab a tile controller out of the tile index from a given 1D index */
+    findTileCtrlByIndex(index: number): any { // todo
         return this.tileIndex[index].tileCtrl;
     }
 
-    
-    getTileIndex() {
+    /** Return the current tileIndex */ 
+    getTileIndex(): any { // todo
         return this.tileIndex;
     }
 }

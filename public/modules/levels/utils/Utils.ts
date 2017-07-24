@@ -2,7 +2,7 @@ import * as angular from 'angular';
 
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { ISideLengthService } from '../sideLengthService/ISideLengthService';
-import { ITileService } from '../tile/ITileService';
+import { TileService } from '../tile/TileService';
 
 export class Utils {
     static $name = 'Utils';
@@ -18,7 +18,7 @@ export class Utils {
         private $timeout: angular.ITimeoutService,
         private $rootScope: angular.IRootScopeService,
         private sideLengthService: ISideLengthService,
-        private tileService: ITileService
+        private tileService: TileService
     ) {
 
     }

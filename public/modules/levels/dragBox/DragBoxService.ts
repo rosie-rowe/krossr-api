@@ -1,4 +1,4 @@
-import { ITileService } from '../tile/ITileService';
+import { TileService } from '../tile/TileService';
 import { Point } from '../point/Point';
 
 'use strict';
@@ -40,7 +40,7 @@ export class DragBoxService {
     }
 
     constructor(
-        private tileService: ITileService
+        private tileService: TileService
     ) {
 
     }
