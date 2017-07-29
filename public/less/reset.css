@@ -1,0 +1,8 @@
+/* Can't use LESS here because it messes up these rules */
+button, input, textarea, select, isindex, datagrid {
+    font: inherit;
+}
+
+::-webkit-input-placeholder {
+   font-family: 'Raleway';
+}

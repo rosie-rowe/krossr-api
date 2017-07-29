@@ -6,6 +6,5 @@ dist
 .sass-cache
 app/bower_components
 public/dist
-public/less
 public/lib
 typings
