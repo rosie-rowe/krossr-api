@@ -12,6 +12,7 @@
     "angular-sanitize": "~1.6.4",
     "angular-ui-utils": "~0.1.1",
     "angular-ui-router": "~0.4.2",
-    "ngDialog": "~1.3.0"
+    "ngDialog": "~1.3.0",
+    "ng-debounce": "^0.1.7"
   }
 }
