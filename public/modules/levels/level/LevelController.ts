@@ -163,6 +163,8 @@ export class LevelController implements angular.IComponentController {
             name: oldLevel ? oldLevel.name : '',
             lives: oldLevel ? oldLevel.lives : undefined
         };
+
+        this.gameMatrix = new GameMatrix(this.Utils.getGameMatrix(), false);
     }
 
     // Find existing Level

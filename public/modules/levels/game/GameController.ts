@@ -104,7 +104,11 @@ export class GameController implements angular.IComponentController {
     * Compare the current state of the game to the correct state
     */
     checkForWin() {
-        return this.gameMatrix.equals(this.goalMatrix);
+        if (this.goalMatrix) {
+            return this.gameMatrix.equals(this.goalMatrix);
+        } else {
+            return false;
+        }
     };
 
     checkWin() {
