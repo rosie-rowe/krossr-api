@@ -4,7 +4,6 @@ import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameOverService } from '../gameOver/GameOverService';
 import { GameSizeService } from '../../levels/gameSize/GameSizeService';
 import { TileSizeService } from '../../levels/tileSize/TileSizeService';
-import { Utils } from '../utils/Utils';
 
 'use strict';
 
@@ -19,7 +18,6 @@ export class GameController implements angular.IComponentController {
         'gameOverService',
         'gameSizeService',
         'tileSizeService',
-        'Utils',
         'dragBoxService'
     ];
 
@@ -30,7 +28,6 @@ export class GameController implements angular.IComponentController {
         private gameOverService: GameOverService,
         private gameSizeService: GameSizeService,
         private tileSizeService: TileSizeService,
-        private Utils: Utils,
         private dragBoxService: DragBoxService,
     ) {
 
