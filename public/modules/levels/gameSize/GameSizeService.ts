@@ -29,7 +29,7 @@ export class GameSizeService {
 
      /* Take a given game width and subtract border widths. I either have to do this
         or remove border-box and add them instead... doesn't really matter */
-    adjustForBorders(width) {
+    private adjustForBorders(width) {
         var borderWidth = 1;
 
         /* 18 is a bit of a magic number, I worked backwards from determining how much extra space
