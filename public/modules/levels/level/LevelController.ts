@@ -197,7 +197,12 @@ export class LevelController implements angular.IComponentController {
                 });
 
                 this.gameMatrix = new GameMatrix(this.Utils.getGameMatrix(), false);
-                this.goalMatrix = new GameMatrix(this.Utils.getGoalMatrix(), true);
+
+                let goalLayout = this.Utils.getGoalMatrix();
+
+                if (goalLayout) {
+                    this.goalMatrix = new GameMatrix(goalLayout, true);
+                }
 
                 this.getLayoutForRepeater(mode, this.level.layout);
                 this.level.currentView = mode;

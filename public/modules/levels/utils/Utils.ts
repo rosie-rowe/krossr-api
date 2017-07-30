@@ -168,6 +168,8 @@ export class Utils {
         if (layout) {
             this.goalMatrix = new BooleanMatrix(layout.length, layout.length);
             this.goalMatrix.initializeWith(layout);
+        } else {
+            this.goalMatrix = null;
         }
     }
 
