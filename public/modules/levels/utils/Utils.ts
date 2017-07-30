@@ -9,16 +9,12 @@ export class Utils {
     static $name = 'Utils';
 
     static $inject = [
-        '$timeout',
-        '$rootScope',
         'gameSizeService',
         'sideLengthService',
         'tileService'
     ];
 
     constructor(
-        private $timeout: angular.ITimeoutService,
-        private $rootScope: angular.IRootScopeService,
         private gameSizeService: GameSizeService,
         private sideLengthService: SideLengthService,
         private tileService: TileService
@@ -29,8 +25,6 @@ export class Utils {
     private gameMatrix: BooleanMatrix;
     private goalMatrix: BooleanMatrix;
     
-    private timeout: number = 1000;
-
     /** Clear everything, to start a new game */
     clearAll() {
         var currentGameMatrix = this.getGameMatrix();
