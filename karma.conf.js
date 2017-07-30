@@ -6,6 +6,8 @@
 var applicationConfiguration = require('./config/config');
 var webpackConfig = require('./webpack.config');
 
+var filesToLoad = applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, ['karma-test/TestModule.test.ts']);
+
 // Karma configuration
 module.exports = function(config) {
 	config.set({
@@ -15,9 +17,7 @@ module.exports = function(config) {
 		],
 
 		// List of files / patterns to load in the browser
-		files: [
-			'karma-test/TestModule.test.ts'
-		],
+		files: filesToLoad,
 
 		preprocessors: {
 			'**/*.test.ts': ['webpack'],
