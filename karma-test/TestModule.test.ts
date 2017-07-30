@@ -38,7 +38,7 @@ class TestModule {
             });
 
             // Then we can start by loading the main application module
-            beforeEach(angular.mock.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies));
+            beforeEach(angular.mock.module(ApplicationConfiguration.applicationModuleName));
 
             GameControllerTests.run();
             LevelControllerTests.run();
