@@ -91,11 +91,6 @@ export class NumberLineController {
 
                 /* if a grouping's tiles all contain the correct values, we want to mark that group off in the view so that the user
                     can keep better track of their progress */
-
-                if (currentGroup[groupCount][0].coord.x === 0 && currentGroup[groupCount][0].coord.y === 0) {
-                    console.log('deciding..');
-                }
-
                 this.cssClass = this.determineCssForGroup(currentGroup);
 
                 resetInd = true;
