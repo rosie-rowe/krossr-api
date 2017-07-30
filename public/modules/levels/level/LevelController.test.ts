@@ -92,7 +92,7 @@ export class LevelControllerTests {
                 });
     
                 // Mock Level in scope
-                scope.level = sampleLevelPutData;
+                LevelController.level = sampleLevelPutData;
     
                 // Set PUT response
                 $httpBackend.expectPUT(/levels\/([0-9a-fA-F]{24})$/).respond();
