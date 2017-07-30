@@ -46,8 +46,8 @@ var config = {
     module: {
         loaders: [
             {
-                include: path.join(__dirname, 'public/modules'),
                 test: /\.ts$/,
+                exclude: /node_modules/,
                 loader: 'ts-loader'
             }
         ]
