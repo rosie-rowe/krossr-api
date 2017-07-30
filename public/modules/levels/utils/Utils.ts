@@ -1,6 +1,7 @@
 import * as angular from 'angular';
 
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
+import { GameSizeService } from '../gameSize/GameSizeService';
 import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileService } from '../tile/TileService';
 
@@ -10,6 +11,7 @@ export class Utils {
     static $inject = [
         '$timeout',
         '$rootScope',
+        'gameSizeService',
         'sideLengthService',
         'tileService'
     ];
@@ -17,6 +19,7 @@ export class Utils {
     constructor(
         private $timeout: angular.ITimeoutService,
         private $rootScope: angular.IRootScopeService,
+        private gameSizeService: GameSizeService,
         private sideLengthService: SideLengthService,
         private tileService: TileService
     ) {
@@ -24,34 +27,9 @@ export class Utils {
     }
 
     private gameMatrix: BooleanMatrix;
-    private gameHeight: string;
-    private gameWidth: string;
     private goalMatrix: BooleanMatrix;
-    private outerGameSize: number;
-    private playableAreaSize: number;
-    private tileSize: number = 25;
+    
     private timeout: number = 1000;
-    private tutorialDivider: number = 4;
- 
-    /* Take a given game width and subtract border widths. I either have to do this
-        or remove border-box and add them instead... doesn't really matter */
-    adjustForBorders(width) {
-        var borderWidth = 1;
-
-        /* 18 is a bit of a magic number, I worked backwards from determining how much extra space
-            the game had based on sideLength */ 
-        return width - ((borderWidth * this.sideLengthService.sideLength) + (18 - this.sideLengthService.sideLength)); 
-    }
-
-    /** Return the width of the main section of the game so we can calculate game and tile sizes off of it */
-    calculatePlayableArea() {
-        var pHeight = window.innerHeight,
-            pWidth = window.innerWidth;
-    
-        this.playableAreaSize = Math.min(pHeight, pWidth);
-    
-        return Math.floor(this.playableAreaSize); 
-    }
 
     /** Clear everything, to start a new game */
     clearAll() {
@@ -82,7 +60,7 @@ export class Utils {
         }
 
         this.tileService.clearTileIndex();
-        this.calculatePlayableArea();
+        this.gameSizeService.calculatePlayableArea();
         this.createEmptyMatrix(args.numberOfTiles);
 
         /* When editing the level, we'll prepopulate the game matrix (revealed tiles) with the goal matrix,
@@ -110,18 +88,6 @@ export class Utils {
         return Array.prototype.concat.apply([], matrix);
     }
 
-    /* Return the current game size (width and height in pixels of the game field, changes depending on number of tiles) */
-    getGameSize(tutorialMode) {
-        // height/width will probably come in as px
-        var intHeight = parseInt(this.gameHeight, 10),
-            intWidth = parseInt(this.gameWidth, 10);
-
-        return {
-            gameHeight: tutorialMode ? intHeight / this.tutorialDivider : this.gameHeight,
-            gameWidth: tutorialMode ? intWidth / this.tutorialDivider : this.gameWidth
-        };
-    }
-
     /* Return the current game matrix */
     getGameMatrix(): BooleanMatrix {
         return this.gameMatrix;
@@ -132,35 +98,9 @@ export class Utils {
         return this.goalMatrix;
     }
 			
-    getTileSize(tutorialMode) {
-        return tutorialMode ? this.tileSize / this.tutorialDivider : this.tileSize;
-    }
-
-    getTileSizePx() {
-        return this.getTileSize(false)  + 'px'
-    }
-
     /* Display an integer size (e.g. 15) and convert it to a pleasing form (15x15) */
     prettySize(size) {
         return size + 'x' + size;
-    }
-
-    /* Modify the current game size. */
-    setGameSize(widthInTiles) {
-        var finalWidth = Math.floor(this.playableAreaSize / 1.6),
-            finalHeight;
-
-        finalWidth = this.adjustForBorders(finalWidth);
-
-        finalHeight = finalWidth;
-        this.gameWidth = finalWidth + 'px';
-        this.gameHeight = finalHeight + 'px';
-
-        this.$timeout(() => {
-            this.$rootScope.$broadcast('gameSizeChanged', { width: this.gameWidth, height: this.gameHeight });
-        });
-        
-        this.setTileSize(finalWidth, widthInTiles);
     }
 
     /* Modify the current goal matrix (loading level from layout) */
@@ -177,23 +117,6 @@ export class Utils {
     setGameMatrix(gameMatrix: BooleanMatrix) {
         this.gameMatrix = gameMatrix;
         this.sideLengthService.sideLength = gameMatrix.length;
-        this.setGameSize(gameMatrix.length);
-    }
-
-    setTileSize(gameWidth, widthInTiles) {
-        this.tileSize = gameWidth / parseInt(widthInTiles, 10);
-        this.$rootScope.$broadcast('tileSizeChanged', this.tileSize);
-    }
-
-    /* Make div.gameContainer-inner be only as large as it needs to be,
-    *  so the game will be centered in its available space. */
-    setOuterGameWidth(width) {
-        this.$timeout(() => {
-            this.setWidth('.gameContainer-inner', this.gameWidth);
-        }, 0);
-    }
-
-    setWidth(selector, width) {
-        angular.element(selector).css("width", width);
+        this.gameSizeService.setGameSize(gameMatrix.length);
     }
 }

@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../users/authentication/Authentication
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
+import { GameSizeService } from '../gameSize/GameSizeService';
 import { ShiftService } from '../shiftService/ShiftService';
 import { Utils } from '../utils/Utils';
 
@@ -22,6 +23,7 @@ export class LevelController implements angular.IComponentController {
         'Authentication',
         'componentDialogService',
         'eventService',
+        'gameSizeService',
         'Levels',
         'ngDialog',
         'shiftService',
@@ -43,6 +45,7 @@ export class LevelController implements angular.IComponentController {
         private Authentication: AuthenticationService,
         private componentDialogService: ComponentDialogService,
         private eventService: EventService,
+        private gameSizeService: GameSizeService,
         private Levels,
         private ngDialog,
         private shiftService: ShiftService,
@@ -188,7 +191,7 @@ export class LevelController implements angular.IComponentController {
 
                 var flatLayout = this.Utils.flatten(data.layout);
 
-                this.Utils.calculatePlayableArea();
+                this.gameSizeService.calculatePlayableArea();
 
                 this.Utils.createNewGame({
                     numberOfTiles: flatLayout.length,

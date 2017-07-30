@@ -5,6 +5,7 @@ import * as angular from 'angular';
 import DragBoxModule from './dragBox/DragBoxModule';
 import GameModule from './game/GameModule';
 import GameOverModule from './gameOver/GameOverModule';
+import GameSizeModule from './gameSize/GameSizeModule';
 import LevelModule from './level/LevelModule';
 import LevelSelectModule from './levelSelect/LevelSelectModule';
 import LevelsServiceModule from './levelsService/LevelsServiceModule';
@@ -16,6 +17,7 @@ import ShiftServiceModule from './shiftService/ShiftServiceModule';
 import StarRatingModule from './starRating/StarRatingModule';
 import SideLengthServiceModule from './sideLengthService/SideLengthServiceModule';
 import TileModule from './tile/TileModule';
+import TileSizeModule from './tileSize/TileSizeModule';
 import UtilsModule from './utils/UtilsModule';
 
 import { LevelsRoutes } from './config/RouteModule';
@@ -25,6 +27,7 @@ export default angular
         DragBoxModule,
         GameModule,
         GameOverModule,
+        GameSizeModule,
         LevelModule,
         LevelSelectModule,
         LevelsServiceModule,
@@ -36,6 +39,7 @@ export default angular
         StarRatingModule,
         SideLengthServiceModule,
         TileModule,
+        TileSizeModule,
         UtilsModule
     ])
     .config(LevelsRoutes.route)

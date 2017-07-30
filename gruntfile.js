@@ -183,7 +183,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'webpack', 'html2js', 'cssmin', 'less']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'webpack:prod', 'html2js', 'cssmin', 'less']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);

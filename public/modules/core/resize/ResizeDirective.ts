@@ -1,4 +1,5 @@
 import * as angular from 'angular';
+import { GameSizeService } from '../../levels/gameSize/GameSizeService';
 import { Utils } from '../../levels/utils/Utils'
 
 'use strict';
@@ -9,12 +10,14 @@ export class ResizeDirective implements angular.IDirective {
     static $inject = [
         '$window',
         'debounce',
+        'gameSizeService',
         'Utils'
     ]
 
     constructor(
         private $window: angular.IWindowService,
         private debounce,
+        private gameSizeService: GameSizeService,
         private Utils: Utils
     ) {
         
@@ -27,8 +30,8 @@ export class ResizeDirective implements angular.IDirective {
             gameMatrix = this.Utils.getGameMatrix();
 
             if (gameMatrix) {
-                this.Utils.calculatePlayableArea();
-                this.Utils.setGameSize(gameMatrix.length);
+                this.gameSizeService.calculatePlayableArea();
+                this.gameSizeService.setGameSize(gameMatrix.length);
                 scope.$apply();
             }
         }, 250));

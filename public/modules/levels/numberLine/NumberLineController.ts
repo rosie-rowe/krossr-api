@@ -3,12 +3,14 @@ import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { LineContent } from '../lineContent/LineContent';
 import { Point } from '../point/Point'
 import { TileGroup } from '../tileGroup/TileGroup';
+import { TileSizeService } from '../tileSize/TileSizeService';
 import { Utils } from '../utils/Utils';
 
 'use strict';
 
 export class NumberLineController {
     static $inject = [
+        'tileSizeService',
         'Utils'
     ]
 
@@ -19,6 +21,7 @@ export class NumberLineController {
     private goalMatrix: BooleanMatrix;
 
     constructor(
+        private tileSizeService: TileSizeService,
         private Utils: Utils
     ) {
     }
@@ -206,13 +209,13 @@ export class NumberLineController {
     }
 
     private getHeight(): string {
-        var tileSize: number = this.Utils.getTileSize(false);        
+        var tileSize: number = this.tileSizeService.getTileSize();        
 
         return this.orientation === 'vertical' ? (tileSize / 2) + 'px' : tileSize + 'px';
     }
 
     private getWidth(): string {
-        var tileSize: number = this.Utils.getTileSize(false);
+        var tileSize: number = this.tileSizeService.getTileSize();
 
         return this.orientation === 'horizontal' ? (tileSize / 2) + 'px' : tileSize + 'px';
     }

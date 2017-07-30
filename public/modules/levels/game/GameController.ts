@@ -2,8 +2,9 @@ import { DragBoxService } from '../dragBox/DragBoxService';
 import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameOverService } from '../gameOver/GameOverService';
+import { GameSizeService } from '../../levels/gameSize/GameSizeService';
+import { TileSizeService } from '../../levels/tileSize/TileSizeService';
 import { Utils } from '../utils/Utils';
-
 
 'use strict';
 
@@ -16,6 +17,8 @@ export class GameController implements angular.IComponentController {
         '$scope',
         'eventService',
         'gameOverService',
+        'gameSizeService',
+        'tileSizeService',
         'Utils',
         'dragBoxService'
     ];
@@ -25,6 +28,8 @@ export class GameController implements angular.IComponentController {
         private $scope: angular.IScope,
         private eventService: EventService,
         private gameOverService: GameOverService,
+        private gameSizeService: GameSizeService,
+        private tileSizeService: TileSizeService,
         private Utils: Utils,
         private dragBoxService: DragBoxService,
     ) {
@@ -43,7 +48,7 @@ export class GameController implements angular.IComponentController {
     }
 
     $postLink() {
-        this.setMargin(this.Utils.getTileSize(false));
+        this.setMargin(this.tileSizeService.getTileSize());
         
         /* not sure if this is still necessary, seems to prevent grab hand from appearing even though draggable is no longer applied */
         this.$element.on('dragstart', (e) => e.preventDefault())
@@ -136,7 +141,7 @@ export class GameController implements angular.IComponentController {
 
     updateGameSize() {
         // don't use args, call to getGameSize so we take tutorials into account
-        var newGameSettings = this.Utils.getGameSize(false);
+        var newGameSettings = this.gameSizeService.getGameSize(false);
 
         if (newGameSettings) {
             this.gameSettings = {

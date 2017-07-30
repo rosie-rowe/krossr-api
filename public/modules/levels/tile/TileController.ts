@@ -4,6 +4,7 @@ import { GameOverService } from '../gameOver/GameOverService';
 import { ShiftService } from '../shiftService/ShiftService';
 import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileService } from '../tile/TileService';
+import { TileSizeService } from '../tileSize/TileSizeService';
 import { TouchService } from '../../core/touch/TouchService';
 import { Utils } from '../utils/Utils';
 
@@ -24,6 +25,7 @@ export class TileController implements angular.IComponentController {
         'shiftService',
         'sideLengthService',
         'tileService',
+        'tileSizeService',
         'touchService'
     ];
 
@@ -61,6 +63,7 @@ export class TileController implements angular.IComponentController {
         private shiftService: ShiftService,
         private sideLengthService: SideLengthService,
         private tileService: TileService,
+        private tileSizeService: TileSizeService,
         private touchService: TouchService
     ) {
        
@@ -77,7 +80,7 @@ export class TileController implements angular.IComponentController {
     }
 
     $postLink() {
-        this.setTileSize(this.Utils.getTileSize(this.tutorial));
+        this.setTileSize(this.tileSizeService.getTileSize());
         this.tileService.addTile({ tileCtrl: this });
 
         this.$element.on('mousedown', (e) => this.mouseDownEvent(e));
@@ -100,7 +103,7 @@ export class TileController implements angular.IComponentController {
         })
 
         this.eventService.subscribe(this.$scope, 'tileSizeChanged', () => {
-            this.setTileSize(this.Utils.getTileSize(this.tutorial));
+            this.setTileSize(this.tileSizeService.getTileSize());
         })
     }
 

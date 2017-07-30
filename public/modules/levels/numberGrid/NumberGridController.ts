@@ -1,6 +1,6 @@
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { EventService } from '../../core/eventService/EventService';
-import { Utils } from '../utils/Utils';
+import { TileSizeService } from '../tileSize/TileSizeService';
 
 'use strict';
 
@@ -10,13 +10,13 @@ export class NumberGridController implements angular.IComponentController {
     static $inject = [
         '$scope',
         'eventService',
-        'Utils'
+        'tileSizeService'
     ];
 
     constructor(
         private $scope: angular.IScope,
         private eventService: EventService,
-        private Utils: Utils
+        private tileSizeService: TileSizeService
     ) {
 
     }
@@ -44,7 +44,7 @@ export class NumberGridController implements angular.IComponentController {
     }
 
     private setTileSize() {
-        this.tileSize = this.Utils.getTileSizePx();
+        this.tileSize = this.tileSizeService.getTileSizePx();
     }
 
     getFontSize() {
