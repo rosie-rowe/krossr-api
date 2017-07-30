@@ -196,7 +196,7 @@ export class LevelController implements angular.IComponentController {
                     controller: mode
                 });
 
-                this.gameMatrix = new GameMatrix(this.Utils.getGameMatrix(), false);
+                this.gameMatrix = new GameMatrix(this.Utils.getGameMatrix(), mode == 'edit');
 
                 let goalLayout = this.Utils.getGoalMatrix();
 
