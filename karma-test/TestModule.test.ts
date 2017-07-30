@@ -1,4 +1,6 @@
 import * as angular from 'angular';
+import 'angular-mocks';
+
 import { ApplicationConfiguration } from '../public/modules/config';
 
 import { GameControllerTests } from '../public/modules/levels/game/GameController.test';

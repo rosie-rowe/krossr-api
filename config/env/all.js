@@ -28,11 +28,7 @@ module.exports = {
 		],
         html: [
             'public/modules/**/*.html'
-        ],
-		tests: [
-			'public/lib/angular-mocks/angular-mocks.js',
-			'public/modules/**/*.test.ts'
-		]
+        ]
 	},
     mailer: {
         from: 'support@krossr.com',

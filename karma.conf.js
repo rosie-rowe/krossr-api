@@ -16,7 +16,6 @@ module.exports = function(config) {
 
 		// List of files / patterns to load in the browser
 		files: [
-			//applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
 			'karma-test/TestModule.test.ts'
 		],
 
@@ -57,11 +56,15 @@ module.exports = function(config) {
 
 		// Continuous Integration mode
 		// If true, it capture browsers, run tests and exit
-		singleRun: false,
+		singleRun: true,
 
 		webpack: {
 			module: webpackConfig.module,
 			resolve: webpackConfig.resolve
+		},
+
+		mime: {
+			'text/x-typescript': ['ts']
 		}
 	});
 };
