@@ -1,6 +1,8 @@
 
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
+import { LineContent } from '../lineContent/LineContent';
 import { Point } from '../point/Point'
+import { TileGroup } from '../tileGroup/TileGroup';
 import { Utils } from '../utils/Utils';
 
 'use strict';
@@ -214,15 +216,4 @@ export class NumberLineController {
 
         return this.orientation === 'horizontal' ? (tileSize / 2) + 'px' : tileSize + 'px';
     }
-}
-
-class LineContent {
-    public cssClass: string;
-    public text: any; // number or string? we'll see
-}
-
-class TileGroup {
-    coord: Point;
-    currentValue: boolean;
-    goalValue: boolean;
 }
