@@ -4,24 +4,25 @@
  * Module dependencies.
  */
 var applicationConfiguration = require('./config/config');
+var webpackConfig = require('./webpack.config');
 
 // Karma configuration
 module.exports = function(config) {
 	config.set({
 		// Frameworks to use
-		frameworks: ['jasmine', 'karma-typescript'],
+		frameworks: ['jasmine'],
 
 		// List of files / patterns to load in the browser
 		files: applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
 
 		preprocessors: {
-			'**/*.ts': ['karma-typescript'],
+			'**/*.test.ts': ['webpack'],
 		},
 
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		//reporters: ['progress'],
-		reporters: ['progress', 'karma-typescript'],
+		reporters: ['progress'],
 
 		// Web server port
 		port: 9876,
@@ -51,6 +52,11 @@ module.exports = function(config) {
 
 		// Continuous Integration mode
 		// If true, it capture browsers, run tests and exit
-		singleRun: false
+		singleRun: false,
+
+		webpack: {
+			module: webpackConfig.module,
+			resolve: webpackConfig.resolve
+		}
 	});
 };
