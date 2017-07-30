@@ -289,14 +289,12 @@ export class LevelController implements angular.IComponentController {
 
     // Split out for easier testing
     submitCreate() {
-        var gameMatrix = this.Utils.getGameMatrix();
-
         // Create new Level object
         var level = new this.Levels ({
             name: this.level.name,
-            layout: gameMatrix.getLayout(),
+            layout: this.gameMatrix.horizontal.getLayout(),
             lives: this.level.lives,
-            size: gameMatrix.length
+            size: this.gameMatrix.horizontal.length
         });
 
         var levelSaveSuccess = (response) => {
