@@ -3,35 +3,16 @@ import { ApplicationConfiguration } from '../../config';
 
 'use strict';
 
-class NumberLineControllerTests {
+export class NumberLineControllerTests {
     static run() {
         // Number grid Controller Spec
-        describe('Number grid Controller Tests', function() {
+        describe('Number line Controller Tests', function() {
             // Initialize global variables
-            var NumberGridController,
+            var NumberLineController,
                 scope,
                 $httpBackend,
                 $stateParams,
                 $location;
-    
-            // The $resource service augments the response object with methods for updating and deleting the resource.
-            // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
-            // the responses exactly. To solve the problem, we define a new toEqualData Jasmine matcher.
-            // When the toEqualData matcher compares two objects, it takes only object properties into
-            // account and ignores methods.
-            beforeEach(function() {
-                jasmine.addMatchers({
-                    toEqualData: function(util, customEqualityTesters) {
-                        return {
-                            compare: function(actual, expected) {
-                                return {
-                                    pass: angular.equals(actual, expected)
-                                };
-                            }
-                        };
-                    }
-                });
-            });
     
             // Then we can start by loading the main application module
             beforeEach(angular.mock.module(ApplicationConfiguration.applicationModuleName));
@@ -49,7 +30,7 @@ class NumberLineControllerTests {
                 $location = _$location_;
     
                 // Initialize the Number grid controller.
-                NumberGridController = $controller('NumberGridController', {
+                NumberLineController = $controller('NumberLineController', {
                     $scope: scope
                 });
             }));
@@ -61,5 +42,3 @@ class NumberLineControllerTests {
         });
     }
 }
-
-NumberLineControllerTests.run();

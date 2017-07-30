@@ -3,7 +3,7 @@ import { ApplicationConfiguration } from '../../config';
 
 'use strict';
 
-class SignInControllerTests {
+export class SignInControllerTests {
     static run() {
         // Authentication controller Spec
         describe('SignInController', function() {
@@ -14,24 +14,6 @@ class SignInControllerTests {
                 $stateParams,
                 $location;
     
-            beforeEach(function() {
-                jasmine.addMatchers({
-                    toEqualData: function(util, customEqualityTesters) {
-                        return {
-                            compare: function(actual, expected) {
-                                return {
-                                    pass: angular.equals(actual, expected)
-                                };
-                            }
-                        };
-                    }
-                });
-            });
-    
-            // Load the main application module
-            beforeEach(angular.mock.module(ApplicationConfiguration.applicationModuleName));
-    
-            // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
             // This allows us to inject a service but then attach it to a variable
             // with the same name as the service.
             beforeEach(inject(function($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_) {
@@ -93,5 +75,3 @@ class SignInControllerTests {
         });
     }
 }
-
-SignInControllerTests.run();

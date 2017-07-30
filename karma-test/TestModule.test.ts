@@ -4,6 +4,13 @@ import 'angular-mocks';
 import { ApplicationConfiguration } from '../public/modules/config';
 
 import { GameControllerTests } from '../public/modules/levels/game/GameController.test';
+import { LevelControllerTests } from '../public/modules/levels/level/LevelController.test';
+import { LevelSelectControllerTests } from '../public/modules/levels/levelSelect/LevelSelectController.test';
+import { NumberGridControllerTests } from '../public/modules/levels/numberGrid/NumberGridController.test';
+import { NumberLineControllerTests } from '../public/modules/levels/numberLine/NumberLineController.test';
+import { TileControllerTests } from '../public/modules/levels/tile/TileController.test';
+import { SignInControllerTests } from '../public/modules/users/signIn/SignInController.test';
+import { SignUpControllerTests } from '../public/modules/users/signUp/SignUpController.test';
 
 'use strict';
 
@@ -31,9 +38,16 @@ class TestModule {
             });
 
             // Then we can start by loading the main application module
-            beforeEach(angular.mock.module(ApplicationConfiguration.applicationModuleName));
+            beforeEach(angular.mock.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies));
 
             GameControllerTests.run();
+            LevelControllerTests.run();
+            LevelSelectControllerTests.run();
+            NumberGridControllerTests.run();
+            NumberLineControllerTests.run();
+            TileControllerTests.run();
+            SignInControllerTests.run();
+            SignUpControllerTests.run();
         })
     }
 }
