@@ -2,16 +2,16 @@
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { LineContent } from '../lineContent/LineContent';
 import { Point } from '../point/Point'
+import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileGroup } from '../tileGroup/TileGroup';
 import { TileSizeService } from '../tileSize/TileSizeService';
-import { Utils } from '../utils/Utils';
 
 'use strict';
 
 export class NumberLineController {
     static $inject = [
-        'tileSizeService',
-        'Utils'
+        'sideLengthService',
+        'tileSizeService'
     ]
 
     static $name = 'NumberLineController';
@@ -21,14 +21,13 @@ export class NumberLineController {
     private goalMatrix: BooleanMatrix;
 
     constructor(
+        private sideLengthService: SideLengthService,
         private tileSizeService: TileSizeService,
-        private Utils: Utils
     ) {
     }
 
     $onInit() {
-        let layout = this.Utils.getGoalMatrix();
-        this.sideLength = layout.length;
+        this.sideLength = this.sideLengthService.sideLength;
     }
 
     private sideLength: number;
