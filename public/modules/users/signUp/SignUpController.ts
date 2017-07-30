@@ -32,7 +32,7 @@ export class SignUpController implements angular.IComponentController {
             this.Authentication.user = response.data;
             this.closeAction();
         }).catch((response) => {
-            this.error = response.message;
+            this.error = response.data.message;
 
             this.$timeout(() => {
                 this.error = null;

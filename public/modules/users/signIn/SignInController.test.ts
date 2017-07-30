@@ -40,7 +40,7 @@ export class SignInControllerTests {
                 $httpBackend.flush();
     
                 // Test scope value
-                expect(scope.authentication.user).toEqual('Fred');
+                expect(SignInController.Authentication.user).toEqual('Fred');
             });
     
             it('$scope.signin() should fail to log in with nothing', function() {
@@ -53,7 +53,7 @@ export class SignInControllerTests {
                 $httpBackend.flush();
     
                 // Test scope value
-                expect(scope.error).toEqual('Missing credentials');
+                expect(SignInController.error).toEqual('Missing credentials');
             });
     
             it('$scope.signin() should fail to log in with wrong credentials', function() {
@@ -70,7 +70,7 @@ export class SignInControllerTests {
                 $httpBackend.flush();
     
                 // Test scope value
-                expect(scope.error).toEqual('Unknown user');
+                expect(SignInController.error).toEqual('Unknown user');
             });
         });
     }

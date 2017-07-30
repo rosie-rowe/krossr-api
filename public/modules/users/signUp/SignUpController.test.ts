@@ -41,8 +41,8 @@ export class SignUpControllerTests {
                 $httpBackend.flush();
     
                 // test scope value
-                expect(scope.authentication.user).toBe('Fred');
-                expect(scope.error).toEqual(undefined);
+                expect(SignUpController.Authentication.user).toBe('Fred');
+                expect(SignUpController.error).toEqual(undefined);
             });
     
             it('$scope.signup() should fail to register with duplicate Username', function() {
@@ -55,7 +55,7 @@ export class SignUpControllerTests {
                 $httpBackend.flush();
     
                 // Test scope value
-                expect(scope.error).toBe('Username already exists');
+                expect(SignUpController.error).toBe('Username already exists');
             });
         });
     }
