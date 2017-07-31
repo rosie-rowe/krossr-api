@@ -108,18 +108,12 @@ export class LevelControllerTests {
                     id: '525a8422f6d0f87f0e407a33'
                 });
     
-                // Create new Levels array and include the Level
-                scope.levels = [sampleLevel];
-    
                 // Set expected DELETE response
                 $httpBackend.expectDELETE(/levels\/([0-9a-fA-F]{24})$/).respond(204);
     
                 // Run controller functionality
                 LevelController.remove(sampleLevel);
                 $httpBackend.flush();
-    
-                // Test array after successful delete
-                expect(scope.levels.length).toBe(0);
             }));
         });
     } 

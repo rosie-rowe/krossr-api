@@ -63,7 +63,7 @@ export class LevelSelectControllerTests {
                 $httpBackend.flush();
             
                 // Test scope value
-                expect(scope.levels).toEqual(sampleLevels);
+                expect(LevelSelectController.levels).toEqual(sampleLevels);
             }));
         });
     }
