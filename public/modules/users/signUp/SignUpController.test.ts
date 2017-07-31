@@ -30,11 +30,14 @@ export class SignUpControllerTests {
                 SignUpController = $controller('SignUpController', {
                     $scope: scope
                 });
+
+                // Fake the closeAction function since it is passed in via an outside scope
+                SignUpController.closeAction = () => {};
             }));
     
             it('$scope.signup() should register with correct data', function() {
                 // Test expected GET request
-                scope.authentication.user = 'Fred';
+                SignUpController.Authentication.user = 'Fred';
                 $httpBackend.when('POST', '/auth/signup').respond(200, 'Fred');
     
                 SignUpController.signup();

@@ -29,6 +29,9 @@ export class SignInControllerTests {
                 SignInController = $controller('SignInController', {
                     $scope: scope
                 });
+                
+                // Fake the closeAction function since it is passed in via an outside scope
+                SignInController.closeAction = () => {};
             }));
     
     
