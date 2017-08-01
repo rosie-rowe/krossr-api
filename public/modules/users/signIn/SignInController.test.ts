@@ -61,7 +61,7 @@ export class SignInControllerTests {
     
             it('$scope.signin() should fail to log in with wrong credentials', function() {
                 // Foo/Bar combo assumed to not exist
-                SignInController.Authentication.user = 'Foo';
+                SignInController.Authentication.signIn('Foo');
                 SignInController.credentials = 'Bar';
     
                 // Test expected POST request

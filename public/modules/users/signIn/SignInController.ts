@@ -41,7 +41,7 @@ export class SignInController implements angular.IComponentController {
     signin() {
         this.$http.post('/auth/signin', this.credentials).then((response) => {
             // If successful we assign the response to the global user model
-            this.Authentication.user = response.data;
+            this.Authentication.signIn(response.data);
             this.closeAction();
         }).catch((response) => {
             this.error = response.data.message;

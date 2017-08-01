@@ -37,7 +37,7 @@ export class SignUpControllerTests {
     
             it('$scope.signup() should register with correct data', function() {
                 // Test expected GET request
-                SignUpController.Authentication.user = 'Fred';
+                SignUpController.Authentication.signIn('Fred');
                 $httpBackend.when('POST', '/auth/signup').respond(200, 'Fred');
     
                 SignUpController.signup();

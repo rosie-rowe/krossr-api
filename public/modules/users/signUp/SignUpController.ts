@@ -29,7 +29,7 @@ export class SignUpController implements angular.IComponentController {
     signup() {
         this.$http.post('/auth/signup', this.credentials).then((response) => {
             // If successful we assign the response to the global user model
-            this.Authentication.user = response.data;
+            this.Authentication.signIn(response.data);
             this.closeAction();
         }).catch((response) => {
             this.error = response.data.message;

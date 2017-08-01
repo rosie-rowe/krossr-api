@@ -34,7 +34,7 @@ export class EditProfileController implements angular.IComponentController {
         private $timeout: angular.ITimeoutService,
         private Users,
         private Authentication: AuthenticationService
-    ){
+    ) {
 
     }
 
@@ -63,7 +63,7 @@ export class EditProfileController implements angular.IComponentController {
 
     signout() {
         this.$http.post('/auth/signout', {}).then((response) => {
-            delete this.Authentication.user;
+            this.Authentication.signOut();
             this.closeAction();
         }).catch((response) => {
 
@@ -78,7 +78,7 @@ export class EditProfileController implements angular.IComponentController {
 
             user.$update((response) => {
                 this.success.username = true;
-                this.Authentication.user = response;
+                this.Authentication.signIn(response);
 
                 this.$timeout(() => {
                     this.success.username = false;

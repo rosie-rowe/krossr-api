@@ -10,7 +10,7 @@ export function errorHandler($httpProvider) {
 					switch (rejection.status) {
 						case 401:
 							// Deauthenticate the global user
-							Authentication.user = null;
+							Authentication.signOut();
 
 							// Redirect to signin page
 							$location.path('signin');
