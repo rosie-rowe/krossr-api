@@ -1,4 +1,5 @@
 import { AuthenticationService } from '../authentication/AuthenticationService'
+import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 
 'use strict';
 
@@ -11,7 +12,7 @@ export class SignInController implements angular.IComponentController {
         '$scope',
         '$timeout',
         'Authentication',
-        'ngDialog'
+        'componentDialogService'
     ];
 
     private credentials;
@@ -24,18 +25,14 @@ export class SignInController implements angular.IComponentController {
         private $scope: angular.IScope,
         private $timeout: angular.ITimeoutService,
         private Authentication: AuthenticationService,
-        private ngDialog
+        private componentDialogService: ComponentDialogService,
     ) {}
 
     $onInit() {}
 
     openForgotPassword() {
         this.closeAction();
-        
-        this.ngDialog.open({
-            plain: true,
-            template: '<forgot-password close-action="closeThisDialog()"></forgot-password>'
-        });
+        this.componentDialogService.open('forgot-password');
     }
 
     signin() {
