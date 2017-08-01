@@ -14,6 +14,6 @@ export function routing($stateProvider) {
 	}).
 	state('reset', {
 		url: '/password/reset/:token',
-		templateUrl: 'modules/users/ResetPassword/ResetPasswordView.html'
+		templateUrl: 'modules/users/resetPassword/ResetPasswordView.html'
 	});
 }

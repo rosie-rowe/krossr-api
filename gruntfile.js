@@ -98,15 +98,13 @@ module.exports = function(grunt) {
 			dev: {
 				script: 'server.js',
 				options: {
-					nodeArgs: ['--debug'],
-					ext: 'js,html',
-					//watch: watchFiles.serverViews.concat(watchFiles.serverJS)
+					ext: 'js,html'
 				}
 			},
 			debug: {
 				script: 'server.js',
 				options: {
-					nodeArgs: ['--inspect'],
+					nodeArgs: ['--debug'],
 					ext: 'js,html'
 				}
 			}
@@ -174,7 +172,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['concurrent:default', 'less']);
+	grunt.registerTask('default', ['concurrent:default']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
