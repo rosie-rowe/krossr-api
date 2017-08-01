@@ -56,7 +56,7 @@ export class LevelSelectControllerTests {
                 var sampleLevels = [sampleLevel];
             
                 // Set GET response
-                $httpBackend.expectGET('levels?pageNum=0&sizeRestriction=&sortDirection=').respond(sampleLevelsResponse);
+                $httpBackend.expectGET('levels?searchText=&sizeRestriction=&sortBy=%22createdAt%22&sortDirection=').respond(sampleLevelsResponse);
             
                 // Run controller functionality
                 LevelSelectController.find();
