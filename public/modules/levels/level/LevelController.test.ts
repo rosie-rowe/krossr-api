@@ -13,6 +13,12 @@ export class LevelControllerTests {
                 $httpBackend,
                 $stateParams,
                 $location;
+
+            var testLayout = [[true, true, true, true, true],
+                              [true, true, true, true, true],
+                              [true, true, true, true, true],
+                              [true, true, true, true, true],
+                              [true, true, true, true, true]]
     
             // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
             // This allows us to inject a service but then attach it to a variable
@@ -36,7 +42,9 @@ export class LevelControllerTests {
                 // Define a sample Level object
                 var sampleLevel = new Levels({
                     id: '525a8422f6d0f87f0e407a33',
-                    name: 'New Level'
+                    name: 'New Level', 
+                    ratings: [],
+                    layout: testLayout 
                 });
     
                 // Set the URL parameter
@@ -48,7 +56,7 @@ export class LevelControllerTests {
                 // Run controller functionality
                 LevelController.selectedLevelId = '525a8422f6d0f87f0e407a33';
             
-                LevelController.findOne();
+                LevelController.findOne('view');
                 $httpBackend.flush();
     
                 expect(LevelController.level.id).toEqual(sampleLevel.id);
@@ -59,11 +67,7 @@ export class LevelControllerTests {
                 var sampleLevelPostData = new Levels({
                     name: 'New Level',
                     lives: 5,
-                    layout: [[true, true, true, true, true],
-                            [true, true, true, true, true],
-                            [true, true, true, true, true],
-                            [true, true, true, true, true],
-                            [true, true, true, true, true]]
+                    layout: testLayout,
                 });
     
                 // Create a sample Level response
