@@ -61,10 +61,7 @@ module.exports = function(config) {
 		// If true, it capture browsers, run tests and exit
 		singleRun: false,
 
-		webpack: {
-			module: webpackConfig.module,
-			resolve: webpackConfig.resolve
-		},
+		webpack: webpackConfig,
 
 		mime: {
 			'text/x-typescript': ['ts']
