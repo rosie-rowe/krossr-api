@@ -2,8 +2,9 @@ import { DragBoxService } from '../dragBox/DragBoxService';
 import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameOverService } from '../gameOver/GameOverService';
-import { GameSizeService } from '../../levels/gameSize/GameSizeService';
-import { TileSizeService } from '../../levels/tileSize/TileSizeService';
+import { GameSizeService } from '../gameSize/GameSizeService';
+import { TileSizeService } from '../tileSize/TileSizeService';
+import { TileState } from '../tile/TileState';
 
 'use strict';
 
@@ -58,7 +59,7 @@ export class GameController implements angular.IComponentController {
         // If the user goes too far away from the game area, clear the dragbox and empty the tiles.
         this.$element.on('mouseleave', (e) => {
             e.preventDefault();
-            this.applyFillDragBox('empty');
+            this.applyFillDragBox(TileState.empty);
         });
 
         /**

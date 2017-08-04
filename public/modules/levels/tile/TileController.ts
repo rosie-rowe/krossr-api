@@ -5,6 +5,7 @@ import { ShiftService } from '../shiftService/ShiftService';
 import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileService } from '../tile/TileService';
 import { TileSizeService } from '../tileSize/TileSizeService';
+import { TileState } from './TileState';
 import { TouchService } from '../../core/touch/TouchService';
 import { Utils } from '../utils/Utils';
 
@@ -108,7 +109,7 @@ export class TileController implements angular.IComponentController {
     }
 
     private clearPending(coords) {
-        this.tileService.fillTiles(coords, true, 'empty', 'isPendingAndNotSelected');
+        this.tileService.fillTiles(coords, true, TileState.empty, 'isPendingAndNotSelected');
     }
 
     /** If the override value (which will be the value of the tile that a dragstart is activated on)
@@ -128,9 +129,9 @@ export class TileController implements angular.IComponentController {
      */
     private initializeFill() {
         if (this.isEditMode && this.tiles && this.tiles[this.index] && this.tiles[this.index].selected) {
-            this.fill('selected');
+            this.fill(TileState.selected);
         } else {
-            this.fill('empty');
+            this.fill(TileState.empty);
         }
     }
 
@@ -164,7 +165,7 @@ export class TileController implements angular.IComponentController {
             this.clearPending(coordsToClear);
         }
 
-        this.tileService.fillTiles(allPendingCoords, true, 'pending','isNotPending');
+        this.tileService.fillTiles(allPendingCoords, true, TileState.pending,'isNotPending');
 
         this.$scope.$apply(); 
     }
@@ -223,7 +224,7 @@ export class TileController implements angular.IComponentController {
             this.fill(changeTo);
         } else {
             if (this.shiftService.shiftOn === true) {
-                this.fill('marked', initState);
+                this.fill(TileState.marked, initState);
                 
                 this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
             } else {
@@ -233,10 +234,10 @@ export class TileController implements angular.IComponentController {
                 }
         
                 if (wrong_answer) {
-                    this.fill('marked');
+                    this.fill(TileState.marked);
                     this.removeLife();
                 } else {
-                    this.fill('selected', initState);
+                    this.fill(TileState.selected, initState);
                     this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
                 }
             }
@@ -245,20 +246,20 @@ export class TileController implements angular.IComponentController {
 
     fill(fillType, override?) {
         switch (fillType) {
-            case 'pending':
+            case TileState.pending:
                 this.pending = true;
                 break;
-            case 'marked':
+            case TileState.marked:
                 this.marked = this.checkForOverride(override, this.marked);
                 this.selected = false;
                 this.pending = false;
                 break;
-            case 'selected':
+            case TileState.selected:
                 this.selected = this.checkForOverride(override, this.selected);
                 this.marked = false;
                 this.pending = false;
                 break;
-            case 'empty':
+            case TileState.empty:
                 this.selected = false;
                 this.marked = false;
                 this.pending = false;

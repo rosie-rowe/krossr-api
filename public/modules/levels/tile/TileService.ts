@@ -1,5 +1,6 @@
 import { Point } from '../point/Point';
 import { SideLengthService } from '../sideLengthService/SideLengthService';
+import { TileState } from '../tile/TileState';
 
 'use strict';
 
@@ -56,7 +57,7 @@ export class TileService {
         let len = this.tileIndex.length;
 
         for (let i = 0; i < len; i++) {
-            this.tileIndex[i].tileCtrl.fill('empty');
+            this.tileIndex[i].tileCtrl.fill(TileState.empty);
         }
     }
 
