@@ -41,12 +41,12 @@ export class ResetPasswordController implements angular.IComponentController {
             this.passwordDetails = null;
 
             // Attach user profile
-            this.Authentication.signIn(response);
+            this.Authentication.signIn(response.data);
 
             // And redirect to the home page
             this.$location.path('/');
         }).catch((response) => {
-            this.error = response.message;
+            this.error = response.data.message;
         });
     };
 }
