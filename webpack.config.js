@@ -23,7 +23,7 @@ var config = {
     },
     output: {
         path: path.join(__dirname + '/public/dist'),
-        filename: '[name].bundle.js'
+        filename: '[name].bundle-[hash].js'
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({

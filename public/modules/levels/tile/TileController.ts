@@ -224,7 +224,7 @@ export class TileController implements angular.IComponentController {
             this.fill(changeTo);
         } else {
             if (this.shiftService.shiftOn === true) {
-                this.fill(TileState.marked, initState);
+                this.fill(this.marked ? TileState.empty : TileState.marked, initState);
                 
                 this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
             } else {
@@ -327,15 +327,19 @@ export class TileController implements angular.IComponentController {
         }
     }
 
-    /** We want to add colored borders to every 5th tile, unless it is at the beginning or end of a column or row */
-    testTileForBorder(sideLength, index) {
-        return (index % 5 === 0
-                && index % sideLength !== 0);
-    };
-
     setTileSize(tileSize) {
         tileSize = Math.floor(tileSize);
         this.width = tileSize + 'px';
         this.height = tileSize + 'px';
+    };
+
+    toggleMarked() {
+        
+    }
+
+    /** We want to add colored borders to every 5th tile, unless it is at the beginning or end of a column or row */
+    testTileForBorder(sideLength, index) {
+        return (index % 5 === 0
+                && index % sideLength !== 0);
     };
 }
