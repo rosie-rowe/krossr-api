@@ -11,11 +11,11 @@ module.exports = {
 	assets: {
         lib: {
             css: [],
-            js: ['public/dist/vendor.bundle.js']
+            js: ['public/dist/vendor.bundle-*.js']
         },
         css: 'public/dist/application.min.css',
         js: [
-			'public/dist/krossr.bundle.js',
+			'public/dist/krossr.bundle-*.js',
             'public/dist/templates.js'
 		]
 	}
