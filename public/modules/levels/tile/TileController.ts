@@ -234,7 +234,7 @@ export class TileController implements angular.IComponentController {
                 }
         
                 if (wrong_answer) {
-                    this.fill(TileState.marked);
+                    this.fill(TileState.marked, initState);
                     this.removeLife();
                 } else {
                     this.fill(TileState.selected, initState);
