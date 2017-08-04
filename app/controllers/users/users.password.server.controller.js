@@ -142,9 +142,13 @@ exports.reset = function(req, res, next) {
                     });
                 } else {
                     if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
-                        user.password = passwordDetails.newPassword;
                         user.resetPasswordToken = undefined;
                         user.resetPasswordExpires = undefined;
+
+                        /* This stuff is common with signup & needs to be extracted out to a common module, TODO */
+                        user.provider = 'local';
+                        user.salt = user.makeSalt();
+                        user.hashedPassword = user.encryptPassword(passwordDetails.newPassword, user.salt);
 
                         user.save().then(function() {
                             req.login(user, function(err) {
