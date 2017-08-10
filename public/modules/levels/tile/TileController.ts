@@ -220,7 +220,7 @@ export class TileController implements angular.IComponentController {
             coord = index;
         }
     
-        if (typeof changeTo === "string") {
+        if (changeTo in TileState) {
             this.fill(changeTo);
         } else {
             if (this.shiftService.shiftOn === true) {
