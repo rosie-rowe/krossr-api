@@ -28,9 +28,7 @@ exports.signup = function(req, res) {
 	user.save().then(function() {
 		winston.info('Saved the user!');
 
-		// Remove sensitive data before login
-		user.password = undefined;
-		user.salt = undefined;
+		user.removeSensitiveInfo();
 
 		req.login(user, function(err) { 
 			if (err) {
@@ -56,9 +54,7 @@ exports.signin = function(req, res, next) {
 		if (err || !user) {
 			res.status(400).send(info);
 		} else {
-			// Remove sensitive data before login
-			user.password = undefined;
-			user.salt = undefined;
+			user.removeSensitiveInfo();
 
 			req.login(user, function(err) {
 				if (err) {

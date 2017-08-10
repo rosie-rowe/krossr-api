@@ -48,6 +48,10 @@ module.exports = function(sequelize, Sequelize) {
                 salt = new Buffer(salt, 'base64');
                 return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
             },
+            removeSensitiveInfo: function() {
+                this.password = null;
+                this.salt = null;
+            },
             setPassword: function(newPassword) {
                 this.provider = 'local';
                 this.salt = this.makeSalt();
