@@ -20,9 +20,7 @@ exports.signup = function(req, res) {
 	var user = User.build(req.body);
 
 	// Add missing user fields
-	user.provider = 'local';
-	user.salt = user.makeSalt();
-	user.hashedPassword = user.encryptPassword(req.body.password, user.salt);
+	user.setPassword(req.body.password);
 
 	winston.info('About to save the user...');
 
