@@ -333,10 +333,6 @@ export class TileController implements angular.IComponentController {
         this.height = tileSize + 'px';
     };
 
-    toggleMarked() {
-        
-    }
-
     /** We want to add colored borders to every 5th tile, unless it is at the beginning or end of a column or row */
     testTileForBorder(sideLength, index) {
         return (index % 5 === 0
