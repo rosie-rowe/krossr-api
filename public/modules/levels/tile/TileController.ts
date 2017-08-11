@@ -1,4 +1,5 @@
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
+import { DragBoxService } from '../dragBox/DragBoxService';
 import { EventService } from '../../core/eventService/EventService';
 import { GameOverService } from '../gameOver/GameOverService';
 import { ShiftService } from '../shiftService/ShiftService';
@@ -51,14 +52,12 @@ export class TileController implements angular.IComponentController {
 
     private tiles;
 
-    private tutorial;
-
     constructor(
         private $attrs: angular.IAttributes,
         private $element: angular.IAugmentedJQuery,
         private $scope: angular.IScope,
         private Utils: Utils, 
-        private dragBoxService,
+        private dragBoxService: DragBoxService,
         private eventService: EventService,
         private gameOverService: GameOverService,
         private shiftService: ShiftService,
@@ -73,7 +72,6 @@ export class TileController implements angular.IComponentController {
     $onInit() {
         this.editable = this.$attrs['editable'];
         this.isEditMode = this.level.currentView === 'edit';
-        this.tutorial = this.$attrs['tutorial'];
 
         this.goalMatrix = this.Utils.getGoalMatrix();
 
