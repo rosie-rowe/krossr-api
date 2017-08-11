@@ -56,7 +56,7 @@ export class DragBoxService {
      */
     fill(override: string): void {
         if (this.validate()) {
-            this.tileService.fillTiles(this.process(), this.initState, override);
+            this.tileService.fillTiles(this.process(), this.initState, override, 'isNotSelected');
             this.clearDragBox();
         }
     }

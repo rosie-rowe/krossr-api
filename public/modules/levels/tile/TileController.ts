@@ -316,6 +316,11 @@ export class TileController implements angular.IComponentController {
         return !this.pending;
     }
 
+    /** used with the validationFn in tileService.fillTiles */
+    isNotSelected() {
+        return !this.selected;
+    }
+    
     /** Remove a life from the pool of remaining lives */
     removeLife() {
         if (this.level && this.level.currentLives) {
