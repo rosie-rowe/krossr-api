@@ -35,6 +35,13 @@ module.exports = function(db) {
 	app.locals.description = config.app.description;
 	app.locals.keywords = config.app.keywords;
 	app.locals.jsFiles = config.getJavaScriptAssets();
+
+	winston.info('Got jsFiles!');
+
+	for (var jsFile in app.locals.jsFiles) {
+		winston.info(app.locals.jsFiles[jsFile]);
+	}
+
 	app.locals.cssFiles = config.getCSSAssets();
 
 	// Passing the request url to environment locals
