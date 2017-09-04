@@ -127,20 +127,23 @@ exports.delete = function(req, res) {
  * Level middleware
  */
 exports.levelByID = function(req, res, next, id) {
-	let user = req.user;
+	var user = req.user;
+
+	var include = user ? 
+	[
+		{
+			attributes: ['rating'],
+			model: db.rating,
+			required: false,
+			where: {
+				userId: user.id
+			}
+		}
+	] : null;
 
 	Level
 		.findOne({
-			include: [
-				{
-					attributes: ['rating'],
-					model: db.rating,
-					required: false,
-					where: {
-						userId: user.id
-					}
-				}
-			],
+			include: include,
             where: {
                 id: id
             }

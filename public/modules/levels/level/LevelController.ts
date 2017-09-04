@@ -290,7 +290,7 @@ export class LevelController implements angular.IComponentController {
 
     /** This should be done on the server side, todo */
     setRating() {
-        if (this.level.ratings.length) {
+        if (this.level.ratings && this.level.ratings.length) {
             this.level.yourRating = this.level.ratings[0].rating;
         }
     }
