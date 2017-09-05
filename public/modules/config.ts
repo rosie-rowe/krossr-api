@@ -6,7 +6,19 @@ import * as angular from 'angular';
 export var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'Krossr';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ngCookies', 'ngDialog', 'ngTouch',  'ngSanitize',  'ui.router', 'ui.utils', 'debounce', 'templates-main'];
+	var applicationModuleVendorDependencies = [
+		'ngResource',
+		'ngAnimate',
+		'ngCookies',
+		'ngDialog',
+		'ngLodash',
+		'ngTouch',
+		'ngSanitize',
+		'ui.router',
+		'ui.utils',
+		'debounce',
+		'templates-main'
+	];
 
 	return {
 		applicationModuleName: applicationModuleName,
