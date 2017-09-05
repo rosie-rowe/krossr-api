@@ -32,7 +32,7 @@ export class SignInController implements angular.IComponentController {
 
     openForgotPassword() {
         this.closeAction();
-        this.componentDialogService.open('forgot-password');
+        this.componentDialogService.open('forgot-password', { username: this.credentials.username });
     }
 
     signin() {

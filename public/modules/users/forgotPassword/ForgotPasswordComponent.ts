@@ -9,6 +9,7 @@ export class ForgotPasswordComponent implements angular.IComponentOptions {
     templateUrl = 'modules/users/forgotPassword/ForgotPasswordView.html';
 
     bindings = {
-        closeAction: '&'
+        closeAction: '&',
+        username: '@'
     }
 }

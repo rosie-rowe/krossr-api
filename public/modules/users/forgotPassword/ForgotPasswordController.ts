@@ -11,7 +11,7 @@ export class ForgotPasswordController implements angular.IComponentController {
     ];
 
     private invalid;
-    private credentials;
+    private credentials: any = {};
 
     private closeAction: Function;
 
@@ -19,6 +19,9 @@ export class ForgotPasswordController implements angular.IComponentController {
     private error: string;
     
     private timeout: number = 1000;
+
+    // the username possibly passed in from outside -- bind it in onInit
+    private username: string;
 
     constructor(
         private $http: angular.IHttpService,
@@ -30,6 +33,7 @@ export class ForgotPasswordController implements angular.IComponentController {
 
     $onInit() {
         this.invalid = this.$stateParams['invalid'];
+        this.credentials.username = this.username;
     }
 
     private clearForm() {
