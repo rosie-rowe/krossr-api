@@ -71,7 +71,7 @@ export class ComponentDialogService {
         return this.ngDialog.open(options);
     }
 
-    openConfirm(directiveName: string): angular.IPromise<any> {
+    openConfirm<TComponentAttributes>(directiveName: string, data?: TComponentAttributes): angular.IPromise<any> {
         let options = this.getDefaultOpenConfirmOptions(directiveName);
 
         return this.ngDialog.openConfirm(options);
