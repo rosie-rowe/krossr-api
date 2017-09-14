@@ -8,7 +8,6 @@ import GameOverModule from './gameOver/GameOverModule';
 import GameSizeModule from './gameSize/GameSizeModule';
 import LevelModule from './level/LevelModule';
 import LevelSelectModule from './levelSelect/LevelSelectModule';
-import LevelsServiceModule from './levelsService/LevelsServiceModule';
 import LifeMeterModule from './lifeMeter/LifeMeterModule';
 import NumberGridModule from './numberGrid/NumberGridModule';
 import NumberLineModule from './numberLine/NumberLineModule';
@@ -30,7 +29,6 @@ export default angular
         GameSizeModule,
         LevelModule,
         LevelSelectModule,
-        LevelsServiceModule,
         LifeMeterModule,
         NumberGridModule,
         NumberLineModule,
