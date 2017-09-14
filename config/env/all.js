@@ -20,7 +20,7 @@ module.exports = {
 		},
 		css: [
 			'public/less/reset.css',
-			'public/less/modules.css'
+			'public/dist/modules.bundle-*.css'
 		],
 		js: [
 			'public/dist/krossr.bundle-*.js',

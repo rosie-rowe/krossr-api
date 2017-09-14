@@ -1,6 +1,7 @@
 'use strict';
 
-var webpackConfig = require('./webpack.config');
+var webpackConfig = require('./webpack.config'),
+	crypto = require('crypto');
 
 module.exports = function(grunt) {
 	// Unified Watch Object
@@ -141,7 +142,7 @@ module.exports = function(grunt) {
 		less: {
 			development: {
 				files: {
-              		'public/less/modules.css': 'public/less/modules.less'
+              		'public/dist/modules.bundle-<%= hash %>.css': 'public/less/modules.less'
             	}
 			},
 			options: {
@@ -170,6 +171,7 @@ module.exports = function(grunt) {
         grunt.config.set('applicationJavaScriptLibFiles', config.assets.lib.js);
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
 		grunt.config.set('applicationCSSFiles', config.assets.css);
+		grunt.config.set('hash', crypto.createHash('md5').digest('hex'));
 	});
 
 	// Default task(s).
