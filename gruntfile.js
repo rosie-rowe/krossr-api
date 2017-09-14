@@ -86,7 +86,7 @@ module.exports = function(grunt) {
             },
             main: {
                 src: '<%= applicationHTMLFiles %>',
-                dest: 'public/dist/templates.js'
+                dest: 'public/dist/templates.bundle-<%= hash %>.js'
             }
         },
 		cssmin: {

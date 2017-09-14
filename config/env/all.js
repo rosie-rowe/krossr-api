@@ -24,7 +24,7 @@ module.exports = {
 		],
 		js: [
 			'public/dist/krossr.bundle-*.js',
-            'public/dist/templates.js'
+            'public/dist/templates.bundle-*.js'
 		],
         html: [
             'public/modules/**/*.html'
