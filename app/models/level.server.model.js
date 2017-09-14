@@ -1,5 +1,7 @@
 'use strict';
 
+var btoa = require('btoa');
+
 module.exports = function(sequelize, Sequelize) {
     var level = sequelize.define('level', {
         name: {
@@ -19,7 +21,7 @@ module.exports = function(sequelize, Sequelize) {
         },
         layout: {
             allowNull: false,
-            type: Sequelize.ARRAY(Sequelize.BOOLEAN),
+            type: Sequelize.STRING,
             unique: true
         },
         size: {
@@ -40,10 +42,29 @@ module.exports = function(sequelize, Sequelize) {
     },
     {
         timestamps: true,
+        hooks: {
+            beforeValidate: function(level, options) {
+                level.encodeLayout();
+            }
+        },
         associate: function(models) {
             level.belongsTo(models.user);
             level.hasMany(models.rating);
-        }
+        },
+        instanceMethods: {
+            /**
+             * Converts the boolean array to a base64 encoded string.
+             * There will be an equivalent method on the client-side called decodeLayout
+             * to convert a base64 encoded string into a boolean array
+             */
+            encodeLayout: function() {
+                var converted = Array.prototype.concat([], this.layout) // flatten
+                                               .map(function(value) { return value ? '1' : '0' })
+                                               .join('');
+                                               
+                this.layout = btoa(converted);
+            }
+        } 
     });
 
     return level;
