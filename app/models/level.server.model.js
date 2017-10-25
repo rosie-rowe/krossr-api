@@ -32,13 +32,6 @@ module.exports = function(sequelize, Sequelize) {
                 isInt: true
             }
         },
-        lives: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            validate: {
-                isInt: true
-            }
-        },
     },
     {
         timestamps: true,

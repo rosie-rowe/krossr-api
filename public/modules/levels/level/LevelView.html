@@ -7,11 +7,6 @@
             <input type="text" data-ng-model="levelCtrl.level.name" id="name" class="form-control" placeholder="Name" required>
         </div>
 
-        <div class="controls">
-            <label class="control-label" for="lives"># of lives (wrong answers allowed)</label>
-            <input type='text' ng-pattern="validNumber" data-ng-model="levelCtrl.level.lives" id="lives" class="form-control" placeholder="# of lives" required>
-        </div>
-
         <div class="controls" ng-if="levelCtrl.level.currentView === 'new'">
             <label class="control-label" for="size">Size</label>
             <select convert-to-number ng-model="levelCtrl.options.size" ng-change="levelCtrl.createNewLevel();">
@@ -47,8 +42,6 @@
             </a>
         </div>
     </div>
-
-    <life-meter ng-if="levelCtrl.level.ready && levelCtrl.level.currentView === 'view'" lives="levelCtrl.level.currentLives"></life-meter>
 
     <div class="rateLevel" ng-if="levelCtrl.Authentication.user && levelCtrl.level && levelCtrl.level.currentView === 'view'">
         Rate: <star-rating ng-model="levelCtrl.level.yourRating" max="5" on-rating-selected="levelCtrl.rate()"></star-rating>

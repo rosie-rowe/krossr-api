@@ -5,6 +5,7 @@ import { ComponentDialogService } from '../../core/componentDialog/ComponentDial
 import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameSizeService } from '../gameSize/GameSizeService';
+import { LevelService } from './LevelService';
 import { ShiftService } from '../shiftService/ShiftService';
 import { Utils } from '../utils/Utils';
 
@@ -24,6 +25,7 @@ export class LevelController implements angular.IComponentController {
         'componentDialogService',
         'eventService',
         'gameSizeService',
+        'levelService',
         'Levels',
         'ngDialog',
         'shiftService',
@@ -46,6 +48,7 @@ export class LevelController implements angular.IComponentController {
         private componentDialogService: ComponentDialogService,
         private eventService: EventService,
         private gameSizeService: GameSizeService,
+        private levelService: LevelService,
         private Levels,
         private ngDialog,
         private shiftService: ShiftService,
@@ -163,8 +166,7 @@ export class LevelController implements angular.IComponentController {
         this.level = {
             currentView: action,
             ready: true,
-            name: oldLevel ? oldLevel.name : '',
-            lives: oldLevel ? oldLevel.lives : undefined
+            name: oldLevel ? oldLevel.name : ''
         };
 
         this.gameMatrix = new GameMatrix(this.Utils.getGameMatrix(), false);
@@ -187,9 +189,9 @@ export class LevelController implements angular.IComponentController {
                 
                 this.setRating();
 
-                this.level.currentLives = data.lives;
+                this.level.layout = this.levelService.decodeLayout(data.layout);
 
-                var flatLayout = this.Utils.flatten(data.layout);
+                var flatLayout = this.Utils.flatten(this.level.layout);
 
                 this.gameSizeService.calculatePlayableArea();
 
@@ -301,7 +303,6 @@ export class LevelController implements angular.IComponentController {
         var level = new this.Levels ({
             name: this.level.name,
             layout: this.gameMatrix.horizontal.getLayout(),
-            lives: this.level.lives,
             size: this.gameMatrix.horizontal.length
         });
 

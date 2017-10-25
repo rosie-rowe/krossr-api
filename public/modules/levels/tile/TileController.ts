@@ -229,7 +229,6 @@ export class TileController implements angular.IComponentController {
         
                 if (wrong_answer) {
                     this.fill(TileState.marked, initState);
-                    this.removeLife();
                 } else {
                     this.fill(TileState.selected, initState);
                     this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
@@ -315,17 +314,6 @@ export class TileController implements angular.IComponentController {
         return !this.selected;
     }
     
-    /** Remove a life from the pool of remaining lives */
-    removeLife() {
-        if (this.level && this.level.currentLives) {
-            this.level.currentLives--;
-
-            if (this.level.currentLives === 0) {
-                this.gameOverService.openDialog(this.level);
-            }
-        }
-    }
-
     setTileSize(tileSize) {
         tileSize = Math.floor(tileSize);
         this.width = tileSize + 'px';

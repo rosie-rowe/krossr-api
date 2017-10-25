@@ -36,7 +36,6 @@ export class LevelSelectControllerTests {
                 var sampleLevel = new Levels({
                     id: '525a8422f6d0f87f0e407a33',
                     name: 'New Level',
-                    lives: 5,
                     layout: [[true, true, true, true, true],
                                 [true, true, true, true, true],
                                 [true, true, true, true, true],

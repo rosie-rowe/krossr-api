@@ -35,7 +35,6 @@
                 <select ng-model="levelSelectCtrl.sortBy" ng-change="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
                     <option value='"createdAt"'>Created Date</option>
                     <option value='name'>Name</option>
-                    <option value='lives'>Lives</option>
                     <option value='"avgRating"'>Ratings</option>
                 </select>
             </div>
@@ -70,10 +69,6 @@
                 Avg:
                 <span ng-if="::level.avgRating">{{ ::level.avgRating | number: 2 }}</span>
                 <span ng-if="::!level.avgRating">n/a</span>
-            </div>
-
-            <div class="lives">
-                {{ ::level.lives }} lives
             </div>
         </div>
     </div>

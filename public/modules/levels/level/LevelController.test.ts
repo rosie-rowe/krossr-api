@@ -66,7 +66,6 @@ export class LevelControllerTests {
                 // Create a sample Level object
                 var sampleLevelPostData = new Levels({
                     name: 'New Level',
-                    lives: 5,
                     layout: testLayout,
                 });
     

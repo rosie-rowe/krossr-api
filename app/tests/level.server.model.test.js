@@ -42,8 +42,7 @@ describe('Level Model Unit Tests:', function() {
 						 [false, true, true, true, false],
 						 [false, true, false, true, false],
 						 [false, true, false, true, false],
-						 [false, true, false, true, false]],
-                lives: 3
+						 [false, true, false, true, false]]
 			});
 
 			done();
