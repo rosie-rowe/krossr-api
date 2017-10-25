@@ -1,4 +1,4 @@
-<h2>You {{ gameOverCtrl.won ? 'win' : 'lose' }}</h2>
+<h2>You win!</h2>
 
 <button class="btn btn-primary" ng-click="gameOverCtrl.close()" ui-sref="level({ levelId: gameOverCtrl.levelId })" ui-sref-opts="{ reload: true }">Retry</button>
 <button class="btn btn-primary" ng-click="gameOverCtrl.newLevel()">New Level</button>

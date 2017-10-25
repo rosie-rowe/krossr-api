@@ -125,14 +125,6 @@ export class GameController implements angular.IComponentController {
         return false;
     };
 
-    gameOver() {
-        if (!this.level.lost) {
-            this.level.won = false;
-            this.level.lost = true;
-            this.gameOverService.openDialog(this.level);
-        }
-    };
-
     setMargin(tileSize: number) {
         this.margin = Math.floor(tileSize) / 2;
     }
