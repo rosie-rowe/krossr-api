@@ -23,19 +23,10 @@ export class GameOverController implements angular.IComponentController {
 
     private closeAction: Function;
 
-    private clearAll() {
-        this.eventService.publish('level.clearAll');
-    }
-
     $onInit() {}
 
-    close() {
-        this.closeAction();
-        this.clearAll();
-    }
-
     newLevel() {
-        this.close();
+        this.closeAction();
         this.componentDialogService.open('level-select');
     }
 }

@@ -10,7 +10,7 @@ export class GameOverService {
     ];
 
     constructor(
-        private ngDialog
+        private ngDialog: angular.dialog.IDialogService
     ) {
 
     }
@@ -19,7 +19,6 @@ export class GameOverService {
         this.ngDialog.open({
             plain: true,
             template: '<game-over close-action="closeThisDialog()" level-id="' + level.id +'" won="' + level.won + '"></game-over>',
-            //scope: this.$scope,
             showClose: false
         });
     }
