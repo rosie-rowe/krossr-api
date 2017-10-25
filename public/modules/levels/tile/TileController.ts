@@ -221,7 +221,7 @@ export class TileController implements angular.IComponentController {
                 
                 this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
             } else {
-                this.fill(TileState.selected, initState);
+                this.fill(this.selected ? TileState.empty : TileState.selected, initState);
                 this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
             }
         }
@@ -299,11 +299,6 @@ export class TileController implements angular.IComponentController {
         return !this.pending;
     }
 
-    /** used with the validationFn in tileService.fillTiles */
-    isNotSelected() {
-        return !this.selected;
-    }
-    
     setTileSize(tileSize) {
         tileSize = Math.floor(tileSize);
         this.width = tileSize + 'px';
