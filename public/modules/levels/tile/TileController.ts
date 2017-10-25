@@ -222,17 +222,8 @@ export class TileController implements angular.IComponentController {
                 
                 this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
             } else {
-                // we don't want this to happen for new or edit screens
-                if (goalMatrix) {
-                    wrong_answer = (goalMatrix.getValueAt(coord.y, coord.x) !== true)
-                }
-        
-                if (wrong_answer) {
-                    this.fill(TileState.marked, initState);
-                } else {
-                    this.fill(TileState.selected, initState);
-                    this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
-                }
+                this.fill(TileState.selected, initState);
+                this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
             }
         }
     }
