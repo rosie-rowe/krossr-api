@@ -51,7 +51,7 @@ module.exports = function(sequelize, Sequelize) {
              * to convert a base64 encoded string into a boolean array
              */
             encodeLayout: function() {
-                var converted = Array.prototype.concat([], this.layout) // flatten
+                var converted = Array.prototype.concat.apply([], this.layout) // flatten
                                                .map(function(value) { return value ? '1' : '0' })
                                                .join('');
                                                
