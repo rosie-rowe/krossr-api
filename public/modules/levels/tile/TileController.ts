@@ -205,8 +205,7 @@ export class TileController implements angular.IComponentController {
     }
 
     changeTile(index, initState, changeTo, goalMatrix) {
-        var coord,
-            wrong_answer = false;
+        var coord;
 
         if (typeof index === 'number') { 
             coord = this.tileService.convertTo2D(index);
