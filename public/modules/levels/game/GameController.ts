@@ -3,6 +3,7 @@ import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameOverService } from '../gameOver/GameOverService';
 import { GameSizeService } from '../gameSize/GameSizeService';
+import { ILevel } from "../level/Level";
 import { TileSizeService } from '../tileSize/TileSizeService';
 import { TileState } from '../tile/TileState';
 
@@ -37,7 +38,7 @@ export class GameController implements angular.IComponentController {
     private gameMatrix: GameMatrix;
     private goalMatrix: GameMatrix;
     private gameSettings;
-    private level; // todo
+    private level: ILevel;
     private margin: number;
     private tiles;
 
@@ -117,11 +118,12 @@ export class GameController implements angular.IComponentController {
     checkWin() {
         var winner = this.checkForWin();
 
-        if (winner && !this.level.lost) {
+        if (winner) {
             this.level.won = true;
             this.$scope.$digest();
             return true;
         }
+        
         return false;
     };
 

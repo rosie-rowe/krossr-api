@@ -2,6 +2,7 @@ import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { DragBoxService } from '../dragBox/DragBoxService';
 import { EventService } from '../../core/eventService/EventService';
 import { GameOverService } from '../gameOver/GameOverService';
+import { ILevel } from "../level/Level";
 import { ShiftService } from '../shiftService/ShiftService';
 import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileService } from '../tile/TileService';
@@ -37,7 +38,7 @@ export class TileController implements angular.IComponentController {
     private index;
     private isEditMode: boolean;
 
-    private level; // todo
+    private level: ILevel;
 
     private editable;
 

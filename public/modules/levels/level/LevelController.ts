@@ -213,7 +213,6 @@ export class LevelController implements angular.IComponentController {
                 this.level.currentView = mode;
 
                 this.level.won = false;
-                this.level.lost = false;
                 this.level.ready = true;
             });
         } else {
