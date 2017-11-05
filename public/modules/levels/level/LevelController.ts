@@ -3,6 +3,7 @@ import * as angular from 'angular';
 import { AuthenticationService } from '../../users/authentication/AuthenticationService'
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 import { EventService } from '../../core/eventService/EventService';
+import { ILevel } from "../level/Level";
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameSizeService } from '../gameSize/GameSizeService';
 import { LevelService } from './LevelService';
@@ -58,7 +59,7 @@ export class LevelController implements angular.IComponentController {
     }
 
     private mode: string; // string for edit, new, etc.
-    private level; // the level
+    private level: ILevel;
     private margin: number;
     private selectedLevelId;
     private error;
@@ -153,7 +154,7 @@ export class LevelController implements angular.IComponentController {
 
     // Create new level (load template)
     createNewLevel() {
-        var action = 'new';
+        var action: 'new' = 'new';
         var oldLevel = angular.copy(this.level);
 
         this.clearAll()

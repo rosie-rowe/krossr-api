@@ -1,5 +1,10 @@
 export interface ILevel {
-    id;
-    won: boolean;
     currentView: 'edit' | 'new' | 'view';
+    id?;
+    name: string;
+    ratings?;
+    ready: boolean;
+    won?: boolean;
+    layout?: Boolean[][];
+    yourRating?;
 }
