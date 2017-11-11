@@ -218,7 +218,7 @@ export class TileController implements angular.IComponentController {
             this.fill(changeTo);
         } else {
             if (this.shiftService.shiftOn === true) {
-                this.fill(this.marked ? TileState.empty : TileState.marked, initState);
+                this.fill(this.marked ? TileState.empty : TileState.marked);
                 
                 this.gameMatrix.setValueAt(coord.y, coord.x, this.selected);
             } else {
@@ -234,7 +234,7 @@ export class TileController implements angular.IComponentController {
                 this.pending = true;
                 break;
             case TileState.marked:
-                this.marked = this.checkForOverride(override, this.marked);
+                this.marked = true;
                 this.selected = false;
                 this.pending = false;
                 break;
