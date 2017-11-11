@@ -84,7 +84,7 @@ exports.upsertRating = function(req, res) {
 		}
 	}).spread(function(result, created) {
 		if (!created) {
-			Rating.update({
+			return Rating.update({
 				rating: rating.rating
 			}, {
 				where: {
