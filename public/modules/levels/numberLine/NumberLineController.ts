@@ -42,7 +42,7 @@ export class NumberLineController {
     private accountForZeros(lineContent: LineContent[]): LineContent[] {
         if (lineContent.length === 0) {
             return [{
-                cssClass: 'finishedGrouping',
+                finished: true,
                 text: 0
             }];
         } else {
@@ -105,7 +105,7 @@ export class NumberLineController {
     private getGroupings(currentGroup: TileGroup): LineContent[] {
         return Object.keys(currentGroup).map((value, index) => {
             return {
-                cssClass: this.cssClass,
+                finished: false,
                 text: currentGroup[value].length
             };
         });

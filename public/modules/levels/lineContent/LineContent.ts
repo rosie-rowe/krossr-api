@@ -1,4 +1,4 @@
 export class LineContent {
-    public cssClass: string;
+    public finished: boolean;
     public text: any; // number or string? we'll see
 }

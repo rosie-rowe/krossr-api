@@ -1,4 +1,4 @@
-<div ng-repeat="entry in numLineCtrl.getLineContent($index) track by $index" class="{{ entry.cssClass }}" ng-style="{
+<div ng-repeat="entry in numLineCtrl.getLineContent($index) track by $index" ng-click="entry.finished = !entry.finished" ng-class="{ 'finishedGrouping': entry.finished }" ng-style="{
 	'width': numLineCtrl.getWidth(),
 	'height': numLineCtrl.getHeight(),
 	'line-height': numLineCtrl.getHeight()
