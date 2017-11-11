@@ -1,3 +1,7 @@
+tile {
+    display: inline-block;
+}
+
 .marked {
     background-color: @tileColor;
     color: @markedColor;
@@ -5,6 +9,8 @@
 
     &:after {
         content: '✖';
+        display: block;
+        text-align: center;
     }
 }
 
