@@ -16,7 +16,7 @@ module.exports = {
         css: 'public/dist/application.min.css',
         js: [
 			'public/dist/krossr.bundle-*.js',
-            'public/dist/templates.js'
+            'public/dist/templates.bundle-*.js'
 		]
 	}
 };
