@@ -1,0 +1,5 @@
+Mode:
+
+<div class="mode" ng-class="{ 'selected': modeSelectorCtrl.selectedMode === mode.name }" ng-click="modeSelectorCtrl.selectMode(mode);" ng-repeat="mode in modeSelectorCtrl.modes">
+    {{ mode.name }}
+</div>
