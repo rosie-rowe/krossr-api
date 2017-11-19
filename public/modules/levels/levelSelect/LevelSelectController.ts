@@ -56,7 +56,7 @@ export class LevelSelectController implements angular.IComponentController {
             // Calculate the size for each level so we can display it to the screen & sort by size
             for (; i < len; i++ ) {
                 currentLevel = allLevels[i];
-                currentLevel.prettySize = this.Utils.prettySize(currentLevel.layout.length);
+                currentLevel.prettySize = this.Utils.prettySize(currentLevel.size);
             }
         }); 
     }
