@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 			},
 			clientLESS: {
                 files: watchFiles.clientLESS,
-                tasks: ['less'],
+                tasks: ['loadConfig', 'buildCSS'],
                 options: {
                     livereload: true,
                 }
@@ -184,7 +184,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'webpack:prod', 'html2js', 'less', 'cssmin']);
+	grunt.registerTask('buildCSS', ['less', 'cssmin']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'webpack:prod', 'html2js', 'buildCSS']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
