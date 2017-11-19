@@ -36,7 +36,7 @@ module.exports = function(sequelize, Sequelize) {
     {
         timestamps: true,
         hooks: {
-            beforeValidate: function(level, options) {
+            beforeValidate: function(level) {
                 level.encodeLayout();
             }
         },
@@ -52,7 +52,7 @@ module.exports = function(sequelize, Sequelize) {
              */
             encodeLayout: function() {
                 var converted = Array.prototype.concat.apply([], this.layout) // flatten
-                                               .map(function(value) { return value ? '1' : '0' })
+                                               .map(function(value) { return value ? '1' : '0'; })
                                                .join('');
                                                
                 this.layout = btoa(converted);
