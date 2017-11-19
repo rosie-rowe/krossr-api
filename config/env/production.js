@@ -13,7 +13,7 @@ module.exports = {
             css: [],
             js: ['public/dist/vendor.bundle-*.js']
         },
-        css: 'public/dist/application.min.css',
+        css: 'public/dist/application.bundle-*.min.css',
         js: [
 			'public/dist/krossr.bundle-*.js',
             'public/dist/templates.bundle-*.js'

@@ -92,7 +92,7 @@ module.exports = function(grunt) {
 		cssmin: {
 			combine: {
 				files: {
-					'public/dist/application-<%= hash =>.min.css': '<%= applicationCSSFiles %>'
+					'public/dist/application.bundle-<%= hash =>.min.css': '<%= applicationCSSFiles %>'
 				}
 			}
 		},
