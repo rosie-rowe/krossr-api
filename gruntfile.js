@@ -60,7 +60,7 @@ module.exports = function(grunt) {
                 files: watchFiles.clientLESS,
                 tasks: ['loadConfig', 'buildCSS'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
 			}
 		},
