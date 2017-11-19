@@ -4,6 +4,7 @@ import { EventService } from '../../core/eventService/EventService';
 import { GameOverService } from '../gameOver/GameOverService';
 import { ILevel } from "../level/Level";
 import { ShiftService } from '../shiftService/ShiftService';
+import { Point } from '../point/Point';
 import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileService } from '../tile/TileService';
 import { TileSizeService } from '../tileSize/TileSizeService';
@@ -107,7 +108,7 @@ export class TileController implements angular.IComponentController {
         })
     }
 
-    private clearPending(coords) {
+    private clearPending(coords: Point[]) {
         this.tileService.fillTiles(coords, true, TileState.empty, 'isPendingAndNotSelected');
     }
 
@@ -161,6 +162,7 @@ export class TileController implements angular.IComponentController {
             coordsToClear = oldCoords.filter(function(e) {
                 if (allPendingCoords.indexOfObject(e) === -1) return true;
             });
+            
             this.clearPending(coordsToClear);
         }
 
