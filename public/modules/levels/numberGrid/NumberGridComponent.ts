@@ -10,13 +10,7 @@ export class NumberGridComponent implements angular.IComponentOptions {
         gameMatrix: '<',
         goalMatrix: '<',
         orientation: '@',
-    }
+    };
 
     bindToController = true;
-
-    constructor(
-
-    ) {
-
-    }
 }
