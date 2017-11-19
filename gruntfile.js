@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 			},
 			clientViews: {
 				files: watchFiles.clientViews,
-                tasks: ['html2js'],
+                tasks: ['loadConfig', 'buildHTML'],
 				options: {
 					livereload: true,
 				}
@@ -92,7 +92,7 @@ module.exports = function(grunt) {
 		cssmin: {
 			combine: {
 				files: {
-					'public/dist/application.min.css': '<%= applicationCSSFiles %>'
+					'public/dist/application-<%= hash =>.min.css': '<%= applicationCSSFiles %>'
 				}
 			}
 		},
@@ -185,7 +185,9 @@ module.exports = function(grunt) {
 
 	// Build task(s).
 	grunt.registerTask('buildCSS', ['less', 'cssmin']);
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'webpack:prod', 'html2js', 'buildCSS']);
+	grunt.registerTask('buildHTML', ['html2js']);
+	grunt.registerTask('buildTypescript', ['webpack:prod']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'buildTypescript', 'buildHTML', 'buildCSS']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
