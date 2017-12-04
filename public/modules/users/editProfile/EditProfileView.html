@@ -1,5 +1,5 @@
 <popup-content>
-	<form name="userForm" data-ng-submit="editProfileCtrl.updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
+	<form name="userForm" data-ng-submit="editProfileCtrl.updateUserProfile(userForm.$valid)" class="signin" autocomplete="off">
 		<h2><label class="control-label" for="lastName">Change your Email Address</h2>
 		<div class="form-group">
 			<input type="email" id="email" name="email" data-ng-model="editProfileCtrl.Authentication.user.email" placeholder="Email">
@@ -13,7 +13,7 @@
 		</div>
 	</form>
 	<h2>Change your password</h2>
-	<form data-ng-submit="editProfileCtrl.changeUserPassword()" class="signin form-horizontal" autocomplete="off">
+	<form data-ng-submit="editProfileCtrl.changeUserPassword()" class="signin" autocomplete="off">
 		<div class="form-group">
 			<input type="password" id="currentPassword" name="currentPassword" data-ng-model="editProfileCtrl.passwordDetails.currentPassword" placeholder="Current Password">
 		</div>
