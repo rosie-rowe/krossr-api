@@ -128,33 +128,11 @@ ul {
 	visibility: hidden !important;
 }
 
-.header-container {
-	.BoxShadowHelper(1);
-
-	box-sizing: border-box;
-	background: @black;
-	font-family: inherit;
-	list-style-type: none;
-	overflow: hidden;
-	height: @navbarHeight;
-	z-index: 10;
-}
-
 .main-viewport {
 	float: left;
 	position: relative;
 	width: 100%;
 	height: 100%;
-}
-
-.navbar-header {
-	background-color: @selectedColor;
-
-	/* I have no idea where this margin is coming from
-		to need to be overidden, dev tools shows nothing */
-	margin: 0;
-	padding: 0 @inputMargin;
-	text-align: center;
 }
 
 nav {
@@ -188,10 +166,10 @@ nav {
 	}
 }
 
-.ng-invalid.ng-dirty{
+.ng-invalid.ng-dirty {
     border-color: @invalidColor;
 }
-.ng-valid.ng-dirty{
+.ng-valid.ng-dirty {
     border-color: @selectedColor;
 }
 
@@ -201,11 +179,6 @@ nav {
 	@media screen and (max-width: @mediumScreen) {
 		margin: 0 auto;
     }
-}
-
-.splash {
-	font-size: 10em;
-	font-family: @mainFont;
 }
 
 .standardMargin {
