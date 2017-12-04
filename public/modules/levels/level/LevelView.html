@@ -21,16 +21,16 @@
         </div>
 
         <div ng-if="levelCtrl.level.currentView === 'edit'">
-            <button ng-disabled="error" class="btn" type="button" ng-click="levelCtrl.confirmUpdate()">
-                <span ng-if="!error">Update</span>
-                <span ng-if="error" ng-bind-html="error"></span>
+            <button ng-disabled="levelCtrl.error" class="btn" type="button" ng-click="levelCtrl.confirmUpdate()">
+                <span ng-if="!levelCtrl.error">Update</span>
+                <span ng-if="levelCtrl.error" ng-bind-html="levelCtrl.error"></span>
             </button>
         </div>
 
         <div ng-if="levelCtrl.level.currentView === 'new'">
-            <button ng-disabled="error" class="btn btn-primary" ng-click="levelCtrl.submitCreate()">
-                <span ng-if="!error">Submit</span>
-                <span ng-if="error" data-ng-bind="error"></span>
+            <button ng-disabled="levelCtrl.error" class="btn btn-primary" ng-click="levelCtrl.submitCreate()">
+                <span ng-if="!levelCtrl.error">Submit</span>
+                <span ng-if="levelCtrl.error" data-ng-bind="levelCtrl.error"></span>
             </button>
         </div>
 
