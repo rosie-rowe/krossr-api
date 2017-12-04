@@ -11,10 +11,8 @@ export class ShellComponent implements angular.IComponentOptions {
 
     template = `
       <krossr-header data-level="level"></krossr-header>
-      <section id="main-section" class="content">
-        <section resize class="playble-area container valign-outer">
-          <ng-transclude></ng-transclude>
-        </section>
+      <section id="main-section" class="content" resize>
+        <ng-transclude></ng-transclude>
       </section> 
     `;
 
