@@ -14,7 +14,7 @@
             <!-- These guys all get their own divs so they don't have the label and input on
                   different lines -->
             <div class="form-group">
-                <label class="control-label">Size</label>
+                <label>Size</label>
                 <select ng-model="levelSelectCtrl.sizeRestriction" ng-change="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
                     <option value="" selected>All</option>
                     <option value="5">5x5</option>
@@ -24,12 +24,12 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Search</label>
+                <label>Search</label>
                 <input ng-model="levelSelectCtrl.searchText" ng-model-options="{ debounce: 250 }" ng-change="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
             </div>
 
             <div class="form-group">
-                <label class="control-label">Sort by</label>
+                <label>Sort by</label>
                 <select ng-model="levelSelectCtrl.sortBy" ng-change="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
                     <option value='"createdAt"'>Created Date</option>
                     <option value='name'>Name</option>
@@ -38,7 +38,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Sort direction</label>
+                <label>Sort direction</label>
                 <select ng-model="levelSelectCtrl.sortDirection" ng-change="levelSelectCtrl.find(levelSelectCtrl.currentPage)">
                     <option value="">Asc</option>
                     <option value="DESC">Desc</option>
