@@ -4,11 +4,11 @@
 		<form data-ng-submit="signInCtrl.signin()" class="signin form-horizontal" autocomplete="off">
 			<div class="form-group">
 				<label class="control-label" for="username">Username</label>
-				<input type="text" id="username" name="username" class="form-control" data-ng-model="signInCtrl.credentials.username" placeholder="Username">
+				<input type="text" id="username" name="username" data-ng-model="signInCtrl.credentials.username" placeholder="Username">
 			</div>
 			<div class="form-group">
 				<label class="control-label" for="password">Password</label>
-				<input type="password" id="password" name="password" class="form-control" data-ng-model="signInCtrl.credentials.password" placeholder="Password">
+				<input type="password" id="password" name="password" data-ng-model="signInCtrl.credentials.password" placeholder="Password">
 			</div>
 			<div class="form-group">
 				<button ng-disabled="signInCtrl.error" type="submit" class="btn btn-primary">

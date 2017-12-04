@@ -2,7 +2,7 @@
 	<form name="userForm" data-ng-submit="editProfileCtrl.updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
 		<h2><label class="control-label" for="lastName">Change your Email Address</h2>
 		<div class="form-group">
-			<input type="email" id="email" name="email" class="form-control" data-ng-model="editProfileCtrl.Authentication.user.email" placeholder="Email">
+			<input type="email" id="email" name="email" data-ng-model="editProfileCtrl.Authentication.user.email" placeholder="Email">
 		</div>
 		<div class="form-group">
 			<button ng-disabled="editProfileCtrl.error.username || editProfileCtrl.success.username" type="submit" class="btn btn-large btn-primary">
@@ -15,13 +15,13 @@
 	<h2>Change your password</h2>
 	<form data-ng-submit="editProfileCtrl.changeUserPassword()" class="signin form-horizontal" autocomplete="off">
 		<div class="form-group">
-			<input type="password" id="currentPassword" name="currentPassword" class="form-control" data-ng-model="editProfileCtrl.passwordDetails.currentPassword" placeholder="Current Password">
+			<input type="password" id="currentPassword" name="currentPassword" data-ng-model="editProfileCtrl.passwordDetails.currentPassword" placeholder="Current Password">
 		</div>
 		<div class="form-group">
-			<input type="password" id="newPassword" minlength="{{ editProfileCtrl.minPasswordLength }}" name="newPassword" class="form-control" data-ng-model="editProfileCtrl.passwordDetails.newPassword" placeholder="New Password">
+			<input type="password" id="newPassword" minlength="{{ editProfileCtrl.minPasswordLength }}" name="newPassword" data-ng-model="editProfileCtrl.passwordDetails.newPassword" placeholder="New Password">
 		</div>
 		<div class="form-group">
-			<input type="password" id="verifyPassword" minlength="{{ editProfileCtrl.minPasswordLength }}" name="verifyPassword" class="form-control" data-ng-model="editProfileCtrl.passwordDetails.verifyPassword" placeholder="Verify Password">
+			<input type="password" id="verifyPassword" minlength="{{ editProfileCtrl.minPasswordLength }}" name="verifyPassword" data-ng-model="editProfileCtrl.passwordDetails.verifyPassword" placeholder="Verify Password">
 		</div>
 		<div class="form-group">
 			<button ng-disabled="editProfileCtrl.error.password || editProfileCtrl.success.password" type="submit" class="btn">
