@@ -36,7 +36,6 @@ describe('Level Model Unit Tests:', function() {
 			level = Level.build({
 				name: 'Level Name',
 				user: user,
-				timeLimit: 3000,
 				size: 25,
 				layout: [[true, true, true, true, true],
 						 [false, true, true, true, false],
