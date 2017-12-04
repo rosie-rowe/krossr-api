@@ -2,12 +2,12 @@
     <div class="form-group form-horizontal restrict-width" ng-if="['edit', 'new'].indexOf(levelCtrl.level.currentView) > -1">
         <h2>{{ levelCtrl.level.currentView }} level</h2>
 
-        <div class="controls">
+        <div class="form-group">
             <label class="control-label" for="name">Name</label>
             <input type="text" data-ng-model="levelCtrl.level.name" id="name" class="form-control" placeholder="Name" required>
         </div>
 
-        <div class="controls" ng-if="levelCtrl.level.currentView === 'new'">
+        <div class="form-group" ng-if="levelCtrl.level.currentView === 'new'">
             <label class="control-label" for="size">Size</label>
             <select convert-to-number ng-model="levelCtrl.options.size" ng-change="levelCtrl.createNewLevel();">
                 <option value="25">5x5</option>

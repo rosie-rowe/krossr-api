@@ -66,14 +66,17 @@ ul {
     color: @white;
     cursor: pointer;
     font-family: inherit;
-    height: @inputHeight;
-   	margin: @inputMargin 0;
+	height: @inputHeight;
     padding: .4em;
     width: 100%;
 	transition: all 1s;
 	
 	.center;
 	.restrict-width;
+
+	button& {
+		.standardMargin;
+	}
 
     &:hover {
         background-color: @selectedColor;
@@ -166,13 +169,15 @@ ul {
 }
 
 .form-group {
+	.standardMargin;
+
 	input {
 		background-color: @secondary;
 		box-sizing: border-box;
 		border: 1px solid @secondary;
 		color: @white;
 		font-family: @mainFont !important;
-		margin: @inputMargin 0;
+		.standardMargin;
 		width: 100%;
 		height: @inputHeight;
 		padding: @inputMargin;
@@ -183,7 +188,7 @@ ul {
 		border: 1px solid @secondary;
 		color: @white;
 		height: @inputHeight;
-		margin: @inputMargin 0;
+		.standardMargin;
 		line-height: 2;
 		padding: 0 @inputMargin;
 		width: 100%;
@@ -191,7 +196,6 @@ ul {
 
 	.details {
 		font-size: 0.7em;
-		margin-bottom: @inputMargin * 3;
 	}
 }
 
@@ -357,6 +361,10 @@ ul {
 .splash {
 	font-size: 10em;
 	font-family: @mainFont;
+}
+
+.standardMargin {
+	margin-top: @inputMargin;
 }
 
 .undecorated-link {
