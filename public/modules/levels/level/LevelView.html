@@ -28,7 +28,7 @@
         </div>
 
         <div ng-if="levelCtrl.level.currentView === 'new'">
-            <button ng-disabled="levelCtrl.error" class="btn btn-primary" ng-click="levelCtrl.submitCreate()">
+            <button ng-disabled="levelCtrl.error" class="btn" ng-click="levelCtrl.submitCreate()">
                 <span ng-if="!levelCtrl.error">Submit</span>
                 <span ng-if="levelCtrl.error" data-ng-bind="levelCtrl.error"></span>
             </button>

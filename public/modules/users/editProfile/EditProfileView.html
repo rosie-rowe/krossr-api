@@ -5,7 +5,7 @@
 			<input type="email" id="email" name="email" data-ng-model="editProfileCtrl.Authentication.user.email" placeholder="Email">
 		</div>
 		<div class="form-group">
-			<button ng-disabled="editProfileCtrl.error.username || editProfileCtrl.success.username" type="submit" class="btn btn-primary">
+			<button ng-disabled="editProfileCtrl.error.username || editProfileCtrl.success.username" type="submit" class="btn">
 				<span ng-if="!editProfileCtrl.success.username">Save Email Address</span>
 				<span ng-if="editProfileCtrl.success.username">Email Saved</span>
 				<span ng-if="editProfileCtrl.error.username" data-ng-bind="editProfileCtrl.error.username"></span>
