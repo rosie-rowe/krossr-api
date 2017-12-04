@@ -51,6 +51,15 @@ module.exports = function(sequelize, Sequelize) {
              * to convert a base64 encoded string into a boolean array
              */
             encodeLayout: function() {
+                /*
+                 * For some reason, this gets called twice when updating a level.
+                 * If the layout has already been encoded, it will throw an error if it is attempted to be re-encoded.
+                 * Therefore, just return
+                 */
+                if (!Array.isArray(this.layout)) {
+                    return;
+                }
+
                 var converted = Array.prototype.concat.apply([], this.layout) // flatten
                                                .map(function(value) { return value ? '1' : '0'; })
                                                .join('');
