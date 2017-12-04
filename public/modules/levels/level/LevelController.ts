@@ -75,10 +75,6 @@ export class LevelController implements angular.IComponentController {
     }
 
     $postLink() {
-        this.eventService.subscribe(this.$scope, 'level.clearAll', () => {
-            this.clearAll();
-        });
-
         this.eventService.subscribe(this.$scope, 'tileSizeChanged', (e, args) => {
             let newSize = Math.floor(args);
             this.margin = newSize / 2;
