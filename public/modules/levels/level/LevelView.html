@@ -17,18 +17,18 @@
         </div>
 
         <div>
-            <button class="btn" type="button" ng-click="levelCtrl.confirmClear()">Clear</button>
+            <button type="button" ng-click="levelCtrl.confirmClear()">Clear</button>
         </div>
 
         <div ng-if="levelCtrl.level.currentView === 'edit'">
-            <button ng-disabled="levelCtrl.error" class="btn" type="button" ng-click="levelCtrl.confirmUpdate()">
+            <button ng-disabled="levelCtrl.error" type="button" ng-click="levelCtrl.confirmUpdate()">
                 <span ng-if="!levelCtrl.error">Update</span>
                 <span ng-if="levelCtrl.error" ng-bind-html="levelCtrl.error"></span>
             </button>
         </div>
 
         <div ng-if="levelCtrl.level.currentView === 'new'">
-            <button ng-disabled="levelCtrl.error" class="btn" ng-click="levelCtrl.submitCreate()">
+            <button ng-disabled="levelCtrl.error" ng-click="levelCtrl.submitCreate()">
                 <span ng-if="!levelCtrl.error">Submit</span>
                 <span ng-if="levelCtrl.error" data-ng-bind="levelCtrl.error"></span>
             </button>
@@ -36,7 +36,7 @@
 
         <div data-ng-if="levelCtrl.Authentication.user.id == levelCtrl.level.userId && levelCtrl.level.currentView === 'edit'">
             <a data-ng-click="levelCtrl.confirmRemove();">
-                <button class="btn">  
+                <button>  
                     Delete Level
                 </button>
             </a>

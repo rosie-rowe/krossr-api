@@ -5,7 +5,7 @@
 			<input type="email" id="email" name="email" data-ng-model="editProfileCtrl.Authentication.user.email" placeholder="Email">
 		</div>
 		<div class="form-group">
-			<button ng-disabled="editProfileCtrl.error.username || editProfileCtrl.success.username" type="submit" class="btn">
+			<button ng-disabled="editProfileCtrl.error.username || editProfileCtrl.success.username" type="submit">
 				<span ng-if="!editProfileCtrl.success.username">Save Email Address</span>
 				<span ng-if="editProfileCtrl.success.username">Email Saved</span>
 				<span ng-if="editProfileCtrl.error.username" data-ng-bind="editProfileCtrl.error.username"></span>
@@ -24,12 +24,12 @@
 			<input type="password" id="verifyPassword" minlength="{{ editProfileCtrl.minPasswordLength }}" name="verifyPassword" data-ng-model="editProfileCtrl.passwordDetails.verifyPassword" placeholder="Verify Password">
 		</div>
 		<div class="form-group">
-			<button ng-disabled="editProfileCtrl.error.password || editProfileCtrl.success.password" type="submit" class="btn">
+			<button ng-disabled="editProfileCtrl.error.password || editProfileCtrl.success.password" type="submit">
 				<span ng-if="!editProfileCtrl.error.password && !editProfileCtrl.success.password">Save Password</span>
 				<span ng-if="!editProfileCtrl.error.password && editProfileCtrl.success.password">Password Saved</span>
 				<span ng-if="editProfileCtrl.error.password" data-ng-bind="editProfileCtrl.error.password"></span>
 			</button>
 		</div>
 	</form>
-	<button ng-click="editProfileCtrl.signout();" class="btn">Sign Out</button>
+	<button ng-click="editProfileCtrl.signout();">Sign Out</button>
 </popup-content>
