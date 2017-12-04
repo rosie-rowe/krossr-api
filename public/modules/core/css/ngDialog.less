@@ -50,13 +50,13 @@
   color: @white;
   position: absolute;
   top: 0;
-  right: 2%;
+  right: 0;
   font-size: 2em;
 }
 
 .ngdialog-overlay {
   position: fixed;
-  background: rgba(0, 0, 0, 1);
+  background: transparent;
   top: 0;
   right: 0;
   bottom: 0;
@@ -73,19 +73,18 @@
 .ngdialog-content {
   .Animation(ngdialog-fadein 0.1s);
   .BoxShadowHelper(5);
-  .restrict-width;
   
   background: @primary;
-  -webkit-backface-visibility: hidden;
-  max-height: 95%;
+  height: 100%;
   width: auto;
   margin: 0 auto;
   padding: @inputMargin * 2;
   position: absolute;
-  top: 1em;
+  top: 0;
   left: 0;
   right: 0;
   overflow: hidden;
+  -webkit-backface-visibility: hidden;
 
   @media screen and (max-width: @mediumScreen) {
     height: 95%;

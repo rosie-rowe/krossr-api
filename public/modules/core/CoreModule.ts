@@ -10,6 +10,7 @@ import HeaderModule from './header/HeaderModule';
 import HelpModule from './help/HelpModule';
 import LoadingAnimationModule from './loadingAnimation/LoadingAnimationModule';
 import PaginationModule from'./pagination/PaginationModule';
+import PopupContentModule from './popupContent/PopupContentModule';
 import ResizeModule from './resize/ResizeModule';
 import TouchModule from './touch/TouchModule';
 
@@ -25,6 +26,7 @@ export default angular
         HelpModule,
         LoadingAnimationModule,
         PaginationModule,
+        PopupContentModule,
         ResizeModule,
         TouchModule
     ])
