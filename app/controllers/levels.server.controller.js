@@ -51,11 +51,10 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var level = req.level;
 
-	level.updateAttributes({
+	return level.updateAttributes({
 		name: req.body.name,
 		layout: req.body.layout,
-		size: req.body.size,
-		timeLimit: req.body.timeLimit
+		size: req.body.size
 	}).then(function(l) {
 		return res.jsonp(l);
 	}).catch(function(err) {

@@ -31,6 +31,7 @@ exports.getErrorMessage = function(err) {
 				break;
 			default:
 				message = 'Something went wrong';
+				break;
 		}
 	} else {
 		for (var errName in err.errors) {
