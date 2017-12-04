@@ -1,4 +1,4 @@
-<section class="hero row">
+<popup-content>
 	<h1>Sign In</h1>
 	<div class="sign-on-form">
 		<form data-ng-submit="signInCtrl.signin()" class="signin form-horizontal" autocomplete="off">
@@ -10,7 +10,7 @@
 				<label class="control-label" for="password">Password</label>
 				<input type="password" id="password" name="password" class="form-control" data-ng-model="signInCtrl.credentials.password" placeholder="Password">
 			</div>
-			<div class="text-center form-group">
+			<div class="form-group">
 				<button ng-disabled="signInCtrl.error" type="submit" class="btn btn-primary">
 					<span ng-if="!signInCtrl.error">Sign in</span>
 					<span ng-if="signInCtrl.error" ng-bind="::signInCtrl.error"></span>
@@ -21,4 +21,4 @@
 			</div>
 		</form>
 	</div>
-</section>
+</popup-content>

@@ -20,7 +20,7 @@
 				<div class="details">Your password must be at least 10 characters. Spaces allowed, no symbols required.</div>
 			</div>
 
-			<div class="text-center">
+			<div class="form-group">
                 <button ng-disabled="signUpCtrl.error" class="btn" type="button" ng-click="signUpCtrl.signup()">
                     <span ng-if="!signUpCtrl.error">Sign Up</span>
                     <span ng-if="signUpCtrl.error" ng-bind-html="signUpCtrl.error"></span>

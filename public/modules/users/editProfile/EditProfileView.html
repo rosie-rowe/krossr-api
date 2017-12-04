@@ -4,7 +4,7 @@
 		<div class="form-group">
 			<input type="email" id="email" name="email" class="form-control" data-ng-model="editProfileCtrl.Authentication.user.email" placeholder="Email">
 		</div>
-		<div class="text-center form-group">
+		<div class="form-group">
 			<button ng-disabled="editProfileCtrl.error.username || editProfileCtrl.success.username" type="submit" class="btn btn-large btn-primary">
 				<span ng-if="!editProfileCtrl.success.username">Save Email Address</span>
 				<span ng-if="editProfileCtrl.success.username">Email Saved</span>
@@ -12,7 +12,7 @@
 			</button>
 		</div>
 	</form>
-	<h2 class="col-md-12 text-center">Change your password</h2>
+	<h2>Change your password</h2>
 	<form data-ng-submit="editProfileCtrl.changeUserPassword()" class="signin form-horizontal" autocomplete="off">
 		<div class="form-group">
 			<input type="password" id="currentPassword" name="currentPassword" class="form-control" data-ng-model="editProfileCtrl.passwordDetails.currentPassword" placeholder="Current Password">
@@ -23,7 +23,7 @@
 		<div class="form-group">
 			<input type="password" id="verifyPassword" minlength="{{ editProfileCtrl.minPasswordLength }}" name="verifyPassword" class="form-control" data-ng-model="editProfileCtrl.passwordDetails.verifyPassword" placeholder="Verify Password">
 		</div>
-		<div class="text-center form-group">
+		<div class="form-group">
 			<button ng-disabled="editProfileCtrl.error.password || editProfileCtrl.success.password" type="submit" class="btn">
 				<span ng-if="!editProfileCtrl.error.password && !editProfileCtrl.success.password">Save Password</span>
 				<span ng-if="!editProfileCtrl.error.password && editProfileCtrl.success.password">Password Saved</span>
