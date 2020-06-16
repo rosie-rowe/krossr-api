@@ -1,11 +1,14 @@
-import { ShiftService } from '../../../ng-app/Shift/ShiftService';
+import { ShiftService } from '../Shift/ShiftService';
+import { Component, OnInit } from '@angular/core';
 
-export class ModeSelectorController implements angular.IComponentController {
-    static $name = 'ModeSelectorController';
+@Component({
+    selector: 'mode-selector',
+    styles: [require('./ModeSelectorStyles.less')],
+    template: require('./ModeSelectorView.html')
 
-    static $inject = [
-        'shiftService'
-    ];
+})
+export class ModeSelectorComponent implements OnInit {
+    static $name = 'modeSelector';
 
     constructor(
         private shiftService: ShiftService
@@ -16,7 +19,7 @@ export class ModeSelectorController implements angular.IComponentController {
     private modes: IMode[]; 
     private selectedMode: string;
 
-    $onInit() {
+    ngOnInit() {
         this.modes = [
             {
                 name: 'Select',

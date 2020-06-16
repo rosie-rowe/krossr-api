@@ -3,7 +3,7 @@ import * as angular from 'angular';
 import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 import { ILevel } from "../level/Level";
-import { GameMatrix } from '../gameMatrix/GameMatrix';
+import { GameMatrix } from '../../../ng-app/GameMatrix/GameMatrix';
 import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
 import { LevelService } from '../../../ng-app/Level/LevelService';
 import { ShiftService } from '../../../ng-app/Shift/ShiftService';

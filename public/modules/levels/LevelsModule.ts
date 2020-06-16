@@ -3,7 +3,6 @@ import * as angular from 'angular';
 import GameModule from './game/GameModule';
 import LevelModule from './level/LevelModule';
 import LevelSelectModule from './levelSelect/LevelSelectModule';
-import ModeSelectorModule from './modeSelector/ModeSelectorModule';
 import ShellModule from './shell/ShellModule';
 import TileModule from './tile/TileModule';
 
@@ -14,7 +13,6 @@ export default angular
         GameModule,
         LevelModule,
         LevelSelectModule,
-        ModeSelectorModule,
         ShellModule,
         TileModule
     ])
