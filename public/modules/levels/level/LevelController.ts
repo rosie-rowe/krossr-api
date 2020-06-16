@@ -2,7 +2,6 @@ import * as angular from 'angular';
 
 import { AuthenticationService } from '../../users/authentication/AuthenticationService'
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
-import { EventService } from '../../core/eventService/EventService';
 import { ILevel } from "../level/Level";
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameSizeService } from '../gameSize/GameSizeService';
@@ -23,7 +22,6 @@ export class LevelController implements angular.IComponentController {
         '$timeout',
         'Authentication',
         'componentDialogService',
-        'eventService',
         'gameSizeService',
         'levelService',
         'Levels',
@@ -47,7 +45,6 @@ export class LevelController implements angular.IComponentController {
         private $timeout: angular.ITimeoutService,
         private Authentication: AuthenticationService,
         private componentDialogService: ComponentDialogService,
-        private eventService: EventService,
         private gameSizeService: GameSizeService,
         private levelService: LevelService,
         private Levels,

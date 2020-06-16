@@ -1,5 +1,4 @@
 import { DragBoxService } from '../../../ng-app/DragBox/DragBoxService';
-import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameOverService } from '../gameOver/GameOverService';
 import { GameSizeService } from '../gameSize/GameSizeService';
@@ -7,6 +6,7 @@ import { ILevel } from "../level/Level";
 import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 import { TileState } from '../tile/TileState';
 import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
+import { GameSizeEventService } from '../../../ng-app/GameSize/GameSizeEventService';
 
 export class GameController implements angular.IComponentController {
     static $controllerAs = 'gameCtrl';
@@ -15,8 +15,8 @@ export class GameController implements angular.IComponentController {
     static $inject = [
         '$element',
         '$scope',
-        'eventService',
         'gameOverService',
+        GameSizeEventService.$name,
         'gameSizeService',
         TileSizeEventService.$name,
         'tileSizeService',
@@ -26,8 +26,8 @@ export class GameController implements angular.IComponentController {
     constructor(
         private $element: angular.IAugmentedJQuery,
         private $scope: angular.IScope,
-        private eventService: EventService,
         private gameOverService: GameOverService,
+        private gameSizeEventService: GameSizeEventService,
         private gameSizeService: GameSizeService,
         private tileSizeEventService: TileSizeEventService,
         private tileSizeService: TileSizeService,
@@ -78,7 +78,7 @@ export class GameController implements angular.IComponentController {
             this.mouseUpEvent(e);
         });
         
-        this.eventService.subscribe(this.$scope, 'gameSizeChanged', () => {
+        this.gameSizeEventService.gameSizeChanged.subscribe(() => {
             this.updateGameSize();
         });
 

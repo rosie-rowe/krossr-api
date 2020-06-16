@@ -12,6 +12,7 @@ import { ShiftService } from './Shift/ShiftService';
 import { LevelService } from './Level/LevelService';
 import { TileSizeEventService } from './TileSize/TileSizeEventService';
 import { TileSizeService } from './TileSize/TileSizeService';
+import { GameSizeEventService } from './GameSize/GameSizeEventService';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ export class AppModule implements DoBootstrap {
 
         this.downgradeServices([
             DragBoxService,
+            GameSizeEventService,
             LevelService,
             SideLengthService,
             ShiftService,

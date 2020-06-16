@@ -1,5 +1,6 @@
 import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
+import { GameSizeEventService } from '../../../ng-app/GameSize/GameSizeEventService';
 
 export class GameSizeService {
     static $name = 'gameSizeService';
@@ -7,6 +8,7 @@ export class GameSizeService {
     static $inject = [
         '$rootScope',
         '$timeout',
+        GameSizeEventService.$name,
         'sideLengthService',
         'tileSizeService'
     ];
@@ -19,6 +21,7 @@ export class GameSizeService {
     constructor(
         private $rootScope: angular.IRootScopeService,
         private $timeout: angular.ITimeoutService,
+        private gameSizeEventService: GameSizeEventService,
         private sideLengthService: SideLengthService,
         private tileSizeService: TileSizeService
     ) {
@@ -70,7 +73,7 @@ export class GameSizeService {
         this.gameHeight = finalHeight + 'px';
 
         this.$timeout(() => {
-            this.$rootScope.$broadcast('gameSizeChanged', { width: this.gameWidth, height: this.gameHeight });
+            this.gameSizeEventService.gameSizeChanged.emit();
         });
         
         this.tileSizeService.setTileSize(finalWidth, widthInTiles);
