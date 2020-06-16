@@ -1,5 +1,5 @@
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
-import { DragBoxService } from '../dragBox/DragBoxService';
+import { DragBoxService } from '../../../ng-app/DragBox/DragBoxService';
 import { EventService } from '../../core/eventService/EventService';
 import { GameOverService } from '../gameOver/GameOverService';
 import { ILevel } from "../level/Level";

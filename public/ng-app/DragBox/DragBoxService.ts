@@ -1,12 +1,12 @@
-import { TileService } from '../../../ng-app/Tile/TileService';
-import { Point } from '../point/Point';
+import { TileService } from '../Tile/TileService';
+import { Point } from '../../modules/levels/point/Point';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+    providedIn: 'root'
+})
 export class DragBoxService {
     static $name = 'dragBoxService';
-
-    static $inject = [
-        'tileService'
-    ];
 
     private _initState: boolean = true;
 

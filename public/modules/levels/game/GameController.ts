@@ -1,4 +1,4 @@
-import { DragBoxService } from '../dragBox/DragBoxService';
+import { DragBoxService } from '../../../ng-app/DragBox/DragBoxService';
 import { EventService } from '../../core/eventService/EventService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameOverService } from '../gameOver/GameOverService';

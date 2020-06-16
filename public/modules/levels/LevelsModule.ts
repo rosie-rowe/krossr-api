@@ -1,6 +1,5 @@
 import * as angular from 'angular';
 
-import DragBoxModule from './dragBox/DragBoxModule';
 import GameModule from './game/GameModule';
 import GameOverModule from './gameOver/GameOverModule';
 import GameSizeModule from './gameSize/GameSizeModule';
@@ -20,7 +19,6 @@ import { LevelsRoutes } from './config/RouteModule';
 
 export default angular
     .module('levels', [
-        DragBoxModule,
         GameModule,
         GameOverModule,
         GameSizeModule,
