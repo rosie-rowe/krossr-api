@@ -6,7 +6,7 @@ import { ILevel } from "../level/Level";
 import { ShiftService } from '../shiftService/ShiftService';
 import { Point } from '../point/Point';
 import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
-import { TileService } from '../tile/TileService';
+import { TileService } from '../../../ng-app/Tile/TileService';
 import { TileSizeService } from '../tileSize/TileSizeService';
 import { TileState } from './TileState';
 import { TouchService } from '../../../ng-app/Touch/TouchService';

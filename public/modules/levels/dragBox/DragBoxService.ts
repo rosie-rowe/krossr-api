@@ -1,4 +1,4 @@
-import { TileService } from '../tile/TileService';
+import { TileService } from '../../../ng-app/Tile/TileService';
 import { Point } from '../point/Point';
 
 export class DragBoxService {

@@ -1,18 +1,18 @@
-import { Point } from '../point/Point';
-import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
-import { TileState } from '../tile/TileState';
+import { Point } from '../../modules/levels/point/Point';
+import { SideLengthService } from '../SideLength/SideLengthService';
+import { TileState } from '../../modules/levels/tile/TileState';
+import { Injectable } from '@angular/core';
 
 /**
  * Keeps a cache of the tiles on the screen for faster access (smooth animation for dragging & selecting),
  * as well as methods for accessing it
  */
 
+@Injectable({
+    providedIn: 'root'
+})
 export class TileService {
     static $name = 'tileService';
-
-    static $inject = [
-        'sideLengthService'
-    ];
 
     private tileIndex: any[] = [];
 
