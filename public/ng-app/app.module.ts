@@ -24,6 +24,7 @@ import { GameOverService } from './GameOver/GameOverService';
 import { GameOverComponent } from './GameOver/GameOverComponent';
 import { NumberLineComponent } from './NumberLine/NumberLineComponent';
 import { NumberGridComponent } from './NumberGrid/NumberGridComponent';
+import { StarRatingComponent } from './StarRating/StarRatingComponent';
 
 @NgModule({
     imports: [
@@ -35,12 +36,14 @@ import { NumberGridComponent } from './NumberGrid/NumberGridComponent';
     declarations: [
         GameOverComponent,
         NumberGridComponent,
-        NumberLineComponent
+        NumberLineComponent,
+        StarRatingComponent
     ],
     entryComponents: [
         GameOverComponent,
         NumberGridComponent,
-        NumberLineComponent
+        NumberLineComponent,
+        StarRatingComponent
     ],
     providers: [
         { provide: 'window', useValue: window }
@@ -56,7 +59,8 @@ export class AppModule implements DoBootstrap {
 
         this.downgradeComponents([
             NumberGridComponent,
-            NumberLineComponent
+            NumberLineComponent,
+            StarRatingComponent
         ]);
 
         this.downgradeServices([

@@ -5,7 +5,6 @@ import LevelModule from './level/LevelModule';
 import LevelSelectModule from './levelSelect/LevelSelectModule';
 import ModeSelectorModule from './modeSelector/ModeSelectorModule';
 import ShellModule from './shell/ShellModule';
-import StarRatingModule from './starRating/StarRatingModule';
 import TileModule from './tile/TileModule';
 
 import { LevelsRoutes } from './config/RouteModule';
@@ -17,7 +16,6 @@ export default angular
         LevelSelectModule,
         ModeSelectorModule,
         ShellModule,
-        StarRatingModule,
         TileModule
     ])
     .config(['$stateProvider', ($stateProvider) => LevelsRoutes.route($stateProvider)])

@@ -1,4 +1,4 @@
-angular.module('templates-main', ['modules/core/confirmation/ConfirmationView.html', 'modules/core/header/HeaderView.html', 'modules/core/help/HelpView.html', 'modules/core/loadingAnimation/LoadingAnimationView.html', 'modules/core/pagination/PaginationView.html', 'modules/core/popupContent/PopupContentView.html', 'modules/core/views/index.client.view.html', 'modules/levels/game/GameView.html', 'modules/levels/level/index.html', 'modules/levels/level/LevelView.html', 'modules/levels/levelSelect/LevelSelectView.html', 'modules/levels/modeSelector/ModeSelectorView.html', 'modules/levels/starRating/StarRatingView.html', 'modules/levels/tile/TileView.html', 'modules/users/editProfile/EditProfileView.html', 'modules/users/forgotPassword/ForgotPasswordView.html', 'modules/users/resetPassword/ResetPasswordView.html', 'modules/users/signIn/SignInView.html', 'modules/users/signUp/SignUpView.html']);
+angular.module('templates-main', ['modules/core/confirmation/ConfirmationView.html', 'modules/core/header/HeaderView.html', 'modules/core/help/HelpView.html', 'modules/core/loadingAnimation/LoadingAnimationView.html', 'modules/core/pagination/PaginationView.html', 'modules/core/popupContent/PopupContentView.html', 'modules/core/views/index.client.view.html', 'modules/levels/game/GameView.html', 'modules/levels/level/index.html', 'modules/levels/level/LevelView.html', 'modules/levels/levelSelect/LevelSelectView.html', 'modules/levels/modeSelector/ModeSelectorView.html', 'modules/levels/tile/TileView.html', 'modules/users/editProfile/EditProfileView.html', 'modules/users/forgotPassword/ForgotPasswordView.html', 'modules/users/resetPassword/ResetPasswordView.html', 'modules/users/signIn/SignInView.html', 'modules/users/signUp/SignUpView.html']);
 
 angular.module("modules/core/confirmation/ConfirmationView.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("modules/core/confirmation/ConfirmationView.html",
@@ -165,7 +165,7 @@ angular.module("modules/levels/level/LevelView.html", []).run(["$templateCache",
     "    </div>\n" +
     "\n" +
     "    <div class=\"rateLevel\" ng-if=\"levelCtrl.Authentication.user && levelCtrl.level && levelCtrl.level.currentView === 'view'\">\n" +
-    "        Rate: <star-rating ng-model=\"levelCtrl.level.yourRating\" max=\"5\" on-rating-selected=\"levelCtrl.rate()\"></star-rating>\n" +
+    "        Rate: <star-rating [rating]=\"levelCtrl.level.yourRating\" max=\"5\" (on-rating-selected)=\"levelCtrl.rate($event)\"></star-rating>\n" +
     "    </div>\n" +
     "\n" +
     "    <mode-selector ng-if=\"levelCtrl.level && levelCtrl.level.currentView === 'view'\"></mode-selector>\n" +
@@ -294,15 +294,6 @@ angular.module("modules/levels/modeSelector/ModeSelectorView.html", []).run(["$t
     "<div class=\"mode\" ng-class=\"{ 'selected': modeSelectorCtrl.selectedMode === mode.name }\" ng-click=\"modeSelectorCtrl.selectMode(mode);\" ng-repeat=\"mode in modeSelectorCtrl.modes\">\n" +
     "    {{ mode.name }}\n" +
     "</div>");
-}]);
-
-angular.module("modules/levels/starRating/StarRatingView.html", []).run(["$templateCache", function ($templateCache) {
-  $templateCache.put("modules/levels/starRating/StarRatingView.html",
-    "<ul class='rating' ng-class='{readonly: starRatingCtrl.readonly}'>\n" +
-    "    <li ng-repeat='star in starRatingCtrl.stars' ng-class='star' ng-click='starRatingCtrl.toggle($index)'>\n" +
-    "        <i class='fa fa-star'></i>\n" +
-    "    </li>\n" +
-    "</ul>");
 }]);
 
 angular.module("modules/levels/tile/TileView.html", []).run(["$templateCache", function ($templateCache) {

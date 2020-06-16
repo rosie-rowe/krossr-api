@@ -44,7 +44,7 @@
     </div>
 
     <div class="rateLevel" ng-if="levelCtrl.Authentication.user && levelCtrl.level && levelCtrl.level.currentView === 'view'">
-        Rate: <star-rating ng-model="levelCtrl.level.yourRating" max="5" on-rating-selected="levelCtrl.rate()"></star-rating>
+        Rate: <star-rating [rating]="levelCtrl.level.yourRating" max="5" (on-rating-selected)="levelCtrl.rate($event)"></star-rating>
     </div>
 
     <mode-selector ng-if="levelCtrl.level && levelCtrl.level.currentView === 'view'"></mode-selector>

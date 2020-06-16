@@ -256,12 +256,12 @@ export class LevelController implements angular.IComponentController {
     }
     
     /* Doing this old school until I figure out a better way */
-    rate() {
+    rate(rating) {
         this.$timeout(() => {
             var url = '/levels/' + this.level.id + '/ratings';
 
             var post_data = {
-                rating: this.level.yourRating
+                rating: rating
             };
 
             this.$http.post(url, post_data).then(function() {
