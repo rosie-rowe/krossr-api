@@ -23,8 +23,8 @@ module.exports = {
 			'public/dist/modules.bundle-*.css'
 		],
 		js: [
-			'public/dist/krossr.bundle-*.js',
-            'public/dist/templates.bundle-*.js'
+            'public/dist/templates.bundle-*.js',
+			'public/dist/krossr.bundle-*.js'
 		],
         html: [
             'public/modules/**/*.html'

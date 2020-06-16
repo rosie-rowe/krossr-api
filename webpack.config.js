@@ -20,7 +20,7 @@ var config = {
             'ngDialog/js/ngDialog.js',
             'ng-lodash/build/ng-lodash.js'
         ],
-        'krossr': 'AppModule.ts'
+        'krossr': 'app.ts'
     },
     output: {
         path: path.join(__dirname + '/public/dist'),
@@ -37,7 +37,8 @@ var config = {
             'node_modules',
             'public/lib',
             'public/lib/angular-ui-router/release',
-            'public/modules'
+            'public/modules',
+            'public/ng-app'
         ],
         extensions: [
             '.ts',
