@@ -2,10 +2,11 @@
 
 module.exports = {
 	db: {
-		name: 'postgres',
-		username: 'brian',
+		name: 'krossr',
+		username: 'rosalyn',
 		password: 'postgres123!',
-		host: 'localhost'
+		host: '127.0.0.1',
+		port: 5432
 	},
 	enableSequelizeLog: 'true',
 //	FORCE_DB_SYNC: 'true',

@@ -3,7 +3,7 @@
 module.exports = {
 	db: {
 		name: 'krossr-test',
-		username: 'brian',
+		username: 'rosalyn',
 		password: 'postgres123!',
 		host: 'localhost'
 	},

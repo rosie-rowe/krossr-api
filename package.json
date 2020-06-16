@@ -2,7 +2,7 @@
   "name": "krossr",
   "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
   "version": "0.0.1",
-  "author": "Brian Rowe",
+  "author": "Rosalyn Rowe",
   "engines": {
     "node": "0.10.x",
     "npm": "1.4.x"
@@ -90,7 +90,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/brian-rowe/krossr"
+    "url": "https://github.com/rosie-rowe/krossr"
   },
   "main": "server.js"
 }
