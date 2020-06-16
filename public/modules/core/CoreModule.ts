@@ -12,7 +12,6 @@ import LoadingAnimationModule from './loadingAnimation/LoadingAnimationModule';
 import PaginationModule from'./pagination/PaginationModule';
 import PopupContentModule from './popupContent/PopupContentModule';
 import ResizeModule from './resize/ResizeModule';
-import TouchModule from './touch/TouchModule';
 
 import { routing } from './config/RouteModule';
 
@@ -27,8 +26,7 @@ export default angular
         LoadingAnimationModule,
         PaginationModule,
         PopupContentModule,
-        ResizeModule,
-        TouchModule
+        ResizeModule
     ])
     .config(routing)
     .name;

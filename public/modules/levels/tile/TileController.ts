@@ -9,7 +9,7 @@ import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileService } from '../tile/TileService';
 import { TileSizeService } from '../tileSize/TileSizeService';
 import { TileState } from './TileState';
-import { TouchService } from '../../core/touch/TouchService';
+import { TouchService } from '../../../ng-app/Touch/TouchService';
 import { Utils } from '../utils/Utils';
 
 'use strict';

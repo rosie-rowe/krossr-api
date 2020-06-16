@@ -1,7 +1,9 @@
 import * as angular from 'angular';
+import { Injectable } from '@angular/core';
 
-'use strict';
-
+@Injectable({
+    providedIn: 'root'
+})
 export class TouchService {
     static $name = 'touchService';
 
@@ -9,7 +11,7 @@ export class TouchService {
     getRealTarget(event: JQueryEventObject): angular.IAugmentedJQuery {
         var myLocation = this.getTouches(event)[0];
 
-        return angular.element(document.elementFromPoint(myLocation.clientX, myLocation.clientY));
+        return angular.element(document.elementFromPoint(myLocation.clientX, myLocation.clientY)) as angular.IAugmentedJQuery;
     }
 
     /** Shortcut for getting actual target scope */

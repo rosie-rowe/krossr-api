@@ -1,8 +1,10 @@
 import { NgModule, DoBootstrap } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { UpgradeModule, downgradeInjectable } from '@angular/upgrade/static';
 import { ApplicationConfiguration } from '../modules/config';
 import { application } from '../modules/AppModule';
+import * as angular from 'angular';
+import { TouchService } from './Touch/TouchService';
 
 @NgModule({
     imports: [
@@ -17,6 +19,17 @@ export class AppModule implements DoBootstrap {
 
     ngDoBootstrap() {
         application();
+
+        this.downgradeServices([
+            TouchService
+        ]);
+
         this.upgrade.bootstrap(document.body, [ApplicationConfiguration.applicationModuleName], { strictDi: false });
+    }
+
+    private downgradeServices(services: any[]) {
+        services.forEach(service => {
+            angular.module(ApplicationConfiguration.applicationModuleName).service(service.$name, downgradeInjectable(service));
+        })
     }
 }
