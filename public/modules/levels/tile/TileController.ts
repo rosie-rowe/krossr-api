@@ -3,7 +3,7 @@ import { DragBoxService } from '../../../ng-app/DragBox/DragBoxService';
 import { EventService } from '../../core/eventService/EventService';
 import { GameOverService } from '../gameOver/GameOverService';
 import { ILevel } from "../level/Level";
-import { ShiftService } from '../shiftService/ShiftService';
+import { ShiftService } from '../../../ng-app/Shift/ShiftService';
 import { Point } from '../point/Point';
 import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileService } from '../../../ng-app/Tile/TileService';

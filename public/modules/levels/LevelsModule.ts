@@ -9,7 +9,6 @@ import ModeSelectorModule from './modeSelector/ModeSelectorModule';
 import NumberGridModule from './numberGrid/NumberGridModule';
 import NumberLineModule from './numberLine/NumberLineModule';
 import ShellModule from './shell/ShellModule';
-import ShiftServiceModule from './shiftService/ShiftServiceModule';
 import StarRatingModule from './starRating/StarRatingModule';
 import TileModule from './tile/TileModule';
 import TileSizeModule from './tileSize/TileSizeModule';
@@ -28,7 +27,6 @@ export default angular
         NumberGridModule,
         NumberLineModule,
         ShellModule,
-        ShiftServiceModule,
         StarRatingModule,
         TileModule,
         TileSizeModule,

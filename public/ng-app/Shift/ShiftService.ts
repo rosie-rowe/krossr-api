@@ -1,3 +1,8 @@
+import { Injectable } from "@angular/core";
+
+@Injectable({
+    providedIn: 'root'
+})
 export class ShiftService {
     static $name = 'shiftService';
     private _shiftLock: boolean = false;
@@ -14,6 +19,4 @@ export class ShiftService {
     set shiftLock(value: boolean) {
         this._shiftLock = value;
     }
-
-    constructor() {}
 }

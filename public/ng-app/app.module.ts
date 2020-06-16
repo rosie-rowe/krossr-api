@@ -8,6 +8,7 @@ import { TouchService } from './Touch/TouchService';
 import { SideLengthService } from './SideLength/SideLengthService';
 import { TileService } from './Tile/TileService';
 import { DragBoxService } from './DragBox/DragBoxService';
+import { ShiftService } from './Shift/ShiftService';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ export class AppModule implements DoBootstrap {
         this.downgradeServices([
             DragBoxService,
             SideLengthService,
+            ShiftService,
             TileService,
             TouchService
         ]);

@@ -1,4 +1,4 @@
-import { ShiftService } from '../shiftService/ShiftService';
+import { ShiftService } from '../../../ng-app/Shift/ShiftService';
 
 export class ModeSelectorController implements angular.IComponentController {
     static $name = 'ModeSelectorController';
