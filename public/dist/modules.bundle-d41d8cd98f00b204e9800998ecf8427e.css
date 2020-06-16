@@ -516,25 +516,6 @@ mode-selector .mode {
 number-grid {
   float: right;
 }
-number-line[orientation="horizontal"] {
-  display: block;
-  text-align: right;
-}
-number-line[orientation="horizontal"] div {
-  display: inline-block;
-  text-align: center;
-}
-number-line[orientation="vertical"] {
-  display: inline-block;
-  text-align: center;
-}
-number-line.even {
-  background-color: #444;
-}
-.finishedGrouping {
-  color: #008287;
-  transition: color .5s;
-}
 star-rating {
   display: inline-block;
 }
@@ -584,4 +565,23 @@ tile {
 }
 .unselected {
   background-color: #E2E2E2;
+}
+number-line[orientation="horizontal"] {
+  display: block;
+  text-align: right;
+}
+number-line[orientation="horizontal"] div {
+  display: inline-block;
+  text-align: center;
+}
+number-line[orientation="vertical"] {
+  display: inline-block;
+  text-align: center;
+}
+number-line.even {
+  background-color: #444;
+}
+.finishedGrouping {
+  color: #008287;
+  transition: color .5s;
 }

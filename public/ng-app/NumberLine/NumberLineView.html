@@ -1,0 +1,7 @@
+<div *ngFor="let entry of lineContent" (click)="toggleFinished(entry)" [ngClass]="{ 'finishedGrouping': entry.finished }" [ngStyle]="{
+	'width': getWidth(),
+	'height': getHeight(),
+	'line-height': getHeight()
+}">
+	{{ entry.text }}
+</div>

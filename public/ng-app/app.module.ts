@@ -1,10 +1,10 @@
 import './angular-material-theme.scss';
 
-import { NgModule, DoBootstrap } from '@angular/core';
+import { NgModule, DoBootstrap, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UpgradeModule, downgradeInjectable } from '@angular/upgrade/static';
+import { UpgradeModule, downgradeInjectable, downgradeComponent } from '@angular/upgrade/static';
 import { ApplicationConfiguration } from '../modules/config';
 import { application } from '../modules/AppModule';
 import * as angular from 'angular';
@@ -22,6 +22,7 @@ import { Utils } from './Utils/Utils';
 import { AuthenticationService } from './Authentication/AuthenticationService';
 import { GameOverService } from './GameOver/GameOverService';
 import { GameOverComponent } from './GameOver/GameOverComponent';
+import { NumberLineComponent } from './NumberLine/NumberLineComponent';
 
 @NgModule({
     imports: [
@@ -32,9 +33,11 @@ import { GameOverComponent } from './GameOver/GameOverComponent';
     ],
     declarations: [
         GameOverComponent,
+        NumberLineComponent
     ],
     entryComponents: [
-        GameOverComponent
+        GameOverComponent,
+        NumberLineComponent
     ],
     providers: [
         { provide: 'window', useValue: window }
@@ -47,6 +50,10 @@ export class AppModule implements DoBootstrap {
 
     ngDoBootstrap() {
         application();
+
+        this.downgradeComponents([
+            NumberLineComponent
+        ]);
 
         this.downgradeServices([
             AuthenticationService,
@@ -67,9 +74,19 @@ export class AppModule implements DoBootstrap {
         this.upgrade.bootstrap(document.body, [ApplicationConfiguration.applicationModuleName], { strictDi: true });
     }
 
-    private downgradeServices(services: any[]) {
+    private downgradeComponents(components: AugmentedType<any>[]) {
+        components.forEach(component => {
+            angular.module(ApplicationConfiguration.applicationModuleName).directive(component.$name, downgradeComponent({ component: component }));
+        })
+    }
+
+    private downgradeServices(services: AugmentedType<any>[]) {
         services.forEach(service => {
             angular.module(ApplicationConfiguration.applicationModuleName).service(service.$name, downgradeInjectable(service));
         })
     }
+}
+
+interface AugmentedType<T> extends Type<T> {
+    $name: string;
 }

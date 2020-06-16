@@ -1,6 +1,6 @@
 <number-line
-	game-matrix="numGridCtrl.gameMatrix"
-	goal-matrix="numGridCtrl.goalMatrix"
+	[game-matrix]="numGridCtrl.gameMatrix"
+	[goal-matrix]="numGridCtrl.goalMatrix"
 	ng-style="{
 		'width': numGridCtrl.isVertical ? numGridCtrl.tileSize : '',
 		'font-size': numGridCtrl.getFontSize()
@@ -8,7 +8,7 @@
 	ng-repeat="i in [].constructor(numGridCtrl.goalMatrix.length) track by $index"
 	ng-class-even="'even'"
 	ng-class-odd="'odd'"
-	index="$index"
-	orientation="{{numGridCtrl.orientation}}"
+	[index]="$index"
+	orientation="{{ numGridCtrl.orientation }}"
 	>
 </number-line>

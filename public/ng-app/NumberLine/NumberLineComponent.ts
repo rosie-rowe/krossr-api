@@ -1,22 +1,21 @@
+import { BooleanMatrix } from '../Matrix/BooleanMatrix'
+import { LineContent } from '../LineContent/LineContent';
+import { Point } from '../Point/Point'
+import { SideLengthService } from '../SideLength/SideLengthService';
+import { TileGroup } from '../TileGroup/TileGroup';
+import { TileSizeService } from '../TileSize/TileSizeService';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { BooleanMatrix } from '../../../ng-app/Matrix/BooleanMatrix'
-import { LineContent } from '../../../ng-app/LineContent/LineContent';
-import { Point } from '../../../ng-app/Point/Point'
-import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
-import { TileGroup } from '../../../ng-app/TileGroup/TileGroup';
-import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
-
-export class NumberLineController {
-    static $inject = [
-        'sideLengthService',
-        'tileSizeService'
-    ]
-
-    static $name = 'NumberLineController';
+@Component({
+	selector: 'number-line',
+	template: require('./NumberLineView.html')
+})
+export class NumberLineComponent implements OnInit {
+	static $name = 'numberLine';
 
     private cssClass = '';
-    private gameMatrix: BooleanMatrix;
-    private goalMatrix: BooleanMatrix;
+    @Input() public gameMatrix: BooleanMatrix;
+    @Input() public goalMatrix: BooleanMatrix;
 
     constructor(
         private sideLengthService: SideLengthService,
@@ -24,8 +23,9 @@ export class NumberLineController {
     ) {
     }
 
-    $onInit() {
-        this.sideLength = this.sideLengthService.sideLength;
+    ngOnInit() {
+		this.sideLength = this.sideLengthService.sideLength;
+		this.getLineContent();
     }
 
     private sideLength: number;
@@ -33,8 +33,8 @@ export class NumberLineController {
     private currentGroup: TileGroup = new TileGroup();
     private hasGroup: boolean = false;
 
-    private index: number;
-    private orientation: string;
+    @Input() public index: number;
+    @Input() public orientation: string;
 
     // display a crossed out 0 if the linecontent comes back with no content. otherwise, pass through
     private accountForZeros(lineContent: LineContent[]): LineContent[] {
@@ -120,15 +120,19 @@ export class NumberLineController {
         return this.lineContent;
     }
 
-    private getHeight(): string {
+    public getHeight(): string {
         var tileSize: number = this.tileSizeService.getTileSize();        
 
         return this.orientation === 'vertical' ? (tileSize / 2) + 'px' : tileSize + 'px';
     }
 
-    private getWidth(): string {
+    public getWidth(): string {
         var tileSize: number = this.tileSizeService.getTileSize();
 
         return this.orientation === 'horizontal' ? (tileSize / 2) + 'px' : tileSize + 'px';
-    }
+	}
+	
+	public toggleFinished(entry: LineContent) {
+		entry.finished = !entry.finished;
+	}
 }

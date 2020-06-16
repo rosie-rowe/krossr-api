@@ -47,7 +47,7 @@ var config = {
             {
                 test: /\.html$/,
                 exclude: /node_modules/,
-                loader: 'html-loader'
+                loader: 'html-loader?minimize=false' // Angular attributes require correct case...
             },
             {
                 test: /\.scss$/,
