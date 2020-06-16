@@ -4,7 +4,7 @@ import { LineContent } from '../lineContent/LineContent';
 import { Point } from '../point/Point'
 import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileGroup } from '../tileGroup/TileGroup';
-import { TileSizeService } from '../tileSize/TileSizeService';
+import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 
 export class NumberLineController {
     static $inject = [

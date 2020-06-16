@@ -4,8 +4,9 @@ import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameOverService } from '../gameOver/GameOverService';
 import { GameSizeService } from '../gameSize/GameSizeService';
 import { ILevel } from "../level/Level";
-import { TileSizeService } from '../tileSize/TileSizeService';
+import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 import { TileState } from '../tile/TileState';
+import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 
 export class GameController implements angular.IComponentController {
     static $controllerAs = 'gameCtrl';
@@ -17,6 +18,7 @@ export class GameController implements angular.IComponentController {
         'eventService',
         'gameOverService',
         'gameSizeService',
+        TileSizeEventService.$name,
         'tileSizeService',
         'dragBoxService'
     ];
@@ -27,6 +29,7 @@ export class GameController implements angular.IComponentController {
         private eventService: EventService,
         private gameOverService: GameOverService,
         private gameSizeService: GameSizeService,
+        private tileSizeEventService: TileSizeEventService,
         private tileSizeService: TileSizeService,
         private dragBoxService: DragBoxService,
     ) {
@@ -79,8 +82,8 @@ export class GameController implements angular.IComponentController {
             this.updateGameSize();
         });
 
-        this.eventService.subscribe(this.$scope, 'tileSizeChanged', (e, args) => {
-            this.setMargin(args);
+        this.tileSizeEventService.tileSizeChanged.subscribe((tileSize) => {
+            this.setMargin(tileSize);
         });
     }
 

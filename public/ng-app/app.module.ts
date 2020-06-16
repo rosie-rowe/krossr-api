@@ -10,6 +10,8 @@ import { TileService } from './Tile/TileService';
 import { DragBoxService } from './DragBox/DragBoxService';
 import { ShiftService } from './Shift/ShiftService';
 import { LevelService } from './Level/LevelService';
+import { TileSizeEventService } from './TileSize/TileSizeEventService';
+import { TileSizeService } from './TileSize/TileSizeService';
 
 @NgModule({
     imports: [
@@ -31,6 +33,8 @@ export class AppModule implements DoBootstrap {
             SideLengthService,
             ShiftService,
             TileService,
+            TileSizeService,
+            TileSizeEventService,
             TouchService
         ]);
 

@@ -1,17 +1,16 @@
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { DragBoxService } from '../../../ng-app/DragBox/DragBoxService';
-import { EventService } from '../../core/eventService/EventService';
-import { GameOverService } from '../gameOver/GameOverService';
 import { ILevel } from "../level/Level";
 import { ShiftService } from '../../../ng-app/Shift/ShiftService';
 import { Point } from '../point/Point';
 import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileService } from '../../../ng-app/Tile/TileService';
-import { TileSizeService } from '../tileSize/TileSizeService';
+import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 import { TileState } from './TileState';
 import { TouchService } from '../../../ng-app/Touch/TouchService';
 import { Utils } from '../utils/Utils';
 import { TileScope } from './TileScope';
+import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 
 export class TileController implements angular.IComponentController {
     static $controllerAs = 'tileCtrl';
@@ -23,12 +22,11 @@ export class TileController implements angular.IComponentController {
         '$scope',
         'Utils',
         'dragBoxService',
-        'eventService',
-        'gameOverService',
         'shiftService',
         'sideLengthService',
         'tileService',
-        'tileSizeService',
+        TileSizeEventService.$name,
+        TileSizeService.$name,
         'touchService'
     ];
 
@@ -59,11 +57,10 @@ export class TileController implements angular.IComponentController {
         private $scope: angular.IScope,
         private Utils: Utils, 
         private dragBoxService: DragBoxService,
-        private eventService: EventService,
-        private gameOverService: GameOverService,
         private shiftService: ShiftService,
         private sideLengthService: SideLengthService,
         private tileService: TileService,
+        private tileSizeEventService: TileSizeEventService,
         private tileSizeService: TileSizeService,
         private touchService: TouchService
     ) {
@@ -102,9 +99,9 @@ export class TileController implements angular.IComponentController {
             this.mouseUpEvent(e);
         })
 
-        this.eventService.subscribe(this.$scope, 'tileSizeChanged', () => {
+        this.tileSizeEventService.tileSizeChanged.subscribe(() => {
             this.setTileSize(this.tileSizeService.getTileSize());
-        })
+        });
     }
 
     private clearPending(coords: Point[]) {

@@ -1,19 +1,17 @@
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
-import { EventService } from '../../core/eventService/EventService';
-import { TileSizeService } from '../tileSize/TileSizeService';
+import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
+import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 
 export class NumberGridController implements angular.IComponentController {
     static $name = 'NumberGridController';
 
     static $inject = [
-        '$scope',
-        'eventService',
+        TileSizeEventService.$name,
         'tileSizeService'
     ];
 
     constructor(
-        private $scope: angular.IScope,
-        private eventService: EventService,
+        private tileSizeEventService: TileSizeEventService,
         private tileSizeService: TileSizeService
     ) {
 
@@ -36,7 +34,7 @@ export class NumberGridController implements angular.IComponentController {
     }
 
     $postLink() {
-        this.eventService.subscribe(this.$scope, 'tileSizeChanged', () => {
+        this.tileSizeEventService.tileSizeChanged.subscribe(() => {
             this.setTileSize();
         });
     }

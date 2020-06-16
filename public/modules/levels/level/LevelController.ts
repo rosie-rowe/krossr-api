@@ -9,6 +9,7 @@ import { GameSizeService } from '../gameSize/GameSizeService';
 import { LevelService } from '../../../ng-app/Level/LevelService';
 import { ShiftService } from '../../../ng-app/Shift/ShiftService';
 import { Utils } from '../utils/Utils';
+import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 
 export class LevelController implements angular.IComponentController {
     static $controllerAs = 'levelCtrl';
@@ -28,6 +29,7 @@ export class LevelController implements angular.IComponentController {
         'Levels',
         'ngDialog',
         'shiftService',
+        TileSizeEventService.$name,
         'Utils'
     ];
 
@@ -51,6 +53,7 @@ export class LevelController implements angular.IComponentController {
         private Levels,
         private ngDialog,
         private shiftService: ShiftService,
+        private tileSizeEventService: TileSizeEventService,
         private Utils: Utils
     ) {
         
@@ -73,8 +76,8 @@ export class LevelController implements angular.IComponentController {
     }
 
     $postLink() {
-        this.eventService.subscribe(this.$scope, 'tileSizeChanged', (e, args) => {
-            let newSize = Math.floor(args);
+        this.tileSizeEventService.tileSizeChanged.subscribe(tileSize => {
+            let newSize = Math.floor(tileSize);
             this.margin = newSize / 2;
         });
     }

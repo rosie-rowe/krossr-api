@@ -1,14 +1,16 @@
+import { Injectable } from "@angular/core";
+import { TileSizeEventService } from "./TileSizeEventService";
+
+@Injectable({
+    providedIn: 'root'
+})
 export class TileSizeService {
     static $name = 'tileSizeService';
-
-    static $inject = [
-        '$rootScope'
-    ];
 
     private tileSize: number = 25;
 
     constructor(
-        private $rootScope: angular.IRootScopeService
+        private tileSizeEventService: TileSizeEventService
     ) {
     }
 
@@ -22,6 +24,6 @@ export class TileSizeService {
 
     setTileSize(gameWidth, widthInTiles) {
         this.tileSize = gameWidth / parseInt(widthInTiles, 10);
-        this.$rootScope.$broadcast('tileSizeChanged', this.tileSize);
+        this.tileSizeEventService.tileSizeChanged.emit(this.tileSize);
     }
 }

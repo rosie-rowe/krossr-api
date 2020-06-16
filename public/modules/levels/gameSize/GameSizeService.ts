@@ -1,5 +1,5 @@
 import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
-import { TileSizeService } from '../tileSize/TileSizeService';
+import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 
 export class GameSizeService {
     static $name = 'gameSizeService';
