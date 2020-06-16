@@ -1,7 +1,7 @@
 import { DragBoxService } from '../../../ng-app/DragBox/DragBoxService';
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameOverService } from '../gameOver/GameOverService';
-import { GameSizeService } from '../gameSize/GameSizeService';
+import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
 import { ILevel } from "../level/Level";
 import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 import { TileState } from '../tile/TileState';

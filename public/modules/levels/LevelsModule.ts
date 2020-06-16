@@ -2,7 +2,6 @@ import * as angular from 'angular';
 
 import GameModule from './game/GameModule';
 import GameOverModule from './gameOver/GameOverModule';
-import GameSizeModule from './gameSize/GameSizeModule';
 import LevelModule from './level/LevelModule';
 import LevelSelectModule from './levelSelect/LevelSelectModule';
 import ModeSelectorModule from './modeSelector/ModeSelectorModule';
@@ -19,7 +18,6 @@ export default angular
     .module('levels', [
         GameModule,
         GameOverModule,
-        GameSizeModule,
         LevelModule,
         LevelSelectModule,
         ModeSelectorModule,

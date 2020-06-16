@@ -1,17 +1,13 @@
-import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
-import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
-import { GameSizeEventService } from '../../../ng-app/GameSize/GameSizeEventService';
+import { SideLengthService } from '../SideLength/SideLengthService';
+import { TileSizeService } from '../TileSize/TileSizeService';
+import { GameSizeEventService } from './GameSizeEventService';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+    providedIn: 'root'
+})
 export class GameSizeService {
     static $name = 'gameSizeService';
-
-    static $inject = [
-        '$rootScope',
-        '$timeout',
-        GameSizeEventService.$name,
-        'sideLengthService',
-        'tileSizeService'
-    ];
 
     private gameHeight: string;
     private gameWidth: string;
@@ -19,8 +15,6 @@ export class GameSizeService {
     private tutorialDivider: number = 4;
 
     constructor(
-        private $rootScope: angular.IRootScopeService,
-        private $timeout: angular.ITimeoutService,
         private gameSizeEventService: GameSizeEventService,
         private sideLengthService: SideLengthService,
         private tileSizeService: TileSizeService
@@ -72,7 +66,7 @@ export class GameSizeService {
         this.gameWidth = finalWidth + 'px';
         this.gameHeight = finalHeight + 'px';
 
-        this.$timeout(() => {
+        setTimeout(() => {
             this.gameSizeEventService.gameSizeChanged.emit();
         });
         

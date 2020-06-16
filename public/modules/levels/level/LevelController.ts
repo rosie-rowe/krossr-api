@@ -4,7 +4,7 @@ import { AuthenticationService } from '../../users/authentication/Authentication
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 import { ILevel } from "../level/Level";
 import { GameMatrix } from '../gameMatrix/GameMatrix';
-import { GameSizeService } from '../gameSize/GameSizeService';
+import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
 import { LevelService } from '../../../ng-app/Level/LevelService';
 import { ShiftService } from '../../../ng-app/Shift/ShiftService';
 import { Utils } from '../utils/Utils';

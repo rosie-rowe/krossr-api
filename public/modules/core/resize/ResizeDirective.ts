@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { GameSizeService } from '../../levels/gameSize/GameSizeService';
+import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
 import { Utils } from '../../levels/utils/Utils'
 
 export class ResizeDirective implements angular.IDirective {
