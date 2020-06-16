@@ -46,7 +46,7 @@ module.exports = function(sequelize, Sequelize) {
                     return '';
                 }
                 salt = new Buffer(salt, 'base64');
-                return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+                return crypto.pbkdf2Sync(password, salt, 10000, 64, null).toString('base64');
             },
             removeSensitiveInfo: function() {
                 this.password = null;
