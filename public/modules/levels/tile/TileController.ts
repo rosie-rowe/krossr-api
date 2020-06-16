@@ -2,7 +2,7 @@ import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { DragBoxService } from '../../../ng-app/DragBox/DragBoxService';
 import { ILevel } from "../level/Level";
 import { ShiftService } from '../../../ng-app/Shift/ShiftService';
-import { Point } from '../point/Point';
+import { Point } from '../../../ng-app/Point/Point';
 import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileService } from '../../../ng-app/Tile/TileService';
 import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';

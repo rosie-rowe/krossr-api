@@ -1,5 +1,5 @@
 import { TileService } from '../Tile/TileService';
-import { Point } from '../../modules/levels/point/Point';
+import { Point } from '../Point/Point';
 import { Injectable } from '@angular/core';
 
 @Injectable({

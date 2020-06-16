@@ -1,9 +1,9 @@
 
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
-import { LineContent } from '../lineContent/LineContent';
-import { Point } from '../point/Point'
+import { LineContent } from '../../../ng-app/LineContent/LineContent';
+import { Point } from '../../../ng-app/Point/Point'
 import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
-import { TileGroup } from '../tileGroup/TileGroup';
+import { TileGroup } from '../../../ng-app/TileGroup/TileGroup';
 import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 
 export class NumberLineController {
