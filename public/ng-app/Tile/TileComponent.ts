@@ -10,7 +10,7 @@ import { TileState } from './TileState';
 import { TouchService } from '../Touch/TouchService';
 import { Utils } from '../Utils/Utils';
 import { TileSizeEventService } from '../TileSize/TileSizeEventService';
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'tile',
@@ -38,7 +38,10 @@ export class TileComponent implements OnInit, AfterViewInit {
     private height: string;
     private width: string;
 
+    private $element: HTMLElement;
+
     constructor(
+        private elementRef: ElementRef,
         private Utils: Utils, 
         private dragBoxService: DragBoxService,
         private shiftService: ShiftService,
@@ -48,10 +51,10 @@ export class TileComponent implements OnInit, AfterViewInit {
         private tileSizeService: TileSizeService,
         private touchService: TouchService
     ) {
-       
     }
 
     ngOnInit() {
+        this.$element = this.elementRef.nativeElement as HTMLElement;
         this.isEditMode = this.level.currentView === 'edit';
 
         this.goalMatrix = this.Utils.getGoalMatrix();
@@ -63,9 +66,9 @@ export class TileComponent implements OnInit, AfterViewInit {
         this.setTileSize(this.tileSizeService.getTileSize());
         this.tileService.addTile({ tileCtrl: this });
 
-        // this.$element.on('mousedown', (e) => this.mouseDownEvent(e));
-        // this.$element.on('mousemove', (e) => this.mouseMoveEvent(e));
-        // this.$element.on('mouseup', (e) => this.mouseUpEvent(e));
+        this.$element.addEventListener('mousedown', (e) => this.mouseDownEvent());
+        this.$element.addEventListener('mousemove', (e) => this.mouseMoveEvent());
+        this.$element.addEventListener('mouseup', (e) => this.mouseUpEvent());
 
         // this.$element.on('touchstart', (e) => {
         //     e.preventDefault();
@@ -148,35 +151,26 @@ export class TileComponent implements OnInit, AfterViewInit {
         this.tileService.fillTiles(allPendingCoords, true, TileState.pending,'isNotPending');
     }
 
-    // private mouseDownEvent(event: JQueryEventObject) {
-    //     let coord = this.tileService.convertTo2D(this.index);
+    private mouseDownEvent() {
+        let coord = this.tileService.convertTo2D(this.index);
 
-    //     this.dragBoxService.startCoord = coord;
-    //     this.dragBoxService.initState = this.selected;
-    // }
+        this.dragBoxService.startCoord = coord;
+        this.dragBoxService.initState = this.selected;
+    }
 
-    // private mouseMoveEvent(event: JQueryEventObject) {
-    //     let actualScope = this.touchService.getTargetScope(event) as TileScope;
+    private mouseMoveEvent() {
+        if (this.dragBoxService.validateStart())  {
+            this.fillPending(this.index);
+        }
+    }
 
-    //     if (actualScope && actualScope.tileCtrl.index) {
-    //         if (this.dragBoxService.validateStart())  {
-    //             this.fillPending(actualScope.tileCtrl.index);
-    //         }
-    //     }
-    // }
-
-    // /*
-    // * This event bubbles up to GameController, which completes the job
-    // */
-    // private mouseUpEvent(event: JQueryEventObject) {
-    //     let actualScope = this.touchService.getTargetScope(event) as TileScope;
-    //     let coord;
-
-    //     if (actualScope && actualScope.tileCtrl.hasOwnProperty('index')) {
-    //         coord = this.tileService.convertTo2D(actualScope.tileCtrl.index);
-    //         this.dragBoxService.endCoord = coord;
-    //     }
-    // }
+    /*
+    * This event bubbles up to GameController, which completes the job
+    */
+    private mouseUpEvent() {
+        let coord = this.tileService.convertTo2D(this.index);
+        this.dragBoxService.endCoord = coord;
+    }
 
     change(index, initState, changeTo) {
         if (this.editable) {
