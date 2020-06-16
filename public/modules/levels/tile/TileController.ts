@@ -5,7 +5,7 @@ import { GameOverService } from '../gameOver/GameOverService';
 import { ILevel } from "../level/Level";
 import { ShiftService } from '../shiftService/ShiftService';
 import { Point } from '../point/Point';
-import { SideLengthService } from '../sideLengthService/SideLengthService';
+import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileService } from '../tile/TileService';
 import { TileSizeService } from '../tileSize/TileSizeService';
 import { TileState } from './TileState';

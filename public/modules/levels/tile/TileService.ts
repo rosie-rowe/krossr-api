@@ -1,5 +1,5 @@
 import { Point } from '../point/Point';
-import { SideLengthService } from '../sideLengthService/SideLengthService';
+import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileState } from '../tile/TileState';
 
 /**

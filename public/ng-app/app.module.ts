@@ -5,6 +5,7 @@ import { ApplicationConfiguration } from '../modules/config';
 import { application } from '../modules/AppModule';
 import * as angular from 'angular';
 import { TouchService } from './Touch/TouchService';
+import { SideLengthService } from './SideLength/SideLengthService';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ export class AppModule implements DoBootstrap {
         application();
 
         this.downgradeServices([
+            SideLengthService,
             TouchService
         ]);
 

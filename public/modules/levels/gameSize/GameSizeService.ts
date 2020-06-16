@@ -1,4 +1,4 @@
-import { SideLengthService } from '../sideLengthService/SideLengthService';
+import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileSizeService } from '../tileSize/TileSizeService';
 
 export class GameSizeService {

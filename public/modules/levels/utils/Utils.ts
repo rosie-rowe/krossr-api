@@ -2,7 +2,7 @@ import * as angular from 'angular';
 
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 import { GameSizeService } from '../gameSize/GameSizeService';
-import { SideLengthService } from '../sideLengthService/SideLengthService';
+import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileService } from '../tile/TileService';
 
 export class Utils {

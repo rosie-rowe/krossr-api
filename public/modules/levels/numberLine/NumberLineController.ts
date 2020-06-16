@@ -2,7 +2,7 @@
 import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { LineContent } from '../lineContent/LineContent';
 import { Point } from '../point/Point'
-import { SideLengthService } from '../sideLengthService/SideLengthService';
+import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
 import { TileGroup } from '../tileGroup/TileGroup';
 import { TileSizeService } from '../tileSize/TileSizeService';
 

@@ -12,7 +12,6 @@ import NumberLineModule from './numberLine/NumberLineModule';
 import ShellModule from './shell/ShellModule';
 import ShiftServiceModule from './shiftService/ShiftServiceModule';
 import StarRatingModule from './starRating/StarRatingModule';
-import SideLengthServiceModule from './sideLengthService/SideLengthServiceModule';
 import TileModule from './tile/TileModule';
 import TileSizeModule from './tileSize/TileSizeModule';
 import UtilsModule from './utils/UtilsModule';
@@ -33,7 +32,6 @@ export default angular
         ShellModule,
         ShiftServiceModule,
         StarRatingModule,
-        SideLengthServiceModule,
         TileModule,
         TileSizeModule,
         UtilsModule
