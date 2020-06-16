@@ -186,7 +186,7 @@ module.exports = function(grunt) {
 	// Build task(s).
 	grunt.registerTask('buildCSS', ['less', 'cssmin']);
 	grunt.registerTask('buildHTML', ['html2js']);
-	grunt.registerTask('buildTypescript', ['webpack:prod']);
+	grunt.registerTask('buildTypescript', ['webpack:dev']);
 	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'buildTypescript', 'buildHTML', 'buildCSS']);
 
 	// Test task.

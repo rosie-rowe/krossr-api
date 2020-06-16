@@ -1,8 +1,6 @@
 'use strict';
 
-var glob = require('glob');
 var path = require('path');
-var webpack = require('webpack');
 
 var config = {
     devtool: 'source-map',
@@ -26,12 +24,6 @@ var config = {
         path: path.join(__dirname + '/public/dist'),
         filename: '[name].bundle-[hash].js'
     },
-    plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor'],
-            minChunks: Infinity
-        })
-    ],
     resolve: {
         modules: [
             'node_modules',
@@ -46,11 +38,24 @@ var config = {
         ]
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.ts$/,
                 exclude: /node_modules/,
                 loader: 'ts-loader'
+            },
+            {
+                test: /\.html$/,
+                exclude: /node_modules/,
+                loader: 'html-loader'
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
             }
         ]
     }

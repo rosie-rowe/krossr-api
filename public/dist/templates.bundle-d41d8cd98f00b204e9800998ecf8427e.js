@@ -1,4 +1,4 @@
-angular.module('templates-main', ['modules/core/confirmation/ConfirmationView.html', 'modules/core/header/HeaderView.html', 'modules/core/help/HelpView.html', 'modules/core/loadingAnimation/LoadingAnimationView.html', 'modules/core/pagination/PaginationView.html', 'modules/core/popupContent/PopupContentView.html', 'modules/core/views/index.client.view.html', 'modules/levels/game/GameView.html', 'modules/levels/gameOver/GameOverView.html', 'modules/levels/level/index.html', 'modules/levels/level/LevelView.html', 'modules/levels/levelSelect/LevelSelectView.html', 'modules/levels/modeSelector/ModeSelectorView.html', 'modules/levels/numberGrid/NumberGridView.html', 'modules/levels/numberLine/NumberLineView.html', 'modules/levels/starRating/StarRatingView.html', 'modules/levels/tile/TileView.html', 'modules/users/editProfile/EditProfileView.html', 'modules/users/forgotPassword/ForgotPasswordView.html', 'modules/users/resetPassword/ResetPasswordView.html', 'modules/users/signIn/SignInView.html', 'modules/users/signUp/SignUpView.html']);
+angular.module('templates-main', ['modules/core/confirmation/ConfirmationView.html', 'modules/core/header/HeaderView.html', 'modules/core/help/HelpView.html', 'modules/core/loadingAnimation/LoadingAnimationView.html', 'modules/core/pagination/PaginationView.html', 'modules/core/popupContent/PopupContentView.html', 'modules/core/views/index.client.view.html', 'modules/levels/game/GameView.html', 'modules/levels/level/index.html', 'modules/levels/level/LevelView.html', 'modules/levels/levelSelect/LevelSelectView.html', 'modules/levels/modeSelector/ModeSelectorView.html', 'modules/levels/numberGrid/NumberGridView.html', 'modules/levels/numberLine/NumberLineView.html', 'modules/levels/starRating/StarRatingView.html', 'modules/levels/tile/TileView.html', 'modules/users/editProfile/EditProfileView.html', 'modules/users/forgotPassword/ForgotPasswordView.html', 'modules/users/resetPassword/ResetPasswordView.html', 'modules/users/signIn/SignInView.html', 'modules/users/signUp/SignUpView.html']);
 
 angular.module("modules/core/confirmation/ConfirmationView.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("modules/core/confirmation/ConfirmationView.html",
@@ -110,14 +110,6 @@ angular.module("modules/levels/game/GameView.html", []).run(["$templateCache", f
     "         <tile game-matrix=\"gameCtrl.gameMatrix\" ng-repeat=\"i in gameCtrl.tiles\" editable='true' index=\"$index\" level=\"gameCtrl.level\" tiles=\"gameCtrl.tiles\"></tile> \n" +
     "	</div>\n" +
     "</div>");
-}]);
-
-angular.module("modules/levels/gameOver/GameOverView.html", []).run(["$templateCache", function ($templateCache) {
-  $templateCache.put("modules/levels/gameOver/GameOverView.html",
-    "<h2>You win!</h2>\n" +
-    "\n" +
-    "<button ng-click=\"gameOverCtrl.closeAction()\" ui-sref=\"level({ levelId: gameOverCtrl.levelId })\" ui-sref-opts=\"{ reload: true }\">Retry</button>\n" +
-    "<button ng-click=\"gameOverCtrl.newLevel()\">New Level</button>");
 }]);
 
 angular.module("modules/levels/level/index.html", []).run(["$templateCache", function ($templateCache) {

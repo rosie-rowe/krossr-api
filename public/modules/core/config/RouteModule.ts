@@ -8,4 +8,4 @@ export function routing($stateProvider, $urlRouterProvider) {
 			url: '/',
 			templateUrl: 'modules/core/views/index.client.view.html'
 		});
-}
+};

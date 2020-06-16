@@ -121,7 +121,8 @@ body {
   /* For preventing mobile Chrome refreshing by dragging down */
   overflow-y: hidden;
 }
-button {
+button,
+::ng-deep button {
   background-color: #008287;
   border: 0;
   color: #FFF;
@@ -136,11 +137,13 @@ button {
   margin-top: 6px;
 }
 @media screen and (max-width: 1024px) {
-  button {
+  button,
+  ::ng-deep button {
     margin: 0 auto;
   }
 }
-button:disabled {
+button:disabled,
+::ng-deep button:disabled {
   background-color: #005154;
   transition: all .2s;
 }

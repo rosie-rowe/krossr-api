@@ -8,5 +8,5 @@ export default angular
     .module('levels.level', [])
     .component(LevelComponent.$name, new LevelComponent())
     .controller(LevelController.$name, LevelController)
-    .factory('Levels', LevelResource)
+    .factory('Levels', ['$resource', ($resource) => LevelResource($resource)])
     .name;

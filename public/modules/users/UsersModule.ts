@@ -19,6 +19,6 @@ export default angular
         SignUpModule,
         UsersServiceModule
     ])
-    .config(errorHandler)
-    .config(routing)
+    .config(['$httpProvider', ($httpProvider) => errorHandler($httpProvider)])
+    .config(['$stateProvider', ($stateProvider) => routing($stateProvider)])
     .name;

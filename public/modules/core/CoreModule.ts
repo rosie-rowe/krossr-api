@@ -24,5 +24,5 @@ export default angular
         PopupContentModule,
         ResizeModule
     ])
-    .config(routing)
+    .config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => routing($stateProvider, $urlRouterProvider)])
     .name;
