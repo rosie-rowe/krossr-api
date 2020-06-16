@@ -1,13 +1,9 @@
-import { BooleanMatrix } from '../matrix/BooleanMatrix';
-
+import { Injectable } from "@angular/core";
+@Injectable({
+    providedIn: 'root'
+})
 export class LevelService {
     static $name = 'levelService';
-
-    static $inject = [];
-
-    constructor() {
-
-    }
 
     /**
      * Converts a base64 string that decodes into a binary string into a layout

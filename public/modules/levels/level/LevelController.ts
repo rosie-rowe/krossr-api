@@ -6,7 +6,7 @@ import { EventService } from '../../core/eventService/EventService';
 import { ILevel } from "../level/Level";
 import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameSizeService } from '../gameSize/GameSizeService';
-import { LevelService } from './LevelService';
+import { LevelService } from '../../../ng-app/Level/LevelService';
 import { ShiftService } from '../../../ng-app/Shift/ShiftService';
 import { Utils } from '../utils/Utils';
 
