@@ -13,11 +13,6 @@ export class EventService {
 
     }
     
-    /** Using this method ensures that an event will always be broadcast from the root down instead of having to worry about hierarchy. */
-    publish(event: string, ...args: any[]): void {
-        this.$rootScope.$broadcast(event, args);
-    }
-
     /** Using this method ensures that an event will always be destroyed when the accompanying scope is destroyed, saving boilerplate code */
     subscribe(scope: angular.IScope, event: string, action: Function): void {
         let eventCanceler = scope.$on(event, (event: angular.IAngularEvent, ...args: any[]) => {
