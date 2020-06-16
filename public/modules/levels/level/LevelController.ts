@@ -1,6 +1,6 @@
 import * as angular from 'angular';
 
-import { AuthenticationService } from '../../users/authentication/AuthenticationService'
+import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 import { ILevel } from "../level/Level";
 import { GameMatrix } from '../gameMatrix/GameMatrix';

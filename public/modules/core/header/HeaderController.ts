@@ -1,4 +1,4 @@
-import { AuthenticationService } from '../../users/authentication/AuthenticationService'
+import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 
 export class HeaderController implements angular.IComponentController {

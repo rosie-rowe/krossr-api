@@ -1,4 +1,4 @@
-import { AuthenticationService } from '../authentication/AuthenticationService'
+import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 
 export class SignInController implements angular.IComponentController {

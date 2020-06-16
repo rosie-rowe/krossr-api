@@ -1,4 +1,4 @@
-import { AuthenticationService } from '../authentication/AuthenticationService'
+import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
 
 export class ResetPasswordController implements angular.IComponentController {
     static $controllerAs = 'resetPasswordCtrl';

@@ -1,4 +1,4 @@
-import { AuthenticationService } from '../../users/authentication/AuthenticationService'
+import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
 import { Utils } from '../../../ng-app/Utils/Utils';
 
 export class LevelSelectController implements angular.IComponentController {

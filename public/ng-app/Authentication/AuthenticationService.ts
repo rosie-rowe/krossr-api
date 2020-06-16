@@ -1,17 +1,16 @@
+import { Inject, Injectable } from "@angular/core";
+
 /**
  * This should handle all interaction with the user information available to the client
  */
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthenticationService {
     static $name = 'Authentication';
 
-    static $inject = [
-        '$log',
-        '$window'
-    ];
-
     constructor(
-        private $log: angular.ILogService,
-        private $window: angular.IWindowService
+        @Inject('window') private $window: any
     ) {
         this.signIn(this.$window.user);
     }

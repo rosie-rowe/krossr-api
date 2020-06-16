@@ -15,11 +15,15 @@ import { TileSizeService } from './TileSize/TileSizeService';
 import { GameSizeEventService } from './GameSize/GameSizeEventService';
 import { GameSizeService } from './GameSize/GameSizeService';
 import { Utils } from './Utils/Utils';
+import { AuthenticationService } from './Authentication/AuthenticationService';
 
 @NgModule({
     imports: [
         BrowserModule,
         UpgradeModule
+    ],
+    providers: [
+        { provide: 'window', useValue: window }
     ]
 })
 export class AppModule implements DoBootstrap {
@@ -31,6 +35,7 @@ export class AppModule implements DoBootstrap {
         application();
 
         this.downgradeServices([
+            AuthenticationService,
             DragBoxService,
             GameSizeService,
             GameSizeEventService,

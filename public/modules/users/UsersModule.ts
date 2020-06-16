@@ -1,6 +1,5 @@
 import * as angular from 'angular';
 
-import AuthenticationModule from './authentication/AuthenticationModule';
 import EditProfileModule from './editProfile/EditProfileModule';
 import ForgotPasswordModule from './forgotPassword/ForgotPasswordModule';
 import ResetPasswordModule from './resetPassword/ResetPasswordModule';
@@ -13,7 +12,6 @@ import { routing } from './config/RouteModule';
 
 export default angular
     .module('users', [
-        AuthenticationModule,
         EditProfileModule,
         ForgotPasswordModule,
         ResetPasswordModule,
