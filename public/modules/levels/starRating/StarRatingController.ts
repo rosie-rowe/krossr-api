@@ -1,5 +1,3 @@
-'use strict';
-
 export class StarRatingController implements angular.IComponentController {
     static $controllerAs = 'starRatingCtrl';
     static $name = 'StarRatingController';

@@ -7,8 +7,6 @@ import { ILevel } from "../level/Level";
 import { TileSizeService } from '../tileSize/TileSizeService';
 import { TileState } from '../tile/TileState';
 
-'use strict';
-
 export class GameController implements angular.IComponentController {
     static $controllerAs = 'gameCtrl';
     static $name = 'GameController';

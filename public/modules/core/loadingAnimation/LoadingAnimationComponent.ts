@@ -1,5 +1,3 @@
-'use strict';
-
 export class LoadingAnimationComponent implements angular.IComponentOptions {
     static $name = 'loadingAnimation';
     bindToController = true;

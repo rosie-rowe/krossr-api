@@ -1,5 +1,3 @@
-'use strict';
-
 export class ConfirmationComponent implements angular.IComponentOptions {
     static $name = 'confirmation';
     bindToController = true;

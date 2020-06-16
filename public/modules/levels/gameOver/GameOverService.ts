@@ -1,7 +1,5 @@
 import { ILevel } from "../level/Level";
 
-'use strict';
-
 /** Open the Game Over popup */
 
 export class GameOverService {

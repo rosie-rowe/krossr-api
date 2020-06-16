@@ -1,5 +1,3 @@
-'use strict';
-
 export class NumberGridComponent implements angular.IComponentOptions {
     static $name = 'numberGrid';
     controller = 'NumberGridController';

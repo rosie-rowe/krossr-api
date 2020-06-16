@@ -1,5 +1,3 @@
-'use strict';
-
 export class ModeSelectorComponent implements angular.IComponentOptions {
     static $name = 'modeSelector';
     controller = 'ModeSelectorController';

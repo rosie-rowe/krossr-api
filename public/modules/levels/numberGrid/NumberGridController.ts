@@ -2,8 +2,6 @@ import { BooleanMatrix } from '../matrix/BooleanMatrix'
 import { EventService } from '../../core/eventService/EventService';
 import { TileSizeService } from '../tileSize/TileSizeService';
 
-'use strict';
-
 export class NumberGridController implements angular.IComponentController {
     static $name = 'NumberGridController';
 

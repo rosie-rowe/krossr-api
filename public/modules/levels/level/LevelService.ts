@@ -1,7 +1,5 @@
 import { BooleanMatrix } from '../matrix/BooleanMatrix';
 
-'use strict';
-
 export class LevelService {
     static $name = 'levelService';
 

@@ -1,5 +1,3 @@
-'use strict';
-
 export class GameOverComponent implements angular.IComponentOptions {
     static $name = 'gameOver';
     bindToController = true;

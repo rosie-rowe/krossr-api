@@ -2,8 +2,6 @@ import { Point } from '../point/Point';
 import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileState } from '../tile/TileState';
 
-'use strict';
-
 /**
  * Keeps a cache of the tiles on the screen for faster access (smooth animation for dragging & selecting),
  * as well as methods for accessing it

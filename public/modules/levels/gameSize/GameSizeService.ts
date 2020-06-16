@@ -1,8 +1,6 @@
 import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileSizeService } from '../tileSize/TileSizeService';
 
-'use strict';
-
 export class GameSizeService {
     static $name = 'gameSizeService';
 

@@ -1,8 +1,6 @@
 import { NumberLineController } from './NumberLineController';
 import { Point } from '../point/Point'
 
-'use strict';
-
 export class NumberLineComponent implements angular.IComponentOptions {
 	static $name = 'numberLine';
 	controller = 'NumberLineController';

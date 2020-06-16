@@ -1,8 +1,6 @@
 import { AuthenticationService } from '../authentication/AuthenticationService'
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 
-'use strict';
-
 export class SignInController implements angular.IComponentController {
     static $controllerAs = 'signInCtrl';
     static $name = 'SignInController';

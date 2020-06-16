@@ -6,8 +6,6 @@ import { SideLengthService } from '../sideLengthService/SideLengthService';
 import { TileGroup } from '../tileGroup/TileGroup';
 import { TileSizeService } from '../tileSize/TileSizeService';
 
-'use strict';
-
 export class NumberLineController {
     static $inject = [
         'sideLengthService',

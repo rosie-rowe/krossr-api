@@ -1,5 +1,3 @@
-'use strict';
-
 export class PaginationController implements angular.IComponentController {
     static $controllerAs = 'paginationCtrl';
     static $name = 'PaginationController';

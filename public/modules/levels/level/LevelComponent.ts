@@ -1,5 +1,3 @@
-'use strict'
-
 export class LevelComponent {
     static $name = 'level';
     bindToController = true;

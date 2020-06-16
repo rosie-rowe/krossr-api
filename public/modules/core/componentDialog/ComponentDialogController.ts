@@ -1,5 +1,3 @@
-'use strict';
-
 /** A controller for an individual ComponentDialog, meant to provide the closeThisDialog() function & others to all of them without needing to explicity pass it in */
 
 export class ComponentDialogController implements angular.IController {

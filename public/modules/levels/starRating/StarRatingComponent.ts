@@ -1,5 +1,3 @@
-'use strict';
-
 export class StarRatingComponent implements angular.IComponentOptions {
     static $name = 'starRating';
     bindToController = true;

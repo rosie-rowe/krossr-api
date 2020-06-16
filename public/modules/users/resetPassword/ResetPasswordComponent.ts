@@ -1,5 +1,3 @@
-'use strict';
-
 /** Screen to reset password */
 
 export class ResetPasswordComponent implements angular.IComponentOptions {

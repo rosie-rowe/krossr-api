@@ -1,8 +1,6 @@
 import * as angular from 'angular';
 import { ApplicationConfiguration } from '../../config';
 
-'use strict';
-
 export class NumberGridControllerTests {
     static run() {
         // Number line Controller Spec

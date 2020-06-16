@@ -1,5 +1,3 @@
-'use strict';
-
 /** Handles broadcast/on events */
 
 export class EventService {

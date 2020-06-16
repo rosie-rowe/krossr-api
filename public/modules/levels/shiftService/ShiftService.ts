@@ -1,5 +1,3 @@
-'use strict';
-
 export class ShiftService {
     static $name = 'shiftService';
     private _shiftLock: boolean = false;

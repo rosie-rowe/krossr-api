@@ -1,7 +1,5 @@
 import * as angular from 'angular';
 
-'use strict';
-
 /**
  * Wrapper for ngDialog to easily allow dialogs to be defined as components
  */

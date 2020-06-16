@@ -1,8 +1,6 @@
 import { AuthenticationService } from '../../users/authentication/AuthenticationService'
 import { Utils } from '../utils/Utils';
 
-'use strict';
-
 export class LevelSelectController implements angular.IComponentController {
     static $controllerAs = 'levelSelectCtrl';
     static $name = 'LevelSelectController';

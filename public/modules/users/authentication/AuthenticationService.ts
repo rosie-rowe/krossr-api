@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * This should handle all interaction with the user information available to the client
  */

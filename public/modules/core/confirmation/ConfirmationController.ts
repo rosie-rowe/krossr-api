@@ -1,5 +1,3 @@
-'use strict';
-
 export class ConfirmationController implements angular.IComponentController {
     static $controllerAs = 'confirmationCtrl';
     static $name = 'ConfirmationController';

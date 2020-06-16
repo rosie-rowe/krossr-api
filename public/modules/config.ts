@@ -1,7 +1,5 @@
 import * as angular from 'angular';
 
-'use strict';
-
 // Init the application configuration module for AngularJS application
 export var ApplicationConfiguration = (function() {
 	// Init module configuration options

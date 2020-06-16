@@ -1,5 +1,3 @@
-'use strict';
-
 export class GameComponent implements angular.IComponentOptions {
     static $name = 'game';
     bindToController = true;

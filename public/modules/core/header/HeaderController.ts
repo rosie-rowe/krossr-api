@@ -1,8 +1,6 @@
 import { AuthenticationService } from '../../users/authentication/AuthenticationService'
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 
-'use strict';
-
 export class HeaderController implements angular.IComponentController {
 	static $controllerAs = 'headerCtrl';
 	static $name = 'HeaderController';	

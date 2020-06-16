@@ -1,5 +1,3 @@
-'use strict';
-
 /** Required to have a number select a dropdown's value, stolen from https://docs.angularjs.org/api/ng/directive/select */
 
 export class ConvertToNumberDirective implements angular.IDirective {

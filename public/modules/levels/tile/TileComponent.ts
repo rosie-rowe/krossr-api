@@ -1,5 +1,3 @@
-'use strict';
-
 export class TileComponent implements angular.IComponentOptions {
     static $name = 'tile';
     bindToController = true;

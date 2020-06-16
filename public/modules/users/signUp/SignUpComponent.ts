@@ -1,5 +1,3 @@
-'use strict';
-
 /** Sign-in popup */
 
 export class SignUpComponent implements angular.IComponentOptions {

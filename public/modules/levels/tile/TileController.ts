@@ -13,8 +13,6 @@ import { TouchService } from '../../../ng-app/Touch/TouchService';
 import { Utils } from '../utils/Utils';
 import { TileScope } from './TileScope';
 
-'use strict';
-
 export class TileController implements angular.IComponentController {
     static $controllerAs = 'tileCtrl';
     static $name = 'TileController';

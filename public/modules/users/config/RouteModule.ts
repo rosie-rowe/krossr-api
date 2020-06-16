@@ -1,5 +1,3 @@
-'use strict';
-
 // Setting up route
 export function routing($stateProvider) {
 	// Users state routing

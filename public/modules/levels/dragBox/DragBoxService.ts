@@ -1,8 +1,6 @@
 import { TileService } from '../tile/TileService';
 import { Point } from '../point/Point';
 
-'use strict';
-
 export class DragBoxService {
     static $name = 'dragBoxService';
 

@@ -1,5 +1,3 @@
-'use strict';
-
 export class HeaderComponent implements angular.IComponentOptions {
     static $name = 'krossrHeader';
     controller = 'HeaderController';

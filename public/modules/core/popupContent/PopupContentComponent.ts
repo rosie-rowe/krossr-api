@@ -1,5 +1,3 @@
-'use strict';
-
 export class PopupContentComponent implements angular.IComponentOptions {
     static $name = 'popupContent';
     bindToController = true;

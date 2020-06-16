@@ -1,5 +1,3 @@
-'use strict';
-
 // Config HTTP Error Handling
 export function errorHandler($httpProvider) {
 	// Set the httpProvider "not authorized" interceptor

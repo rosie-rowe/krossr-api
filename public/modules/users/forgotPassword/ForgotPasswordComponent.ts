@@ -1,5 +1,3 @@
-'use strict';
-
 /** Popup to change email/password or log out */
 
 export class ForgotPasswordComponent implements angular.IComponentOptions {

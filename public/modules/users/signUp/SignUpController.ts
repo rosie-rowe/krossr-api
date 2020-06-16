@@ -1,7 +1,5 @@
 import { AuthenticationService } from '../authentication/AuthenticationService'
 
-'use strict';
-
 export class SignUpController implements angular.IComponentController {
     static $controllerAs = 'signUpCtrl';
     static $name = 'SignUpController';

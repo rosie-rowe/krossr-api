@@ -1,5 +1,3 @@
-'use strict';
-
 export class LevelSelectComponent implements angular.IComponentOptions {
     static $name = 'levelSelect';
     bindToController = true;

@@ -1,7 +1,5 @@
 import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 
-'use strict';
-
 export class GameOverController implements angular.IComponentController {
     static $controllerAs = 'gameOverCtrl';
     static $name = 'GameOverController';
