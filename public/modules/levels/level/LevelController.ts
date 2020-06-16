@@ -7,7 +7,7 @@ import { GameMatrix } from '../gameMatrix/GameMatrix';
 import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
 import { LevelService } from '../../../ng-app/Level/LevelService';
 import { ShiftService } from '../../../ng-app/Shift/ShiftService';
-import { Utils } from '../utils/Utils';
+import { Utils } from '../../../ng-app/Utils/Utils';
 import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 
 export class LevelController implements angular.IComponentController {

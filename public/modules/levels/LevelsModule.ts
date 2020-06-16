@@ -10,7 +10,6 @@ import NumberLineModule from './numberLine/NumberLineModule';
 import ShellModule from './shell/ShellModule';
 import StarRatingModule from './starRating/StarRatingModule';
 import TileModule from './tile/TileModule';
-import UtilsModule from './utils/UtilsModule';
 
 import { LevelsRoutes } from './config/RouteModule';
 
@@ -25,8 +24,7 @@ export default angular
         NumberLineModule,
         ShellModule,
         StarRatingModule,
-        TileModule,
-        UtilsModule
+        TileModule
     ])
     .config(LevelsRoutes.route)
     .name;

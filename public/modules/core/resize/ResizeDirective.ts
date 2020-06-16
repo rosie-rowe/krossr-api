@@ -1,6 +1,6 @@
 import * as angular from 'angular';
 import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
-import { Utils } from '../../levels/utils/Utils'
+import { Utils } from '../../../ng-app/Utils/Utils'
 
 export class ResizeDirective implements angular.IDirective {
     static $name = 'resize';

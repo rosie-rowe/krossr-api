@@ -8,7 +8,7 @@ import { TileService } from '../../../ng-app/Tile/TileService';
 import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 import { TileState } from './TileState';
 import { TouchService } from '../../../ng-app/Touch/TouchService';
-import { Utils } from '../utils/Utils';
+import { Utils } from '../../../ng-app/Utils/Utils';
 import { TileScope } from './TileScope';
 import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 

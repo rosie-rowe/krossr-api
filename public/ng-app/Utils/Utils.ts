@@ -1,18 +1,14 @@
-import * as angular from 'angular';
+import { BooleanMatrix } from '../../modules/levels/matrix/BooleanMatrix';
+import { GameSizeService } from '../GameSize/GameSizeService';
+import { SideLengthService } from '../SideLength/SideLengthService';
+import { TileService } from '../Tile/TileService';
+import { Injectable } from '@angular/core';
 
-import { BooleanMatrix } from '../matrix/BooleanMatrix';
-import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
-import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
-import { TileService } from '../../../ng-app/Tile/TileService';
-
+@Injectable({
+    providedIn: 'root'
+})
 export class Utils {
     static $name = 'Utils';
-
-    static $inject = [
-        'gameSizeService',
-        'sideLengthService',
-        'tileService'
-    ];
 
     constructor(
         private gameSizeService: GameSizeService,

@@ -14,6 +14,7 @@ import { TileSizeEventService } from './TileSize/TileSizeEventService';
 import { TileSizeService } from './TileSize/TileSizeService';
 import { GameSizeEventService } from './GameSize/GameSizeEventService';
 import { GameSizeService } from './GameSize/GameSizeService';
+import { Utils } from './Utils/Utils';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ export class AppModule implements DoBootstrap {
             TileService,
             TileSizeService,
             TileSizeEventService,
-            TouchService
+            TouchService,
+            Utils
         ]);
 
         this.upgrade.bootstrap(document.body, [ApplicationConfiguration.applicationModuleName], { strictDi: false });
