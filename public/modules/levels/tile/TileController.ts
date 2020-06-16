@@ -1,4 +1,4 @@
-import { BooleanMatrix } from '../matrix/BooleanMatrix';
+import { BooleanMatrix } from '../../../ng-app/Matrix/BooleanMatrix';
 import { DragBoxService } from '../../../ng-app/DragBox/DragBoxService';
 import { ILevel } from "../level/Level";
 import { ShiftService } from '../../../ng-app/Shift/ShiftService';

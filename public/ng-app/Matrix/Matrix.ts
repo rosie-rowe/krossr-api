@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { IEquatable } from '../../core/equatable/IEquatable';
+import { IEquatable } from '../Equatable/IEquatable';
 
 /**
  * Container for a 2D array

@@ -1,5 +1,5 @@
-import { BooleanMatrix } from '../matrix/BooleanMatrix';
-import { IEquatable } from '../../core/equatable/IEquatable';
+import { BooleanMatrix } from '../../../ng-app/Matrix/BooleanMatrix';
+import { IEquatable } from '../../../ng-app/Equatable/IEquatable';
 
 export class GameMatrix implements IEquatable<GameMatrix> {
     public horizontal: BooleanMatrix;

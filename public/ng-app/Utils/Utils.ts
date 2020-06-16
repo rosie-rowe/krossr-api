@@ -1,4 +1,4 @@
-import { BooleanMatrix } from '../../modules/levels/matrix/BooleanMatrix';
+import { BooleanMatrix } from '../Matrix/BooleanMatrix';
 import { GameSizeService } from '../GameSize/GameSizeService';
 import { SideLengthService } from '../SideLength/SideLengthService';
 import { TileService } from '../Tile/TileService';

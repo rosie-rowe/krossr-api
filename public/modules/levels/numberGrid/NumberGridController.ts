@@ -1,4 +1,4 @@
-import { BooleanMatrix } from '../matrix/BooleanMatrix'
+import { BooleanMatrix } from '../../../ng-app/Matrix/BooleanMatrix'
 import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 

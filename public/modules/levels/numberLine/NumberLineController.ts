@@ -1,5 +1,5 @@
 
-import { BooleanMatrix } from '../matrix/BooleanMatrix'
+import { BooleanMatrix } from '../../../ng-app/Matrix/BooleanMatrix'
 import { LineContent } from '../../../ng-app/LineContent/LineContent';
 import { Point } from '../../../ng-app/Point/Point'
 import { SideLengthService } from '../../../ng-app/SideLength/SideLengthService';
