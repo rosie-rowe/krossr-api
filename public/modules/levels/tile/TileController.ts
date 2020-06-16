@@ -11,6 +11,7 @@ import { TileSizeService } from '../tileSize/TileSizeService';
 import { TileState } from './TileState';
 import { TouchService } from '../../../ng-app/Touch/TouchService';
 import { Utils } from '../utils/Utils';
+import { TileScope } from './TileScope';
 
 'use strict';
 
@@ -160,7 +161,7 @@ export class TileController implements angular.IComponentController {
             // more speed -- only clear the values that are present in
             // oldCoords but not allPendingCoords
             coordsToClear = oldCoords.filter(function(e) {
-                if (allPendingCoords.indexOfObject(e) === -1) return true;
+                if ((allPendingCoords as any).indexOfObject(e) === -1) return true;
             });
             
             this.clearPending(coordsToClear);
@@ -179,7 +180,7 @@ export class TileController implements angular.IComponentController {
     }
 
     private mouseMoveEvent(event: JQueryEventObject) {
-        let actualScope = this.touchService.getTargetScope(event);
+        let actualScope = this.touchService.getTargetScope(event) as TileScope;
 
         if (actualScope && actualScope.tileCtrl.index) {
             if (this.dragBoxService.validateStart())  {
@@ -192,7 +193,7 @@ export class TileController implements angular.IComponentController {
     * This event bubbles up to GameController, which completes the job
     */
     private mouseUpEvent(event: JQueryEventObject) {
-        let actualScope = this.touchService.getTargetScope(event);
+        let actualScope = this.touchService.getTargetScope(event) as TileScope;
         let coord;
 
         if (actualScope && actualScope.tileCtrl.hasOwnProperty('index')) {
