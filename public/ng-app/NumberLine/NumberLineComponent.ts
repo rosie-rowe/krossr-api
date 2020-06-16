@@ -7,7 +7,8 @@ import { TileSizeService } from '../TileSize/TileSizeService';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'number-line',
+    selector: 'number-line',
+    styles: [require('./NumberLineStyles.less')],
 	template: require('./NumberLineView.html')
 })
 export class NumberLineComponent implements OnInit {

@@ -1,4 +1,6 @@
-number-line {
+@import (reference) '../../less/variables.less';
+
+:host {
     &[orientation="horizontal"] {
         display: block;
         text-align: right;
@@ -17,9 +19,9 @@ number-line {
     &.even {
         background-color: #444;
     }
-}
 
-.finishedGrouping {
-    color: @selectedColor;    
-    transition: color .5s;
+    .finishedGrouping {
+        color: @selectedColor;    
+        transition: color .5s;
+    }
 }

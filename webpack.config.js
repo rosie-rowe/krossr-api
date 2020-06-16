@@ -49,12 +49,21 @@ var config = {
                 exclude: /node_modules/,
                 loader: 'html-loader?minimize=false' // Angular attributes require correct case...
             },
+            /** Mixed usage of scss/less loaders will be fixed later, TODO */
             {
                 test: /\.scss$/,
                 use: [
                     'style-loader',
                     'css-loader',
                     'sass-loader'
+                ]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    'to-string-loader',
+                    'css-loader',
+                    'less-loader'
                 ]
             }
         ]

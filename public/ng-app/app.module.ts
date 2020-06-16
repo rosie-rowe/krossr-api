@@ -23,6 +23,7 @@ import { AuthenticationService } from './Authentication/AuthenticationService';
 import { GameOverService } from './GameOver/GameOverService';
 import { GameOverComponent } from './GameOver/GameOverComponent';
 import { NumberLineComponent } from './NumberLine/NumberLineComponent';
+import { NumberGridComponent } from './NumberGrid/NumberGridComponent';
 
 @NgModule({
     imports: [
@@ -33,10 +34,12 @@ import { NumberLineComponent } from './NumberLine/NumberLineComponent';
     ],
     declarations: [
         GameOverComponent,
+        NumberGridComponent,
         NumberLineComponent
     ],
     entryComponents: [
         GameOverComponent,
+        NumberGridComponent,
         NumberLineComponent
     ],
     providers: [
@@ -52,6 +55,7 @@ export class AppModule implements DoBootstrap {
         application();
 
         this.downgradeComponents([
+            NumberGridComponent,
             NumberLineComponent
         ]);
 

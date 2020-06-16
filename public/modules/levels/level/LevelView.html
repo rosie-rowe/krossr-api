@@ -53,8 +53,8 @@
         <div class="gameContainer-inner">
             <div class="top row">
                 <number-grid
-                    game-matrix="levelCtrl.gameMatrix['vertical']"
-                    goal-matrix="levelCtrl.goalMatrix['vertical']"
+                    [game-matrix]="levelCtrl.gameMatrix['vertical']"
+                    [goal-matrix]="levelCtrl.goalMatrix['vertical']"
                     ng-if="levelCtrl.level && levelCtrl.level.layout && levelCtrl.level.currentView === 'view'"
                     orientation="vertical"
                     class="top-grid"
@@ -65,8 +65,8 @@
                 <game game-matrix="levelCtrl.gameMatrix" goal-matrix="levelCtrl.goalMatrix" level="levelCtrl.level" tiles="levelCtrl.finalLayout.tiles" ng-if="levelCtrl.finalLayout.tiles"></game>
 
                 <number-grid
-                    game-matrix="levelCtrl.gameMatrix['horizontal']"
-                    goal-matrix="levelCtrl.goalMatrix['horizontal']"
+                    [game-matrix]="levelCtrl.gameMatrix['horizontal']"
+                    [goal-matrix]="levelCtrl.goalMatrix['horizontal']"
                     ng-if="levelCtrl.level && levelCtrl.level.layout && levelCtrl.level.currentView === 'view'"
                     orientation="horizontal"
                     class="left-grid"

@@ -4,7 +4,6 @@ import GameModule from './game/GameModule';
 import LevelModule from './level/LevelModule';
 import LevelSelectModule from './levelSelect/LevelSelectModule';
 import ModeSelectorModule from './modeSelector/ModeSelectorModule';
-import NumberGridModule from './numberGrid/NumberGridModule';
 import ShellModule from './shell/ShellModule';
 import StarRatingModule from './starRating/StarRatingModule';
 import TileModule from './tile/TileModule';
@@ -17,7 +16,6 @@ export default angular
         LevelModule,
         LevelSelectModule,
         ModeSelectorModule,
-        NumberGridModule,
         ShellModule,
         StarRatingModule,
         TileModule

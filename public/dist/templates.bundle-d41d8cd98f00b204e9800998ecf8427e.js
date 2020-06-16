@@ -1,4 +1,4 @@
-angular.module('templates-main', ['modules/core/confirmation/ConfirmationView.html', 'modules/core/header/HeaderView.html', 'modules/core/help/HelpView.html', 'modules/core/loadingAnimation/LoadingAnimationView.html', 'modules/core/pagination/PaginationView.html', 'modules/core/popupContent/PopupContentView.html', 'modules/core/views/index.client.view.html', 'modules/levels/game/GameView.html', 'modules/levels/level/index.html', 'modules/levels/level/LevelView.html', 'modules/levels/levelSelect/LevelSelectView.html', 'modules/levels/modeSelector/ModeSelectorView.html', 'modules/levels/numberGrid/NumberGridView.html', 'modules/levels/starRating/StarRatingView.html', 'modules/levels/tile/TileView.html', 'modules/users/editProfile/EditProfileView.html', 'modules/users/forgotPassword/ForgotPasswordView.html', 'modules/users/resetPassword/ResetPasswordView.html', 'modules/users/signIn/SignInView.html', 'modules/users/signUp/SignUpView.html']);
+angular.module('templates-main', ['modules/core/confirmation/ConfirmationView.html', 'modules/core/header/HeaderView.html', 'modules/core/help/HelpView.html', 'modules/core/loadingAnimation/LoadingAnimationView.html', 'modules/core/pagination/PaginationView.html', 'modules/core/popupContent/PopupContentView.html', 'modules/core/views/index.client.view.html', 'modules/levels/game/GameView.html', 'modules/levels/level/index.html', 'modules/levels/level/LevelView.html', 'modules/levels/levelSelect/LevelSelectView.html', 'modules/levels/modeSelector/ModeSelectorView.html', 'modules/levels/starRating/StarRatingView.html', 'modules/levels/tile/TileView.html', 'modules/users/editProfile/EditProfileView.html', 'modules/users/forgotPassword/ForgotPasswordView.html', 'modules/users/resetPassword/ResetPasswordView.html', 'modules/users/signIn/SignInView.html', 'modules/users/signUp/SignUpView.html']);
 
 angular.module("modules/core/confirmation/ConfirmationView.html", []).run(["$templateCache", function ($templateCache) {
   $templateCache.put("modules/core/confirmation/ConfirmationView.html",
@@ -174,8 +174,8 @@ angular.module("modules/levels/level/LevelView.html", []).run(["$templateCache",
     "        <div class=\"gameContainer-inner\">\n" +
     "            <div class=\"top row\">\n" +
     "                <number-grid\n" +
-    "                    game-matrix=\"levelCtrl.gameMatrix['vertical']\"\n" +
-    "                    goal-matrix=\"levelCtrl.goalMatrix['vertical']\"\n" +
+    "                    [game-matrix]=\"levelCtrl.gameMatrix['vertical']\"\n" +
+    "                    [goal-matrix]=\"levelCtrl.goalMatrix['vertical']\"\n" +
     "                    ng-if=\"levelCtrl.level && levelCtrl.level.layout && levelCtrl.level.currentView === 'view'\"\n" +
     "                    orientation=\"vertical\"\n" +
     "                    class=\"top-grid\"\n" +
@@ -186,8 +186,8 @@ angular.module("modules/levels/level/LevelView.html", []).run(["$templateCache",
     "                <game game-matrix=\"levelCtrl.gameMatrix\" goal-matrix=\"levelCtrl.goalMatrix\" level=\"levelCtrl.level\" tiles=\"levelCtrl.finalLayout.tiles\" ng-if=\"levelCtrl.finalLayout.tiles\"></game>\n" +
     "\n" +
     "                <number-grid\n" +
-    "                    game-matrix=\"levelCtrl.gameMatrix['horizontal']\"\n" +
-    "                    goal-matrix=\"levelCtrl.goalMatrix['horizontal']\"\n" +
+    "                    [game-matrix]=\"levelCtrl.gameMatrix['horizontal']\"\n" +
+    "                    [goal-matrix]=\"levelCtrl.goalMatrix['horizontal']\"\n" +
     "                    ng-if=\"levelCtrl.level && levelCtrl.level.layout && levelCtrl.level.currentView === 'view'\"\n" +
     "                    orientation=\"horizontal\"\n" +
     "                    class=\"left-grid\"\n" +
@@ -294,24 +294,6 @@ angular.module("modules/levels/modeSelector/ModeSelectorView.html", []).run(["$t
     "<div class=\"mode\" ng-class=\"{ 'selected': modeSelectorCtrl.selectedMode === mode.name }\" ng-click=\"modeSelectorCtrl.selectMode(mode);\" ng-repeat=\"mode in modeSelectorCtrl.modes\">\n" +
     "    {{ mode.name }}\n" +
     "</div>");
-}]);
-
-angular.module("modules/levels/numberGrid/NumberGridView.html", []).run(["$templateCache", function ($templateCache) {
-  $templateCache.put("modules/levels/numberGrid/NumberGridView.html",
-    "<number-line\n" +
-    "	[game-matrix]=\"numGridCtrl.gameMatrix\"\n" +
-    "	[goal-matrix]=\"numGridCtrl.goalMatrix\"\n" +
-    "	ng-style=\"{\n" +
-    "		'width': numGridCtrl.isVertical ? numGridCtrl.tileSize : '',\n" +
-    "		'font-size': numGridCtrl.getFontSize()\n" +
-    "	}\"\n" +
-    "	ng-repeat=\"i in [].constructor(numGridCtrl.goalMatrix.length) track by $index\"\n" +
-    "	ng-class-even=\"'even'\"\n" +
-    "	ng-class-odd=\"'odd'\"\n" +
-    "	[index]=\"$index\"\n" +
-    "	orientation=\"{{ numGridCtrl.orientation }}\"\n" +
-    "	>\n" +
-    "</number-line>");
 }]);
 
 angular.module("modules/levels/starRating/StarRatingView.html", []).run(["$templateCache", function ($templateCache) {

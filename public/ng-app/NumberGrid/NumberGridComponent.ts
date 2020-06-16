@@ -1,39 +1,41 @@
-import { BooleanMatrix } from '../../../ng-app/Matrix/BooleanMatrix'
-import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
-import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
+import { BooleanMatrix } from '../Matrix/BooleanMatrix'
+import { TileSizeService } from '../TileSize/TileSizeService';
+import { TileSizeEventService } from '../TileSize/TileSizeEventService';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 
-export class NumberGridController implements angular.IComponentController {
-    static $name = 'NumberGridController';
-
-    static $inject = [
-        TileSizeEventService.$name,
-        'tileSizeService'
-    ];
+@Component({
+    selector: 'number-grid',
+    styles: [require('./NumberGridStyles.less')],
+    template: require('./NumberGridView.html')
+})
+export class NumberGridComponent implements OnInit {
+    static $name = 'numberGrid';
 
     constructor(
         private tileSizeEventService: TileSizeEventService,
         private tileSizeService: TileSizeService
     ) {
-
     }
 
     /** The top row is considered vertical because the numbers go from top to bottom */
     private isVertical: boolean;
 
     // At this level and below we're working with the individual rotated pieces, not the full thing
-    private gameMatrix: BooleanMatrix;
-    private goalMatrix: BooleanMatrix;
+    @Input() gameMatrix: BooleanMatrix;
+    @Input() goalMatrix: BooleanMatrix;
 
-    private orientation: string;
+    @Input() orientation: string;
 
     private tileSize: string;
 
-    $onInit() {
+    public repeater: number[];
+
+    ngOnInit() {
+        this.repeater = new Array(this.goalMatrix.length).fill(null).map((x, i) => i);
+
         this.isVertical = this.orientation === 'vertical';
         this.setTileSize();
-    }
 
-    $postLink() {
         this.tileSizeEventService.tileSizeChanged.subscribe(() => {
             this.setTileSize();
         });
