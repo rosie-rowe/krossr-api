@@ -1,6 +1,6 @@
 import { Point } from '../Point/Point';
 import { SideLengthService } from '../SideLength/SideLengthService';
-import { TileState } from '../../modules/levels/tile/TileState';
+import { TileState } from './TileState';
 import { Injectable } from '@angular/core';
 
 /**

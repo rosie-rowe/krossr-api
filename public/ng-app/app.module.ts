@@ -26,6 +26,7 @@ import { NumberLineComponent } from './NumberLine/NumberLineComponent';
 import { NumberGridComponent } from './NumberGrid/NumberGridComponent';
 import { StarRatingComponent } from './StarRating/StarRatingComponent';
 import { ModeSelectorComponent } from './ModeSelector/ModeSelectorComponent';
+import { TileComponent } from './Tile/TileComponent';
 
 @NgModule({
     imports: [
@@ -39,14 +40,16 @@ import { ModeSelectorComponent } from './ModeSelector/ModeSelectorComponent';
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
-        StarRatingComponent
+        StarRatingComponent,
+        TileComponent
     ],
     entryComponents: [
         GameOverComponent,
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
-        StarRatingComponent
+        StarRatingComponent,
+        TileComponent
     ],
     providers: [
         { provide: 'window', useValue: window }
@@ -64,7 +67,8 @@ export class AppModule implements DoBootstrap {
             ModeSelectorComponent,
             NumberGridComponent,
             NumberLineComponent,
-            StarRatingComponent
+            StarRatingComponent,
+            TileComponent
         ]);
 
         this.downgradeServices([

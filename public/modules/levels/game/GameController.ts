@@ -4,7 +4,7 @@ import { GameOverService } from '../../../ng-app/GameOver/GameOverService';
 import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
 import { ILevel } from "../level/Level";
 import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
-import { TileState } from '../tile/TileState';
+import { TileState } from '../../../ng-app/Tile/TileState';
 import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 import { GameSizeEventService } from '../../../ng-app/GameSize/GameSizeEventService';
 
