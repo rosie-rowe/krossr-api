@@ -36,6 +36,7 @@ import { LevelSelectComponent } from './LevelSelect/LevelSelectComponent';
 import { HeaderComponent } from './Header/HeaderComponent';
 import { PaginationComponent } from './Pagination/PaginationComponent';
 import { RatingService } from './Rating/RatingService';
+import { LoadingAnimationComponent } from './LoadingAnimation/LoadingAnimationComponent';
 
 @NgModule({
     imports: [
@@ -51,6 +52,7 @@ import { RatingService } from './Rating/RatingService';
         GameComponent,
         GameOverComponent,
         HeaderComponent,
+        LoadingAnimationComponent,
         LevelSelectComponent,
         ModeSelectorComponent,
         NumberGridComponent,
@@ -63,6 +65,7 @@ import { RatingService } from './Rating/RatingService';
         GameComponent,
         GameOverComponent,
         HeaderComponent,
+        LoadingAnimationComponent,
         LevelSelectComponent,
         ModeSelectorComponent,
         NumberGridComponent,
@@ -86,6 +89,7 @@ export class AppModule implements DoBootstrap {
         this.downgradeComponents([
             GameComponent,
             HeaderComponent,
+            LoadingAnimationComponent,
             ModeSelectorComponent,
             NumberGridComponent,
             NumberLineComponent,

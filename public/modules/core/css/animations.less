@@ -2,7 +2,6 @@
     .Transition(opacity .3s ease-in-out);
 }
 
-
 [ui-view].ng-enter {
   opacity: 0;
 }
@@ -20,41 +19,15 @@
   opacity: 0;
 }
 
-.animate-hide {
+/** Maybe todo, sheet might need to be loaded by a component for ng-deep to work */
+.animate-hide,
+::ng-deep .animate-hide {
     .Transition(opacity .3s ease-in-out);
 	opacity: 1;
 
 	&.ng-hide {
 		opacity: 0;
 	}
-}
-
-/* taking the animation out of context makes it possible to use it without making scrollbars appear */
-loading-animation {
-	position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-
-    z-index: 0; /* not clickable */
-}
-
-.loadingAnimation {
-	height: 100%;
-	width: 100%;
-	display: table;
-	text-align: center;
-
-	&.ng-hide  {
-		display: table !important;
-	}
-}
-
-.loadingAnimation-inner {
-	font-size: 72px;
-	display: table-cell;
-	vertical-align: middle;
 }
 
 .animate-if.ng-enter, .animate-if.ng-leave {
@@ -69,8 +42,4 @@ loading-animation {
 .animate-if.ng-leave,
 .animate-if.ng-enter.ng-enter-active {
 	max-height: 100%;
-}
-
-.specialK {
-	text-shadow: 1px 3px 30px @selectedColor;
 }

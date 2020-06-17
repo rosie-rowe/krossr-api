@@ -3,7 +3,6 @@ import * as angular from 'angular';
 import ConfirmationModule from './confirmation/ConfirmationModule';
 import ConvertToNumberModule from './convertToNumber/ConvertToNumberModule';
 import HelpModule from './help/HelpModule';
-import LoadingAnimationModule from './loadingAnimation/LoadingAnimationModule';
 import PopupContentModule from './popupContent/PopupContentModule';
 import ResizeModule from './resize/ResizeModule';
 
@@ -14,7 +13,6 @@ export default angular
         ConfirmationModule,
         ConvertToNumberModule,
         HelpModule,
-        LoadingAnimationModule,
         PopupContentModule,
         ResizeModule
     ])

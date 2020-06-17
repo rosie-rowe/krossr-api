@@ -251,7 +251,6 @@ export class LevelController implements angular.IComponentController {
         }
     }
     
-    /* Doing this old school until I figure out a better way */
     rate(rating) {
         this.$timeout(() => {
             this.ratingService.rate(this.level.id, rating);

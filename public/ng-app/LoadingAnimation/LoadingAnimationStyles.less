@@ -1,0 +1,32 @@
+@import (reference) '../../less/variables.less';
+
+:host {
+	position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    z-index: 0;
+
+    .loadingAnimation {
+        height: 100%;
+        width: 100%;
+        display: table;
+        text-align: center;
+    
+        &.ng-hide  {
+            display: table !important;
+        }
+    }
+
+    .loadingAnimation-inner {
+        font-size: 72px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .specialK {
+        text-shadow: 1px 3px 30px @selectedColor;
+    }
+}
