@@ -10,7 +10,6 @@ export var ApplicationConfiguration = (function() {
 		'ngSanitize',
 		'ui.router',
 		'ui.router.upgrade',
-		'ui.utils',
 		'debounce',
 		'templates-main'
 	];
