@@ -1,9 +1,16 @@
 import { Injectable } from "@angular/core";
+import { LevelList } from "./LevelList";
+import { HttpClient, HttpParams } from "@angular/common/http";
 @Injectable({
     providedIn: 'root'
 })
 export class LevelService {
     static $name = 'levelService';
+
+    constructor(
+        private httpClient: HttpClient
+    ) {
+    }
 
     /**
      * Converts a base64 string that decodes into a binary string into a layout
@@ -29,5 +36,11 @@ export class LevelService {
         });
 
         return resultLayout;
+    }
+
+    getLevels(query: any): Promise<LevelList> {
+        return this.httpClient.get('levels', {
+            params: new HttpParams({ fromObject: query})
+        }).toPromise().then((result: LevelList) => result);
     }
 }

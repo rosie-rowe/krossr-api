@@ -1,5 +1,6 @@
 import './angular-material-theme.scss';
 
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, DoBootstrap, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +35,7 @@ import { GameComponent } from './Game/GameComponent';
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        HttpClientModule,
         MatDialogModule,
         UpgradeModule
     ],

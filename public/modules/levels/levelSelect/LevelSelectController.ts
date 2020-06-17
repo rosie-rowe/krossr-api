@@ -1,5 +1,7 @@
 import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
 import { Utils } from '../../../ng-app/Utils/Utils';
+import { LevelService } from '../../../ng-app/Level/LevelService';
+import { query } from '@angular/animations';
 
 export class LevelSelectController implements angular.IComponentController {
     static $controllerAs = 'levelSelectCtrl';
@@ -7,13 +9,13 @@ export class LevelSelectController implements angular.IComponentController {
 
     static $inject = [
         'Authentication',
-        'Levels',
+        LevelService.$name,
         'Utils'
     ];
 
     constructor(
         private Authentication: AuthenticationService,
-        private Levels: any,
+        private levelService: LevelService,
         private Utils: Utils
     ) {
 
@@ -42,7 +44,7 @@ export class LevelSelectController implements angular.IComponentController {
             sortDirection: this.sortDirection
         };
     
-        this.Levels.query(queryObj, (data) => {
+        this.levelService.getLevels(queryObj).then(data => {
             var i = 0,
                 allLevels = data.levels,
                 len = allLevels ? allLevels.length : 0,
