@@ -12,7 +12,6 @@ module.exports = function(grunt) {
 		clientJS: ['public/js/*.js', 'public/modules/*[!tests]*/*.js'],
 		clientCSS: ['public/modules/**/*.css', 'public/less/modules.css'],
 		clientLESS: ['public/**/*.less', 'public/less/*'],
-		mochaTests: ['app/tests/**/*.js']
 	};
 
 	grunt.loadNpmTasks('grunt-webpack');
@@ -127,13 +126,6 @@ module.exports = function(grunt) {
 				NODE_ENV: 'test'
 			}
 		},
-		mochaTest: {
-			src: watchFiles.mochaTests,
-			options: {
-				reporter: 'spec',
-				require: 'server.js'
-			}
-		},
 		karma: {
 			unit: {
 				configFile: 'karma.conf.js'
@@ -189,11 +181,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('buildTypescript', ['webpack:dev']);
 	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'buildTypescript', 'buildHTML', 'buildCSS']);
 
-	// Test task.
-	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
-
-    grunt.registerTask('mocha', ['env:test', 'mochaTest']);
-
-	// production
-	grunt.registerTask('production', []);
+	grunt.registerTask('test', ['env:test', 'karma:unit']);
 };

@@ -100,7 +100,6 @@
     "grunt-env": "~0.4.1",
     "grunt-html2js": "^0.3.6",
     "grunt-karma": "^2.0.0",
-    "grunt-mocha-test": "~0.13.2",
     "grunt-nodemon": "~0.4.2",
     "grunt-webpack": "^3.0.2",
     "jasmine-core": "^2.6.4",
