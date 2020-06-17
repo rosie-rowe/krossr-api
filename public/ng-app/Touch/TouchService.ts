@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
     providedIn: 'root'
@@ -8,17 +8,10 @@ export class TouchService {
     static $name = 'touchService';
 
     /** Touchmove/touchend will not move along with crossing over elements like mousemove/mouseup will, so we need hax */
-    getRealTarget(event: JQueryEventObject): angular.IAugmentedJQuery {
+    getRealTarget(event: TouchEvent): angular.IAugmentedJQuery {
         var myLocation = this.getTouches(event)[0];
 
         return angular.element(document.elementFromPoint(myLocation.clientX, myLocation.clientY)) as angular.IAugmentedJQuery;
-    }
-
-    /** Shortcut for getting actual target scope */
-    getTargetScope(event: JQueryEventObject): angular.IScope {
-        var target = this.getRealTarget(event);
-
-        return target.scope();
     }
 
     /**
@@ -39,4 +32,8 @@ export class TouchService {
 
         return event.touches;
     }
+
+    public tileTouched: EventEmitter<HTMLElement> = new EventEmitter();
+    public tileTouchEnd: EventEmitter<HTMLElement> = new EventEmitter();
+    public lastTouchedTile: HTMLElement;
 }

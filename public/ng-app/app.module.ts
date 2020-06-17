@@ -27,6 +27,7 @@ import { NumberGridComponent } from './NumberGrid/NumberGridComponent';
 import { StarRatingComponent } from './StarRating/StarRatingComponent';
 import { ModeSelectorComponent } from './ModeSelector/ModeSelectorComponent';
 import { TileComponent } from './Tile/TileComponent';
+import { TileEventService } from './Tile/TileEventService';
 
 @NgModule({
     imports: [
@@ -80,6 +81,7 @@ export class AppModule implements DoBootstrap {
             LevelService,
             SideLengthService,
             ShiftService,
+            TileEventService,
             TileService,
             TileSizeService,
             TileSizeEventService,

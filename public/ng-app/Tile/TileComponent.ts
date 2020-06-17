@@ -11,6 +11,7 @@ import { TouchService } from '../Touch/TouchService';
 import { Utils } from '../Utils/Utils';
 import { TileSizeEventService } from '../TileSize/TileSizeEventService';
 import { Component, Input, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { TileEventService } from './TileEventService';
 
 @Component({
     selector: 'tile',
@@ -46,6 +47,7 @@ export class TileComponent implements OnInit, AfterViewInit {
         private dragBoxService: DragBoxService,
         private shiftService: ShiftService,
         private sideLengthService: SideLengthService,
+        private tileEventService: TileEventService,
         private tileService: TileService,
         private tileSizeEventService: TileSizeEventService,
         private tileSizeService: TileSizeService,
@@ -75,18 +77,30 @@ export class TileComponent implements OnInit, AfterViewInit {
             this.mouseDownEvent();
         });
 
-        // this.$element.on('touchmove', (e) => {
-        //     e.preventDefault();
-        //     this.mouseMoveEvent(e);
-        // });
+        this.$element.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            this.touchMoveEvent(e);
+        });
 
         this.$element.addEventListener('touchend', (e) => {
             e.preventDefault();
-            this.mouseUpEvent();
+            this.touchEndEvent();
         })
 
         this.tileSizeEventService.tileSizeChanged.subscribe(() => {
             this.setTileSize(this.tileSizeService.getTileSize());
+        });
+
+        this.touchService.tileTouched.subscribe(tile => {
+            if (this.$element === tile) {
+                this.tryFillPending();
+            }
+        })
+
+        this.touchService.tileTouchEnd.subscribe(tile => {
+            if (this.$element === tile ) {
+                this.tryEndDragbox();
+            }
         });
     }
 
@@ -159,6 +173,16 @@ export class TileComponent implements OnInit, AfterViewInit {
     }
 
     private mouseMoveEvent() {
+        this.tryFillPending();
+    }
+
+    private touchMoveEvent(e: TouchEvent) {
+        let actualTile = this.getActualTileFromTouchEvent(e);
+        this.touchService.tileTouched.emit(actualTile);
+        this.touchService.lastTouchedTile = actualTile;
+    }
+
+    private tryFillPending() {
         if (this.dragBoxService.validateStart())  {
             this.fillPending(this.index);
         }
@@ -168,8 +192,25 @@ export class TileComponent implements OnInit, AfterViewInit {
     * This event bubbles up to GameController, which completes the job
     */
     private mouseUpEvent() {
+        this.tryEndDragbox();
+    }
+
+    private touchEndEvent() {
+        this.touchService.tileTouchEnd.emit(this.touchService.lastTouchedTile);
+        this.touchService.lastTouchedTile = null;
+    }
+    
+    private tryEndDragbox() {
         let coord = this.tileService.convertTo2D(this.index);
-        this.dragBoxService.endCoord = coord;
+        this.dragBoxService.endCoord = coord; 
+        this.tileEventService.tileDragEnd.emit();
+    }
+
+    /** This relies on jQuery, TODO */
+    private getActualTileFromTouchEvent(e: TouchEvent) {
+        let actualTile = this.touchService.getRealTarget(e).closest('tile');
+
+        return actualTile[0] as HTMLElement;
     }
 
     change(index, initState, changeTo) {

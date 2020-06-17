@@ -7,6 +7,7 @@ import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
 import { TileState } from '../../../ng-app/Tile/TileState';
 import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 import { GameSizeEventService } from '../../../ng-app/GameSize/GameSizeEventService';
+import { TileEventService } from '../../../ng-app/Tile/TileEventService';
 
 export class GameController implements angular.IComponentController {
     static $controllerAs = 'gameCtrl';
@@ -18,6 +19,7 @@ export class GameController implements angular.IComponentController {
         'gameOverService',
         GameSizeEventService.$name,
         'gameSizeService',
+        TileEventService.$name,
         TileSizeEventService.$name,
         'tileSizeService',
         'dragBoxService'
@@ -29,6 +31,7 @@ export class GameController implements angular.IComponentController {
         private gameOverService: GameOverService,
         private gameSizeEventService: GameSizeEventService,
         private gameSizeService: GameSizeService,
+        private tileEventService: TileEventService,
         private tileSizeEventService: TileSizeEventService,
         private tileSizeService: TileSizeService,
         private dragBoxService: DragBoxService,
@@ -64,23 +67,13 @@ export class GameController implements angular.IComponentController {
             this.applyFillDragBox(TileState.empty);
         });
 
-        /**
-         * If a user starts dragging a tile and their mouse pointer leaves the game area,
-         * the area that was highlighted before should stay highlighted,
-         * and should activate when the user lets go of the mouse button.
-         * When the mouse is released in the game, attempt to process a dragbox and check if the game is won.
-         * This event works with the mouseup event in TileController and 
-         * should always run after that event due to bubbling.
-         */
-        this.$element.on('mouseup', (e) => this.mouseUpEvent(e));
-        this.$element.on('touchend', (e) => {
-            e.preventDefault();
-            this.mouseUpEvent(e);
-        });
-        
         this.gameSizeEventService.gameSizeChanged.subscribe(() => {
             this.updateGameSize();
         });
+
+        this.tileEventService.tileDragEnd.subscribe(() => {
+            this.mouseUpEvent();
+        })
 
         this.tileSizeEventService.tileSizeChanged.subscribe((tileSize) => {
             this.setMargin(tileSize);
@@ -95,7 +88,15 @@ export class GameController implements angular.IComponentController {
         this.$scope.$apply();
     };
 
-    private mouseUpEvent(event: JQueryEventObject) {
+    /**
+     * If a user starts dragging a tile and their mouse pointer leaves the game area,
+     * the area that was highlighted before should stay highlighted,
+     * and should activate when the user lets go of the mouse button.
+     * When the mouse is released in the game, attempt to process a dragbox and check if the game is won.
+     * This event works with the mouseup event in TileController and 
+     * should always run after that event.
+     */
+    private mouseUpEvent() {
         this.applyFillDragBox();
 
         if (this.checkWin()) {
