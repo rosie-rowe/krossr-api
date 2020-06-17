@@ -34,6 +34,7 @@ import { TileEventService } from './Tile/TileEventService';
 import { GameComponent } from './Game/GameComponent';
 import { LevelSelectComponent } from './LevelSelect/LevelSelectComponent';
 import { HeaderComponent } from './Header/HeaderComponent';
+import { PaginationComponent } from './Pagination/PaginationComponent';
 
 @NgModule({
     imports: [
@@ -53,6 +54,7 @@ import { HeaderComponent } from './Header/HeaderComponent';
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
+        PaginationComponent,
         StarRatingComponent,
         TileComponent
     ],
@@ -64,6 +66,7 @@ import { HeaderComponent } from './Header/HeaderComponent';
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
+        PaginationComponent,
         StarRatingComponent,
         TileComponent
     ],

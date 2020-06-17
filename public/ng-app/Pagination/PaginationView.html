@@ -1,0 +1,13 @@
+<div class="pagination">
+    <div class="prevPage" (click)="pageDown()" [ngClass]="{'invisible': currentPage === 0}">
+        ◀
+    </div>
+
+    <div class="currentPage">
+        Page {{ currentPage + 1 }} of {{ totalPages }}
+    </div>
+
+    <div class="nextPage" (click)="pageUp()" [ngClass]="{'invisible': currentPage + 1 === totalPages }">
+        ▶
+    </div>
+</div>

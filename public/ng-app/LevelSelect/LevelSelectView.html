@@ -85,6 +85,5 @@
         </button>
     </div>
 
-    <!-- TODO -->
-    <!-- <pagination *ngIf="levels && levels.length > 0" on-pagination="find(currentPage)" current-page="currentPage" total-pages="totalPages"></pagination> -->
+    <pagination *ngIf="levels && levels.length > 0" (onPagination)="find($event)" [currentPage]="currentPage" [totalPages]="totalPages"></pagination>
 </div>
