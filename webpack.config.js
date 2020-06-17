@@ -6,12 +6,7 @@ var config = {
     devtool: 'source-map',
     entry: {
         'vendor': [
-            'angular',
-            'angular-animate',
-            'angular-resource',
-            'angular-cookies',
-            'angular-touch',
-            'ng-debounce/angular-debounce.js'
+            'angular'
         ],
         'krossr': 'app.ts'
     },
@@ -22,7 +17,6 @@ var config = {
     resolve: {
         modules: [
             'node_modules',
-            'public/lib',
             'public/modules',
             'public/ng-app'
         ],

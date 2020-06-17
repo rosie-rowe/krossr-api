@@ -1,3 +1,9 @@
+import 'angular';
+import 'angular-animate'
+import 'angular-resource'
+import 'angular-cookies';
+import 'angular-touch'
+import 'ng-debounce/dist/ng-debounce';
 import './polyfills';
 import  { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app.module';
