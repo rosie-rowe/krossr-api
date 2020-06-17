@@ -70,20 +70,20 @@ export class TileComponent implements OnInit, AfterViewInit {
         this.$element.addEventListener('mousemove', (e) => this.mouseMoveEvent());
         this.$element.addEventListener('mouseup', (e) => this.mouseUpEvent());
 
-        // this.$element.on('touchstart', (e) => {
-        //     e.preventDefault();
-        //     this.mouseDownEvent(e);
-        // });
+        this.$element.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.mouseDownEvent();
+        });
 
         // this.$element.on('touchmove', (e) => {
         //     e.preventDefault();
         //     this.mouseMoveEvent(e);
         // });
 
-        // this.$element.on('touchend', (e) => {
-        //     e.preventDefault();
-        //     this.mouseUpEvent(e);
-        // })
+        this.$element.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.mouseUpEvent();
+        })
 
         this.tileSizeEventService.tileSizeChanged.subscribe(() => {
             this.setTileSize(this.tileSizeService.getTileSize());
