@@ -4,7 +4,6 @@ export interface ILevel {
     name: string;
     ratings?;
     ready: boolean;
-    won?: boolean;
     layout?: Boolean[][];
     yourRating?;
 }

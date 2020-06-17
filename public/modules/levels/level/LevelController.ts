@@ -205,7 +205,6 @@ export class LevelController implements angular.IComponentController {
                 this.getLayoutForRepeater(mode, this.level.layout);
                 this.level.currentView = mode;
 
-                this.level.won = false;
                 this.level.ready = true;
             });
         } else {

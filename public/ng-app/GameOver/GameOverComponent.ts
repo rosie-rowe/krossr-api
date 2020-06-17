@@ -1,17 +1,16 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Input, Inject } from '@angular/core';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LevelSelectComponent } from '../LevelSelect/LevelSelectComponent';
 
 @Component({
     selector: 'game-over',
     template: require('./GameOverView.html')
 })
 export class GameOverComponent {
-    @Input() levelId: string;
-    @Output() closeAction: EventEmitter<void> = new EventEmitter();
-    @Input() won: boolean;
-
     constructor(
-        private matDialogRef: MatDialogRef<GameOverComponent>
+        private matDialogRef: MatDialogRef<GameOverComponent>,
+        private matDialog: MatDialog,
+        @Inject(MAT_DIALOG_DATA) public data: { levelId: number }
     ) {
     }
 
@@ -21,6 +20,6 @@ export class GameOverComponent {
 
     newLevel() {
         this.matDialogRef.close();
-        // this.componentDialogService.open('level-select');
+        this.matDialog.open(LevelSelectComponent);
     }
 }

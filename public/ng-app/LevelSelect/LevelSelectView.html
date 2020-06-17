@@ -51,7 +51,7 @@
 
     <div class="list-group" *ngIf="levels">
         <div *ngFor="let level of levels; let isOdd = odd" [ngClass]="{ 'odd': isOdd }" class="list-group-item level">
-            <a class="playButton" uiSref="level" [uiParams]="{ levelId: level.id }" ui-sref-opts="{ reload: true }" (click)="close()">
+            <a class="playButton" uiSref="level" [uiParams]="{ levelId: level.id }" [uiOptions]="{ reload: true }" (click)="close()">
                 <i class="fa fa-play"></i>
             </a>
 
@@ -61,7 +61,7 @@
                 by {{ level.user.username }}
             </div>
 
-            <a class="editButton" uiSref="update-level" [uiParams]="{ levelId: level.id }" (click)="close()" *ngIf="level && Authentication.user.id === level.userId">
+            <a class="editButton" uiSref="update-level" [uiParams]="{ levelId: level.id }" [uiOptions]="{ reload: true }" (click)="close()" *ngIf="level && Authentication.user.id === level.userId">
                 <i class="fa fa-edit"></i>
             </a>
 

@@ -20,8 +20,7 @@ export class GameOverService {
     openDialog(level: ILevel): void {
         this.matDialog.open(GameOverComponent, {
             data: {
-                levelId: level.id,
-                won: level.won
+                levelId: level.id
             },
             disableClose: true
         });

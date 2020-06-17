@@ -112,7 +112,6 @@ export class GameComponent implements OnInit {
         var winner = this.checkForWin();
 
         if (winner) {
-            this.level.won = true;
             return true;
         }
         
