@@ -1,6 +1,5 @@
 import * as angular from 'angular';
 
-import ComponentDialogModule from './componentDialog/ComponentDialogModule';
 import ConfirmationModule from './confirmation/ConfirmationModule';
 import ConvertToNumberModule from './convertToNumber/ConvertToNumberModule';
 import HelpModule from './help/HelpModule';
@@ -13,7 +12,6 @@ import { routing } from './config/RouteModule';
 
 export default angular
     .module('core', [
-        ComponentDialogModule,
         ConfirmationModule,
         ConvertToNumberModule,
         HelpModule,

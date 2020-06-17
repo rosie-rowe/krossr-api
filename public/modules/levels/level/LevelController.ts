@@ -1,7 +1,6 @@
 import * as angular from 'angular';
 
 import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
-import { ComponentDialogService } from '../../core/componentDialog/ComponentDialogService';
 import { ILevel } from "../level/Level";
 import { GameMatrix } from '../../../ng-app/GameMatrix/GameMatrix';
 import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
@@ -21,7 +20,6 @@ export class LevelController implements angular.IComponentController {
         '$stateParams',
         '$timeout',
         'Authentication',
-        'componentDialogService',
         'gameSizeService',
         'levelService',
         'Levels',
@@ -44,7 +42,6 @@ export class LevelController implements angular.IComponentController {
         private $stateParams: any,
         private $timeout: angular.ITimeoutService,
         private Authentication: AuthenticationService,
-        private componentDialogService: ComponentDialogService,
         private gameSizeService: GameSizeService,
         private levelService: LevelService,
         private Levels,
@@ -274,7 +271,8 @@ export class LevelController implements angular.IComponentController {
     remove(level) {
         if (level) { 
             level.$remove(() => {
-                this.componentDialogService.open('level-select');
+                // TODO
+                // this.componentDialogService.open('level-select');
             });
         }
     }

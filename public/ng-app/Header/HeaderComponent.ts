@@ -1,5 +1,4 @@
 import { AuthenticationService } from '../Authentication/AuthenticationService'
-import { ComponentDialogService } from '../../modules/core/componentDialog/ComponentDialogService';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { LevelSelectComponent } from '../LevelSelect/LevelSelectComponent';
@@ -14,7 +13,6 @@ export class HeaderComponent {
 
 	constructor(
 		private Authentication: AuthenticationService,
-        // private componentDialogService: ComponentDialogService,
         private matDialog: MatDialog
 	) {
 
