@@ -71,8 +71,7 @@
 
             <div class="averageRating">
                 Avg:
-                <!-- TODO Rounding -->
-                <span *ngIf="level.avgRating">{{ level.avgRating }}</span>
+                <span *ngIf="level.avgRating">{{ level.avgRating | number:'1.2-2' }}</span>
                 <span *ngIf="!level.avgRating">n/a</span>
             </div>
         </div>
