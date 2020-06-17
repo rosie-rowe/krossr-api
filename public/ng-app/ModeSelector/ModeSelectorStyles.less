@@ -8,4 +8,10 @@
         display: inline-block;
         padding: @inputMargin;
     }
+
+    /** shouldn't need to be duplicated with TileStyles, todo */
+    .selected {
+        background-color: @selectedColor;
+        transition: background-color .5s;
+    }
 }

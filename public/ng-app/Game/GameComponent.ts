@@ -1,33 +1,26 @@
-import { DragBoxService } from '../../../ng-app/DragBox/DragBoxService';
-import { GameMatrix } from '../../../ng-app/GameMatrix/GameMatrix';
-import { GameOverService } from '../../../ng-app/GameOver/GameOverService';
-import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
-import { ILevel } from "../level/Level";
-import { TileSizeService } from '../../../ng-app/TileSize/TileSizeService';
-import { TileState } from '../../../ng-app/Tile/TileState';
-import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
-import { GameSizeEventService } from '../../../ng-app/GameSize/GameSizeEventService';
-import { TileEventService } from '../../../ng-app/Tile/TileEventService';
+import { DragBoxService } from '../DragBox/DragBoxService';
+import { GameMatrix } from '../GameMatrix/GameMatrix';
+import { GameOverService } from '../GameOver/GameOverService';
+import { GameSizeService } from '../GameSize/GameSizeService';
+import { ILevel } from "../../modules/levels/level/Level";
+import { TileSizeService } from '../TileSize/TileSizeService';
+import { TileState } from '../Tile/TileState';
+import { TileSizeEventService } from '../TileSize/TileSizeEventService';
+import { GameSizeEventService } from '../GameSize/GameSizeEventService';
+import { TileEventService } from '../Tile/TileEventService';
+import { Input, Component, OnInit, ElementRef } from '@angular/core';
+import * as angular from 'angular';
 
-export class GameController implements angular.IComponentController {
-    static $controllerAs = 'gameCtrl';
-    static $name = 'GameController';
-
-    static $inject = [
-        '$element',
-        '$scope',
-        'gameOverService',
-        GameSizeEventService.$name,
-        'gameSizeService',
-        TileEventService.$name,
-        TileSizeEventService.$name,
-        'tileSizeService',
-        'dragBoxService'
-    ];
+@Component({
+    selector: 'game',
+    styles: [require('./GameStyles.less')],
+    template: require('./GameView.html')
+})
+export class GameComponent implements OnInit {
+    static $name = 'game';
 
     constructor(
-        private $element: angular.IAugmentedJQuery,
-        private $scope: angular.IScope,
+        private elementRef: ElementRef,
         private gameOverService: GameOverService,
         private gameSizeEventService: GameSizeEventService,
         private gameSizeService: GameSizeService,
@@ -36,33 +29,34 @@ export class GameController implements angular.IComponentController {
         private tileSizeService: TileSizeService,
         private dragBoxService: DragBoxService,
     ) {
-
+        this.$element = this.elementRef.nativeElement;
     }
 
-    private gameMatrix: GameMatrix;
-    private goalMatrix: GameMatrix;
+    @Input() public gameMatrix: GameMatrix;
+    @Input() public goalMatrix: GameMatrix;
+    @Input() public level: ILevel;
+    @Input() public tiles;
+
+    private $element: HTMLElement;
     private gameSettings;
-    private level: ILevel;
-    private margin: number;
-    private tiles;
+    private margin: string;
 
-    $onInit() {
+    ngOnInit() {
         this.dragBoxService.clearDragBox();
-    }
 
-    $postLink() {
         this.setMargin(this.tileSizeService.getTileSize());
         
         /* not sure if this is still necessary, seems to prevent grab hand from appearing even though draggable is no longer applied */
-        this.$element.on('dragstart', (e) => e.preventDefault())
+        this.$element.addEventListener('dragstart', (e) => e.preventDefault())
 
         // focus the game when the mouse enters it so that the first click will register
-        this.$element.on('mouseenter', () => {
-            this.$element.find('.inner').focus();
+        this.$element.addEventListener('mouseenter', () => {
+            // TODO remove angular.element
+            angular.element(this.$element).find('.inner').focus();
         })
 
         // If the user goes too far away from the game area, clear the dragbox and empty the tiles.
-        this.$element.on('mouseleave', (e) => {
+        this.$element.addEventListener('mouseleave', (e) => {
             e.preventDefault();
             this.applyFillDragBox(TileState.empty);
         });
@@ -85,7 +79,6 @@ export class GameController implements angular.IComponentController {
         marked if shift was held) */
     private applyFillDragBox(override?) {
         this.dragBoxService.fill(override);
-        this.$scope.$apply();
     };
 
     /**
@@ -102,8 +95,6 @@ export class GameController implements angular.IComponentController {
         if (this.checkWin()) {
             this.gameOverService.openDialog(this.level);
         }
-
-        this.$scope.$apply();
     }
 
     /**
@@ -122,7 +113,6 @@ export class GameController implements angular.IComponentController {
 
         if (winner) {
             this.level.won = true;
-            this.$scope.$digest();
             return true;
         }
         
@@ -130,7 +120,7 @@ export class GameController implements angular.IComponentController {
     };
 
     setMargin(tileSize: number) {
-        this.margin = Math.floor(tileSize) / 2;
+        this.margin = Math.floor(tileSize) / 2 + 'px';
     }
 
     updateGameSize() {
