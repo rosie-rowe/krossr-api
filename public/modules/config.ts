@@ -1,5 +1,3 @@
-import * as angular from 'angular';
-
 // Init the application configuration module for AngularJS application
 export var ApplicationConfiguration = (function() {
 	// Init module configuration options
@@ -13,6 +11,7 @@ export var ApplicationConfiguration = (function() {
 		'ngTouch',
 		'ngSanitize',
 		'ui.router',
+		'ui.router.upgrade',
 		'ui.utils',
 		'debounce',
 		'templates-main'

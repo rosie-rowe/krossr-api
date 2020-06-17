@@ -5,6 +5,7 @@ import { ApplicationConfiguration } from './config';
 import CoreModule from './core/CoreModule';
 import LevelsModule from './levels/LevelsModule';
 import UsersModule from './users/UsersModule';
+import { UrlService } from "@uirouter/core";
 
 export function application() {
 	let dependencies = ApplicationConfiguration.applicationModuleVendorDependencies.concat([
@@ -32,7 +33,12 @@ export function application() {
 			});
 		}
 	]);
-	
+
+	// Hybrid stuff, remove later TODO
+	angular.module(ApplicationConfiguration.applicationModuleName).config(['$urlServiceProvider', ($urlService: UrlService) => {
+		$urlService.deferIntercept();
+	}]);
+
 	//Then define the init function for starting up the application
 	angular.element(document).ready(function() {
 		//Fixing facebook bug with redirect
@@ -49,8 +55,5 @@ export function application() {
 				return -1;
 			}
 		}
-	
-		//Then init the app (leave this to Angular)
-		// angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 	});
 }

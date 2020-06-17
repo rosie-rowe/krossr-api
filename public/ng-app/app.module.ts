@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpgradeModule, downgradeInjectable, downgradeComponent } from '@angular/upgrade/static';
+import { UIRouterUpgradeModule } from '@uirouter/angular-hybrid';
 import { ApplicationConfiguration } from '../modules/config';
 import { application } from '../modules/AppModule';
 import * as angular from 'angular';
@@ -41,7 +42,8 @@ import { HeaderComponent } from './Header/HeaderComponent';
         HttpClientModule,
         MatDialogModule,
         ReactiveFormsModule,
-        UpgradeModule
+        UpgradeModule,
+        UIRouterUpgradeModule.forRoot()
     ],
     declarations: [
         GameComponent,

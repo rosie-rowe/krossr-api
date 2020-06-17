@@ -12,7 +12,6 @@ var config = {
             'angular-cookies',
             'angular-touch',
             'angular-sanitize',
-            'angular-ui-router',
             'angular-ui-utils/ui-utils.js',
             'ng-debounce/angular-debounce.js',
             'ngDialog/js/ngDialog.js',
@@ -28,7 +27,6 @@ var config = {
         modules: [
             'node_modules',
             'public/lib',
-            'public/lib/angular-ui-router/release',
             'public/modules',
             'public/ng-app'
         ],
