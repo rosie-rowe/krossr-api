@@ -35,6 +35,7 @@ import { GameComponent } from './Game/GameComponent';
 import { LevelSelectComponent } from './LevelSelect/LevelSelectComponent';
 import { HeaderComponent } from './Header/HeaderComponent';
 import { PaginationComponent } from './Pagination/PaginationComponent';
+import { RatingService } from './Rating/RatingService';
 
 @NgModule({
     imports: [
@@ -99,6 +100,7 @@ export class AppModule implements DoBootstrap {
             GameSizeService,
             GameSizeEventService,
             LevelService,
+            RatingService,
             SideLengthService,
             ShiftService,
             TileEventService,

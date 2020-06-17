@@ -8,14 +8,13 @@ import { LevelService } from '../../../ng-app/Level/LevelService';
 import { ShiftService } from '../../../ng-app/Shift/ShiftService';
 import { Utils } from '../../../ng-app/Utils/Utils';
 import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
+import { RatingService } from '../../../ng-app/Rating/RatingService';
 
 export class LevelController implements angular.IComponentController {
     static $controllerAs = 'levelCtrl';
     static $name = 'LevelController';
 
     static $inject = [
-        '$http',
-        '$scope',
         '$state',
         '$stateParams',
         '$timeout',
@@ -23,6 +22,7 @@ export class LevelController implements angular.IComponentController {
         'gameSizeService',
         'levelService',
         'Levels',
+        RatingService.$name,
         'shiftService',
         TileSizeEventService.$name,
         'Utils'
@@ -35,8 +35,6 @@ export class LevelController implements angular.IComponentController {
     };
 
     constructor(
-        private $http: angular.IHttpService,
-        private $scope: angular.IScope,
         private $state: angular.ui.IStateService,
         private $stateParams: any,
         private $timeout: angular.ITimeoutService,
@@ -44,6 +42,7 @@ export class LevelController implements angular.IComponentController {
         private gameSizeService: GameSizeService,
         private levelService: LevelService,
         private Levels,
+        private ratingService: RatingService,
         private shiftService: ShiftService,
         private tileSizeEventService: TileSizeEventService,
         private Utils: Utils
@@ -255,15 +254,7 @@ export class LevelController implements angular.IComponentController {
     /* Doing this old school until I figure out a better way */
     rate(rating) {
         this.$timeout(() => {
-            var url = '/levels/' + this.level.id + '/ratings';
-
-            var post_data = {
-                rating: rating
-            };
-
-            this.$http.post(url, post_data).then(function() {
-                console.log('omg');
-            });
+            this.ratingService.rate(this.level.id, rating);
         });
     }
 
