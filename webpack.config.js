@@ -11,8 +11,6 @@ var config = {
             'angular-resource',
             'angular-cookies',
             'angular-touch',
-            'angular-sanitize',
-            'angular-ui-utils/ui-utils.js',
             'ng-debounce/angular-debounce.js'
         ],
         'krossr': 'app.ts'

@@ -7,7 +7,6 @@ export var ApplicationConfiguration = (function() {
 		'ngAnimate',
 		'ngCookies',
 		'ngTouch',
-		'ngSanitize',
 		'ui.router',
 		'ui.router.upgrade',
 		'debounce',
