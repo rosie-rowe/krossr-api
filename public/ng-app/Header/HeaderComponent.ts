@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Component } from '@angular/core';
 import { LevelSelectComponent } from '../LevelSelect/LevelSelectComponent';
 import { HelpComponent } from '../Help/HelpComponent';
+import { EditProfileComponent } from '../EditProfile/EditProfileComponent';
+import { SignInComponent } from '../SignIn/SignInComponent';
 
 @Component({
     selector: 'krossr-header',
@@ -19,10 +21,8 @@ export class HeaderComponent {
 
     }
 
-    // LOTS TODO
-
 	openEditProfile() {
-		// this.componentDialogService.open('edit-profile');
+		this.matDialog.open(EditProfileComponent);
 	}
 
 	openHelp() {
@@ -34,9 +34,10 @@ export class HeaderComponent {
 	}
 
 	openSignIn() {
-		// this.componentDialogService.open('sign-in');
+		this.matDialog.open(SignInComponent);
 	}
 
+	// TODO
 	openSignUp() {
 		// this.componentDialogService.open('sign-up');
 	}

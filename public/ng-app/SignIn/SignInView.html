@@ -1,0 +1,24 @@
+<popup-content>
+	<h1>Sign In</h1>
+
+	<form [formGroup]="formGroup" autocomplete="off">
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input type="text" id="username" name="username" [formControl]="username" (keyup)="updateUsername($event.target.value)" placeholder="Username">
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" [formControl]="password" (keyup)="updatePassword($event.target.value)" placeholder="Password">
+		</div>
+		<div class="form-group">
+			<button [disabled]="error" (click)="signin()">
+				<span ng-if="!error">Sign in</span>
+				<span ng-if="error">{{ error }}</span>
+			</button>
+		</div>
+		<!-- TODO -->
+		<!-- <div class="form-group">
+			<a ng-click="openForgotPassword()">Forgot your password?</a>
+		</div> -->
+	</form>
+</popup-content>

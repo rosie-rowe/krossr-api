@@ -5,7 +5,7 @@ import { ApplicationConfiguration } from '../public/modules/config';
 
 import { LevelControllerTests } from '../public/modules/levels/level/LevelController.test';
 // import { LevelSelectControllerTests } from '../public/ng-app/LevelSelect/LevelSelectController.test';
-import { SignInControllerTests } from '../public/modules/users/signIn/SignInController.test';
+// import { SignInControllerTests } from '../public/ng-app/SignIn/SignInController.test';
 import { SignUpControllerTests } from '../public/modules/users/signUp/SignUpController.test';
 
 'use strict';
@@ -38,7 +38,7 @@ class TestModule {
 
             LevelControllerTests.run();
             // LevelSelectControllerTests.run();
-            SignInControllerTests.run();
+            // SignInControllerTests.run();
             SignUpControllerTests.run();
         })
     }

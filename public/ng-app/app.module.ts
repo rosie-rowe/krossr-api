@@ -39,6 +39,8 @@ import { RatingService } from './Rating/RatingService';
 import { LoadingAnimationComponent } from './LoadingAnimation/LoadingAnimationComponent';
 import { HelpComponent } from './Help/HelpComponent';
 import { PopupContentComponent } from './PopupContent/PopupContentComponent';
+import { EditProfileComponent } from './EditProfile/EditProfileComponent';
+import { SignInComponent } from './SignIn/SignInComponent';
 
 @NgModule({
     imports: [
@@ -51,6 +53,7 @@ import { PopupContentComponent } from './PopupContent/PopupContentComponent';
         UIRouterUpgradeModule.forRoot()
     ],
     declarations: [
+        EditProfileComponent,
         GameComponent,
         GameOverComponent,
         HeaderComponent,
@@ -62,10 +65,12 @@ import { PopupContentComponent } from './PopupContent/PopupContentComponent';
         NumberLineComponent,
         PaginationComponent,
         PopupContentComponent,
+        SignInComponent,
         StarRatingComponent,
         TileComponent
     ],
     entryComponents: [
+        EditProfileComponent,
         GameComponent,
         GameOverComponent,
         HeaderComponent,
@@ -77,6 +82,7 @@ import { PopupContentComponent } from './PopupContent/PopupContentComponent';
         NumberLineComponent,
         PaginationComponent,
         PopupContentComponent,
+        SignInComponent,
         StarRatingComponent,
         TileComponent
     ],
