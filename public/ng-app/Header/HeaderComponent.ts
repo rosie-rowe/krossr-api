@@ -1,7 +1,8 @@
 import { AuthenticationService } from '../Authentication/AuthenticationService'
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { LevelSelectComponent } from '../LevelSelect/LevelSelectComponent';
+import { HelpComponent } from '../Help/HelpComponent';
 
 @Component({
     selector: 'krossr-header',
@@ -25,7 +26,7 @@ export class HeaderComponent {
 	}
 
 	openHelp() {
-		// this.componentDialogService.open('help');
+		this.matDialog.open(HelpComponent);
 	}
 
 	openLevelSelect() {

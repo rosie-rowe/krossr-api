@@ -37,6 +37,8 @@ import { HeaderComponent } from './Header/HeaderComponent';
 import { PaginationComponent } from './Pagination/PaginationComponent';
 import { RatingService } from './Rating/RatingService';
 import { LoadingAnimationComponent } from './LoadingAnimation/LoadingAnimationComponent';
+import { HelpComponent } from './Help/HelpComponent';
+import { PopupContentComponent } from './PopupContent/PopupContentComponent';
 
 @NgModule({
     imports: [
@@ -52,12 +54,14 @@ import { LoadingAnimationComponent } from './LoadingAnimation/LoadingAnimationCo
         GameComponent,
         GameOverComponent,
         HeaderComponent,
+        HelpComponent,
         LoadingAnimationComponent,
         LevelSelectComponent,
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
         PaginationComponent,
+        PopupContentComponent,
         StarRatingComponent,
         TileComponent
     ],
@@ -65,12 +69,14 @@ import { LoadingAnimationComponent } from './LoadingAnimation/LoadingAnimationCo
         GameComponent,
         GameOverComponent,
         HeaderComponent,
+        HelpComponent,
         LoadingAnimationComponent,
         LevelSelectComponent,
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
         PaginationComponent,
+        PopupContentComponent,
         StarRatingComponent,
         TileComponent
     ],
