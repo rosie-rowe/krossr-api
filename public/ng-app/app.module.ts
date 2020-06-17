@@ -2,6 +2,7 @@ import './angular-material-theme.scss';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, DoBootstrap, Type } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -30,6 +31,8 @@ import { ModeSelectorComponent } from './ModeSelector/ModeSelectorComponent';
 import { TileComponent } from './Tile/TileComponent';
 import { TileEventService } from './Tile/TileEventService';
 import { GameComponent } from './Game/GameComponent';
+import { LevelSelectComponent } from './LevelSelect/LevelSelectComponent';
+import { HeaderComponent } from './Header/HeaderComponent';
 
 @NgModule({
     imports: [
@@ -37,11 +40,14 @@ import { GameComponent } from './Game/GameComponent';
         BrowserModule,
         HttpClientModule,
         MatDialogModule,
+        ReactiveFormsModule,
         UpgradeModule
     ],
     declarations: [
         GameComponent,
         GameOverComponent,
+        HeaderComponent,
+        LevelSelectComponent,
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
@@ -51,6 +57,8 @@ import { GameComponent } from './Game/GameComponent';
     entryComponents: [
         GameComponent,
         GameOverComponent,
+        HeaderComponent,
+        LevelSelectComponent,
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
@@ -71,6 +79,7 @@ export class AppModule implements DoBootstrap {
 
         this.downgradeComponents([
             GameComponent,
+            HeaderComponent,
             ModeSelectorComponent,
             NumberGridComponent,
             NumberLineComponent,

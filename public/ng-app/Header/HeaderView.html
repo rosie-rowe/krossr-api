@@ -1,0 +1,36 @@
+<nav role="navigation">
+	<ul (click)="openLevelSelect()">
+		<li>
+			<i class="fa fa-bars"></i>
+			<div>Levels</div>
+		</li>
+	</ul>
+
+	<ul (click)="openEditProfile()" *ngIf="Authentication.user">
+		<li>
+			<i class="fa fa-user"></i>
+			<div>{{ Authentication.user.username }}</div>
+		</li>
+	</ul>
+
+	<ul (click)="openSignUp()" *ngIf="!Authentication.user">
+		<li>
+			<i class="fa fa-user"></i>
+			<div>Sign Up</div>
+		</li>
+	</ul>
+
+	<ul (click)="openSignIn()" *ngIf="!Authentication.user">
+		<li>
+			<i class="fa fa-user"></i>
+			<div>Sign In</div>
+		</li>
+	</ul>
+
+	<ul (click)="openHelp()">
+		<li>
+			<i class="fa fa-question"></i>
+			<div>Help</div>
+		</li>
+	</ul>
+</nav>

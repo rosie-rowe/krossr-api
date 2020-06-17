@@ -1,0 +1,94 @@
+<div class="listLevels" [formGroup]="formGroup">
+    <h2>
+        Levels
+        <span class="filterIcon" ng-click="toggleShowFilter()">
+            <i class="fa fa-filter" [ngClass]="{'active': showFilter}"></i>
+        </span>
+        <!-- TODO UI-SREF -->
+        <span class="createIcon" *ngIf="Authentication.user" (click)="close()">
+            <i class="fa fa-plus"></i>
+        </span>
+    </h2>
+    
+    <div class="form-group">
+        <div class="form-group" [hidden]="!showFilter">
+            <!-- These guys all get their own divs so they don't have the label and input on
+                  different lines -->
+
+            <!-- TODO -->
+            <!-- <div class="form-group">
+                <label>Size</label>
+                <select ng-model="sizeRestriction" (change)="find(currentPage)">
+                    <option value="" selected>All</option>
+                    <option value="5">5x5</option>
+                    <option value="10">10x10</option>
+                    <option value="15">15x15</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Search</label>
+                <input ng-model="searchText" ng-model-options="{ debounce: 250 }" (change)="find(currentPage)">
+            </div>
+
+            <div class="form-group">
+                <label>Sort by</label>
+                <select ng-model="sortBy" (change)="find(currentPage)">
+                    <option value='"createdAt"'>Created Date</option>
+                    <option value='name'>Name</option>
+                    <option value='"avgRating"'>Ratings</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Sort direction</label>
+                <select ng-model="sortDirection" (change)="find(currentPage)">
+                    <option value="">Asc</option>
+                    <option value="DESC">Desc</option>
+                </select>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="list-group" *ngIf="levels">
+        <div *ngFor="let level of levels; let isOdd = odd" [ngClass]="{ 'odd': isOdd }" class="list-group-item level">
+            <!-- TODO -->
+            <!-- <a class="playButton" ui-sref="level({ levelId: level.id })" ui-sref-opts="{ reload: true }" ng-click="closeAction()">
+                <i class="fa fa-play"></i>
+            </a> -->
+
+            <div class="list-group-item-heading">{{ level.name }}</div>
+
+            <div class="username" (click)="setSearchText(level.user.username)" >
+                by {{ level.user.username }}
+            </div>
+
+            <!-- TODO -->
+            <!-- <a class="editButton" ui-sref="update-level({ levelId: level.id })" ui-sref-opts="{ reload: true }" ng-click="closeAction()" *ngIf="level && Authentication.user.id === level.userId">
+                <i class="fa fa-edit"></i>
+            </a> -->
+
+            <div class="size" (click)="setSizeRestriction(level.size)">
+                {{ level.prettySize }}
+            </div>
+
+            <div class="averageRating">
+                Avg:
+                <!-- TODO Rounding -->
+                <span *ngIf="level.avgRating">{{ level.avgRating }}</span>
+                <span *ngIf="!level.avgRating">n/a</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" [hidden]="levels.count > 0">
+    	No Levels yet!
+
+        <button *ngIf="Authentication.user" (click)="createNewLevel();closeThisDialog();">
+            Create One
+        </button>
+    </div>
+
+    <!-- TODO -->
+    <!-- <pagination *ngIf="levels && levels.length > 0" on-pagination="find(currentPage)" current-page="currentPage" total-pages="totalPages"></pagination> -->
+</div>

@@ -1,3 +1,5 @@
+@import (reference) '../../../less/mixins.less';
+
 * {
 	box-sizing: border-box;
 }
@@ -76,10 +78,6 @@ ul {
 
 ::-webkit-input-placeholder {
 	font-family: @mainFont;
-}
-
-.center {
-	margin: 0 auto;
 }
 
 .content {
@@ -172,16 +170,4 @@ nav {
 }
 .ng-valid.ng-dirty {
     border-color: @selectedColor;
-}
-
-.restrict-width {
-	max-width: 300px;
-
-	@media screen and (max-width: @mediumScreen) {
-		margin: 0 auto;
-    }
-}
-
-.standardMargin {
-	margin-top: @inputMargin;
 }

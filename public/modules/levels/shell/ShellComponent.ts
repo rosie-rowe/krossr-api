@@ -8,7 +8,7 @@ export class ShellComponent implements angular.IComponentOptions {
     transclude = true;
 
     template = `
-      <krossr-header data-level="level"></krossr-header>
+      <krossr-header></krossr-header>
       <section id="main-section" class="content" resize>
         <ng-transclude></ng-transclude>
       </section> 

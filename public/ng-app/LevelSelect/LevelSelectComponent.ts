@@ -1,24 +1,24 @@
-import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
-import { Utils } from '../../../ng-app/Utils/Utils';
-import { LevelService } from '../../../ng-app/Level/LevelService';
-import { query } from '@angular/animations';
+import { AuthenticationService } from '../Authentication/AuthenticationService'
+import { Utils } from '../Utils/Utils';
+import { LevelService } from '../Level/LevelService';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
-export class LevelSelectController implements angular.IComponentController {
-    static $controllerAs = 'levelSelectCtrl';
-    static $name = 'LevelSelectController';
-
-    static $inject = [
-        'Authentication',
-        LevelService.$name,
-        'Utils'
-    ];
+@Component({
+    selector: 'level-select',
+    styles: [require('./LevelSelectStyles.less')],
+    template: require('./LevelSelectView.html')
+})
+export class LevelSelectComponent implements OnInit {
+    static $name = 'levelSelect';
 
     constructor(
         private Authentication: AuthenticationService,
         private levelService: LevelService,
+        private matDialogRef: MatDialogRef<LevelSelectComponent>,
         private Utils: Utils
     ) {
-
     }
 
     private currentPage: number = 0;
@@ -30,7 +30,16 @@ export class LevelSelectController implements angular.IComponentController {
     private totalPages: number;
     private levels;
 
-    $onInit() {}
+    public formGroup: FormGroup;
+    
+    close() {
+        this.matDialogRef.close();
+    }
+
+    ngOnInit() {
+        this.find(this.currentPage);
+        this.formGroup = new FormGroup({});
+    }
 
     /* Find a list of levels */
     find(currentPage: number) {
