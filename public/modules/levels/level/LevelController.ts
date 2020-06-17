@@ -23,7 +23,6 @@ export class LevelController implements angular.IComponentController {
         'gameSizeService',
         'levelService',
         'Levels',
-        'ngDialog',
         'shiftService',
         TileSizeEventService.$name,
         'Utils'
@@ -45,7 +44,6 @@ export class LevelController implements angular.IComponentController {
         private gameSizeService: GameSizeService,
         private levelService: LevelService,
         private Levels,
-        private ngDialog,
         private shiftService: ShiftService,
         private tileSizeEventService: TileSizeEventService,
         private Utils: Utils
@@ -81,45 +79,48 @@ export class LevelController implements angular.IComponentController {
     }
 
     confirmClear() {
-        this.ngDialog.openConfirm({
-            closeByDocument: false,
-            plain: true,
-            scope: this.$scope,
-            showClose: false,
-            template: `<confirmation
-                        cancel-action="closeThisDialog()"
-                        confirm-action="confirm()"
-                        submit-action="levelCtrl.clearAll()"
-                        submit-text="Clear"></confirmation>`
-        });
+        // this.ngDialog.openConfirm({
+        //     closeByDocument: false,
+        //     plain: true,
+        //     scope: this.$scope,
+        //     showClose: false,
+        //     template: `<confirmation
+        //                 cancel-action="closeThisDialog()"
+        //                 confirm-action="confirm()"
+        //                 submit-action="levelCtrl.clearAll()"
+        //                 submit-text="Clear"></confirmation>`
+        // });
+        // TODO
     };
 
     confirmRemove() {
-        this.ngDialog.openConfirm({
-            closeByDocument: false,
-            plain: true,
-            scope: this.$scope,
-            showClose: false,
-            template: `<confirmation
-                        cancel-action="closeThisDialog()"
-                        confirm-action="confirm()"
-                        submit-action="levelCtrl.removeCurrentLevel()"
-                        submit-text="Delete"></confirmation>`
-        });
+        // this.ngDialog.openConfirm({
+        //     closeByDocument: false,
+        //     plain: true,
+        //     scope: this.$scope,
+        //     showClose: false,
+        //     template: `<confirmation
+        //                 cancel-action="closeThisDialog()"
+        //                 confirm-action="confirm()"
+        //                 submit-action="levelCtrl.removeCurrentLevel()"
+        //                 submit-text="Delete"></confirmation>`
+        // });
+        // TODO
     };
 
     confirmUpdate() {
-        this.ngDialog.openConfirm({
-            closeByDocument: false,
-            plain: true,
-            scope: this.$scope,
-            showClose: false,
-            template: `<confirmation
-                        cancel-action="closeThisDialog()"
-                        confirm-action="confirm()"
-                        submit-action="levelCtrl.update()"
-                        submit-text="Update"></confirmation>`
-        });
+        // this.ngDialog.openConfirm({
+        //     closeByDocument: false,
+        //     plain: true,
+        //     scope: this.$scope,
+        //     showClose: false,
+        //     template: `<confirmation
+        //                 cancel-action="closeThisDialog()"
+        //                 confirm-action="confirm()"
+        //                 submit-action="levelCtrl.update()"
+        //                 submit-text="Update"></confirmation>`
+        // });
+        // TODO
     };
 
      /** Create new Level (submit function) */

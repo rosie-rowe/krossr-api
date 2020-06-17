@@ -23,17 +23,6 @@ export function application() {
 		}
 	]);
 	
-	// Setting ngDialog defaults
-	angular.module(ApplicationConfiguration.applicationModuleName).config(['ngDialogProvider',
-		function(ngDialogProvider) {
-			ngDialogProvider.setDefaults({
-				closeByDocument: false,
-				overlay: true,
-				appendTo: '#main-section'
-			});
-		}
-	]);
-
 	// Hybrid stuff, remove later TODO
 	angular.module(ApplicationConfiguration.applicationModuleName).config(['$urlServiceProvider', ($urlService: UrlService) => {
 		$urlService.deferIntercept();

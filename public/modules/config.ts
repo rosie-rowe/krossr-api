@@ -6,8 +6,6 @@ export var ApplicationConfiguration = (function() {
 		'ngResource',
 		'ngAnimate',
 		'ngCookies',
-		'ngDialog',
-		'ngLodash',
 		'ngTouch',
 		'ngSanitize',
 		'ui.router',

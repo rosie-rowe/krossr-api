@@ -13,9 +13,7 @@ var config = {
             'angular-touch',
             'angular-sanitize',
             'angular-ui-utils/ui-utils.js',
-            'ng-debounce/angular-debounce.js',
-            'ngDialog/js/ngDialog.js',
-            'ng-lodash/build/ng-lodash.js'
+            'ng-debounce/angular-debounce.js'
         ],
         'krossr': 'app.ts'
     },
