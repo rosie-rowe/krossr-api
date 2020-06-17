@@ -10,8 +10,7 @@
   "scripts": {
     "start": "node server.js",
     "debug": "node --inspect server.js",
-    "test": "grunt test",
-    "postinstall": "bower install --allow-root --config.interactive=false"
+    "test": "grunt test"
   },
   "dependencies": {
     "@angular/animations": "^9.1.11",
