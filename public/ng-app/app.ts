@@ -13,6 +13,7 @@ import { NgZone } from '@angular/core';
 platformBrowserDynamic().bootstrapModule(AppModule).then(platformRef => {
     const urlService: UrlService = platformRef.injector.get(UIRouter).urlService;
 
+    // TODO UIRouter error handling (401 signout and redirect?)
     function startUIRouter() {
         urlService.listen();
         urlService.sync();
