@@ -20,7 +20,7 @@ export class LevelController implements angular.IComponentController {
         '$timeout',
         'Authentication',
         'gameSizeService',
-        'levelService',
+        LevelService.$name,
         'Levels',
         RatingService.$name,
         'shiftService',
@@ -93,6 +93,7 @@ export class LevelController implements angular.IComponentController {
     };
 
     confirmRemove() {
+        this.removeCurrentLevel();
         // this.ngDialog.openConfirm({
         //     closeByDocument: false,
         //     plain: true,
@@ -260,10 +261,10 @@ export class LevelController implements angular.IComponentController {
      /** Remove any Level passed in */
     remove(level) {
         if (level) { 
-            level.$remove(() => {
+            this.levelService.removeLevel(level.id).then(() => {
                 // TODO
                 // this.componentDialogService.open('level-select');
-            });
+            })
         }
     }
 

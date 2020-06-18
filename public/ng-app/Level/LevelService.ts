@@ -43,4 +43,8 @@ export class LevelService {
             params: new HttpParams({ fromObject: query})
         }).toPromise().then((result: LevelList) => result);
     }
+
+    removeLevel(levelId: number) {
+        return this.httpClient.delete(`levels/${levelId}`).toPromise();
+    }
 }
