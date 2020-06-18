@@ -12,7 +12,6 @@ import { ForgotPasswordService } from "./ForgotPasswordService";
 export class ForgotPasswordComponent {
     public static $name = 'forgotPassword';
 
-    // TODO pass in from url if present
     @Input() public invalid = false;
 
     public username: string;
