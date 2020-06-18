@@ -42,6 +42,7 @@ import { PopupContentComponent } from './PopupContent/PopupContentComponent';
 import { EditProfileComponent } from './EditProfile/EditProfileComponent';
 import { SignInComponent } from './SignIn/SignInComponent';
 import { ForgotPasswordComponent } from './ForgotPassword/ForgotPasswordComponent';
+import { ResetPasswordComponent } from './ResetPassword/ResetPasswordComponent';
 
 @NgModule({
     imports: [
@@ -67,6 +68,7 @@ import { ForgotPasswordComponent } from './ForgotPassword/ForgotPasswordComponen
         NumberLineComponent,
         PaginationComponent,
         PopupContentComponent,
+        ResetPasswordComponent,
         SignInComponent,
         StarRatingComponent,
         TileComponent
@@ -85,6 +87,7 @@ import { ForgotPasswordComponent } from './ForgotPassword/ForgotPasswordComponen
         NumberLineComponent,
         PaginationComponent,
         PopupContentComponent,
+        ResetPasswordComponent,
         SignInComponent,
         StarRatingComponent,
         TileComponent
@@ -102,12 +105,14 @@ export class AppModule implements DoBootstrap {
         application();
 
         this.downgradeComponents([
+            ForgotPasswordComponent,
             GameComponent,
             HeaderComponent,
             LoadingAnimationComponent,
             ModeSelectorComponent,
             NumberGridComponent,
             NumberLineComponent,
+            ResetPasswordComponent,
             StarRatingComponent,
             TileComponent
         ]);

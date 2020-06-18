@@ -106,6 +106,7 @@ exports.validateResetToken = function(req, res) {
             }
         }
     }).then(function(user) {
+        // todo these redirects suck
         if (!user) {
             return res.redirect('/#!/password/reset/invalid');
         }
@@ -120,6 +121,7 @@ exports.validateResetToken = function(req, res) {
 
 /**
  * Reset password POST from email token
+ * TODO re-evalulate
  */
 exports.reset = function(req, res, next) {
     // Init Variables

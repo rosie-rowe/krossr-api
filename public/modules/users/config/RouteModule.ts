@@ -8,10 +8,10 @@ export function routing($stateProvider) {
 			invalid: true
 		},
 		plain: true,
-		template: '<forgot-password></forgot-password>'
+		template: (params) => `<forgot-password invalid="${params.invalid}"></forgot-password>`
 	}).
 	state('reset', {
 		url: '/password/reset/:token',
-		template: '<reset-password></reset-password>'
+		template: (params) => `<reset-password token="${params.token}"></reset-password>`
 	});
 }

@@ -1,6 +1,6 @@
 /** Popup to change email/password or log out */
 
-import { Input, Component, Inject } from "@angular/core";
+import { Input, Component, Inject, Optional } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ForgotPasswordService } from "./ForgotPasswordService";
@@ -10,6 +10,8 @@ import { ForgotPasswordService } from "./ForgotPasswordService";
     template: require('./ForgotPasswordView.html')
 })
 export class ForgotPasswordComponent {
+    public static $name = 'forgotPassword';
+
     // TODO pass in from url if present
     @Input() public invalid = false;
 
@@ -24,19 +26,21 @@ export class ForgotPasswordComponent {
     public usernameFormControl: FormControl;
 
     constructor(
-        private matDialogRef: MatDialogRef<ForgotPasswordComponent>,
+        @Optional() private matDialogRef: MatDialogRef<ForgotPasswordComponent>,
         private forgotPasswordService: ForgotPasswordService,
-        @Inject(MAT_DIALOG_DATA) public data: { username: string }
+        @Optional() @Inject(MAT_DIALOG_DATA) public data: { username: string }
     ) {
     }
 
     close() {
-        this.matDialogRef.close();
+        if (this.matDialogRef) {
+            this.matDialogRef.close();
+        }
     }
 
     ngOnInit() {
         this.formGroup = new FormGroup({});
-        this.usernameFormControl = new FormControl(this.data.username, [Validators.required]);
+        this.usernameFormControl = new FormControl(this.data ? this.data.username : '', [Validators.required]);
         this.formGroup.addControl('username', this.usernameFormControl);
     }
 

@@ -3,7 +3,6 @@
 var path = require('path');
 
 var config = {
-    devtool: 'source-map',
     entry: {
         'vendor': [
             'angular'
@@ -13,6 +12,9 @@ var config = {
     output: {
         path: path.join(__dirname + '/public/dist'),
         filename: '[name].bundle-[hash].js'
+    },
+    optimization: {
+        minimize: false
     },
     resolve: {
         modules: [
