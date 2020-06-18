@@ -41,6 +41,7 @@ import { HelpComponent } from './Help/HelpComponent';
 import { PopupContentComponent } from './PopupContent/PopupContentComponent';
 import { EditProfileComponent } from './EditProfile/EditProfileComponent';
 import { SignInComponent } from './SignIn/SignInComponent';
+import { ForgotPasswordComponent } from './ForgotPassword/ForgotPasswordComponent';
 
 @NgModule({
     imports: [
@@ -54,6 +55,7 @@ import { SignInComponent } from './SignIn/SignInComponent';
     ],
     declarations: [
         EditProfileComponent,
+        ForgotPasswordComponent,
         GameComponent,
         GameOverComponent,
         HeaderComponent,
@@ -71,6 +73,7 @@ import { SignInComponent } from './SignIn/SignInComponent';
     ],
     entryComponents: [
         EditProfileComponent,
+        ForgotPasswordComponent,
         GameComponent,
         GameOverComponent,
         HeaderComponent,

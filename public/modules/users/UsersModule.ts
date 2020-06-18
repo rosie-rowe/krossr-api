@@ -1,6 +1,5 @@
 import * as angular from 'angular';
 
-import ForgotPasswordModule from './forgotPassword/ForgotPasswordModule';
 import ResetPasswordModule from './resetPassword/ResetPasswordModule';
 import SignUpModule from './signUp/SignUpModule';
 
@@ -9,7 +8,6 @@ import { routing } from './config/RouteModule';
 
 export default angular
     .module('users', [
-        ForgotPasswordModule,
         ResetPasswordModule,
         SignUpModule,
     ])

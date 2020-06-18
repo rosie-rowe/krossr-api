@@ -1,8 +1,9 @@
 import { AuthenticationService } from '../Authentication/AuthenticationService'
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
 import { SignInService } from './SignInService';
+import { ForgotPasswordComponent } from '../ForgotPassword/ForgotPasswordComponent';
 
 /** Sign-in popup */
 @Component({
@@ -20,6 +21,7 @@ export class SignInComponent implements OnInit {
     constructor(
         private Authentication: AuthenticationService,
         private matDialogRef: MatDialogRef<SignInComponent>,
+        private matDialog: MatDialog,
         private signInService: SignInService
     ) {}
 
@@ -27,6 +29,8 @@ export class SignInComponent implements OnInit {
         this.formGroup = new FormGroup({});
         this.username = new FormControl('');
         this.password = new FormControl('');
+        this.formGroup.addControl('username', this.username);
+        this.formGroup.addControl('password', this.password);
     }
 
     close() {
@@ -35,8 +39,11 @@ export class SignInComponent implements OnInit {
 
     openForgotPassword() {
         this.close();
-        // TODO
-        // this.componentDialogService.open('forgot-password', { username: this.credentials.username });
+        this.matDialog.open(ForgotPasswordComponent, {
+            data: {
+                username: this.username.value
+            }
+        });
     }
 
     signin() {
