@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { LevelList } from "./LevelList";
 import { HttpClient, HttpParams } from "@angular/common/http";
+import { LevelParams } from "../../modules/levels/level/LevelParams";
 @Injectable({
     providedIn: 'root'
 })
@@ -42,6 +43,10 @@ export class LevelService {
         return this.httpClient.get('levels', {
             params: new HttpParams({ fromObject: query})
         }).toPromise().then((result: LevelList) => result);
+    }
+
+    updateLevel(params: LevelParams) {
+        return this.httpClient.put(`levels/${params.id}`, params).toPromise();
     }
 
     removeLevel(levelId: number) {

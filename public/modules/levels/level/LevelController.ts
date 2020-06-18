@@ -109,6 +109,7 @@ export class LevelController implements angular.IComponentController {
     };
 
     confirmUpdate() {
+        this.update();
         // this.ngDialog.openConfirm({
         //     closeByDocument: false,
         //     plain: true,
@@ -312,14 +313,14 @@ export class LevelController implements angular.IComponentController {
     updateLevel(level) {
         level.size = level.layout.length;
 
-        level.$update(() => {
-           this.$state.go('update-level', { levelId: level.id }, { reload: true }); 
-        }, function(errorResponse) {
-            this.error = errorResponse.data.message;
+        this.levelService.updateLevel(level).then(() => {
+            this.$state.go('update-level', { levelId: level.id }, { reload: true }); 
+        }).catch(response => {
+            this.error = response.error.message;
 
             this.$timeout(() => {
                 this.error = null;
             }, this.timeout);
-        });
+        })
     }
 }
