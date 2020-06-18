@@ -14,7 +14,7 @@ var _ = require('lodash'),
     crypto = require('crypto');
 
 /**
- * Forgot for reset password (forgot POST)
+ * Forgot for reset password (forgot POST) TODO
  */
 exports.forgot = function(req, res, next) {
     async.waterfall([
