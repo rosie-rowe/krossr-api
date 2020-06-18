@@ -50,7 +50,7 @@ export class SignInComponent implements OnInit {
         this.signInService.signIn(this.username.value, this.password.value).then(() => {
             this.close();
         }).catch((response: any) => {
-            this.error = response.data.message;
+            this.error = response.error.message;
 
             setTimeout(() => {
                 this.error = null;

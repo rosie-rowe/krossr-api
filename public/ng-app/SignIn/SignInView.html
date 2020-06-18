@@ -12,8 +12,8 @@
 		</div>
 		<div class="form-group">
 			<button [disabled]="error" (click)="signin()">
-				<span ng-if="!error">Sign in</span>
-				<span ng-if="error">{{ error }}</span>
+				<span *ngIf="!error">Sign in</span>
+				<span *ngIf="error">{{ error }}</span>
 			</button>
 		</div>
 		<div class="form-group">
