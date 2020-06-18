@@ -44,6 +44,7 @@ import { SignInComponent } from './SignIn/SignInComponent';
 import { ForgotPasswordComponent } from './ForgotPassword/ForgotPasswordComponent';
 import { ResetPasswordComponent } from './ResetPassword/ResetPasswordComponent';
 import { SignUpComponent } from './SignUp/SignUpComponent';
+import { ConfirmationComponent } from './Confirmation/ConfirmationComponent';
 
 @NgModule({
     imports: [
@@ -56,6 +57,7 @@ import { SignUpComponent } from './SignUp/SignUpComponent';
         UIRouterUpgradeModule.forRoot()
     ],
     declarations: [
+        ConfirmationComponent,
         EditProfileComponent,
         ForgotPasswordComponent,
         GameComponent,
@@ -76,6 +78,7 @@ import { SignUpComponent } from './SignUp/SignUpComponent';
         TileComponent
     ],
     entryComponents: [
+        ConfirmationComponent,
         EditProfileComponent,
         ForgotPasswordComponent,
         GameComponent,
