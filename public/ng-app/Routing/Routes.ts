@@ -1,8 +1,6 @@
 import { Ng1StateDeclaration } from "@uirouter/angularjs";
 
 export class Routes {
-    private static levelTemplateUrl = 'modules/levels/level/index.html';
-
     static getNg1Routes(): { [name: string]: Ng1StateDeclaration } {
         return {
             /** Password */
@@ -20,24 +18,17 @@ export class Routes {
             /** Levels */
             'create-level': {
                 url: '/level/new',
-                templateUrl: this.levelTemplateUrl,
-                params: {
-                    mode: 'new'
-                }
+                template: (params) => `<level mode="new">`
             },
             'level': {
                 url: '/level/:levelId',
-                templateUrl: this.levelTemplateUrl,
-                params: {
-                    mode: 'view'
+                template: (params) => {
+                    return `<level level-id="${params.levelId}" mode="view">`
                 }
             },
             'update-level': {
                 url: '/level/:levelId/edit',
-                templateUrl: this.levelTemplateUrl,
-                params: {
-                    mode: 'edit'
-                }
+                template: (params) => `<level level-id="${params.levelId}" mode="edit">`
             }
         }
     }

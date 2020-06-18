@@ -6,6 +6,8 @@ export class LevelComponent {
     templateUrl = 'modules/levels/level/LevelView.html';
 
     bindings = {
-        controller: '@'
+        controller: '@',
+        levelId: '@',
+        mode: '@'
     }
 }

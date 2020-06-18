@@ -17,7 +17,6 @@ export class LevelController implements angular.IComponentController {
 
     static $inject = [
         '$state',
-        '$stateParams',
         '$timeout',
         'Authentication',
         'gameSizeService',
@@ -36,7 +35,6 @@ export class LevelController implements angular.IComponentController {
 
     constructor(
         private $state: angular.ui.IStateService,
-        private $stateParams: any,
         private $timeout: angular.ITimeoutService,
         private Authentication: AuthenticationService,
         private gameSizeService: GameSizeService,
@@ -53,6 +51,7 @@ export class LevelController implements angular.IComponentController {
     private level: ILevel;
     private margin: number;
     private selectedLevelId;
+    private levelId;
     private error;
     private timeout = 1000;
 
@@ -60,8 +59,7 @@ export class LevelController implements angular.IComponentController {
     private goalMatrix: GameMatrix;
 
     $onInit() {
-        this.selectedLevelId = this.$stateParams['levelId'];
-        this.mode = this.$stateParams.mode;
+        this.selectedLevelId = this.levelId;
         this.findOne(this.mode);
     }
 
