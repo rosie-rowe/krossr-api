@@ -1,6 +1,5 @@
 import 'angular';
 import 'angular-animate'
-import 'angular-resource'
 import 'ng-debounce/dist/ng-debounce';
 import './polyfills';
 import  { platformBrowserDynamic } from '@angular/platform-browser-dynamic';

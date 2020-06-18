@@ -3,7 +3,6 @@ export var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'Krossr';
 	var applicationModuleVendorDependencies = [
-		'ngResource',
 		'ngAnimate',
 		'ui.router',
 		'ui.router.upgrade',
