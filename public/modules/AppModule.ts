@@ -4,14 +4,12 @@ import { ApplicationConfiguration } from './config';
 
 import CoreModule from './core/CoreModule';
 import LevelsModule from './levels/LevelsModule';
-import UsersModule from './users/UsersModule';
 import { UrlService } from "@uirouter/core";
 
 export function application() {
 	let dependencies = ApplicationConfiguration.applicationModuleVendorDependencies.concat([
 		CoreModule,
-		LevelsModule,
-		UsersModule
+		LevelsModule
 	]);
 	
 	angular.module(ApplicationConfiguration.applicationModuleName, dependencies);

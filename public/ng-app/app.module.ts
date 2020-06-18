@@ -45,6 +45,8 @@ import { ForgotPasswordComponent } from './ForgotPassword/ForgotPasswordComponen
 import { ResetPasswordComponent } from './ResetPassword/ResetPasswordComponent';
 import { SignUpComponent } from './SignUp/SignUpComponent';
 import { ConfirmationComponent } from './Confirmation/ConfirmationComponent';
+import { Routes } from './Routing/Routes';
+import { StateProvider } from '@uirouter/angularjs';
 
 @NgModule({
     imports: [
@@ -110,6 +112,8 @@ export class AppModule implements DoBootstrap {
     ngDoBootstrap() {
         application();
 
+        this.registerRoutes();
+
         this.downgradeComponents([
             ForgotPasswordComponent,
             GameComponent,
@@ -142,6 +146,16 @@ export class AppModule implements DoBootstrap {
         ]);
 
         this.upgrade.bootstrap(document.body, [ApplicationConfiguration.applicationModuleName], { strictDi: true });
+    }
+
+    private registerRoutes() {
+        let ng1Routes = Routes.getNg1Routes();
+
+        angular.module(ApplicationConfiguration.applicationModuleName).config(['$stateProvider', ($stateProvider: StateProvider) => {
+            Object.keys(ng1Routes).forEach(key => {
+                $stateProvider.state(key, ng1Routes[key]);
+            })
+        }]);
     }
 
     private downgradeComponents(components: AugmentedType<any>[]) {
