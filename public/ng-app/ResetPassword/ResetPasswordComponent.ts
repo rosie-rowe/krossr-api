@@ -2,6 +2,7 @@ import { AuthenticationService } from '../Authentication/AuthenticationService'
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ResetPasswordService } from './ResetPasswordService';
+import { MinPasswordLength } from '../Password/MinPasswordLength';
 
 @Component({
     selector: 'reset-password',
@@ -26,9 +27,8 @@ export class ResetPasswordComponent implements OnInit {
 
     ngOnInit() {
         this.formGroup = new FormGroup({});
-        // TODO length validation
-        this.newPasswordFormControl = new FormControl('', [Validators.required]);
-        this.verifyPasswordFormControl = new FormControl('', [Validators.required]);
+        this.newPasswordFormControl = new FormControl('', [Validators.required, Validators.minLength(MinPasswordLength.value)]);
+        this.verifyPasswordFormControl = new FormControl('', [Validators.required, Validators.minLength(MinPasswordLength.value)]);
         this.formGroup.addControl('newPassword', this.newPasswordFormControl);
         this.formGroup.addControl('verifyPassword', this.verifyPasswordFormControl);
     }
