@@ -39,6 +39,10 @@ export class LevelService {
         return resultLayout;
     }
 
+    getLevel(levelId: number) {
+        return this.httpClient.get(`levels/${levelId}`).toPromise();
+    }
+
     getLevels(query: any): Promise<LevelList> {
         return this.httpClient.get('levels', {
             params: new HttpParams({ fromObject: query})

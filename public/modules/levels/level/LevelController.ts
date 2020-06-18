@@ -176,9 +176,7 @@ export class LevelController implements angular.IComponentController {
         this.mode = mode;
 
         if (this.selectedLevelId) {
-            this.Levels.get({ 
-                levelId: this.selectedLevelId
-            }).$promise.then((data) => {
+            this.levelService.getLevel(this.selectedLevelId).then((data: ILevel) => {
                 this.level = data;
                 
                 this.setRating();
