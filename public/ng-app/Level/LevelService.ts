@@ -39,6 +39,10 @@ export class LevelService {
         return resultLayout;
     }
 
+    createLevel(params: LevelParams) {
+        return this.httpClient.post('levels', params).toPromise();
+    }
+
     getLevel(levelId: number) {
         return this.httpClient.get(`levels/${levelId}`).toPromise();
     }

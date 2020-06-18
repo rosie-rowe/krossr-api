@@ -9,6 +9,7 @@ import { ShiftService } from '../../../ng-app/Shift/ShiftService';
 import { Utils } from '../../../ng-app/Utils/Utils';
 import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
 import { RatingService } from '../../../ng-app/Rating/RatingService';
+import { LevelParams } from './LevelParams';
 
 export class LevelController implements angular.IComponentController {
     static $controllerAs = 'levelCtrl';
@@ -125,16 +126,12 @@ export class LevelController implements angular.IComponentController {
     };
 
      /** Create new Level (submit function) */
-    create(level, successFunc, failFunc) {
+    create(level, successFunc: Function, failFunc: Function) {
         // Redirect after save
-        level.$save(function(response) {
-            if (typeof successFunc === 'function') {
-                successFunc(response);
-            }
-        }, function(errorResponse) {
-            if (typeof failFunc === 'function') {
-                failFunc(errorResponse);
-            }
+        this.levelService.createLevel(level).then(response => {
+            successFunc(response);
+        }).catch(response => {
+            failFunc(response);
         });
     }
 
@@ -282,18 +279,18 @@ export class LevelController implements angular.IComponentController {
     // Split out for easier testing
     submitCreate() {
         // Create new Level object
-        var level = new this.Levels ({
+        var level = {
             name: this.level.name,
             layout: this.gameMatrix.horizontal.getLayout(),
             size: this.gameMatrix.horizontal.length
-        });
+        } as LevelParams;
 
         var levelSaveSuccess = (response) => {
             this.$state.go('update-level', { levelId: response.id }, { reload: true });
         };
 
         var levelSaveFailure = (err) => {
-            this.error = err.data.message;
+            this.error = err.error.message;
 
             this.$timeout(() => {
                 this.error = '';
