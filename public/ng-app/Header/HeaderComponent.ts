@@ -5,6 +5,7 @@ import { LevelSelectComponent } from '../LevelSelect/LevelSelectComponent';
 import { HelpComponent } from '../Help/HelpComponent';
 import { EditProfileComponent } from '../EditProfile/EditProfileComponent';
 import { SignInComponent } from '../SignIn/SignInComponent';
+import { SignUpComponent } from '../SignUp/SignUpComponent';
 
 @Component({
     selector: 'krossr-header',
@@ -37,8 +38,7 @@ export class HeaderComponent {
 		this.matDialog.open(SignInComponent);
 	}
 
-	// TODO
 	openSignUp() {
-		// this.componentDialogService.open('sign-up');
+		this.matDialog.open(SignUpComponent);
 	}
 }

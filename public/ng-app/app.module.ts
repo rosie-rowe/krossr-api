@@ -43,6 +43,7 @@ import { EditProfileComponent } from './EditProfile/EditProfileComponent';
 import { SignInComponent } from './SignIn/SignInComponent';
 import { ForgotPasswordComponent } from './ForgotPassword/ForgotPasswordComponent';
 import { ResetPasswordComponent } from './ResetPassword/ResetPasswordComponent';
+import { SignUpComponent } from './SignUp/SignUpComponent';
 
 @NgModule({
     imports: [
@@ -70,6 +71,7 @@ import { ResetPasswordComponent } from './ResetPassword/ResetPasswordComponent';
         PopupContentComponent,
         ResetPasswordComponent,
         SignInComponent,
+        SignUpComponent,
         StarRatingComponent,
         TileComponent
     ],
@@ -89,6 +91,7 @@ import { ResetPasswordComponent } from './ResetPassword/ResetPasswordComponent';
         PopupContentComponent,
         ResetPasswordComponent,
         SignInComponent,
+        SignUpComponent,
         StarRatingComponent,
         TileComponent
     ],
