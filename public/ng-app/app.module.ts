@@ -47,6 +47,7 @@ import { SignUpComponent } from './SignUp/SignUpComponent';
 import { ConfirmationComponent } from './Confirmation/ConfirmationComponent';
 import { Routes } from './Routing/Routes';
 import { StateProvider } from '@uirouter/angularjs';
+import { ChangePasswordComponent } from './ChangePassword/ChangePasswordComponent';
 
 @NgModule({
     imports: [
@@ -59,6 +60,7 @@ import { StateProvider } from '@uirouter/angularjs';
         UIRouterUpgradeModule.forRoot()
     ],
     declarations: [
+        ChangePasswordComponent,
         ConfirmationComponent,
         EditProfileComponent,
         ForgotPasswordComponent,
@@ -80,6 +82,7 @@ import { StateProvider } from '@uirouter/angularjs';
         TileComponent
     ],
     entryComponents: [
+        ChangePasswordComponent,
         ConfirmationComponent,
         EditProfileComponent,
         ForgotPasswordComponent,

@@ -12,25 +12,7 @@
 				<span ng-if="error.username" data-ng-bind="error.username"></span>
 			</button>
 		</div>
-	</form>
-	<h2>Change your password</h2>
-	<form data-ng-submit="changeUserPassword()" autocomplete="off">
-		<div class="form-group">
-			<input type="password" id="currentPassword" name="currentPassword" data-ng-model="passwordDetails.currentPassword" placeholder="Current Password">
-		</div>
-		<div class="form-group">
-			<input type="password" id="newPassword" minlength="{{ minPasswordLength }}" name="newPassword" data-ng-model="passwordDetails.newPassword" placeholder="New Password">
-		</div>
-		<div class="form-group">
-			<input type="password" id="verifyPassword" minlength="{{ minPasswordLength }}" name="verifyPassword" data-ng-model="passwordDetails.verifyPassword" placeholder="Verify Password">
-		</div>
-		<div class="form-group">
-			<button ng-disabled="error.password || success.password" type="submit">
-				<span ng-if="!error.password && !success.password">Save Password</span>
-				<span ng-if="!error.password && success.password">Password Saved</span>
-				<span ng-if="error.password" data-ng-bind="error.password"></span>
-			</button>
-		</div>
-	</form> -->
+	</form>-->
+	<change-password></change-password>
 	<button (click)="signout()">Sign Out</button>
 </popup-content>

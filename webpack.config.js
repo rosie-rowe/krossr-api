@@ -3,6 +3,7 @@
 var path = require('path');
 
 var config = {
+    devtool: 'source-map',
     entry: {
         'vendor': [
             'angular'

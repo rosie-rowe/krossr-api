@@ -1,8 +1,8 @@
-import { AuthenticationService } from '../Authentication/AuthenticationService'
 import { Component, OnInit } from '@angular/core';
 import { SignUpService } from './SignUpService';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MinPasswordLength } from '../Password/MinPasswordLength';
 
 @Component({
     selector: 'sign-up',
@@ -10,7 +10,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class SignUpComponent implements OnInit {
     private error: string;
-    private minPasswordLength = 10;
     private timeout: number = 1000;
 
     constructor(
@@ -27,7 +26,7 @@ export class SignUpComponent implements OnInit {
         this.formGroup = new FormGroup({});
         this.username = new FormControl('', [Validators.required]);
         this.email = new FormControl('', [Validators.required, Validators.email]);
-        this.password = new FormControl('', [Validators.required, Validators.minLength(this.minPasswordLength)])
+        this.password = new FormControl('', [Validators.required, Validators.minLength(MinPasswordLength.value)])
         this.formGroup.addControl('username', this.username);
         this.formGroup.addControl('email', this.email);
         this.formGroup.addControl('password', this.password);
