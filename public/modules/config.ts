@@ -6,7 +6,6 @@ export var ApplicationConfiguration = (function() {
 		'ngAnimate',
 		'ui.router',
 		'ui.router.upgrade',
-		'debounce',
 		'templates-main'
 	];
 

@@ -3,13 +3,11 @@ import * as angular from 'angular';
 import { ApplicationConfiguration } from './config';
 
 import CoreModule from './core/CoreModule';
-import LevelsModule from './levels/LevelsModule';
 import { UrlService } from "@uirouter/core";
 
 export function application() {
 	let dependencies = ApplicationConfiguration.applicationModuleVendorDependencies.concat([
-		CoreModule,
-		LevelsModule
+		CoreModule
 	]);
 	
 	angular.module(ApplicationConfiguration.applicationModuleName, dependencies);

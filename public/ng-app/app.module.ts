@@ -50,6 +50,9 @@ import { StateProvider } from '@uirouter/angularjs';
 import { ChangePasswordComponent } from './ChangePassword/ChangePasswordComponent';
 import { UpdateUserComponent } from './User/UpdateUserComponent';
 import { LevelComponent } from './Level/LevelComponent';
+import { ShellComponent } from './Shell/ShellComponent';
+import { ResizeDirective } from './Resize/ResizeDirective';
+import { GameResizeService } from './GameSize/GameResizeService';
 
 @NgModule({
     imports: [
@@ -79,6 +82,8 @@ import { LevelComponent } from './Level/LevelComponent';
         PaginationComponent,
         PopupContentComponent,
         ResetPasswordComponent,
+        ResizeDirective,
+        ShellComponent,
         SignInComponent,
         SignUpComponent,
         StarRatingComponent,
@@ -103,6 +108,7 @@ import { LevelComponent } from './Level/LevelComponent';
         PaginationComponent,
         PopupContentComponent,
         ResetPasswordComponent,
+        ShellComponent,
         SignInComponent,
         SignUpComponent,
         StarRatingComponent,
@@ -114,8 +120,12 @@ import { LevelComponent } from './Level/LevelComponent';
     ]
 })
 export class AppModule implements DoBootstrap {
-    constructor(private upgrade: UpgradeModule) {
+    constructor(
+        private upgrade: UpgradeModule,
+        private gameResizeService: GameResizeService
+    ) {
         console.log('Angular is running!');
+        gameResizeService.initialize();
     }
 
     ngDoBootstrap() {
@@ -133,6 +143,7 @@ export class AppModule implements DoBootstrap {
             NumberGridComponent,
             NumberLineComponent,
             ResetPasswordComponent,
+            ShellComponent,
             StarRatingComponent,
             TileComponent
         ]);

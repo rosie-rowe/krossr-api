@@ -19,7 +19,6 @@ export class GameSizeService {
         private sideLengthService: SideLengthService,
         private tileSizeService: TileSizeService
     ) {
-        
     }
 
      /* Take a given game width and subtract border widths. I either have to do this
