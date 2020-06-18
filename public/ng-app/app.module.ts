@@ -48,6 +48,7 @@ import { ConfirmationComponent } from './Confirmation/ConfirmationComponent';
 import { Routes } from './Routing/Routes';
 import { StateProvider } from '@uirouter/angularjs';
 import { ChangePasswordComponent } from './ChangePassword/ChangePasswordComponent';
+import { UpdateUserComponent } from './User/UpdateUserComponent';
 
 @NgModule({
     imports: [
@@ -79,7 +80,8 @@ import { ChangePasswordComponent } from './ChangePassword/ChangePasswordComponen
         SignInComponent,
         SignUpComponent,
         StarRatingComponent,
-        TileComponent
+        TileComponent,
+        UpdateUserComponent,
     ],
     entryComponents: [
         ChangePasswordComponent,
@@ -101,7 +103,8 @@ import { ChangePasswordComponent } from './ChangePassword/ChangePasswordComponen
         SignInComponent,
         SignUpComponent,
         StarRatingComponent,
-        TileComponent
+        TileComponent,
+        UpdateUserComponent
     ],
     providers: [
         { provide: 'window', useValue: window }

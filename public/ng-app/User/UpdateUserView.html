@@ -1,0 +1,13 @@
+	<form name="userForm" [formGroup]="formGroup" autocomplete="off">
+		<h2>Change your Email Address</h2>
+		<div class="form-group">
+			<input type="email" id="email" name="email" [formControl]="emailFormControl" (keyup)="updateEmail($event.target.value)" placeholder="Email">
+		</div>
+		<div class="form-group">
+			<button [disabled]="error || success" type="submit" (click)="updateUser()">
+				<span *ngIf="!success && !error">Save Email Address</span>
+				<span *ngIf="success && !error">Email Saved</span>
+				<span *ngIf="error">{{ error }}</span>
+			</button>
+		</div>
+	</form>
