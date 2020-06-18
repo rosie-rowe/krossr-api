@@ -5,7 +5,6 @@ export var ApplicationConfiguration = (function() {
 	var applicationModuleVendorDependencies = [
 		'ngResource',
 		'ngAnimate',
-		'ngCookies',
 		'ngTouch',
 		'ui.router',
 		'ui.router.upgrade',
