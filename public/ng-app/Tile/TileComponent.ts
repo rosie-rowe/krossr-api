@@ -1,6 +1,6 @@
 import { BooleanMatrix } from '../Matrix/BooleanMatrix';
 import { DragBoxService } from '../DragBox/DragBoxService';
-import { ILevel } from "../../modules/levels/level/Level";
+import { ILevel } from "../Level/Level";
 import { ShiftService } from '../Shift/ShiftService';
 import { Point } from '../Point/Point';
 import { SideLengthService } from '../SideLength/SideLengthService';

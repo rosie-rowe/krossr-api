@@ -1,23 +1,27 @@
-level {
+@import (reference) '../../less/mixins.less';
+@import (reference) '../../less/variables.less';
+
+:host {
     .main-viewport;
     .user-select();
     display: block;
     padding: @inputMargin * 5;
-}
 
-.gameContainer-inner {
-    display: inline-block;
-
-    .viewLevel & {
+    .viewLevel .gameContainer-inner {
         position: absolute;
         bottom: 0;
         right: 0;
     }
 
+    .gameContainer-inner {
+        display: inline-block;
+    
+    }
+
     @media screen and (max-width: @mediumScreen) {
         margin: 0 auto;
 
-        .viewLevel & {
+        .viewLevel .gameContainer-inner {
             position: static;
         }
     }

@@ -1,31 +1,29 @@
 import * as angular from 'angular';
 
-import { AuthenticationService } from '../../../ng-app/Authentication/AuthenticationService'
+import { AuthenticationService } from '../Authentication/AuthenticationService'
 import { ILevel } from "../level/Level";
-import { GameMatrix } from '../../../ng-app/GameMatrix/GameMatrix';
-import { GameSizeService } from '../../../ng-app/GameSize/GameSizeService';
-import { LevelService } from '../../../ng-app/Level/LevelService';
-import { ShiftService } from '../../../ng-app/Shift/ShiftService';
-import { Utils } from '../../../ng-app/Utils/Utils';
-import { TileSizeEventService } from '../../../ng-app/TileSize/TileSizeEventService';
-import { RatingService } from '../../../ng-app/Rating/RatingService';
+import { GameMatrix } from '../GameMatrix/GameMatrix';
+import { GameSizeService } from '../GameSize/GameSizeService';
+import { LevelService } from './LevelService';
+import { ShiftService } from '../Shift/ShiftService';
+import { Utils } from '../Utils/Utils';
+import { TileSizeEventService } from '../TileSize/TileSizeEventService';
+import { RatingService } from '../Rating/RatingService';
 import { LevelParams } from './LevelParams';
+import { Input, Component, OnInit } from '@angular/core';
+import { StateService } from '@uirouter/core';
 
-export class LevelController implements angular.IComponentController {
-    static $controllerAs = 'levelCtrl';
-    static $name = 'LevelController';
-
-    static $inject = [
-        '$state',
-        '$timeout',
-        'Authentication',
-        'gameSizeService',
-        LevelService.$name,
-        RatingService.$name,
-        'shiftService',
-        TileSizeEventService.$name,
-        'Utils'
-    ];
+@Component({
+    selector: 'level',
+    styles: [require('./LevelStyles.less')],
+    template: require('./LevelView.html')
+})
+export class LevelComponent implements OnInit {
+    static $name = 'level';
+    bindToController = true;
+    controller = 'LevelController';
+    controllerAs = 'levelCtrl';
+    templateUrl = 'modules/levels/level/LevelView.html';
 
     private finalLayout: any = {};
 
@@ -34,8 +32,7 @@ export class LevelController implements angular.IComponentController {
     };
 
     constructor(
-        private $state: angular.ui.IStateService,
-        private $timeout: angular.ITimeoutService,
+        private $state: StateService,
         private Authentication: AuthenticationService,
         private gameSizeService: GameSizeService,
         private levelService: LevelService,
@@ -47,23 +44,21 @@ export class LevelController implements angular.IComponentController {
         
     }
 
-    private mode: string; // string for edit, new, etc.
+    @Input() public mode: string; // string for edit, new, etc.
     private level: ILevel;
     private margin: number;
     private selectedLevelId;
-    private levelId;
+    @Input() public levelId;
     private error;
     private timeout = 1000;
 
     private gameMatrix: GameMatrix;
     private goalMatrix: GameMatrix;
 
-    $onInit() {
+    ngOnInit() {
         this.selectedLevelId = this.levelId;
         this.findOne(this.mode);
-    }
 
-    $postLink() {
         this.tileSizeEventService.tileSizeChanged.subscribe(tileSize => {
             let newSize = Math.floor(tileSize);
             this.margin = newSize / 2;
@@ -245,7 +240,7 @@ export class LevelController implements angular.IComponentController {
     }
     
     rate(rating) {
-        this.$timeout(() => {
+        setTimeout(() => {
             this.ratingService.rate(this.level.id, rating);
         });
     }
@@ -288,7 +283,7 @@ export class LevelController implements angular.IComponentController {
         var levelSaveFailure = (err) => {
             this.error = err.error.message;
 
-            this.$timeout(() => {
+            setTimeout(() => {
                 this.error = '';
             }, this.timeout)
         }
@@ -309,7 +304,7 @@ export class LevelController implements angular.IComponentController {
         }).catch(response => {
             this.error = response.error.message;
 
-            this.$timeout(() => {
+            setTimeout(() => {
                 this.error = null;
             }, this.timeout);
         })

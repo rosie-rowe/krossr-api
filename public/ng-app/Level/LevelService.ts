@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { LevelList } from "./LevelList";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { LevelParams } from "../../modules/levels/level/LevelParams";
+import { LevelParams } from "./LevelParams";
 @Injectable({
     providedIn: 'root'
 })

@@ -2,7 +2,7 @@ import { DragBoxService } from '../DragBox/DragBoxService';
 import { GameMatrix } from '../GameMatrix/GameMatrix';
 import { GameOverService } from '../GameOver/GameOverService';
 import { GameSizeService } from '../GameSize/GameSizeService';
-import { ILevel } from "../../modules/levels/level/Level";
+import { ILevel } from "../Level/Level";
 import { TileSizeService } from '../TileSize/TileSizeService';
 import { TileState } from '../Tile/TileState';
 import { TileSizeEventService } from '../TileSize/TileSizeEventService';

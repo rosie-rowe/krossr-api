@@ -1,4 +1,4 @@
-import { ILevel } from "../../modules/levels/level/Level";
+import { ILevel } from "../Level/Level";
 import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { GameOverComponent } from "./GameOverComponent";

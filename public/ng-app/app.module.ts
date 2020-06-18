@@ -49,6 +49,7 @@ import { Routes } from './Routing/Routes';
 import { StateProvider } from '@uirouter/angularjs';
 import { ChangePasswordComponent } from './ChangePassword/ChangePasswordComponent';
 import { UpdateUserComponent } from './User/UpdateUserComponent';
+import { LevelComponent } from './Level/LevelComponent';
 
 @NgModule({
     imports: [
@@ -67,6 +68,7 @@ import { UpdateUserComponent } from './User/UpdateUserComponent';
         ForgotPasswordComponent,
         GameComponent,
         GameOverComponent,
+        LevelComponent,
         HeaderComponent,
         HelpComponent,
         LoadingAnimationComponent,
@@ -90,6 +92,7 @@ import { UpdateUserComponent } from './User/UpdateUserComponent';
         ForgotPasswordComponent,
         GameComponent,
         GameOverComponent,
+        LevelComponent,
         HeaderComponent,
         HelpComponent,
         LoadingAnimationComponent,
@@ -124,6 +127,7 @@ export class AppModule implements DoBootstrap {
             ForgotPasswordComponent,
             GameComponent,
             HeaderComponent,
+            LevelComponent,
             LoadingAnimationComponent,
             ModeSelectorComponent,
             NumberGridComponent,

@@ -3,7 +3,7 @@ import 'angular-mocks';
 
 import { ApplicationConfiguration } from '../public/modules/config';
 
-import { LevelControllerTests } from '../public/modules/levels/level/LevelController.test';
+// import { LevelControllerTests } from '../public/ng-app/Level/LevelController.test';
 // import { LevelSelectControllerTests } from '../public/ng-app/LevelSelect/LevelSelectController.test';
 // import { SignInControllerTests } from '../public/ng-app/SignIn/SignInController.test';
 // import { SignUpControllerTests } from '../public/ng-app/SignUp/SignUpController.test';
@@ -36,7 +36,7 @@ class TestModule {
             // Then we can start by loading the main application module
             beforeEach(angular.mock.module(ApplicationConfiguration.applicationModuleName));
 
-            LevelControllerTests.run();
+            // LevelControllerTests.run();
             // LevelSelectControllerTests.run();
             // SignInControllerTests.run();
             // SignUpControllerTests.run();
