@@ -177,17 +177,12 @@ export class AppModule implements DoBootstrap {
     }
 
     private registerRoutes() {
-        let ng1Routes = Routes.getNg1Routes();
         let ng2Routes = Routes.getNg2Routes();
 
         angular.module(ApplicationConfiguration.applicationModuleName).config(['$stateProvider', '$urlRouterProvider', ($stateProvider: StateProvider, $urlRouterProvider: UrlRouterProvider) => {
             // Redirect to home view when route not found
             $urlRouterProvider.otherwise('/');
             
-            Object.keys(ng1Routes).forEach(key => {
-                $stateProvider.state(key, ng1Routes[key]);
-            })
-
             ng2Routes.forEach(route => {
                 $stateProvider.state(route.name, route);
             })
