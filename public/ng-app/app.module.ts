@@ -46,7 +46,7 @@ import { ResetPasswordComponent } from './ResetPassword/ResetPasswordComponent';
 import { SignUpComponent } from './SignUp/SignUpComponent';
 import { ConfirmationComponent } from './Confirmation/ConfirmationComponent';
 import { Routes } from './Routing/Routes';
-import { StateProvider, UrlRouterProvider } from '@uirouter/angularjs';
+import { StateProvider, UrlRouterProvider, StateRegistry } from '@uirouter/angularjs';
 import { ChangePasswordComponent } from './ChangePassword/ChangePasswordComponent';
 import { UpdateUserComponent } from './User/UpdateUserComponent';
 import { LevelComponent } from './Level/LevelComponent';
@@ -178,6 +178,7 @@ export class AppModule implements DoBootstrap {
 
     private registerRoutes() {
         let ng1Routes = Routes.getNg1Routes();
+        let ng2Routes = Routes.getNg2Routes();
 
         angular.module(ApplicationConfiguration.applicationModuleName).config(['$stateProvider', '$urlRouterProvider', ($stateProvider: StateProvider, $urlRouterProvider: UrlRouterProvider) => {
             // Redirect to home view when route not found
@@ -185,6 +186,10 @@ export class AppModule implements DoBootstrap {
             
             Object.keys(ng1Routes).forEach(key => {
                 $stateProvider.state(key, ng1Routes[key]);
+            })
+
+            ng2Routes.forEach(route => {
+                $stateProvider.state(route.name, route);
             })
         }]);
     }

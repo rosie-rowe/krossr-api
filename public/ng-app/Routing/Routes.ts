@@ -1,13 +1,10 @@
 import { Ng1StateDeclaration } from "@uirouter/angularjs";
+import { Ng2StateDeclaration } from "@uirouter/angular";
+import { HomeComponent } from "../Home/HomeComponent";
 
 export class Routes {
     static getNg1Routes(): { [name: string]: Ng1StateDeclaration } {
         return {
-            /** Home */
-            'home': {
-                url: '/',
-                template: '<home></home>'
-            },
             /** Password */
             'reset-invalid': {
                 url: '/password/reset/invalid',
@@ -36,5 +33,15 @@ export class Routes {
                 template: (params) => `<level level-id="${params.levelId}" mode="edit">`
             }
         }
+    }
+
+    static getNg2Routes(): Ng2StateDeclaration[] {
+        return [
+            {
+                name: 'home',
+                url: '/',
+                component: HomeComponent
+            }
+        ];
     }
 }
