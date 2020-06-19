@@ -5,8 +5,7 @@ export var ApplicationConfiguration = (function() {
 	var applicationModuleVendorDependencies = [
 		'ngAnimate',
 		'ui.router',
-		'ui.router.upgrade',
-		'templates-main'
+		'ui.router.upgrade'
 	];
 
 	return {

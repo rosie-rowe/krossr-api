@@ -25,10 +25,7 @@ module.exports = {
 		js: [
             'public/dist/templates.bundle-*.js',
 			'public/dist/krossr.bundle-*.js'
-		],
-        html: [
-            'public/modules/**/*.html'
-        ]
+		]
 	},
     mailer: {
         from: 'support@krossr.com',

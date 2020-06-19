@@ -79,15 +79,6 @@ module.exports = function(grunt) {
 				src: watchFiles.clientCSS
 			}
 		},
-        html2js: {
-            options: {
-                base: 'public/'
-            },
-            main: {
-                src: '<%= applicationHTMLFiles %>',
-                dest: 'public/dist/templates.bundle-<%= hash %>.js'
-            }
-        },
 		cssmin: {
 			combine: {
 				files: {
@@ -159,7 +150,6 @@ module.exports = function(grunt) {
 		var init = require('./config/init')();
 		var config = require('./config/config');
 
-        grunt.config.set('applicationHTMLFiles', config.assets.html);
         grunt.config.set('applicationJavaScriptLibFiles', config.assets.lib.js);
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
 		grunt.config.set('applicationCSSFiles', config.assets.css);
@@ -177,9 +167,8 @@ module.exports = function(grunt) {
 
 	// Build task(s).
 	grunt.registerTask('buildCSS', ['less', 'cssmin']);
-	grunt.registerTask('buildHTML', ['html2js']);
 	grunt.registerTask('buildTypescript', ['webpack:dev']);
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'buildTypescript', 'buildHTML', 'buildCSS']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'buildTypescript', 'buildCSS']);
 
 	grunt.registerTask('test', ['env:test', 'karma:unit']);
 };
