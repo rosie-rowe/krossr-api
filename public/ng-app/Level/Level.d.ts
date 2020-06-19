@@ -5,5 +5,6 @@ export interface ILevel {
     ratings?;
     ready: boolean;
     layout?: Boolean[][];
+    size: number;
     yourRating?;
 }

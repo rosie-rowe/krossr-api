@@ -1,0 +1,34 @@
+<div class="form-group">
+    <h2>{{ level.currentView }} level</h2>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" [formControl]="nameFormControl" (keyup)="updateName($event.target.value)" id="name" placeholder="Name">
+    </div>
+
+    <div class="form-group" *ngIf="level.currentView === 'new'">
+        <label for="size">Size</label>
+        <select [formControl]="sizeFormControl" (change)="updateSize($event.target.value)">
+            <option *ngFor="let value of sizeOptions">
+                {{ value }}
+            </option>
+        </select>
+    </div>
+
+    <div>
+        <button type="button" (click)="confirmClear()">Clear</button>
+    </div>
+
+    <button [disabled]="error" type="button" (click)="submit()">
+        <span *ngIf="!error">{{ submitText }}</span>
+        <span *ngIf="error">{{ error }}</span>
+    </button>
+
+    <div *ngIf="level.id">
+        <a (click)="confirmRemove()">
+            <button>  
+                Delete Level
+            </button>
+        </a>
+    </div>
+</div>

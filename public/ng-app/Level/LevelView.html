@@ -1,47 +1,8 @@
-<section class="viewLevel">
-    <!-- <div class="form-group" *ngIf="['edit', 'new'].indexOf(level.currentView) > -1">
-        <h2>{{ level.currentView }} level</h2>
-
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" data-ng-model="level.name" id="name" placeholder="Name" required>
-        </div>
-
-        <div class="form-group" *ngIf="level.currentView === 'new'">
-            <label for="size">Size</label>
-            <select convert-to-number ng-model="options.size" ng-change="createNewLevel();">
-                <option value="25">5x5</option>
-                <option value="100">10x10</option>
-                <option value="225">15x15</option>
-            </select>
-        </div>
-
-        <div>
-            <button type="button" ng-click="confirmClear()">Clear</button>
-        </div>
-
-        <div *ngIf="level.currentView === 'edit'">
-            <button ng-disabled="error" type="button" ng-click="confirmUpdate()">
-                <span *ngIf="!error">Update</span>
-                <span *ngIf="error" ng-bind-html="error"></span>
-            </button>
-        </div>
-
-        <div *ngIf="level.currentView === 'new'">
-            <button ng-disabled="error" ng-click="submitCreate()">
-                <span *ngIf="!error">Submit</span>
-                <span *ngIf="error" data-ng-bind="error"></span>
-            </button>
-        </div>
-
-        <div data-*ngIf="Authentication.user.id == level.userId && level.currentView === 'edit'">
-            <a data-ng-click="confirmRemove();">
-                <button>  
-                    Delete Level
-                </button>
-            </a>
-        </div>
-    </div> -->
+<section class="viewLevel" *ngIf="level">
+    <level-editor-form *ngIf="level.currentView === 'new'" [error]="error" [level]="level" submitText="Submit" (sizeChange)="createGameArray()" (submitAction)="submitCreate($event)">
+    </level-editor-form>
+    <level-editor-form *ngIf="level.currentView === 'edit'" [error]="error" [level]="level" submitText="Update" (sizeChange)="createGameArray()" (submitAction)="confirmUpdate($event)">
+    </level-editor-form>
 
     <div class="rateLevel" *ngIf="Authentication.user && level && level.currentView === 'view'">
         Rate: <star-rating [rating]="level.yourRating" max="5" (onRatingSelected)="rate($event)"></star-rating>

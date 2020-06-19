@@ -12,6 +12,9 @@ import { RatingService } from '../Rating/RatingService';
 import { LevelParams } from './LevelParams';
 import { Input, Component, OnInit } from '@angular/core';
 import { StateService } from '@uirouter/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../Confirmation/ConfirmationComponent';
+import { ConfirmationOptions } from '../Confirmation/ConfirmationOptions';
 
 @Component({
     selector: 'level',
@@ -27,21 +30,17 @@ export class LevelComponent implements OnInit {
 
     private finalLayout: any = {};
 
-    private options = {
-        size: 25
-    };
-
     constructor(
         private $state: StateService,
         private Authentication: AuthenticationService,
         private gameSizeService: GameSizeService,
         private levelService: LevelService,
+        private matDialog: MatDialog,
         private ratingService: RatingService,
         private shiftService: ShiftService,
         private tileSizeEventService: TileSizeEventService,
         private Utils: Utils
     ) {
-        
     }
 
     @Input() public mode: string; // string for edit, new, etc.
@@ -65,55 +64,14 @@ export class LevelComponent implements OnInit {
         });
     }
 
-    clearAll() {
-        this.Utils.clearAll();
-    }
-
-    confirmClear() {
-        // this.ngDialog.openConfirm({
-        //     closeByDocument: false,
-        //     plain: true,
-        //     scope: this.$scope,
-        //     showClose: false,
-        //     template: `<confirmation
-        //                 cancel-action="closeThisDialog()"
-        //                 confirm-action="confirm()"
-        //                 submit-action="levelCtrl.clearAll()"
-        //                 submit-text="Clear"></confirmation>`
-        // });
-        // TODO
-    };
-
-    confirmRemove() {
-        this.removeCurrentLevel();
-        // this.ngDialog.openConfirm({
-        //     closeByDocument: false,
-        //     plain: true,
-        //     scope: this.$scope,
-        //     showClose: false,
-        //     template: `<confirmation
-        //                 cancel-action="closeThisDialog()"
-        //                 confirm-action="confirm()"
-        //                 submit-action="levelCtrl.removeCurrentLevel()"
-        //                 submit-text="Delete"></confirmation>`
-        // });
-        // TODO
-    };
-
-    confirmUpdate() {
-        this.update();
-        // this.ngDialog.openConfirm({
-        //     closeByDocument: false,
-        //     plain: true,
-        //     scope: this.$scope,
-        //     showClose: false,
-        //     template: `<confirmation
-        //                 cancel-action="closeThisDialog()"
-        //                 confirm-action="confirm()"
-        //                 submit-action="levelCtrl.update()"
-        //                 submit-text="Update"></confirmation>`
-        // });
-        // TODO
+    confirmUpdate(level: ILevel) {
+        this.matDialog.open(ConfirmationComponent, {
+            data: {
+                submitText: 'Update',
+                submitAction: () => this.updateLevel(level)
+            } as ConfirmationOptions,
+            disableClose: true
+        })
     };
 
      /** Create new Level (submit function) */
@@ -126,10 +84,10 @@ export class LevelComponent implements OnInit {
         });
     }
 
-    createGameArray(controller) {
+    createGameArray() {
         this.Utils.createNewGame({
-            numberOfTiles: this.options.size,
-            controller: controller
+            numberOfTiles: this.level ? this.level.size : 25,
+            controller: this.level ? this.level.currentView : 'new'
         });
     }
 
@@ -138,17 +96,18 @@ export class LevelComponent implements OnInit {
         var action: 'new' = 'new';
         var oldLevel = angular.copy(this.level);
 
-        this.clearAll()
+        this.Utils.clearAll();
 
         this.level = undefined;
 
-        this.createGameArray(action);
+        this.createGameArray();
         this.getLayoutForRepeater(action);
 
         this.level = {
             currentView: action,
             ready: true,
-            name: oldLevel ? oldLevel.name : ''
+            name: oldLevel ? oldLevel.name : '',
+            size: 25
         };
 
         this.gameMatrix = new GameMatrix(this.Utils.getGameMatrix(), false);
@@ -245,20 +204,6 @@ export class LevelComponent implements OnInit {
         });
     }
 
-     /** Remove any Level passed in */
-    remove(level) {
-        if (level) { 
-            this.levelService.removeLevel(level.id).then(() => {
-                // TODO
-                // this.componentDialogService.open('level-select');
-            })
-        }
-    }
-
-    /** Remove the level you're looking at */
-    removeCurrentLevel() {
-        this.remove(this.level);
-    }
 
     /** This should be done on the server side, todo */
     setRating() {
@@ -290,11 +235,6 @@ export class LevelComponent implements OnInit {
 
         this.create(level, levelSaveSuccess, levelSaveFailure);
     }
-
-    // Update existing Level
-    update() {
-        this.updateLevel(this.level);
-    };
 
     updateLevel(level) {
         level.size = level.layout.length;

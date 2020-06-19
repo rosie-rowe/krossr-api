@@ -54,6 +54,7 @@ import { ShellComponent } from './Shell/ShellComponent';
 import { ResizeDirective } from './Resize/ResizeDirective';
 import { GameResizeService } from './GameSize/GameResizeService';
 import { HomeComponent } from './Home/HomeComponent';
+import { LevelEditorFormComponent } from './LevelEditorForm/LevelEditorFormComponent';
 
 @NgModule({
     imports: [
@@ -77,6 +78,7 @@ import { HomeComponent } from './Home/HomeComponent';
         HeaderComponent,
         HelpComponent,
         LoadingAnimationComponent,
+        LevelEditorFormComponent,
         LevelSelectComponent,
         ModeSelectorComponent,
         NumberGridComponent,
@@ -104,6 +106,7 @@ import { HomeComponent } from './Home/HomeComponent';
         HeaderComponent,
         HelpComponent,
         LoadingAnimationComponent,
+        LevelEditorFormComponent,
         LevelSelectComponent,
         ModeSelectorComponent,
         NumberGridComponent,
