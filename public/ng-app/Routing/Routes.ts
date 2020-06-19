@@ -3,6 +3,11 @@ import { Ng1StateDeclaration } from "@uirouter/angularjs";
 export class Routes {
     static getNg1Routes(): { [name: string]: Ng1StateDeclaration } {
         return {
+            /** Home */
+            'home': {
+                url: '/',
+                template: '<home></home>'
+            },
             /** Password */
             'reset-invalid': {
                 url: '/password/reset/invalid',

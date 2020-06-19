@@ -46,13 +46,14 @@ import { ResetPasswordComponent } from './ResetPassword/ResetPasswordComponent';
 import { SignUpComponent } from './SignUp/SignUpComponent';
 import { ConfirmationComponent } from './Confirmation/ConfirmationComponent';
 import { Routes } from './Routing/Routes';
-import { StateProvider } from '@uirouter/angularjs';
+import { StateProvider, UrlRouterProvider } from '@uirouter/angularjs';
 import { ChangePasswordComponent } from './ChangePassword/ChangePasswordComponent';
 import { UpdateUserComponent } from './User/UpdateUserComponent';
 import { LevelComponent } from './Level/LevelComponent';
 import { ShellComponent } from './Shell/ShellComponent';
 import { ResizeDirective } from './Resize/ResizeDirective';
 import { GameResizeService } from './GameSize/GameResizeService';
+import { HomeComponent } from './Home/HomeComponent';
 
 @NgModule({
     imports: [
@@ -71,6 +72,7 @@ import { GameResizeService } from './GameSize/GameResizeService';
         ForgotPasswordComponent,
         GameComponent,
         GameOverComponent,
+        HomeComponent,
         LevelComponent,
         HeaderComponent,
         HelpComponent,
@@ -97,6 +99,7 @@ import { GameResizeService } from './GameSize/GameResizeService';
         ForgotPasswordComponent,
         GameComponent,
         GameOverComponent,
+        HomeComponent,
         LevelComponent,
         HeaderComponent,
         HelpComponent,
@@ -125,7 +128,7 @@ export class AppModule implements DoBootstrap {
         private gameResizeService: GameResizeService
     ) {
         console.log('Angular is running!');
-        gameResizeService.initialize();
+        this.gameResizeService.initialize();
     }
 
     ngDoBootstrap() {
@@ -137,6 +140,7 @@ export class AppModule implements DoBootstrap {
             ForgotPasswordComponent,
             GameComponent,
             HeaderComponent,
+            HomeComponent,
             LevelComponent,
             LoadingAnimationComponent,
             ModeSelectorComponent,
@@ -172,7 +176,10 @@ export class AppModule implements DoBootstrap {
     private registerRoutes() {
         let ng1Routes = Routes.getNg1Routes();
 
-        angular.module(ApplicationConfiguration.applicationModuleName).config(['$stateProvider', ($stateProvider: StateProvider) => {
+        angular.module(ApplicationConfiguration.applicationModuleName).config(['$stateProvider', '$urlRouterProvider', ($stateProvider: StateProvider, $urlRouterProvider: UrlRouterProvider) => {
+            // Redirect to home view when route not found
+            $urlRouterProvider.otherwise('/');
+            
             Object.keys(ng1Routes).forEach(key => {
                 $stateProvider.state(key, ng1Routes[key]);
             })
