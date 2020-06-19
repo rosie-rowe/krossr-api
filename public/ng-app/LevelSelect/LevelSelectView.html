@@ -77,7 +77,7 @@
         </div>
     </div>
 
-    <div class="alert alert-warning" [hidden]="levels && levels.count > 0">
+    <div class="alert alert-warning" *ngIf="!levels || !levels.length">
     	No Levels yet!
 
         <button *ngIf="Authentication.user" (click)="createNewLevel();closeThisDialog();">

@@ -16,8 +16,12 @@ export class GameResizeService {
 
     initialize() {
         this.resizeEventService.windowResized.subscribe(() => {
-            this.gameSizeService.calculatePlayableArea();
-            this.gameSizeService.setGameSize(this.utils.getGameMatrix().length);
+            let gameMatrix = this.utils.getGameMatrix();
+
+            if (gameMatrix) {
+                this.gameSizeService.calculatePlayableArea();
+                this.gameSizeService.setGameSize(gameMatrix.length);
+            }
         });
     }
 }
