@@ -6,6 +6,7 @@ import { Utils } from "../Utils/Utils";
 import { ConfirmationComponent } from "../Confirmation/ConfirmationComponent";
 import { ConfirmationOptions } from "../Confirmation/ConfirmationOptions";
 import { LevelService } from "../Level/LevelService";
+import { LevelSelectComponent } from "../LevelSelect/LevelSelectComponent";
 
 @Component({
     selector: 'level-editor-form',
@@ -70,8 +71,7 @@ export class LevelEditorFormComponent implements OnInit {
     remove(level) {
         if (level) { 
             this.levelService.removeLevel(level.id).then(() => {
-                // TODO
-                // this.componentDialogService.open('level-select');
+                this.matDialog.open(LevelSelectComponent);
             })
         }
     }

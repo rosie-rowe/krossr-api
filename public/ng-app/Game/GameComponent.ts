@@ -50,7 +50,6 @@ export class GameComponent implements OnInit {
 
         // focus the game when the mouse enters it so that the first click will register
         this.$element.addEventListener('mouseenter', () => {
-            // TODO remove angular.element
             let elements = this.$element.querySelectorAll('.inner') as NodeListOf<HTMLElement>;
 
             elements.forEach(ele => ele.focus());
