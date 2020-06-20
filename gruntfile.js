@@ -9,14 +9,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: ['public/dist'],
-		env: {
-            development: {
-                NODE_ENV: 'development'
-            },
-			test: {
-				NODE_ENV: 'test'
-			}
-		},
 		webpack: {
 			prod: webpackConfig,
 			dev: webpackConfig
@@ -27,5 +19,5 @@ module.exports = function(grunt) {
 	grunt.option('force', true);
 
 	grunt.registerTask('buildTypescript', ['webpack:dev']);
-	grunt.registerTask('build', ['env:development', 'clean', 'buildTypescript']);
+	grunt.registerTask('build', ['buildTypescript']);
 };

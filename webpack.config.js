@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 var config = {
     devtool: 'source-map',
@@ -14,6 +15,9 @@ var config = {
     optimization: {
         minimize: false
     },
+    plugins: [
+        new CleanWebpackPlugin()
+    ],
     resolve: {
         modules: [
             'node_modules',
