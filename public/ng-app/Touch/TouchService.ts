@@ -8,10 +8,10 @@ export class TouchService {
     static $name = 'touchService';
 
     /** Touchmove/touchend will not move along with crossing over elements like mousemove/mouseup will, so we need hax */
-    getRealTarget(event: TouchEvent): angular.IAugmentedJQuery {
+    getRealTarget(event: TouchEvent) {
         var myLocation = this.getTouches(event)[0];
 
-        return angular.element(document.elementFromPoint(myLocation.clientX, myLocation.clientY)) as angular.IAugmentedJQuery;
+        return document.elementFromPoint(myLocation.clientX, myLocation.clientY);
     }
 
     /**

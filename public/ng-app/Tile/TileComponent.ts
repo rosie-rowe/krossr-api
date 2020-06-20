@@ -210,7 +210,7 @@ export class TileComponent implements OnInit, AfterViewInit {
     private getActualTileFromTouchEvent(e: TouchEvent) {
         let actualTile = this.touchService.getRealTarget(e).closest('tile');
 
-        return actualTile[0] as HTMLElement;
+        return actualTile as HTMLElement;
     }
 
     change(index, initState, changeTo) {

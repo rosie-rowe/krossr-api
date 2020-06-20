@@ -5,9 +5,6 @@ var path = require('path');
 var config = {
     devtool: 'source-map',
     entry: {
-        'vendor': [
-            'angular'
-        ],
         'krossr': 'app.ts'
     },
     output: {

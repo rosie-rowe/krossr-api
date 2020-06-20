@@ -1,5 +1,3 @@
-import * as angular from 'angular';
-
 import { AuthenticationService } from '../Authentication/AuthenticationService'
 import { ILevel } from "../level/Level";
 import { GameMatrix } from '../GameMatrix/GameMatrix';
@@ -94,7 +92,11 @@ export class LevelComponent implements OnInit {
     // Create new level (load template)
     createNewLevel() {
         var action: 'new' = 'new';
-        var oldLevel = angular.copy(this.level);
+        let name = '';
+
+        if (this.level) {
+            name = this.level.name;
+        }
 
         this.Utils.clearAll();
 
@@ -106,7 +108,7 @@ export class LevelComponent implements OnInit {
         this.level = {
             currentView: action,
             ready: true,
-            name: oldLevel ? oldLevel.name : '',
+            name,
             size: 25
         };
 

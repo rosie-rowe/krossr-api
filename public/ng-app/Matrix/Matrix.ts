@@ -1,4 +1,3 @@
-import * as angular from 'angular';
 import { IEquatable } from '../Equatable/IEquatable';
 
 /**
@@ -33,11 +32,12 @@ export class Matrix<T> implements IEquatable<Matrix<T>> {
 
     /** Return a COPY of the current layout to preserve encapsulation -- you shouldn't be able to modify a matrix by normal means */
     getLayout() {
-        return angular.copy(this.matrix);
+        return JSON.parse(JSON.stringify(this.matrix));
     }
 
     equals(other: Matrix<T>) {
-        return angular.equals(this.matrix, other.matrix);
+        // TODO
+        // return angular.equals(this.matrix, other.matrix);
     }
 
     initializeWith(values: T[][]) {

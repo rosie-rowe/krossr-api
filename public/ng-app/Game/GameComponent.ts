@@ -9,7 +9,6 @@ import { TileSizeEventService } from '../TileSize/TileSizeEventService';
 import { GameSizeEventService } from '../GameSize/GameSizeEventService';
 import { TileEventService } from '../Tile/TileEventService';
 import { Input, Component, OnInit, ElementRef } from '@angular/core';
-import * as angular from 'angular';
 
 @Component({
     selector: 'game',
@@ -52,7 +51,9 @@ export class GameComponent implements OnInit {
         // focus the game when the mouse enters it so that the first click will register
         this.$element.addEventListener('mouseenter', () => {
             // TODO remove angular.element
-            angular.element(this.$element).find('.inner').focus();
+            let elements = this.$element.querySelectorAll('.inner') as NodeListOf<HTMLElement>;
+
+            elements.forEach(ele => ele.focus());
         })
 
         // If the user goes too far away from the game area, clear the dragbox and empty the tiles.

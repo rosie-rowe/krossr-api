@@ -1,7 +1,4 @@
-import * as angular from 'angular';
-import 'angular-mocks';
-
-import { ApplicationConfiguration } from '../public/modules/config';
+// import { ApplicationConfiguration } from '../public/modules/config';
 
 // import { LevelControllerTests } from '../public/ng-app/Level/LevelController.test';
 // import { LevelSelectControllerTests } from '../public/ng-app/LevelSelect/LevelSelectController.test';
@@ -34,7 +31,7 @@ class TestModule {
             });
 
             // Then we can start by loading the main application module
-            beforeEach(angular.mock.module(ApplicationConfiguration.applicationModuleName));
+            // beforeEach(angular.mock.module(ApplicationConfiguration.applicationModuleName));
 
             // LevelControllerTests.run();
             // LevelSelectControllerTests.run();
