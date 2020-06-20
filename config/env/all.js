@@ -18,7 +18,6 @@ module.exports = {
 			]
 		},
 		js: [
-            'public/dist/templates.bundle-*.js',
 			'public/dist/krossr.bundle-*.js'
 		]
 	},

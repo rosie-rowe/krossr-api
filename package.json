@@ -8,6 +8,7 @@
     "npm": "1.4.x"
   },
   "scripts": {
+    "build": "npx webpack --config webpack.config.js",
     "start": "node server.js",
     "debug": "node --inspect server.js",
     "test": "grunt test"
@@ -72,8 +73,6 @@
     "@types/jasmine": "^2.5.53",
     "@types/jquery": "^2.0.47",
     "clean-webpack-plugin": "^3.0.0",
-    "grunt": "^1.0.1",
-    "grunt-webpack": "^3.0.2",
     "jasmine-core": "^2.6.4",
     "karma": "^1.7.0",
     "karma-chrome-launcher": "~2.2.0",
@@ -86,7 +85,8 @@
     "should": "~4.0.4",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
-    "webpack": "^4.43.0"
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   },
   "repository": {
     "type": "git",
