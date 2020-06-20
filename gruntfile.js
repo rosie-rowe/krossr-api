@@ -40,11 +40,6 @@ module.exports = function(grunt) {
 				NODE_ENV: 'test'
 			}
 		},
-		karma: {
-			unit: {
-				configFile: 'karma.conf.js'
-			}
-		},
 		webpack: {
 			prod: webpackConfig,
 			dev: webpackConfig
@@ -62,6 +57,4 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('buildTypescript', ['webpack:dev']);
 	grunt.registerTask('build', ['env:development', 'clean', 'buildTypescript']);
-
-	grunt.registerTask('test', ['env:test', 'karma:unit']);
 };

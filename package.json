@@ -75,7 +75,6 @@
     "grunt-concurrent": "~1.0.0",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-env": "~0.4.1",
-    "grunt-karma": "^2.0.0",
     "grunt-nodemon": "~0.4.2",
     "grunt-webpack": "^3.0.2",
     "jasmine-core": "^2.6.4",
