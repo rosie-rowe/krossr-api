@@ -1,6 +1,7 @@
 'use strict';
 
 const { where } = require('sequelize');
+const sequelize = require('../../config/sequelize');
 
 /**
  * Module dependencies.
@@ -223,8 +224,7 @@ exports.paginate = function(req, res) {
 		},
 		limit: numPerPage,
 		offset: pageNum * numPerPage,
-		// TODO
-		//order: [[Level, sortBy, sortDirection]]
+		order: Sequelize.literal(`${sortBy} ${sortDirection}`)
 	}).then(function(levels) {
 		return res.jsonp({
 			levels: levels.rows,
