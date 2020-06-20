@@ -13,15 +13,10 @@ module.exports = {
 	sessionCollection: 'sessions',
 	assets: {
 		lib: {
-			css: [],
 			js: [
 				'public/dist/vendor.bundle-*.js'
 			]
 		},
-		css: [
-			'public/less/reset.css',
-			'public/dist/modules.bundle-*.css'
-		],
 		js: [
             'public/dist/templates.bundle-*.js',
 			'public/dist/krossr.bundle-*.js'

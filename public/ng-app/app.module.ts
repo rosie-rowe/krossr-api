@@ -1,3 +1,5 @@
+import '!!style-loader!css-loader!../less/reset.css';
+import '!!style-loader!css-loader!less-loader!../less/modules.less';
 import './angular-material-theme.scss';
 
 import { HttpClientModule } from '@angular/common/http';

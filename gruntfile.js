@@ -10,13 +10,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: ['public/dist'],
-		cssmin: {
-			combine: {
-				files: {
-					'public/dist/application.bundle-<%= hash %>.min.css': '<%= applicationCSSFiles %>'
-				}
-			}
-		},
 		nodemon: {
 			dev: {
 				script: 'server.js',
@@ -53,13 +46,6 @@ module.exports = function(grunt) {
 				configFile: 'karma.conf.js'
 			}
 		},
-		less: {
-			development: {
-				files: {
-              		'public/dist/modules.bundle-<%= hash %>.css': 'public/less/modules.less'
-            	}
-			}
-		},
 		webpack: {
 			prod: webpackConfig,
 			dev: webpackConfig
@@ -90,10 +76,8 @@ module.exports = function(grunt) {
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
 
-	// Build task(s).
-	grunt.registerTask('buildCSS', ['less', 'cssmin']);
 	grunt.registerTask('buildTypescript', ['webpack:dev']);
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'buildTypescript', 'buildCSS']);
+	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'buildTypescript']);
 
 	grunt.registerTask('test', ['env:test', 'karma:unit']);
 };
