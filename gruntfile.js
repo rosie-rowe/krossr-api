@@ -9,29 +9,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: ['public/dist'],
-		nodemon: {
-			dev: {
-				script: 'server.js',
-				options: {
-					ext: 'js,html'
-				}
-			},
-			debug: {
-				script: 'server.js',
-				options: {
-					nodeArgs: ['--inspect'],
-					ext: 'js,html'
-				}
-			}
-		},
-		concurrent: {
-			default: ['nodemon:dev', 'watch'],
-			debug: ['nodemon:debug'],
-			options: {
-				logConcurrentOutput: true,
-				limit: 10
-			}
-		},
 		env: {
             development: {
                 NODE_ENV: 'development'
@@ -48,12 +25,6 @@ module.exports = function(grunt) {
 
 	// Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
-
-	// Default task(s).
-	grunt.registerTask('default', ['concurrent:default']);
-
-	// Debug task.
-	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
 
 	grunt.registerTask('buildTypescript', ['webpack:dev']);
 	grunt.registerTask('build', ['env:development', 'clean', 'buildTypescript']);
