@@ -28,41 +28,46 @@ module.exports = function(sequelize, Sequelize) {
     },
     {
         timestamps: true,
-        instanceMethods: {
-            toJSON: function() {
-                var values = this.get();
-                delete values.hashedPassword;
-                delete values.salt;
-                return values;
-            },
-            makeSalt : function() {
-                return crypto.randomBytes(16).toString('base64'); 
-            },
-            authenticate: function(plainText) {
-                return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
-            },
-            encryptPassword: function(password, salt) {
-                if (!password || !salt) {
-                    return '';
-                }
-                salt = new Buffer(salt, 'base64');
-                return crypto.pbkdf2Sync(password, salt, 10000, 64, null).toString('base64');
-            },
-            removeSensitiveInfo: function() {
-                this.password = null;
-                this.salt = null;
-            },
-            setPassword: function(newPassword) {
-                this.provider = 'local';
-                this.salt = this.makeSalt();
-                this.hashedPassword = this.encryptPassword(newPassword, this.salt);
-            }
-        },
         associate: function(models) {
             user.hasMany(models.level);
             user.hasMany(models.rating);
         }
     });
+
+    user.prototype.authenticate = function(plainText) {
+        return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
+    }
+
+    user.prototype.encryptPassword = function(password, salt) {
+        if (!password || !salt) {
+            return '';
+        }
+        salt = new Buffer(salt, 'base64');
+        return crypto.pbkdf2Sync(password, salt, 10000, 64, null).toString('base64');
+    }
+
+    user.prototype.makeSalt = function () {
+        return crypto.randomBytes(16).toString('base64'); 
+    }
+
+    user.prototype.removeSensitiveInfo = function() {
+        this.password = null;
+        this.salt = null;
+    }
+
+    user.prototype.toJSON = function() {
+        var values = this.get();
+        delete values.hashedPassword;
+        delete values.salt;
+        return values;
+    }
+
+    user.prototype.setPassword = function(newPassword) {
+        this.provider = 'local';
+        this.salt = this.makeSalt();
+        this.hashedPassword = this.encryptPassword(newPassword, this.salt);
+    }
+
 
     return user;
 };

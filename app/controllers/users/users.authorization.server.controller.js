@@ -11,7 +11,7 @@ var _ = require('lodash'),
  * User middleware
  */
 exports.userByID = function(req, res, next, id) {
-	User.find({ where: { id: id }}).then(function(user) {
+	User.findOne({ where: { id: id }}).then(function(user) {
 		if (!user) {
 			return next(new Error('Failed to load User ' + id));
 		}

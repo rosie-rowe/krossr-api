@@ -28,7 +28,7 @@ exports.forgot = function(req, res, next) {
         // Lookup user by username
         function(token, done) {
             if (req.body.username) {
-                User.find({
+                User.findOne({
                     attributes: {
                         exclude: ['salt, password']
                     },
@@ -98,7 +98,7 @@ exports.forgot = function(req, res, next) {
  * Reset password GET from email token
  */
 exports.validateResetToken = function(req, res) {
-    User.find({
+    User.findOne({
         where: {
             resetPasswordToken: req.params.token,
             resetPasswordExpires: {
@@ -130,7 +130,7 @@ exports.reset = function(req, res, next) {
     async.waterfall([
 
         function(done) {
-            User.find({
+            User.findOne({
                 where: {
                     resetPasswordToken: req.params.token,
                     resetPasswordExpires: {
@@ -209,7 +209,7 @@ exports.changePassword = function(req, res) {
 
     if (req.user) {
         if (passwordDetails.newPassword) {
-            User.find({
+            User.findOne({
                 where: {
                     id: req.user.id
                 }

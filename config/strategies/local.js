@@ -10,32 +10,19 @@ var passport = require('passport'),
 
 module.exports = function() {
 	// Use local strategy
-	passport.use(new LocalStrategy({
-			usernameField: 'username',
-			passwordField: 'password'
-		},
+	passport.use(new LocalStrategy(
 		function(username, password, done) {
-			User.find({
+			User.findOne({ 
 				where: {
-					username: username
+					username
 				}
-			}).then(function(user) {
-				if (!user) {
-					return done(null, false, {
-						message: 'Unknown user'
-					});
-				}
-
-				if (!user.authenticate(password)) {
-					return done(null, false, {
-						message: 'Invalid password'
-					});
-				}
-
+			}).then(user => {
+				if (!user) return done(null, false);
+				if (!user.authenticate(password)) return done(null, false);
 
 				return done(null, user);
-			}).catch(function(err) {
-				return done(err);
+			}).catch(err => {
+				if (err) return done(err);
 			});
 		}
 	));

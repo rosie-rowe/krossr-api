@@ -14,7 +14,7 @@ module.exports = function() {
 
 	// Deserialize sessions
 	passport.deserializeUser(function(id, done) {
-		User.find({
+		User.findOne({
 			exclude: ['salt', 'password'],
 			where: {
 				id: id

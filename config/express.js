@@ -12,7 +12,7 @@ var express = require('express'),
 	cookieParser = require('cookie-parser'),
 	helmet = require('helmet'),
 	passport = require('passport'),
-	SequelizeStore = require('connect-sequelize')(session),
+	SequelizeStore = require('connect-session-sequelize')(session.Store),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
@@ -90,7 +90,7 @@ module.exports = function(db) {
 
 	// Postgres Sessions
 	app.use(session({
-		store: new SequelizeStore(db, {}, 'Session'),
+		store: new SequelizeStore({ db }),
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
