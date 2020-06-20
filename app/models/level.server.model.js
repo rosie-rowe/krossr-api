@@ -43,31 +43,30 @@ module.exports = function(sequelize, Sequelize) {
         associate: function(models) {
             level.belongsTo(models.user);
             level.hasMany(models.rating);
-        },
-        instanceMethods: {
-            /**
-             * Converts the boolean array to a base64 encoded string.
-             * There will be an equivalent method on the client-side called decodeLayout
-             * to convert a base64 encoded string into a boolean array
-             */
-            encodeLayout: function() {
-                /*
-                 * For some reason, this gets called twice when updating a level.
-                 * If the layout has already been encoded, it will throw an error if it is attempted to be re-encoded.
-                 * Therefore, just return
-                 */
-                if (!Array.isArray(this.layout)) {
-                    return;
-                }
-
-                var converted = Array.prototype.concat.apply([], this.layout) // flatten
-                                               .map(function(value) { return value ? '1' : '0'; })
-                                               .join('');
-                                               
-                this.layout = btoa(converted);
-            }
-        } 
+        }
     });
+
+    /**
+     * Converts the boolean array to a base64 encoded string.
+     * There will be an equivalent method on the client-side called decodeLayout
+     * to convert a base64 encoded string into a boolean array
+     */
+    level.prototype.encodeLayout = function () {
+       /*
+        * For some reason, this gets called twice when updating a level.
+        * If the layout has already been encoded, it will throw an error if it is attempted to be re-encoded.
+        * Therefore, just return
+        */
+        if (!Array.isArray(this.layout)) {
+            return;
+        }
+
+        var converted = Array.prototype.concat.apply([], this.layout) // flatten
+                                        .map(function(value) { return value ? '1' : '0'; })
+                                        .join('');
+                                        
+        this.layout = btoa(converted);
+    }
 
     return level;
 }; 

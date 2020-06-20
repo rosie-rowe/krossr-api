@@ -1,5 +1,7 @@
 'use strict';
 
+const { where } = require('sequelize');
+
 /**
  * Module dependencies.
  */
@@ -8,7 +10,9 @@ var db = require('../../config/sequelize'),
 	errorHandler = require('./errors'),
 	Level = db.level,
 	Rating = db.rating,
-	Sequelize = require('sequelize');
+	User = db.user,
+	Sequelize = require('sequelize'),
+	Op = Sequelize.Op;
 
 /**
  * Create a Level
@@ -132,7 +136,7 @@ exports.levelByID = function(req, res, next, id) {
 	[
 		{
 			attributes: ['rating'],
-			model: db.rating,
+			model: Rating,
 			required: false,
 			where: {
 				userId: user.id
@@ -166,7 +170,11 @@ exports.paginate = function(req, res) {
 
 	winston.info('Trying to query Levels...');
 
-	var whereBuilder = {};
+	var whereBuilder = {
+		id: {
+			[Op.not]: null
+		}
+	};
 
     /* This may be able to be done better, but hey. Include the average rating of a level with the levels query,
      * rather than every ratings object for that level. Also, exclude levels without average ratings if ratings are being filtered upon */
@@ -201,22 +209,22 @@ exports.paginate = function(req, res) {
         },
 		include: [
             {
-                model: db.rating,
+                model: Rating,
                 attributes: []
             },
             {
-                model: db.user,
+                model: User,
                 attributes: ['username'],
-                required: true,
-                where: {}
+                required: true
             }
         ],
 		where: {
-			$and: isRating ? [whereBuilder, ratingTest] : whereBuilder
+			[Op.and]: isRating ? [whereBuilder, ratingTest] : whereBuilder
 		},
 		limit: numPerPage,
 		offset: pageNum * numPerPage,
-		order: sortBy + ' ' + sortDirection
+		// TODO
+		//order: [[Level, sortBy, sortDirection]]
 	}).then(function(levels) {
 		return res.jsonp({
 			levels: levels.rows,
