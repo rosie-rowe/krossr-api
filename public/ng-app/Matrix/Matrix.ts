@@ -36,8 +36,7 @@ export class Matrix<T> implements IEquatable<Matrix<T>> {
     }
 
     equals(other: Matrix<T>) {
-        // TODO
-        // return angular.equals(this.matrix, other.matrix);
+        return JSON.stringify(this.matrix) === JSON.stringify(other.matrix);
     }
 
     initializeWith(values: T[][]) {

@@ -206,7 +206,6 @@ export class TileComponent implements OnInit, AfterViewInit {
         this.tileEventService.tileDragEnd.emit();
     }
 
-    /** This relies on jQuery, TODO */
     private getActualTileFromTouchEvent(e: TouchEvent) {
         let actualTile = this.touchService.getRealTarget(e).closest('tile');
 
