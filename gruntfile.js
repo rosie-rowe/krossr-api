@@ -1,7 +1,6 @@
 'use strict';
 
-var webpackConfig = require('./webpack.config'),
-	crypto = require('crypto');
+var webpackConfig = require('./webpack.config');
 
 module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-webpack');
@@ -58,18 +57,6 @@ module.exports = function(grunt) {
 	// Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
 
-	// A Task for loading the configuration object
-	grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
-		//jshint unused:false
-		var init = require('./config/init')();
-		var config = require('./config/config');
-
-        grunt.config.set('applicationJavaScriptLibFiles', config.assets.lib.js);
-		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
-		grunt.config.set('applicationCSSFiles', config.assets.css);
-		grunt.config.set('hash', crypto.createHash('md5').digest('hex'));
-	});
-
 	// Default task(s).
 	grunt.registerTask('default', ['concurrent:default']);
 
@@ -77,7 +64,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
 
 	grunt.registerTask('buildTypescript', ['webpack:dev']);
-	grunt.registerTask('build', ['env:development', 'loadConfig', 'clean', 'buildTypescript']);
+	grunt.registerTask('build', ['env:development', 'clean', 'buildTypescript']);
 
 	grunt.registerTask('test', ['env:test', 'karma:unit']);
 };
