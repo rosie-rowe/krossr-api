@@ -4,35 +4,12 @@ var webpackConfig = require('./webpack.config'),
 	crypto = require('crypto');
 
 module.exports = function(grunt) {
-	// Unified Watch Object
-	var watchFiles = {
-		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/*[!tests]*/*.js'],
-		clientJS: ['public/js/*.js', 'public/modules/*[!tests]*/*.js'],
-		clientCSS: ['public/modules/**/*.css', 'public/less/modules.css']
-	};
-
 	grunt.loadNpmTasks('grunt-webpack');
 
 	// Project Configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: ['public/dist'],
-		jshint: {
-			all: {
-				src: watchFiles.clientJS.concat(watchFiles.serverJS),
-				options: {
-					jshintrc: true
-				}
-			}
-		},
-		csslint: {
-			options: {
-				csslintrc: '.csslintrc',
-			},
-			all: {
-				src: watchFiles.clientCSS
-			}
-		},
 		cssmin: {
 			combine: {
 				files: {
@@ -115,9 +92,6 @@ module.exports = function(grunt) {
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
-
-	// Lint task(s).
-	grunt.registerTask('lint', ['jshint', 'csslint']);
 
 	// Build task(s).
 	grunt.registerTask('buildCSS', ['less', 'cssmin']);
