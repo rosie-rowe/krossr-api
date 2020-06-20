@@ -6,12 +6,9 @@ var webpackConfig = require('./webpack.config'),
 module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
-		serverViews: ['app/views/**/*.*'],
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/*[!tests]*/*.js'],
-		clientViews: ['public/modules/**/*.html'],
 		clientJS: ['public/js/*.js', 'public/modules/*[!tests]*/*.js'],
-		clientCSS: ['public/modules/**/*.css', 'public/less/modules.css'],
-		clientLESS: ['public/**/*.less', 'public/less/*'],
+		clientCSS: ['public/modules/**/*.css', 'public/less/modules.css']
 	};
 
 	grunt.loadNpmTasks('grunt-webpack');
@@ -20,49 +17,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		clean: ['public/dist'],
-		watch: {
-			serverViews: {
-				files: watchFiles.serverViews,
-				options: {
-					livereload: true
-				}
-			},
-			serverJS: {
-				files: watchFiles.serverJS,
-				tasks: ['jshint'],
-				options: {
-					livereload: true
-				}
-			},
-			clientViews: {
-				files: watchFiles.clientViews,
-                tasks: ['loadConfig', 'buildHTML'],
-				options: {
-					livereload: true,
-				}
-			},
-			clientJS: {
-				files: watchFiles.clientJS,
-				tasks: ['jshint'],
-				options: {
-					livereload: true
-				}
-			},
-			clientCSS: {
-				files: watchFiles.clientCSS,
-				tasks: [],
-				options: {
-					livereload: true
-				}
-			},
-			clientLESS: {
-                files: watchFiles.clientLESS,
-                tasks: ['loadConfig', 'buildCSS'],
-                options: {
-                    livereload: true
-                }
-			}
-		},
 		jshint: {
 			all: {
 				src: watchFiles.clientJS.concat(watchFiles.serverJS),

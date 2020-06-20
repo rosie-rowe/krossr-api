@@ -80,7 +80,6 @@
     "grunt-contrib-jshint": "~1.1.0",
     "grunt-contrib-less": "^1.0.0",
     "grunt-contrib-uglify": "~3.0.1",
-    "grunt-contrib-watch": "~1.0.0",
     "grunt-env": "~0.4.1",
     "grunt-karma": "^2.0.0",
     "grunt-nodemon": "~0.4.2",
