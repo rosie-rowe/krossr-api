@@ -58,9 +58,6 @@ module.exports = function(grunt) {
 				files: {
               		'public/dist/modules.bundle-<%= hash %>.css': 'public/less/modules.less'
             	}
-			},
-			options: {
-				plugins: [require('less-plugin-glob')]
 			}
 		},
 		webpack: {
