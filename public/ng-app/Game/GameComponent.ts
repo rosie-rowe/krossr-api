@@ -18,7 +18,6 @@ import { Subscription } from 'rxjs';
 })
 export class GameComponent implements OnInit, OnDestroy {
     static $name = 'game';
-    static count = 0;
 
     constructor(
         private elementRef: ElementRef,
@@ -53,7 +52,6 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.$id = GameComponent.count++;
         this.dragBoxService.clearDragBox();
 
         this.setMargin(this.tileSizeService.getTileSize());
@@ -123,7 +121,6 @@ export class GameComponent implements OnInit, OnDestroy {
         var winner = this.checkForWin();
 
         if (winner) {
-            console.log(`won on ${this.$id}`);
             return true;
         }
         
