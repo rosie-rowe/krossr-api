@@ -4,10 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
-	errorHandler = require('../errors'),
-	passport = require('passport'),
-	db = require('../../../config/sequelize'),
-	User = db.user;
+	errorHandler = require('../errors');
 
 /**
  * Update user details
