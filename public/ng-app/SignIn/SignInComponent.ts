@@ -46,7 +46,7 @@ export class SignInComponent implements OnInit {
         });
     }
 
-    signin() {
+    signIn() {
         this.signInService.signIn(this.username.value, this.password.value).then(() => {
             this.close();
         }).catch((response: any) => {
@@ -56,6 +56,10 @@ export class SignInComponent implements OnInit {
                 this.error = null;
             }, this.timeout);
         })
+    }
+
+    signInButtonText() {
+        return this.error || 'Sign In';
     }
 
     updateUsername(username: string) {

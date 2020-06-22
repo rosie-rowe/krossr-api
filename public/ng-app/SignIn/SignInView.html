@@ -11,10 +11,7 @@
 			<input type="password" id="password" name="password" [formControl]="password" (keyup)="updatePassword($event.target.value)" placeholder="Password">
 		</div>
 		<div class="form-group">
-			<button [disabled]="error" (click)="signin()">
-				<span *ngIf="!error">Sign in</span>
-				<span *ngIf="error">{{ error }}</span>
-			</button>
+			<krossr-button [disabled]="error" (click)="signIn()" [text]="signInButtonText()"></krossr-button>
 		</div>
 		<div class="form-group">
 			<a (click)="openForgotPassword()">Forgot your password?</a>

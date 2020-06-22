@@ -32,7 +32,7 @@ export class SignUpComponent implements OnInit {
         this.formGroup.addControl('password', this.password);
     }
 
-    signup() {
+    signUp() {
         this.signUpService.signUp(this.username.value, this.email.value, this.password.value).then(() => {
             this.matDialogRef.close();
         }).catch((response) => {
@@ -43,6 +43,10 @@ export class SignUpComponent implements OnInit {
             }, this.timeout);
         });
     };
+
+    signUpButtonText() {
+        return this.error || 'Sign Up';
+    }
 
     updateUsername(username: string) {
         this.username.setValue(username);

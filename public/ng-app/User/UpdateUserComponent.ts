@@ -44,6 +44,14 @@ export class UpdateUserComponent implements OnInit{
         });
     }
 
+    updateUserButtonText() {
+        if (this.success) {
+            return 'Email Saved';
+        }
+
+        return this.error || 'Save Email Address';
+    }
+
     updateEmail(email: string) {
         this.emailFormControl.setValue(email);
     }

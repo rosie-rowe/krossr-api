@@ -21,10 +21,7 @@
 		</div>
 
 		<div class="form-group">
-			<button [disabled]="error" type="button" (click)="signup()">
-				<span *ngIf="!error">Sign Up</span>
-				<span *ngIf="error">{{ error }}</span>
-			</button>
+			<krossr-button [disabled]="error" (click)="signUp()" [text]="signUpButtonText()"></krossr-button>
 		</div>
 	</form>
 </popup-content>
