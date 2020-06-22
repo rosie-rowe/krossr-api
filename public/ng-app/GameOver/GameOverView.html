@@ -1,6 +1,8 @@
-<h2 mat-dialog-title>You win!</h2>
+<popup-content>
+    <h2 mat-dialog-title>You win!</h2>
 
-<mat-dialog-actions>
-    <button (click)="close()" uiSref="level" [uiParams]="{ levelId: data.levelId }" [uiOptions]="{ reload: true }">Retry</button>
-    <button (click)="newLevel()">New Level</button>
-</mat-dialog-actions>
+    <mat-dialog-actions>
+        <button (click)="close()" uiSref="level" [uiParams]="{ levelId: data.levelId }" [uiOptions]="{ reload: true }">Retry</button>
+        <button (click)="newLevel()">New Level</button>
+    </mat-dialog-actions>
+</popup-content>
