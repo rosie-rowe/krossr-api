@@ -58,6 +58,14 @@ export class ChangePasswordComponent implements OnInit {
         this.updateVerifyPassword('');
     }
 
+    changePasswordButtonText () {
+        if (this.success) {
+            return 'Password Saved!'
+        }
+
+        return this.error || 'Save Password';
+    }
+
     updateCurrentPassword(currentPassword: string) {
         this.currentPasswordFormControl.setValue(currentPassword);
     }

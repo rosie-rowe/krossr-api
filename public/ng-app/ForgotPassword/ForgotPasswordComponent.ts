@@ -70,6 +70,10 @@ export class ForgotPasswordComponent {
         });
     };
 
+    askForResetButtonText() {
+        return this.success || this.error || 'Submit';
+    }
+
     updateUsername(username: string) {
         this.usernameFormControl.setValue(username);
     }

@@ -1,8 +1,6 @@
 <popup-content>
-    <h2 mat-dialog-title>You win!</h2>
+    <h2>You win!</h2>
 
-    <mat-dialog-actions>
-        <button (click)="close()" uiSref="level" [uiParams]="{ levelId: data.levelId }" [uiOptions]="{ reload: true }">Retry</button>
-        <button (click)="newLevel()">New Level</button>
-    </mat-dialog-actions>
+    <krossr-button (click)="close()" uiSref="level" [uiParams]="{ levelId: data.levelId }" [uiOptions]="{ reload: true }" text="Retry"></krossr-button>
+    <krossr-button (click)="newLevel()" text="New Level"></krossr-button>
 </popup-content>
