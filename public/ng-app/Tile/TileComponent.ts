@@ -12,6 +12,7 @@ import { Utils } from '../Utils/Utils';
 import { TileSizeEventService } from '../TileSize/TileSizeEventService';
 import { Component, Input, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { TileEventService } from './TileEventService';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'tile',
@@ -156,7 +157,9 @@ export class TileComponent implements OnInit, AfterViewInit {
             // more speed -- only clear the values that are present in
             // oldCoords but not allPendingCoords
             coordsToClear = oldCoords.filter(function(e) {
-                if ((allPendingCoords as any).indexOfObject(e) === -1) return true;
+                if (_.findIndex(allPendingCoords, e) === -1) {
+                    return true;
+                }
             });
             
             this.clearPending(coordsToClear);
