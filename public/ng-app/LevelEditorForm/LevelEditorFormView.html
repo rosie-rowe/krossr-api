@@ -15,20 +15,7 @@
         </select>
     </div>
 
-    <div>
-        <button type="button" (click)="confirmClear()">Clear</button>
-    </div>
-
-    <button [disabled]="error" type="button" (click)="submit()">
-        <span *ngIf="!error">{{ submitText }}</span>
-        <span *ngIf="error">{{ error }}</span>
-    </button>
-
-    <div *ngIf="level.id">
-        <a (click)="confirmRemove()">
-            <button>  
-                Delete Level
-            </button>
-        </a>
-    </div>
+    <krossr-button (click)="confirmClear()" text="Clear Tiles"></krossr-button>
+    <krossr-button [disabled]="error" (click)="submit()" [text]="submitButtonText()"></krossr-button>
+    <krossr-button *ngIf="level.id" (click)="confirmRemove()" text="Delete Level"></krossr-button>
 </div>

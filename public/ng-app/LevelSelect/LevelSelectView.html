@@ -50,10 +50,6 @@
 
         <div class="alert alert-warning" *ngIf="!levels || !levels.length">
             No Levels yet!
-
-            <button *ngIf="Authentication.user" (click)="createNewLevel();closeThisDialog();">
-                Create One
-            </button>
         </div>
 
         <pagination *ngIf="levels && levels.length > 0" (onPagination)="find($event)" [currentPage]="currentPage"

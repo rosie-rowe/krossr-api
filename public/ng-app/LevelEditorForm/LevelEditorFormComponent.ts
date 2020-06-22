@@ -86,6 +86,10 @@ export class LevelEditorFormComponent implements OnInit {
         this.submitAction.emit(this.level);
     }
 
+    public submitButtonText() {
+        return this.error || this.submitText;
+    }
+
     public updateName(name: string) {
         this.nameFormControl.setValue(name);
         this.level.name = this.nameFormControl.value;
