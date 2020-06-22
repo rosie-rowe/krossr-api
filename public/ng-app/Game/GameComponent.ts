@@ -9,6 +9,7 @@ import { TileSizeEventService } from '../TileSize/TileSizeEventService';
 import { GameSizeEventService } from '../GameSize/GameSizeEventService';
 import { TileEventService } from '../Tile/TileEventService';
 import { Input, Component, OnInit, ElementRef, Renderer2, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'game',
@@ -17,6 +18,7 @@ import { Input, Component, OnInit, ElementRef, Renderer2, OnDestroy } from '@ang
 })
 export class GameComponent implements OnInit, OnDestroy {
     static $name = 'game';
+    static count = 0;
 
     constructor(
         private elementRef: ElementRef,
@@ -40,14 +42,18 @@ export class GameComponent implements OnInit, OnDestroy {
     private $element: HTMLElement;
     private gameSettings;
     private margin: string;
+    private $id: number;
 
     private listeners: Array<() => void> = [];
+    private subscriptions: Subscription[];
 
     ngOnDestroy() {
         this.listeners.forEach(listener => listener());
+        this.subscriptions.forEach(sub => sub.unsubscribe());
     }
 
     ngOnInit() {
+        this.$id = GameComponent.count++;
         this.dragBoxService.clearDragBox();
 
         this.setMargin(this.tileSizeService.getTileSize());
@@ -66,17 +72,17 @@ export class GameComponent implements OnInit, OnDestroy {
             })
         ];
 
-        this.gameSizeEventService.gameSizeChanged.subscribe(() => {
-            this.updateGameSize();
-        });
-
-        this.tileEventService.tileDragEnd.subscribe(() => {
-            this.mouseUpEvent();
-        })
-
-        this.tileSizeEventService.tileSizeChanged.subscribe((tileSize) => {
-            this.setMargin(tileSize);
-        });
+        this.subscriptions = [
+            this.gameSizeEventService.gameSizeChanged.subscribe(() => {
+                this.updateGameSize();
+            }),
+            this.tileEventService.tileDragEnd.subscribe(() => {
+                this.mouseUpEvent();
+            }),
+            this.tileSizeEventService.tileSizeChanged.subscribe((tileSize) => {
+                this.setMargin(tileSize);
+            })
+        ];
     }
 
     /** Change the tiles inside the dragbox to the specified state
@@ -117,6 +123,7 @@ export class GameComponent implements OnInit, OnDestroy {
         var winner = this.checkForWin();
 
         if (winner) {
+            console.log(`won on ${this.$id}`);
             return true;
         }
         

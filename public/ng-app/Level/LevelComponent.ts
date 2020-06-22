@@ -8,18 +8,19 @@ import { Utils } from '../Utils/Utils';
 import { TileSizeEventService } from '../TileSize/TileSizeEventService';
 import { RatingService } from '../Rating/RatingService';
 import { LevelParams } from './LevelParams';
-import { Input, Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit, OnDestroy } from '@angular/core';
 import { StateService } from '@uirouter/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationComponent } from '../Confirmation/ConfirmationComponent';
 import { ConfirmationOptions } from '../Confirmation/ConfirmationOptions';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'level',
     styles: [require('./LevelStyles.less')],
     template: require('./LevelView.html')
 })
-export class LevelComponent implements OnInit {
+export class LevelComponent implements OnInit, OnDestroy {
     static $name = 'level';
     bindToController = true;
     controller = 'LevelController';
@@ -52,14 +53,22 @@ export class LevelComponent implements OnInit {
     private gameMatrix: GameMatrix;
     private goalMatrix: GameMatrix;
 
+    private subscriptions: Subscription[];
+
+    ngOnDestroy() {
+        this.subscriptions.forEach(sub => sub.unsubscribe());
+    }
+
     ngOnInit() {
         this.selectedLevelId = this.levelId;
         this.findOne(this.mode);
 
-        this.tileSizeEventService.tileSizeChanged.subscribe(tileSize => {
-            let newSize = Math.floor(tileSize);
-            this.margin = newSize / 2 + 'px';
-        });
+        this.subscriptions = [
+            this.tileSizeEventService.tileSizeChanged.subscribe(tileSize => {
+                let newSize = Math.floor(tileSize);
+                this.margin = newSize / 2 + 'px';
+            })
+        ];
     }
 
     confirmUpdate(level: ILevel) {

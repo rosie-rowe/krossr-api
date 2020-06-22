@@ -13,6 +13,7 @@ import { TileSizeEventService } from '../TileSize/TileSizeEventService';
 import { Component, Input, OnInit, AfterViewInit, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { TileEventService } from './TileEventService';
 import * as _ from 'lodash';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'tile',
@@ -43,6 +44,7 @@ export class TileComponent implements OnInit, AfterViewInit, OnDestroy {
     private $element: HTMLElement;
 
     private listeners: Array<() => void> = [];
+    private subscriptions: Subscription[];
 
     constructor(
         private elementRef: ElementRef,
@@ -61,6 +63,7 @@ export class TileComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnDestroy() {
         this.listeners.forEach(listener => listener());
+        this.subscriptions.forEach(sub => sub.unsubscribe());
     }
 
     ngOnInit() {
@@ -94,21 +97,21 @@ export class TileComponent implements OnInit, AfterViewInit, OnDestroy {
             }),
         ];
 
-        this.tileSizeEventService.tileSizeChanged.subscribe(() => {
-            this.setTileSize(this.tileSizeService.getTileSize());
-        });
-
-        this.touchService.tileTouched.subscribe(tile => {
-            if (this.$element === tile) {
-                this.tryFillPending();
-            }
-        })
-
-        this.touchService.tileTouchEnd.subscribe(tile => {
-            if (this.$element === tile ) {
-                this.tryEndDragbox();
-            }
-        });
+        this.subscriptions = [
+            this.tileSizeEventService.tileSizeChanged.subscribe(() => {
+                this.setTileSize(this.tileSizeService.getTileSize());
+            }),
+            this.touchService.tileTouched.subscribe(tile => {
+                if (this.$element === tile) {
+                    this.tryFillPending();
+                }
+            }),
+            this.touchService.tileTouchEnd.subscribe(tile => {
+                if (this.$element === tile ) {
+                    this.tryEndDragbox();
+                }
+            })
+        ];
     }
 
     private clearPending(coords: Point[]) {

@@ -1,14 +1,15 @@
 import { BooleanMatrix } from '../Matrix/BooleanMatrix'
 import { TileSizeService } from '../TileSize/TileSizeService';
 import { TileSizeEventService } from '../TileSize/TileSizeEventService';
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'number-grid',
     styles: [require('./NumberGridStyles.less')],
     template: require('./NumberGridView.html')
 })
-export class NumberGridComponent implements OnInit {
+export class NumberGridComponent implements OnInit, OnDestroy {
     static $name = 'numberGrid';
 
     constructor(
@@ -30,15 +31,23 @@ export class NumberGridComponent implements OnInit {
 
     public repeater: number[];
 
+    private subscriptions: Subscription[];
+
+    ngOnDestroy() {
+        this.subscriptions.forEach(sub => sub.unsubscribe());
+    }
+
     ngOnInit() {
         this.repeater = new Array(this.goalMatrix.length).fill(null).map((x, i) => i);
 
         this.isVertical = this.orientation === 'vertical';
         this.setTileSize();
 
-        this.tileSizeEventService.tileSizeChanged.subscribe(() => {
-            this.setTileSize();
-        });
+        this.subscriptions = [
+            this.tileSizeEventService.tileSizeChanged.subscribe(() => {
+                this.setTileSize();
+            })
+        ];
     }
 
     private setTileSize() {
