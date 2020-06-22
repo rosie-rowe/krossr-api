@@ -63,10 +63,10 @@ export class TileComponent implements OnInit, AfterViewInit {
         this.goalMatrix = this.Utils.getGoalMatrix();
 
         this.initializeFill();
+        this.setTileSize(this.tileSizeService.getTileSize());
     }
 
     ngAfterViewInit() {
-        this.setTileSize(this.tileSizeService.getTileSize());
         this.tileService.addTile({ tileCtrl: this });
 
         this.$element.addEventListener('mousedown', (e) => this.mouseDownEvent());
@@ -134,11 +134,7 @@ export class TileComponent implements OnInit, AfterViewInit {
 
     private fillPending(index) {
         var coord = this.tileService.convertTo2D(index),
-                    coordsToClear,
-                    i = 0,
-                    len,
-                    currentCoord,
-                    currentTileController;
+                    coordsToClear;
 
         // save a snapshot of the previous dragbox for comparison purposes
         var oldCoords = this.dragBoxService.process();
