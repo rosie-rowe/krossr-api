@@ -1,0 +1,25 @@
+@import (reference) '../../less/mixins.less';
+@import (reference) '../../less/variables.less';
+
+:host {
+    button {
+        background-color: @selectedColor;
+        border: 0;
+        color: @white;
+        cursor: pointer;
+        font-family: inherit;
+        height: @inputHeight;
+        padding: .4em;
+        width: 100%;
+        transition: all 1s;
+        
+        .center;
+        .restrict-width;
+        .standardMargin;
+
+        &:disabled {
+            background-color: darken(@selectedColor, 10%);
+            transition: all .2s;
+        }
+    }
+}

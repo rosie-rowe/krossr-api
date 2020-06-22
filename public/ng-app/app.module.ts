@@ -40,6 +40,7 @@ import { LevelEditorFormComponent } from './LevelEditorForm/LevelEditorFormCompo
 import { uiRouterConfigFn } from './Config/RouterConfig';
 import { UIRouterModule } from '@uirouter/angular';
 import { LevelSelectFilterComponent } from './LevelSelectFilter/LevelSelectFilterComponent';
+import { KrossrButtonComponent } from './KrossrButton/KrossrButtonComponent';
 
 @NgModule({
     imports: [
@@ -59,6 +60,7 @@ import { LevelSelectFilterComponent } from './LevelSelectFilter/LevelSelectFilte
         GameComponent,
         GameOverComponent,
         HomeComponent,
+        KrossrButtonComponent,
         LevelComponent,
         HeaderComponent,
         HelpComponent,
@@ -88,6 +90,7 @@ import { LevelSelectFilterComponent } from './LevelSelectFilter/LevelSelectFilte
         GameComponent,
         GameOverComponent,
         HomeComponent,
+        KrossrButtonComponent,
         LevelComponent,
         HeaderComponent,
         HelpComponent,
