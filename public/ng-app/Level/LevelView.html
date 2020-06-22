@@ -1,7 +1,7 @@
 <section class="viewLevel" *ngIf="level">
-    <level-editor-form *ngIf="level.currentView === 'new'" [error]="error" [level]="level" submitText="Submit" (sizeChange)="createGameArray()" (submitAction)="submitCreate($event)">
+    <level-editor-form *ngIf="level.currentView === 'new'" [error]="error" [level]="level" submitText="Submit" (sizeChange)="createGameArray('new')" (submitAction)="submitCreate($event)">
     </level-editor-form>
-    <level-editor-form *ngIf="level.currentView === 'edit'" [error]="error" [level]="level" submitText="Update" (sizeChange)="createGameArray()" (submitAction)="confirmUpdate($event)">
+    <level-editor-form *ngIf="level.currentView === 'edit'" [error]="error" [level]="level" submitText="Update" (sizeChange)="createGameArray('edit')" (submitAction)="confirmUpdate($event)">
     </level-editor-form>
 
     <div class="rateLevel" *ngIf="Authentication.user && level && level.currentView === 'view'">

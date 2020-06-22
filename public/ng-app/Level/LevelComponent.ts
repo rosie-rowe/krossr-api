@@ -82,11 +82,13 @@ export class LevelComponent implements OnInit {
         });
     }
 
-    createGameArray() {
+    createGameArray(action: string) {
         this.Utils.createNewGame({
             numberOfTiles: this.level ? this.level.size : 25,
             controller: this.level ? this.level.currentView : 'new'
         });
+
+        this.getLayoutForRepeater(action);
     }
 
     // Create new level (load template)
@@ -102,8 +104,7 @@ export class LevelComponent implements OnInit {
 
         this.level = undefined;
 
-        this.createGameArray();
-        this.getLayoutForRepeater(action);
+        this.createGameArray(action);
 
         this.level = {
             currentView: action,
