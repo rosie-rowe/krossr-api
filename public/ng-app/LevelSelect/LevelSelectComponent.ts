@@ -4,6 +4,7 @@ import { LevelService } from '../Level/LevelService';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { LevelSelectFilterOptions } from '../LevelSelectFilter/LevelSelectFilterOptions';
 
 @Component({
     selector: 'level-select',
@@ -23,10 +24,7 @@ export class LevelSelectComponent implements OnInit {
 
     private currentPage: number = 0;
     private showFilter: boolean;
-    private sizeRestriction: string = '';
-    private searchText: string = ''
-    private sortBy: string = '"createdAt"';
-    private sortDirection: string = '';
+    private filter: LevelSelectFilterOptions;
     private totalPages: number;
     private levels;
 
@@ -46,12 +44,12 @@ export class LevelSelectComponent implements OnInit {
         this.currentPage = currentPage;
 
         var queryObj = {
-            pageNum: currentPage,
-            sizeRestriction: this.sizeRestriction,
-            searchText: this.searchText,
-            sortBy: this.sortBy,
-            sortDirection: this.sortDirection
+            pageNum: currentPage
         };
+
+        if (this.filter) {
+            Object.assign(queryObj, this.filter);
+        }
     
         this.levelService.getLevels(queryObj).then(data => {
             var i = 0,
@@ -68,6 +66,11 @@ export class LevelSelectComponent implements OnInit {
                 currentLevel.prettySize = this.Utils.prettySize(currentLevel.size);
             }
         }); 
+    }
+
+    refilter(options: LevelSelectFilterOptions) {
+        this.filter = options;
+        this.find(0);
     }
 
     toggleShowFilter() {

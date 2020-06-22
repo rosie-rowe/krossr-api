@@ -187,17 +187,17 @@ exports.paginate = function(req, res) {
 
 	if (sizeRestriction) {
 		whereBuilder.size = {
-			$eq: parseInt(sizeRestriction, 10)
+			[Op.eq]: parseInt(sizeRestriction, 10)
 		};
 	}
 
 	if (searchText) {
 		searchText = '%' + searchText + '%';
 
-		whereBuilder.$or = [
+		whereBuilder[Op.or] = [
 			{
 				name: {
-					$iLike: searchText
+					[Op.iLike]: searchText
 				}
 			},
 			Sequelize.where(Sequelize.col('user.username'), 'ILIKE', searchText)

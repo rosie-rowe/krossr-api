@@ -39,6 +39,7 @@ import { HomeComponent } from './Home/HomeComponent';
 import { LevelEditorFormComponent } from './LevelEditorForm/LevelEditorFormComponent';
 import { uiRouterConfigFn } from './Config/RouterConfig';
 import { UIRouterModule } from '@uirouter/angular';
+import { LevelSelectFilterComponent } from './LevelSelectFilter/LevelSelectFilterComponent';
 
 @NgModule({
     imports: [
@@ -64,6 +65,7 @@ import { UIRouterModule } from '@uirouter/angular';
         LoadingAnimationComponent,
         LevelEditorFormComponent,
         LevelSelectComponent,
+        LevelSelectFilterComponent,
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
@@ -92,6 +94,7 @@ import { UIRouterModule } from '@uirouter/angular';
         LoadingAnimationComponent,
         LevelEditorFormComponent,
         LevelSelectComponent,
+        LevelSelectFilterComponent,
         ModeSelectorComponent,
         NumberGridComponent,
         NumberLineComponent,
