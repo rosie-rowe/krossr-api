@@ -115,14 +115,10 @@ import { LevelSelectFilterComponent } from './LevelSelectFilter/LevelSelectFilte
         { provide: 'window', useValue: window }
     ]
 })
-export class AppModule implements DoBootstrap {
+export class AppModule {
     constructor(
         private gameResizeService: GameResizeService
     ) {
-        console.log('Angular is running!');
         this.gameResizeService.initialize();
-    }
-
-    ngDoBootstrap() {
     }
 }
