@@ -19,7 +19,7 @@
                     *ngIf="level && level.layout && level.currentView === 'view'"
                     orientation="vertical"
                     class="top-grid"
-                    ng-style="{'padding-right': margin}"></number-grid>
+                    [ngStyle]="{'padding-right': margin}"></number-grid>
             </div>
             
             <div class="bottom row">
@@ -31,7 +31,7 @@
                     *ngIf="level && level.layout && level.currentView === 'view'"
                     orientation="horizontal"
                     class="left-grid"
-                    ng-style="{'padding-top': margin}">
+                    [ngStyle]="{'padding-top': margin}">
                 </number-grid>
             </div>
         </div>

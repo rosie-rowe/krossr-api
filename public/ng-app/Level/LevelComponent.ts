@@ -43,7 +43,7 @@ export class LevelComponent implements OnInit {
 
     @Input() public mode: string; // string for edit, new, etc.
     private level: ILevel;
-    private margin: number;
+    private margin: string;
     private selectedLevelId;
     @Input() public levelId;
     private error;
@@ -58,7 +58,7 @@ export class LevelComponent implements OnInit {
 
         this.tileSizeEventService.tileSizeChanged.subscribe(tileSize => {
             let newSize = Math.floor(tileSize);
-            this.margin = newSize / 2;
+            this.margin = newSize / 2 + 'px';
         });
     }
 
