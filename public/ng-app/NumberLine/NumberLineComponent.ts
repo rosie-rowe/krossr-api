@@ -14,7 +14,6 @@ import { Component, Input, OnInit } from '@angular/core';
 export class NumberLineComponent implements OnInit {
 	static $name = 'numberLine';
 
-    private cssClass = '';
     @Input() public gameMatrix: BooleanMatrix;
     @Input() public goalMatrix: BooleanMatrix;
 
@@ -65,7 +64,6 @@ export class NumberLineComponent implements OnInit {
         let groupCount: number = 0;
         let currentGroup: TileGroup = new TileGroup();
         let resetInd: boolean = true;
-        let coord: Point = { x: undefined, y: undefined };
 
         // Loop through the row, building a separate count for each group of consecutive true tiles
         for (var i = 0; i < this.sideLength; i++) {
