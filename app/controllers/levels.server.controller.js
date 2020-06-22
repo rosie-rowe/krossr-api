@@ -56,7 +56,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var level = req.level;
 
-	return level.updateAttributes({
+	return level.update({
 		name: req.body.name,
 		layout: req.body.layout,
 		size: req.body.size

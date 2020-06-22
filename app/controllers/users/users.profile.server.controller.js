@@ -21,7 +21,7 @@ exports.update = function(req, res) {
 
 	if (user) {
 		// Merge existing user
-		user.updateAttributes({
+		user.update({
 			updated: Date.now(),
 			email: req.body.email
 		});
