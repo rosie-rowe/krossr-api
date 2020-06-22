@@ -1,6 +1,5 @@
 import { BooleanMatrix } from '../Matrix/BooleanMatrix'
 import { LineContent } from '../LineContent/LineContent';
-import { Point } from '../Point/Point'
 import { SideLengthService } from '../SideLength/SideLengthService';
 import { TileGroup } from '../TileGroup/TileGroup';
 import { TileSizeService } from '../TileSize/TileSizeService';
