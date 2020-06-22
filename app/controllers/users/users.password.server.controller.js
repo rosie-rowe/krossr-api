@@ -108,10 +108,10 @@ exports.validateResetToken = function(req, res) {
     }).then(function(user) {
         // todo these redirects suck
         if (!user) {
-            return res.redirect('/#!/password/reset/invalid');
+            return res.redirect('/password/reset/invalid');
         }
 
-        res.redirect('/#!/password/reset/' + req.params.token);
+        res.redirect('/password/reset/' + req.params.token);
     }).catch(function(err) {
         res.status(500).send({
             message: errorHandler.getErrorMessage(err)
