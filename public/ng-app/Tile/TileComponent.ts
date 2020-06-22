@@ -10,7 +10,7 @@ import { TileState } from './TileState';
 import { TouchService } from '../Touch/TouchService';
 import { Utils } from '../Utils/Utils';
 import { TileSizeEventService } from '../TileSize/TileSizeEventService';
-import { Component, Input, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { TileEventService } from './TileEventService';
 import * as _ from 'lodash';
 
@@ -19,7 +19,7 @@ import * as _ from 'lodash';
     styles: [require('./TileStyles.less')],
     template: require('./TileView.html')
 })
-export class TileComponent implements OnInit, AfterViewInit {
+export class TileComponent implements OnInit, AfterViewInit, OnDestroy {
     static $name = 'tile';
 
     /* At this level, work with the horizontal version only */
@@ -42,8 +42,11 @@ export class TileComponent implements OnInit, AfterViewInit {
 
     private $element: HTMLElement;
 
+    private listeners: Array<() => void> = [];
+
     constructor(
         private elementRef: ElementRef,
+        private renderer: Renderer2,
         private Utils: Utils, 
         private dragBoxService: DragBoxService,
         private shiftService: ShiftService,
@@ -54,6 +57,10 @@ export class TileComponent implements OnInit, AfterViewInit {
         private tileSizeService: TileSizeService,
         private touchService: TouchService
     ) {
+    }
+
+    ngOnDestroy() {
+        this.listeners.forEach(listener => listener());
     }
 
     ngOnInit() {
@@ -69,24 +76,23 @@ export class TileComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         this.tileService.addTile({ tileCtrl: this });
 
-        this.$element.addEventListener('mousedown', (e) => this.mouseDownEvent());
-        this.$element.addEventListener('mousemove', (e) => this.mouseMoveEvent());
-        this.$element.addEventListener('mouseup', (e) => this.mouseUpEvent());
-
-        this.$element.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            this.mouseDownEvent();
-        });
-
-        this.$element.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            this.touchMoveEvent(e);
-        });
-
-        this.$element.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            this.touchEndEvent();
-        })
+        this.listeners = [
+            this.renderer.listen(this.$element, 'mousedown', () => this.mouseDownEvent()),
+            this.renderer.listen(this.$element, 'mousemove', () => this.mouseMoveEvent()),
+            this.renderer.listen(this.$element, 'mouseup', () => this.mouseUpEvent()),
+            this.renderer.listen(this.$element, 'touchstart', (e) => {
+                e.preventDefault();
+                this.mouseDownEvent();
+            }),
+            this.renderer.listen(this.$element, 'touchmove', (e) => {
+                e.preventDefault();
+                this.touchMoveEvent(e);
+            }),
+            this.renderer.listen(this.$element, 'touchend', (e) => {
+                e.preventDefault();
+                this.touchEndEvent();
+            }),
+        ];
 
         this.tileSizeEventService.tileSizeChanged.subscribe(() => {
             this.setTileSize(this.tileSizeService.getTileSize());

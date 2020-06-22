@@ -8,18 +8,19 @@ import { TileState } from '../Tile/TileState';
 import { TileSizeEventService } from '../TileSize/TileSizeEventService';
 import { GameSizeEventService } from '../GameSize/GameSizeEventService';
 import { TileEventService } from '../Tile/TileEventService';
-import { Input, Component, OnInit, ElementRef } from '@angular/core';
+import { Input, Component, OnInit, ElementRef, Renderer2, OnDestroy } from '@angular/core';
 
 @Component({
     selector: 'game',
     styles: [require('./GameStyles.less')],
     template: require('./GameView.html')
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
     static $name = 'game';
 
     constructor(
         private elementRef: ElementRef,
+        private renderer: Renderer2,
         private gameOverService: GameOverService,
         private gameSizeEventService: GameSizeEventService,
         private gameSizeService: GameSizeService,
@@ -40,26 +41,30 @@ export class GameComponent implements OnInit {
     private gameSettings;
     private margin: string;
 
+    private listeners: Array<() => void> = [];
+
+    ngOnDestroy() {
+        this.listeners.forEach(listener => listener());
+    }
+
     ngOnInit() {
         this.dragBoxService.clearDragBox();
 
         this.setMargin(this.tileSizeService.getTileSize());
-        
-        /* not sure if this is still necessary, seems to prevent grab hand from appearing even though draggable is no longer applied */
-        this.$element.addEventListener('dragstart', (e) => e.preventDefault())
 
-        // focus the game when the mouse enters it so that the first click will register
-        this.$element.addEventListener('mouseenter', () => {
-            let elements = this.$element.querySelectorAll('.inner') as NodeListOf<HTMLElement>;
-
-            elements.forEach(ele => ele.focus());
-        })
-
-        // If the user goes too far away from the game area, clear the dragbox and empty the tiles.
-        this.$element.addEventListener('mouseleave', (e) => {
-            e.preventDefault();
-            this.applyFillDragBox(TileState.empty);
-        });
+        this.listeners = [
+            // focus the game when the mouse enters it so that the first click will register
+            this.renderer.listen(this.$element,'mouseenter', () => {
+                let elements = this.$element.querySelectorAll('.inner') as NodeListOf<HTMLElement>;
+    
+                elements.forEach(ele => ele.focus());
+            }),
+            // If the user goes too far away from the game area, clear the dragbox and empty the tiles.
+            this.renderer.listen(this.$element, 'mouseleave', (e) => {
+                e.preventDefault();
+                this.applyFillDragBox(TileState.empty);
+            })
+        ];
 
         this.gameSizeEventService.gameSizeChanged.subscribe(() => {
             this.updateGameSize();
