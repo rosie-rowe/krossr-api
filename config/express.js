@@ -139,7 +139,9 @@ module.exports = function(db) {
 	// Assume 404 since no middleware responded
 	app.use(function(req, res) {
 		// let Angular handle it
-		res.status(200).render('index');
+		res.status(200).render('index', {
+			user: req.user || null
+		});
 	});
 
 	return app;
