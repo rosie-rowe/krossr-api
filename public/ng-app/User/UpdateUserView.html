@@ -1,9 +1,0 @@
-	<form name="userForm" [formGroup]="formGroup" autocomplete="off">
-		<h2>Change your Email Address</h2>
-		<div class="form-group">
-			<input type="email" id="email" name="email" [formControl]="emailFormControl" (keyup)="updateEmail($event.target.value)" placeholder="Email">
-		</div>
-		<div class="form-group">
-			<krossr-button [disabled]="error || success" (click)="updateUser()" [text]="updateUserButtonText()"></krossr-button>
-		</div>
-	</form>

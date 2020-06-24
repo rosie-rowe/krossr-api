@@ -1,5 +1,0 @@
-<div class="outer game" [ngStyle]="{'padding': margin}" *ngIf="gameSettings">
-	<div class="inner game" [ngStyle]="{ 'width': gameSettings.width, 'height': gameSettings.height }" tabindex="1">
-         <tile [gameMatrix]="gameMatrix" *ngFor="let tile of tiles; let $index = index;" [editable]='true' [index]="$index" [level]="level" [tiles]="tiles"></tile> 
-	</div>
-</div>
