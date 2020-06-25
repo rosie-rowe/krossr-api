@@ -2,6 +2,7 @@
 
 import { EnvironmentConfiguration } from './config';
 import * as express from 'express';
+import * as passport from 'passport';
 import { UsersRoutes } from '../app/routes/UsersRoutes';
 import { IKrossrDatabase } from '../app/database/IKrossrDatabase';
 import { LevelsRoutes } from '../app/routes/LevelsRoutes';
@@ -17,7 +18,6 @@ var morgan = require('morgan'),
 	methodOverride = require('method-override'),
 	cookieParser = require('cookie-parser'),
 	helmet = require('helmet'),
-	passport = require('passport'),
 	SequelizeStore = require('connect-session-sequelize')(session.Store),
 	flash = require('connect-flash'),
 	consolidate = require('consolidate'),

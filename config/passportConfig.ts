@@ -1,15 +1,15 @@
 'use strict';
 
 import { LocalPassportStrategy } from "./strategies/local";
-
-var passport = require('passport');
+import * as passport from 'passport';
 
 export class PassportConfiguration {
 	static configure(db) {
 		let User = db.user;
 
 		// Serialize sessions
-		passport.serializeUser(function (user, done) {
+		// TODO typing
+		passport.serializeUser(function (user: any, done) {
 			done(null, user.id);
 		});
 

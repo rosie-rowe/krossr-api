@@ -1,4 +1,4 @@
-let passport = require('passport');
+import * as passport from 'passport';
 
 export class SignInController {
     public signIn = (req, res, next) => {

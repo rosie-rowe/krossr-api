@@ -1,10 +1,7 @@
-'use strict';
 
-/**
- * Module dependencies.
- */
-var passport = require('passport'),
-	LocalStrategy = require('passport-local').Strategy;
+import * as passport from 'passport';
+
+var LocalStrategy = require('passport-local').Strategy;
 
 export class LocalPassportStrategy {
 	public static use(db) {
