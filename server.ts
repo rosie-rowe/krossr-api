@@ -3,10 +3,12 @@
  * Module dependencies.
  */
 
+import { WinstonConfiguration } from './config/winston';
+
 //jshint unused:false
 // var init = require('./config/init')(),
 // 	config = require('./config/config'),
-var winston = require('./config/winston');
+let winston = new WinstonConfiguration().initialize();
 winston.info('huzzah');
 
 // winston.info('Starting '+config.app.name+'...');
