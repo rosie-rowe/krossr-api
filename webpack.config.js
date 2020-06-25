@@ -10,9 +10,13 @@ var config = {
         'server': './server.ts'
     },
     externals: [
-        nodeExternals()
+        nodeExternals(),
+        { fs: 'commonjs fs' }
     ],
     mode: 'development',
+    node: {
+        __dirname: false
+    },
     output: {
         path: path.join(__dirname + '/dist'),
         filename: '[name].js'
@@ -21,7 +25,7 @@ var config = {
         minimize: false
     },
     plugins: [
-        new CleanWebpackPlugin()
+        // new CleanWebpackPlugin()
     ],
     resolve: {
         modules: [

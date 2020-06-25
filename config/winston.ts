@@ -2,7 +2,14 @@ var winston = require('winston');
 var logger = new (winston.Logger)();
 
 export class WinstonConfiguration {
+    static isInitialized: boolean;
+
+    /** Should only be called by root file */
     static initialize() {
+        if (this.isInitialized) {
+            return logger;
+        }
+
         logger.add(winston.transports.Console, {
             level: 'verbose',
             prettyPrint: true,
@@ -18,6 +25,8 @@ export class WinstonConfiguration {
                 logger.info(message);
             }
         };
+
+        this.isInitialized = true;
 
         return logger;
     }

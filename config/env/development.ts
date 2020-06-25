@@ -9,7 +9,7 @@ export class DevelopmentEnvironmentConfiguration implements IEnvironmentConfigur
 
 	enableSequelizeLog = 'false';
 
-	//forceDbSync = 'true';
+	//forceDbSync = true;
 
 	db = {
 		name: 'krossr',

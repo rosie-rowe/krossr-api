@@ -1,18 +1,17 @@
-'use strict';
+/**
+ * Main application entry file.
+ * Please note that the order of loading is important.
+ */
 
 import { WinstonConfiguration } from './config/winston';
 import { EnvironmentConfiguration } from './config/config';
+import { SequelizeConfiguration } from './config/sequelizeConfig';
 let config = EnvironmentConfiguration.getConfiguration();
 let winston = WinstonConfiguration.initialize();
 
-winston.info('Starting ' +config.app.title+ '...');
+winston.info(`Starting ${config.app.title} ...`);
 
-// /**
-//  * Main application entry file.
-//  * Please note that the order of loading is important.
-//  */
-
-// var db = require('./config/sequelize');
+let db = SequelizeConfiguration.initialize();
 
 // // Init the express application
 // var app = require('./config/express')(db.sequelize);

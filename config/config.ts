@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import { EnvironmentConfigurationDefaults } from './env/all';
 import { DevelopmentEnvironmentConfiguration } from './env/development';
+import { IEnvironmentConfiguration } from './env/IEnvironmentConfiguration';
 
 /**
  * Load app configurations
@@ -10,7 +11,7 @@ export class EnvironmentConfiguration {
 		return _.extend(
 			EnvironmentConfigurationDefaults.getDefaults(),
 			EnvironmentConfiguration.getConfig()
-		);
+		) as IEnvironmentConfiguration;
 	}
 
 	private static getConfig() {
