@@ -2,6 +2,7 @@
 
 import { EnvironmentConfiguration } from './config';
 import * as express from 'express';
+import { UsersRoutes } from '../app/routes/UsersRoutes';
 let config = EnvironmentConfiguration.getConfiguration();
 
 /**
@@ -117,6 +118,8 @@ export class ExpressConfiguration {
 				require(path.resolve(routePath))(app);
 			});
 		});
+
+		UsersRoutes.configureRoutes(app);
 	
 		// Assume 404 since no middleware responded
 		app.use(function(req, res) {

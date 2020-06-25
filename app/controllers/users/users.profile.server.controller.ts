@@ -5,9 +5,9 @@ import * as _ from 'lodash';
 /**
  * Module dependencies.
  */
-var errorHandler = require('../errors');
+// var errorHandler = require('../errors');
 
-class UserProfileController {
+export class UserProfileController {
 	/**
 	 * Update user details
 	 */
@@ -35,7 +35,7 @@ class UserProfileController {
 				});
 			}).catch(function (err) {
 				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
+					message: 'frig off' // TODO //errorHandler.getErrorMessage(err)
 				});
 			});
 		} else {
