@@ -10,9 +10,6 @@ module.exports = function(app: Express) {
 	app.route('/levels')
 		.post(users.requiresLogin, levels.create);
 
-	app.route('/levels/new')
-		.get(levels.newLevel);
-
 	app.route('/levels/:levelId/ratings')
 		.post(users.requiresLogin, levels.upsertRating);
 
