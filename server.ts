@@ -1,19 +1,11 @@
 'use strict';
-/**
- * Module dependencies.
- */
 
 import { WinstonConfiguration } from './config/winston';
+import { EnvironmentConfiguration } from './config/config';
+let config = EnvironmentConfiguration.getConfiguration();
+let winston = WinstonConfiguration.initialize();
 
-//jshint unused:false
-// var init = require('./config/init')(),
-// 	config = require('./config/config'),
-let winston = new WinstonConfiguration().initialize();
-winston.info('huzzah');
-
-// winston.info('Starting '+config.app.name+'...');
-// winston.info('Config loaded: '+config.NODE_ENV);
-// winston.debug('Accepted Config:',config);
+winston.info('Starting ' +config.app.title+ '...');
 
 // /**
 //  * Main application entry file.

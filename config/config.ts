@@ -1,11 +1,25 @@
-'use strict';
-
-var _ = require('lodash');
+import * as _ from 'lodash';
+import { EnvironmentConfigurationDefaults } from './env/all';
+import { DevelopmentEnvironmentConfiguration } from './env/development';
 
 /**
  * Load app configurations
  */
-module.exports = _.extend(
-	require('./env/all'),
-	require('./env/' + process.env.NODE_ENV) || {}
-);
+export class EnvironmentConfiguration {
+	static getConfiguration() {
+		return _.extend(
+			EnvironmentConfigurationDefaults.getDefaults(),
+			EnvironmentConfiguration.getConfig()
+		);
+	}
+
+	private static getConfig() {
+		switch (process.env.NODE_ENV) {
+			case "development":
+				return new DevelopmentEnvironmentConfiguration();
+
+			default:
+				throw new Error('process.env.NODE_ENV is not a supported environment!');
+		}
+	}
+}

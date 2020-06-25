@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash');
+var _: _.LoDashStatic = require('lodash');
 
 /**
  * Extend user's controller

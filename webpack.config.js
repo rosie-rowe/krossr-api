@@ -12,6 +12,7 @@ var config = {
     externals: [
         nodeExternals()
     ],
+    mode: 'development',
     output: {
         path: path.join(__dirname + '/dist'),
         filename: '[name].js'

@@ -1,10 +1,11 @@
 'use strict';
 
+import * as _ from 'lodash';
+
 /**
  * Module dependencies.
  */
-var _ = require('lodash'),
-	db = require('../../../config/sequelize'),
+var db = require('../../../config/sequelize'),
 	User = db.user;
 
 /**

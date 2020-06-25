@@ -2,7 +2,7 @@ var winston = require('winston');
 var logger = new (winston.Logger)();
 
 export class WinstonConfiguration {
-    initialize() {
+    static initialize() {
         logger.add(winston.transports.Console, {
             level: 'verbose',
             prettyPrint: true,
