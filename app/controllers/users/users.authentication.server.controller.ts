@@ -44,11 +44,3 @@ exports.signup = function(req, res) {
         });
     });
 };
-
-/**
- * Signout
- */
-exports.signout = function(req, res) {
-	req.logout();
-	res.status(200).send();
-};

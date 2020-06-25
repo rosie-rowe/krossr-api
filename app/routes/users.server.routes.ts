@@ -13,8 +13,6 @@ module.exports = function(app) {
 	// Setting up the users authentication api
 	app.route('/auth/signup').post(users.signup);
 
-	app.route('/auth/signout').post(users.signout);
-
 	// Finish by binding the user middleware
 	app.param('userId', users.userByID);
 };
