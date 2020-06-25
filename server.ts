@@ -16,7 +16,7 @@ winston.info(`Starting ${config.app.title} ...`);
 let db = SequelizeConfiguration.initialize();
 
 // Init the express application
-let app = ExpressConfiguration.configure(db.sequelize);
+let app = ExpressConfiguration.configure(db);
 
 // Bootstrap passport config
 PassportConfiguration.configure(db);

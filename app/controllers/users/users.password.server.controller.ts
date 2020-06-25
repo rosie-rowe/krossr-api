@@ -7,7 +7,6 @@ import * as _ from 'lodash';
  */
 var errorHandler = require('../errors'),
     db = require('../../../config/sequelize'),
-    passport = require('passport'),
     User = db.user,
     config = require('../../../config/config'),
     nodemailer = require('nodemailer'),

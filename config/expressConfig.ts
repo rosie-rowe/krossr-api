@@ -3,6 +3,7 @@
 import { EnvironmentConfiguration } from './config';
 import * as express from 'express';
 import { UsersRoutes } from '../app/routes/UsersRoutes';
+import { IKrossrDatabase } from '../app/database/IKrossrDatabase';
 let config = EnvironmentConfiguration.getConfiguration();
 
 /**
@@ -24,7 +25,7 @@ var glob = require('glob'),
 	winston = require('winston');
 
 export class ExpressConfiguration {
-	static configure(db: any): express.Application {
+	static configure(db: IKrossrDatabase): express.Application {
 		winston.info('Intializing Express!');
 
 		// Initialize express app
@@ -88,7 +89,7 @@ export class ExpressConfiguration {
 	
 		// Postgres Sessions
 		app.use(session({
-			store: new SequelizeStore({ db }),
+			store: new SequelizeStore({ db: db.sequelize }),
 			secret: process.env.SESSION_SECRET,
 			resave: false,
 			cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
@@ -119,7 +120,7 @@ export class ExpressConfiguration {
 			});
 		});
 
-		UsersRoutes.configureRoutes(app);
+		UsersRoutes.configureRoutes(app, db);
 	
 		// Assume 404 since no middleware responded
 		app.use(function(req, res) {
