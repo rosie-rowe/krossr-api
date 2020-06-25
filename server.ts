@@ -6,6 +6,8 @@
 import { WinstonConfiguration } from './config/winston';
 import { EnvironmentConfiguration } from './config/config';
 import { SequelizeConfiguration } from './config/sequelizeConfig';
+import { ExpressConfiguration } from './config/express';
+import { PassportConfiguration } from './config/passport';
 let config = EnvironmentConfiguration.getConfiguration();
 let winston = WinstonConfiguration.initialize();
 
@@ -13,11 +15,11 @@ winston.info(`Starting ${config.app.title} ...`);
 
 let db = SequelizeConfiguration.initialize();
 
-// // Init the express application
-// var app = require('./config/express')(db.sequelize);
+// Init the express application
+let app = ExpressConfiguration.configure(db.sequelize);
 
-// // Bootstrap passport config
-// require('./config/passport')();
+// Bootstrap passport config
+PassportConfiguration.configure(db);
 
 // // Start the app by listening on <port>
 // app.listen(config.port, config.ipaddr);

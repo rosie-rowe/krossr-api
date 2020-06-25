@@ -7,13 +7,14 @@ import * as path from 'path';
 import { WinstonConfiguration } from './winston';
 import { Sequelize } from 'sequelize';
 import { EnvironmentConfiguration } from './config';
+import * as sequelize from 'sequelize';
 
 let config = EnvironmentConfiguration.getConfiguration();
 let winston = WinstonConfiguration.initialize();
 
 export class SequelizeConfiguration {
     static initialize() {
-        let db = {};
+        let db: { sequelize?: sequelize.Sequelize } = {};
 
         winston.info('Initializing Sequelize...')
 
@@ -73,7 +74,7 @@ export class SequelizeConfiguration {
 
         // assign the sequelize variables to the db object and returning the db. 
 
-        _.extend({
+        db = _.extend({
             sequelize: sequelize,
             Sequelize: Sequelize
         }, db);

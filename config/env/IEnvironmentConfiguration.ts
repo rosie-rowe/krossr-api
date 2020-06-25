@@ -6,4 +6,5 @@ export interface IEnvironmentConfiguration {
     db: IDatabaseConfiguration;
     forceDbSync?: boolean;
     enableSequelizeLog: string;
+    templateEngine?: string;
 }
