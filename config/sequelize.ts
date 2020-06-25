@@ -6,7 +6,7 @@ var Sequelize = require('sequelize');
 var _ = require('lodash');
 var config = require('./config');
 var winston = require('./winston');
-var db = {};
+var db: any = {};
 
 var rootPath = path.normalize(__dirname + '/..');
 

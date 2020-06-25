@@ -1,7 +1,6 @@
 'use strict';
 
 const { where } = require('sequelize');
-const sequelize = require('../../config/sequelize');
 
 /**
  * Module dependencies.
@@ -171,7 +170,7 @@ exports.paginate = function(req, res) {
 
 	winston.info('Trying to query Levels...');
 
-	var whereBuilder = {
+	var whereBuilder: any = {
 		id: {
 			[Op.not]: null
 		}

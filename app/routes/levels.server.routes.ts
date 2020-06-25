@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = function(app) {
+import { Express } from 'express';
+
+module.exports = function(app: Express) {
 	var users = require('../../app/controllers/users');
 	var levels = require('../../app/controllers/levels');
 
