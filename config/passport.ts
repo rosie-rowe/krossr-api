@@ -2,9 +2,9 @@
 
 var passport = require('passport'),
 	db = require('./sequelize'),
+	glob = require('glob'),
 	User = db.user,
-	path = require('path'),
-	config = require('./config');
+	path = require('path');
 
 module.exports = function() {
 	// Serialize sessions
@@ -29,7 +29,9 @@ module.exports = function() {
 	let strategiesDir = path.resolve(__dirname, '../config/strategies');
 
 	// Initialize strategies
-	config.getGlobbedFiles(strategiesDir + '**/*.js').forEach(function(strategy) {
-		require(path.resolve(strategy))();
+	glob(strategiesDir + '**/*.js', (err, files) => {
+		files.forEach(strategy => {
+			require(path.resolve(strategy))();
+		});
 	});
 };
