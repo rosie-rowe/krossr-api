@@ -54,7 +54,3 @@ export class UserProfileController {
 		res.jsonp(req.user || null);
 	}
 }
-
-let me = new UserProfileController();
-exports.update = me.update;
-exports.me = me.me;
