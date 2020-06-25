@@ -9,7 +9,4 @@ module.exports = function(app) {
 	app.route('/auth/forgot').post(users.forgot);
 	app.route('/auth/reset/:token').get(users.validateResetToken);
 	app.route('/auth/reset/:token').post(users.reset);
-
-	// Finish by binding the user middleware
-	app.param('userId', users.userByID);
 };

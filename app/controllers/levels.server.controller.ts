@@ -3,14 +3,7 @@
 /**
  * Module dependencies.
  */
-var db = require('../../config/sequelize'),
-	winston = require('../../config/winston'),
-	errorHandler = require('./errors'),
-	Level = db.level,
-	Rating = db.rating,
-	User = db.user,
-	Sequelize = require('sequelize'),
-	Op = Sequelize.Op;
+var errorHandler = require('./errors');
 
 /**
  * Update a Level
