@@ -1,7 +1,5 @@
 'use strict';
 
-const { where } = require('sequelize');
-
 /**
  * Module dependencies.
  */
