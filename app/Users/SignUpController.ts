@@ -1,6 +1,6 @@
-import { ErrorHandler } from '../../Error/errors.server.controller';
-import { WinstonConfiguration } from '../../../config/winston';
-import { IKrossrDatabase } from '../../database/IKrossrDatabase';
+import { ErrorHandler } from '../Error/errors.server.controller';
+import { WinstonConfiguration } from '../../config/winston';
+import { IKrossrDatabase } from '../database/IKrossrDatabase';
 
 let winston = WinstonConfiguration.initialize();
 

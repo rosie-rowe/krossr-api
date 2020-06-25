@@ -1,9 +1,9 @@
 import * as express from 'express';
-import { UserProfileController } from '../controllers/users/UserProfileController';
-import { SignInController } from '../controllers/users/SignInController';
-import { SignOutController } from '../controllers/users/SignOutController';
+import { UserProfileController } from '../Users/UserProfileController';
+import { SignInController } from '../Users/SignInController';
+import { SignOutController } from '../Users/SignOutController';
 import { IKrossrDatabase } from '../database/IKrossrDatabase';
-import { SignUpController } from '../controllers/users/SignUpController';
+import { SignUpController } from '../Users/SignUpController';
 
 export class UsersRoutes {
     private static userProfileController = new UserProfileController();
