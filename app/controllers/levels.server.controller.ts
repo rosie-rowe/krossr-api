@@ -41,13 +41,6 @@ exports.newLevel = function(req, res) {
 };
 
 /**
- * Show the current Level
- */
-exports.read = function(req, res) {
-	return res.jsonp(req.level);
-};
-
-/**
  * Update a Level
  */
 exports.update = function(req, res) {
@@ -122,40 +115,6 @@ exports.delete = function(req, res) {
 			message: errorHandler.getErrorMessage(err)
 		});
 	});
-};
-
-/**
- * Level middleware
- */
-exports.levelByID = function(req, res, next, id) {
-	var user = req.user;
-
-	var include = user ? 
-	[
-		{
-			attributes: ['rating'],
-			model: Rating,
-			required: false,
-			where: {
-				userId: user.id
-			}
-		}
-	] : null;
-
-	Level
-		.findOne({
-			include: include,
-            where: {
-                id: id
-            }
-        }).then(function(level) {
-			if (!level) {
-				return next(new Error('Failed to load level ' + id));
-			} else {
-				req.level = level;
-				return next();
-			}
-		});
 };
 
 /**

@@ -17,10 +17,6 @@ module.exports = function(app: Express) {
 		.post(users.requiresLogin, levels.upsertRating);
 
 	app.route('/levels/:levelId')
-		.get(levels.read)
 		.put(users.requiresLogin, levels.update)
 		.delete(users.requiresLogin, levels.hasAuthorization, levels.delete);
-
-	// Finish by binding the Level middleware
-	app.param('levelId', levels.levelByID);
 };
