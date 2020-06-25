@@ -1,13 +1,15 @@
 'use strict';
 
 import * as _ from 'lodash';
-
-/**
- * Module dependencies.
- */
-// var errorHandler = require('../errors');
+import { ErrorsController } from '../errors.server.controller';
 
 export class UserProfileController {
+	private errorHandler: ErrorsController;
+
+	constructor() {
+		this.errorHandler = new ErrorsController();
+	}
+
 	/**
 	 * Update user details
 	 */
@@ -33,9 +35,9 @@ export class UserProfileController {
 						res.jsonp(user);
 					}
 				});
-			}).catch(function (err) {
+			}).catch((err) => {
 				return res.status(400).send({
-					message: 'frig off' // TODO //errorHandler.getErrorMessage(err)
+					message: this.errorHandler.getErrorMessage(err)
 				});
 			});
 		} else {
