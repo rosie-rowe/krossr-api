@@ -10,8 +10,7 @@ let config = EnvironmentConfiguration.getConfiguration();
 /**
  * Module dependencies.
  */
-var glob = require('glob'),
-	morgan = require('morgan'),
+var morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
 	compress = require('compression'),
@@ -22,7 +21,6 @@ var glob = require('glob'),
 	SequelizeStore = require('connect-session-sequelize')(session.Store),
 	flash = require('connect-flash'),
 	consolidate = require('consolidate'),
-	path = require('path'),
 	winston = require('winston');
 
 export class ExpressConfiguration {
@@ -113,14 +111,6 @@ export class ExpressConfiguration {
 		app.use(helmet.ienoopen());
 		app.disable('x-powered-by');
 	
-		let routesFolder = path.resolve(__dirname, '../app/routes');
-	
-		glob(routesFolder + '**/*.js', { sync: true }, (err, files) => {
-			files.forEach(routePath => {
-				require(path.resolve(routePath))(app);
-			});
-		});
-
 		LevelsRoutes.configureRoutes(app, db);
 		UsersRoutes.configureRoutes(app, db);
 	
