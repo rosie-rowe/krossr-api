@@ -1,16 +1,20 @@
 'use strict';
 
 var path = require('path');
+var nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 var config = {
     devtool: 'source-map',
     entry: {
-        'krossr': 'app.ts'
+        'server': './server.ts'
     },
+    externals: [
+        nodeExternals()
+    ],
     output: {
-        path: path.join(__dirname + '/public/dist'),
-        filename: '[name].bundle-[hash].js'
+        path: path.join(__dirname + '/dist'),
+        filename: '[name].js'
     },
     optimization: {
         minimize: false
@@ -20,9 +24,7 @@ var config = {
     ],
     resolve: {
         modules: [
-            'node_modules',
-            'public/modules',
-            'public/ng-app'
+            'node_modules'
         ],
         extensions: [
             '.ts',
@@ -40,23 +42,6 @@ var config = {
                 test: /\.html$/,
                 exclude: /node_modules/,
                 loader: 'html-loader?minimize=false' // Angular attributes require correct case...
-            },
-            /** Mixed usage of scss/less loaders will be fixed later, TODO */
-            {
-                test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader'
-                ]
-            },
-            {
-                test: /\.less$/,
-                use: [
-                    'to-string-loader',
-                    'css-loader',
-                    'less-loader'
-                ]
             }
         ]
     }
