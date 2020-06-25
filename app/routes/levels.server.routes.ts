@@ -8,7 +8,6 @@ module.exports = function(app: Express) {
 
 	// Levels Routes
 	app.route('/levels')
-		.get(levels.paginate)
 		.post(users.requiresLogin, levels.create);
 
 	app.route('/levels/new')

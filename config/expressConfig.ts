@@ -4,6 +4,7 @@ import { EnvironmentConfiguration } from './config';
 import * as express from 'express';
 import { UsersRoutes } from '../app/routes/UsersRoutes';
 import { IKrossrDatabase } from '../app/database/IKrossrDatabase';
+import { LevelsRoutes } from '../app/routes/LevelsRoutes';
 let config = EnvironmentConfiguration.getConfiguration();
 
 /**
@@ -120,6 +121,7 @@ export class ExpressConfiguration {
 			});
 		});
 
+		LevelsRoutes.configureRoutes(app, db);
 		UsersRoutes.configureRoutes(app, db);
 	
 		// Assume 404 since no middleware responded

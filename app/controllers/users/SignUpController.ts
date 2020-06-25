@@ -1,16 +1,16 @@
-import { ErrorsController } from '../errors.server.controller';
+import { ErrorHandler } from '../../Error/errors.server.controller';
 import { WinstonConfiguration } from '../../../config/winston';
 import { IKrossrDatabase } from '../../database/IKrossrDatabase';
 
 let winston = WinstonConfiguration.initialize();
 
 export class SignUpController {
-    private errorHandler: ErrorsController;
+    private errorHandler: ErrorHandler;
     private db: IKrossrDatabase
 
     constructor(db: IKrossrDatabase) {
         this.db = db;
-        this.errorHandler = new ErrorsController();
+        this.errorHandler = new ErrorHandler();
     }
 
     public signUp = (req, res) => {

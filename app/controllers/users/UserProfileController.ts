@@ -1,13 +1,13 @@
 'use strict';
 
 import * as _ from 'lodash';
-import { ErrorsController } from '../errors.server.controller';
+import { ErrorHandler } from '../../Error/errors.server.controller';
 
 export class UserProfileController {
-	private errorHandler: ErrorsController;
+	private errorHandler: ErrorHandler;
 
 	constructor() {
-		this.errorHandler = new ErrorsController();
+		this.errorHandler = new ErrorHandler();
 	}
 
 	/**

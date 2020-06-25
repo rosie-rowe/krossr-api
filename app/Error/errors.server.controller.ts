@@ -1,7 +1,6 @@
 'use strict';
 
-// TODO
-export class ErrorsController {
+export class ErrorHandler {
 	/**
 	 * Get the error message from error object
 	 */
