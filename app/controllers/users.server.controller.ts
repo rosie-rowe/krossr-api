@@ -11,6 +11,5 @@ var _: _.LoDashStatic = require('lodash');
 module.exports = _.extend(
 	require('./users/users.authentication'),
 	require('./users/users.authorization'),
-	require('./users/users.password'),
-	require('./users/users.profile')
+	require('./users/users.password')
 );

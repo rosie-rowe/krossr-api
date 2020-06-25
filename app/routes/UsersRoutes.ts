@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { UserProfileController } from '../controllers/users/users.profile.server.controller';
+import { UserProfileController } from '../controllers/users/UserProfileController';
 import { SignInController } from '../controllers/users/SignInController';
 
 export class UsersRoutes {
