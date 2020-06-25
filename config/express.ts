@@ -112,11 +112,10 @@ module.exports = function(db) {
 	app.use(helmet.ienoopen());
 	app.disable('x-powered-by');
 
-	// Setting the app router and static folder
-	app.use(express.static(path.resolve('./public')));
+	let routesFolder = path.resolve(__dirname, '../app/routes');
 
 	// Globbing routing files
-	config.getGlobbedFiles('./app/routes/**/*.js').forEach(function(routePath) {
+	config.getGlobbedFiles(routesFolder + '**/*.js').forEach(function(routePath) {
 		require(path.resolve(routePath))(app);
 	});
 

@@ -26,8 +26,10 @@ module.exports = function() {
 		});
 	});
 
+	let strategiesDir = path.resolve(__dirname, '../config/strategies');
+
 	// Initialize strategies
-	config.getGlobbedFiles('./config/strategies/**/*.js').forEach(function(strategy) {
+	config.getGlobbedFiles(strategiesDir + '**/*.js').forEach(function(strategy) {
 		require(path.resolve(strategy))();
 	});
 };

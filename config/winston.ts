@@ -11,7 +11,8 @@ logger.add(winston.transports.Console, {
     prettyPrint: true,
     colorize: true,
     silent: false,
-    timestamp: false
+    timestamp: false,
+    verbose: false
 });
 
 logger.stream = {
