@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var express = require('express'),
+	glob = require('glob'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
@@ -25,17 +26,11 @@ module.exports = function(db) {
 	// Initialize express app
 	var app = express();
 
-	// Globbing model files
-	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
-		require(path.resolve(modelPath));
-	});
-
 	// Setting application local variables
 	app.locals.themeColor = '#008287'; // same as @selectedColor in css
 	app.locals.title = config.app.title;
 	app.locals.description = config.app.description;
 	app.locals.keywords = config.app.keywords;
-	app.locals.jsFiles = config.getJavaScriptAssets();
 
 	// Passing the request url to environment locals
 	app.use(function(req, res, next) {
@@ -114,9 +109,10 @@ module.exports = function(db) {
 
 	let routesFolder = path.resolve(__dirname, '../app/routes');
 
-	// Globbing routing files
-	config.getGlobbedFiles(routesFolder + '**/*.js').forEach(function(routePath) {
-		require(path.resolve(routePath))(app);
+	glob(routesFolder + '**/*.js', { sync: true }, (err, files) => {
+		files.forEach(routePath => {
+			require(path.resolve(routePath))(app);
+		});
 	});
 
 	// Assume 404 since no middleware responded
