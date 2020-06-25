@@ -6,7 +6,6 @@ import * as _ from 'lodash';
  */
 var errorHandler = require('../errors'),
 	db = require('../../../config/sequelize'),
-	passport = require('passport'),
 	User = db.user,
 	winston = require('../../../config/winston');
 
@@ -44,27 +43,6 @@ exports.signup = function(req, res) {
             message: errorHandler.getErrorMessage(err)
         });
     });
-};
-
-/**
- * Signin after passport authentication
- */
-exports.signin = function(req, res, next) {
-	passport.authenticate('local', function(err, user, info) {
-		if (err || !user) {
-			res.status(400).send(info);
-		} else {
-			user.removeSensitiveInfo();
-
-			req.login(user, function(err) {
-				if (err) {
-					res.status(400).send(err);
-				} else {
-					res.jsonp(user);
-				}
-			});
-		}
-	})(req, res, next);
 };
 
 /**

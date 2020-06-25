@@ -1,8 +1,8 @@
 'use strict';
 
-var passport = require('passport'),
-	glob = require('glob'),
-	path = require('path');
+import { LocalPassportStrategy } from "./strategies/local";
+
+var passport = require('passport');
 
 export class PassportConfiguration {
 	static configure(db) {
@@ -27,13 +27,6 @@ export class PassportConfiguration {
 			});
 		});
 
-		let strategiesDir = path.resolve(__dirname, '../config/strategies');
-
-		// Initialize strategies
-		glob(strategiesDir + '**/*.js', (err, files) => {
-			files.forEach(strategy => {
-				require(path.resolve(strategy))();
-			});
-		});
+		LocalPassportStrategy.use(db);
 	}
 }
