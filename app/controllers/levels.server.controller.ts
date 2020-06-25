@@ -13,27 +13,6 @@ var db = require('../../config/sequelize'),
 	Op = Sequelize.Op;
 
 /**
- * Create a Level
- */
-exports.create = function(req, res) {
-	req.body.userId = req.user.id;
-
-	Level.create(req.body).then(function(level) {
-		if (!level) {
-			return res.status(500).send({
-				message: 'There was a problem creating the level'
-			});
-		} else {
-			return res.jsonp(level);
-		}
-	}).catch(function(err) {
-		return res.status(500).send({
-			message: errorHandler.getErrorMessage(err)
-		});
-	});
-};
-
-/**
  * Update a Level
  */
 exports.update = function(req, res) {

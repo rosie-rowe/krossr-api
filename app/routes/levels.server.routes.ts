@@ -6,10 +6,6 @@ module.exports = function(app: Express) {
 	var users = require('../../app/controllers/users');
 	var levels = require('../../app/controllers/levels');
 
-	// Levels Routes
-	app.route('/levels')
-		.post(users.requiresLogin, levels.create);
-
 	app.route('/levels/:levelId/ratings')
 		.post(users.requiresLogin, levels.upsertRating);
 
