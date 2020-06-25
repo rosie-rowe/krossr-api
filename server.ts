@@ -6,7 +6,7 @@
 import { WinstonConfiguration } from './config/winston';
 import { EnvironmentConfiguration } from './config/config';
 import { SequelizeConfiguration } from './config/sequelizeConfig';
-import { ExpressConfiguration } from './config/express';
+import { ExpressConfiguration } from './config/expressConfig';
 import { PassportConfiguration } from './config/passport';
 let config = EnvironmentConfiguration.getConfiguration();
 let winston = WinstonConfiguration.initialize();

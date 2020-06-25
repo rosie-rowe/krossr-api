@@ -1,13 +1,13 @@
 'use strict';
 
 import { EnvironmentConfiguration } from './config';
+import * as express from 'express';
 let config = EnvironmentConfiguration.getConfiguration();
 
 /**
  * Module dependencies.
  */
-var express = require('express'),
-	glob = require('glob'),
+var glob = require('glob'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
@@ -23,7 +23,7 @@ var express = require('express'),
 	winston = require('winston');
 
 export class ExpressConfiguration {
-	static configure(db: any) {
+	static configure(db: any): express.Application {
 		winston.info('Intializing Express!');
 
 		// Initialize express app
