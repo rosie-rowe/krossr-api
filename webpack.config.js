@@ -3,6 +3,7 @@
 var path = require('path');
 var nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { EnvironmentPlugin } = require('webpack');
 
 var config = {
     devtool: 'source-map',
@@ -26,6 +27,7 @@ var config = {
     },
     plugins: [
         // new CleanWebpackPlugin()
+        new EnvironmentPlugin(['SESSION_SECRET'])
     ],
     resolve: {
         modules: [

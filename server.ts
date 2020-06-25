@@ -21,11 +21,8 @@ let app = ExpressConfiguration.configure(db.sequelize);
 // Bootstrap passport config
 PassportConfiguration.configure(db);
 
-// // Start the app by listening on <port>
-// app.listen(config.port, config.ipaddr);
+// Start the app by listening on <port>
+app.listen(config.port, config.ipaddr);
 
-// // Expose app
-// exports = module.exports = app;
-
-// // Logging initialization
-// console.log('MEAN.JS application started on port ' + config.port);
+// Logging initialization
+console.log('MEAN.JS application started on port ' + config.port);
