@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { IKrossrDatabase } from '../database/IKrossrDatabase';
+import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { LevelListController } from '../LevelList/LevelListController';
 import { LevelsMiddleware } from '../Levels/LevelsMiddleware';
 import { LevelsController } from '../Levels/LevelsController';

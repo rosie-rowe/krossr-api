@@ -1,4 +1,4 @@
-import { IKrossrDatabase } from "../database/IKrossrDatabase";
+import { IKrossrDatabase } from "../Database/IKrossrDatabase";
 import { ErrorHandler } from "../Error/errors.server.controller";
 
 export class LevelsController {

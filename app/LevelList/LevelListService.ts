@@ -1,5 +1,5 @@
 import { LevelListQuery } from "./LevelListQuery";
-import { IKrossrDatabase } from "../database/IKrossrDatabase";
+import { IKrossrDatabase } from "../Database/IKrossrDatabase";
 import { Op } from 'sequelize';
 
 export class LevelListService {

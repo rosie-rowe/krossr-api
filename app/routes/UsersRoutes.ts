@@ -2,7 +2,7 @@ import * as express from 'express';
 import { UserProfileController } from '../Users/UserProfileController';
 import { SignInController } from '../Users/SignInController';
 import { SignOutController } from '../Users/SignOutController';
-import { IKrossrDatabase } from '../database/IKrossrDatabase';
+import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { SignUpController } from '../Users/SignUpController';
 import { ErrorHandler } from '../Error/errors.server.controller';
 

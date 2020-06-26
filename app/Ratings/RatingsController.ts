@@ -1,4 +1,4 @@
-import { IKrossrDatabase } from "../database/IKrossrDatabase";
+import { IKrossrDatabase } from "../Database/IKrossrDatabase";
 
 export class RatingsController {
     constructor(private db: IKrossrDatabase) {
