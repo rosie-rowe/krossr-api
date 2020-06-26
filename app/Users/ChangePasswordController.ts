@@ -41,7 +41,7 @@ export class ChangePasswordController {
                                             });
                                         }
                                     });
-                                }).catch(function (err) {
+                                }).catch((err) => {
                                     return res.status(400).send({
                                         message: this.errorHandler.getErrorMessage(err)
                                     });
@@ -57,7 +57,7 @@ export class ChangePasswordController {
                             });
                         }
                     }
-                }).catch(function (err) {
+                }).catch((err) => {
                     res.status(400).send({
                         message: this.errorHandler.getErrorMessage(err)
                     });
