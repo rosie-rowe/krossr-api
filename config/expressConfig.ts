@@ -30,12 +30,6 @@ export class ExpressConfiguration {
 		// Initialize express app
 		var app = express();
 	
-		// Setting application local variables
-		app.locals.themeColor = '#008287'; // same as @selectedColor in css
-		app.locals.title = config.app.title;
-		app.locals.description = config.app.description;
-		app.locals.keywords = config.app.keywords;
-	
 		// Passing the request url to environment locals
 		app.use(function(req, res, next) {
 			res.locals.url = req.protocol + '://' + req.headers.host + req.url;
