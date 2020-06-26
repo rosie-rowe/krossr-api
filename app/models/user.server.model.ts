@@ -1,6 +1,6 @@
 'use strict';
 
-var crypto = require('crypto');
+var cryptoUser = require('crypto'); // renamed to avoid scope issues for now, TODO
 
 module.exports = function(sequelize, Sequelize) {
     var user = sequelize.define('user', {
@@ -43,11 +43,11 @@ module.exports = function(sequelize, Sequelize) {
             return '';
         }
         salt = new Buffer(salt, 'base64');
-        return crypto.pbkdf2Sync(password, salt, 10000, 64, null).toString('base64');
+        return cryptoUser.pbkdf2Sync(password, salt, 10000, 64, null).toString('base64');
     }
 
     user.prototype.makeSalt = function () {
-        return crypto.randomBytes(16).toString('base64'); 
+        return cryptoUser.randomBytes(16).toString('base64'); 
     }
 
     user.prototype.removeSensitiveInfo = function() {

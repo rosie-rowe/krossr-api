@@ -9,90 +9,8 @@ var errorHandler = require('../errors'),
     db = require('../../../config/sequelize'),
     User = db.user,
     config = require('../../../config/config'),
-    nodemailer = require('nodemailer'),
-    async = require('async'),
-    crypto = require('crypto');
-
-/**
- * Forgot for reset password (forgot POST) TODO
- */
-exports.forgot = function(req, res, next) {
-    async.waterfall([
-        // Generate random token
-        function(done) {
-            crypto.randomBytes(20, function(err, buffer) {
-                var token = buffer.toString('hex');
-                done(err, token);
-            });
-        },
-        // Lookup user by username
-        function(token, done) {
-            if (req.body.username) {
-                User.findOne({
-                    attributes: {
-                        exclude: ['salt, password']
-                    },
-                    where: {
-                        username: req.body.username
-                    }
-                }).then(function(user) {
-                    if (!user) {
-                        return res.status(400).send({
-                            message: 'Username not found'
-                        });
-                    } else if (user.provider !== 'local') {
-                        return res.status(400).send({
-                            message: 'Try ' + user.provider + ' account?'
-                        });
-                    } else {
-                        user.resetPasswordToken = token;
-                        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
-                        user.save().then(function() {
-                            done(null, token, user);
-                        }).catch(function(err) {
-                            done(err);
-                        });
-                    }
-                });
-            } else {
-                return res.status(400).send({
-                    message: 'Username required'
-                });
-            }
-        },
-        function(token, user, done) {
-            res.render('templates/reset-password-email', {
-                name: user.username,
-                appName: config.app.title,
-                url: 'http://' + req.headers.host + '/auth/reset/' + token
-            }, function(err, emailHTML) {
-                done(err, emailHTML, user);
-            });
-        },
-        // If valid email, send reset email using service
-        function(emailHTML, user, done) {
-            var smtpTransport = nodemailer.createTransport(config.mailer.options);
-            var mailOptions = {
-                to: user.email,
-                from: config.mailer.from,
-                subject: 'Password Reset',
-                html: emailHTML
-            };
-            smtpTransport.sendMail(mailOptions, function(err) {
-                if (!err) {
-                    res.send({
-                        message: 'Email sent!'
-                    });
-                }
-
-                done(err);
-            });
-        }
-    ], function(err) {
-        if (err) return next(err);
-    });
-};
+    nodemailerUser = require('nodemailer'), // TODO
+    async = require('async');
 
 /**
  * Reset password GET from email token
@@ -183,7 +101,7 @@ exports.reset = function(req, res, next) {
         },
         // If valid email, send reset email using service
         function(emailHTML, user, done) {
-            var smtpTransport = nodemailer.createTransport(config.mailer.options);
+            var smtpTransport = nodemailerUser.createTransport(config.mailer.options);
             var mailOptions = {
                 to: user.email,
                 from: config.mailer.from,
