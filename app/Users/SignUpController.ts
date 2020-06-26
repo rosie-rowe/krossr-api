@@ -5,12 +5,10 @@ import { IKrossrDatabase } from '../database/IKrossrDatabase';
 let winston = WinstonConfiguration.initialize();
 
 export class SignUpController {
-    private errorHandler: ErrorHandler;
-    private db: IKrossrDatabase
-
-    constructor(db: IKrossrDatabase) {
-        this.db = db;
-        this.errorHandler = new ErrorHandler();
+    constructor(
+        private db: IKrossrDatabase,
+        private errorHandler: ErrorHandler
+    ) {
     }
 
     public signUp = (req, res) => {

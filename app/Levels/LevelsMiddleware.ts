@@ -6,6 +6,14 @@ export class LevelsMiddleware {
     ) {
     }
 
+    public hasAuthorization = (req, res, next) => {
+        if (req.level.userId !== req.user.id) {
+            return res.status(403).send('User is not authorized');
+        }
+
+        next();
+    }
+
     public levelByID = (req, res, next, id) => {
         let Level = this.db.level;
         let Rating = this.db.rating;

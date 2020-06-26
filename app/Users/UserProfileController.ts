@@ -4,10 +4,9 @@ import * as _ from 'lodash';
 import { ErrorHandler } from '../Error/errors.server.controller';
 
 export class UserProfileController {
-	private errorHandler: ErrorHandler;
-
-	constructor() {
-		this.errorHandler = new ErrorHandler();
+	constructor(
+		private errorHandler: ErrorHandler
+	) {
 	}
 
 	/**

@@ -35,7 +35,7 @@ export class RatingsController {
                     res.jsonp(level);
                 }).catch(function (err) {
                     return res.status(500).send({
-                        message: errorHandler.getErrorMessage(err)
+                        message: this.errorHandler.getErrorMessage(err)
                     });
                 });
             } else {
@@ -43,7 +43,7 @@ export class RatingsController {
             }
         }).catch(function (err) {
             return res.status(500).send({
-                message: errorHandler.getErrorMessage(err)
+                message: this.errorHandler.getErrorMessage(err)
             });
         });
     }
