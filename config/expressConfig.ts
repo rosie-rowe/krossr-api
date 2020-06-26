@@ -3,9 +3,9 @@
 import { EnvironmentConfiguration } from './config';
 import * as express from 'express';
 import * as passport from 'passport';
-import { UsersRoutes } from '../app/routes/UsersRoutes';
+import { UsersRoutes } from '../app/Routes/UsersRoutes';
 import { IKrossrDatabase } from '../app/Database/IKrossrDatabase';
-import { LevelsRoutes } from '../app/routes/LevelsRoutes';
+import { LevelsRoutes } from '../app/Routes/LevelsRoutes';
 let config = EnvironmentConfiguration.getConfiguration();
 
 /**
