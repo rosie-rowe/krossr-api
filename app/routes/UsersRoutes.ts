@@ -7,6 +7,7 @@ import { SignUpController } from '../Users/SignUpController';
 import { ErrorHandler } from '../Error/errors.server.controller';
 import { ChangePasswordController } from '../Users/ChangePasswordController';
 import { ForgotPasswordController } from '../Users/ForgotPasswordController';
+import { ResetPasswordController } from '../Users/ResetPasswordController';
 
 export class UsersRoutes {
     private static errorHandler = new ErrorHandler();
@@ -18,6 +19,7 @@ export class UsersRoutes {
         let signUpController = new SignUpController(db, this.errorHandler);
         let changePasswordController = new ChangePasswordController(db, this.errorHandler);
         let forgotPasswordController = new ForgotPasswordController(db);
+        let resetPasswordController = new ResetPasswordController(db, this.errorHandler);
 
         // Setting up the users profile api
         app.route('/users/me').get(userProfileController.me);
@@ -31,5 +33,9 @@ export class UsersRoutes {
         // Setting up the users password api
         app.route('/users/password').post(changePasswordController.changePassword);
         app.route('/auth/forgot').post(forgotPasswordController.forgot);
+
+        app.route('/auth/reset/:token')
+            .get(resetPasswordController.validateResetToken)
+            .post(resetPasswordController.reset);
     }
 }
