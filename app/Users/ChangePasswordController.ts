@@ -8,69 +8,91 @@ export class ChangePasswordController {
     ) {
     }
 
-    /** Holy shit callback hell. TODO! */
-    public changePassword = (req, res) => {
+    public changePassword = async (req, res) => {
         let User = this.db.user;
 
         // Init Variables
         let passwordDetails = req.body;
 
-        if (req.user) {
-            if (passwordDetails.newPassword) {
-                User.findOne({
-                    where: {
-                        id: req.user.id
-                    }
-                }).then(function(user) {
-                    if (!user) {
-                        res.status(400).send({
-                            message: 'User is not found'
-                        });
-                    } else {
-                        if (user.authenticate(passwordDetails.currentPassword)) {
-                            if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
-                                user.hashedPassword = user.encryptPassword(passwordDetails.newPassword, user.salt);
-
-                                user.save().then(() => {
-                                    req.login(user, (err) => {
-                                        if (err) {
-                                            res.status(400).send(err);
-                                        } else {
-                                            res.send({
-                                                message: 'Password changed successfully'
-                                            });
-                                        }
-                                    });
-                                }).catch((err) => {
-                                    return res.status(400).send({
-                                        message: this.errorHandler.getErrorMessage(err)
-                                    });
-                                });
-                            } else {
-                                res.status(400).send({
-                                    message: 'Passwords do not match'
-                                });
-                            }
-                        } else {
-                            res.status(400).send({
-                                message: 'Current password is incorrect'
-                            });
-                        }
-                    }
-                }).catch((err) => {
-                    res.status(400).send({
-                        message: this.errorHandler.getErrorMessage(err)
-                    });
-                });
-            } else {
-                res.status(400).send({
-                    message: 'Please provide a new password'
-                });
-            }
-        } else {
-            res.status(400).send({
-                message: 'User is not signed in'
-            });
+        if (!passwordDetails.newPassword) {
+            return this.newPasswordMissing(res);
         }
+
+        if (passwordDetails.newPassword !== passwordDetails.verifyPassword) {
+            return this.passwordsDoNotMatch(res);
+        }
+
+        if (!req.user) {
+            return this.userIsNotSignedIn(res);
+        }
+
+        try {
+            let user = await User.findOne({
+                where: {
+                    id: req.user.id
+                }
+            });
+
+            if (!user) {
+                return this.userIsNotFound(res);
+            }
+
+            if (!user.authenticate(passwordDetails.currentPassword)) {
+                return this.currentPasswordIsIncorrect(res);
+            }
+
+            user.hashedPassword = user.encryptPassword(passwordDetails.newPassword, user.salt);
+
+            // TODO await (need types)
+            user.save().then(() => {
+                req.login(user, (err) => {
+                    if (err) {
+                        res.status(400).send(err);
+                    } else {
+                        res.send({
+                            message: 'Password changed successfully'
+                        });
+                    }
+                });
+            }).catch(err => this.unknownError(res, err));
+        } catch (err) {
+            this.unknownError(res, err);
+        }
+    }
+
+    private newPasswordMissing(res) {
+        res.status(400).send({
+            message: 'Please provide a new password'
+        });
+    }
+
+    private passwordsDoNotMatch(res) {
+        res.status(400).send({
+            message: 'Passwords do not match'
+        });
+    }
+
+    private userIsNotSignedIn(res) {
+        res.status(400).send({
+            message: 'User is not signed in'
+        });
+    }
+
+    private userIsNotFound(res) {
+        res.status(400).send({
+            message: 'User is not found'
+        });
+    }
+
+    private currentPasswordIsIncorrect(res) {
+        res.status(400).send({
+            message: 'Current password is incorrect'
+        });
+    }
+
+    private unknownError(res, err) {
+        res.status(400).send({
+            message: this.errorHandler.getErrorMessage(err)
+        });
     }
 }
