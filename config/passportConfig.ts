@@ -1,6 +1,6 @@
 'use strict';
 
-import { LocalPassportStrategy } from "./strategies/local";
+import { LocalPassportStrategy } from './strategies/local';
 import * as passport from 'passport';
 
 export class PassportConfiguration {
@@ -9,20 +9,20 @@ export class PassportConfiguration {
 
 		// Serialize sessions
 		// TODO typing
-		passport.serializeUser(function (user: any, done) {
+		passport.serializeUser(function(user: any, done) {
 			done(null, user.id);
 		});
 
 		// Deserialize sessions
-		passport.deserializeUser(function (id, done) {
+		passport.deserializeUser(function(id, done) {
 			User.findOne({
 				exclude: ['salt', 'password'],
 				where: {
-					id: id
+					id
 				}
-			}).then(function (user) {
+			}).then(function(user) {
 				done(null, user);
-			}).catch(function (err) {
+			}).catch(function(err) {
 				done(err);
 			});
 		});

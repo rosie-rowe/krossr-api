@@ -3,8 +3,8 @@ import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { EnvironmentConfiguration } from '../../config/config';
 
 // TODO use types/import
-var nodemailerForgot = require('nodemailer');
-var cryptoForgot = require('crypto');
+let nodemailerForgot = require('nodemailer');
+let cryptoForgot = require('crypto');
 
 export class ForgotPasswordController {
     constructor(
@@ -23,7 +23,7 @@ export class ForgotPasswordController {
             // Generate random token
             function(done) {
                 cryptoForgot.randomBytes(20, function(err, buffer) {
-                    var token = buffer.toString('hex');
+                    let token = buffer.toString('hex');
                     done(err, token);
                 });
             },
@@ -49,7 +49,7 @@ export class ForgotPasswordController {
                         } else {
                             user.resetPasswordToken = token;
                             user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-    
+
                             user.save().then(function() {
                                 done(null, token, user);
                             }).catch(function(err) {
@@ -75,8 +75,8 @@ export class ForgotPasswordController {
             },
             // If valid email, send reset email using service
             function(emailHTML, user, done) {
-                var smtpTransport = nodemailerForgot.createTransport(config.mailer.options);
-                var mailOptions = {
+                let smtpTransport = nodemailerForgot.createTransport(config.mailer.options);
+                let mailOptions = {
                     to: user.email,
                     from: config.mailer.from,
                     subject: 'Password Reset',
@@ -88,12 +88,12 @@ export class ForgotPasswordController {
                             message: 'Email sent!'
                         });
                     }
-    
+
                     done(err);
                 });
             }
         ], function(err) {
-            if (err) return next(err);
+            if (err) { return next(err); }
         });
     }
 }

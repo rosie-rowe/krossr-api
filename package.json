@@ -11,7 +11,8 @@
     "build": "tsc && npx webpack --config webpack.config.js",
     "start": "node dist/server.js",
     "debug": "node --inspect dist/server.js",
-    "test": "npx karma start karma.conf.js"
+    "test": "npx karma start karma.conf.js",
+    "lint": "tslint --project ."
   },
   "dependencies": {
     "@types/async": "^3.2.3",

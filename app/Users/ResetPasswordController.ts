@@ -1,9 +1,9 @@
 import * as async from 'async';
-import { IKrossrDatabase } from "../Database/IKrossrDatabase";
-import { ErrorHandler } from "../Error/ErrorHandler";
+import { IKrossrDatabase } from '../Database/IKrossrDatabase';
+import { ErrorHandler } from '../Error/ErrorHandler';
 import { EnvironmentConfiguration } from '../../config/config';
 
-var nodemailerReset = require('nodemailer'); // TODO
+let nodemailerReset = require('nodemailer'); // TODO
 
 export class ResetPasswordController {
     constructor(
@@ -25,7 +25,7 @@ export class ResetPasswordController {
                     $gt: Date.now()
                 }
             }
-        }).then(function (user) {
+        }).then(function(user) {
             // todo these redirects suck
             if (!user) {
                 return res.redirect('/password/reset/invalid');
@@ -44,10 +44,10 @@ export class ResetPasswordController {
         let config = EnvironmentConfiguration.getConfiguration();
         let User = this.db.user;
         // Init Variables
-        var passwordDetails = req.body;
+        let passwordDetails = req.body;
 
         async.waterfall([
-            function (done) {
+            function(done) {
                 User.findOne({
                     where: {
                         resetPasswordToken: req.params.token,
@@ -55,7 +55,7 @@ export class ResetPasswordController {
                             $gt: Date.now()
                         }
                     }
-                }).then(function (user) {
+                }).then(function(user) {
                     if (!user) {
                         return res.status(400).send({
                             message: 'Password reset token is invalid or has expired.'
@@ -67,12 +67,12 @@ export class ResetPasswordController {
 
                             user.setPassword(passwordDetails.newPassword);
 
-                            user.save().then(function () {
-                                req.login(user, function (err) {
+                            user.save().then(function() {
+                                req.login(user, function(err) {
                                     if (err) {
                                         res.status(400).send(err);
                                     } else {
-                                        // Return authenticated user 
+                                        // Return authenticated user
                                         res.jsonp(user);
 
                                         done(err, user);
@@ -91,30 +91,30 @@ export class ResetPasswordController {
                     }
                 });
             },
-            function (user, done) {
+            function(user, done) {
                 res.render('templates/reset-password-confirm-email', {
                     name: user.username,
                     appName: config.app.title
-                }, function (err, emailHTML) {
+                }, function(err, emailHTML) {
                     done(err, emailHTML, user);
                 });
             },
             // If valid email, send reset email using service
-            function (emailHTML, user, done) {
-                var smtpTransport = nodemailerReset.createTransport(config.mailer.options);
-                var mailOptions = {
+            function(emailHTML, user, done) {
+                let smtpTransport = nodemailerReset.createTransport(config.mailer.options);
+                let mailOptions = {
                     to: user.email,
                     from: config.mailer.from,
                     subject: 'Your password has been changed',
                     html: emailHTML
                 };
 
-                smtpTransport.sendMail(mailOptions, function (err) {
+                smtpTransport.sendMail(mailOptions, function(err) {
                     done(err, 'done');
                 });
             }
-        ], function (err) {
-            if (err) return next(err);
+        ], function(err) {
+            if (err) { return next(err); }
         });
     }
 }

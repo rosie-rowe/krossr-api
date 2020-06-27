@@ -7,7 +7,7 @@ module.exports = {
 		password: 'postgres123!',
 		host: 'localhost'
 	},
-	//FORCE_DB_SYNC: 'true',
+	// FORCE_DB_SYNC: 'true',
 	port: 3001,
 	app: {
 		title: 'krossr - Test Environment'

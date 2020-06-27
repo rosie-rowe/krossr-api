@@ -1,6 +1,6 @@
-import { IDatabaseConfiguration } from "./IDatabaseConfiguration";
-import { IApplicationConfiguration } from "./IApplicationConfiguration";
-import { IMailerOptions } from "./IMailerOptions";
+import { IDatabaseConfiguration } from './IDatabaseConfiguration';
+import { IApplicationConfiguration } from './IApplicationConfiguration';
+import { IMailerOptions } from './IMailerOptions';
 
 export interface IEnvironmentConfiguration {
     app: IApplicationConfiguration;

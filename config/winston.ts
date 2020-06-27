@@ -1,5 +1,5 @@
-var winston = require('winston');
-var logger = new (winston.Logger)();
+let winston = require('winston');
+let logger = new (winston.Logger)();
 
 export class WinstonConfiguration {
     static isInitialized: boolean;
@@ -18,10 +18,10 @@ export class WinstonConfiguration {
             timestamp: false,
             verbose: false
         });
-        
+
         logger.stream = {
-            //jshint unused:false
-            write: function(message, encoding){
+            // jshint unused:false
+            write(message, encoding){
                 logger.info(message);
             }
         };

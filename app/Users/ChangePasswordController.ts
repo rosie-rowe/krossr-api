@@ -1,5 +1,5 @@
-import { IKrossrDatabase } from "../Database/IKrossrDatabase";
-import { ErrorHandler } from "../Error/ErrorHandler";
+import { IKrossrDatabase } from '../Database/IKrossrDatabase';
+import { ErrorHandler } from '../Error/ErrorHandler';
 
 export class ChangePasswordController {
     constructor(
@@ -13,7 +13,7 @@ export class ChangePasswordController {
         let User = this.db.user;
 
         // Init Variables
-        var passwordDetails = req.body;
+        let passwordDetails = req.body;
 
         if (req.user) {
             if (passwordDetails.newPassword) {
@@ -21,7 +21,7 @@ export class ChangePasswordController {
                     where: {
                         id: req.user.id
                     }
-                }).then(function (user) {
+                }).then(function(user) {
                     if (!user) {
                         res.status(400).send({
                             message: 'User is not found'
@@ -31,8 +31,8 @@ export class ChangePasswordController {
                             if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
                                 user.hashedPassword = user.encryptPassword(passwordDetails.newPassword, user.salt);
 
-                                user.save().then(function () {
-                                    req.login(user, function (err) {
+                                user.save().then(function() {
+                                    req.login(user, function(err) {
                                         if (err) {
                                             res.status(400).send(err);
                                         } else {

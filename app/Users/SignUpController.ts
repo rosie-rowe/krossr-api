@@ -15,14 +15,14 @@ export class SignUpController {
         let User = this.db.user;
 
         // Init Variables
-        var user = User.build(req.body);
+        let user = User.build(req.body);
 
         // Add missing user fields
         user.setPassword(req.body.password);
 
         winston.info('About to save the user...');
 
-        // Then save the user 
+        // Then save the user
         user.save().then(() => {
             winston.info('Saved the user!');
 

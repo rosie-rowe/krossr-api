@@ -14,7 +14,7 @@ export class UserProfileController {
 	 */
 	update = (req, res) => {
 		// Init Variables
-		var user = req.user;
+		let user = req.user;
 
 		// For security measurement we remove the roles from the req.body object
 		delete req.body.roles;
@@ -26,8 +26,8 @@ export class UserProfileController {
 				email: req.body.email
 			});
 
-			user.save().then(function () {
-				req.login(user, function (err) {
+			user.save().then(function() {
+				req.login(user, function(err) {
 					if (err) {
 						res.status(400).send(err);
 					} else {

@@ -1,5 +1,5 @@
-import { IKrossrDatabase } from "../Database/IKrossrDatabase";
-import { ErrorHandler } from "../Error/ErrorHandler";
+import { IKrossrDatabase } from '../Database/IKrossrDatabase';
+import { ErrorHandler } from '../Error/ErrorHandler';
 
 export class LevelsController {
     constructor(
@@ -28,13 +28,13 @@ export class LevelsController {
                 message: this.errorHandler.getErrorMessage(err)
             });
         });
-    };
+    }
 
     /**
      * Delete a Level
      */
     public delete = (req, res) => {
-        var level = req.level;
+        let level = req.level;
 
         level.destroy().then(function() {
             return res.jsonp(level);
@@ -53,7 +53,7 @@ export class LevelsController {
     }
 
     public update = (req, res) => {
-        var level = req.level;
+        let level = req.level;
 
         return level.update({
             name: req.body.name,

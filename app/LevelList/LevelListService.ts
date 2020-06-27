@@ -1,5 +1,5 @@
-import { LevelListQuery } from "./LevelListQuery";
-import { IKrossrDatabase } from "../Database/IKrossrDatabase";
+import { LevelListQuery } from './LevelListQuery';
+import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { Op } from 'sequelize';
 
 export class LevelListService {
@@ -16,14 +16,14 @@ export class LevelListService {
         let User = this.db.user;
         let Sequelize = this.db.Sequelize;
 
-        var pageNum = query.pageNum,
+        let pageNum = query.pageNum,
             sizeRestriction = query.sizeRestriction,
             searchText = query.searchText,
             sortBy = query.sortBy || '"createdAt"',
             sortDirection = query.sortDirection || 'ASC',
             numPerPage = query.numPerPage;
 
-        var whereBuilder: any = {
+        let whereBuilder: any = {
             id: {
                 [Op.not]: null
             }
@@ -31,11 +31,11 @@ export class LevelListService {
 
         /* This may be able to be done better, but hey. Include the average rating of a level with the levels query,
          * rather than every ratings object for that level. Also, exclude levels without average ratings if ratings are being filtered upon */
-        var baseRatingQuery = '(SELECT AVG("ratings"."rating") FROM "ratings" WHERE "ratings"."levelId" = "level"."id")';
-        var ratingQuery = Sequelize.literal(baseRatingQuery);
-        var ratingTest = Sequelize.literal(baseRatingQuery + ' IS NOT NULL');
+        let baseRatingQuery = '(SELECT AVG("ratings"."rating") FROM "ratings" WHERE "ratings"."levelId" = "level"."id")';
+        let ratingQuery = Sequelize.literal(baseRatingQuery);
+        let ratingTest = Sequelize.literal(baseRatingQuery + ' IS NOT NULL');
 
-        var isRating = (sortBy === '"avgRating"');
+        let isRating = (sortBy === '"avgRating"');
 
         if (sizeRestriction) {
             whereBuilder.size = {

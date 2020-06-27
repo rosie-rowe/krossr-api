@@ -1,7 +1,7 @@
-import { IKrossrDatabase } from "../Database/IKrossrDatabase"
-import { LevelListService } from "./LevelListService";
-import { LevelListQuery } from "./LevelListQuery";
-import { ErrorHandler } from "../Error/ErrorHandler";
+import { IKrossrDatabase } from '../Database/IKrossrDatabase';
+import { LevelListService } from './LevelListService';
+import { LevelListQuery } from './LevelListQuery';
+import { ErrorHandler } from '../Error/ErrorHandler';
 
 export class LevelListController {
     private levelListService: LevelListService;
@@ -21,7 +21,7 @@ export class LevelListController {
             return res.jsonp({
                 levels: levels.rows,
                 count: levels.count,
-                numPerPage: numPerPage
+                numPerPage
             });
         }).catch((err) => {
             return res.status(500).send({

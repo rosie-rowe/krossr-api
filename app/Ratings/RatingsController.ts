@@ -1,4 +1,4 @@
-import { IKrossrDatabase } from "../Database/IKrossrDatabase";
+import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 
 export class RatingsController {
     constructor(private db: IKrossrDatabase) {
@@ -9,9 +9,9 @@ export class RatingsController {
      */
     public upsertRating = (req, res) => {
         let Rating = this.db.rating;
-        var level = req.level;
-        var user = req.user;
-        var rating = Rating.build(req.body);
+        let level = req.level;
+        let user = req.user;
+        let rating = Rating.build(req.body);
 
         /* Simulated composite primary key since Sequelize doesn't support them yet */
         Rating.findOrCreate({
@@ -22,7 +22,7 @@ export class RatingsController {
             defaults: {
                 rating: rating.rating
             }
-        }).spread(function (result, created) {
+        }).spread(function(result, created) {
             if (!created) {
                 return Rating.update({
                     rating: rating.rating
@@ -31,9 +31,9 @@ export class RatingsController {
                         userId: user.id,
                         levelId: level.id
                     }
-                }).then(function () {
+                }).then(function() {
                     res.jsonp(level);
-                }).catch(function (err) {
+                }).catch(function(err) {
                     return res.status(500).send({
                         message: this.errorHandler.getErrorMessage(err)
                     });
@@ -41,7 +41,7 @@ export class RatingsController {
             } else {
                 res.jsonp(level);
             }
-        }).catch(function (err) {
+        }).catch(function(err) {
             return res.status(500).send({
                 message: this.errorHandler.getErrorMessage(err)
             });

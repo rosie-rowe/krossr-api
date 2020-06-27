@@ -7,7 +7,7 @@ export class SignInController {
                 res.status(400).send(info);
             } else {
                 user.removeSensitiveInfo();
-    
+
                 req.login(user, function(err) {
                     if (err) {
                         res.status(400).send(err);

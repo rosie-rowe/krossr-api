@@ -16,7 +16,7 @@ export class EnvironmentConfiguration {
 
 	private static getConfig() {
 		switch (process.env.NODE_ENV) {
-			case "development":
+			case 'development':
 				return new DevelopmentEnvironmentConfiguration();
 
 			default:

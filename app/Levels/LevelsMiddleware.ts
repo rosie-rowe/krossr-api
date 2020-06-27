@@ -1,4 +1,4 @@
-import { IKrossrDatabase } from "../Database/IKrossrDatabase";
+import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 
 export class LevelsMiddleware {
     constructor(
@@ -17,9 +17,9 @@ export class LevelsMiddleware {
     public levelByID = (req, res, next, id) => {
         let Level = this.db.level;
         let Rating = this.db.rating;
-        var user = req.user;
+        let user = req.user;
 
-        var include = user ?
+        let include = user ?
             [
                 {
                     attributes: ['rating'],
@@ -33,9 +33,9 @@ export class LevelsMiddleware {
 
         Level
             .findOne({
-                include: include,
+                include,
                 where: {
-                    id: id
+                    id
                 }
             }).then((level) => {
                 if (!level) {
