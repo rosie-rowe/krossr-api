@@ -7,20 +7,20 @@ import { IEnvironmentConfiguration } from './env/IEnvironmentConfiguration';
  * Load app configurations
  */
 export class EnvironmentConfiguration {
-	static getConfiguration() {
-		return _.extend(
-			EnvironmentConfigurationDefaults.getDefaults(),
-			EnvironmentConfiguration.getConfig()
-		) as IEnvironmentConfiguration;
-	}
+    static getConfiguration() {
+        return _.extend(
+            EnvironmentConfigurationDefaults.getDefaults(),
+            EnvironmentConfiguration.getConfig()
+        ) as IEnvironmentConfiguration;
+    }
 
-	private static getConfig() {
-		switch (process.env.NODE_ENV) {
-			case 'development':
-				return new DevelopmentEnvironmentConfiguration();
+    private static getConfig() {
+        switch (process.env.NODE_ENV) {
+            case 'development':
+                return new DevelopmentEnvironmentConfiguration();
 
-			default:
-				throw new Error('process.env.NODE_ENV is not a supported environment!');
-		}
-	}
+            default:
+                throw new Error('process.env.NODE_ENV is not a supported environment!');
+        }
+    }
 }
