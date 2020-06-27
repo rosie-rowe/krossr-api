@@ -14,8 +14,6 @@ export class ForgotPasswordController {
 
     // TODO set up mailgun or something and make sure this still works
     public forgot = (req, res, next) => {
-
-
         let config = EnvironmentConfiguration.getConfiguration();
         let User = this.db.user;
 

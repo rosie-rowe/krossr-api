@@ -13,16 +13,6 @@ export class EnvironmentConfigurationDefaults {
             templateEngine: 'swig',
             sessionSecret: 'MEAN',
             sessionCollection: 'sessions',
-            assets: {
-                lib: {
-                    js: [
-                        'public/dist/vendor.bundle-*.js'
-                    ]
-                },
-                js: [
-                    'public/dist/krossr.bundle-*.js'
-                ]
-            },
             mailer: {
                 from: 'support@krossr.com',
                 options: {
