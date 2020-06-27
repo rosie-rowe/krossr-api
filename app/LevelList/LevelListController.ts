@@ -1,7 +1,7 @@
 import { IKrossrDatabase } from "../Database/IKrossrDatabase"
 import { LevelListService } from "./LevelListService";
 import { LevelListQuery } from "./LevelListQuery";
-import { ErrorHandler } from "../Error/errors.server.controller";
+import { ErrorHandler } from "../Error/ErrorHandler";
 
 export class LevelListController {
     private levelListService: LevelListService;

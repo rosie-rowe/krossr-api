@@ -1,4 +1,4 @@
-import { ErrorHandler } from '../Error/errors.server.controller';
+import { ErrorHandler } from '../Error/ErrorHandler';
 import { WinstonConfiguration } from '../../config/winston';
 import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 

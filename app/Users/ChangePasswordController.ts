@@ -1,5 +1,5 @@
 import { IKrossrDatabase } from "../Database/IKrossrDatabase";
-import { ErrorHandler } from "../Error/errors.server.controller";
+import { ErrorHandler } from "../Error/ErrorHandler";
 
 export class ChangePasswordController {
     constructor(

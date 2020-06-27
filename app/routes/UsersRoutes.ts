@@ -4,7 +4,7 @@ import { SignInController } from '../Users/SignInController';
 import { SignOutController } from '../Users/SignOutController';
 import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { SignUpController } from '../Users/SignUpController';
-import { ErrorHandler } from '../Error/errors.server.controller';
+import { ErrorHandler } from '../Error/ErrorHandler';
 import { ChangePasswordController } from '../Users/ChangePasswordController';
 import { ForgotPasswordController } from '../Users/ForgotPasswordController';
 import { ResetPasswordController } from '../Users/ResetPasswordController';

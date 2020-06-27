@@ -5,7 +5,7 @@ import { LevelsMiddleware } from '../Levels/LevelsMiddleware';
 import { LevelsController } from '../Levels/LevelsController';
 import { UsersMiddleware } from '../Users/UsersMiddleware';
 import { RatingsController } from '../Ratings/RatingsController';
-import { ErrorHandler } from '../Error/errors.server.controller';
+import { ErrorHandler } from '../Error/ErrorHandler';
 
 export class LevelsRoutes {
     static configureRoutes(app: express.Application, db: IKrossrDatabase) {

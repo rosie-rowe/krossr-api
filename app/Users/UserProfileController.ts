@@ -1,7 +1,7 @@
 'use strict';
 
 import * as _ from 'lodash';
-import { ErrorHandler } from '../Error/errors.server.controller';
+import { ErrorHandler } from '../Error/ErrorHandler';
 
 export class UserProfileController {
 	constructor(

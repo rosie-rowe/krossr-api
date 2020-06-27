@@ -1,6 +1,6 @@
 import * as async from 'async';
 import { IKrossrDatabase } from "../Database/IKrossrDatabase";
-import { ErrorHandler } from "../Error/errors.server.controller";
+import { ErrorHandler } from "../Error/ErrorHandler";
 import { EnvironmentConfiguration } from '../../config/config';
 
 var nodemailerReset = require('nodemailer'); // TODO
