@@ -1,7 +1,6 @@
 
 import * as passport from 'passport';
-
-let LocalStrategy = require('passport-local').Strategy;
+import { Strategy as LocalStrategy } from 'passport-local';
 
 export class LocalPassportStrategy {
     public static use(db) {
