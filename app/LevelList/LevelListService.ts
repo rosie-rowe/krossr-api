@@ -16,12 +16,12 @@ export class LevelListService {
         let User = this.db.user;
         let Sequelize = this.db.Sequelize;
 
-        let pageNum = query.pageNum,
-            sizeRestriction = query.sizeRestriction,
-            searchText = query.searchText,
-            sortBy = query.sortBy || '"createdAt"',
-            sortDirection = query.sortDirection || 'ASC',
-            numPerPage = query.numPerPage;
+        let pageNum = query.pageNum;
+        let sizeRestriction = query.sizeRestriction;
+        let searchText = query.searchText;
+        let sortBy = query.sortBy || '"createdAt"';
+        let sortDirection = query.sortDirection || 'ASC';
+        let numPerPage = query.numPerPage;
 
         let whereBuilder: any = {
             id: {
@@ -29,8 +29,11 @@ export class LevelListService {
             }
         };
 
-        /* This may be able to be done better, but hey. Include the average rating of a level with the levels query,
-         * rather than every ratings object for that level. Also, exclude levels without average ratings if ratings are being filtered upon */
+        /**
+         * This may be able to be done better, but hey. Include the average rating of a level with the levels query,
+         * rather than every ratings object for that level.
+         * Also, exclude levels without average ratings if ratings are being filtered upon
+         */
         let baseRatingQuery = '(SELECT AVG("ratings"."rating") FROM "ratings" WHERE "ratings"."levelId" = "level"."id")';
         let ratingQuery = Sequelize.literal(baseRatingQuery);
         let ratingTest = Sequelize.literal(baseRatingQuery + ' IS NOT NULL');

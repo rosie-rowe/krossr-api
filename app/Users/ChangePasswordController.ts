@@ -31,8 +31,8 @@ export class ChangePasswordController {
                             if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
                                 user.hashedPassword = user.encryptPassword(passwordDetails.newPassword, user.salt);
 
-                                user.save().then(function() {
-                                    req.login(user, function(err) {
+                                user.save().then(() => {
+                                    req.login(user, (err) => {
                                         if (err) {
                                             res.status(400).send(err);
                                         } else {

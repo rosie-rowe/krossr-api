@@ -7,21 +7,17 @@ import { UsersRoutes } from '../app/Routes/UsersRoutes';
 import { IKrossrDatabase } from '../app/Database/IKrossrDatabase';
 import { LevelsRoutes } from '../app/Routes/LevelsRoutes';
 let config = EnvironmentConfiguration.getConfiguration();
-
-/**
- * Module dependencies.
- */
-let morgan = require('morgan'),
-    bodyParser = require('body-parser'),
-    session = require('express-session'),
-    compress = require('compression'),
-    methodOverride = require('method-override'),
-    cookieParser = require('cookie-parser'),
-    helmet = require('helmet'),
-    SequelizeStore = require('connect-session-sequelize')(session.Store),
-    flash = require('connect-flash'),
-    consolidate = require('consolidate'),
-    winston = require('winston');
+let morgan = require('morgan');
+let bodyParser = require('body-parser');
+let session = require('express-session');
+let compress = require('compression');
+let methodOverride = require('method-override');
+let cookieParser = require('cookie-parser');
+let helmet = require('helmet');
+let SequelizeStore = require('connect-session-sequelize')(session.Store);
+let flash = require('connect-flash');
+let consolidate = require('consolidate');
+let winston = require('winston');
 
 export class ExpressConfiguration {
     static configure(db: IKrossrDatabase): express.Application {
@@ -31,7 +27,7 @@ export class ExpressConfiguration {
         let app = express();
 
         // Passing the request url to environment locals
-        app.use(function(req, res, next) {
+        app.use((req, res, next) => {
             res.locals.url = req.protocol + '://' + req.headers.host + req.url;
             next();
         });
@@ -109,7 +105,7 @@ export class ExpressConfiguration {
         UsersRoutes.configureRoutes(app, db);
 
         // Assume 404 since no middleware responded
-        app.use(function(req, res) {
+        app.use((req, res) => {
             // let Angular handle it
             // this needs to maintain the route, TODO
             res.redirect('/');

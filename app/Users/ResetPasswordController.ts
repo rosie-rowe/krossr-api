@@ -25,7 +25,7 @@ export class ResetPasswordController {
                     $gt: Date.now()
                 }
             }
-        }).then(function(user) {
+        }).then((user) => {
             // todo these redirects suck
             if (!user) {
                 return res.redirect('/password/reset/invalid');
@@ -47,7 +47,7 @@ export class ResetPasswordController {
         let passwordDetails = req.body;
 
         async.waterfall([
-            function(done) {
+            (done) => {
                 User.findOne({
                     where: {
                         resetPasswordToken: req.params.token,
@@ -67,8 +67,8 @@ export class ResetPasswordController {
 
                             user.setPassword(passwordDetails.newPassword);
 
-                            user.save().then(function() {
-                                req.login(user, function(err) {
+                            user.save().then(() => {
+                                req.login(user, (err) => {
                                     if (err) {
                                         res.status(400).send(err);
                                     } else {
@@ -91,16 +91,16 @@ export class ResetPasswordController {
                     }
                 });
             },
-            function(user, done) {
+            (user, done) => {
                 res.render('templates/reset-password-confirm-email', {
                     name: user.username,
                     appName: config.app.title
-                }, function(err, emailHTML) {
+                }, (err, emailHTML) => {
                     done(err, emailHTML, user);
                 });
             },
             // If valid email, send reset email using service
-            function(emailHTML, user, done) {
+            (emailHTML, user, done) => {
                 let smtpTransport = nodemailerReset.createTransport(config.mailer.options);
                 let mailOptions = {
                     to: user.email,
@@ -109,11 +109,11 @@ export class ResetPasswordController {
                     html: emailHTML
                 };
 
-                smtpTransport.sendMail(mailOptions, function(err) {
+                smtpTransport.sendMail(mailOptions, (err) => {
                     done(err, 'done');
                 });
             }
-        ], function(err) {
+        ], (err) => {
             if (err) { return next(err); }
         });
     }

@@ -22,7 +22,7 @@ export class RatingsController {
             defaults: {
                 rating: rating.rating
             }
-        }).spread(function(result, created) {
+        }).spread((result, created) => {
             if (!created) {
                 return Rating.update({
                     rating: rating.rating
@@ -31,7 +31,7 @@ export class RatingsController {
                         userId: user.id,
                         levelId: level.id
                     }
-                }).then(function() {
+                }).then(() => {
                     res.jsonp(level);
                 }).catch(function(err) {
                     return res.status(500).send({

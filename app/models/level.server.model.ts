@@ -62,7 +62,7 @@ module.exports = (sequelize, Sequelize) => {
         }
 
         let converted = Array.prototype.concat.apply([], this.layout) // flatten
-                                        .map(function(value) { return value ? '1' : '0'; })
+                                        .map((value) => value ? '1' : '0')
                                         .join('');
 
         this.layout = btoa(converted);

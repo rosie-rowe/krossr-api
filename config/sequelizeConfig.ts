@@ -30,13 +30,13 @@ export class SequelizeConfiguration {
 
         // loop through all files in models directory ignoring hidden files and this file
         fs.readdirSync(modelsDir)
-            .filter(function(file) {
+            .filter(file => {
                 return (file.indexOf('.') !== 0) && (file !== 'index.js');
             })
             // use js output, not ts input
             .map((file: string) => file.substring(0, file.length - 2) + 'js')
             // import model files and save model names
-            .forEach(function(file) {
+            .forEach((file) => {
                 winston.info('Loading model file ' + file);
                 let fullPath = path.join(modelsDir, file);
                 winston.info('Full path: ' + fullPath);
@@ -49,7 +49,7 @@ export class SequelizeConfiguration {
         winston.info('Invoking associations...');
 
         // invoke associations on each of the models
-        Object.keys(db).forEach(function(modelName) {
+        Object.keys(db).forEach((modelName) => {
             if (db[modelName].options.hasOwnProperty('associate')) {
                 db[modelName].options.associate(db);
             }
@@ -66,9 +66,9 @@ export class SequelizeConfiguration {
                 force: config.forceDbSync,
                 logging: config.enableSequelizeLog === 'true' ? winston.verbose : false
             })
-            .then(function() {
+            .then(() => {
                 winston.info('Database ' + (config.forceDbSync ? '*DROPPED* and ' : '') + 'synchronized');
-            }).catch(function(err) {
+            }).catch(err => {
                 winston.error('An error occurred: ', err);
             });
 

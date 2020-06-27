@@ -9,7 +9,7 @@ export class LocalPassportStrategy {
 
         // Use local strategy
         passport.use(new LocalStrategy(
-            function(username, password, done) {
+            (username, password, done) => {
                 User.findOne({
                     where: {
                         username

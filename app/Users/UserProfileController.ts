@@ -26,8 +26,8 @@ export class UserProfileController {
                 email: req.body.email
             });
 
-            user.save().then(function() {
-                req.login(user, function(err) {
+            user.save().then(() => {
+                req.login(user, (err) => {
                     if (err) {
                         res.status(400).send(err);
                     } else {

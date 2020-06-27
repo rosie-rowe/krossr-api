@@ -9,20 +9,20 @@ export class PassportConfiguration {
 
         // Serialize sessions
         // TODO typing
-        passport.serializeUser(function(user: any, done) {
+        passport.serializeUser((user: any, done) => {
             done(null, user.id);
         });
 
         // Deserialize sessions
-        passport.deserializeUser(function(id, done) {
+        passport.deserializeUser((id, done) => {
             User.findOne({
                 exclude: ['salt', 'password'],
                 where: {
                     id
                 }
-            }).then(function(user) {
+            }).then((user) => {
                 done(null, user);
-            }).catch(function(err) {
+            }).catch((err) => {
                 done(err);
             });
         });

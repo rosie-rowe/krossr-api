@@ -2,7 +2,7 @@
 
 let cryptoUser = require('crypto'); // renamed to avoid scope issues for now, TODO
 
-module.exports = function(sequelize, Sequelize) {
+module.exports = (sequelize, Sequelize) => {
     let user = sequelize.define('user', {
         email: {
             allowNull: false,
@@ -38,7 +38,7 @@ module.exports = function(sequelize, Sequelize) {
         return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
     };
 
-    user.prototype.encryptPassword = function(password, salt) {
+    user.prototype.encryptPassword = (password, salt) => {
         if (!password || !salt) {
             return '';
         }
@@ -46,7 +46,7 @@ module.exports = function(sequelize, Sequelize) {
         return cryptoUser.pbkdf2Sync(password, salt, 10000, 64, null).toString('base64');
     };
 
-    user.prototype.makeSalt = function() {
+    user.prototype.makeSalt = () => {
         return cryptoUser.randomBytes(16).toString('base64');
     };
 

@@ -21,14 +21,14 @@ export class ForgotPasswordController {
 
         async.waterfall([
             // Generate random token
-            function(done) {
-                cryptoForgot.randomBytes(20, function(err, buffer) {
+            (done) => {
+                cryptoForgot.randomBytes(20, (err, buffer) => {
                     let token = buffer.toString('hex');
                     done(err, token);
                 });
             },
             // Lookup user by username
-            function(token, done) {
+            (token, done) => {
                 if (req.body.username) {
                     User.findOne({
                         attributes: {
@@ -37,7 +37,7 @@ export class ForgotPasswordController {
                         where: {
                             username: req.body.username
                         }
-                    }).then(function(user) {
+                    }).then((user) => {
                         if (!user) {
                             return res.status(400).send({
                                 message: 'Username not found'
@@ -50,9 +50,9 @@ export class ForgotPasswordController {
                             user.resetPasswordToken = token;
                             user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
-                            user.save().then(function() {
+                            user.save().then(() => {
                                 done(null, token, user);
-                            }).catch(function(err) {
+                            }).catch((err) => {
                                 done(err);
                             });
                         }
@@ -63,18 +63,18 @@ export class ForgotPasswordController {
                     });
                 }
             },
-            function(token, user, done) {
+            (token, user, done) => {
                 // TODO
                 res.render('templates/reset-password-email', {
                     name: user.username,
                     appName: config.app.title,
                     url: 'http://' + req.headers.host + '/auth/reset/' + token
-                }, function(err, emailHTML) {
+                }, (err, emailHTML) => {
                     done(err, emailHTML, user);
                 });
             },
             // If valid email, send reset email using service
-            function(emailHTML, user, done) {
+            (emailHTML, user, done) => {
                 let smtpTransport = nodemailerForgot.createTransport(config.mailer.options);
                 let mailOptions = {
                     to: user.email,
@@ -82,7 +82,7 @@ export class ForgotPasswordController {
                     subject: 'Password Reset',
                     html: emailHTML
                 };
-                smtpTransport.sendMail(mailOptions, function(err) {
+                smtpTransport.sendMail(mailOptions, (err) => {
                     if (!err) {
                         res.send({
                             message: 'Email sent!'
@@ -92,7 +92,7 @@ export class ForgotPasswordController {
                     done(err);
                 });
             }
-        ], function(err) {
+        ], (err) => {
             if (err) { return next(err); }
         });
     }

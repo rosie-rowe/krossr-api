@@ -15,7 +15,7 @@ export class LevelsController {
         let Level = this.db.level;
         req.body.userId = req.user.id;
 
-        Level.create(req.body).then(function(level) {
+        Level.create(req.body).then((level) => {
             if (!level) {
                 return res.status(500).send({
                     message: 'There was a problem creating the level'
@@ -23,7 +23,7 @@ export class LevelsController {
             } else {
                 return res.jsonp(level);
             }
-        }).catch(function(err) {
+        }).catch((err) => {
             return res.status(500).send({
                 message: this.errorHandler.getErrorMessage(err)
             });
@@ -36,7 +36,7 @@ export class LevelsController {
     public delete = (req, res) => {
         let level = req.level;
 
-        level.destroy().then(function() {
+        level.destroy().then(() => {
             return res.jsonp(level);
         }).catch(function(err) {
             return res.status(500).send({

@@ -2,13 +2,13 @@ import * as passport from 'passport';
 
 export class SignInController {
     public signIn = (req, res, next) => {
-        passport.authenticate('local', function(err, user, info) {
+        passport.authenticate('local', (err, user, info) => {
             if (err || !user) {
                 res.status(400).send(info);
             } else {
                 user.removeSensitiveInfo();
 
-                req.login(user, function(err) {
+                req.login(user, (err) => {
                     if (err) {
                         res.status(400).send(err);
                     } else {
