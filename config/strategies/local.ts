@@ -1,11 +1,10 @@
 
 import * as passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
+import { User } from '../../app/models/UserModel';
 
 export class LocalPassportStrategy {
-    public static use(db) {
-        let User = db.user;
-
+    public static use() {
         // Use local strategy
         passport.use(new LocalStrategy(
             (username, password, done) => {

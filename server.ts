@@ -19,7 +19,7 @@ let db = SequelizeConfiguration.initialize();
 let app = ExpressConfiguration.configure(db);
 
 // Bootstrap passport config
-PassportConfiguration.configure(db);
+PassportConfiguration.configure();
 
 // Start the app by listening on <port>
 app.listen(config.port, config.ipaddr);

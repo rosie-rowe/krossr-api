@@ -2,11 +2,10 @@
 
 import { LocalPassportStrategy } from './strategies/local';
 import * as passport from 'passport';
+import { User } from '../app/models/UserModel';
 
 export class PassportConfiguration {
-    static configure(db) {
-        let User = db.user;
-
+    static configure() {
         // Serialize sessions
         // TODO typing
         passport.serializeUser((user: any, done) => {
@@ -16,7 +15,9 @@ export class PassportConfiguration {
         // Deserialize sessions
         passport.deserializeUser((id, done) => {
             User.findOne({
-                exclude: ['salt', 'password'],
+                attributes: {
+                    exclude: ['salt', 'password'],
+                },
                 where: {
                     id
                 }
@@ -27,6 +28,6 @@ export class PassportConfiguration {
             });
         });
 
-        LocalPassportStrategy.use(db);
+        LocalPassportStrategy.use();
     }
 }
