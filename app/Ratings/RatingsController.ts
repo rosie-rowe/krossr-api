@@ -21,7 +21,6 @@ export class RatingsController {
                 userId: user.id
             }
         }).then((value) => {
-            let rating = value[0];
             let created = value[1];
 
             if (!created) {

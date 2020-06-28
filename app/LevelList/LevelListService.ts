@@ -57,7 +57,6 @@ export class LevelListService {
                     association: Level.associations.user,
                     attributes: ['username']
                 }
-                // Level.associations.ratings
             ],
             where: {
                 [Op.and]: isRating ? [whereBuilder, ratingTest] : whereBuilder
