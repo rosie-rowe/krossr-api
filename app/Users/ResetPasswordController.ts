@@ -1,13 +1,12 @@
 import * as async from 'async';
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { EnvironmentConfiguration } from '../../config/config';
+import { User } from '../models/UserModel';
 
 let nodemailerReset = require('nodemailer'); // TODO
 
 export class ResetPasswordController {
     constructor(
-        private db: IKrossrDatabase,
         private errorHandler: ErrorHandler
     ) {
     }
@@ -16,8 +15,6 @@ export class ResetPasswordController {
      * Reset password GET from email token
      */
     public validateResetToken = (req, res) => {
-        let User = this.db.user;
-
         User.findOne({
             where: {
                 resetPasswordToken: req.params.token,
@@ -42,7 +39,6 @@ export class ResetPasswordController {
     // TODO refactor
     public reset = (req, res, next) => {
         let config = EnvironmentConfiguration.getConfiguration();
-        let User = this.db.user;
         // Init Variables
         let passwordDetails = req.body;
 

@@ -1,11 +1,6 @@
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
+import { Level } from '../models/LevelModel';
 
 export class LevelsMiddleware {
-    constructor(
-        private db: IKrossrDatabase
-    ) {
-    }
-
     public hasAuthorization = (req, res, next) => {
         if (req.level.userId !== req.user.id) {
             return res.status(403).send('User is not authorized');
@@ -15,15 +10,13 @@ export class LevelsMiddleware {
     }
 
     public levelByID = (req, res, next, id) => {
-        let Level = this.db.level;
-        let Rating = this.db.rating;
         let user = req.user;
 
         let include = user ?
             [
                 {
+                    associaton: [Level.associations.ratings],
                     attributes: ['rating'],
-                    model: Rating,
                     required: false,
                     where: {
                         userId: user.id
@@ -31,19 +24,18 @@ export class LevelsMiddleware {
                 }
             ] : null;
 
-        Level
-            .findOne({
-                include,
-                where: {
-                    id
-                }
-            }).then((level) => {
-                if (!level) {
-                    return next(new Error('Failed to load level ' + id));
-                } else {
-                    req.level = level;
-                    return next();
-                }
-            });
+        Level.findOne({
+            include,
+            where: {
+                id
+            }
+        }).then((level) => {
+            if (!level) {
+                return next(new Error('Failed to load level ' + id));
+            } else {
+                req.level = level;
+                return next();
+            }
+        });
     }
 }

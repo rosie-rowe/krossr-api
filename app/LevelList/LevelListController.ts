@@ -1,4 +1,3 @@
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { LevelListService } from './LevelListService';
 import { LevelListQuery } from './LevelListQuery';
 import { ErrorHandler } from '../Error/ErrorHandler';
@@ -7,10 +6,9 @@ export class LevelListController {
     private levelListService: LevelListService;
 
     constructor(
-        db: IKrossrDatabase,
         private errorHandler: ErrorHandler
     ) {
-        this.levelListService = new LevelListService(db);
+        this.levelListService = new LevelListService();
     }
 
     public paginate = (req, res) => {

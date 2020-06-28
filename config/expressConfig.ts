@@ -101,8 +101,8 @@ export class ExpressConfiguration {
         app.use(helmet.ienoopen());
         app.disable('x-powered-by');
 
-        LevelsRoutes.configureRoutes(app, db);
-        UsersRoutes.configureRoutes(app, db);
+        LevelsRoutes.configureRoutes(app);
+        UsersRoutes.configureRoutes(app);
 
         // Assume 404 since no middleware responded
         app.use((req, res) => {

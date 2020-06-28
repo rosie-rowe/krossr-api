@@ -1,5 +1,4 @@
 import * as express from 'express';
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { LevelListController } from '../LevelList/LevelListController';
 import { LevelsMiddleware } from '../Levels/LevelsMiddleware';
 import { LevelsController } from '../Levels/LevelsController';
@@ -8,13 +7,13 @@ import { RatingsController } from '../Ratings/RatingsController';
 import { ErrorHandler } from '../Error/ErrorHandler';
 
 export class LevelsRoutes {
-    static configureRoutes(app: express.Application, db: IKrossrDatabase) {
+    static configureRoutes(app: express.Application) {
         // TODO dependency injection
         let errorHandler = new ErrorHandler();
-        let levelListController = new LevelListController(db, errorHandler);
-        let levelsController = new LevelsController(db, errorHandler);
-        let ratingsController = new RatingsController(db);
-        let levelsMiddleware = new LevelsMiddleware(db);
+        let levelListController = new LevelListController(errorHandler);
+        let levelsController = new LevelsController(errorHandler);
+        let ratingsController = new RatingsController();
+        let levelsMiddleware = new LevelsMiddleware();
         let usersMiddleware = new UsersMiddleware();
 
         // Levels Routes

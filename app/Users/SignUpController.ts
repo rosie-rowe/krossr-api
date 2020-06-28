@@ -1,19 +1,16 @@
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { WinstonConfiguration } from '../../config/winston';
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
+import { User } from '../models/UserModel';
 
 let winston = WinstonConfiguration.initialize();
 
 export class SignUpController {
     constructor(
-        private db: IKrossrDatabase,
         private errorHandler: ErrorHandler
     ) {
     }
 
     public signUp = (req, res) => {
-        let User = this.db.user;
-
         // Init Variables
         let user = User.build(req.body);
 

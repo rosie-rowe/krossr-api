@@ -2,7 +2,6 @@ import * as express from 'express';
 import { UserProfileController } from '../Users/UserProfileController';
 import { SignInController } from '../Users/SignInController';
 import { SignOutController } from '../Users/SignOutController';
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { SignUpController } from '../Users/SignUpController';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { ChangePasswordController } from '../Users/ChangePasswordController';
@@ -14,12 +13,12 @@ export class UsersRoutes {
     private static signInController = new SignInController();
     private static signOutController = new SignOutController();
 
-    static configureRoutes(app: express.Application, db: IKrossrDatabase) {
+    static configureRoutes(app: express.Application) {
         let userProfileController = new UserProfileController(this.errorHandler);
-        let signUpController = new SignUpController(db, this.errorHandler);
-        let changePasswordController = new ChangePasswordController(db, this.errorHandler);
-        let forgotPasswordController = new ForgotPasswordController(db);
-        let resetPasswordController = new ResetPasswordController(db, this.errorHandler);
+        let signUpController = new SignUpController(this.errorHandler);
+        let changePasswordController = new ChangePasswordController(this.errorHandler);
+        let forgotPasswordController = new ForgotPasswordController();
+        let resetPasswordController = new ResetPasswordController(this.errorHandler);
 
         // Setting up the users profile api
         app.route('/users/me').get(userProfileController.me);

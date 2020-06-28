@@ -1,13 +1,13 @@
 'use strict';
 
-let fs = require('fs');
-
 import * as _ from 'lodash';
-import * as path from 'path';
 import { WinstonConfiguration } from './winston';
 import { Sequelize } from 'sequelize';
 import { EnvironmentConfiguration } from './config';
 import * as sequelize from 'sequelize';
+import { UserConfiguration } from '../app/models/UserModel';
+import { LevelConfiguration } from '../app/models/LevelModel';
+import { RatingConfiguration } from '../app/models/RatingModel';
 
 let config = EnvironmentConfiguration.getConfiguration();
 let winston = WinstonConfiguration.initialize();
@@ -18,9 +18,6 @@ export class SequelizeConfiguration {
 
         winston.info('Initializing Sequelize...');
 
-        let rootPath = path.normalize(__dirname);
-        let modelsDir = rootPath + '/models';
-
         // create your instance of sequelize
         let sequelize = new Sequelize(config.db.name, config.db.username, config.db.password, {
             host: config.db.host,
@@ -28,32 +25,18 @@ export class SequelizeConfiguration {
             dialect: 'postgres'
         });
 
-        // loop through all files in models directory ignoring hidden files and this file
-        fs.readdirSync(modelsDir)
-            .filter(file => {
-                return (file.indexOf('.') !== 0) && (file !== 'index.js');
-            })
-            // import model files and save model names
-            .forEach((file) => {
-                winston.info('Loading model file ' + file);
-                let fullPath = path.join(modelsDir, file);
-                winston.info('Full path: ' + fullPath);
-                let model = sequelize.import(fullPath);
+        let modelConfigs = [
+            RatingConfiguration,
+            UserConfiguration,
+            LevelConfiguration
+        ];
 
-                winston.info('Model name: ' + model.name);
-                db[model.name] = model;
-            });
-
-        winston.info('Invoking associations...');
-
-        // invoke associations on each of the models
-        Object.keys(db).forEach((modelName) => {
-            if (db[modelName].options.hasOwnProperty('associate')) {
-                db[modelName].options.associate(db);
-            }
+        modelConfigs.forEach((c) => {
+            c.init(sequelize);
         });
 
-        winston.info('Assocations invoked. Synchronizing database...');
+        winston.info('Models initialized!');
+
 
         // Synchronizing any model changes with database.
         // set FORCE_DB_SYNC=true in the environment, or the program parameters to drop the database,

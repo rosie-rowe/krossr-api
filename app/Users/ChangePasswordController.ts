@@ -1,16 +1,13 @@
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { ErrorHandler } from '../Error/ErrorHandler';
+import { User } from '../models/UserModel';
 
 export class ChangePasswordController {
     constructor(
-        private db: IKrossrDatabase,
         private errorHandler: ErrorHandler
     ) {
     }
 
     public changePassword = async (req, res) => {
-        let User = this.db.user;
-
         // Init Variables
         let passwordDetails = req.body;
 

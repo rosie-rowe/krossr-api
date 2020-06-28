@@ -1,21 +1,10 @@
 import { LevelListQuery } from './LevelListQuery';
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
-import { Op } from 'sequelize';
+import { Sequelize, Op } from 'sequelize';
+import { Level } from '../models/LevelModel';
 
 export class LevelListService {
-    private db: IKrossrDatabase;
-
-    constructor(db: IKrossrDatabase) {
-        this.db = db;
-    }
-
     // This can be done WAY better, todo
     public getList(query: LevelListQuery) {
-        let Level = this.db.level;
-        let Rating = this.db.rating;
-        let User = this.db.user;
-        let Sequelize = this.db.Sequelize;
-
         let pageNum = query.pageNum;
         let sizeRestriction = query.sizeRestriction;
         let searchText = query.searchText;
@@ -65,14 +54,10 @@ export class LevelListService {
             },
             include: [
                 {
-                    model: Rating,
-                    attributes: []
+                    association: Level.associations.user,
+                    attributes: ['username']
                 },
-                {
-                    model: User,
-                    attributes: ['username'],
-                    required: true
-                }
+                Level.associations.ratings
             ],
             where: {
                 [Op.and]: isRating ? [whereBuilder, ratingTest] : whereBuilder

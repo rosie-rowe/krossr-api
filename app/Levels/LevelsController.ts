@@ -1,9 +1,8 @@
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { ErrorHandler } from '../Error/ErrorHandler';
+import { Level } from '../models/LevelModel';
 
 export class LevelsController {
     constructor(
-        private db: IKrossrDatabase,
         private errorHandler: ErrorHandler
     ) {
     }
@@ -12,7 +11,6 @@ export class LevelsController {
      * Create a Level
      */
     public create = (req, res) => {
-        let Level = this.db.level;
         req.body.userId = req.user.id;
 
         Level.create(req.body).then((level) => {

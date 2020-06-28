@@ -1,21 +1,15 @@
 import * as async from 'async';
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
 import { EnvironmentConfiguration } from '../../config/config';
+import { User } from '../models/UserModel';
 
 // TODO use types/import
 let nodemailerForgot = require('nodemailer');
 let cryptoForgot = require('crypto');
 
 export class ForgotPasswordController {
-    constructor(
-        private db: IKrossrDatabase
-    ) {
-    }
-
     // TODO set up mailgun or something and make sure this still works
     public forgot = (req, res, next) => {
         let config = EnvironmentConfiguration.getConfiguration();
-        let User = this.db.user;
 
         async.waterfall([
             // Generate random token
@@ -46,7 +40,11 @@ export class ForgotPasswordController {
                             });
                         } else {
                             user.resetPasswordToken = token;
-                            user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+                            // todo utc (moment?) after getting db working again
+                            let now = new Date();
+                            now.setHours(now.getHours() + 1); // add 1 hour
+                            user.resetPasswordExpires = now;
 
                             user.save().then(() => {
                                 done(null, token, user);

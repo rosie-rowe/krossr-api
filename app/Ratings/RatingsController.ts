@@ -1,14 +1,10 @@
-import { IKrossrDatabase } from '../Database/IKrossrDatabase';
+import { Rating } from '../models/RatingModel';
 
 export class RatingsController {
-    constructor(private db: IKrossrDatabase) {
-    }
-
     /**
      * Add or replace a Rating. Each user should only be able to have one rating for each level.
      */
     public upsertRating = (req, res) => {
-        let Rating = this.db.rating;
         let level = req.level;
         let user = req.user;
         let rating = Rating.build(req.body);
@@ -20,9 +16,14 @@ export class RatingsController {
                 levelId: level.id
             },
             defaults: {
-                rating: rating.rating
+                rating: rating.rating,
+                levelId: level.id,
+                userId: user.id
             }
-        }).spread((result, created) => {
+        }).then((value) => {
+            let rating = value[0];
+            let created = value[1];
+
             if (!created) {
                 return Rating.update({
                     rating: rating.rating
