@@ -49,16 +49,16 @@ export class LevelListService {
         }
 
         return Level.findAndCountAll({
-            attributes: {
-                include: [[ratingQuery, 'avgRating']]
-            },
-            include: [
-                {
-                    association: Level.associations.user,
-                    attributes: ['username']
-                },
-                Level.associations.ratings
-            ],
+            // attributes: {
+            //     include: [[ratingQuery, 'avgRating']]
+            // },
+            // include: [
+            //     {
+            //         association: Level.associations.user,
+            //         attributes: ['username']
+            //     },
+            //     Level.associations.ratings
+            // ],
             where: {
                 [Op.and]: isRating ? [whereBuilder, ratingTest] : whereBuilder
             },
