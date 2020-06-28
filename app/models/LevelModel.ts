@@ -100,8 +100,8 @@ export class LevelConfiguration {
         });
 
         Level.hasOne(User, {
-            sourceKey: 'id',
-            foreignKey: 'userId',
+            sourceKey: 'userId',
+            foreignKey: 'id',
             as: 'user'
         });
 

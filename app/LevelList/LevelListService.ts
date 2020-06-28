@@ -52,13 +52,13 @@ export class LevelListService {
             // attributes: {
             //     include: [[ratingQuery, 'avgRating']]
             // },
-            // include: [
-            //     {
-            //         association: Level.associations.user,
-            //         attributes: ['username']
-            //     },
-            //     Level.associations.ratings
-            // ],
+            include: [
+                {
+                    association: Level.associations.user,
+                    attributes: ['username']
+                }
+                // Level.associations.ratings
+            ],
             where: {
                 [Op.and]: isRating ? [whereBuilder, ratingTest] : whereBuilder
             },
