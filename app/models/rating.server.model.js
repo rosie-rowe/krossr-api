@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = function(sequelize, Sequelize) {
-    var rating = sequelize.define('rating', {
+module.exports = (sequelize, Sequelize) => {
+    let rating = sequelize.define('rating', {
         rating: {
             type: Sequelize.INTEGER,
             validate: {
@@ -10,7 +10,7 @@ module.exports = function(sequelize, Sequelize) {
         }
     },
     {
-        associate: function(models) {
+        associate(models) {
             rating.belongsTo(models.level);
             rating.belongsTo(models.user);
         }

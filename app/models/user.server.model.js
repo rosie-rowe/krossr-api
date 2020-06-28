@@ -1,9 +1,9 @@
 'use strict';
 
-var crypto = require('crypto');
+let cryptoUser = require('crypto'); // renamed to avoid scope issues for now, TODO
 
-module.exports = function(sequelize, Sequelize) {
-    var user = sequelize.define('user', {
+module.exports = (sequelize, Sequelize) => {
+    let user = sequelize.define('user', {
         email: {
             allowNull: false,
             type: Sequelize.STRING,
@@ -28,7 +28,7 @@ module.exports = function(sequelize, Sequelize) {
     },
     {
         timestamps: true,
-        associate: function(models) {
+        associate(models) {
             user.hasMany(models.level);
             user.hasMany(models.rating);
         }
@@ -36,40 +36,40 @@ module.exports = function(sequelize, Sequelize) {
 
     user.prototype.authenticate = function(plainText) {
         return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
-    }
+    };
 
-    user.prototype.encryptPassword = function(password, salt) {
+    user.prototype.encryptPassword = (password, salt) => {
         if (!password || !salt) {
             return '';
         }
         salt = new Buffer(salt, 'base64');
-        return crypto.pbkdf2Sync(password, salt, 10000, 64, null).toString('base64');
-    }
+        return cryptoUser.pbkdf2Sync(password, salt, 10000, 64, null).toString('base64');
+    };
 
-    user.prototype.makeSalt = function () {
-        return crypto.randomBytes(16).toString('base64'); 
-    }
+    user.prototype.makeSalt = () => {
+        return cryptoUser.randomBytes(16).toString('base64');
+    };
 
     user.prototype.removeSensitiveInfo = function() {
         this.password = null;
         this.salt = null;
-    }
+    };
 
     user.prototype.toJSON = function() {
-        var values = this.get();
+        let values = this.get();
         delete values.hashedPassword;
         delete values.salt;
         return values;
-    }
+    };
 
     user.prototype.setPassword = function(newPassword) {
         this.provider = 'local';
         this.salt = this.makeSalt();
         this.hashedPassword = this.encryptPassword(newPassword, this.salt);
-    }
+    };
 
 
     return user;
 };
 
- 
+

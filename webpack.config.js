@@ -1,28 +1,44 @@
 'use strict';
 
 var path = require('path');
+var nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const { EnvironmentPlugin } = require('webpack');
 
 var config = {
     devtool: 'source-map',
     entry: {
-        'krossr': 'app.ts'
+        'server': './server.ts'
+    },
+    externals: [
+        nodeExternals(),
+        { fs: 'commonjs fs' }
+    ],
+    mode: 'development',
+    node: {
+        __dirname: false
     },
     output: {
-        path: path.join(__dirname + '/public/dist'),
-        filename: '[name].bundle-[hash].js'
+        path: path.join(__dirname + '/dist'),
+        filename: '[name].js'
     },
     optimization: {
         minimize: false
     },
     plugins: [
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new CopyPlugin({
+            patterns: [
+                { from: 'app/models', to: 'models' },
+                { from: 'app/views', to: 'views' }
+            ]
+        }),
+        new EnvironmentPlugin(['SESSION_SECRET'])
     ],
     resolve: {
         modules: [
-            'node_modules',
-            'public/modules',
-            'public/ng-app'
+            'node_modules'
         ],
         extensions: [
             '.ts',
@@ -40,23 +56,6 @@ var config = {
                 test: /\.html$/,
                 exclude: /node_modules/,
                 loader: 'html-loader?minimize=false' // Angular attributes require correct case...
-            },
-            /** Mixed usage of scss/less loaders will be fixed later, TODO */
-            {
-                test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader'
-                ]
-            },
-            {
-                test: /\.less$/,
-                use: [
-                    'to-string-loader',
-                    'css-loader',
-                    'less-loader'
-                ]
             }
         ]
     }
