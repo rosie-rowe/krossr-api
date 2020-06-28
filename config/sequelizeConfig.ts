@@ -18,8 +18,8 @@ export class SequelizeConfiguration {
 
         winston.info('Initializing Sequelize...');
 
-        let rootPath = path.normalize(__dirname + '/..');
-        let modelsDir = rootPath + '/app/models';
+        let rootPath = path.normalize(__dirname);
+        let modelsDir = rootPath + '/models';
 
         // create your instance of sequelize
         let sequelize = new Sequelize(config.db.name, config.db.username, config.db.password, {
@@ -33,8 +33,6 @@ export class SequelizeConfiguration {
             .filter(file => {
                 return (file.indexOf('.') !== 0) && (file !== 'index.js');
             })
-            // use js output, not ts input
-            .map((file: string) => file.substring(0, file.length - 2) + 'js')
             // import model files and save model names
             .forEach((file) => {
                 winston.info('Loading model file ' + file);
