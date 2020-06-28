@@ -52,14 +52,6 @@ export class RatingConfiguration {
             sequelize
         });
 
-        // Rating.belongsTo(User, {
-        //     foreignKey: 'userId',
-        //     as: 'ratings'
-        // });
-
-        // Rating.belongsTo(Level, {
-        //     foreignKey: 'ratingId',
-        //     as: 'ratings'
-        // });
+        // maybe todo belongsTo on User and Level
     }
 }

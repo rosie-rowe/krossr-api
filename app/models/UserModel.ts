@@ -92,14 +92,6 @@ export class UserConfiguration {
             sequelize
         });
 
-        // User.hasMany(Rating, {
-        //     sourceKey: 'userId',
-        //     as: 'ratings'
-        // });
-
-        // User.hasMany(Level, {
-        //     sourceKey: 'userId',
-        //     as: 'levels'
-        // });
+        // todo hasMany on Rating and Level
     }
 }
