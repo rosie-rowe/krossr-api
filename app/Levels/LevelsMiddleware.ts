@@ -1,4 +1,5 @@
 import { Level } from '../models/LevelModel';
+import { IncludeOptions } from 'sequelize/types';
 
 export class LevelsMiddleware {
     public hasAuthorization = (req, res, next) => {
@@ -15,13 +16,13 @@ export class LevelsMiddleware {
         let include = user ?
             [
                 {
-                    associaton: [Level.associations.ratings],
+                    association: Level.associations.ratings,
                     attributes: ['rating'],
                     required: false,
                     where: {
                         userId: user.id
                     }
-                }
+                } as IncludeOptions
             ] : null;
 
         Level.findOne({

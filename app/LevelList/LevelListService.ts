@@ -23,7 +23,7 @@ export class LevelListService {
          * rather than every ratings object for that level.
          * Also, exclude levels without average ratings if ratings are being filtered upon
          */
-        let baseRatingQuery = '(SELECT AVG("ratings"."rating") FROM "ratings" WHERE "ratings"."levelId" = "level"."id")';
+        let baseRatingQuery = '(SELECT AVG("ratings"."rating") FROM "ratings" WHERE "ratings"."levelId" = "Level"."id")';
         let ratingQuery = Sequelize.literal(baseRatingQuery);
         let ratingTest = Sequelize.literal(baseRatingQuery + ' IS NOT NULL');
 
@@ -49,9 +49,9 @@ export class LevelListService {
         }
 
         return Level.findAndCountAll({
-            // attributes: {
-            //     include: [[ratingQuery, 'avgRating']]
-            // },
+            attributes: {
+                include: [[ratingQuery, 'avgRating']]
+            },
             include: [
                 {
                     association: Level.associations.user,

@@ -105,9 +105,9 @@ export class LevelConfiguration {
             as: 'user'
         });
 
-        // Level.hasMany(Rating, {
-        //     foreignKey: 'levelId',
-        //     as: 'ratings'
-        // });
+        Level.hasMany(Rating, {
+            foreignKey: 'levelId',
+            as: 'ratings'
+        });
     }
 }
