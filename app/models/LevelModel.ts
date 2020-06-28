@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes, BuildOptions, HasOneGetAssociationMixin, Association } from 'sequelize';
+import { Sequelize, Model, DataTypes, HasOneGetAssociationMixin, Association } from 'sequelize';
 import { User } from './UserModel';
 import { Rating } from './RatingModel';
 let btoa = require('btoa');

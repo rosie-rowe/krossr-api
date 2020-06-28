@@ -1,8 +1,6 @@
 'use strict';
 
 import { Model, DataTypes, Sequelize } from 'sequelize';
-import { Rating } from './RatingModel';
-import { Level } from './LevelModel';
 
 let cryptoUser = require('crypto'); // renamed to avoid scope issues for now, TODO
 

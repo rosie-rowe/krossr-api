@@ -1,6 +1,4 @@
-import { Sequelize, Model, DataTypes, BuildOptions } from 'sequelize';
-import { Level } from './LevelModel';
-import { User } from './UserModel';
+import { Sequelize, Model, DataTypes } from 'sequelize';
 
 interface RatingCreationAttributes {
     rating: number;
