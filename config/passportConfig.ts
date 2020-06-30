@@ -7,8 +7,7 @@ import { User } from '../app/models/UserModel';
 export class PassportConfiguration {
     static configure() {
         // Serialize sessions
-        // TODO typing
-        passport.serializeUser((user: any, done) => {
+        passport.serializeUser((user: User, done) => {
             done(null, user.id);
         });
 

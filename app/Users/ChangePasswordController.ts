@@ -40,8 +40,9 @@ export class ChangePasswordController {
 
             user.hashedPassword = user.encryptPassword(passwordDetails.newPassword, user.salt);
 
-            // TODO await (need types)
-            user.save().then(() => {
+            try {
+                await user.save();
+
                 req.login(user, (err) => {
                     if (err) {
                         res.status(400).send(err);
@@ -51,7 +52,9 @@ export class ChangePasswordController {
                         });
                     }
                 });
-            }).catch(err => this.unknownError(res, err));
+            } catch(err) {
+                this.unknownError(res, err)
+            }
         } catch (err) {
             this.unknownError(res, err);
         }
