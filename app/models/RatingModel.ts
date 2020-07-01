@@ -49,7 +49,5 @@ export class RatingConfiguration {
             tableName: 'ratings',
             sequelize
         });
-
-        // maybe todo belongsTo on User and Level
     }
 }

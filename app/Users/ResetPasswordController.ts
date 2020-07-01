@@ -13,7 +13,7 @@ export class ResetPasswordController {
     }
 
     /**
-     * Reset password GET from email token
+     * Reset password GET from email token, TODO this isn't actually called?
      */
     public validateResetToken = (req, res) => {
         User.findOne({

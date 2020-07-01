@@ -89,7 +89,5 @@ export class UserConfiguration {
             tableName: 'users',
             sequelize
         });
-
-        // todo hasMany on Rating and Level
     }
 }
