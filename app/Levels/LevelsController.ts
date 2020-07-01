@@ -1,5 +1,7 @@
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { Level } from '../models/LevelModel';
+import { LevelRequest } from './LevelRequest';
+import { Response } from 'express';
 
 export class LevelsController {
     constructor(
@@ -10,7 +12,7 @@ export class LevelsController {
     /**
      * Create a Level
      */
-    public create = (req, res) => {
+    public create = (req: LevelRequest, res: Response) => {
         req.body.userId = req.user.id;
 
         Level.create(req.body).then((level) => {
@@ -31,7 +33,7 @@ export class LevelsController {
     /**
      * Delete a Level
      */
-    public delete = (req, res) => {
+    public delete = (req: LevelRequest, res: Response) => {
         let level = req.level;
 
         level.destroy().then(() => {
@@ -46,14 +48,12 @@ export class LevelsController {
     /**
      * Show the current Level. todo types
      */
-    public read = (req, res) => {
+    public read = (req: LevelRequest, res: Response) => {
         return res.jsonp(req.level);
     }
 
-    public update = (req, res) => {
-        let level = req.level;
-
-        return level.update({
+    public update = (req: LevelRequest, res: Response) => {
+        return req.level.update({
             name: req.body.name,
             layout: req.body.layout,
             size: req.body.size

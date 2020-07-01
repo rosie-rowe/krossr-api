@@ -11,6 +11,7 @@ export class LevelListController {
         this.levelListService = new LevelListService();
     }
 
+    // todo types
     public paginate = (req, res) => {
         let query = req.query as LevelListQuery;
         let numPerPage = query.numPerPage = 9;
