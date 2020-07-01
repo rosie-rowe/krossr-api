@@ -2,6 +2,7 @@ import * as async from 'async';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
+import { Op } from 'sequelize';
 
 let nodemailerReset = require('nodemailer'); // TODO
 
@@ -19,7 +20,7 @@ export class ResetPasswordController {
             where: {
                 resetPasswordToken: req.params.token,
                 resetPasswordExpires: {
-                    $gt: Date.now()
+                    [Op.gt]: new Date()
                 }
             }
         }).then((user) => {
@@ -48,7 +49,7 @@ export class ResetPasswordController {
                     where: {
                         resetPasswordToken: req.params.token,
                         resetPasswordExpires: {
-                            $gt: Date.now()
+                            [Op.gt]: new Date()
                         }
                     }
                 }).then(function(user) {

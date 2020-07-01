@@ -41,7 +41,6 @@ export class ForgotPasswordController {
                         } else {
                             user.resetPasswordToken = token;
 
-                            // todo utc (moment?) after getting db working again
                             let now = new Date();
                             now.setHours(now.getHours() + 1); // add 1 hour
                             user.resetPasswordExpires = now;
