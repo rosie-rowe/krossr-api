@@ -107,8 +107,7 @@ export class ExpressConfiguration {
         // Assume 404 since no middleware responded
         app.use((req, res) => {
             // let Angular handle it
-            // this needs to maintain the route, TODO
-            res.redirect('/');
+            res.redirect(`/?clientUrl=${req.url}`);
         });
 
         return app;
