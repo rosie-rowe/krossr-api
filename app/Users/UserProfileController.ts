@@ -22,7 +22,6 @@ export class UserProfileController {
         if (user) {
             // Merge existing user
             user.update({
-                updated: Date.now(),
                 email: req.body.email
             });
 
