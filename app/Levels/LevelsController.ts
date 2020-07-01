@@ -46,7 +46,7 @@ export class LevelsController {
     }
 
     /**
-     * Show the current Level. todo types
+     * Show the current Level.
      */
     public read = (req: LevelRequest, res: Response) => {
         return res.jsonp(req.level);

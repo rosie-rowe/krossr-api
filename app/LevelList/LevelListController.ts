@@ -1,6 +1,6 @@
 import { LevelListService } from './LevelListService';
-import { LevelListQuery } from './LevelListQuery';
 import { ErrorHandler } from '../Error/ErrorHandler';
+import { LevelListRequest } from './LevelListRequest';
 
 export class LevelListController {
     private levelListService: LevelListService;
@@ -11,12 +11,12 @@ export class LevelListController {
         this.levelListService = new LevelListService();
     }
 
-    // todo types
-    public paginate = (req, res) => {
-        let query = req.query as LevelListQuery;
-        let numPerPage = query.numPerPage = 9;
+    public paginate = (req: LevelListRequest, res) => {
+        let query = req.query;
+        query.numPerPage = '9';
+        let numPerPage = parseInt(query.numPerPage, 10);
 
-        this.levelListService.getList(req.query as LevelListQuery).then((levels) => {
+        this.levelListService.getList(query).then((levels) => {
             return res.jsonp({
                 levels: levels.rows,
                 count: levels.count,

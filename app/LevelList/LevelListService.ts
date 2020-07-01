@@ -5,12 +5,12 @@ import { Level } from '../models/LevelModel';
 export class LevelListService {
     // This can be done WAY better, todo
     public getList(query: LevelListQuery) {
-        let pageNum = query.pageNum;
+        let pageNum = parseInt(query.pageNum, 10);
         let sizeRestriction = query.sizeRestriction;
         let searchText = query.searchText;
         let sortBy = query.sortBy || '"createdAt"';
         let sortDirection = query.sortDirection || 'ASC';
-        let numPerPage = query.numPerPage;
+        let numPerPage = parseInt(query.numPerPage, 10);
 
         let whereBuilder: any = {
             id: {
