@@ -1,10 +1,16 @@
 import { Level } from '../models/LevelModel';
 import { IncludeOptions } from 'sequelize/types';
+import { ErrorHandler } from '../Error/ErrorHandler';
 
 export class LevelsMiddleware {
+    constructor(
+        private errorHandler: ErrorHandler
+    ) {
+    }
+
     public hasAuthorization = (req, res, next) => {
         if (req.level.userId !== req.user.id) {
-            return res.status(403).send('User is not authorized');
+            return this.errorHandler.sendForbiddenErrorResponse(res);
         }
 
         next();

@@ -12,9 +12,9 @@ export class LevelsRoutes {
         let errorHandler = new ErrorHandler();
         let levelListController = new LevelListController(errorHandler);
         let levelsController = new LevelsController(errorHandler);
-        let ratingsController = new RatingsController();
-        let levelsMiddleware = new LevelsMiddleware();
-        let usersMiddleware = new UsersMiddleware();
+        let ratingsController = new RatingsController(errorHandler);
+        let levelsMiddleware = new LevelsMiddleware(errorHandler);
+        let usersMiddleware = new UsersMiddleware(errorHandler);
 
         // Levels Routes
         app.route('/levels')

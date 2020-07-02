@@ -3,6 +3,14 @@
 import { KrossrErrorResponse } from '../KrossrResponse/KrossrErrorResponse';
 
 export class ErrorHandler {
+    public sendUnauthenticatedErrorResponse(res) {
+        return this.sendErrorResponse(res, 'User is not logged in', 401);
+    }
+
+    public sendForbiddenErrorResponse(res) {
+        return this.sendErrorResponse(res, 'User is not allowed', 403);
+    }
+
     public sendClientErrorResponse(res: KrossrErrorResponse, err: string) {
         return this.sendErrorResponse(res, err, 400);
     }
