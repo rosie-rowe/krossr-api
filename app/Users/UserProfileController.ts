@@ -3,10 +3,12 @@
 import * as _ from 'lodash';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { UserRequest } from './UserRequest';
+import { UserViewModelMapper } from './UserViewModelMapper';
 
 export class UserProfileController {
     constructor(
-        private errorHandler: ErrorHandler
+        private errorHandler: ErrorHandler,
+        private userMapper: UserViewModelMapper,
     ) {
     }
 
@@ -31,7 +33,8 @@ export class UserProfileController {
                     if (err) {
                         res.status(400).send(err);
                     } else {
-                        res.jsonp(user);
+                        let result = this.userMapper.toViewModel(user);
+                        res.jsonp(result);
                     }
                 });
             }).catch((err) => {
@@ -50,6 +53,6 @@ export class UserProfileController {
      * Send User
      */
     me = (req: UserRequest, res) => {
-        res.jsonp(req.user || null);
+        res.jsonp(req.user ? this.userMapper.toViewModel(req.user) : null);
     }
 }

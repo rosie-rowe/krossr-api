@@ -15,7 +15,7 @@ export class UsersRoutes {
     private static signOutController = new SignOutController();
 
     static configureRoutes(app: express.Application) {
-        let userProfileController = new UserProfileController(this.errorHandler);
+        let userProfileController = new UserProfileController(this.errorHandler, this.userMapper);
         let signInController = new SignInController(this.userMapper);
         let signUpController = new SignUpController(this.errorHandler, this.userMapper);
         let changePasswordController = new ChangePasswordController(this.errorHandler);
