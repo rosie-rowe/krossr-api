@@ -15,36 +15,38 @@ export class UserProfileController {
     /**
      * Update user details
      */
-    update = (req, res) => {
+    update = async (req: UserRequest, res) => {
         // Init Variables
         let user = req.user;
+
+        if (!user) {
+            res.status(400).send({
+                message: 'User is not signed in'
+            });
+        }
 
         // For security measurement we remove the roles from the req.body object
         delete req.body.roles;
 
-        if (user) {
-            // Merge existing user
-            user.update({
-                email: req.body.email
-            });
+        // Merge existing user
+        user.update({
+            email: req.body.email
+        });
 
-            user.save().then(() => {
-                req.login(user, (err) => {
-                    if (err) {
-                        res.status(400).send(err);
-                    } else {
-                        let result = this.userMapper.toViewModel(user);
-                        res.jsonp(result);
-                    }
-                });
-            }).catch((err) => {
-                return res.status(400).send({
-                    message: this.errorHandler.getErrorMessage(err)
-                });
+        try {
+            await user.save();
+
+            req.login(user, (err) => {
+                if (err) {
+                    res.status(400).send(err);
+                } else {
+                    let result = this.userMapper.toViewModel(user);
+                    res.jsonp(result);
+                }
             });
-        } else {
-            res.status(400).send({
-                message: 'User is not signed in'
+        } catch (err) {
+            return res.status(400).send({
+                message: this.errorHandler.getErrorMessage(err)
             });
         }
     }
