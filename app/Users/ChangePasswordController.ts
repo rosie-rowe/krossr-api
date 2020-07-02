@@ -1,5 +1,7 @@
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { User } from '../models/UserModel';
+import { KrossrErrorResponse } from '../KrossrResponse/KrossrErrorResponse';
+import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
 
 export class ChangePasswordController {
     constructor(
@@ -7,7 +9,7 @@ export class ChangePasswordController {
     ) {
     }
 
-    public changePassword = async (req, res) => {
+    public changePassword = async (req: KrossrRequest, res) => {
         // Init Variables
         let passwordDetails = req.body;
 
@@ -45,6 +47,7 @@ export class ChangePasswordController {
 
                 req.login(user, (err) => {
                     if (err) {
+                        // todo
                         res.status(400).send(err);
                     } else {
                         res.send({
@@ -60,39 +63,27 @@ export class ChangePasswordController {
         }
     }
 
-    private newPasswordMissing(res) {
-        res.status(400).send({
-            message: 'Please provide a new password'
-        });
+    private newPasswordMissing(res: KrossrErrorResponse) {
+        this.errorHandler.sendClientErrorResponse(res, 'Please provide a new password');
     }
 
-    private passwordsDoNotMatch(res) {
-        res.status(400).send({
-            message: 'Passwords do not match'
-        });
+    private passwordsDoNotMatch(res: KrossrErrorResponse) {
+        this.errorHandler.sendClientErrorResponse(res, 'Passwords do not match');
     }
 
-    private userIsNotSignedIn(res) {
-        res.status(400).send({
-            message: 'User is not signed in'
-        });
+    private userIsNotSignedIn(res: KrossrErrorResponse) {
+        this.errorHandler.sendClientErrorResponse(res, 'User is not signed in');
     }
 
-    private userIsNotFound(res) {
-        res.status(400).send({
-            message: 'User is not found'
-        });
+    private userIsNotFound(res: KrossrErrorResponse) {
+        this.errorHandler.sendClientErrorResponse(res, 'User is not found');
     }
 
-    private currentPasswordIsIncorrect(res) {
-        res.status(400).send({
-            message: 'Current password is incorrect'
-        });
+    private currentPasswordIsIncorrect(res: KrossrErrorResponse) {
+        this.errorHandler.sendClientErrorResponse(res, 'Current password is incorrect');
     }
 
-    private unknownError(res, err) {
-        res.status(400).send({
-            message: this.errorHandler.getErrorMessage(err)
-        });
+    private unknownError(res: KrossrErrorResponse, err) {
+        this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
     }
 }

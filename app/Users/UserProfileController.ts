@@ -20,9 +20,7 @@ export class UserProfileController {
         let user = req.user;
 
         if (!user) {
-            res.status(400).send({
-                message: 'User is not signed in'
-            });
+            return this.errorHandler.sendClientErrorResponse(res, 'User is not signed in');
         }
 
         // For security measurement we remove the roles from the req.body object
@@ -38,6 +36,7 @@ export class UserProfileController {
 
             req.login(user, (err) => {
                 if (err) {
+                    // todo
                     res.status(400).send(err);
                 } else {
                     let result = this.userMapper.toViewModel(user);
@@ -45,9 +44,7 @@ export class UserProfileController {
                 }
             });
         } catch (err) {
-            return res.status(400).send({
-                message: this.errorHandler.getErrorMessage(err)
-            });
+            return this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
         }
     }
 

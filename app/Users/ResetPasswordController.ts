@@ -56,9 +56,7 @@ export class ResetPasswordController {
                     }
                 }).then((user) => {
                     if (!user) {
-                        return res.status(400).send({
-                            message: 'Password reset token is invalid or has expired.'
-                        });
+                        return this.errorHandler.sendClientErrorResponse(res, 'Password reset token is invalid or has expired');
                     } else {
                         if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
                             user.resetPasswordToken = undefined;
@@ -69,6 +67,7 @@ export class ResetPasswordController {
                             user.save().then(() => {
                                 req.login(user, (err) => {
                                     if (err) {
+                                        // todo
                                         res.status(400).send(err);
                                     } else {
                                         // Return authenticated user
@@ -79,14 +78,10 @@ export class ResetPasswordController {
                                     }
                                 });
                             }).catch((err) => {
-                                return res.status(400).send({
-                                    message: this.errorHandler.getErrorMessage(err)
-                                });
+                                return this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
                             });
                         } else {
-                            return res.status(400).send({
-                                message: 'Passwords do not match'
-                            });
+                            return this.errorHandler.sendClientErrorResponse(res, 'Password do not match');
                         }
                     }
                 });

@@ -15,6 +15,7 @@ export class SignInController {
             } else {
                 req.login(user, (err) => {
                     if (err) {
+                        // todo
                         res.status(400).send(err);
                     } else {
                         let result = this.userMapper.toViewModel(user);

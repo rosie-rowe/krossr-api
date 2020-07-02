@@ -1,12 +1,18 @@
 import * as async from 'async';
 import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
+import { ErrorHandler } from '../Error/ErrorHandler';
 
 // TODO use types/import
 let nodemailerForgot = require('nodemailer');
 let cryptoForgot = require('crypto');
 
 export class ForgotPasswordController {
+    constructor(
+        private errorHandler: ErrorHandler
+    ) {
+    }
+
     // TODO set up mailgun or something and make sure this still works
     public forgot = (req, res, next) => {
         let config = EnvironmentConfiguration.getConfiguration();
@@ -31,13 +37,9 @@ export class ForgotPasswordController {
                         }
                     }).then((user) => {
                         if (!user) {
-                            return res.status(400).send({
-                                message: 'Username not found'
-                            });
+                            return this.errorHandler.sendClientErrorResponse(res, 'Username not found');
                         } else if (user.provider !== 'local') {
-                            return res.status(400).send({
-                                message: 'Try ' + user.provider + ' account?'
-                            });
+                            return this.errorHandler.sendClientErrorResponse(res, `Try ${user.provider} account?`)
                         } else {
                             user.resetPasswordToken = token;
 
@@ -53,9 +55,7 @@ export class ForgotPasswordController {
                         }
                     });
                 } else {
-                    return res.status(400).send({
-                        message: 'Username required'
-                    });
+                    return this.errorHandler.sendClientErrorResponse(res, 'Username required');
                 }
             },
             (token, user, done) => {

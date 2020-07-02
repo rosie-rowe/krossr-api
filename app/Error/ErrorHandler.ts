@@ -1,10 +1,22 @@
 'use strict';
 
+import { KrossrErrorResponse } from '../KrossrResponse/KrossrErrorResponse';
+
 export class ErrorHandler {
+    public sendClientErrorResponse(res: KrossrErrorResponse, err: string) {
+        return this.sendErrorResponse(res, err, 400);
+    }
+
+    public sendErrorResponse(res: KrossrErrorResponse, err: string, statusCode: number) {
+        return res.status(statusCode).send({
+            message: err
+        });
+    }
+
     /**
      * Get the error message from error object
      */
-    public getErrorMessage = function(err) {
+    public getErrorMessage = (err) => {
         let message = 'Something went wrong';
 
         if (err.code) {
@@ -23,7 +35,7 @@ export class ErrorHandler {
         }
 
         return message;
-    };
+    }
 
     /**
      * Get unique error field name
