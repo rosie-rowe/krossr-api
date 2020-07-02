@@ -17,16 +17,12 @@ export class LevelsController {
 
         Level.create(req.body).then((level) => {
             if (!level) {
-                return res.status(500).send({
-                    message: 'There was a problem creating the level'
-                });
+                this.errorHandler.sendServerErrorResponse(res, 'There was a problem creating the level');
             } else {
                 return res.jsonp(level);
             }
         }).catch((err) => {
-            return res.status(500).send({
-                message: this.errorHandler.getErrorMessage(err)
-            });
+            this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
         });
     }
 
@@ -39,9 +35,7 @@ export class LevelsController {
         level.destroy().then(() => {
             return res.jsonp(level);
         }).catch(function(err) {
-            return res.status(500).send({
-                message: this.errorHandler.getErrorMessage(err)
-            });
+            this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
         });
     }
 
@@ -60,9 +54,7 @@ export class LevelsController {
         }).then(level => {
             return res.jsonp(level);
         }).catch(err => {
-            return res.status(500).send({
-                message: this.errorHandler.getErrorMessage(err)
-            });
+            this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
         });
     }
 }

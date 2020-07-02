@@ -33,9 +33,7 @@ export class ResetPasswordController {
 
             res.redirect('/password/reset/' + req.params.token);
         }).catch((err) => {
-            res.status(500).send({
-                message: this.errorHandler.getErrorMessage(err)
-            });
+            return this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
         });
     }
 

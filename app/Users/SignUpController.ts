@@ -27,18 +27,14 @@ export class SignUpController {
 
             req.login(user, (err) => {
                 if (err) {
-                    res.status(500).send({
-                        message: this.errorHandler.getErrorMessage(err)
-                    });
-                } else {
-                    let result = this.userMapper.toViewModel(user);
-                    res.jsonp(result);
+                    return this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
                 }
+
+                let result = this.userMapper.toViewModel(user);
+                res.jsonp(result);
             });
         }).catch((err) => {
-            return res.status(500).send({
-                message: this.errorHandler.getErrorMessage(err)
-            });
+            return this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
         });
     }
 }

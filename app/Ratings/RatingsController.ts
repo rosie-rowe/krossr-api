@@ -1,6 +1,12 @@
 import { Rating } from '../models/RatingModel';
+import { ErrorHandler } from '../Error/ErrorHandler';
 
 export class RatingsController {
+    constructor(
+        private errorHandler: ErrorHandler
+    ) {
+    }
+
     /**
      * Add or replace a Rating. Each user should only be able to have one rating for each level.
      */
@@ -9,7 +15,7 @@ export class RatingsController {
         let user = req.user;
         let rating = Rating.build(req.body);
 
-        /* Simulated composite primary key since Sequelize doesn't support them yet */
+        /* Simulated composite primary key since Sequelize doesn't support them yet (is this still true in Sequelize 6? todo) */
         Rating.findOrCreate({
             where: {
                 userId: user.id,
@@ -33,18 +39,14 @@ export class RatingsController {
                     }
                 }).then(() => {
                     res.jsonp(level);
-                }).catch(function(err) {
-                    return res.status(500).send({
-                        message: this.errorHandler.getErrorMessage(err)
-                    });
+                }).catch((err) => {
+                    this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
                 });
             } else {
                 res.jsonp(level);
             }
-        }).catch(function(err) {
-            return res.status(500).send({
-                message: this.errorHandler.getErrorMessage(err)
-            });
+        }).catch((err) => {
+            this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
         });
     }
 }
