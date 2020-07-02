@@ -1,18 +1,24 @@
 import * as passport from 'passport';
+import { User } from '../models/UserModel';
+import { UserViewModelMapper } from './UserViewModelMapper';
 
 export class SignInController {
+    constructor(
+        private userMapper: UserViewModelMapper
+    ) {
+    }
+
     public signIn = (req, res, next) => {
-        passport.authenticate('local', (err, user, info) => {
+        passport.authenticate('local', (err, user: User, info) => {
             if (err || !user) {
                 res.status(400).send(info);
             } else {
-                user.removeSensitiveInfo();
-
                 req.login(user, (err) => {
                     if (err) {
                         res.status(400).send(err);
                     } else {
-                        res.jsonp(user);
+                        let result = this.userMapper.toViewModel(user);
+                        res.jsonp(result);
                     }
                 });
             }

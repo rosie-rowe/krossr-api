@@ -45,10 +45,6 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
         return cryptoUser.randomBytes(16).toString('base64');
     }
 
-    removeSensitiveInfo() {
-        this.salt = null;
-    }
-
     setPassword(newPassword: string) {
         this.provider = 'local';
         this.salt = this.makeSalt();

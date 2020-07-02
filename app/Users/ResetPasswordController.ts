@@ -3,12 +3,14 @@ import { ErrorHandler } from '../Error/ErrorHandler';
 import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
 import { Op } from 'sequelize';
+import { UserViewModelMapper } from './UserViewModelMapper';
 
 let nodemailerReset = require('nodemailer'); // TODO
 
 export class ResetPasswordController {
     constructor(
-        private errorHandler: ErrorHandler
+        private errorHandler: ErrorHandler,
+        private userMapper: UserViewModelMapper
     ) {
     }
 
@@ -52,7 +54,7 @@ export class ResetPasswordController {
                             [Op.gt]: new Date()
                         }
                     }
-                }).then(function(user) {
+                }).then((user) => {
                     if (!user) {
                         return res.status(400).send({
                             message: 'Password reset token is invalid or has expired.'
@@ -70,7 +72,8 @@ export class ResetPasswordController {
                                         res.status(400).send(err);
                                     } else {
                                         // Return authenticated user
-                                        res.jsonp(user);
+                                        let result = this.userMapper.toViewModel(user);
+                                        res.jsonp(result);
 
                                         done(err, user);
                                     }

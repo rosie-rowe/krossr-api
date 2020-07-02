@@ -1,12 +1,14 @@
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { WinstonConfiguration } from '../../config/winston';
 import { User } from '../models/UserModel';
+import { UserViewModelMapper } from './UserViewModelMapper';
 
 let winston = WinstonConfiguration.initialize();
 
 export class SignUpController {
     constructor(
-        private errorHandler: ErrorHandler
+        private errorHandler: ErrorHandler,
+        private userMapper: UserViewModelMapper
     ) {
     }
 
@@ -23,15 +25,14 @@ export class SignUpController {
         user.save().then(() => {
             winston.info('Saved the user!');
 
-            user.removeSensitiveInfo();
-
             req.login(user, (err) => {
                 if (err) {
                     res.status(500).send({
                         message: this.errorHandler.getErrorMessage(err)
                     });
                 } else {
-                    res.jsonp(user);
+                    let result = this.userMapper.toViewModel(user);
+                    res.jsonp(result);
                 }
             });
         }).catch((err) => {

@@ -7,25 +7,27 @@ import { ErrorHandler } from '../Error/ErrorHandler';
 import { ChangePasswordController } from '../Users/ChangePasswordController';
 import { ForgotPasswordController } from '../Users/ForgotPasswordController';
 import { ResetPasswordController } from '../Users/ResetPasswordController';
+import { UserViewModelMapper } from '../Users/UserViewModelMapper';
 
 export class UsersRoutes {
+    private static userMapper = new UserViewModelMapper();
     private static errorHandler = new ErrorHandler();
-    private static signInController = new SignInController();
     private static signOutController = new SignOutController();
 
     static configureRoutes(app: express.Application) {
         let userProfileController = new UserProfileController(this.errorHandler);
-        let signUpController = new SignUpController(this.errorHandler);
+        let signInController = new SignInController(this.userMapper);
+        let signUpController = new SignUpController(this.errorHandler, this.userMapper);
         let changePasswordController = new ChangePasswordController(this.errorHandler);
         let forgotPasswordController = new ForgotPasswordController();
-        let resetPasswordController = new ResetPasswordController(this.errorHandler);
+        let resetPasswordController = new ResetPasswordController(this.errorHandler, this.userMapper);
 
         // Setting up the users profile api
         app.route('/users/me').get(userProfileController.me);
         app.route('/users').put(userProfileController.update);
 
         // Setting up the users authentication ap
-        app.route('/auth/signin').post(this.signInController.signIn);
+        app.route('/auth/signin').post(signInController.signIn);
         app.route('/auth/signout').post(this.signOutController.signOut);
         app.route('/auth/signup').post(signUpController.signUp);
 

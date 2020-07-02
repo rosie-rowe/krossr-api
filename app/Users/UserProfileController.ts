@@ -2,6 +2,7 @@
 
 import * as _ from 'lodash';
 import { ErrorHandler } from '../Error/ErrorHandler';
+import { UserRequest } from './UserRequest';
 
 export class UserProfileController {
     constructor(
@@ -48,7 +49,7 @@ export class UserProfileController {
     /**
      * Send User
      */
-    me = (req, res) => {
+    me = (req: UserRequest, res) => {
         res.jsonp(req.user || null);
     }
 }

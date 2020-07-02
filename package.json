@@ -15,6 +15,7 @@
     "lint": "tslint --project ."
   },
   "dependencies": {
+    "@krossr/types": "git+https://github.com/rosie-rowe/krossr-types.git",
     "@types/async": "^3.2.3",
     "@types/express": "^4.17.6",
     "@types/lodash": "^4.14.155",
