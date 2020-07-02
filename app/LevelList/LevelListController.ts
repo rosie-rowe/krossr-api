@@ -11,22 +11,21 @@ export class LevelListController {
         this.levelListService = new LevelListService();
     }
 
-    public paginate = (req: LevelListRequest, res) => {
+    public paginate = async (req: LevelListRequest, res) => {
         let query = req.query;
         query.numPerPage = '9';
         let numPerPage = parseInt(query.numPerPage, 10);
 
-        this.levelListService.getList(query).then((levels) => {
+        try {
+            let levels = await this.levelListService.getList(query);
+
             return res.jsonp({
                 levels: levels.rows,
                 count: levels.count,
                 numPerPage
             });
-        }).catch((err) => {
-            return res.status(500).send({
-                message: this.errorHandler.getErrorMessage(err)
-            });
-        });
+        } catch (err) {
+            return this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+        }
     }
-
 }

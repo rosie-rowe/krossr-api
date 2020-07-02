@@ -7,6 +7,10 @@ export class ErrorHandler {
         return this.sendErrorResponse(res, err, 400);
     }
 
+    public sendServerErrorResponse(res: KrossrErrorResponse, err: string) {
+        return this.sendErrorResponse(res, err, 500);
+    }
+
     public sendErrorResponse(res: KrossrErrorResponse, err: string, statusCode: number) {
         return res.status(statusCode).send({
             message: err
