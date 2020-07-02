@@ -19,7 +19,7 @@ export class UsersRoutes {
         let signInController = new SignInController(this.userMapper);
         let signUpController = new SignUpController(this.errorHandler, this.userMapper);
         let changePasswordController = new ChangePasswordController(this.errorHandler);
-        let forgotPasswordController = new ForgotPasswordController();
+        let forgotPasswordController = new ForgotPasswordController(this.errorHandler);
         let resetPasswordController = new ResetPasswordController(this.errorHandler, this.userMapper);
 
         // Setting up the users profile api
