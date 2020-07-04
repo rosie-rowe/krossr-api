@@ -35,7 +35,7 @@ export class LevelsController {
         let level = req.level;
 
         level.destroy().then(() => {
-            return res.jsonp(level);
+            return res.status(200).send();
         }).catch(function(err) {
             this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
         });
