@@ -21,7 +21,8 @@ export class LevelsController {
             if (!level) {
                 this.errorHandler.sendServerErrorResponse(res, 'There was a problem creating the level');
             } else {
-                return res.jsonp(level);
+                let result = this.levelMapper.toViewModel(level);
+                return res.jsonp(result);
             }
         }).catch((err) => {
             this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
@@ -58,10 +59,11 @@ export class LevelsController {
     public update = (req: LevelRequest, res: Response) => {
         return req.level.update({
             name: req.body.name,
-            layout: req.body.layout,
+            layout: req.body.decodedLayout,
             size: req.body.size
         }).then(level => {
-            return res.jsonp(level);
+            let result = this.levelMapper.toViewModel(level);
+            return res.jsonp(result);
         }).catch(err => {
             this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
         });
