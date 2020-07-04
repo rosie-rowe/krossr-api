@@ -23,7 +23,7 @@ export class LevelsMiddleware {
             [
                 {
                     association: Level.associations.ratings,
-                    attributes: ['rating'],
+                    attributes: ['rating', 'userId'],
                     required: false,
                     where: {
                         userId: user.id

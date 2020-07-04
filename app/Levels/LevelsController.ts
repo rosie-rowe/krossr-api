@@ -47,12 +47,7 @@ export class LevelsController {
      */
     public read = (req: LevelRequest, res: Response) => {
         let result = this.levelMapper.toViewModel(req.level);
-
-        // todo revisit this
-        if (req.level.ratings && req.user) {
-            result.userRating = req.level.ratings[0];
-        }
-
+        result.userRating = this.getUserRating(req);
         return res.jsonp(result);
     }
 
@@ -67,5 +62,11 @@ export class LevelsController {
         }).catch(err => {
             this.errorHandler.sendUnknownServerErrorResponse(res, err);
         });
+    }
+
+    private getUserRating(req: LevelRequest) {
+        if (req.level.ratings && req.user) {
+            return req.level.ratings.find(rating => rating.userId === req.user.id);
+        }
     }
 }
