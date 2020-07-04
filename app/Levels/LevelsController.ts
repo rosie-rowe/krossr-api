@@ -2,10 +2,12 @@ import { ErrorHandler } from '../Error/ErrorHandler';
 import { Level } from '../models/LevelModel';
 import { LevelRequest } from './LevelRequest';
 import { Response } from 'express';
+import { LevelViewModelMapper } from './LevelViewModelMapper';
 
 export class LevelsController {
     constructor(
-        private errorHandler: ErrorHandler
+        private errorHandler: ErrorHandler,
+        private levelMapper: LevelViewModelMapper
     ) {
     }
 
@@ -43,6 +45,13 @@ export class LevelsController {
      * Show the current Level.
      */
     public read = (req: LevelRequest, res: Response) => {
+        let result = this.levelMapper.toViewModel(req.level);
+
+        // todo revisit this
+        if (req.level.ratings && req.user) {
+            result.userRating = req.level.ratings[0];
+        }
+
         return res.jsonp(req.level);
     }
 

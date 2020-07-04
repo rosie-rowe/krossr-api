@@ -1,6 +1,7 @@
 import * as passport from 'passport';
 import { User } from '../models/UserModel';
 import { UserViewModelMapper } from './UserViewModelMapper';
+import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
 
 export class SignInController {
     constructor(
@@ -8,7 +9,7 @@ export class SignInController {
     ) {
     }
 
-    public signIn = (req, res, next) => {
+    public signIn = (req: KrossrRequest, res, next) => {
         passport.authenticate('local', (err, user: User, info) => {
             if (err || !user) {
                 res.status(400).send(info);

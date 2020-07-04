@@ -1,4 +1,4 @@
-import { Sequelize, Model, DataTypes, HasOneGetAssociationMixin, Association } from 'sequelize';
+import { Sequelize, Model, DataTypes, HasOneGetAssociationMixin, Association, HasManyGetAssociationsMixin } from 'sequelize';
 import { User } from './UserModel';
 import { Rating } from './RatingModel';
 let btoa = require('btoa');
@@ -20,6 +20,7 @@ export class Level extends Model<LevelAttributes, LevelCreationAttributes> imple
     public layout!: string;
     public size!: number;
     public userId!: number;
+    public ratings?: Rating[];
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
