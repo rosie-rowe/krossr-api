@@ -83,6 +83,6 @@ export class ChangePasswordController {
     }
 
     private unknownError(res: KrossrErrorResponse, err) {
-        this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
+        this.errorHandler.sendUnknownClientErrorResponse(res, err);
     }
 }

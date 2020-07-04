@@ -25,7 +25,7 @@ export class LevelsController {
                 return res.jsonp(result);
             }
         }).catch((err) => {
-            this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+            this.errorHandler.sendUnknownServerErrorResponse(res, err);
         });
     }
 
@@ -38,7 +38,7 @@ export class LevelsController {
         level.destroy().then(() => {
             return res.status(200).send();
         }).catch(function(err) {
-            this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+            this.errorHandler.sendUnknownServerErrorResponse(res, err);
         });
     }
 
@@ -65,7 +65,7 @@ export class LevelsController {
             let result = this.levelMapper.toViewModel(level);
             return res.jsonp(result);
         }).catch(err => {
-            this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+            this.errorHandler.sendUnknownServerErrorResponse(res, err);
         });
     }
 }

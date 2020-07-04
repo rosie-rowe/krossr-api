@@ -27,14 +27,14 @@ export class SignUpController {
 
             req.login(user, (err) => {
                 if (err) {
-                    return this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+                    return this.errorHandler.sendUnknownServerErrorResponse(res, err);
                 }
 
                 let result = this.userMapper.toViewModel(user);
                 res.jsonp(result);
             });
         }).catch((err) => {
-            return this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+            return this.errorHandler.sendUnknownServerErrorResponse(res, err);
         });
     }
 }

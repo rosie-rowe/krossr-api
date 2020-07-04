@@ -25,10 +25,18 @@ export class ErrorHandler {
         });
     }
 
+    public sendUnknownClientErrorResponse(res: KrossrErrorResponse, err: any) {
+        return this.sendClientErrorResponse(res, this.getErrorMessage(err));
+    }
+
+    public sendUnknownServerErrorResponse(res: KrossrErrorResponse, err: any) {
+        return this.sendServerErrorResponse(res, this.getErrorMessage(err));
+    }
+
     /**
      * Get the error message from error object
      */
-    public getErrorMessage = (err) => {
+    private getErrorMessage = (err) => {
         let message = 'Something went wrong';
 
         if (err.code) {

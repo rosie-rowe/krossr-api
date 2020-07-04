@@ -40,13 +40,13 @@ export class RatingsController {
                 }).then(() => {
                     res.jsonp(level);
                 }).catch((err) => {
-                    this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+                    this.errorHandler.sendUnknownServerErrorResponse(res, err);
                 });
             } else {
                 res.jsonp(level);
             }
         }).catch((err) => {
-            this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+            this.errorHandler.sendUnknownServerErrorResponse(res, err);
         });
     }
 }

@@ -33,7 +33,7 @@ export class ResetPasswordController {
 
             res.redirect('/password/reset/' + req.params.token);
         }).catch((err) => {
-            return this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+            return this.errorHandler.sendUnknownServerErrorResponse(res, err);
         });
     }
 
@@ -65,7 +65,7 @@ export class ResetPasswordController {
                             user.save().then(() => {
                                 req.login(user, (err) => {
                                     if (err) {
-                                        this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
+                                        this.errorHandler.sendUnknownClientErrorResponse(res, err);
                                     } else {
                                         // Return authenticated user
                                         let result = this.userMapper.toViewModel(user);
@@ -75,7 +75,7 @@ export class ResetPasswordController {
                                     }
                                 });
                             }).catch((err) => {
-                                return this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
+                                this.errorHandler.sendUnknownClientErrorResponse(res, err);
                             });
                         } else {
                             return this.errorHandler.sendClientErrorResponse(res, 'Password do not match');

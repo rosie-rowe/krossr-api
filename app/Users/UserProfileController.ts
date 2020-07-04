@@ -36,14 +36,14 @@ export class UserProfileController {
 
             req.login(user, (err) => {
                 if (err) {
-                    this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
+                    this.errorHandler.sendUnknownClientErrorResponse(res, err);
                 } else {
                     let result = this.userMapper.toViewModel(user);
                     res.jsonp(result);
                 }
             });
         } catch (err) {
-            return this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
+            this.errorHandler.sendUnknownClientErrorResponse(res, err);
         }
     }
 

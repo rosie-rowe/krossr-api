@@ -29,7 +29,7 @@ export class LevelListController {
                 numPerPage
             });
         } catch (err) {
-            return this.errorHandler.sendServerErrorResponse(res, this.errorHandler.getErrorMessage(err));
+            return this.errorHandler.sendUnknownServerErrorResponse(res, err);
         }
     }
 }
