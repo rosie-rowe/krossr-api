@@ -21,6 +21,8 @@ export class Rating extends Model<RatingAttributes, RatingCreationAttributes> im
 }
 
 export class RatingConfiguration {
+    static compositeKey = 'oneRatingPerLevelPerUser';
+
     public static init(sequelize: Sequelize) {
         Rating.init({
             id: {
@@ -39,11 +41,13 @@ export class RatingConfiguration {
             },
             levelId: {
                 type: DataTypes.INTEGER.UNSIGNED,
-                allowNull: false
+                allowNull: false,
+                unique: this.compositeKey
             },
             userId: {
                 type: DataTypes.INTEGER.UNSIGNED,
-                allowNull: false
+                allowNull: false,
+                unique: this.compositeKey
             }
         }, {
             tableName: 'ratings',

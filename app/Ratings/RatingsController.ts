@@ -15,7 +15,6 @@ export class RatingsController {
         let user = req.user;
         let rating = Rating.build(req.body);
 
-        /* Simulated composite primary key since Sequelize doesn't support them yet (is this still true in Sequelize 6? todo) */
         Rating.findOrCreate({
             where: {
                 userId: user.id,
