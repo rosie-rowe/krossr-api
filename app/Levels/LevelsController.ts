@@ -52,7 +52,7 @@ export class LevelsController {
             result.userRating = req.level.ratings[0];
         }
 
-        return res.jsonp(req.level);
+        return res.jsonp(result);
     }
 
     public update = (req: LevelRequest, res: Response) => {
