@@ -14,8 +14,7 @@ export class SignInController {
     public signIn = (req: KrossrRequest, res, next) => {
         passport.authenticate('local', (err, user: User, info) => {
             if (err || !user) {
-                // todo
-                res.status(400).send(info);
+                this.errorHandler.sendUnknownClientErrorResponse(res, info);
             } else {
                 req.login(user, (err) => {
                     if (err) {

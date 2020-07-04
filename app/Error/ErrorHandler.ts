@@ -39,6 +39,10 @@ export class ErrorHandler {
     private getErrorMessage = (err) => {
         let message = 'Something went wrong';
 
+        if (err.message) {
+            return err.message;
+        }
+
         if (err.code) {
             switch (err.code) {
                 case 11000:
