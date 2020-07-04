@@ -79,9 +79,7 @@ export class ForgotPasswordController {
                 };
                 smtpTransport.sendMail(mailOptions, (err) => {
                     if (!err) {
-                        res.send({
-                            message: 'Email sent!'
-                        });
+                        res.send();
                     }
 
                     done(err);

@@ -49,9 +49,7 @@ export class ChangePasswordController {
                     if (err) {
                         this.unknownError(res, err);
                     } else {
-                        res.send({
-                            message: 'Password changed successfully'
-                        });
+                        res.send();
                     }
                 });
             } catch(err) {
