@@ -6,13 +6,15 @@ import { UsersMiddleware } from '../Users/UsersMiddleware';
 import { RatingsController } from '../Ratings/RatingsController';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { LevelViewModelMapper } from '../Levels/LevelViewModelMapper';
+import { LevelListLevelViewModelMapper } from '../LevelList/LevelListLevelViewModelMapper';
 
 export class LevelsRoutes {
     static configureRoutes(app: express.Application) {
         let levelMapper = new LevelViewModelMapper();
+        let levelListMapper = new LevelListLevelViewModelMapper();
         // TODO dependency injection
         let errorHandler = new ErrorHandler();
-        let levelListController = new LevelListController(errorHandler);
+        let levelListController = new LevelListController(errorHandler, levelListMapper);
         let levelsController = new LevelsController(errorHandler, levelMapper);
         let ratingsController = new RatingsController(errorHandler);
         let levelsMiddleware = new LevelsMiddleware(errorHandler);

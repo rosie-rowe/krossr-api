@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "npx webpack --config webpack.config.js",
+    "watch": "npx webpack --config webpack.config.js --watch",
     "start": "node dist/server.js",
     "debug": "node --inspect dist/server.js",
     "test": "npx karma start karma.conf.js",

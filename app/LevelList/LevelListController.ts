@@ -1,12 +1,14 @@
 import { LevelListService } from './LevelListService';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { LevelListRequest } from './LevelListRequest';
+import { LevelListLevelViewModelMapper } from './LevelListLevelViewModelMapper';
 
 export class LevelListController {
     private levelListService: LevelListService;
 
     constructor(
-        private errorHandler: ErrorHandler
+        private errorHandler: ErrorHandler,
+        private levelListMapper: LevelListLevelViewModelMapper
     ) {
         this.levelListService = new LevelListService();
     }
@@ -19,8 +21,10 @@ export class LevelListController {
         try {
             let levels = await this.levelListService.getList(query);
 
+            let rows = levels.rows.map(level => this.levelListMapper.toViewModel(level));
+
             return res.jsonp({
-                levels: levels.rows,
+                levels: rows,
                 count: levels.count,
                 numPerPage
             });

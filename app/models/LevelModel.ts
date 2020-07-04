@@ -20,7 +20,11 @@ export class Level extends Model<LevelAttributes, LevelCreationAttributes> imple
     public layout!: string;
     public size!: number;
     public userId!: number;
+
+    // not saved in db table.
     public ratings?: Rating[];
+    public avgRating?: string;
+    public user?: User;
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
