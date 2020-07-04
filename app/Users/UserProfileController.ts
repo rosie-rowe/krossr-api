@@ -36,8 +36,7 @@ export class UserProfileController {
 
             req.login(user, (err) => {
                 if (err) {
-                    // todo
-                    res.status(400).send(err);
+                    this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
                 } else {
                     let result = this.userMapper.toViewModel(user);
                     res.jsonp(result);

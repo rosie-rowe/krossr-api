@@ -65,8 +65,7 @@ export class ResetPasswordController {
                             user.save().then(() => {
                                 req.login(user, (err) => {
                                     if (err) {
-                                        // todo
-                                        res.status(400).send(err);
+                                        this.errorHandler.sendClientErrorResponse(res, this.errorHandler.getErrorMessage(err));
                                     } else {
                                         // Return authenticated user
                                         let result = this.userMapper.toViewModel(user);

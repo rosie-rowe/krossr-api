@@ -47,8 +47,7 @@ export class ChangePasswordController {
 
                 req.login(user, (err) => {
                     if (err) {
-                        // todo
-                        res.status(400).send(err);
+                        this.unknownError(res, err);
                     } else {
                         res.send({
                             message: 'Password changed successfully'
@@ -56,7 +55,7 @@ export class ChangePasswordController {
                     }
                 });
             } catch(err) {
-                this.unknownError(res, err)
+                this.unknownError(res, err);
             }
         } catch (err) {
             this.unknownError(res, err);
