@@ -1,11 +1,11 @@
 import * as async from 'async';
+import * as crypto from 'crypto';
 import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
 import { ErrorHandler } from '../Error/ErrorHandler';
 
 // TODO use types/import
 let nodemailerForgot = require('nodemailer');
-let cryptoForgot = require('crypto');
 
 export class ForgotPasswordController {
     constructor(
@@ -20,7 +20,7 @@ export class ForgotPasswordController {
         async.waterfall([
             // Generate random token
             (done) => {
-                cryptoForgot.randomBytes(20, (err, buffer) => {
+                crypto.randomBytes(20, (err, buffer) => {
                     let token = buffer.toString('hex');
                     done(err, token);
                 });

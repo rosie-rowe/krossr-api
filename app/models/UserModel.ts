@@ -1,8 +1,7 @@
 'use strict';
 
 import { Model, DataTypes, Sequelize } from 'sequelize';
-
-let cryptoUser = require('crypto'); // renamed to avoid scope issues for now, TODO
+import * as crypto from 'crypto';
 
 interface UserCreationAttributes {
     email: string;
@@ -38,11 +37,11 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             return '';
         }
         let saltBuffer = new Buffer(salt, 'base64');
-        return cryptoUser.pbkdf2Sync(password, saltBuffer, 10000, 64, null).toString('base64');
+        return crypto.pbkdf2Sync(password, saltBuffer, 10000, 64, null).toString('base64');
     }
 
     makeSalt() {
-        return cryptoUser.randomBytes(16).toString('base64');
+        return crypto.randomBytes(16).toString('base64');
     }
 
     setPassword(newPassword: string) {
