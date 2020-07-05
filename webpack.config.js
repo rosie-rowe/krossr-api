@@ -34,7 +34,7 @@ var config = {
                 { from: 'app/views', to: 'views' }
             ]
         }),
-        new EnvironmentPlugin(['SESSION_SECRET'])
+        new EnvironmentPlugin(['SESSION_SECRET', 'SENDGRID_API_KEY'])
     ],
     resolve: {
         modules: [

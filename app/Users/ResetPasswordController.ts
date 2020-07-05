@@ -4,11 +4,12 @@ import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
 import { Op } from 'sequelize';
 import { UserViewModelMapper } from './UserViewModelMapper';
-import * as nodemailer from 'nodemailer';
+import { MailerService } from '../Mailer/MailerService';
 
 export class ResetPasswordController {
     constructor(
         private errorHandler: ErrorHandler,
+        private mailerService: MailerService,
         private userMapper: UserViewModelMapper
     ) {
     }
@@ -91,8 +92,7 @@ export class ResetPasswordController {
                 });
             },
             // If valid email, send reset email using service
-            (emailHTML, user, done) => {
-                let smtpTransport = nodemailer.createTransport(config.mailer.options);
+            async (emailHTML, user, done) => {
                 let mailOptions = {
                     to: user.email,
                     from: config.mailer.from,
@@ -100,9 +100,12 @@ export class ResetPasswordController {
                     html: emailHTML
                 };
 
-                smtpTransport.sendMail(mailOptions, (err) => {
-                    done(err, 'done');
-                });
+                try {
+                    await this.mailerService.send(mailOptions);
+                    done(null);
+                } catch (err) {
+                    done(err);
+                }
             }
         ], (err) => {
             if (err) { return next(err); }

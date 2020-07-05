@@ -8,6 +8,7 @@ import { ChangePasswordController } from '../Users/ChangePasswordController';
 import { ForgotPasswordController } from '../Users/ForgotPasswordController';
 import { ResetPasswordController } from '../Users/ResetPasswordController';
 import { UserViewModelMapper } from '../Users/UserViewModelMapper';
+import { MailerService } from '../Mailer/MailerService';
 
 export class UsersRoutes {
     private static userMapper = new UserViewModelMapper();
@@ -15,12 +16,14 @@ export class UsersRoutes {
     private static signOutController = new SignOutController();
 
     static configureRoutes(app: express.Application) {
+        let mailerService = new MailerService();
+
         let userProfileController = new UserProfileController(this.errorHandler, this.userMapper);
         let signInController = new SignInController(this.errorHandler, this.userMapper);
         let signUpController = new SignUpController(this.errorHandler, this.userMapper);
         let changePasswordController = new ChangePasswordController(this.errorHandler);
-        let forgotPasswordController = new ForgotPasswordController(this.errorHandler);
-        let resetPasswordController = new ResetPasswordController(this.errorHandler, this.userMapper);
+        let forgotPasswordController = new ForgotPasswordController(this.errorHandler, mailerService);
+        let resetPasswordController = new ResetPasswordController(this.errorHandler, mailerService, this.userMapper);
 
         // Setting up the users profile api
         app.route('/users/me').get(userProfileController.me);

@@ -3,15 +3,15 @@ import * as crypto from 'crypto';
 import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
 import { ErrorHandler } from '../Error/ErrorHandler';
-import * as nodemailer from 'nodemailer';
+import { MailerService } from '../Mailer/MailerService';
 
 export class ForgotPasswordController {
     constructor(
-        private errorHandler: ErrorHandler
+        private errorHandler: ErrorHandler,
+        private mailerService: MailerService
     ) {
     }
 
-    // TODO set up mailgun or something and make sure this still works
     public forgot = (req, res, next) => {
         let config = EnvironmentConfiguration.getConfiguration();
 
@@ -57,7 +57,6 @@ export class ForgotPasswordController {
                 }
             },
             (token, user, done) => {
-                // TODO
                 res.render('templates/reset-password-email', {
                     name: user.username,
                     appName: config.app.title,
@@ -67,21 +66,20 @@ export class ForgotPasswordController {
                 });
             },
             // If valid email, send reset email using service
-            (emailHTML, user, done) => {
-                let smtpTransport = nodemailer.createTransport(config.mailer.options);
+            async (emailHTML, user, done) => {
                 let mailOptions = {
                     to: user.email,
                     from: config.mailer.from,
                     subject: 'Password Reset',
                     html: emailHTML
                 };
-                smtpTransport.sendMail(mailOptions, (err) => {
-                    if (!err) {
-                        res.send();
-                    }
 
+                try {
+                    await this.mailerService.send(mailOptions);
+                    done(null);
+                } catch (err) {
                     done(err);
-                });
+                }
             }
         ], (err) => {
             if (err) { return next(err); }
