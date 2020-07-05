@@ -1,7 +1,7 @@
 import { Sequelize, Model, DataTypes, HasOneGetAssociationMixin, Association, HasManyGetAssociationsMixin } from 'sequelize';
 import { User } from './UserModel';
 import { Rating } from './RatingModel';
-let btoa = require('btoa');
+import btoa from 'btoa';
 
 interface LevelCreationAttributes {
     name: string;

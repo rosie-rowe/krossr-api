@@ -1,7 +1,7 @@
 'use strict';
 
 import { EnvironmentConfiguration } from './config';
-import * as express from 'express';
+import express from 'express';
 import * as passport from 'passport';
 import { UsersRoutes } from '../app/Routes/UsersRoutes';
 import { IKrossrDatabase } from '../app/Database/IKrossrDatabase';
