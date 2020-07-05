@@ -25,7 +25,7 @@ export class ResetPasswordController {
                 }
             }
         }).then((user) => {
-            // todo these redirects suck
+            // TODO these redirects suck
             if (!user) {
                 return res.redirect('/password/reset/invalid');
             }
