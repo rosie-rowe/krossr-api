@@ -4,8 +4,7 @@ import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
 import { Op } from 'sequelize';
 import { UserViewModelMapper } from './UserViewModelMapper';
-
-let nodemailerReset = require('nodemailer'); // TODO
+import * as nodemailer from 'nodemailer';
 
 export class ResetPasswordController {
     constructor(
@@ -93,7 +92,7 @@ export class ResetPasswordController {
             },
             // If valid email, send reset email using service
             (emailHTML, user, done) => {
-                let smtpTransport = nodemailerReset.createTransport(config.mailer.options);
+                let smtpTransport = nodemailer.createTransport(config.mailer.options);
                 let mailOptions = {
                     to: user.email,
                     from: config.mailer.from,

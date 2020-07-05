@@ -3,9 +3,7 @@ import * as crypto from 'crypto';
 import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
 import { ErrorHandler } from '../Error/ErrorHandler';
-
-// TODO use types/import
-let nodemailerForgot = require('nodemailer');
+import * as nodemailer from 'nodemailer';
 
 export class ForgotPasswordController {
     constructor(
@@ -70,7 +68,7 @@ export class ForgotPasswordController {
             },
             // If valid email, send reset email using service
             (emailHTML, user, done) => {
-                let smtpTransport = nodemailerForgot.createTransport(config.mailer.options);
+                let smtpTransport = nodemailer.createTransport(config.mailer.options);
                 let mailOptions = {
                     to: user.email,
                     from: config.mailer.from,
