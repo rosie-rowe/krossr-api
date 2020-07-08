@@ -1,7 +1,9 @@
 import { ViewModelMapper } from '../ViewModel/ViewModelMapper';
 import { Level } from '../models/LevelModel';
 import { LevelListLevelViewModel } from '@krossr/types';
+import { injectable } from 'inversify';
 
+@injectable()
 export class LevelListLevelViewModelMapper implements ViewModelMapper<Level, LevelListLevelViewModel> {
     toViewModel(model: Level): LevelListLevelViewModel {
         return {

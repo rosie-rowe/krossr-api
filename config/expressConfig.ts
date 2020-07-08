@@ -3,6 +3,7 @@
 import { EnvironmentConfiguration } from './config';
 import express from 'express';
 import * as passport from 'passport';
+import DIContainer from '../di-container';
 import { UsersRoutes } from '../app/Routes/UsersRoutes';
 import { IKrossrDatabase } from '../app/Database/IKrossrDatabase';
 import { LevelsRoutes } from '../app/Routes/LevelsRoutes';
@@ -101,7 +102,9 @@ export class ExpressConfiguration {
         app.use(helmet.ienoopen());
         app.disable('x-powered-by');
 
-        LevelsRoutes.configureRoutes(app);
+        let levelsRoutes = DIContainer.get<LevelsRoutes>(LevelsRoutes);
+        levelsRoutes.configureRoutes(app);
+
         UsersRoutes.configureRoutes(app);
 
         // Assume 404 since no middleware responded

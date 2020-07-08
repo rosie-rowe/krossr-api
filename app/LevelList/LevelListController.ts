@@ -2,15 +2,15 @@ import { LevelListService } from './LevelListService';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { LevelListRequest } from './LevelListRequest';
 import { LevelListLevelViewModelMapper } from './LevelListLevelViewModelMapper';
+import { injectable, inject } from 'inversify';
 
+@injectable()
 export class LevelListController {
-    private levelListService: LevelListService;
-
     constructor(
-        private errorHandler: ErrorHandler,
-        private levelListMapper: LevelListLevelViewModelMapper
+        @inject(ErrorHandler) private errorHandler: ErrorHandler,
+        @inject(LevelListLevelViewModelMapper) private levelListMapper: LevelListLevelViewModelMapper,
+        @inject(LevelListService) private levelListService: LevelListService
     ) {
-        this.levelListService = new LevelListService();
     }
 
     public paginate = async (req: LevelListRequest, res) => {

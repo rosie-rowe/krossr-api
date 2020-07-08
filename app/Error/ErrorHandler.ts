@@ -1,7 +1,9 @@
 'use strict';
 
 import { KrossrErrorResponse } from '../KrossrResponse/KrossrErrorResponse';
+import { injectable } from 'inversify';
 
+@injectable()
 export class ErrorHandler {
     public sendUnauthenticatedErrorResponse(res) {
         return this.sendErrorResponse(res, 'User is not logged in', 401);

@@ -1,10 +1,12 @@
 import { Level } from '../models/LevelModel';
 import { IncludeOptions } from 'sequelize/types';
 import { ErrorHandler } from '../Error/ErrorHandler';
+import { injectable, inject } from 'inversify';
 
+@injectable()
 export class LevelsMiddleware {
     constructor(
-        private errorHandler: ErrorHandler
+        @inject(ErrorHandler) private errorHandler: ErrorHandler
     ) {
     }
 

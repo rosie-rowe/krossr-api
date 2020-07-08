@@ -1,7 +1,9 @@
 import { LevelListQuery } from './LevelListQuery';
 import { Sequelize, Op } from 'sequelize';
 import { Level } from '../models/LevelModel';
+import { injectable } from 'inversify';
 
+@injectable()
 export class LevelListService {
     // This can be done WAY better, todo
     public getList(query: LevelListQuery) {

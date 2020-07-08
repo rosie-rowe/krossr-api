@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { ErrorHandler } from '../Error/ErrorHandler';
+import { inject, injectable } from 'inversify';
 
+@injectable()
 export class UsersMiddleware {
     constructor(
-        private errorHandler: ErrorHandler
+        @inject(ErrorHandler) private errorHandler: ErrorHandler
     ) {
     }
 

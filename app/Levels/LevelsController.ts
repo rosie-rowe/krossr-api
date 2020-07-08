@@ -3,11 +3,13 @@ import { Level } from '../models/LevelModel';
 import { LevelRequest } from './LevelRequest';
 import { Response } from 'express';
 import { LevelViewModelMapper } from './LevelViewModelMapper';
+import { inject, injectable } from 'inversify';
 
+@injectable()
 export class LevelsController {
     constructor(
-        private errorHandler: ErrorHandler,
-        private levelMapper: LevelViewModelMapper
+        @inject(ErrorHandler) private errorHandler: ErrorHandler,
+        @inject(LevelViewModelMapper) private levelMapper: LevelViewModelMapper
     ) {
     }
 

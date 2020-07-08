@@ -3,6 +3,7 @@
  * Please note that the order of loading is important.
  */
 
+import 'reflect-metadata';
 import { WinstonConfiguration } from './config/winston';
 import { EnvironmentConfiguration } from './config/config';
 import { SequelizeConfiguration } from './config/sequelizeConfig';

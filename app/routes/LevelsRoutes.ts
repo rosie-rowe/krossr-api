@@ -4,36 +4,34 @@ import { LevelsMiddleware } from '../Levels/LevelsMiddleware';
 import { LevelsController } from '../Levels/LevelsController';
 import { UsersMiddleware } from '../Users/UsersMiddleware';
 import { RatingsController } from '../Ratings/RatingsController';
-import { ErrorHandler } from '../Error/ErrorHandler';
-import { LevelViewModelMapper } from '../Levels/LevelViewModelMapper';
-import { LevelListLevelViewModelMapper } from '../LevelList/LevelListLevelViewModelMapper';
+import { inject, injectable } from 'inversify';
 
+@injectable()
 export class LevelsRoutes {
-    static configureRoutes(app: express.Application) {
-        let levelMapper = new LevelViewModelMapper();
-        let levelListMapper = new LevelListLevelViewModelMapper();
-        // TODO dependency injection
-        let errorHandler = new ErrorHandler();
-        let levelListController = new LevelListController(errorHandler, levelListMapper);
-        let levelsController = new LevelsController(errorHandler, levelMapper);
-        let ratingsController = new RatingsController(errorHandler);
-        let levelsMiddleware = new LevelsMiddleware(errorHandler);
-        let usersMiddleware = new UsersMiddleware(errorHandler);
+    constructor(
+        @inject(LevelListController) private levelListController: LevelListController,
+        @inject(LevelsController) private levelsController: LevelsController,
+        @inject(RatingsController) private ratingsController: RatingsController,
+        @inject(LevelsMiddleware) private levelsMiddleware: LevelsMiddleware,
+        @inject(UsersMiddleware) private usersMiddleware: UsersMiddleware
+    ) {
+    }
 
+    configureRoutes(app: express.Application) {
         // Levels Routes
         app.route('/levels')
-            .get(levelListController.paginate)
-            .post(usersMiddleware.requiresLogin, levelsController.create);
+            .get(this.levelListController.paginate)
+            .post(this.usersMiddleware.requiresLogin, this.levelsController.create);
 
         app.route('/levels/:levelId')
-            .get(levelsController.read)
-            .put(usersMiddleware.requiresLogin, levelsMiddleware.hasAuthorization, levelsController.update)
-            .delete(usersMiddleware.requiresLogin, levelsMiddleware.hasAuthorization, levelsController.delete);
+            .get(this.levelsController.read)
+            .put(this.usersMiddleware.requiresLogin, this.levelsMiddleware.hasAuthorization, this.levelsController.update)
+            .delete(this.usersMiddleware.requiresLogin, this.levelsMiddleware.hasAuthorization, this.levelsController.delete);
 
         app.route('/levels/:levelId/ratings')
-            .post(usersMiddleware.requiresLogin, ratingsController.upsertRating);
+            .post(this.usersMiddleware.requiresLogin, this.ratingsController.upsertRating);
 
         // Finish by binding the Level middleware
-        app.param('levelId', levelsMiddleware.levelByID);
+        app.param('levelId', this.levelsMiddleware.levelByID);
     }
 }

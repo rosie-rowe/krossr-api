@@ -1,6 +1,8 @@
 import { Rating } from '../models/RatingModel';
 import { ErrorHandler } from '../Error/ErrorHandler';
+import { injectable } from 'inversify';
 
+@injectable()
 export class RatingsController {
     constructor(
         private errorHandler: ErrorHandler
