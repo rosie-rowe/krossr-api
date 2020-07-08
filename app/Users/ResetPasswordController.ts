@@ -64,8 +64,8 @@ export class ResetPasswordController {
             return this.errorHandler.sendClientErrorResponse(res, 'Password reset token is invalid or has expired');
         } else {
             if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
-                user.resetPasswordToken = undefined;
-                user.resetPasswordExpires = undefined;
+                user.resetPasswordToken = null;
+                user.resetPasswordExpires = null;
 
                 user.setPassword(passwordDetails.newPassword);
 
