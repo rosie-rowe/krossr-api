@@ -1,10 +1,7 @@
 import { ErrorHandler } from '../Error/ErrorHandler';
-import { WinstonConfiguration } from '../../config/winston';
 import { User } from '../models/UserModel';
 import { UserViewModelMapper } from './UserViewModelMapper';
 import { injectable, inject } from 'inversify';
-
-let winston = WinstonConfiguration.initialize();
 
 @injectable()
 export class SignUpController {
@@ -21,12 +18,8 @@ export class SignUpController {
         // Add missing user fields
         user.setPassword(req.body.password);
 
-        winston.info('About to save the user...');
-
         // Then save the user
         user.save().then(() => {
-            winston.info('Saved the user!');
-
             req.login(user, (err) => {
                 if (err) {
                     return this.errorHandler.sendUnknownServerErrorResponse(res, err);
