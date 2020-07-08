@@ -105,7 +105,8 @@ export class ExpressConfiguration {
         let levelsRoutes = DIContainer.get<LevelsRoutes>(LevelsRoutes);
         levelsRoutes.configureRoutes(app);
 
-        UsersRoutes.configureRoutes(app);
+        let usersRoutes = DIContainer.get<UsersRoutes>(UsersRoutes);
+        usersRoutes.configureRoutes(app);
 
         // Assume 404 since no middleware responded
         app.use((req, res) => {

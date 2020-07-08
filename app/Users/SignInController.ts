@@ -3,11 +3,13 @@ import { User } from '../models/UserModel';
 import { UserViewModelMapper } from './UserViewModelMapper';
 import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
 import { ErrorHandler } from '../Error/ErrorHandler';
+import { inject, injectable } from 'inversify';
 
+@injectable()
 export class SignInController {
     constructor(
-        private errorHandler: ErrorHandler,
-        private userMapper: UserViewModelMapper
+        @inject(ErrorHandler) private errorHandler: ErrorHandler,
+        @inject(UserViewModelMapper) private userMapper: UserViewModelMapper
     ) {
     }
 

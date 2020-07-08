@@ -2,10 +2,12 @@ import { ErrorHandler } from '../Error/ErrorHandler';
 import { User } from '../models/UserModel';
 import { KrossrErrorResponse } from '../KrossrResponse/KrossrErrorResponse';
 import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
+import { inject, injectable } from 'inversify';
 
+@injectable()
 export class ChangePasswordController {
     constructor(
-        private errorHandler: ErrorHandler
+        @inject(ErrorHandler) private errorHandler: ErrorHandler
     ) {
     }
 

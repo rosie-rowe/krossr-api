@@ -4,11 +4,13 @@ import * as _ from 'lodash';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { UserRequest } from './UserRequest';
 import { UserViewModelMapper } from './UserViewModelMapper';
+import { injectable, inject } from 'inversify';
 
+@injectable()
 export class UserProfileController {
     constructor(
-        private errorHandler: ErrorHandler,
-        private userMapper: UserViewModelMapper,
+        @inject(ErrorHandler) private errorHandler: ErrorHandler,
+        @inject(UserViewModelMapper) private userMapper: UserViewModelMapper,
     ) {
     }
 

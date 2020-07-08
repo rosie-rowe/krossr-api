@@ -4,11 +4,13 @@ import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { MailerService } from '../Mailer/MailerService';
+import { injectable, inject } from 'inversify';
 
+@injectable()
 export class ForgotPasswordController {
     constructor(
-        private errorHandler: ErrorHandler,
-        private mailerService: MailerService
+        @inject(ErrorHandler) private errorHandler: ErrorHandler,
+        @inject(MailerService) private mailerService: MailerService
     ) {
     }
 

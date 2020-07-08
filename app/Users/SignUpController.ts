@@ -2,13 +2,15 @@ import { ErrorHandler } from '../Error/ErrorHandler';
 import { WinstonConfiguration } from '../../config/winston';
 import { User } from '../models/UserModel';
 import { UserViewModelMapper } from './UserViewModelMapper';
+import { injectable, inject } from 'inversify';
 
 let winston = WinstonConfiguration.initialize();
 
+@injectable()
 export class SignUpController {
     constructor(
-        private errorHandler: ErrorHandler,
-        private userMapper: UserViewModelMapper
+        @inject(ErrorHandler) private errorHandler: ErrorHandler,
+        @inject(UserViewModelMapper) private userMapper: UserViewModelMapper
     ) {
     }
 

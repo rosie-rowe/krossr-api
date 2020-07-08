@@ -7,12 +7,14 @@ import { UserViewModelMapper } from './UserViewModelMapper';
 import { MailerService } from '../Mailer/MailerService';
 import { ResetPasswordValidationResponse } from './ResetPasswordValidationResponse';
 import { IEnvironmentConfiguration } from '../../config/env/IEnvironmentConfiguration';
+import { injectable, inject } from 'inversify';
 
+@injectable()
 export class ResetPasswordController {
     constructor(
-        private errorHandler: ErrorHandler,
-        private mailerService: MailerService,
-        private userMapper: UserViewModelMapper
+        @inject(ErrorHandler) private errorHandler: ErrorHandler,
+        @inject(MailerService) private mailerService: MailerService,
+        @inject(UserViewModelMapper) private userMapper: UserViewModelMapper
     ) {
     }
 

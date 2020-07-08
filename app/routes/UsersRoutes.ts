@@ -3,43 +3,40 @@ import { UserProfileController } from '../Users/UserProfileController';
 import { SignInController } from '../Users/SignInController';
 import { SignOutController } from '../Users/SignOutController';
 import { SignUpController } from '../Users/SignUpController';
-import { ErrorHandler } from '../Error/ErrorHandler';
 import { ChangePasswordController } from '../Users/ChangePasswordController';
 import { ForgotPasswordController } from '../Users/ForgotPasswordController';
 import { ResetPasswordController } from '../Users/ResetPasswordController';
-import { UserViewModelMapper } from '../Users/UserViewModelMapper';
-import { MailerService } from '../Mailer/MailerService';
+import { inject, injectable } from 'inversify';
 
+@injectable()
 export class UsersRoutes {
-    private static userMapper = new UserViewModelMapper();
-    private static errorHandler = new ErrorHandler();
-    private static signOutController = new SignOutController();
+    constructor(
+        @inject(ChangePasswordController) private changePasswordController: ChangePasswordController,
+        @inject(ForgotPasswordController) private forgotPasswordController: ForgotPasswordController,
+        @inject(ResetPasswordController) private resetPasswordController: ResetPasswordController,
+        @inject(SignInController) private signInController: SignInController,
+        @inject(SignOutController) private signOutController: SignOutController,
+        @inject(SignUpController) private signUpController: SignUpController,
+        @inject(UserProfileController) private userProfileController: UserProfileController
+    ) {
+    }
 
-    static configureRoutes(app: express.Application) {
-        let mailerService = new MailerService();
-
-        let userProfileController = new UserProfileController(this.errorHandler, this.userMapper);
-        let signInController = new SignInController(this.errorHandler, this.userMapper);
-        let signUpController = new SignUpController(this.errorHandler, this.userMapper);
-        let changePasswordController = new ChangePasswordController(this.errorHandler);
-        let forgotPasswordController = new ForgotPasswordController(this.errorHandler, mailerService);
-        let resetPasswordController = new ResetPasswordController(this.errorHandler, mailerService, this.userMapper);
-
+    configureRoutes(app: express.Application) {
         // Setting up the users profile api
-        app.route('/users/me').get(userProfileController.me);
-        app.route('/users').put(userProfileController.update);
+        app.route('/users/me').get(this.userProfileController.me);
+        app.route('/users').put(this.userProfileController.update);
 
-        // Setting up the users authentication ap
-        app.route('/auth/signin').post(signInController.signIn);
+        // Setting up the users authentication api
+        app.route('/auth/signin').post(this.signInController.signIn);
         app.route('/auth/signout').post(this.signOutController.signOut);
-        app.route('/auth/signup').post(signUpController.signUp);
+        app.route('/auth/signup').post(this.signUpController.signUp);
 
         // Setting up the users password api
-        app.route('/users/password').post(changePasswordController.changePassword);
-        app.route('/auth/forgot').post(forgotPasswordController.forgot);
+        app.route('/users/password').post(this.changePasswordController.changePassword);
+        app.route('/auth/forgot').post(this.forgotPasswordController.forgot);
 
         app.route('/auth/reset/:token')
-            .get(resetPasswordController.validateResetToken)
-            .post(resetPasswordController.reset);
+            .get(this.resetPasswordController.validateResetToken)
+            .post(this.resetPasswordController.reset);
     }
 }
