@@ -3,10 +3,10 @@
 import { EnvironmentConfiguration } from './config';
 import express from 'express';
 import * as passport from 'passport';
-import DIContainer from '../di-container';
 import { UsersRoutes } from '../app/Routes/UsersRoutes';
 import { IKrossrDatabase } from '../app/Database/IKrossrDatabase';
 import { LevelsRoutes } from '../app/Routes/LevelsRoutes';
+import { inject, injectable } from 'inversify';
 let config = EnvironmentConfiguration.getConfiguration();
 let morgan = require('morgan');
 let bodyParser = require('body-parser');
@@ -20,8 +20,15 @@ let flash = require('connect-flash');
 let consolidate = require('consolidate');
 let winston = require('winston');
 
+@injectable()
 export class ExpressConfiguration {
-    static configure(db: IKrossrDatabase): express.Application {
+    constructor(
+        @inject(LevelsRoutes) private levelsRoutes: LevelsRoutes,
+        @inject(UsersRoutes) private usersRoutes: UsersRoutes
+    ) {
+    }
+
+    configure(db: IKrossrDatabase): express.Application {
         winston.info('Intializing Express!');
 
         // Initialize express app
@@ -102,11 +109,8 @@ export class ExpressConfiguration {
         app.use(helmet.ienoopen());
         app.disable('x-powered-by');
 
-        let levelsRoutes = DIContainer.get<LevelsRoutes>(LevelsRoutes);
-        levelsRoutes.configureRoutes(app);
-
-        let usersRoutes = DIContainer.get<UsersRoutes>(UsersRoutes);
-        usersRoutes.configureRoutes(app);
+        this.levelsRoutes.configureRoutes(app);
+        this.usersRoutes.configureRoutes(app);
 
         // Assume 404 since no middleware responded
         app.use((req, res) => {

@@ -4,6 +4,7 @@
  */
 
 import 'reflect-metadata';
+import DIContainer from './di-container';
 import { WinstonConfiguration } from './config/winston';
 import { EnvironmentConfiguration } from './config/config';
 import { SequelizeConfiguration } from './config/sequelizeConfig';
@@ -17,7 +18,8 @@ winston.info(`Starting ${config.app.title} ...`);
 let db = SequelizeConfiguration.initialize();
 
 // Init the express application
-let app = ExpressConfiguration.configure(db);
+let expressConfig = DIContainer.get<ExpressConfiguration>(ExpressConfiguration);
+let app = expressConfig.configure(db);
 
 // Bootstrap passport config
 PassportConfiguration.configure();

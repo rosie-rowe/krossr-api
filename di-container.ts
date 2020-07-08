@@ -1,3 +1,5 @@
+// this file should ONLY be imported into server.ts
+
 import { Container } from 'inversify';
 import { ErrorHandler } from './app/Error/ErrorHandler';
 import { LevelListLevelViewModelMapper } from './app/LevelList/LevelListLevelViewModelMapper';
@@ -19,6 +21,7 @@ import { ChangePasswordController } from './app/Users/ChangePasswordController';
 import { ForgotPasswordController } from './app/Users/ForgotPasswordController';
 import { ResetPasswordController } from './app/Users/ResetPasswordController';
 import { UsersRoutes } from './app/Routes/UsersRoutes';
+import { ExpressConfiguration } from './config/expressConfig';
 
 let DIContainer = new Container();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
@@ -48,5 +51,7 @@ DIContainer.bind<UsersMiddleware>(UsersMiddleware).toSelf();
 
 DIContainer.bind<LevelsRoutes>(LevelsRoutes).toSelf().inSingletonScope();
 DIContainer.bind<UsersRoutes>(UsersRoutes).toSelf().inSingletonScope();
+
+DIContainer.bind<ExpressConfiguration>(ExpressConfiguration).toSelf().inSingletonScope();
 
 export default DIContainer;
