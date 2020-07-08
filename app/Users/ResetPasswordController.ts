@@ -5,6 +5,7 @@ import { User } from '../models/UserModel';
 import { Op } from 'sequelize';
 import { UserViewModelMapper } from './UserViewModelMapper';
 import { MailerService } from '../Mailer/MailerService';
+import { ResetPasswordValidationResponse } from './ResetPasswordValidationResponse';
 
 export class ResetPasswordController {
     constructor(
@@ -15,26 +16,16 @@ export class ResetPasswordController {
     }
 
     /**
-     * Reset password GET from email token, TODO this isn't actually called?
+     * Reset password GET from email token
      */
-    public validateResetToken = (req, res) => {
-        User.findOne({
-            where: {
-                resetPasswordToken: req.params.token,
-                resetPasswordExpires: {
-                    [Op.gt]: new Date()
-                }
-            }
-        }).then((user) => {
-            // TODO these redirects suck
-            if (!user) {
-                return res.redirect('/password/reset/invalid');
-            }
+    public validateResetToken = async (req, res: ResetPasswordValidationResponse) => {
+        try {
+            let user = await this.getUserByToken(req.params.token);
 
-            res.redirect('/password/reset/' + req.params.token);
-        }).catch((err) => {
+            return res.send({ valid: !!user });
+        } catch (err) {
             return this.errorHandler.sendUnknownServerErrorResponse(res, err);
-        });
+        }
     }
 
     // TODO refactor
@@ -109,6 +100,17 @@ export class ResetPasswordController {
             }
         ], (err) => {
             if (err) { return next(err); }
+        });
+    }
+
+    private async getUserByToken(token: string) {
+        return await User.findOne({
+            where: {
+                resetPasswordToken: token,
+                resetPasswordExpires: {
+                    [Op.gt]: new Date()
+                }
+            }
         });
     }
 }
