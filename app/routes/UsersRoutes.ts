@@ -7,9 +7,10 @@ import { ChangePasswordController } from '../Users/ChangePasswordController';
 import { ForgotPasswordController } from '../Users/ForgotPasswordController';
 import { ResetPasswordController } from '../Users/ResetPasswordController';
 import { inject, injectable } from 'inversify';
+import { RouteConfiguration } from './RouteConfiguration';
 
 @injectable()
-export class UsersRoutes {
+export class UsersRoutes implements RouteConfiguration {
     constructor(
         @inject(ChangePasswordController) private changePasswordController: ChangePasswordController,
         @inject(ForgotPasswordController) private forgotPasswordController: ForgotPasswordController,

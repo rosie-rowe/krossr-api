@@ -3,10 +3,10 @@
 import { EnvironmentConfiguration } from './config';
 import express from 'express';
 import * as passport from 'passport';
-import { UsersRoutes } from '../app/Routes/UsersRoutes';
 import { IKrossrDatabase } from '../app/Database/IKrossrDatabase';
-import { LevelsRoutes } from '../app/Routes/LevelsRoutes';
-import { inject, injectable } from 'inversify';
+import { injectable, multiInject } from 'inversify';
+import { RouteConfiguration } from '../app/Routes/RouteConfiguration';
+import { RouteSymbols } from '../app/routes/RouteSymbols';
 let config = EnvironmentConfiguration.getConfiguration();
 let morgan = require('morgan');
 let bodyParser = require('body-parser');
@@ -23,8 +23,7 @@ let winston = require('winston');
 @injectable()
 export class ExpressConfiguration {
     constructor(
-        @inject(LevelsRoutes) private levelsRoutes: LevelsRoutes,
-        @inject(UsersRoutes) private usersRoutes: UsersRoutes
+        @multiInject(RouteSymbols.RouteConfiguration) private routeConfigs: RouteConfiguration[],
     ) {
     }
 
@@ -109,8 +108,7 @@ export class ExpressConfiguration {
         app.use(helmet.ienoopen());
         app.disable('x-powered-by');
 
-        this.levelsRoutes.configureRoutes(app);
-        this.usersRoutes.configureRoutes(app);
+        this.routeConfigs.forEach(routeConfig => routeConfig.configureRoutes(app));
 
         // Assume 404 since no middleware responded
         app.use((req, res) => {

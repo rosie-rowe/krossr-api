@@ -5,9 +5,10 @@ import { LevelsController } from '../Levels/LevelsController';
 import { UsersMiddleware } from '../Users/UsersMiddleware';
 import { RatingsController } from '../Ratings/RatingsController';
 import { inject, injectable } from 'inversify';
+import { RouteConfiguration } from './RouteConfiguration';
 
 @injectable()
-export class LevelsRoutes {
+export class LevelsRoutes implements RouteConfiguration {
     constructor(
         @inject(LevelListController) private levelListController: LevelListController,
         @inject(LevelsController) private levelsController: LevelsController,

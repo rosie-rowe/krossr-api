@@ -22,6 +22,8 @@ import { ForgotPasswordController } from './app/Users/ForgotPasswordController';
 import { ResetPasswordController } from './app/Users/ResetPasswordController';
 import { UsersRoutes } from './app/Routes/UsersRoutes';
 import { ExpressConfiguration } from './config/expressConfig';
+import { RouteConfiguration } from './app/Routes/RouteConfiguration';
+import { RouteSymbols } from './app/routes/RouteSymbols';
 
 let DIContainer = new Container();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
@@ -49,8 +51,8 @@ DIContainer.bind<UserProfileController>(UserProfileController).toSelf();
 DIContainer.bind<LevelsMiddleware>(LevelsMiddleware).toSelf();
 DIContainer.bind<UsersMiddleware>(UsersMiddleware).toSelf();
 
-DIContainer.bind<LevelsRoutes>(LevelsRoutes).toSelf().inSingletonScope();
-DIContainer.bind<UsersRoutes>(UsersRoutes).toSelf().inSingletonScope();
+DIContainer.bind<RouteConfiguration>(RouteSymbols.RouteConfiguration).to(LevelsRoutes).inSingletonScope();
+DIContainer.bind<RouteConfiguration>(RouteSymbols.RouteConfiguration).to(UsersRoutes).inSingletonScope();
 
 DIContainer.bind<ExpressConfiguration>(ExpressConfiguration).toSelf().inSingletonScope();
 
