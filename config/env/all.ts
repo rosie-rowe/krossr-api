@@ -1,7 +1,8 @@
-'use strict';
+import { injectable } from 'inversify';
 
+@injectable()
 export class EnvironmentConfigurationDefaults {
-    static getDefaults() {
+    getDefaults() {
         return {
             app: {
                 title: 'krossr',

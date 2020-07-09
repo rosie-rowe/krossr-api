@@ -10,7 +10,10 @@ import { EnvironmentConfiguration } from './config/config';
 import { SequelizeConfiguration } from './config/sequelizeConfig';
 import { ExpressConfiguration } from './config/expressConfig';
 import { PassportConfiguration } from './config/passportConfig';
-let config = EnvironmentConfiguration.getConfiguration();
+
+let environmentConfiguration = DIContainer.get<EnvironmentConfiguration>(EnvironmentConfiguration);
+let config = environmentConfiguration.getConfiguration();
+
 let winston = WinstonConfiguration.initialize();
 
 winston.info(`Starting ${config.app.title} ...`);

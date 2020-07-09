@@ -36,6 +36,8 @@ import { AuthenticationStrategy } from './config/strategies/AuthenticationStrate
 import { AuthenticationStrategySymbols } from './config/strategies/AuthenticationStrategySymbols';
 import { LocalPassportStrategy } from './config/strategies/LocalPassportStrategy';
 import { PassportConfiguration } from './config/passportConfig';
+import { EnvironmentConfiguration } from './config/config';
+import { EnvironmentConfigurationDefaults } from './config/env/all';
 
 let DIContainer = new Container();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
@@ -74,6 +76,10 @@ DIContainer.bind<RouteConfiguration>(RouteSymbols.RouteConfiguration).to(LevelsR
 DIContainer.bind<RouteConfiguration>(RouteSymbols.RouteConfiguration).to(UsersRoutes).inSingletonScope();
 
 DIContainer.bind<AuthenticationStrategy>(AuthenticationStrategySymbols.AuthenticationStrategy).to(LocalPassportStrategy);
+
+DIContainer.bind<EnvironmentConfigurationDefaults>(EnvironmentConfigurationDefaults).toSelf();
+
+DIContainer.bind<EnvironmentConfiguration>(EnvironmentConfiguration).toSelf().inSingletonScope();
 
 DIContainer.bind<ExpressConfiguration>(ExpressConfiguration).toSelf().inSingletonScope();
 DIContainer.bind<PassportConfiguration>(PassportConfiguration).toSelf().inSingletonScope();

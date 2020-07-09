@@ -5,18 +5,21 @@ import { User } from '../models/UserModel';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { MailerService } from '../Mailer/MailerService';
 import { injectable, inject } from 'inversify';
+import { IEnvironmentConfiguration } from '../../config/env/IEnvironmentConfiguration';
 
 @injectable()
 export class ForgotPasswordController {
+    private config: IEnvironmentConfiguration;
+
     constructor(
+        @inject(EnvironmentConfiguration) private environmentConfiguration: EnvironmentConfiguration,
         @inject(ErrorHandler) private errorHandler: ErrorHandler,
         @inject(MailerService) private mailerService: MailerService
     ) {
+        this.config = this.environmentConfiguration.getConfiguration();
     }
 
     public forgot = (req, res, next) => {
-        let config = EnvironmentConfiguration.getConfiguration();
-
         async.waterfall([
             // Generate random token
             (done) => {
@@ -62,7 +65,7 @@ export class ForgotPasswordController {
             (token, user, done) => {
                 res.render('templates/reset-password-email', {
                     name: user.username,
-                    appName: config.app.title,
+                    appName: this.config.app.title,
                     url: 'http://' + req.headers.host + '/auth/reset/' + token
                 }, (err, emailHTML) => {
                     done(err, emailHTML, user);
@@ -72,7 +75,7 @@ export class ForgotPasswordController {
             async (emailHTML, user, done) => {
                 let mailOptions = {
                     to: user.email,
-                    from: config.mailer.from,
+                    from: this.config.mailer.from,
                     subject: 'Password Reset',
                     html: emailHTML
                 };

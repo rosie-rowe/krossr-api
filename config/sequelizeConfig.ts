@@ -5,16 +5,16 @@ import { WinstonConfiguration } from './winston';
 import { Sequelize } from 'sequelize';
 import { EnvironmentConfiguration } from './config';
 import * as sequelize from 'sequelize';
-import { multiInject, injectable } from 'inversify';
+import { multiInject, injectable, inject } from 'inversify';
 import { ModelSymbols } from '../app/models/ModelSymbols';
 import { ModelConfiguration } from '../app/models/ModelConfiguration';
 
-let config = EnvironmentConfiguration.getConfiguration();
 let winston = WinstonConfiguration.initialize();
 
 @injectable()
 export class SequelizeConfiguration {
     constructor(
+        @inject(EnvironmentConfiguration) private environmentConfiguration: EnvironmentConfiguration,
         @multiInject(ModelSymbols.ModelConfiguration) private modelConfigs: ModelConfiguration<Sequelize>[]
     ) {
     }
@@ -23,6 +23,8 @@ export class SequelizeConfiguration {
         let db: { sequelize?: sequelize.Sequelize } = {};
 
         winston.info('Initializing Sequelize...');
+
+        let config = this.environmentConfiguration.getConfiguration();
 
         // create your instance of sequelize
         let sequelize = new Sequelize(config.db.name, config.db.username, config.db.password, {

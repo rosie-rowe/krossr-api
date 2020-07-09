@@ -11,11 +11,15 @@ import { injectable, inject } from 'inversify';
 
 @injectable()
 export class ResetPasswordController {
+    private config: IEnvironmentConfiguration;
+
     constructor(
+        @inject(EnvironmentConfiguration) private environmentConfiguration: EnvironmentConfiguration,
         @inject(ErrorHandler) private errorHandler: ErrorHandler,
         @inject(MailerService) private mailerService: MailerService,
         @inject(UserViewModelMapper) private userMapper: UserViewModelMapper
     ) {
+        this.config = this.environmentConfiguration.getConfiguration();
     }
 
     /**
@@ -33,8 +37,6 @@ export class ResetPasswordController {
     }
 
     public reset = (req, res, next) => {
-        let config = EnvironmentConfiguration.getConfiguration();
-
         async.waterfall([
             async (done) => {
                 let user = await this.getUserByToken(req.params.token);
@@ -42,8 +44,8 @@ export class ResetPasswordController {
                 done(null, user);
             },
             (user: User, done) => this.resetPassword(req, res, user, done),
-            async (user: User, done) => this.renderEmailTemplate(res, config, user, done),
-            async (emailHTML: string, user: User, done) => this.sendEmail(config, user.email, emailHTML, done)
+            async (user: User, done) => this.renderEmailTemplate(res, user, done),
+            async (emailHTML: string, user: User, done) => this.sendEmail(user.email, emailHTML, done)
         ], (err) => {
             if (err) { return next(err); }
         });
@@ -93,20 +95,20 @@ export class ResetPasswordController {
         }
     }
 
-    private async renderEmailTemplate(res, config: IEnvironmentConfiguration, user: User, done) {
+    private async renderEmailTemplate(res, user: User, done) {
         res.render('templates/reset-password-confirm-email', {
             name: user.username,
-            appName: config.app.title
+            appName: this.config.app.title
         }, (err, emailHTML) => {
             done(err, emailHTML, user);
         });
     }
 
     // If valid email, send reset email using service
-    private async sendEmail(config: IEnvironmentConfiguration, to: string, emailHTML: string, done) {
+    private async sendEmail(to: string, emailHTML: string, done) {
         let mailOptions = {
             to,
-            from: config.mailer.from,
+            from: this.config.mailer.from,
             subject: 'Your password has been changed',
             html: emailHTML
         };

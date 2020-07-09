@@ -4,10 +4,10 @@ import { EnvironmentConfiguration } from './config';
 import express from 'express';
 import * as passport from 'passport';
 import { IKrossrDatabase } from '../app/Database/IKrossrDatabase';
-import { injectable, multiInject } from 'inversify';
+import { injectable, multiInject, inject } from 'inversify';
 import { RouteConfiguration } from '../app/Routes/RouteConfiguration';
 import { RouteSymbols } from '../app/routes/RouteSymbols';
-let config = EnvironmentConfiguration.getConfiguration();
+import { IEnvironmentConfiguration } from './env/IEnvironmentConfiguration';
 let morgan = require('morgan');
 let bodyParser = require('body-parser');
 let session = require('express-session');
@@ -22,9 +22,13 @@ let winston = require('winston');
 
 @injectable()
 export class ExpressConfiguration {
+    private config: IEnvironmentConfiguration;
+
     constructor(
+        @inject(EnvironmentConfiguration) private environmentConfiguration: EnvironmentConfiguration,
         @multiInject(RouteSymbols.RouteConfiguration) private routeConfigs: RouteConfiguration[],
     ) {
+        this.config = this.environmentConfiguration.getConfiguration();
     }
 
     configure(db: IKrossrDatabase): express.Application {
@@ -51,7 +55,7 @@ export class ExpressConfiguration {
         app.set('showStackError', true);
 
         // Set swig as the template engine
-        app.engine('server.view.html', consolidate[config.templateEngine]);
+        app.engine('server.view.html', consolidate[this.config.templateEngine]);
 
         // Set views path and view engine
         app.set('view engine', 'server.view.html');
