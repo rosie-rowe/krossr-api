@@ -24,6 +24,7 @@ import { UsersRoutes } from './app/Routes/UsersRoutes';
 import { ExpressConfiguration } from './config/expressConfig';
 import { RouteConfiguration } from './app/Routes/RouteConfiguration';
 import { RouteSymbols } from './app/routes/RouteSymbols';
+import { LevelService } from './app/Levels/LevelService';
 
 let DIContainer = new Container();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
@@ -33,6 +34,7 @@ DIContainer.bind<LevelListLevelViewModelMapper>(LevelListLevelViewModelMapper).t
 
 DIContainer.bind<UserViewModelMapper>(UserViewModelMapper).toSelf();
 
+DIContainer.bind<LevelService>(LevelService).toSelf();
 DIContainer.bind<LevelListService>(LevelListService).toSelf();
 DIContainer.bind<MailerService>(MailerService).toSelf();
 

@@ -4,11 +4,13 @@ import { LevelRequest } from './LevelRequest';
 import { Response } from 'express';
 import { LevelViewModelMapper } from './LevelViewModelMapper';
 import { inject, injectable } from 'inversify';
+import { LevelService } from './LevelService';
 
 @injectable()
 export class LevelsController {
     constructor(
         @inject(ErrorHandler) private errorHandler: ErrorHandler,
+        @inject(LevelService) private levelService: LevelService,
         @inject(LevelViewModelMapper) private levelMapper: LevelViewModelMapper
     ) {
     }
@@ -34,14 +36,13 @@ export class LevelsController {
     /**
      * Delete a Level
      */
-    public delete = (req: LevelRequest, res: Response) => {
-        let level = req.level;
-
-        level.destroy().then(() => {
+    public delete = async (req: LevelRequest, res: Response) => {
+        try {
+            await this.levelService.deleteLevel(req.level);
             return res.status(200).send();
-        }).catch(function(err) {
+        } catch (err) {
             this.errorHandler.sendUnknownServerErrorResponse(res, err);
-        });
+        }
     }
 
     /**
