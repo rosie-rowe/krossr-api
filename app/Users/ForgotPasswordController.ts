@@ -27,6 +27,7 @@ export class ForgotPasswordController {
             },
             // Lookup user by username
             (token, done) => {
+                // TODO
                 if (req.body.username) {
                     User.findOne({
                         attributes: {

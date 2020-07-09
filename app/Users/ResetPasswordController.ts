@@ -23,6 +23,7 @@ export class ResetPasswordController {
      */
     public validateResetToken = async (req, res: ResetPasswordValidationResponse) => {
         try {
+            // TODO
             let user = await this.getUserByToken(req.params.token);
 
             return res.send({ valid: !!user });
@@ -60,7 +61,7 @@ export class ResetPasswordController {
     }
 
     private resetPassword(req, res, user: User, done) {
-        let passwordDetails = req.body;
+        let passwordDetails = req.body; // TODO
 
         if (!user) {
             return this.errorHandler.sendClientErrorResponse(res, 'Password reset token is invalid or has expired');

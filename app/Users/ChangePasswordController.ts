@@ -13,7 +13,7 @@ export class ChangePasswordController {
 
     public changePassword = async (req: KrossrRequest, res) => {
         // Init Variables
-        let passwordDetails = req.body;
+        let passwordDetails = req.body; // TODO
 
         if (!passwordDetails.newPassword) {
             return this.newPasswordMissing(res);

@@ -12,7 +12,7 @@ export class SignUpController {
     }
 
     public signUp = (req, res) => {
-        // Init Variables
+        // Init Variables TODO
         let user = User.build(req.body);
 
         // Add missing user fields

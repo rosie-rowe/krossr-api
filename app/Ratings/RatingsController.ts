@@ -15,7 +15,7 @@ export class RatingsController {
     public upsertRating = (req, res) => {
         let level = req.level;
         let user = req.user;
-        let rating = Rating.build(req.body);
+        let rating = Rating.build(req.body); // TODO
 
         Rating.findOrCreate({
             where: {
