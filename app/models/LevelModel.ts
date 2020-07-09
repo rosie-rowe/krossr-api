@@ -3,7 +3,7 @@ import { User } from './UserModel';
 import { Rating } from './RatingModel';
 import btoa from 'btoa';
 
-interface LevelCreationAttributes {
+export interface LevelCreationAttributes {
     name: string;
     layout: string;
     size: number;
@@ -36,23 +36,6 @@ export class Level extends Model<LevelAttributes, LevelCreationAttributes> imple
         user: Association<Level, User>,
         ratings: Association<Level, Rating>
     };
-
-    encodeLayout() {
-        /*
-         * For some reason, this gets called twice when updating a level.
-         * If the layout has already been encoded, it will throw an error if it is attempted to be re-encoded.
-         * Therefore, just return
-         */
-        if (!Array.isArray(this.layout)) {
-            return;
-        }
-
-        let converted = Array.prototype.concat.apply([], this.layout) // flatten
-            .map((value) => value ? '1' : '0')
-            .join('');
-
-        this.layout = btoa(converted);
-    }
 }
 
 export class LevelConfiguration {
@@ -96,11 +79,6 @@ export class LevelConfiguration {
             }
         }, {
             tableName: 'levels',
-            hooks: {
-                beforeValidate(level) {
-                    level.encodeLayout();
-                }
-            },
             sequelize
         });
 

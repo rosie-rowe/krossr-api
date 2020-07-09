@@ -13,9 +13,7 @@ export class LevelListLevelViewModelMapper implements ViewModelMapper<Level, Lev
             size: model.size,
             avgRating: (model as any).dataValues.avgRating, // TODO
             createdAt: model.createdAt.toString(),
-            user: {
-                username: model.user.username
-            }
+            user: model.user
         };
     }
 
