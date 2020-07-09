@@ -2,7 +2,7 @@ import { Sequelize, Model, DataTypes } from 'sequelize';
 import { ModelConfiguration } from './ModelConfiguration';
 import { injectable } from 'inversify';
 
-interface RatingCreationAttributes {
+export interface RatingCreationAttributes {
     rating: number;
     levelId: number;
     userId: number;

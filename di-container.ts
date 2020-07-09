@@ -41,6 +41,7 @@ import { EnvironmentConfigurationDefaults } from './config/env/all';
 import { KrossrLoggerProvider } from './app/Logger/KrossrLoggerProvider';
 import { LoggerSymbols } from './app/Logger/LoggerSymbols';
 import { WinstonConfiguration } from './config/winston';
+import { RatingsService } from './app/Ratings/RatingsService';
 
 let DIContainer = new Container();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
@@ -53,6 +54,7 @@ DIContainer.bind<UserViewModelMapper>(UserViewModelMapper).toSelf();
 DIContainer.bind<LevelService>(LevelService).toSelf();
 DIContainer.bind<LevelListService>(LevelListService).toSelf();
 DIContainer.bind<MailerService>(MailerService).toSelf();
+DIContainer.bind<RatingsService>(RatingsService).toSelf();
 
 DIContainer.bind<LevelListController>(LevelListController).toSelf();
 DIContainer.bind<LevelsController>(LevelsController).toSelf();
