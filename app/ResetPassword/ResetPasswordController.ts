@@ -3,11 +3,12 @@ import { ErrorHandler } from '../Error/ErrorHandler';
 import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
 import { Op } from 'sequelize';
-import { UserViewModelMapper } from './UserViewModelMapper';
+import { UserViewModelMapper } from '../Users/UserViewModelMapper';
 import { MailerService } from '../Mailer/MailerService';
 import { ResetPasswordValidationResponse } from './ResetPasswordValidationResponse';
 import { IEnvironmentConfiguration } from '../../config/env/IEnvironmentConfiguration';
 import { injectable, inject } from 'inversify';
+import { ResetPasswordRequest } from './ResetPasswordRequest';
 
 @injectable()
 export class ResetPasswordController {
@@ -62,8 +63,8 @@ export class ResetPasswordController {
         });
     }
 
-    private resetPassword(req, res, user: User, done) {
-        let passwordDetails = req.body; // TODO
+    private resetPassword(req: ResetPasswordRequest, res, user: User, done) {
+        let passwordDetails = req.body;
 
         if (!user) {
             return this.errorHandler.sendClientErrorResponse(res, 'Password reset token is invalid or has expired');

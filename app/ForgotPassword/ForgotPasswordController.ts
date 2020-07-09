@@ -6,6 +6,7 @@ import { ErrorHandler } from '../Error/ErrorHandler';
 import { MailerService } from '../Mailer/MailerService';
 import { injectable, inject } from 'inversify';
 import { IEnvironmentConfiguration } from '../../config/env/IEnvironmentConfiguration';
+import { ForgotPasswordRequest } from './ForgotPasswordRequest';
 
 @injectable()
 export class ForgotPasswordController {
@@ -19,7 +20,8 @@ export class ForgotPasswordController {
         this.config = this.environmentConfiguration.getConfiguration();
     }
 
-    public forgot = (req, res, next) => {
+    public forgot = (req: ForgotPasswordRequest, res, next) => {
+        // TODO refactor
         async.waterfall([
             // Generate random token
             (done) => {
@@ -30,7 +32,6 @@ export class ForgotPasswordController {
             },
             // Lookup user by username
             (token, done) => {
-                // TODO
                 if (req.body.username) {
                     User.findOne({
                         attributes: {

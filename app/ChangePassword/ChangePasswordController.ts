@@ -3,6 +3,7 @@ import { User } from '../models/UserModel';
 import { KrossrErrorResponse } from '../KrossrResponse/KrossrErrorResponse';
 import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
 import { inject, injectable } from 'inversify';
+import { ChangePasswordRequest } from './ChangePasswordRequest';
 
 @injectable()
 export class ChangePasswordController {
@@ -11,9 +12,8 @@ export class ChangePasswordController {
     ) {
     }
 
-    public changePassword = async (req: KrossrRequest, res) => {
-        // Init Variables
-        let passwordDetails = req.body; // TODO
+    public changePassword = async (req: ChangePasswordRequest, res) => {
+        let passwordDetails = req.body;
 
         if (!passwordDetails.newPassword) {
             return this.newPasswordMissing(res);

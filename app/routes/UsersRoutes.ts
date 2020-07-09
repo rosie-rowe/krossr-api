@@ -3,9 +3,9 @@ import { UserProfileController } from '../Users/UserProfileController';
 import { SignInController } from '../Users/SignInController';
 import { SignOutController } from '../Users/SignOutController';
 import { SignUpController } from '../Users/SignUpController';
-import { ChangePasswordController } from '../Users/ChangePasswordController';
-import { ForgotPasswordController } from '../Users/ForgotPasswordController';
-import { ResetPasswordController } from '../Users/ResetPasswordController';
+import { ChangePasswordController } from '../ChangePassword/ChangePasswordController';
+import { ForgotPasswordController } from '../ForgotPassword/ForgotPasswordController';
+import { ResetPasswordController } from '../ResetPassword/ResetPasswordController';
 import { inject, injectable } from 'inversify';
 import { RouteConfiguration } from './RouteConfiguration';
 
