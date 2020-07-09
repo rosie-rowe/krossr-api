@@ -57,7 +57,7 @@ export class LevelListService {
             include: [
                 {
                     association: Level.associations.user,
-                    attributes: ['username']
+                    attributes: ['id', 'username']
                 }
             ],
             where: {
