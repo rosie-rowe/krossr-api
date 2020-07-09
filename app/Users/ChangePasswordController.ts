@@ -54,7 +54,7 @@ export class ChangePasswordController {
                         res.send();
                     }
                 });
-            } catch(err) {
+            } catch (err) {
                 this.unknownError(res, err);
             }
         } catch (err) {

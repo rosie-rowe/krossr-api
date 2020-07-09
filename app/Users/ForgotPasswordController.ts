@@ -39,7 +39,7 @@ export class ForgotPasswordController {
                         if (!user) {
                             return this.errorHandler.sendClientErrorResponse(res, 'Username not found');
                         } else if (user.provider !== 'local') {
-                            return this.errorHandler.sendClientErrorResponse(res, `Try ${user.provider} account?`)
+                            return this.errorHandler.sendClientErrorResponse(res, `Try ${user.provider} account?`);
                         } else {
                             user.resetPasswordToken = token;
 

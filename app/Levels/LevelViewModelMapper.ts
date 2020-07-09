@@ -15,6 +15,6 @@ export class LevelViewModelMapper implements ViewModelMapper<Level, LevelViewMod
     }
 
     toModel(viewModel: LevelViewModel): Level {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
 }
