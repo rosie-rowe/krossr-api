@@ -15,7 +15,8 @@ let winston = WinstonConfiguration.initialize();
 
 winston.info(`Starting ${config.app.title} ...`);
 
-let db = SequelizeConfiguration.initialize();
+let sequelizeConfig = DIContainer.get<SequelizeConfiguration>(SequelizeConfiguration);
+let db = sequelizeConfig.initialize();
 
 // Init the express application
 let expressConfig = DIContainer.get<ExpressConfiguration>(ExpressConfiguration);

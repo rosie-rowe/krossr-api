@@ -1,4 +1,6 @@
 import { Sequelize, Model, DataTypes } from 'sequelize';
+import { ModelConfiguration } from './ModelConfiguration';
+import { injectable } from 'inversify';
 
 interface RatingCreationAttributes {
     rating: number;
@@ -20,10 +22,11 @@ export class Rating extends Model<RatingAttributes, RatingCreationAttributes> im
     public readonly updatedAt!: Date;
 }
 
-export class RatingConfiguration {
-    static compositeKey = 'oneRatingPerLevelPerUser';
+@injectable()
+export class RatingConfiguration implements ModelConfiguration<Sequelize> {
+    private compositeKey = 'oneRatingPerLevelPerUser';
 
-    public static init(sequelize: Sequelize) {
+    configure(sequelize: Sequelize) {
         Rating.init({
             id: {
                 type: DataTypes.INTEGER.UNSIGNED,

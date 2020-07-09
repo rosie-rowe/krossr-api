@@ -25,6 +25,13 @@ import { ExpressConfiguration } from './config/expressConfig';
 import { RouteConfiguration } from './app/Routes/RouteConfiguration';
 import { RouteSymbols } from './app/routes/RouteSymbols';
 import { LevelService } from './app/Levels/LevelService';
+import { ModelConfiguration } from './app/models/ModelConfiguration';
+import { Sequelize } from 'sequelize/types';
+import { ModelSymbols } from './app/models/ModelSymbols';
+import { LevelConfiguration } from './app/models/LevelModel';
+import { RatingConfiguration } from './app/models/RatingModel';
+import { UserConfiguration } from './app/models/UserModel';
+import { SequelizeConfiguration } from './config/sequelizeConfig';
 
 let DIContainer = new Container();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
@@ -53,9 +60,16 @@ DIContainer.bind<UserProfileController>(UserProfileController).toSelf();
 DIContainer.bind<LevelsMiddleware>(LevelsMiddleware).toSelf();
 DIContainer.bind<UsersMiddleware>(UsersMiddleware).toSelf();
 
+/** order */
+DIContainer.bind<ModelConfiguration<Sequelize>>(ModelSymbols.ModelConfiguration).to(RatingConfiguration);
+DIContainer.bind<ModelConfiguration<Sequelize>>(ModelSymbols.ModelConfiguration).to(UserConfiguration);
+DIContainer.bind<ModelConfiguration<Sequelize>>(ModelSymbols.ModelConfiguration).to(LevelConfiguration);
+/** is important */
+
 DIContainer.bind<RouteConfiguration>(RouteSymbols.RouteConfiguration).to(LevelsRoutes).inSingletonScope();
 DIContainer.bind<RouteConfiguration>(RouteSymbols.RouteConfiguration).to(UsersRoutes).inSingletonScope();
 
 DIContainer.bind<ExpressConfiguration>(ExpressConfiguration).toSelf().inSingletonScope();
+DIContainer.bind<SequelizeConfiguration>(SequelizeConfiguration).toSelf().inSingletonScope();
 
 export default DIContainer;

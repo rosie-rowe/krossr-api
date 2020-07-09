@@ -2,6 +2,8 @@ import { Sequelize, Model, DataTypes, HasOneGetAssociationMixin, Association, Ha
 import { User } from './UserModel';
 import { Rating } from './RatingModel';
 import btoa from 'btoa';
+import { ModelConfiguration } from './ModelConfiguration';
+import { injectable } from 'inversify';
 
 export interface LevelCreationAttributes {
     name: string;
@@ -38,8 +40,9 @@ export class Level extends Model<LevelAttributes, LevelCreationAttributes> imple
     };
 }
 
-export class LevelConfiguration {
-    public static init(sequelize: Sequelize) {
+@injectable()
+export class LevelConfiguration implements ModelConfiguration<Sequelize> {
+    configure(sequelize: Sequelize) {
         Level.init({
             id: {
                 type: DataTypes.INTEGER.UNSIGNED,

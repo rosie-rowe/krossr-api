@@ -5,15 +5,21 @@ import { WinstonConfiguration } from './winston';
 import { Sequelize } from 'sequelize';
 import { EnvironmentConfiguration } from './config';
 import * as sequelize from 'sequelize';
-import { UserConfiguration } from '../app/models/UserModel';
-import { LevelConfiguration } from '../app/models/LevelModel';
-import { RatingConfiguration } from '../app/models/RatingModel';
+import { multiInject, injectable } from 'inversify';
+import { ModelSymbols } from '../app/models/ModelSymbols';
+import { ModelConfiguration } from '../app/models/ModelConfiguration';
 
 let config = EnvironmentConfiguration.getConfiguration();
 let winston = WinstonConfiguration.initialize();
 
+@injectable()
 export class SequelizeConfiguration {
-    static initialize() {
+    constructor(
+        @multiInject(ModelSymbols.ModelConfiguration) private modelConfigs: ModelConfiguration<Sequelize>[]
+    ) {
+    }
+
+    initialize() {
         let db: { sequelize?: sequelize.Sequelize } = {};
 
         winston.info('Initializing Sequelize...');
@@ -25,18 +31,11 @@ export class SequelizeConfiguration {
             dialect: 'postgres'
         });
 
-        let modelConfigs = [
-            RatingConfiguration,
-            UserConfiguration,
-            LevelConfiguration
-        ];
-
-        modelConfigs.forEach((c) => {
-            c.init(sequelize);
+        this.modelConfigs.forEach((c) => {
+            c.configure(sequelize);
         });
 
         winston.info('Models initialized!');
-
 
         // Synchronizing any model changes with database.
         // set FORCE_DB_SYNC=true in the environment, or the program parameters to drop the database,

@@ -2,6 +2,8 @@
 
 import { Model, DataTypes, Sequelize } from 'sequelize';
 import * as crypto from 'crypto';
+import { ModelConfiguration } from './ModelConfiguration';
+import { injectable } from 'inversify';
 
 interface UserCreationAttributes {
     email: string;
@@ -51,8 +53,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     }
 }
 
-export class UserConfiguration {
-    public static init(sequelize: Sequelize) {
+@injectable()
+export class UserConfiguration implements ModelConfiguration<Sequelize> {
+    configure(sequelize: Sequelize) {
         User.init({
             id: {
                 type: DataTypes.INTEGER.UNSIGNED,
