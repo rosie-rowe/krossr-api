@@ -14,7 +14,7 @@ export class LevelListController {
     }
 
     public paginate = async (req: LevelListRequest, res) => {
-        let query = req.query; // TODO
+        let query = req.query;
         query.numPerPage = '9';
         let numPerPage = parseInt(query.numPerPage, 10);
 

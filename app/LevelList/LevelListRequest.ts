@@ -1,5 +1,5 @@
 import { LevelListQuery } from './LevelListQuery';
+import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
 
-export class LevelListRequest {
-    query: LevelListQuery;
+export interface LevelListRequest extends KrossrRequest<any, any, LevelListQuery> {
 }

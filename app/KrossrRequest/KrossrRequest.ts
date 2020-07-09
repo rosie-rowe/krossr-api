@@ -1,7 +1,8 @@
 import { Request } from 'express';
-import { ParamsDictionary } from 'express-serve-static-core';
+import { ParamsDictionary, Query } from 'express-serve-static-core';
 import { User } from '../models/UserModel';
 
-export interface KrossrRequest<TResBody = any, TReqBody = any> extends Request<ParamsDictionary, TResBody, TReqBody> {
-    user?: User;
-}
+export interface KrossrRequest<TResBody = any, TReqBody = any, TQuery = Query>
+    extends Request<ParamsDictionary, TResBody, TReqBody, TQuery> {
+        user?: User;
+    }
