@@ -25,9 +25,6 @@ export class UserProfileController {
             return this.errorHandler.sendClientErrorResponse(res, 'User is not signed in');
         }
 
-        // For security measurement we remove the roles from the req.body object TODO
-        delete req.body.roles;
-
         // Merge existing user
         user.update({
             email: req.body.email
