@@ -9,6 +9,7 @@ import { ResetPasswordValidationResponse } from './ResetPasswordValidationRespon
 import { IEnvironmentConfiguration } from '../../config/env/IEnvironmentConfiguration';
 import { injectable, inject } from 'inversify';
 import { ResetPasswordRequest } from './ResetPasswordRequest';
+import { PasswordService } from '../Password/PasswordService';
 
 @injectable()
 export class ResetPasswordController {
@@ -18,6 +19,7 @@ export class ResetPasswordController {
         @inject(EnvironmentConfiguration) private environmentConfiguration: EnvironmentConfiguration,
         @inject(ErrorHandler) private errorHandler: ErrorHandler,
         @inject(MailerService) private mailerService: MailerService,
+        @inject(PasswordService) private passwordService: PasswordService,
         @inject(UserViewModelMapper) private userMapper: UserViewModelMapper
     ) {
         this.config = this.environmentConfiguration.getConfiguration();
@@ -73,7 +75,7 @@ export class ResetPasswordController {
                 user.resetPasswordToken = null;
                 user.resetPasswordExpires = null;
 
-                user.setPassword(passwordDetails.newPassword);
+                this.passwordService.setPassword(user, passwordDetails.newPassword);
 
                 user.save().then(() => {
                     req.login(user, (err) => {

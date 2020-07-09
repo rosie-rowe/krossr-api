@@ -16,7 +16,7 @@ import { MailerService } from './app/Mailer/MailerService';
 import { SignOutController } from './app/Users/SignOutController';
 import { UserProfileController } from './app/Users/UserProfileController';
 import { SignInController } from './app/Users/SignInController';
-import { SignUpController } from './app/Users/SignUpController';
+import { SignUpController } from './app/SignUp/SignUpController';
 import { ChangePasswordController } from './app/ChangePassword/ChangePasswordController';
 import { ForgotPasswordController } from './app/ForgotPassword/ForgotPasswordController';
 import { ResetPasswordController } from './app/ResetPassword/ResetPasswordController';
@@ -42,6 +42,8 @@ import { KrossrLoggerProvider } from './app/Logger/KrossrLoggerProvider';
 import { LoggerSymbols } from './app/Logger/LoggerSymbols';
 import { WinstonConfiguration } from './config/winston';
 import { RatingsService } from './app/Ratings/RatingsService';
+import { PasswordService } from './app/Password/PasswordService';
+import { SignUpService } from './app/SignUp/SignUpService';
 
 let DIContainer = new Container();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
@@ -54,7 +56,9 @@ DIContainer.bind<UserViewModelMapper>(UserViewModelMapper).toSelf();
 DIContainer.bind<LevelService>(LevelService).toSelf();
 DIContainer.bind<LevelListService>(LevelListService).toSelf();
 DIContainer.bind<MailerService>(MailerService).toSelf();
+DIContainer.bind<PasswordService>(PasswordService).toSelf();
 DIContainer.bind<RatingsService>(RatingsService).toSelf();
+DIContainer.bind<SignUpService>(SignUpService).toSelf();
 
 DIContainer.bind<LevelListController>(LevelListController).toSelf();
 DIContainer.bind<LevelsController>(LevelsController).toSelf();

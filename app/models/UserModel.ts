@@ -1,11 +1,10 @@
 'use strict';
 
 import { Model, DataTypes, Sequelize } from 'sequelize';
-import * as crypto from 'crypto';
 import { ModelConfiguration } from './ModelConfiguration';
 import { injectable } from 'inversify';
 
-interface UserCreationAttributes {
+export interface UserCreationAttributes {
     email: string;
     username: string;
     hashedPassword: string;
@@ -29,28 +28,6 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
 
     public resetPasswordToken!: string | null;
     public resetPasswordExpires!: Date | null;
-
-    authenticate(plainText: string) {
-        return this.encryptPassword(plainText, this.salt) === this.hashedPassword;
-    }
-
-    encryptPassword(password: string, salt: string) {
-        if (!password || !salt) {
-            return '';
-        }
-        let saltBuffer = new Buffer(salt, 'base64');
-        return crypto.pbkdf2Sync(password, saltBuffer, 10000, 64, null).toString('base64');
-    }
-
-    makeSalt() {
-        return crypto.randomBytes(16).toString('base64');
-    }
-
-    setPassword(newPassword: string) {
-        this.provider = 'local';
-        this.salt = this.makeSalt();
-        this.hashedPassword = this.encryptPassword(newPassword, this.salt);
-    }
 }
 
 @injectable()

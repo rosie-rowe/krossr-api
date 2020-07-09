@@ -1,14 +1,15 @@
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { User } from '../models/UserModel';
 import { KrossrErrorResponse } from '../KrossrResponse/KrossrErrorResponse';
-import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
 import { inject, injectable } from 'inversify';
 import { ChangePasswordRequest } from './ChangePasswordRequest';
+import { PasswordService } from '../Password/PasswordService';
 
 @injectable()
 export class ChangePasswordController {
     constructor(
-        @inject(ErrorHandler) private errorHandler: ErrorHandler
+        @inject(ErrorHandler) private errorHandler: ErrorHandler,
+        @inject(PasswordService) private passwordService: PasswordService
     ) {
     }
 
@@ -38,11 +39,11 @@ export class ChangePasswordController {
                 return this.userIsNotFound(res);
             }
 
-            if (!user.authenticate(passwordDetails.currentPassword)) {
+            if (!this.passwordService.authenticate(user, passwordDetails.currentPassword)) {
                 return this.currentPasswordIsIncorrect(res);
             }
 
-            user.hashedPassword = user.encryptPassword(passwordDetails.newPassword, user.salt);
+            this.passwordService.setPassword(user, passwordDetails.newPassword);
 
             try {
                 await user.save();

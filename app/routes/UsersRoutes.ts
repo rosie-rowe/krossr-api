@@ -2,7 +2,7 @@ import * as express from 'express';
 import { UserProfileController } from '../Users/UserProfileController';
 import { SignInController } from '../Users/SignInController';
 import { SignOutController } from '../Users/SignOutController';
-import { SignUpController } from '../Users/SignUpController';
+import { SignUpController } from '../SignUp/SignUpController';
 import { ChangePasswordController } from '../ChangePassword/ChangePasswordController';
 import { ForgotPasswordController } from '../ForgotPassword/ForgotPasswordController';
 import { ResetPasswordController } from '../ResetPassword/ResetPasswordController';
