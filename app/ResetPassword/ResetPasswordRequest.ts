@@ -1,5 +1,5 @@
 import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
-import { ResetPasswordParamsViewModel } from '@krossr/types';
+import { ResetPasswordBodyViewModel } from '@krossr/types';
 
-export interface ResetPasswordRequest extends KrossrRequest<any, ResetPasswordParamsViewModel> {
+export interface ResetPasswordRequest extends KrossrRequest<any, ResetPasswordBodyViewModel> {
 }

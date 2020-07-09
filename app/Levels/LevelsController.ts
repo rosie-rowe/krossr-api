@@ -3,7 +3,7 @@ import { LevelRequest } from './LevelRequest';
 import { Response } from 'express';
 import { inject, injectable } from 'inversify';
 import { LevelService } from './LevelService';
-import { CreateLevelParamsViewModel, UpdateLevelParamsViewModel } from '@krossr/types';
+import { CreateLevelBodyViewModel, UpdateLevelBodyViewModel } from '@krossr/types';
 
 @injectable()
 export class LevelsController {
@@ -16,7 +16,7 @@ export class LevelsController {
     /**
      * Create a Level
      */
-    public create = async (req: LevelRequest<CreateLevelParamsViewModel>, res: Response) => {
+    public create = async (req: LevelRequest<CreateLevelBodyViewModel>, res: Response) => {
         try {
             let level = await this.levelService.createLevel(req.user, req.body);
 
@@ -54,7 +54,7 @@ export class LevelsController {
         }
     }
 
-    public update = async (req: LevelRequest<UpdateLevelParamsViewModel>, res: Response) => {
+    public update = async (req: LevelRequest<UpdateLevelBodyViewModel>, res: Response) => {
         try {
             let level = await this.levelService.updateLevel(req.level, req.body);
             return res.jsonp(level);

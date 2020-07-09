@@ -2,7 +2,7 @@ import btoa from 'btoa';
 import { injectable, inject } from 'inversify';
 import { Level, LevelCreationAttributes } from '../models/LevelModel';
 import { User } from '../models/UserModel';
-import { CreateLevelParamsViewModel, LevelViewModel, UpdateLevelParamsViewModel } from '@krossr/types';
+import { CreateLevelBodyViewModel, LevelViewModel, UpdateLevelBodyViewModel } from '@krossr/types';
 import { LevelViewModelMapper } from './LevelViewModelMapper';
 
 @injectable()
@@ -12,7 +12,7 @@ export class LevelService {
     ) {
     }
 
-    async createLevel(user: User, params: CreateLevelParamsViewModel): Promise<LevelViewModel> {
+    async createLevel(user: User, params: CreateLevelBodyViewModel): Promise<LevelViewModel> {
         let attributes: LevelCreationAttributes = {
             name: params.name,
             layout: this.encodeLayout(params.decodedLayout),
@@ -35,7 +35,7 @@ export class LevelService {
         await level.destroy();
     }
 
-    async updateLevel(level: Level, params: UpdateLevelParamsViewModel): Promise<LevelViewModel> {
+    async updateLevel(level: Level, params: UpdateLevelBodyViewModel): Promise<LevelViewModel> {
         let update = {
             name: params.name,
             layout: this.encodeLayout(params.decodedLayout),
