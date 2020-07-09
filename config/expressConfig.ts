@@ -8,6 +8,9 @@ import { injectable, multiInject, inject } from 'inversify';
 import { RouteConfiguration } from '../app/Routes/RouteConfiguration';
 import { RouteSymbols } from '../app/routes/RouteSymbols';
 import { IEnvironmentConfiguration } from './env/IEnvironmentConfiguration';
+import { LoggerSymbols } from '../app/Logger/LoggerSymbols';
+import { KrossrLoggerProvider } from '../app/Logger/KrossrLoggerProvider';
+import { KrossrLogger } from '../app/Logger/KrossrLogger';
 let morgan = require('morgan');
 let bodyParser = require('body-parser');
 let session = require('express-session');
@@ -18,21 +21,23 @@ let helmet = require('helmet');
 let SequelizeStore = require('connect-session-sequelize')(session.Store);
 let flash = require('connect-flash');
 let consolidate = require('consolidate');
-let winston = require('winston');
 
 @injectable()
 export class ExpressConfiguration {
     private config: IEnvironmentConfiguration;
+    private logger: KrossrLogger;
 
     constructor(
+        @inject(LoggerSymbols.KrossrLogger) private loggerProvider: KrossrLoggerProvider,
         @inject(EnvironmentConfiguration) private environmentConfiguration: EnvironmentConfiguration,
         @multiInject(RouteSymbols.RouteConfiguration) private routeConfigs: RouteConfiguration[],
     ) {
         this.config = this.environmentConfiguration.getConfiguration();
+        this.logger = this.loggerProvider.getLogger();
     }
 
     configure(db: IKrossrDatabase): express.Application {
-        winston.info('Intializing Express!');
+        this.logger.info('Intializing Express!');
 
         // Initialize express app
         let app = express();
@@ -85,7 +90,7 @@ export class ExpressConfiguration {
         // CookieParser should be above session
         app.use(cookieParser());
 
-        winston.info('Trying to set up sessions...');
+        this.logger.info('Trying to set up sessions...');
 
         // Postgres Sessions
         app.use(session({
@@ -96,7 +101,7 @@ export class ExpressConfiguration {
             saveUninitialized: true
         }));
 
-        winston.info('...done');
+        this.logger.info('...done');
 
         // use passport session
         app.use(passport.initialize());

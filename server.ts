@@ -5,18 +5,21 @@
 
 import 'reflect-metadata';
 import DIContainer from './di-container';
-import { WinstonConfiguration } from './config/winston';
 import { EnvironmentConfiguration } from './config/config';
 import { SequelizeConfiguration } from './config/sequelizeConfig';
 import { ExpressConfiguration } from './config/expressConfig';
 import { PassportConfiguration } from './config/passportConfig';
+import { KrossrLoggerProvider } from './app/Logger/KrossrLoggerProvider';
+import { LoggerSymbols } from './app/Logger/LoggerSymbols';
 
 let environmentConfiguration = DIContainer.get<EnvironmentConfiguration>(EnvironmentConfiguration);
 let config = environmentConfiguration.getConfiguration();
 
-let winston = WinstonConfiguration.initialize();
+let loggerProvider = DIContainer.get<KrossrLoggerProvider>(LoggerSymbols.KrossrLogger);
+loggerProvider.initialize();
+let logger = loggerProvider.getLogger();
 
-winston.info(`Starting ${config.app.title} ...`);
+logger.info(`Starting ${config.app.title} ...`);
 
 let sequelizeConfig = DIContainer.get<SequelizeConfiguration>(SequelizeConfiguration);
 let db = sequelizeConfig.initialize();

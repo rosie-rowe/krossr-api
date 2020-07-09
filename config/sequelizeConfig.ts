@@ -1,28 +1,32 @@
 'use strict';
 
 import * as _ from 'lodash';
-import { WinstonConfiguration } from './winston';
 import { Sequelize } from 'sequelize';
 import { EnvironmentConfiguration } from './config';
 import * as sequelize from 'sequelize';
 import { multiInject, injectable, inject } from 'inversify';
 import { ModelSymbols } from '../app/models/ModelSymbols';
 import { ModelConfiguration } from '../app/models/ModelConfiguration';
-
-let winston = WinstonConfiguration.initialize();
+import { LoggerSymbols } from '../app/Logger/LoggerSymbols';
+import { KrossrLoggerProvider } from '../app/Logger/KrossrLoggerProvider';
+import { KrossrLogger } from '../app/Logger/KrossrLogger';
 
 @injectable()
 export class SequelizeConfiguration {
+    private logger: KrossrLogger;
+
     constructor(
+        @inject(LoggerSymbols.KrossrLogger) private loggerProvider: KrossrLoggerProvider,
         @inject(EnvironmentConfiguration) private environmentConfiguration: EnvironmentConfiguration,
         @multiInject(ModelSymbols.ModelConfiguration) private modelConfigs: ModelConfiguration<Sequelize>[]
     ) {
+        this.logger = this.loggerProvider.getLogger();
     }
 
     initialize() {
         let db: { sequelize?: sequelize.Sequelize } = {};
 
-        winston.info('Initializing Sequelize...');
+        this.logger.info('Initializing Sequelize...');
 
         let config = this.environmentConfiguration.getConfiguration();
 
@@ -37,7 +41,7 @@ export class SequelizeConfiguration {
             c.configure(sequelize);
         });
 
-        winston.info('Models initialized!');
+        this.logger.info('Models initialized!');
 
         // Synchronizing any model changes with database.
         // set FORCE_DB_SYNC=true in the environment, or the program parameters to drop the database,
@@ -46,12 +50,12 @@ export class SequelizeConfiguration {
         sequelize
             .sync({
                 force: config.forceDbSync,
-                logging: config.enableSequelizeLog === 'true' ? winston.verbose : false
+                logging: config.enableSequelizeLog === 'true' ? this.logger.verbose : false
             })
             .then(() => {
-                winston.info('Database ' + (config.forceDbSync ? '*DROPPED* and ' : '') + 'synchronized');
+                this.logger.info('Database ' + (config.forceDbSync ? '*DROPPED* and ' : '') + 'synchronized');
             }).catch(err => {
-                winston.error('An error occurred: ', err);
+                this.logger.error('An error occurred: ', err);
             });
 
         // assign the sequelize variables to the db object and returning the db.

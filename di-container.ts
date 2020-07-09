@@ -38,6 +38,9 @@ import { LocalPassportStrategy } from './config/strategies/LocalPassportStrategy
 import { PassportConfiguration } from './config/passportConfig';
 import { EnvironmentConfiguration } from './config/config';
 import { EnvironmentConfigurationDefaults } from './config/env/all';
+import { KrossrLoggerProvider } from './app/Logger/KrossrLoggerProvider';
+import { LoggerSymbols } from './app/Logger/LoggerSymbols';
+import { WinstonConfiguration } from './config/winston';
 
 let DIContainer = new Container();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
@@ -78,6 +81,8 @@ DIContainer.bind<RouteConfiguration>(RouteSymbols.RouteConfiguration).to(UsersRo
 DIContainer.bind<AuthenticationStrategy>(AuthenticationStrategySymbols.AuthenticationStrategy).to(LocalPassportStrategy);
 
 DIContainer.bind<EnvironmentConfigurationDefaults>(EnvironmentConfigurationDefaults).toSelf();
+
+DIContainer.bind<KrossrLoggerProvider>(LoggerSymbols.KrossrLogger).to(WinstonConfiguration).inSingletonScope();
 
 DIContainer.bind<EnvironmentConfiguration>(EnvironmentConfiguration).toSelf().inSingletonScope();
 

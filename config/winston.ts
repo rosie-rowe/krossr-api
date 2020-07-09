@@ -1,13 +1,22 @@
+import { injectable } from 'inversify';
+import { KrossrLogger } from '../app/Logger/KrossrLogger';
+import { KrossrLoggerProvider } from '../app/Logger/KrossrLoggerProvider';
+
 let winston = require('winston');
 let logger = new (winston.Logger)();
 
-export class WinstonConfiguration {
-    static isInitialized: boolean;
+@injectable()
+export class WinstonConfiguration implements KrossrLoggerProvider {
+    private logger: KrossrLogger;
+
+    getLogger() {
+        return this.logger;
+    }
 
     /** Should only be called by root file */
-    static initialize() {
-        if (this.isInitialized) {
-            return logger;
+    initialize() {
+        if (!!this.getLogger()) {
+            throw new Error('this should only be called ONCE!');
         }
 
         logger.add(winston.transports.Console, {
@@ -26,8 +35,6 @@ export class WinstonConfiguration {
             }
         };
 
-        this.isInitialized = true;
-
-        return logger;
+        this.logger = logger;
     }
 }
