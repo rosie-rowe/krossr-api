@@ -32,6 +32,10 @@ import { LevelConfiguration } from './app/models/LevelModel';
 import { RatingConfiguration } from './app/models/RatingModel';
 import { UserConfiguration } from './app/models/UserModel';
 import { SequelizeConfiguration } from './config/sequelizeConfig';
+import { AuthenticationStrategy } from './config/strategies/AuthenticationStrategy';
+import { AuthenticationStrategySymbols } from './config/strategies/AuthenticationStrategySymbols';
+import { LocalPassportStrategy } from './config/strategies/LocalPassportStrategy';
+import { PassportConfiguration } from './config/passportConfig';
 
 let DIContainer = new Container();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
@@ -69,7 +73,10 @@ DIContainer.bind<ModelConfiguration<Sequelize>>(ModelSymbols.ModelConfiguration)
 DIContainer.bind<RouteConfiguration>(RouteSymbols.RouteConfiguration).to(LevelsRoutes).inSingletonScope();
 DIContainer.bind<RouteConfiguration>(RouteSymbols.RouteConfiguration).to(UsersRoutes).inSingletonScope();
 
+DIContainer.bind<AuthenticationStrategy>(AuthenticationStrategySymbols.AuthenticationStrategy).to(LocalPassportStrategy);
+
 DIContainer.bind<ExpressConfiguration>(ExpressConfiguration).toSelf().inSingletonScope();
+DIContainer.bind<PassportConfiguration>(PassportConfiguration).toSelf().inSingletonScope();
 DIContainer.bind<SequelizeConfiguration>(SequelizeConfiguration).toSelf().inSingletonScope();
 
 export default DIContainer;

@@ -23,7 +23,8 @@ let expressConfig = DIContainer.get<ExpressConfiguration>(ExpressConfiguration);
 let app = expressConfig.configure(db);
 
 // Bootstrap passport config
-PassportConfiguration.configure();
+let passportConfig = DIContainer.get<PassportConfiguration>(PassportConfiguration);
+passportConfig.configure();
 
 // Start the app by listening on <port>
 app.listen(config.port, config.ipaddr);

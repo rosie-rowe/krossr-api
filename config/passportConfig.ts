@@ -1,11 +1,19 @@
 'use strict';
 
-import { LocalPassportStrategy } from './strategies/local';
 import * as passport from 'passport';
 import { User } from '../app/models/UserModel';
+import { multiInject, injectable } from 'inversify';
+import { AuthenticationStrategySymbols } from './strategies/AuthenticationStrategySymbols';
+import { AuthenticationStrategy } from './strategies/AuthenticationStrategy';
 
+@injectable()
 export class PassportConfiguration {
-    static configure() {
+    constructor(
+        @multiInject(AuthenticationStrategySymbols.AuthenticationStrategy) private strategies: AuthenticationStrategy[]
+    ) {
+    }
+
+    configure() {
         // Serialize sessions
         passport.serializeUser((user: User, done) => {
             done(null, user.id);
@@ -27,6 +35,6 @@ export class PassportConfiguration {
             });
         });
 
-        LocalPassportStrategy.use();
+        this.strategies.forEach(strat => strat.use());
     }
 }
