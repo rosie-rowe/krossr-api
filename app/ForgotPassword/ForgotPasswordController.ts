@@ -1,4 +1,3 @@
-import * as async from 'async';
 import * as crypto from 'crypto';
 import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
@@ -7,6 +6,7 @@ import { MailerService } from '../Mailer/MailerService';
 import { injectable, inject } from 'inversify';
 import { IEnvironmentConfiguration } from '../../config/env/IEnvironmentConfiguration';
 import { ForgotPasswordRequest } from './ForgotPasswordRequest';
+import { Response } from 'express';
 
 @injectable()
 export class ForgotPasswordController {
@@ -20,76 +20,96 @@ export class ForgotPasswordController {
         this.config = this.environmentConfiguration.getConfiguration();
     }
 
-    public forgot = (req: ForgotPasswordRequest, res, next) => {
-        // TODO refactor
-        async.waterfall([
-            // Generate random token
-            (done) => {
-                crypto.randomBytes(20, (err, buffer) => {
-                    let token = buffer.toString('hex');
-                    done(err, token);
-                });
-            },
-            // Lookup user by username
-            (token, done) => {
-                if (req.body.username) {
-                    User.findOne({
-                        attributes: {
-                            exclude: ['salt, password']
-                        },
-                        where: {
-                            username: req.body.username
-                        }
-                    }).then((user) => {
-                        if (!user) {
-                            return this.errorHandler.sendClientErrorResponse(res, 'Username not found');
-                        } else if (user.provider !== 'local') {
-                            return this.errorHandler.sendClientErrorResponse(res, `Try ${user.provider} account?`);
-                        } else {
-                            user.resetPasswordToken = token;
+    public forgot = async (req: ForgotPasswordRequest, res, next) => {
+        if (!req.body.username) {
+            return this.errorHandler.sendClientErrorResponse(res, 'Username required');
+        }
 
-                            let now = new Date();
-                            now.setHours(now.getHours() + 1); // add 1 hour
-                            user.resetPasswordExpires = now;
+        try {
+            let token = this.generateRandomToken();
+            let user = await this.getUser(req.body.username);
 
-                            user.save().then(() => {
-                                done(null, token, user);
-                            }).catch((err) => {
-                                done(err);
-                            });
-                        }
-                    });
-                } else {
-                    return this.errorHandler.sendClientErrorResponse(res, 'Username required');
-                }
-            },
-            (token, user, done) => {
-                res.render('templates/reset-password-email', {
-                    name: user.username,
-                    appName: this.config.app.title,
-                    url: 'http://' + req.headers.host + '/auth/reset/' + token
-                }, (err, emailHTML) => {
-                    done(err, emailHTML, user);
-                });
-            },
-            // If valid email, send reset email using service
-            async (emailHTML, user, done) => {
-                let mailOptions = {
-                    to: user.email,
-                    from: this.config.mailer.from,
-                    subject: 'Password Reset',
-                    html: emailHTML
-                };
-
-                try {
-                    await this.mailerService.send(mailOptions);
-                    done(null);
-                } catch (err) {
-                    done(err);
-                }
+            if (!user) {
+                return this.errorHandler.sendClientErrorResponse(res, 'Username not found');
             }
-        ], (err) => {
-            if (err) { return next(err); }
+
+            this.updateUser(user, token);
+
+            let emailHTML = await this.renderEmail(res, req, user, token);
+
+            await this.sendEmail(emailHTML, user);
+
+            res.send();
+        } catch (err) {
+            this.errorHandler.sendUnknownServerErrorResponse(res, err);
+        }
+    }
+
+    private generateRandomToken() {
+        let token: string;
+
+        crypto.randomBytes(20, (err, buffer) => {
+            if (err) {
+                throw err;
+            }
+
+            token = buffer.toString('hex');
         });
+
+        return token;
+    }
+
+    private getExpirationDateTime() {
+        let now = new Date();
+        now.setHours(now.getHours() + 1); // add 1 hour
+
+        return now;
+    }
+
+    private async getUser(username: string) {
+        if (username) {
+            return await User.findOne({
+                attributes: {
+                    exclude: ['salt, password']
+                },
+                where: {
+                    username
+                }
+            });
+        }
+    }
+
+    private async updateUser(user: User, token: string) {
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = this.getExpirationDateTime();
+
+        await user.save();
+    }
+
+    private async renderEmail(res: Response, req: ForgotPasswordRequest, user: User, token: string) {
+        return new Promise<string>((resolve, reject) => {
+            res.render('templates/reset-password-email', {
+                name: user.username,
+                appName: this.config.app.title,
+                url: 'http://' + req.headers.host + '/auth/reset/' + token
+            }, (err, emailHTML) => {
+                if (err) {
+                    reject(err);
+                }
+
+                resolve(emailHTML);
+            });
+        });
+    }
+
+    private async sendEmail(emailHTML: string, user: User) {
+        let mailOptions = {
+            to: user.email,
+            from: this.config.mailer.from,
+            subject: 'Password Reset',
+            html: emailHTML
+        };
+
+        await this.mailerService.send(mailOptions);
     }
 }
