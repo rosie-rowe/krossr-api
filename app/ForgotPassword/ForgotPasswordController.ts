@@ -89,7 +89,7 @@ export class ForgotPasswordController {
             res.render('templates/reset-password-email', {
                 name: user.username,
                 appName: this.config.app.title,
-                url: 'http://' + req.headers.host + '/auth/reset/' + token
+                url: 'http://' + req.headers.host + '/password/reset/' + token
             }, (err, emailHTML) => {
                 if (err) {
                     reject(err);
