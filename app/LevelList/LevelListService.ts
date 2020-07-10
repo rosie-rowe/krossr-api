@@ -5,7 +5,6 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class LevelListService {
-    // This can be done WAY better, todo
     public getList(query: LevelListQuery) {
         let pageNum = parseInt(query.pageNum, 10);
         let sizeRestriction = query.sizeRestriction;
