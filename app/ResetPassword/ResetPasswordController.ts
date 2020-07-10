@@ -28,9 +28,8 @@ export class ResetPasswordController {
     /**
      * Reset password GET from email token
      */
-    public validateResetToken = async (req, res: ResetPasswordValidationResponse) => {
+    public validateResetToken = async (req: ResetPasswordRequest, res: ResetPasswordValidationResponse) => {
         try {
-            // TODO
             let user = await this.getUserByToken(req.params.token);
 
             return res.send({ valid: !!user });
@@ -39,7 +38,7 @@ export class ResetPasswordController {
         }
     }
 
-    public reset = (req, res, next) => {
+    public reset = (req: ResetPasswordRequest, res, next) => {
         async.waterfall([
             async (done) => {
                 let user = await this.getUserByToken(req.params.token);
