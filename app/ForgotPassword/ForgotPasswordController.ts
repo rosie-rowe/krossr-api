@@ -26,7 +26,7 @@ export class ForgotPasswordController {
         }
 
         try {
-            let token = this.generateRandomToken();
+            let token = await this.generateRandomToken();
             let user = await this.getUser(req.body.username);
 
             if (!user) {
@@ -46,17 +46,15 @@ export class ForgotPasswordController {
     }
 
     private generateRandomToken() {
-        let token: string;
+        return new Promise<string>((resolve, reject) => {
+            crypto.randomBytes(20, (err, buffer) => {
+                if (err) {
+                    reject(err);
+                }
 
-        crypto.randomBytes(20, (err, buffer) => {
-            if (err) {
-                throw err;
-            }
-
-            token = buffer.toString('hex');
+                resolve(buffer.toString('hex'));
+            });
         });
-
-        return token;
     }
 
     private getExpirationDateTime() {
