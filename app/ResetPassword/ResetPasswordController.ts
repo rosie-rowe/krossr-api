@@ -38,19 +38,22 @@ export class ResetPasswordController {
         }
     }
 
-    public reset = (req: ResetPasswordRequest, res, next) => {
-        async.waterfall([
-            async (done) => {
-                let user = await this.getUserByToken(req.params.token);
+    public reset = async (req: ResetPasswordRequest, res, next) => {
+        try {
+            let user = await this.getUserByToken(req.params.token);
 
-                done(null, user);
-            },
-            (user: User, done) => this.resetPassword(req, res, user, done),
-            async (user: User, done) => this.renderEmailTemplate(res, user, done),
-            async (emailHTML: string, user: User, done) => this.sendEmail(user.email, emailHTML, done)
-        ], (err) => {
-            if (err) { return next(err); }
-        });
+            if (!user) {
+                return this.errorHandler.sendClientErrorResponse(res, 'Password reset token is invalid or has expired');
+            }
+
+            await this.resetPassword(req, res, user);
+
+            let emailTemplate = await this.renderEmailTemplate(res, user);
+
+            await this.sendEmail(user.email, emailTemplate);
+        } catch (err) {
+            return this.errorHandler.sendUnknownServerErrorResponse(res, err);
+        }
     }
 
     private async getUserByToken(token: string) {
@@ -64,50 +67,47 @@ export class ResetPasswordController {
         });
     }
 
-    private resetPassword(req: ResetPasswordRequest, res, user: User, done) {
+    private async resetPassword(req: ResetPasswordRequest, res, user: User) {
         let passwordDetails = req.body;
 
-        if (!user) {
-            return this.errorHandler.sendClientErrorResponse(res, 'Password reset token is invalid or has expired');
-        } else {
-            if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
-                user.resetPasswordToken = null;
-                user.resetPasswordExpires = null;
-
-                this.passwordService.setPassword(user, passwordDetails.newPassword);
-
-                user.save().then(() => {
-                    req.login(user, (err) => {
-                        if (err) {
-                            this.errorHandler.sendUnknownClientErrorResponse(res, err);
-                        } else {
-                            // Return authenticated user
-                            let result = this.userMapper.toViewModel(user);
-                            res.jsonp(result);
-
-                            done(err, user);
-                        }
-                    });
-                }).catch((err) => {
-                    this.errorHandler.sendUnknownClientErrorResponse(res, err);
-                });
-            } else {
-                return this.errorHandler.sendClientErrorResponse(res, 'Password do not match');
-            }
+        if (passwordDetails.newPassword !== passwordDetails.verifyPassword) {
+            return this.errorHandler.sendClientErrorResponse(res, 'Password do not match');
         }
-    }
 
-    private async renderEmailTemplate(res, user: User, done) {
-        res.render('templates/reset-password-confirm-email', {
-            name: user.username,
-            appName: this.config.app.title
-        }, (err, emailHTML) => {
-            done(err, emailHTML, user);
+        user.resetPasswordToken = null;
+        user.resetPasswordExpires = null;
+
+        this.passwordService.setPassword(user, passwordDetails.newPassword);
+
+        await user.save();
+
+        req.login(user, (err) => {
+            if (err) {
+                throw err;
+            } else {
+                // Return authenticated user
+                let result = this.userMapper.toViewModel(user);
+                res.jsonp(result);
+            }
         });
     }
 
-    // If valid email, send reset email using service
-    private async sendEmail(to: string, emailHTML: string, done) {
+    private async renderEmailTemplate(res, user: User) {
+        return new Promise<string>((resolve, reject) => {
+            res.render('templates/reset-password-confirm-email', {
+                name: user.username,
+                appName: this.config.app.title
+            }, (err, emailHTML) => {
+                if (err) {
+                    reject(err);
+                }
+
+                resolve(emailHTML);
+            });
+        });
+    }
+
+    private async sendEmail(to: string, emailHTML: string) {
         let mailOptions = {
             to,
             from: this.config.mailer.from,
@@ -115,11 +115,6 @@ export class ResetPasswordController {
             html: emailHTML
         };
 
-        try {
-            await this.mailerService.send(mailOptions);
-            done(null);
-        } catch (err) {
-            done(err);
-        }
+        await this.mailerService.send(mailOptions);
     }
 }
