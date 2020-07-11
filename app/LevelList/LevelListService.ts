@@ -22,7 +22,9 @@ export class LevelListService {
             Ratings: LevelListSortByOptions.Ratings
         };
 
-        let sizeOptions = {};
+        let sizeOptions = {
+            All: ''
+        };
 
         SizeOptions.Options.forEach(size => {
             sizeOptions[this.sizeFormatter.formatSize(size)] = size;
