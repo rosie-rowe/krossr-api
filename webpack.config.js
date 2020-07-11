@@ -5,6 +5,7 @@ var nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { EnvironmentPlugin } = require('webpack');
+const tsNameof = require('ts-nameof');
 
 var config = {
     devtool: 'source-map',
@@ -50,7 +51,12 @@ var config = {
             {
                 test: /\.ts$/,
                 exclude: /node_modules/,
-                loader: 'ts-loader'
+                use: [{
+                    loader: 'ts-loader',
+                    options: {
+                        getCustomTransformers: () => ({ before: [tsNameof] })
+                    }
+                }]
             },
             {
                 test: /\.html$/,

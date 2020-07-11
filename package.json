@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.53",
+    "@types/ts-nameof": "^4.2.1",
     "clean-webpack-plugin": "^3.0.0",
     "jasmine-core": "^2.6.4",
     "karma": "^1.7.0",
@@ -70,6 +71,7 @@
     "karma-webpack": "^2.0.4",
     "should": "~4.0.4",
     "ts-loader": "^7.0.5",
+    "ts-nameof": "^5.0.0",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"

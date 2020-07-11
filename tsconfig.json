@@ -9,6 +9,6 @@
         "lib": [],
         "outDir": "dist",
         "target": "es6",
-        "types": ["node", "reflect-metadata"]
+        "types": ["node", "reflect-metadata", "ts-nameof"]
     }
 }
