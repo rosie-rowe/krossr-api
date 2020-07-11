@@ -19,6 +19,9 @@ export class LevelsRoutes implements RouteConfiguration {
     }
 
     configureRoutes(app: express.Application) {
+        app.route('/levels/options')
+            .get(this.levelListController.getOptions);
+
         // Levels Routes
         app.route('/levels')
             .get(this.levelListController.paginate)

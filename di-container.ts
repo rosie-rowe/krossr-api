@@ -44,8 +44,10 @@ import { WinstonConfiguration } from './config/winston';
 import { RatingsService } from './app/Ratings/RatingsService';
 import { PasswordService } from './app/Password/PasswordService';
 import { SignUpService } from './app/SignUp/SignUpService';
+import { SizeFormatter } from './app/Size/SizeFormatter';
 
 let DIContainer = new Container();
+DIContainer.bind<SizeFormatter>(SizeFormatter).toSelf();
 DIContainer.bind<ErrorHandler>(ErrorHandler).toSelf();
 
 DIContainer.bind<LevelViewModelMapper>(LevelViewModelMapper).toSelf();

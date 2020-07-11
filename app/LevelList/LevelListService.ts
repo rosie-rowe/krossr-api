@@ -1,11 +1,41 @@
 import { LevelListQuery } from './LevelListQuery';
 import { Sequelize, Op } from 'sequelize';
 import { Level } from '../models/LevelModel';
-import { injectable } from 'inversify';
+import { injectable, inject } from 'inversify';
 import { LevelListSortByOptions } from './LevelListSortByOptions';
+import { SizeOptions } from '../Size/SizeOptions';
+import { SizeFormatter } from '../Size/SizeFormatter';
+import { SortDirectionOptions } from '../SortDirection/SortDirectionOptions';
+import { LevelListFilterSelectOptionsViewModel } from '@krossr/types';
 
 @injectable()
 export class LevelListService {
+    constructor(
+        @inject(SizeFormatter) private sizeFormatter: SizeFormatter
+    ) {
+    }
+
+    public getOptions(): LevelListFilterSelectOptionsViewModel {
+        let sortByOptions = {
+            'Created Date': LevelListSortByOptions.CreatedDate,
+            Name: LevelListSortByOptions.Name,
+            Ratings: LevelListSortByOptions.Ratings
+        };
+
+        let sizeOptions = {};
+
+        SizeOptions.Options.forEach(size => {
+            sizeOptions[this.sizeFormatter.formatSize(size)] = size;
+        });
+
+        let sortDirectionOptions = {
+            Ascending: SortDirectionOptions.ASC,
+            Descending: SortDirectionOptions.DESC
+        };
+
+        return { sortByOptions, sizeOptions, sortDirectionOptions };
+    }
+
     public getList(query: LevelListQuery) {
         let pageNum = parseInt(query.pageNum, 10);
         let sizeRestriction = query.sizeRestriction;

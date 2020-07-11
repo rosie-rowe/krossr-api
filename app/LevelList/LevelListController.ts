@@ -3,14 +3,20 @@ import { ErrorHandler } from '../Error/ErrorHandler';
 import { LevelListRequest } from './LevelListRequest';
 import { LevelListLevelViewModelMapper } from './LevelListLevelViewModelMapper';
 import { injectable, inject } from 'inversify';
+import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
 
 @injectable()
 export class LevelListController {
     constructor(
         @inject(ErrorHandler) private errorHandler: ErrorHandler,
         @inject(LevelListLevelViewModelMapper) private levelListMapper: LevelListLevelViewModelMapper,
-        @inject(LevelListService) private levelListService: LevelListService
+        @inject(LevelListService) private levelListService: LevelListService,
     ) {
+    }
+
+    public getOptions = async (req: KrossrRequest, res) => {
+        let options = this.levelListService.getOptions();
+        res.jsonp(options);
     }
 
     public paginate = async (req: LevelListRequest, res) => {
