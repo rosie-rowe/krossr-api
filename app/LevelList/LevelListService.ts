@@ -2,6 +2,7 @@ import { LevelListQuery } from './LevelListQuery';
 import { Sequelize, Op } from 'sequelize';
 import { Level } from '../models/LevelModel';
 import { injectable } from 'inversify';
+import { LevelListSortByOptions } from './LevelListSortByOptions';
 
 @injectable()
 export class LevelListService {
@@ -9,7 +10,7 @@ export class LevelListService {
         let pageNum = parseInt(query.pageNum, 10);
         let sizeRestriction = query.sizeRestriction;
         let searchText = query.searchText;
-        let sortBy = query.sortBy || '"createdAt"';
+        let sortBy = query.sortBy || LevelListSortByOptions.CreatedDate;
         let sortDirection = query.sortDirection || 'ASC';
         let numPerPage = parseInt(query.numPerPage, 10);
 
@@ -28,7 +29,7 @@ export class LevelListService {
         let ratingQuery = Sequelize.literal(baseRatingQuery);
         let ratingTest = Sequelize.literal(baseRatingQuery + ' IS NOT NULL');
 
-        let isRating = (sortBy === '"avgRating"');
+        let isRating = (sortBy === LevelListSortByOptions.Ratings);
 
         if (sizeRestriction) {
             whereBuilder.size = {
@@ -51,7 +52,7 @@ export class LevelListService {
 
         return Level.findAndCountAll({
             attributes: {
-                include: [[ratingQuery, 'avgRating']]
+                include: [[ratingQuery, nameof<Level>(o => o.avgRating)]]
             },
             include: [
                 {
