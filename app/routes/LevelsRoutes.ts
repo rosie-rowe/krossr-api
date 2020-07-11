@@ -6,10 +6,12 @@ import { UsersMiddleware } from '../Users/UsersMiddleware';
 import { RatingsController } from '../Ratings/RatingsController';
 import { inject, injectable } from 'inversify';
 import { RouteConfiguration } from './RouteConfiguration';
+import { LevelEditorController } from '../LevelEditor/LevelEditorController';
 
 @injectable()
 export class LevelsRoutes implements RouteConfiguration {
     constructor(
+        @inject(LevelEditorController) private levelEditorController: LevelEditorController,
         @inject(LevelListController) private levelListController: LevelListController,
         @inject(LevelsController) private levelsController: LevelsController,
         @inject(RatingsController) private ratingsController: RatingsController,
@@ -19,6 +21,9 @@ export class LevelsRoutes implements RouteConfiguration {
     }
 
     configureRoutes(app: express.Application) {
+        app.route('/levelEditor/options')
+            .get(this.levelEditorController.getOptions);
+
         app.route('/levels/options')
             .get(this.levelListController.getOptions);
 

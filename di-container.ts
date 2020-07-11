@@ -45,6 +45,8 @@ import { RatingsService } from './app/Ratings/RatingsService';
 import { PasswordService } from './app/Password/PasswordService';
 import { SignUpService } from './app/SignUp/SignUpService';
 import { SizeFormatter } from './app/Size/SizeFormatter';
+import { LevelEditorService } from './app/LevelEditor/LevelEditorService';
+import { LevelEditorController } from './app/LevelEditor/LevelEditorController';
 
 let DIContainer = new Container();
 DIContainer.bind<SizeFormatter>(SizeFormatter).toSelf();
@@ -55,6 +57,7 @@ DIContainer.bind<LevelListLevelViewModelMapper>(LevelListLevelViewModelMapper).t
 
 DIContainer.bind<UserViewModelMapper>(UserViewModelMapper).toSelf();
 
+DIContainer.bind<LevelEditorService>(LevelEditorService).toSelf();
 DIContainer.bind<LevelService>(LevelService).toSelf();
 DIContainer.bind<LevelListService>(LevelListService).toSelf();
 DIContainer.bind<MailerService>(MailerService).toSelf();
@@ -62,6 +65,7 @@ DIContainer.bind<PasswordService>(PasswordService).toSelf();
 DIContainer.bind<RatingsService>(RatingsService).toSelf();
 DIContainer.bind<SignUpService>(SignUpService).toSelf();
 
+DIContainer.bind<LevelEditorController>(LevelEditorController).toSelf();
 DIContainer.bind<LevelListController>(LevelListController).toSelf();
 DIContainer.bind<LevelsController>(LevelsController).toSelf();
 DIContainer.bind<RatingsController>(RatingsController).toSelf();
