@@ -12,7 +12,7 @@
     "watch": "npx webpack --config webpack.config.js --watch",
     "start": "node dist/server.js",
     "debug": "node --inspect dist/server.js",
-    "test": "npx jasmine",
+    "test": "npx jasmine-ts",
     "lint": "tslint --project ."
   },
   "dependencies": {
