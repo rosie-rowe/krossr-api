@@ -42,7 +42,7 @@
     "express-session": "^1.17.1",
     "helmet": "~0.4.0",
     "inversify": "^5.0.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",
     "nodemailer": "^6.4.10",
