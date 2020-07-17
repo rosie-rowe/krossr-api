@@ -3,6 +3,7 @@ import { UserViewModelMapper } from '../Users/UserViewModelMapper';
 import { injectable, inject } from 'inversify';
 import { SignUpRequest } from './SignUpRequest';
 import { SignUpService } from './SignUpService';
+import { Response } from 'express';
 
 @injectable()
 export class SignUpController {
@@ -13,7 +14,7 @@ export class SignUpController {
     ) {
     }
 
-    public signUp = async (req: SignUpRequest, res) => {
+    public signUp = async (req: SignUpRequest, res: Response) => {
         try {
             let user = await this.signUpService.signUp(req.body);
 

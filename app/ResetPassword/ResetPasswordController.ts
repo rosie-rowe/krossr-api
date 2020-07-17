@@ -1,4 +1,3 @@
-import * as async from 'async';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { EnvironmentConfiguration } from '../../config/config';
 import { User } from '../models/UserModel';
@@ -10,6 +9,7 @@ import { IEnvironmentConfiguration } from '../../config/env/IEnvironmentConfigur
 import { injectable, inject } from 'inversify';
 import { ResetPasswordRequest } from './ResetPasswordRequest';
 import { PasswordService } from '../Password/PasswordService';
+import { Response } from 'express';
 
 @injectable()
 export class ResetPasswordController {
@@ -38,7 +38,7 @@ export class ResetPasswordController {
         }
     }
 
-    public reset = async (req: ResetPasswordRequest, res, next) => {
+    public reset = async (req: ResetPasswordRequest, res: Response) => {
         try {
             let user = await this.getUserByToken(req.params.token);
 
@@ -67,7 +67,7 @@ export class ResetPasswordController {
         });
     }
 
-    private async resetPassword(req: ResetPasswordRequest, res, user: User) {
+    private async resetPassword(req: ResetPasswordRequest, res: Response, user: User) {
         let passwordDetails = req.body;
 
         if (passwordDetails.newPassword !== passwordDetails.verifyPassword) {
@@ -92,7 +92,7 @@ export class ResetPasswordController {
         });
     }
 
-    private async renderEmailTemplate(res, user: User) {
+    private async renderEmailTemplate(res: Response, user: User) {
         return new Promise<string>((resolve, reject) => {
             res.render('templates/reset-password-confirm-email', {
                 name: user.username,

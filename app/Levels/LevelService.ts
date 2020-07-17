@@ -49,7 +49,7 @@ export class LevelService {
 
     private encodeLayout(layout: boolean[][]) {
         let converted = Array.prototype.concat.apply([], layout) // flatten
-                             .map((value) => value ? '1' : '0')
+                             .map((value: boolean) => value ? '1' : '0')
                              .join('');
 
         return btoa(converted);

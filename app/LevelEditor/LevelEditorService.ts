@@ -1,4 +1,4 @@
-import { LevelEditorSelectOptionsViewModel } from '@krossr/types';
+import { LevelEditorSelectOptionsViewModel, Dictionary } from '@krossr/types';
 import { SizeOptions } from '../Size/SizeOptions';
 import { inject, injectable } from 'inversify';
 import { SizeFormatter } from '../Size/SizeFormatter';

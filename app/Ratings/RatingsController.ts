@@ -2,6 +2,7 @@ import { ErrorHandler } from '../Error/ErrorHandler';
 import { injectable, inject } from 'inversify';
 import { UpsertRatingRequest } from './UpsertRatingRequest';
 import { RatingsService } from './RatingsService';
+import { Response } from 'express';
 
 @injectable()
 export class RatingsController {
@@ -11,7 +12,7 @@ export class RatingsController {
     ) {
     }
 
-    public upsertRating = async (req: UpsertRatingRequest, res) => {
+    public upsertRating = async (req: UpsertRatingRequest, res: Response) => {
         try {
             await this.ratingsService.upsertRating(req.level, req.user, req.body);
             res.send();

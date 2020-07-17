@@ -4,6 +4,7 @@ import { KrossrErrorResponse } from '../KrossrResponse/KrossrErrorResponse';
 import { inject, injectable } from 'inversify';
 import { ChangePasswordRequest } from './ChangePasswordRequest';
 import { PasswordService } from '../Password/PasswordService';
+import { Response } from 'express';
 
 @injectable()
 export class ChangePasswordController {
@@ -13,7 +14,7 @@ export class ChangePasswordController {
     ) {
     }
 
-    public changePassword = async (req: ChangePasswordRequest, res) => {
+    public changePassword = async (req: ChangePasswordRequest, res: Response) => {
         let passwordDetails = req.body;
 
         if (!passwordDetails.newPassword) {
@@ -83,7 +84,7 @@ export class ChangePasswordController {
         this.errorHandler.sendClientErrorResponse(res, 'Current password is incorrect');
     }
 
-    private unknownError(res: KrossrErrorResponse, err) {
+    private unknownError(res: KrossrErrorResponse, err: any) {
         this.errorHandler.sendUnknownClientErrorResponse(res, err);
     }
 }

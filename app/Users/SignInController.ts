@@ -4,6 +4,7 @@ import { UserViewModelMapper } from './UserViewModelMapper';
 import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { inject, injectable } from 'inversify';
+import { Response } from 'express';
 
 @injectable()
 export class SignInController {
@@ -13,7 +14,8 @@ export class SignInController {
     ) {
     }
 
-    public signIn = (req: KrossrRequest, res, next) => {
+    // tslint:disable-next-line: ban-types
+    public signIn = (req: KrossrRequest, res: Response, next: Function) => {
         passport.authenticate('local', (error, user: User, info) => {
             if (error || !user) {
                 this.errorHandler.sendUnknownClientErrorResponse(res, info);

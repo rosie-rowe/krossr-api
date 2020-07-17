@@ -5,11 +5,11 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class ErrorHandler {
-    public sendUnauthenticatedErrorResponse(res) {
+    public sendUnauthenticatedErrorResponse(res: KrossrErrorResponse) {
         return this.sendErrorResponse(res, 'User is not logged in', 401);
     }
 
-    public sendForbiddenErrorResponse(res) {
+    public sendForbiddenErrorResponse(res: KrossrErrorResponse) {
         return this.sendErrorResponse(res, 'User is not allowed', 403);
     }
 
@@ -38,7 +38,7 @@ export class ErrorHandler {
     /**
      * Get the error message from error object
      */
-    private getErrorMessage = (err) => {
+    private getErrorMessage = (err: any) => {
         let message = 'Something went wrong';
 
         if (err.message) {
@@ -66,7 +66,7 @@ export class ErrorHandler {
     /**
      * Get unique error field name
      */
-    private getUniqueErrorMessage(err) {
+    private getUniqueErrorMessage(err: any) {
         let output;
 
         try {

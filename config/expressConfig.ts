@@ -1,7 +1,7 @@
 'use strict';
 
 import { EnvironmentConfiguration } from './config';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import * as passport from 'passport';
 import { IKrossrDatabase } from '../app/Database/IKrossrDatabase';
 import { injectable, multiInject, inject } from 'inversify';
@@ -50,8 +50,8 @@ export class ExpressConfiguration {
 
         // Should be placed before express.static
         app.use(compress({
-            filter(req, res) {
-                return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
+            filter(req: Request, res: Response) {
+                return (/json|text|javascript|css/).test(res.getHeader('Content-Type') as string);
             },
             level: 9
         }));

@@ -56,7 +56,7 @@ export class LevelConfiguration implements ModelConfiguration<Sequelize> {
                 validate: {
                     is: /[a-z\d\-_\s]+/i,
                     notEmpty: true,
-                    isLongEnough(val) {
+                    isLongEnough(val: string) {
                         if (val.length < 6) {
                             throw new Error('Please choose a longer name');
                         }

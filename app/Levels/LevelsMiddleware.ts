@@ -2,6 +2,8 @@ import { Level } from '../models/LevelModel';
 import { IncludeOptions } from 'sequelize/types';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { injectable, inject } from 'inversify';
+import { LevelRequest } from './LevelRequest';
+import { Response } from 'express';
 
 @injectable()
 export class LevelsMiddleware {
@@ -10,7 +12,7 @@ export class LevelsMiddleware {
     ) {
     }
 
-    public hasAuthorization = (req, res, next) => {
+    public hasAuthorization = (req: LevelRequest<void>, res: Response, next: () => void) => {
         if (req.level.userId !== req.user.id) {
             return this.errorHandler.sendForbiddenErrorResponse(res);
         }
@@ -18,7 +20,7 @@ export class LevelsMiddleware {
         next();
     }
 
-    public levelByID = (req, res, next, id) => {
+    public levelByID = (req: LevelRequest<void>, res: Response, next: (error?: Error) => void, id: string) => {
         let user = req.user;
 
         let include = user ?

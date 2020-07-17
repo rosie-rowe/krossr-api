@@ -30,7 +30,7 @@ export class WinstonConfiguration implements KrossrLoggerProvider {
 
         logger.stream = {
             // jshint unused:false
-            write(message, encoding){
+            write(message: string){
                 logger.info(message);
             }
         };

@@ -3,7 +3,7 @@ require('reflect-metadata');
 import { SizeFormatter } from './SizeFormatter';
 
 describe('SizeFormatter', () => {
-    let sizeFormatter;
+    let sizeFormatter: SizeFormatter;
 
     beforeEach(() => {
         sizeFormatter = new SizeFormatter();

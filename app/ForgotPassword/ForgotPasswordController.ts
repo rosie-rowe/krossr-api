@@ -20,7 +20,7 @@ export class ForgotPasswordController {
         this.config = this.environmentConfiguration.getConfiguration();
     }
 
-    public forgot = async (req: ForgotPasswordRequest, res, next) => {
+    public forgot = async (req: ForgotPasswordRequest, res: Response) => {
         if (!req.body.username) {
             return this.errorHandler.sendClientErrorResponse(res, 'Username required');
         }

@@ -4,6 +4,7 @@ import { LevelListRequest } from './LevelListRequest';
 import { LevelListLevelViewModelMapper } from './LevelListLevelViewModelMapper';
 import { injectable, inject } from 'inversify';
 import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
+import { Response } from 'express';
 
 @injectable()
 export class LevelListController {
@@ -14,12 +15,12 @@ export class LevelListController {
     ) {
     }
 
-    public getOptions = async (req: KrossrRequest, res) => {
+    public getOptions = async (req: KrossrRequest, res: Response) => {
         let options = this.levelListService.getOptions();
         res.jsonp(options);
     }
 
-    public paginate = async (req: LevelListRequest, res) => {
+    public paginate = async (req: LevelListRequest, res: Response) => {
         let query = req.query;
         query.numPerPage = '9';
         let numPerPage = parseInt(query.numPerPage, 10);

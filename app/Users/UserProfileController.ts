@@ -1,10 +1,9 @@
-'use strict';
-
 import * as _ from 'lodash';
 import { ErrorHandler } from '../Error/ErrorHandler';
 import { UserRequest } from './UserRequest';
 import { UserViewModelMapper } from './UserViewModelMapper';
 import { injectable, inject } from 'inversify';
+import { Response } from 'express';
 
 @injectable()
 export class UserProfileController {
@@ -17,7 +16,7 @@ export class UserProfileController {
     /**
      * Update user details
      */
-    update = async (req: UserRequest, res) => {
+    update = async (req: UserRequest, res: Response) => {
         // Init Variables
         let user = req.user;
 
@@ -49,7 +48,7 @@ export class UserProfileController {
     /**
      * Send User
      */
-    me = (req: UserRequest, res) => {
+    me = (req: UserRequest, res: Response) => {
         res.jsonp(req.user ? this.userMapper.toViewModel(req.user) : null);
     }
 }
