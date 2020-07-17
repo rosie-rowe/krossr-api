@@ -11,12 +11,13 @@ export class LevelEditorService {
     }
 
     public getOptions(): LevelEditorSelectOptionsViewModel {
-        let sizeOptions = {};
+        let sizeOptions: Dictionary<number> = {};
 
         SizeOptions.Options.forEach(option => {
             // sizes in sizeOptions are per-side, but the editor needs to know the total number
             // this assumes square matrices, as most of the app does
-            sizeOptions[this.sizeFormatter.formatSize(option)] = Math.pow(option, 2);
+            let key = this.sizeFormatter.formatSize(option);
+            sizeOptions[key] = Math.pow(option, 2);
         });
 
         return { sizeOptions };

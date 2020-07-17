@@ -6,7 +6,7 @@ import { LevelListSortByOptions } from './LevelListSortByOptions';
 import { SizeOptions } from '../Size/SizeOptions';
 import { SizeFormatter } from '../Size/SizeFormatter';
 import { SortDirectionOptions } from '../SortDirection/SortDirectionOptions';
-import { LevelListFilterSelectOptionsViewModel } from '@krossr/types';
+import { LevelListFilterSelectOptionsViewModel, Dictionary } from '@krossr/types';
 
 @injectable()
 export class LevelListService {
@@ -22,8 +22,8 @@ export class LevelListService {
             Ratings: LevelListSortByOptions.Ratings
         };
 
-        let sizeOptions = {
-            All: ''
+        let sizeOptions: Dictionary<number> = {
+            All: null
         };
 
         SizeOptions.Options.forEach(size => {
