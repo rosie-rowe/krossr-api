@@ -11,8 +11,4 @@ export class UserViewModelMapper implements ViewModelMapper<User, UserViewModel>
             username: model.username
         };
     }
-
-    toModel(viewModel: UserViewModel): User {
-        throw new Error('Method not implemented.');
-    }
 }

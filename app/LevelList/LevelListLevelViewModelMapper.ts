@@ -23,8 +23,4 @@ export class LevelListLevelViewModelMapper implements ViewModelMapper<Level, Lev
             user: model.user
         };
     }
-
-    toModel(viewModel: LevelListLevelViewModel): Level {
-        throw new Error('Method not implemented.');
-    }
 }
