@@ -27,8 +27,7 @@ export class LevelListController {
 
         try {
             let levels = await this.levelListService.getList(query);
-
-            let rows = levels.rows.map(level => this.levelListMapper.toViewModel(level));
+            let rows = await Promise.all(levels.rows.map(level => this.levelListMapper.toViewModel(level)));
 
             return res.jsonp({
                 levels: rows,

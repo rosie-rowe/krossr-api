@@ -1,7 +1,6 @@
-import { Sequelize, Model, DataTypes, HasOneGetAssociationMixin, Association, HasManyGetAssociationsMixin } from 'sequelize';
+import { Sequelize, Model, DataTypes, Association, HasManyGetAssociationsMixin, BelongsToGetAssociationMixin } from 'sequelize';
 import { User } from './UserModel';
 import { Rating } from './RatingModel';
-import btoa from 'btoa';
 import { ModelConfiguration } from './ModelConfiguration';
 import { injectable } from 'inversify';
 
@@ -31,7 +30,7 @@ export class Level extends Model<LevelAttributes, LevelCreationAttributes> imple
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 
-    public getUser!: HasOneGetAssociationMixin<User>;
+    public getUser!: BelongsToGetAssociationMixin<User>;
 
     // tslint:disable-next-line member-ordering
     public static associations: {
@@ -85,9 +84,7 @@ export class LevelConfiguration implements ModelConfiguration<Sequelize> {
             sequelize
         });
 
-        Level.hasOne(User, {
-            sourceKey: 'userId',
-            foreignKey: 'id',
+        Level.belongsTo(User, {
             as: 'user'
         });
 

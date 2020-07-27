@@ -86,12 +86,6 @@ export class LevelListService {
             attributes: {
                 include: [[ratingQuery, nameof<Level>(o => o.avgRating)]]
             },
-            include: [
-                {
-                    association: Level.associations.user,
-                    attributes: ['id', 'username']
-                }
-            ],
             where: {
                 [Op.and]: isRating ? [whereBuilder, ratingTest] : whereBuilder
             },
