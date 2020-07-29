@@ -1,4 +1,4 @@
-import * as crypto from 'crypto'
+import * as crypto from 'crypto';
 import { User } from '../models/UserModel';
 import { injectable } from 'inversify';
 

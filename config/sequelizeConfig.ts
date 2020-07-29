@@ -1,5 +1,3 @@
-'use strict';
-
 import * as _ from 'lodash';
 import { Sequelize } from 'sequelize';
 import { EnvironmentConfiguration } from './config';
@@ -31,14 +29,14 @@ export class SequelizeConfiguration {
         let config = this.environmentConfiguration.getConfiguration();
 
         // create your instance of sequelize
-        let sequelize = new Sequelize(config.db.name, config.db.username, config.db.password, {
+        let database = new Sequelize(config.db.name, config.db.username, config.db.password, {
             host: config.db.host,
             port: config.db.port,
             dialect: 'postgres'
         });
 
         this.modelConfigs.forEach((c) => {
-            c.configure(sequelize);
+            c.configure(database);
         });
 
         this.logger.info('Models initialized!');
@@ -47,7 +45,7 @@ export class SequelizeConfiguration {
         // set FORCE_DB_SYNC=true in the environment, or the program parameters to drop the database,
         //   and force model changes into it, if required;
         // Caution: Do not set FORCE_DB_SYNC to true for every run to avoid losing data with restarts
-        sequelize
+        database
             .sync({
                 force: config.forceDbSync,
                 logging: config.enableSequelizeLog === 'true' ? this.logger.verbose : false
@@ -61,7 +59,7 @@ export class SequelizeConfiguration {
         // assign the sequelize variables to the db object and returning the db.
 
         db = _.extend({
-            sequelize,
+            database,
             Sequelize
         }, db);
 

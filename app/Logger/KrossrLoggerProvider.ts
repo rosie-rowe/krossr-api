@@ -1,4 +1,4 @@
-import { KrossrLogger } from "./KrossrLogger";
+import { KrossrLogger } from './KrossrLogger';
 
 export interface KrossrLoggerProvider {
     getLogger(): KrossrLogger;

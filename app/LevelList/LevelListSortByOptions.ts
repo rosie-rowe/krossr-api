@@ -1,4 +1,4 @@
-import { Level } from "../models/LevelModel";
+import { Level } from '../models/LevelModel';
 
 export class LevelListSortByOptions {
     static CreatedDate = `"${nameof<Level>(o => o.createdAt)}"`;

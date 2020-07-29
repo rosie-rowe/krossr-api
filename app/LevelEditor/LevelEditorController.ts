@@ -1,7 +1,7 @@
-import { injectable, inject } from "inversify";
-import { LevelEditorService } from "./LevelEditorService";
-import { Response } from "express";
-import { KrossrRequest } from "../KrossrRequest/KrossrRequest";
+import { injectable, inject } from 'inversify';
+import { LevelEditorService } from './LevelEditorService';
+import { Response } from 'express';
+import { KrossrRequest } from '../KrossrRequest/KrossrRequest';
 
 @injectable()
 export class LevelEditorController {
